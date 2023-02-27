@@ -30,6 +30,7 @@ class ilAssQuestionHintList implements Iterator
     /** @var list<ilAssQuestionHint> */
     private array $questionHints = [];
 
+    #[ReturnTypeWillChange]
     public function current()
     {
         return current($this->questionHints);
