@@ -21,8 +21,10 @@ use ILIAS\Setup;
 class ilComponentBuildPluginInfoObjective extends Setup\Artifact\BuildArtifactObjective
 {
     protected const BASE_PATH = "./Customizing/global/plugins/";
+    protected const BASE_PATH_FINDER = "./global/plugins/";
     protected const PLUGIN_PHP = "plugin.php";
     protected const PLUGIN_CLASS_FILE = "classes/class.il%sPlugin.php";
+    protected ?\ILIAS\Filesystem\Finder\Finder $finder = null;
 
     public function getArtifactPath(): string
     {
@@ -34,11 +36,11 @@ class ilComponentBuildPluginInfoObjective extends Setup\Artifact\BuildArtifactOb
     {
         $data = [];
         foreach (["Modules", "Services"] as $type) {
-            $components = $this->scanDir(static::BASE_PATH . $type);
+            $components = $this->scanDir($type);
             foreach ($components as $component) {
-                $slots = $this->scanDir(static::BASE_PATH . "$type/$component");
+                $slots = $this->scanDir("$type/$component");
                 foreach ($slots as $slot) {
-                    $plugins = $this->scanDir(static::BASE_PATH . "$type/$component/$slot");
+                    $plugins = $this->scanDir("$type/$component/$slot");
                     foreach ($plugins as $plugin) {
                         $this->addPlugin($data, $type, $component, $slot, $plugin);
                     }
@@ -46,6 +48,15 @@ class ilComponentBuildPluginInfoObjective extends Setup\Artifact\BuildArtifactOb
             }
         }
         return new Setup\Artifact\ArrayArtifact($data);
+    }
+
+    protected function getFinder()
+    {
+        if ($this->finder) return $this->finder;
+
+        // This is not functional without $DIC
+        $filesystem = $DIC->filesystem()->customizing();
+        $this->finder = $filesystem->finder()->ignoreVCS(true); // also ignores dot files by default
     }
 
     protected function addPlugin(array &$data, string $type, string $component, string $slot, string $plugin): void
@@ -67,16 +78,16 @@ class ilComponentBuildPluginInfoObjective extends Setup\Artifact\BuildArtifactOb
 
         require_once($plugin_php);
         if (!isset($id)) {
-            throw new \InvalidArgumentException("$path does not define \$id");
+            throw new \InvalidArgumentException("$plugin_class does not define \$id");
         }
         if (!isset($version)) {
-            throw new \InvalidArgumentException("$path does not define \$version");
+            throw new \InvalidArgumentException("$plugin_class does not define \$version");
         }
         if (!isset($ilias_min_version)) {
-            throw new \InvalidArgumentException("$path does not define \$ilias_min_version");
+            throw new \InvalidArgumentException("$plugin_class does not define \$ilias_min_version");
         }
         if (!isset($ilias_max_version)) {
-            throw new \InvalidArgumentException("$path does not define \$ilias_max_version");
+            throw new \InvalidArgumentException("$plugin_class does not define \$ilias_max_version");
         }
 
         if (isset($data[$id])) {
@@ -106,11 +117,16 @@ class ilComponentBuildPluginInfoObjective extends Setup\Artifact\BuildArtifactOb
      */
     protected function scanDir(string $dir): array
     {
-        if (!file_exists($dir)) {
+        if ($this->getFinder()->in([static::BASE_PATH_FINDER . $dir])->count() === 0) {
             return [];
         }
-        $result = scandir($dir);
-        return array_values(array_diff($result, [".", ".."]));
+
+        $directory_names = [];
+        $dirs = $this->getFinder()->in([static::BASE_PATH_FINDER . $dir])->directories()->getIterator();
+        foreach ($dirs as $dir) {
+            $directory_names[] = basename($dir);
+        }
+        return $directory_names;
     }
 
     protected function fileExists(string $path): bool
