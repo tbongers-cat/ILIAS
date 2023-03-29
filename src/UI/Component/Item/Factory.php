@@ -138,4 +138,24 @@ interface Factory
      * @return \ILIAS\UI\Component\Item\Notification
      */
     public function notification($title, Icon $lead): Notification;
+
+    /**
+     * ---
+     * description:
+     *   purpose: >
+     *       This is a item to be used in repository lists or similar contexts.
+     *   composition: >
+     *       A list item consists of a title and the following optional elements:
+     *       description, action drop down, properties (name/value)
+     *       Property values MAY be interactive by using a Shy Buttons or a Link.
+     * rules:
+     *    accessibility:
+     *      1: >
+     *       Information MUST NOT be provided by color alone. The same information could
+     *       be presented, e.g. in a property to enable screen reader access.
+     * ---
+     * @param string|\ILIAS\UI\Component\Button\Shy|\ILIAS\UI\Component\Link\Link $title Title of the item
+     * @return \ILIAS\UI\Component\Item\Repository
+     */
+    public function repository($title): Repository;
 }

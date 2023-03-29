@@ -49,6 +49,8 @@ class Renderer extends AbstractComponentRenderer
             return $this->renderStandard($component, $default_renderer);
         } elseif ($component instanceof Shy) {
             return $this->renderShy($component, $default_renderer);
+        } elseif ($component instanceof Repository) {
+            return $this->renderRepository($component, $default_renderer);
         }
         return "";
     }
@@ -278,6 +280,23 @@ class Renderer extends AbstractComponentRenderer
         return $tpl->get();
     }
 
+    protected function renderRepository(Item $component, RendererInterface $default_renderer): string
+    {
+        $tpl = $this->getTemplate("tpl.item_repository.html", true, true);
+
+        $this->renderTitle($component, $default_renderer, $tpl);
+        $this->renderDescription($component, $tpl);
+        $this->renderProperties($component, $default_renderer, $tpl);
+
+        // actions
+        $actions = $component->getActions();
+        if ($actions !== null) {
+            $tpl->setVariable("ACTIONS", $default_renderer->render($actions));
+        }
+
+        return $tpl->get();
+    }
+
     protected function renderTitle(Item $component, RendererInterface $default_renderer, Template $tpl): void
     {
         $title = $component->getTitle();
@@ -365,7 +384,8 @@ class Renderer extends AbstractComponentRenderer
             Standard::class,
             Shy::class,
             Group::class,
-            Notification::class
+            Notification::class,
+            Repository::class
         ];
     }
 }
