@@ -55,7 +55,7 @@ function deploy() {
 
   if [ "${NEW_BRANCH}" == "1" ]
   then
-    echo "[${NOW}] Detect new branch '${BRANCH}'. That will be committed to ${STYLE_REPO}"
+    echo "[${NOW}] Detected new branch '${BRANCH}', which will be committed to ${STYLE_REPO}"
     git -C ${DEPLOY_BASE_FOLDER} add . >/dev/null 2>&1
     git -C ${DEPLOY_BASE_FOLDER} commit -m "Style changes from '${HASH}'" -m "Original message: '${MSG}'" -m "${URL}" >/dev/null 2>&1
     git -C ${DEPLOY_BASE_FOLDER} push origin ${BRANCH} >/dev/null 2>&1
@@ -70,7 +70,7 @@ function deploy() {
   then
     echo "[${NOW}] No changes detected on style files."
   else
-    echo "[${NOW}] Detect changes on style files. They will be committed to ${STYLE_REPO}"
+    echo "[${NOW}] Detected changes on style files, which will be committed to ${STYLE_REPO}"
     git -C ${DEPLOY_BASE_FOLDER} add . >/dev/null 2>&1
     git -C ${DEPLOY_BASE_FOLDER} commit -m "Style changes from '${HASH}'" -m "Original message: '${MSG}'" -m "${URL}" >/dev/null 2>&1
     git -C ${DEPLOY_BASE_FOLDER} push origin ${BRANCH} >/dev/null 2>&1
