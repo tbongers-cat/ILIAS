@@ -17,9 +17,9 @@
 
 NOW=$(date +'%d.%m.%Y %I:%M:%S')
 DEPLOY_BASE_FOLDER="./CI/Style-To-Repo/repo"
-STYLE_REPO="<complete url>"
-STYLE_REPO_NAME_SHORT="<all after github.com>"
-STYLE_REPO_USER_NAME="<user_name>"
+STYLE_REPO="git@github.com:tbongers-cat/delos-test.git"
+STYLE_REPO_NAME_SHORT="tbongers-cat/delos-test.git"
+STYLE_REPO_USER_NAME="tbongers-cat"
 
 function deploy() {
   MSG=${1}

@@ -5,6 +5,7 @@ on:
       - "release_7"
       - "release_8"
       - "trunk"
+      - "v9/pr/5209"
 
 jobs:
   style-to-repo:
