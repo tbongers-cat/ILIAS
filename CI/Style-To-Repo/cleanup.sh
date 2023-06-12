@@ -20,13 +20,13 @@ BASE_PATH="./CI/Style-To-Repo"
 function removeBuildArtifacts() {
   if [ -d "${BASE_PATH}/style" ]
   then
-    rm -rf ${BASE_PATH}/style
+   # rm -rf ${BASE_PATH}/style
   fi
 }
 
 function removeDeployArtifacts() {
   if [ -d "${BASE_PATH}/repo" ]
   then
-    rm -rf ${BASE_PATH}/repo
+   # rm -rf ${BASE_PATH}/repo
   fi
 }
