@@ -38,7 +38,7 @@ function deploy() {
   git -C ${DEPLOY_BASE_FOLDER} ls-remote --exit-code --heads origin ${BRANCH} >/dev/null 2>&1
   BRANCH_EXISTS=$?
 
-  if [ ${BRANCH_EXISTS} = "0" ]
+  if [ ${BRANCH_EXISTS} == "0" ]
   then
     git -C ${DEPLOY_BASE_FOLDER} checkout ${BRANCH} >/dev/null 2>&1
   else
