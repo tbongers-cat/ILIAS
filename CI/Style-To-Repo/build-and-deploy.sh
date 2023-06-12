@@ -31,15 +31,15 @@ source "./CI/Style-To-Repo/deploy.sh"
 source "./CI/Style-To-Repo/cleanup.sh"
 
 NOW=$(date +'%d.%m.%Y %I:%M:%S')
-echo "[${NOW}] Building style folder."
+echo "[${NOW}] Build style folder"
 build
 
 NOW=$(date +'%d.%m.%Y %I:%M:%S')
-echo "[${NOW}] Deploy style folder."
+echo "[${NOW}] Deploy style folder"
 deploy "${MSG}" "${HASH}" "${URL}" "${BRANCH}" "${PUSH_SECRET}"
 
 NOW=$(date +'%d.%m.%Y %I:%M:%S')
-echo "[${NOW}] Cleanup build and deploy artifacts."
+echo "[${NOW}] Cleanup build and deploy artifacts"
 removeBuildArtifacts
 removeDeployArtifacts
 
