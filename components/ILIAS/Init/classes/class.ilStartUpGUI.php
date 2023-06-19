@@ -234,6 +234,9 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
                         'is_explicit_logout' => false,
                     ]
                 );
+
+                $this->dic->user()->setId($auth_session->getUserId());
+                $this->dic->user()->read();
             }
 
             $this->logger->debug('Show login page');
@@ -1276,6 +1279,12 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
 
     private function showLogout(): void
     {
+        if (!$this->authSession->isExpired() &&
+            $this->authSession->isAuthenticated() &&
+            !ilObjUser::_isAnonymous($this->authSession->getUserId())) {
+            $this->ctrl->redirectToURL(ilUserUtil::getStartingPointAsUrl());
+        }
+
         $this->help->setSubScreenId('logout');
 
         $tpl = self::initStartUpTemplate('tpl.logout.html');
