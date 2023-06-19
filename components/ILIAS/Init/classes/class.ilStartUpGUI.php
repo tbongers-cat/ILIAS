@@ -197,6 +197,7 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
 
     private function jumpToPasswordAssistance(): void
     {
+        $this->ctrl->saveParameterByClass(ilPasswordAssistanceGUI::class, 'key');
         $this->ctrl->redirectByClass(ilPasswordAssistanceGUI::class);
     }
 
