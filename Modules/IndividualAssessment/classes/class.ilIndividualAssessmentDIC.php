@@ -103,7 +103,11 @@ trait ilIndividualAssessmentDIC
                 $dic['ilCtrl'],
                 $dic['tpl'],
                 $dic['lng'],
-                $dic->object()
+                $dic->object(),
+                $dic->refinery(),
+                $dic['ui.factory'],
+                $dic['ui.renderer'],
+                $dic['http']->request()
             );
         };
 

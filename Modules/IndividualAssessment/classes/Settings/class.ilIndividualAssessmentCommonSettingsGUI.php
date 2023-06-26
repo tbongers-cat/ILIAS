@@ -23,24 +23,17 @@ class ilIndividualAssessmentCommonSettingsGUI
     public const CMD_EDIT = 'editSettings';
     public const CMD_SAVE = 'saveSettings';
 
-    protected ilObjIndividualAssessment $object;
-    protected ilCtrl $ctrl;
-    protected ilGlobalTemplateInterface $tpl;
-    protected ilLanguage $lng;
-    protected ilObjectService $object_service;
-
     public function __construct(
-        ilObjIndividualAssessment $object,
-        ilCtrl $ctrl,
-        ilGlobalTemplateInterface $tpl,
-        ilLanguage $lng,
-        ilObjectService $object_service
+        protected ilObjIndividualAssessment $object,
+        protected ilCtrl $ctrl,
+        protected ilGlobalTemplateInterface $tpl,
+        protected ilLanguage $lng,
+        protected ilObjectService $object_service,
+        protected ILIAS\Refinery\Factory $refinery,
+        protected ILIAS\UI\Factory $ui_factory,
+        protected ILIAS\UI\Renderer $renderer,
+        protected Psr\Http\Message\ServerRequestInterface $request
     ) {
-        $this->object = $object;
-        $this->ctrl = $ctrl;
-        $this->tpl = $tpl;
-        $this->lng = $lng;
-        $this->object_service = $object_service;
     }
 
     public function executeCommand(): void
@@ -48,22 +41,30 @@ class ilIndividualAssessmentCommonSettingsGUI
         $cmd = $this->ctrl->getCmd();
         switch ($cmd) {
             case self::CMD_EDIT:
-                $this->editSettings();
+                $content = $this->editSettings();
                 break;
             case self::CMD_SAVE:
-                $this->saveSettings();
+                $content = $this->saveSettings();
                 break;
             default:
                 throw new Exception('Unknown command ' . $cmd);
         }
+
+        $this->tpl->setContent($content);
     }
 
-    protected function editSettings(ilPropertyFormGUI $form = null): void
+    protected function editSettings(): string
     {
-        if (is_null($form)) {
-            $form = $this->buildForm();
-        }
-        $this->tpl->setContent($form->getHTML());
+//        if (is_null($form)) {
+//            $form = $this->buildForm();
+//        }
+
+        return $this->buildForm()->getHTML();
+
+//        return $this->renderer->render($this->buildForm2(
+//            $this->object,
+//            $this->ctrl->getFormAction($this, self::CMD_SAVE)
+//        ));
     }
 
     protected function buildForm(): ilPropertyFormGUI
@@ -78,6 +79,51 @@ class ilIndividualAssessmentCommonSettingsGUI
         $this->addCommonFieldsToForm($form);
 
         return $form;
+    }
+
+    protected function buildForm2(
+        ilObjIndividualAssessment $iass,
+        string $submit_action
+    ): ILIAS\UI\Component\Input\Container\Form\Standard {
+        $if = $this->ui_factory->input();
+
+        $form = $if->container()->form()->standard(
+            $submit_action,
+            $this->buildFormElements(
+                $iass,
+                $if
+            )
+        )->withAdditionalTransformation(
+            $this->refinery->custom()->transformation(
+                function ($values) {
+                }
+            )
+        );
+
+        return $form;
+    }
+
+    protected function buildFormElements(
+        ilObjIndividualAssessment $iass,
+        ILIAS\UI\Component\Input\Factory $if
+    ) {
+        $txt = fn($id) => $this->lng->txt($id);
+        $formElements = [];
+
+        $image = $iass->getObjectProperties()->getPropertyTileImage()->toForm(
+            $this->lng,
+            $if->field(),
+            $this->refinery
+        );
+        $section_common = $if->field()->section(
+            [
+                'image' => $image
+            ],
+            $txt('cont_presentation')
+        );
+        $formElements['common'] = $section_common;
+
+        return $formElements;
     }
 
     protected function addServiceSettingsToForm(ilPropertyFormGUI $form): void
@@ -101,27 +147,45 @@ class ilIndividualAssessmentCommonSettingsGUI
         $form_service->addTileImage();
     }
 
-    protected function saveSettings(): void
+    protected function saveSettings(): ?string
     {
-        $form = $this->buildForm();
+        $form = $this
+            ->buildForm($this->ctrl->getFormAction($this, self::CMD_SAVE))
+            ->withRequest($this->request);
 
-        if (!$form->checkInput()) {
-            $form->setValuesByPost();
-            $this->editSettings($form);
-            return;
+        $result = $form->getInputGroup()->getContent();
+
+        if ($result->isOK()) {
+//            $result->value()->update();
+
+            $this->tpl->setOnScreenMessage("success", $this->lng->txt('iass_settings_saved'), true);
+            $this->ctrl->redirect($this, self::CMD_EDIT);
+            return null;
+        } else {
+            $this->tpl->setOnScreenMessage("failure", $this->lng->txt("msg_form_save_error"));
+            return $this->renderer->render($form);
         }
 
-        ilObjectServiceSettingsGUI::updateServiceSettingsForm(
-            $this->object->getId(),
-            $form,
-            [
-                ilObjectServiceSettingsGUI::ORGU_POSITION_ACCESS,
-                ilObjectServiceSettingsGUI::CUSTOM_METADATA
-            ]
-        );
 
-        $form_service = $this->object_service->commonSettings()->legacyForm($form, $this->object);
-        $form_service->saveTileImage();
+//        $form = $this->buildForm();
+//
+//        if (!$form->checkInput()) {
+//            $form->setValuesByPost();
+//            $this->editSettings($form);
+//            return;
+//        }
+//
+//        ilObjectServiceSettingsGUI::updateServiceSettingsForm(
+//            $this->object->getId(),
+//            $form,
+//            [
+//                ilObjectServiceSettingsGUI::ORGU_POSITION_ACCESS,
+//                ilObjectServiceSettingsGUI::CUSTOM_METADATA
+//            ]
+//        );
+//
+//        $form_service = $this->object_service->commonSettings()->legacyForm($form, $this->object);
+//        $form_service->saveTileImage();
 
         $this->tpl->setOnScreenMessage("success", $this->lng->txt('iass_settings_saved'), true);
         $this->ctrl->redirect($this, self::CMD_EDIT);
