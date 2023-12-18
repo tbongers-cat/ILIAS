@@ -42,6 +42,7 @@ class ExamplesTest extends ILIAS_UI_TestBase
 
     protected static string $path_to_base_factory = "components/ILIAS/UI/src/Factory.php";
     protected Container $dic;
+    protected Crawler\ExamplesYamlParser $example_parser;
 
     public function setUp(): void
     {
@@ -56,6 +57,7 @@ class ExamplesTest extends ILIAS_UI_TestBase
         //This avoids Undefined index: ilfilehash for the moment
         $_POST["ilfilehash"] = "";
         $this->setUpMockDependencies();
+        $this->example_parser = new Crawler\ExamplesYamlParser();
     }
 
     /**
@@ -141,6 +143,15 @@ class ExamplesTest extends ILIAS_UI_TestBase
         } catch (NotImplementedException $e) {
             $this->assertTrue(true);
         }
+    }
+
+    /**
+     * @dataProvider getFullFunctionNamesAndPathExample
+     */
+    public function testAllExamplesHaveExpectedOutcomeInDocs(string $example_function_name, string $example_path)
+    {
+        $docs = $this->example_parser->parseYamlStringArrayFromFile($example_path);
+        $this->assertArrayHasKey('expected output', $docs);
     }
 
     /**
