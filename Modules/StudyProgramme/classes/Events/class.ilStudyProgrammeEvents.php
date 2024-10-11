@@ -22,6 +22,12 @@ class ilStudyProgrammeEvents implements StudyProgrammeEvents
 {
     protected ilAppEventHandler $app_event_handler;
 
+    public const PUBLIC_EVENTS = [
+        self::EVENT_USER_ASSIGNED,
+        self::EVENT_USER_DEASSIGNED,
+        self::EVENT_USER_REASSIGNED,
+    ];
+
     public function __construct(
         ilLogger $logger,
         ilAppEventHandler $app_event_handler,
@@ -50,9 +56,9 @@ class ilStudyProgrammeEvents implements StudyProgrammeEvents
         };
 
         $this->logger->debug("PRG raised: " . $event . ' (' . var_export(array_map(
-                $parameter_formatter,
-                $parameter
-            ), true) . ')');
+            $parameter_formatter,
+            $parameter
+        ), true) . ')');
 
         if (in_array($event, [
             self::EVENT_USER_ASSIGNED,
@@ -85,19 +91,15 @@ class ilStudyProgrammeEvents implements StudyProgrammeEvents
         if ($event === self::EVENT_USER_REASSIGNED) {
             $this->prg_event_handler->sendReAssignedMail($parameter['ass_id'], $parameter['root_prg_id']);
         }
-
-        if (in_array($event, [
-            self::EVENT_USER_ASSIGNED,
-            self::EVENT_USER_DEASSIGNED
-        ])) {
-            $this->app_event_handler->raise(self::COMPONENT, $event, $parameter);
-        }
-
         if ($event === self::EVENT_VALIDITY_CHANGE) {
             $this->prg_event_handler->resetMailFlagValidity($parameter['ass_id'], $parameter['root_prg_id']);
         }
         if ($event === self::EVENT_DEADLINE_CHANGE) {
             $this->prg_event_handler->resetMailFlagDeadline($parameter['ass_id'], $parameter['root_prg_id']);
+        }
+
+        if (in_array($event, self::PUBLIC_EVENTS)) {
+            $this->app_event_handler->raise(self::COMPONENT, $event, $parameter);
         }
     }
 
