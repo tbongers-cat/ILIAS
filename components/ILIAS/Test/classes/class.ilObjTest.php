@@ -4495,13 +4495,6 @@ class ilObjTest extends ilObject
         return $res;
     }
 
-    public function getInvitedParticipantList(): ilTestParticipantList
-    {
-        $participant_list = new ilTestParticipantList($this, $this->user, $this->lng, $this->db);
-        $participant_list->initializeFromDbRows($this->getInvitedUsers());
-        return $participant_list;
-    }
-
     public function getActiveParticipantList(): ilTestParticipantList
     {
         $participant_list = new ilTestParticipantList($this, $this->user, $this->lng, $this->db);
@@ -4523,7 +4516,7 @@ class ilObjTest extends ilObject
         if ($this->getAnonymity()) {
             if ($user_id !== 0) {
                 $result = $this->db->queryF(
-                    "SELECT tst_active.active_id, tst_active.tries, usr_id, %s login, %s lastname, %s firstname, tst_invited_user.clientip, " .
+                    "SELECT tst_active.active_id, tst_active.tries, usr_id, %s login, %s lastname, %s firstname, " .
                     "tst_active.submitted test_finished, matriculation, COALESCE(tst_active.last_finished_pass, -1) <> tst_active.last_started_pass unfinished_passes  FROM usr_data, tst_invited_user " .
                     "LEFT JOIN tst_active ON tst_active.user_fi = tst_invited_user.user_fi AND tst_active.test_fi = tst_invited_user.test_fi " .
                     "WHERE tst_invited_user.test_fi = %s and tst_invited_user.user_fi=usr_data.usr_id AND usr_data.usr_id=%s " .
@@ -4533,7 +4526,7 @@ class ilObjTest extends ilObject
                 );
             } else {
                 $result = $this->db->queryF(
-                    "SELECT tst_active.active_id, tst_active.tries, usr_id, %s login, %s lastname, %s firstname, tst_invited_user.clientip, " .
+                    "SELECT tst_active.active_id, tst_active.tries, usr_id, %s login, %s lastname, %s firstname, " .
                     "tst_active.submitted test_finished, matriculation, COALESCE(tst_active.last_finished_pass, -1) <> tst_active.last_started_pass unfinished_passes  FROM usr_data, tst_invited_user " .
                     "LEFT JOIN tst_active ON tst_active.user_fi = tst_invited_user.user_fi AND tst_active.test_fi = tst_invited_user.test_fi " .
                     "WHERE tst_invited_user.test_fi = %s and tst_invited_user.user_fi=usr_data.usr_id " .
@@ -4545,7 +4538,7 @@ class ilObjTest extends ilObject
         } else {
             if ($user_id !== 0) {
                 $result = $this->db->queryF(
-                    "SELECT tst_active.active_id, tst_active.tries, usr_id, login, lastname, firstname, tst_invited_user.clientip, " .
+                    "SELECT tst_active.active_id, tst_active.tries, usr_id, login, lastname, firstname, " .
                     "tst_active.submitted test_finished, matriculation, COALESCE(tst_active.last_finished_pass, -1) <> tst_active.last_started_pass unfinished_passes  FROM usr_data, tst_invited_user " .
                     "LEFT JOIN tst_active ON tst_active.user_fi = tst_invited_user.user_fi AND tst_active.test_fi = tst_invited_user.test_fi " .
                     "WHERE tst_invited_user.test_fi = %s and tst_invited_user.user_fi=usr_data.usr_id AND usr_data.usr_id=%s " .
@@ -4555,7 +4548,7 @@ class ilObjTest extends ilObject
                 );
             } else {
                 $result = $this->db->queryF(
-                    "SELECT tst_active.active_id, tst_active.tries, usr_id, login, lastname, firstname, tst_invited_user.clientip, " .
+                    "SELECT tst_active.active_id, tst_active.tries, usr_id, login, lastname, firstname, " .
                     "tst_active.submitted test_finished, matriculation, COALESCE(tst_active.last_finished_pass, -1) <> tst_active.last_started_pass unfinished_passes  FROM usr_data, tst_invited_user " .
                     "LEFT JOIN tst_active ON tst_active.user_fi = tst_invited_user.user_fi AND tst_active.test_fi = tst_invited_user.test_fi " .
                     "WHERE tst_invited_user.test_fi = %s and tst_invited_user.user_fi=usr_data.usr_id " .
