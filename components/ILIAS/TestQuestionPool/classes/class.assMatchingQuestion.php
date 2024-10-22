@@ -884,30 +884,6 @@ class assMatchingQuestion extends assQuestion implements ilObjQuestionScoringAdj
         return $result;
     }
 
-    private function fetchSubmittedMatchingsFromPost(): array
-    {
-        $post = $this->questionpool_request->getParsedBody();
-
-        $matchings = [];
-        if (array_key_exists('matching', $post)) {
-            $postData = $post['matching'][$this->getId()];
-            foreach ($this->getDefinitions() as $definition) {
-                if (isset($postData[$definition->getIdentifier()])) {
-                    foreach ($this->getTerms() as $term) {
-                        if (isset($postData[$definition->getIdentifier()][$term->getIdentifier()])) {
-                            if (!is_array($postData[$definition->getIdentifier()])) {
-                                $postData[$definition->getIdentifier()] = [];
-                            }
-                            $matchings[$definition->getIdentifier()][] = $term->getIdentifier();
-                        }
-                    }
-                }
-            }
-        }
-
-        return $matchings;
-    }
-
     private function checkSubmittedMatchings(array $submitted_matchings): bool
     {
         if ($this->getMatchingMode() == self::MATCHING_MODE_N_ON_N) {
@@ -944,7 +920,7 @@ class assMatchingQuestion extends assQuestion implements ilObjQuestionScoringAdj
             $pass = ilObjTest::_getPass($active_id);
         }
 
-        $submitted_matchings = $this->fetchSubmittedMatchingsFromPost();
+        $submitted_matchings = $this->questionpool_request->getMatchingPairs();
         if (!$this->checkSubmittedMatchings($submitted_matchings)) {
             return false;
         }
@@ -965,7 +941,7 @@ class assMatchingQuestion extends assQuestion implements ilObjQuestionScoringAdj
 
     protected function savePreviewData(ilAssQuestionPreviewSession $previewSession): void
     {
-        $submitted_matchings = $this->fetchSubmittedMatchingsFromPost();
+        $submitted_matchings = $this->questionpool_request->getMatchingPairs();
 
         if ($this->checkSubmittedMatchings($submitted_matchings)) {
             $previewSession->setParticipantsSolution($submitted_matchings);
