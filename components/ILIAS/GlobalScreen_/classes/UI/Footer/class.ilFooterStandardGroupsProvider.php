@@ -142,7 +142,7 @@ final class ilFooterStandardGroupsProvider extends AbstractStaticFooterProvider
                     $translation_title
                 )
                 ->withAction($this->buildURI($translation_url))
-                ->withOpenInNewViewport()
+                ->withOpenInNewViewport(true)
                 ->withParent($this->getIdentificationFor(ilFooterStandardGroups::SERVICES));
         }
 
