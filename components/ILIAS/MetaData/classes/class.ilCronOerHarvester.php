@@ -144,11 +144,11 @@ class ilCronOerHarvester extends ilCronJob
             $this->lng->txt('meta_oer_copyright_selection_info')
         );
 
-        foreach (ilMDCopyrightSelectionEntry::_getEntries() as $copyright_entry) {
+        foreach ($this->initiator->copyrightRepository()->getAllEntries() as $copyright_entry) {
             $copyright_checkox = new ilCheckboxOption(
-                $copyright_entry->getTitle(),
-                (string) $copyright_entry->getEntryId(),
-                $copyright_entry->getDescription()
+                $copyright_entry->title(),
+                (string) $copyright_entry->id(),
+                $copyright_entry->description()
             );
             $checkbox_group->addOption($copyright_checkox);
         }

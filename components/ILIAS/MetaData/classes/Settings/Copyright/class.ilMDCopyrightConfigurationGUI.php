@@ -32,6 +32,7 @@ use ILIAS\MetaData\Copyright\EntryInterface;
 use ILIAS\FileUpload\MimeType;
 use ILIAS\ResourceStorage\Services as IRSS;
 use ILIAS\MetaData\Copyright\Database\Wrapper;
+use ILIAS\MetaData\Settings\Copyright\Usage\Searcher as UsageSearcher;
 
 /**
  * @ilCtrl_Calls ilMDCopyrightConfigurationGUI: ilMDCopyrightUsageGUI, ilMDCopyrightImageUploadHandlerGUI
@@ -125,7 +126,13 @@ class ilMDCopyrightConfigurationGUI
     ): void {
         $has_write = $this->access_service->hasCurrentUserWriteAccess();
 
-        $table_gui = new ilMDCopyrightTableGUI($this, 'showCopyrightSelection', $has_write);
+        $table_gui = new ilMDCopyrightTableGUI(
+            $this->repository,
+            $this->renderer,
+            $this,
+            'showCopyrightSelection',
+            $has_write
+        );
         $table_gui->setTitle($this->lng->txt("md_copyright_selection"));
         $table_gui->parseSelections();
 

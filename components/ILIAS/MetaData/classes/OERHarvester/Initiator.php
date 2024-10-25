@@ -29,6 +29,7 @@ use ILIAS\MetaData\OERHarvester\XML\Writer;
 use ILIAS\MetaData\OERHarvester\Settings\SettingsInterface;
 use ILIAS\Export\ExportHandler\Factory as ExportService;
 use ILIAS\Data\Factory as DataFactory;
+use ILIAS\MetaData\Copyright\RepositoryInterface;
 
 class Initiator
 {
@@ -71,5 +72,10 @@ class Initiator
     public function settings(): SettingsInterface
     {
         return $this->services->OERHarvester()->settings();
+    }
+
+    public function copyrightRepository(): RepositoryInterface
+    {
+        return $this->services->copyright()->repository();
     }
 }
