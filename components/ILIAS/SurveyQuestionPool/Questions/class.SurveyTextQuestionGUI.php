@@ -48,37 +48,16 @@ class SurveyTextQuestionGUI extends SurveyQuestionGUI
         $maxchars->setDecimals(0);
         $a_form->addItem($maxchars);
 
-        // textwidth
-        $textwidth = new ilNumberInputGUI($this->lng->txt("width"), "textwidth");
-        $textwidth->setRequired(true);
-        $textwidth->setSize(3);
-        $textwidth->setDecimals(0);
-        $textwidth->setMinValue(10, true);
-        $a_form->addItem($textwidth);
-
-        // textheight
-        $textheight = new ilNumberInputGUI($this->lng->txt("height"), "textheight");
-        $textheight->setRequired(true);
-        $textheight->setSize(3);
-
-        $textheight->setDecimals(0);
-        $textheight->setMinValue(1);
-        $a_form->addItem($textheight);
-
         // values
         if ($this->object->getMaxChars() > 0) {
             $maxchars->setValue($this->object->getMaxChars());
         }
-        $textwidth->setValue($this->object->getTextWidth());
-        $textheight->setValue($this->object->getTextHeight());
     }
 
     protected function importEditFormValues(ilPropertyFormGUI $a_form): void
     {
         $max = $a_form->getInput("maxchars");
         $this->object->setMaxChars((int) $max);
-        $this->object->setTextWidth($a_form->getInput("textwidth"));
-        $this->object->setTextHeight($a_form->getInput("textheight"));
     }
 
     public function getParsedAnswers(
@@ -119,8 +98,6 @@ class SurveyTextQuestionGUI extends SurveyQuestionGUI
         } else {
             $template->setVariable("TEXTBOX_IMAGE", ilUtil::getHtmlPath(ilUtil::getImagePath("textbox.png")));
             $template->setVariable("TEXTBOX", $this->lng->txt("textbox"));
-            $template->setVariable("TEXTBOX_WIDTH", $this->object->getTextWidth() * 16);
-            $template->setVariable("TEXTBOX_HEIGHT", $this->object->getTextHeight() * 16);
         }
         if ($this->object->getMaxChars()) {
             $template->setVariable("TEXT_MAXCHARS", sprintf($this->lng->txt("text_maximum_chars_allowed"), $this->object->getMaxChars()));
@@ -146,27 +123,12 @@ class SurveyTextQuestionGUI extends SurveyQuestionGUI
     ): string {
         $template = new ilTemplate("tpl.il_svy_out_text.html", true, true, "components/ILIAS/SurveyQuestionPool");
 
-        if ($this->object->getTextHeight() === 1) {
-            $template->setCurrentBlock("textinput");
-            if (is_array($working_data)) {
-                if (isset($working_data[0]["textanswer"])) {
-                    $template->setVariable("VALUE_ANSWER", " value=\"" . ilLegacyFormElementsUtil::prepareFormOutput($working_data[0]["textanswer"]) . "\"");
-                }
-            }
-            $template->setVariable("QUESTION_ID", $this->object->getId());
-            $template->setVariable("WIDTH", $this->object->getTextWidth());
-            if ($this->object->getMaxChars()) {
-                $template->setVariable("MAXLENGTH", " maxlength=\"" . $this->object->getMaxChars() . "\"");
-            }
-        } else {
-            $template->setCurrentBlock("textarea");
-            if (is_array($working_data) && isset($working_data[0]["textanswer"])) {
-                $template->setVariable("VALUE_ANSWER", ilLegacyFormElementsUtil::prepareFormOutput($working_data[0]["textanswer"]));
-            }
-            $template->setVariable("QUESTION_ID", $this->object->getId());
-            $template->setVariable("WIDTH", $this->object->getTextWidth());
-            $template->setVariable("HEIGHT", $this->object->getTextHeight());
+        $template->setCurrentBlock("textarea");
+        if (is_array($working_data) && isset($working_data[0]["textanswer"])) {
+            $template->setVariable("VALUE_ANSWER", ilLegacyFormElementsUtil::prepareFormOutput($working_data[0]["textanswer"]));
         }
+        $template->setVariable("QUESTION_ID", $this->object->getId());
+
         $template->parseCurrentBlock();
         $template->setCurrentBlock("question_data_text");
         if ($show_questiontext) {
