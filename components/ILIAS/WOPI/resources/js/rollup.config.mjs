@@ -13,15 +13,15 @@
  * https://github.com/ILIAS-eLearning
  */
 
-import terser from '@rollup/plugin-terser';
-import copyright from '../../../../../scripts/Copyright-Checker/copyright';
+// import terser from '@rollup/plugin-terser';
+// import copyright from '../../../../../scripts/Copyright-Checker/copyright';
 
 export default {
   input: './src/index.js',
   output: {
     file: './dist/wopi.min.js',
     format: 'iife',
-    banner: copyright,
+    // banner: copyright,
     globals: {
       document: 'document',
       ilias: 'il',
@@ -29,11 +29,11 @@ export default {
     },
     external: ['document', 'ilias', 'jquery'],
     plugins: [
-      terser({
-        format: {
-          comments: 'preserveCopyright',
-        },
-      }),
+      // terser({
+      //   format: {
+      //     comments: 'preserveCopyright',
+      //   },
+      // }),
     ],
   },
 };

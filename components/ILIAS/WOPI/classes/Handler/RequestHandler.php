@@ -46,6 +46,8 @@ final class RequestHandler
     private ?int $token_user_id = null;
     private ?string $token_resource_id = null;
     private ResourceStakeholder $stakeholder;
+    private int $saving_interval = 0;
+    private bool $editable = false;
 
     public function __construct()
     {
@@ -53,6 +55,7 @@ final class RequestHandler
         $this->http = $DIC->http();
         $this->data_signer = $DIC['file_delivery.data_signer'];
         $this->irss = $DIC->resourceStorage();
+        $this->saving_interval = (int) $DIC->settings()->get('saving_interval');
     }
 
     protected function checkAuth(): void
@@ -76,7 +79,8 @@ final class RequestHandler
         }
 
         $this->token_user_id = (int) ($token_data['user_id'] ?? 0);
-        $this->token_resource_id = ($token_data['resource_id'] ?? '');
+        $this->token_resource_id = (string) ($token_data['resource_id'] ?? '');
+        $this->editable = (bool) ($token_data['editable'] ?? '');
         $stakeholder = $token_data['stakeholder'] ?? null;
         if ($stakeholder !== null) {
             try {
@@ -129,7 +133,8 @@ final class RequestHandler
                             // CheckFileInfo
                             $response = new GetFileInfoResponse(
                                 $current_revision,
-                                $this->token_user_id
+                                $this->token_user_id,
+                                $this->editable
                             );
                             $this->http->saveResponse(
                                 $this->http->response()->withBody(
@@ -162,12 +167,25 @@ final class RequestHandler
                             $body_stream = $this->http->request()->getBody();
                             $body = $body_stream->getContents();
                             $file_stream = Streams::ofString($body);
+
+                            $draft = true;
+
+                            if ($this->saving_interval > 0) {
+                                $latest_revision = $resource->getCurrentRevision();
+                                $creation_time = $latest_revision->getInformation()->getCreationDate()->getTimestamp();
+                                $current_time = time();
+                                $time_diff = $current_time - $creation_time;
+                                if ($time_diff > $this->saving_interval) {
+                                    $this->irss->manage()->publish($resource_id);
+                                }
+                            }
+
                             $new_revision = $this->irss->manage()->appendNewRevisionFromStream(
                                 $resource_id,
                                 $file_stream,
                                 $this->stakeholder,
                                 $current_revision->getTitle(),
-                                true
+                                $draft
                             );
 
                             // CheckFileInfo

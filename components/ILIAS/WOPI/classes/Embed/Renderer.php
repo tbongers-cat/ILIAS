@@ -38,6 +38,7 @@ class Renderer
     {
         $tpl = new \ilTemplate('tpl.wopi_container.html', true, true, 'components/ILIAS/WOPI');
         $tpl->setVariable('EDITOR_URL', (string) $this->embedded_application->getActionLauncherURL());
+        $tpl->setVariable('INLINE', (string) (int) $this->embedded_application->isInline());
         $tpl->setVariable('TOKEN', (string) $this->embedded_application->getToken());
         $tpl->setVariable('TTL', (string) (time() + $this->embedded_application->getTTL()) * 1000); // in milliseconds
 
