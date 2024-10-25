@@ -30,7 +30,7 @@ use Firebase\JWT\JWT;
  * @author      Björn Heyser <info@bjoernheyser.de>
  * @author      Stefan Schneider <eqsoft4@gmail.com>
  *
- * @package components\ILIAS/LTIConsumer
+ * @package     components\ILIAS/LTIConsumer
  */
 class ilObjLTIConsumer extends ilObject2
 {
@@ -356,7 +356,8 @@ class ilObjLTIConsumer extends ilObject2
 
     public function load(): void
     {
-        global $DIC; /* @var \ILIAS\DI\Container $DIC */
+        global $DIC;
+        /* @var \ILIAS\DI\Container $DIC */
 
         $query = "SELECT * FROM {$this->dbTableName()} WHERE obj_id = %s";
         $res = $DIC->database()->queryF($query, ['integer'], [$this->getId()]);
@@ -397,7 +398,8 @@ class ilObjLTIConsumer extends ilObject2
 
     public function save(): void
     {
-        global $DIC; /* @var \ILIAS\DI\Container $DIC */
+        global $DIC;
+        /* @var \ILIAS\DI\Container $DIC */
 
         $DIC->database()->replace($this->dbTableName(), [
             'obj_id' => ['integer', $this->getId()]
@@ -407,9 +409,9 @@ class ilObjLTIConsumer extends ilObject2
             'launch_key' => ['text', $this->getCustomLaunchKey()],
             'launch_secret' => ['text', $this->getCustomLaunchSecret()],
             'custom_params' => ['text', $this->getCustomParams()],
-            'use_xapi' => ['integer',$this->getUseXapi()],
-            'activity_id' => ['text',$this->getCustomActivityId()],
-            'show_statements' => ['integer',$this->isStatementsReportEnabled()],
+            'use_xapi' => ['integer', $this->getUseXapi()],
+            'activity_id' => ['text', $this->getCustomActivityId()],
+            'show_statements' => ['integer', $this->isStatementsReportEnabled()],
             'highscore_enabled' => ['integer', (int) $this->getHighscoreEnabled()],
             'highscore_achieved_ts' => ['integer', (int) $this->getHighscoreAchievedTS()],
             'highscore_percentage' => ['integer', (int) $this->getHighscorePercentage()],
@@ -475,7 +477,6 @@ class ilObjLTIConsumer extends ilObject2
     /////////////////////////////////////////
     /// HIGHSCORE
 
-
     /**
      * Sets if the highscore feature should be enabled.
      */
@@ -493,7 +494,6 @@ class ilObjLTIConsumer extends ilObject2
     {
         return $this->_highscore_enabled;
     }
-
 
     /**
      * Sets if the date and time of the scores achievement should be displayed.
@@ -658,9 +658,16 @@ class ilObjLTIConsumer extends ilObject2
     /**
      * @throws ilWACException
      */
-    public function buildLaunchParameters(ilCmiXapiUser $cmixUser, string $token, string $contextType, string $contextId, string $contextTitle, ?string $returnUrl = ''): array
-    {
-        global $DIC; /* @var \ILIAS\DI\Container $DIC */
+    public function buildLaunchParameters(
+        ilCmiXapiUser $cmixUser,
+        string $token,
+        string $contextType,
+        string $contextId,
+        string $contextTitle,
+        ?string $returnUrl = ''
+    ): array {
+        global $DIC;
+        /* @var \ILIAS\DI\Container $DIC */
 
         $roles = $DIC->access()->checkAccess('write', '', $this->getRefId()) ? "Instructor" : "Learner";
         //todo if object is in course or group, roles would have to be taken from there s. Mantis 35435 - if necessary Jour Fixe topic
@@ -745,19 +752,25 @@ class ilObjLTIConsumer extends ilObject2
             "context_label" => $contextType . " " . $contextId,
             "launch_presentation_locale" => $this->lng->getLangKey(),
             "launch_presentation_document_target" => $documentTarget,
-            "launch_presentation_width" => "",//recommended
-            "launch_presentation_height" => "",//recommended
+            "launch_presentation_width" => "",
+            //recommended
+            "launch_presentation_height" => "",
+            //recommended
             "launch_presentation_return_url" => $returnUrl,
             "tool_consumer_instance_guid" => $toolConsumerInstanceGuid,
-            "tool_consumer_instance_name" => $DIC->settings()->get("short_inst_name") ? $DIC->settings()->get("short_inst_name") : CLIENT_ID,
+            "tool_consumer_instance_name" => $DIC->settings()->get("short_inst_name") ? $DIC->settings()->get(
+                "short_inst_name"
+            ) : CLIENT_ID,
             "tool_consumer_instance_description" => ilObjSystemFolder::_getHeaderTitle(),
-            "tool_consumer_instance_url" => ilLink::_getLink(ROOT_FOLDER_ID, "root"),//ToDo? "https://vb52p70.example.com/release_5-3/goto.php?target=root_1&client_id=inno",
+            "tool_consumer_instance_url" => ilLink::_getLink(ROOT_FOLDER_ID, "root"),
+            //ToDo? "https://vb52p70.example.com/release_5-3/goto.php?target=root_1&client_id=inno",
             "tool_consumer_instance_contact_email" => $DIC->settings()->get("admin_email"),
             "launch_presentation_css_url" => "",
             "tool_consumer_info_product_family_code" => "ilias",
             "tool_consumer_info_version" => ILIAS_VERSION,
             "lis_result_sourcedid" => $token,
-            "lis_outcome_service_url" => self::getIliasHttpPath() . "/components/ILIAS/LTIConsumer/result.php?client_id=" . CLIENT_ID,
+            "lis_outcome_service_url" => self::getIliasHttpPath(
+                ) . "/components/ILIAS/LTIConsumer/result.php?client_id=" . CLIENT_ID,
             "role_scope_mentor" => ""
         ];
 
@@ -779,9 +792,19 @@ class ilObjLTIConsumer extends ilObject2
      * @throws ilWACException
      */
 
-    public function buildLaunchParametersLTI13(ilCmiXapiUser $cmixUser, string $endpoint, string $clientId, int $deploymentId, string $nonce, string $contextType, string $contextId, string $contextTitle, ?string $returnUrl = ''): ?array
-    {
-        global $DIC; /* @var \ILIAS\DI\Container $DIC */
+    public function buildLaunchParametersLTI13(
+        ilCmiXapiUser $cmixUser,
+        string $endpoint,
+        string $clientId,
+        int $deploymentId,
+        string $nonce,
+        string $contextType,
+        string $contextId,
+        string $contextTitle,
+        ?string $returnUrl = ''
+    ): ?array {
+        global $DIC;
+        /* @var \ILIAS\DI\Container $DIC */
 
         $roles = $DIC->access()->checkAccess('write', '', $this->getRefId()) ? "Instructor" : "Learner";
         if ($this->getProvider()->getAlwaysLearner() == true) {
@@ -855,19 +878,26 @@ class ilObjLTIConsumer extends ilObject2
             "context_label" => $contextType . " " . $contextId,
             "launch_presentation_locale" => $this->lng->getLangKey(),
             "launch_presentation_document_target" => $documentTarget,
-            "launch_presentation_width" => "",//recommended
-            "launch_presentation_height" => "",//recommended
+            "launch_presentation_width" => "",
+            //recommended
+            "launch_presentation_height" => "",
+            //recommended
             "launch_presentation_return_url" => $returnUrl,
             "tool_consumer_instance_guid" => $toolConsumerInstanceGuid,
-            "tool_consumer_instance_name" => $DIC->settings()->get("short_inst_name") ? $DIC->settings()->get("short_inst_name") : CLIENT_ID,
+            "tool_consumer_instance_name" => $DIC->settings()->get("short_inst_name") ? $DIC->settings()->get(
+                "short_inst_name"
+            ) : CLIENT_ID,
             "tool_consumer_instance_description" => ilObjSystemFolder::_getHeaderTitle(),
-            "tool_consumer_instance_url" => ilLink::_getLink(ROOT_FOLDER_ID, "root"),//ToDo? "https://vb52p70.example.com/release_5-3/goto.php?target=root_1&client_id=inno",
+            "tool_consumer_instance_url" => ilLink::_getLink(ROOT_FOLDER_ID, "root"),
+            //ToDo? "https://vb52p70.example.com/release_5-3/goto.php?target=root_1&client_id=inno",
             "tool_consumer_instance_contact_email" => $DIC->settings()->get("admin_email"),
             "launch_presentation_css_url" => "",
             "tool_consumer_info_product_family_code" => "ilias",
             "tool_consumer_info_version" => ILIAS_VERSION,
-            "lis_result_sourcedid" => "",//$token,
-            "lis_outcome_service_url" => self::getIliasHttpPath() . "/components/ILIAS/LTIConsumer/result.php?client_id=" . CLIENT_ID,
+            "lis_result_sourcedid" => "",
+            //$token,
+            "lis_outcome_service_url" => self::getIliasHttpPath(
+                ) . "/components/ILIAS/LTIConsumer/result.php?client_id=" . CLIENT_ID,
             "role_scope_mentor" => ""
         ];
 
@@ -880,11 +910,13 @@ class ilObjLTIConsumer extends ilObject2
 
         if ($this->getProvider()->isGradeSynchronization()) {
             $gradeservice = new ilLTIConsumerGradeService();
-            $launch_vars['custom_lineitem_url'] = self::getIliasHttpPath() . "/components/ILIAS/LTIConsumer/ltiservices.php/gradeservice/" . $contextId . "/lineitems/" . $this->id . "/lineitem";
+            $launch_vars['custom_lineitem_url'] = self::getIliasHttpPath(
+                ) . "/components/ILIAS/LTIConsumer/ltiservices.php/gradeservice/" . $contextId . "/lineitems/" . $this->id . "/lineitem";
 
             // ! Moodle as tool provider requires a custom_lineitems_url even though this should be optional in launch request, especially if only posting score scope is permitted by platform
             // http://www.imsglobal.org/spec/lti-ags/v2p0#example-link-has-a-single-line-item-tool-can-only-post-score
-            $launch_vars['custom_lineitems_url'] = self::getIliasHttpPath() . "/components/ILIAS/LTIConsumer/ltiservices.php/gradeservice/" . $contextId . "/linetitems/";
+            $launch_vars['custom_lineitems_url'] = self::getIliasHttpPath(
+                ) . "/components/ILIAS/LTIConsumer/ltiservices.php/gradeservice/" . $contextId . "/linetitems/";
 
             $launch_vars['custom_ags_scopes'] = implode(",", $gradeservice->getPermittedScopes());
         }
@@ -902,8 +934,12 @@ class ilObjLTIConsumer extends ilObject2
 
     // ToDo:
 
-    public static function buildContentSelectionParameters(ilLTIConsumeProvider $provider, int $refId, string $returnUrl, string $nonce): ?array
-    {
+    public static function buildContentSelectionParameters(
+        ilLTIConsumeProvider $provider,
+        int $refId,
+        string $returnUrl,
+        string $nonce
+    ): ?array {
         global $DIC;
 
         $clientId = $provider->getClientId();
@@ -969,12 +1005,17 @@ class ilObjLTIConsumer extends ilObject2
             "context_label" => $contextType . " " . $contextId,
             "launch_presentation_locale" => $DIC->language()->getLangKey(),
             "launch_presentation_document_target" => $documentTarget,
-            "launch_presentation_width" => "",//recommended
-            "launch_presentation_height" => "",//recommended
+            "launch_presentation_width" => "",
+            //recommended
+            "launch_presentation_height" => "",
+            //recommended
             "tool_consumer_instance_guid" => $toolConsumerInstanceGuid,
-            "tool_consumer_instance_name" => $DIC->settings()->get("short_inst_name") ? $DIC->settings()->get("short_inst_name") : CLIENT_ID,
+            "tool_consumer_instance_name" => $DIC->settings()->get("short_inst_name") ? $DIC->settings()->get(
+                "short_inst_name"
+            ) : CLIENT_ID,
             "tool_consumer_instance_description" => ilObjSystemFolder::_getHeaderTitle(),
-            "tool_consumer_instance_url" => ilLink::_getLink(ROOT_FOLDER_ID, "root"),//ToDo? "https://vb52p70.example.com/release_5-3/goto.php?target=root_1&client_id=inno",
+            "tool_consumer_instance_url" => ilLink::_getLink(ROOT_FOLDER_ID, "root"),
+            //ToDo? "https://vb52p70.example.com/release_5-3/goto.php?target=root_1&client_id=inno",
             "tool_consumer_instance_contact_email" => $DIC->settings()->get("admin_email"),
             "tool_consumer_info_product_family_code" => "ilias",
             "tool_consumer_info_version" => ILIAS_VERSION,
@@ -996,8 +1037,13 @@ class ilObjLTIConsumer extends ilObject2
         return self::LTISignJWT($content_select_vars, '', $clientId, $deploymentId, $nonce);
     }
 
-    public static function LTISignJWT(array $parms, string $endpoint, string $oAuthConsumerKey, $typeId = 0, string $nonce = ''): array
-    {
+    public static function LTISignJWT(
+        array $parms,
+        string $endpoint,
+        string $oAuthConsumerKey,
+        $typeId = 0,
+        string $nonce = ''
+    ): array {
         if (empty($typeId)) {
             $typeId = 0;
         }
@@ -1286,8 +1332,8 @@ class ilObjLTIConsumer extends ilObject2
         */
         $provider->setKeyType('JWK_KEYSET');
         $provider->setLtiVersion('1.3.0');
-        $provider->setClientId((string)$tokenObj->aud); //client_id
-        $provider->setCreator((int)$tokenObj->sub); // user_id
+        $provider->setClientId((string) $tokenObj->aud); //client_id
+        $provider->setCreator((int) $tokenObj->sub); // user_id
         $provider->setAvailability(ilLTIConsumeProvider::AVAILABILITY_CREATE);
         $provider->setIsGlobal(false);
         $provider->insert();
