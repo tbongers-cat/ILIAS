@@ -27,11 +27,7 @@ use ILIAS\Services\WOPI\Discovery\ActionDBRepository;
 use ILIAS\Services\WOPI\Discovery\ActionRepository;
 use ILIAS\Services\WOPI\Embed\EmbeddedApplication;
 use ILIAS\Data\URI;
-use ILIAS\UI\Component\Modal\Modal;
-use ILIAS\Services\WOPI\Discovery\ActionTarget;
 use ILIAS\FileUpload\MimeType;
-use ILIAS\MetaData\Services\ServicesInterface as LOMServices;
-use ILIAS\File\Capabilities\Capabilities;
 
 /**
  * @author Fabian Schmid <fabian@sr.solutions>
@@ -61,7 +57,7 @@ class ilFileVersionsGUI
     public const CMD_CREATE_NEW_VERSION = 'saveVersion';
     public const CMD_ADD_REPLACING_VERSION = 'addReplacingVersion';
     public const CMD_CREATE_REPLACING_VERSION = 'createReplacingVersion';
-    public const CMD_UNZIP_CURRENT_REVISION = Capabilities::UNZIP->value;
+    public const CMD_UNZIP_CURRENT_REVISION = 'unzipCurrentRevision';
     public const CMD_PROCESS_UNZIP = 'processUnzip';
     public const CMD_RENDER_DELETE_SELECTED_VERSIONS_MODAL = 'renderDeleteSelectedVersionsModal';
     public const CMD_PUBLISH = 'publish';

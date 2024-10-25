@@ -62,11 +62,11 @@ class ilObjFileGUI extends ilObject2GUI
     public const UPLOAD_ORIGIN_STANDARD = 'standard';
     public const UPLOAD_ORIGIN_DROPZONE = 'dropzone';
 
-    public const CMD_EDIT = Capabilities::EDIT_SETTINGS->value;
-    public const CMD_VERSIONS = Capabilities::MANAGE_VERSIONS->value;
+    public const CMD_EDIT ='edit';
+    public const CMD_VERSIONS = 'versions';
     public const CMD_UPLOAD_FILES = "uploadFiles";
 
-    public const CMD_SEND_FILE = Capabilities::DOWNLOAD->value;
+    public const CMD_SEND_FILE = 'sendFile';
     private \ILIAS\File\Capabilities\CapabilityCollection $capabilities;
 
     /**
