@@ -20,13 +20,10 @@ declare(strict_types=1);
 
 use Jumbojett\OpenIDConnectClient;
 
-/**
- * Class ilAuthProviderOpenIdConnect
- * @author Stefan Meyer <smeyer.ilias@gmx.de>
- */
 class ilAuthProviderOpenIdConnect extends ilAuthProvider
 {
-    private const OIDC_AUTH_IDTOKEN = "oidc_auth_idtoken";
+    private const OIDC_AUTH_IDTOKEN = 'oidc_auth_idtoken';
+
     private readonly ilOpenIdConnectSettings $settings;
     /** @var array $body */
     private $body;
@@ -63,9 +60,8 @@ class ilAuthProviderOpenIdConnect extends ilAuthProvider
                     ILIAS_HTTP_PATH . '/' . ilStartUpGUI::logoutUrl()
                 );
             } catch (\Jumbojett\OpenIDConnectClientException $e) {
-                $this->logger->warning("Logging out of OIDC provider failed with: " . $e->getMessage());
+                $this->logger->warning('Logging out of OIDC provider failed with: ' . $e->getMessage());
             }
-
         }
     }
 
@@ -80,7 +76,7 @@ class ilAuthProviderOpenIdConnect extends ilAuthProvider
                 $host = $proxy->getHost();
                 $port = $proxy->getPort();
                 if ($port) {
-                    $host .= ":" . $port;
+                    $host .= ':' . $port;
                 }
                 $oidc->setHttpProxy($host);
             }
@@ -114,16 +110,13 @@ class ilAuthProviderOpenIdConnect extends ilAuthProvider
             $this->logger->warning($e->getMessage());
             $this->logger->warning((string) $e->getCode());
             $status->setStatus(ilAuthStatus::STATUS_AUTHENTICATION_FAILED);
-            $status->setTranslatedReason($this->lng->txt("auth_oidc_failed"));
+            $status->setTranslatedReason($this->lng->txt('auth_oidc_failed'));
             return false;
         }
     }
 
     /**
-     *
-     * @param ilAuthStatus $status
      * @param stdClass $user_info
-     * @return ilAuthStatus
      */
     private function handleUpdate(ilAuthStatus $status, $user_info): ilAuthStatus
     {
@@ -139,7 +132,6 @@ class ilAuthProviderOpenIdConnect extends ilAuthProvider
         $ext_account = $user_info->{$uid_field};
 
         $this->logger->debug('Authenticated external account: ' . $ext_account);
-
 
         $int_account = ilObjUser::_checkExternalAuthAccount(
             ilOpenIdConnectUserSync::AUTH_MODE,
@@ -161,7 +153,6 @@ class ilAuthProviderOpenIdConnect extends ilAuthProvider
             ilSession::set('used_external_auth_mode', ilAuthUtils::AUTH_OPENID_CONNECT);
             $status->setAuthenticatedUserId($user_id);
             $status->setStatus(ilAuthStatus::STATUS_AUTHENTICATED);
-
             //$_GET['target'] = $this->getCredentials()->getRedirectionTarget();// TODO PHP8-REVIEW Please eliminate this. Mutating the request is not allowed and will not work in ILIAS 8.
         } catch (ilOpenIdConnectSyncForbiddenException) {
             $status->setStatus(ilAuthStatus::STATUS_AUTHENTICATION_FAILED);
@@ -178,6 +169,8 @@ class ilAuthProviderOpenIdConnect extends ilAuthProvider
             $this->settings->getClientId(),
             $this->settings->getSecret()
         );
+
+        $oidc->setCodeChallengeMethod('S256');
 
         return $oidc;
     }
