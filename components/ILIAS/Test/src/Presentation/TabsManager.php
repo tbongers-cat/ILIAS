@@ -67,8 +67,8 @@ class TabsManager
     public const SETTINGS_SUBTAB_ID_EDIT_INTRODUCTION_PAGE = 'edit_introduction';
     public const SETTINGS_SUBTAB_ID_EDIT_CONCLUSION_PAGE = 'edit_concluding_remarks';
     private const SETTINGS_SUBTAB_ID_CERTIFICATE = 'certificate';
-    public const SETTINGS_SUBTAB_ID_ASSIGN_SKILL_TRESHOLDS = 'skill_level_thresholds';
-    public const SETTINGS_SUBTAB_ID_ASSIGN_SKILLS_TO_QUESTIONS = 'question_skill_assignment';
+    public const SETTINGS_SUBTAB_ID_ASSIGN_SKILL_TRESHOLDS = 'tst_skl_sub_tab_thresholds';
+    public const SETTINGS_SUBTAB_ID_ASSIGN_SKILLS_TO_QUESTIONS = 'qpl_skl_sub_tab_quest_assign';
     private const SETTINGS_SUBTAB_ID_PERSONAL_DEFAULT_SETTINGS = 'tst_default_settings';
 
     protected ?string $parent_back_href = null;
@@ -574,16 +574,16 @@ class TabsManager
         );
 
         if ($this->test_object->isSkillServiceToBeConsidered()) {
-            $this->tabs->addSubTab(
+            $this->tabs->addSubTabTarget(
                 self::SETTINGS_SUBTAB_ID_ASSIGN_SKILLS_TO_QUESTIONS,
-                $this->lng->txt('qpl_skl_sub_tab_quest_assign'),
                 $this->ctrl->getLinkTargetByClass(
                     [
                         \ilTestSkillAdministrationGUI::class,
                         \ilAssQuestionSkillAssignmentsGUI::class
                     ],
                     \ilAssQuestionSkillAssignmentsGUI::CMD_SHOW_SKILL_QUEST_ASSIGNS
-                )
+                ),
+                [\ilAssQuestionSkillAssignmentsGUI::CMD_SHOW_SKILL_QUEST_ASSIGNS]
             );
         }
     }
@@ -606,7 +606,10 @@ class TabsManager
 
         $this->tabs->addSubTabTarget(
             self::SETTINGS_SUBTAB_ID_SCORING,
-            $this->ctrl->getLinkTargetByClass([\ilObjTestGUI::class, SettingsScoringGUI::class]),
+            $this->ctrl->getLinkTargetByClass(
+                [\ilObjTestGUI::class, SettingsScoringGUI::class],
+                SettingsScoringGUI::CMD_SHOW_FORM
+            ),
             '',
             [SettingsScoringGUI::class]
         );
@@ -638,16 +641,16 @@ class TabsManager
         }
 
         if ($this->test_object->isSkillServiceToBeConsidered()) {
-            $this->tabs->addSubTab(
+            $this->tabs->addSubTabTarget(
                 self::SETTINGS_SUBTAB_ID_ASSIGN_SKILL_TRESHOLDS,
-                $this->lng->txt('tst_skl_sub_tab_thresholds'),
                 $this->ctrl->getLinkTargetByClass(
                     [
                         \ilTestSkillAdministrationGUI::class,
                         \ilTestSkillLevelThresholdsGUI::class
                     ],
                     \ilTestSkillLevelThresholdsGUI::CMD_SHOW_SKILL_THRESHOLDS
-                )
+                ),
+                [\ilTestSkillLevelThresholdsGUI::CMD_SHOW_SKILL_THRESHOLDS]
             );
         }
 

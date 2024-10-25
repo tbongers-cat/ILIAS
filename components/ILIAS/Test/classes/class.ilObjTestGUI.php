@@ -43,6 +43,7 @@ use ILIAS\Test\Presentation\TestScreenGUI;
 use ILIAS\Test\Presentation\TabsManager;
 use ILIAS\Test\Results\Data\Factory as ResultsDataFactory;
 use ILIAS\Test\Results\Presentation\Factory as ResultsPresentationFactory;
+use ILIAS\Test\Results\Toplist\TestTopListRepository;
 use ILIAS\Test\ExportImport\Factory as ExportImportFactory;
 use ILIAS\TestQuestionPool\Questions\GeneralQuestionPropertiesRepository;
 use ILIAS\TestQuestionPool\RequestDataCollector as QPLRequestDataCollector;
@@ -125,6 +126,7 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
     private ExportImportFactory $export_factory;
     private TestQuestionsRepository $test_questions_repository;
     private GeneralQuestionPropertiesRepository $questionrepository;
+    private TestTopListRepository $toplist_repository;
     private ilTestParticipantAccessFilterFactory $participant_access_filter_factory;
     private QPLRequestDataCollector $qplrequest;
     private TitleColumnsBuilder $title_builder;
@@ -201,6 +203,7 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
         $this->export_factory = $local_dic['exportimport.factory'];
         $this->participant_access_filter_factory = $local_dic['participant.access_filter.factory'];
         $this->test_pass_result_repository = $local_dic['results.data.test_result_repository'];
+        $this->toplist_repository = $local_dic['results.toplist.repository'];
 
         $ref_id = 0;
         if ($this->testrequest->hasRefId() && is_numeric($this->testrequest->getRefId())) {
@@ -432,6 +435,7 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
                     $this->ui_renderer,
                     $this->skills_service,
                     $this->questionrepository,
+                    $this->toplist_repository,
                     $this->testrequest,
                     $this->http,
                     $this->data_factory,

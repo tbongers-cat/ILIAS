@@ -35,7 +35,6 @@ class TestTopListRepositoryTest extends \ilTestBaseTestCase
         parent::setUp();
 
         $this->testObj = new TestTopListRepository(
-            $this->getTestObjMock(),
             $this->createMock(\ilDBInterface::class)
         );
     }

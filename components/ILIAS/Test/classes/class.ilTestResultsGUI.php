@@ -67,6 +67,7 @@ class ilTestResultsGUI
         private readonly UIRenderer $ui_renderer,
         private readonly SkillService $skills_service,
         private readonly GeneralQuestionPropertiesRepository $questionrepository,
+        private readonly TestTopListRepository $toplist_repository,
         private readonly RequestDataCollector $testrequest,
         private readonly GlobalHttpState $http,
         private readonly DataFactory $data_factory,
@@ -143,7 +144,7 @@ class ilTestResultsGUI
 
                 $gui = new ilTestToplistGUI(
                     $this->test_object,
-                    new TestTopListRepository($this->test_object, $this->db),
+                    $this->toplist_repository,
                     $this->ctrl,
                     $this->main_tpl,
                     $this->lng,

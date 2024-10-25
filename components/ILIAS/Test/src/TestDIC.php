@@ -40,6 +40,7 @@ use ILIAS\Test\Questions\Properties\Repository as TestQuestionsRepository;
 use ILIAS\Test\Questions\Properties\DatabaseRepository as TestQuestionsDatabaseRepository;
 use ILIAS\Test\Results\Data\Factory as ResultsDataFactory;
 use ILIAS\Test\Results\Presentation\Factory as ResultsPresentationFactory;
+use ILIAS\Test\Results\Toplist\TestTopListRepository;
 use ILIAS\TestQuestionPool\Questions\GeneralQuestionPropertiesRepository;
 use ILIAS\TestQuestionPool\RequestDataCollector as QPLRequestDataCollector;
 use ILIAS\Data\Factory as DataFactory;
@@ -91,6 +92,9 @@ class TestDIC extends PimpleContainer
                 $DIC['http'],
                 $DIC['lng']
             );
+
+        $dic['results.toplist.repository'] = static fn($c): TestTopListRepository =>
+            new TestTopListRepository($DIC['ilDB']);
 
         $dic['results.data.test_result_repository'] = static fn($c): TestResultRepository =>
             new TestResultRepository($DIC['ilDB']);

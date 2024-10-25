@@ -23,15 +23,14 @@ namespace ILIAS\Test\Results\Toplist;
 class TestTopListRepository
 {
     public function __construct(
-        private readonly \ilObjTest $object,
         private readonly \ilDBInterface $db
     ) {
     }
 
-    public function getGeneralToplist(TopListOrder $order_by): \Generator
+    public function getGeneralToplist(\ilObjTest $object, TopListOrder $order_by): \Generator
     {
         $order_stmt = $order_by === TopListOrder::BY_TIME ? 'tst_pass_result.workingtime' : 'percentage';
-        $this->db->setLimit($this->object->getHighscoreTopNum(), 0);
+        $this->db->setLimit($object->getHighscoreTopNum(), 0);
         $result = $this->db->query(
             '
 			SELECT tst_result_cache.*, round(points/maxpoints*100,2) as percentage, tst_pass_result.workingtime, usr_data.usr_id, usr_data.firstname, usr_data.lastname
@@ -41,7 +40,7 @@ class TestTopListRepository
 			INNER JOIN tst_result_cache ON tst_active.active_id = tst_result_cache.active_fi
 			INNER JOIN tst_pass_result ON tst_active.active_id = tst_pass_result.active_fi AND tst_pass_result.pass = tst_result_cache.pass
 			INNER JOIN usr_data ON usr_data.usr_id = tst_active.user_fi
-			WHERE object_reference.ref_id = ' . $this->db->quote($this->object->getRefId(), 'integer') .
+			WHERE object_reference.ref_id = ' . $this->db->quote($object->getRefId(), 'integer') .
             ' ORDER BY ' . $order_stmt . ' DESC'
         );
 
@@ -50,9 +49,9 @@ class TestTopListRepository
         }
     }
 
-    public function getUserToplistByPercentage(int $a_user_id): \Generator
+    public function getUserToplistByPercentage(\ilObjTest $object, int $a_user_id): \Generator
     {
-        $a_test_ref_id = $this->object->getRefId();
+        $a_test_ref_id = $object->getRefId();
         $result = $this->db->query(
             '
 			SELECT COUNT(tst_pass_result.workingtime) cnt
@@ -138,7 +137,7 @@ class TestTopListRepository
 				AND tst_active.user_fi = ' . $this->db->quote($a_user_id, 'integer') . '
 			)
 			ORDER BY round(reached_points/max_points*100) ASC
-			LIMIT 0, ' . $this->db->quote($this->object->getHighscoreTopNum(), 'integer') . '
+			LIMIT 0, ' . $this->db->quote($object->getHighscoreTopNum(), 'integer') . '
 		)
 		UNION(
 			SELECT tst_result_cache.*, round(reached_points/max_points*100) as percentage,
@@ -165,15 +164,15 @@ class TestTopListRepository
 				AND tst_active.user_fi = ' . $this->db->quote($a_user_id, 'integer') . '
 			)
 			ORDER BY round(reached_points/max_points*100) ASC
-			LIMIT 0, ' . $this->db->quote($this->object->getHighscoreTopNum(), 'integer') . '
+			LIMIT 0, ' . $this->db->quote($object->getHighscoreTopNum(), 'integer') . '
 		)
 		ORDER BY round(reached_points/max_points*100) DESC, tstamp ASC
-		LIMIT 0, ' . $this->db->quote($this->object->getHighscoreTopNum(), 'integer') . '
+		LIMIT 0, ' . $this->db->quote($object->getHighscoreTopNum(), 'integer') . '
 		'
         );
 
-        $i = $own_placement - ($better_participants >= $this->object->getHighscoreTopNum()
-                ? $this->object->getHighscoreTopNum() : $better_participants);
+        $i = $own_placement - ($better_participants >= $object->getHighscoreTopNum()
+                ? $object->getHighscoreTopNum() : $better_participants);
 
         if ($i > 1) {
             yield $this->buildEmptyItem();
@@ -189,9 +188,9 @@ class TestTopListRepository
         }
     }
 
-    public function getUserToplistByWorkingtime(int $a_user_id): \Generator
+    public function getUserToplistByWorkingtime(\ilObjTest $object, int $a_user_id): \Generator
     {
-        $a_test_ref_id = $this->object->getRefId();
+        $a_test_ref_id = $object->getRefId();
         $result = $this->db->query(
             '
 			SELECT COUNT(tst_pass_result.workingtime) cnt
@@ -277,7 +276,7 @@ class TestTopListRepository
 				AND tst_active.user_fi = ' . $this->db->quote($a_user_id, 'integer') . '
 			)
 			ORDER BY workingtime DESC
-			LIMIT 0, ' . $this->db->quote($this->object->getHighscoreTopNum(), 'integer') . '
+			LIMIT 0, ' . $this->db->quote($object->getHighscoreTopNum(), 'integer') . '
 		)
 		UNION(
 			SELECT tst_result_cache.*, round(reached_points/max_points*100) as percentage,
@@ -304,10 +303,10 @@ class TestTopListRepository
 				AND tst_active.user_fi = ' . $this->db->quote($a_user_id, 'integer') . '
 			)
 			ORDER BY workingtime DESC
-			LIMIT 0, ' . $this->db->quote($this->object->getHighscoreTopNum(), 'integer') . '
+			LIMIT 0, ' . $this->db->quote($object->getHighscoreTopNum(), 'integer') . '
 		)
 		ORDER BY workingtime ASC
-		LIMIT 0, ' . $this->db->quote($this->object->getHighscoreTopNum(), 'integer') . '
+		LIMIT 0, ' . $this->db->quote($object->getHighscoreTopNum(), 'integer') . '
 		'
         );
 

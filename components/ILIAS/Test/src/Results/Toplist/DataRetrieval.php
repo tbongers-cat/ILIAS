@@ -127,10 +127,10 @@ class DataRetrieval implements \ILIAS\UI\Component\Table\DataRetrieval
     {
         if ($this->list_type === TopListType::USER) {
             return $this->order_by === TopListOrder::BY_SCORE
-                ? $this->repository->getUserToplistByPercentage($this->user->getId())
-                : $this->repository->getUserToplistByWorkingtime($this->user->getId());
+                ? $this->repository->getUserToplistByPercentage($this->test_obj, $this->user->getId())
+                : $this->repository->getUserToplistByWorkingtime($this->test_obj, $this->user->getId());
         } else {
-            return $this->repository->getGeneralToplist($this->order_by);
+            return $this->repository->getGeneralToplist($this->test_obj, $this->order_by);
         }
     }
 

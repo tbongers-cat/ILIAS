@@ -397,6 +397,10 @@ trait ilTestBaseTestCaseTrait
             => $this->createMock(
                 ILIAS\Test\Results\Data\Factory::class
             );
+        $local_dic_mock['results.toplist.repository'] = fn(Pimple\Container $c)
+            => $this->createMock(
+                ILIAS\Test\Results\Toplist\TestTopListRepository::class
+            );
         $local_dic_mock['results.data.test_result_repository'] = fn(Pimple\Container $c)
             => $this->createMock(
                 \ILIAS\Test\Results\Data\Repository::class
