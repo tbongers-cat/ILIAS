@@ -16,23 +16,27 @@
  *
  *********************************************************************/
 
-declare(strict_types=1);
+namespace ILIAS\GlobalScreen\UI\Footer\Groups;
 
-namespace ILIAS\GlobalScreen\Scope\Footer\Factory;
-
-use ILIAS\Data\URI;
-use ILIAS\UI\Component\Signal;
-
-/**
- * @author Fabian Schmid <fabian@sr.solutions>
- */
-interface hasAction extends isItem
+interface Group
 {
-    public function withAction(URI|Signal $action): self;
+    public function getId(): string;
 
-    public function getAction(): URI|Signal;
+    public function withId(string $id): self;
 
-    public function withOpenInNewViewport(bool $state);
+    public function getTitle(): string;
 
-    public function mustOpenInNewViewport(): bool;
+    public function withTitle(string $title): self;
+
+    public function withActive(bool $active): self;
+
+    public function isActive(): bool;
+
+    public function withPosition(int $position): self;
+
+    public function getPosition(): int;
+
+    public function isCore(): bool;
+
+    public function getItems(): int;
 }

@@ -18,21 +18,14 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\GlobalScreen\Scope\Footer\Factory;
-
-use ILIAS\Data\URI;
-use ILIAS\UI\Component\Signal;
-
 /**
  * @author Fabian Schmid <fabian@sr.solutions>
  */
-interface hasAction extends isItem
+enum ilFooterStandardGroups: string
 {
-    public function withAction(URI|Signal $action): self;
+    case ACCESSIBILITY = 'accessibility';
+    case LEGAL_INFORMATION = 'legal_information';
+    case SUPPORT = 'support';
+    case SERVICES = 'services';
 
-    public function getAction(): URI|Signal;
-
-    public function withOpenInNewViewport(bool $state);
-
-    public function mustOpenInNewViewport(): bool;
 }

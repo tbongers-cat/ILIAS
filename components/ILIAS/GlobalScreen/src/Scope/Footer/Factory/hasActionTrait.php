@@ -44,10 +44,10 @@ trait hasActionTrait
         return $this->action;
     }
 
-    public function withOpenInNewViewport()
+    public function withOpenInNewViewport(bool $state)
     {
         $clone = clone $this;
-        $clone->open_in_new_viewport = true;
+        $clone->open_in_new_viewport = $state;
         return $clone;
     }
 
