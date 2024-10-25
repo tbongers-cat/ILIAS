@@ -73,6 +73,7 @@ class ilColumnGUI
     protected static array $locations = array(
         "ilNewsForContextBlockGUI" => "components/ILIAS/News/",
         "ilCalendarBlockGUI" => "components/ILIAS/Calendar/",
+        "ilTutorialSupportBlockGUI" => "components/ILIAS/Course/",
         "ilPDCalendarBlockGUI" => "components/ILIAS/Calendar/",
         "ilConsultationHoursCalendarBlockGUI" => "components/ILIAS/Calendar/",
         "ilPDTasksBlockGUI" => "components/ILIAS/Tasks/",
@@ -91,6 +92,7 @@ class ilColumnGUI
         "ilPDNewsBlockGUI" => 'pd' . ilDashboardSidePanelSettingsRepository::NEWS,
         "ilNewsForContextBlockGUI" => "news",
         "ilCalendarBlockGUI" => "cal",
+        "ilTutorialSupportBlockGUI" => "tusu",
         "ilPDCalendarBlockGUI" => 'pd' . ilDashboardSidePanelSettingsRepository::CALENDAR,
         "ilConsultationHoursCalendarBlockGUI" => "chcal",
         "ilSelectedItemsBlockGUI" => "pditems",
@@ -109,6 +111,7 @@ class ilColumnGUI
         "crs" => array(
             "ilNewsForContextBlockGUI" => IL_COL_RIGHT,
             "ilCalendarBlockGUI" => IL_COL_RIGHT,
+            "ilTutorialSupportBlockGUI" => IL_COL_RIGHT,
             "ilConsultationHoursCalendarBlockGUI" => IL_COL_RIGHT,
             "ilClassificationBlockGUI" => IL_COL_RIGHT
             ),
@@ -152,6 +155,7 @@ class ilColumnGUI
         array("news" => true,
             "cal" => true,
             "chcal" => true,
+            "tusu" => true,
             "pd" . ilDashboardSidePanelSettingsRepository::CALENDAR => true,
             "pd" . ilDashboardSidePanelSettingsRepository::NEWS => true,
             "pdtag" => true,
@@ -590,6 +594,9 @@ class ilColumnGUI
                     if ($type == "chcal") {         // consultation hours always directly below calendar
                         $nr = -7;
                     }
+                    if ($type == "tusu") {          // tutorial support below calendar
+                        $nr = -6;
+                    }
                     if ($type == "pdfeedb") {		// always show feedback request second
                         $nr = -10;
                     }
@@ -759,6 +766,11 @@ class ilColumnGUI
                 }
                 $tags_active = new ilSetting("tags");		// tags presentation in classification block
                 return (bool) $tags_active->get("enable", "0");
+            } elseif (
+                $a_type === "tusu" &&
+                ilObjCourse::lookupTutorialBlockSettingEabled($ilCtrl->getContextObjId())
+            ) {
+                return true;
             }
             return false;
         }
