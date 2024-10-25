@@ -18,28 +18,23 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\GlobalScreen\Collector;
+namespace ILIAS\GlobalScreen\Scope\Footer\Collector\Information;
+
+use ILIAS\GlobalScreen\Scope\Footer\Factory\isItem;
+use ILIAS\GlobalScreen\Identification\IdentificationInterface;
+use ILIAS\GlobalScreen\Scope\Footer\Factory\hasTitle;
 
 /**
  * @author Fabian Schmid <fabian@sr.solutions>
  */
-interface Collector
+interface ItemInformation
 {
-    /**
-     * Runs the Collection of all items from the providers
-     * @deprecated
-     */
-    public function collectOnce(): void;
+    public function isItemActive(isItem $item): bool;
 
-    public function hasBeenCollected(): bool;
+    public function customPosition(isItem $item): isItem;
 
-    public function collectStructure(): void;
+    public function customTranslationForUser(hasTitle $item): hasTitle;
 
-    public function prepareItemsForUIRepresentation(): void;
+    public function getParent(isItem $item): IdentificationInterface;
 
-    public function filterItemsByVisibilty(): void;
-
-    public function cleanupItemsForUIRepresentation(): void;
-
-    public function sortItemsForUIRepresentation(): void;
 }

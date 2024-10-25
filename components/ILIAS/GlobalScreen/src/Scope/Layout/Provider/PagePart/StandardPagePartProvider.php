@@ -38,6 +38,9 @@ use ILIAS\GlobalScreen\Services;
 use ILIAS\DI\UIServices;
 use ilLanguage;
 use ILIAS\GlobalScreen\Client\CallbackHandler;
+use ILIAS\GlobalScreen\Scope\Footer\Factory\Group;
+use ILIAS\GlobalScreen\Scope\Footer\Factory\Link;
+use ILIAS\GlobalScreen\Scope\Footer\Collector\Renderer\FooterRendererFactory;
 
 /**
  * Class StandardPagePartProvider
@@ -54,9 +57,7 @@ class StandardPagePartProvider implements PagePartProvider
     protected UIServices $ui;
     protected ilLanguage $lang;
 
-    /**
-     * @inheritDoc
-     */
+
     public function __construct()
     {
         global $DIC;
@@ -65,17 +66,13 @@ class StandardPagePartProvider implements PagePartProvider
         $this->lang = $DIC->language();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getContent(): ?Legacy
     {
         return $this->content ?? $this->ui->factory()->legacy("");
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getMetaBar(): ?MetaBar
     {
         $this->gs->collector()->metaBar()->collectOnce();
@@ -96,9 +93,7 @@ class StandardPagePartProvider implements PagePartProvider
         return $meta_bar;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getMainBar(): ?MainBar
     {
         // Collect all items which could be displayed in the main bar
@@ -145,7 +140,7 @@ class StandardPagePartProvider implements PagePartProvider
                 $identifier = $this->hash($tool->getProviderIdentification()->serialize());
                 $close_button = null;
                 if ($tool->hasCloseCallback()) {
-                    $close_button = $this->ui->factory()->button()->close()->withOnLoadCode(static function (string $id) use ($identifier) {
+                    $close_button = $this->ui->factory()->button()->close()->withOnLoadCode(static function (string $id) use ($identifier): string {
                         $key_item = CallbackHandler::KEY_ITEM;
                         return "$('#$id').on('click', function(){
                             $.ajax({
@@ -163,9 +158,7 @@ class StandardPagePartProvider implements PagePartProvider
         return $main_bar;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getBreadCrumbs(): ?Breadcrumbs
     {
         // TODO this currently gets the items from ilLocatorGUI, should that serve be removed with
@@ -175,7 +168,10 @@ class StandardPagePartProvider implements PagePartProvider
         $f = $this->ui->factory();
         $crumbs = [];
         foreach ($DIC['ilLocator']->getItems() as $item) {
-            if (empty($item['title']) || empty($item['link'])) {
+            if (empty($item['title'])) {
+                continue;
+            }
+            if (empty($item['link'])) {
                 continue;
             }
             $crumbs[] = $f->link()->standard($item['title'], $item["link"]);
@@ -184,9 +180,7 @@ class StandardPagePartProvider implements PagePartProvider
         return $f->breadcrumbs($crumbs);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getLogo(): ?Image
     {
         $std_logo = ilUtil::getImagePath("logo/HeaderIcon.svg");
@@ -196,9 +190,7 @@ class StandardPagePartProvider implements PagePartProvider
                         ->withAction($this->getStartingPointAsUrl());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getResponsiveLogo(): ?Image
     {
         $responsive_logo = ilUtil::getImagePath("logo/HeaderIconResponsive.svg");
@@ -208,9 +200,7 @@ class StandardPagePartProvider implements PagePartProvider
                         ->withAction($this->getStartingPointAsUrl());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getFaviconPath(): string
     {
         return ilUtil::getImagePath("logo/favicon.ico");
@@ -219,15 +209,13 @@ class StandardPagePartProvider implements PagePartProvider
     protected function getStartingPointAsUrl(): string
     {
         $std_logo_link = ilUserUtil::getStartingPointAsUrl();
-        if (!$std_logo_link) {
-            $std_logo_link = "./goto.php?target=root_1";
+        if ($std_logo_link === '' || $std_logo_link === '0') {
+            return "./goto.php?target=root_1";
         }
         return $std_logo_link;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getSystemInfos(): array
     {
         $system_infos = [];
@@ -239,41 +227,41 @@ class StandardPagePartProvider implements PagePartProvider
         return $system_infos;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getFooter(): ?Footer
     {
-        return $this->ui->factory()->mainControls()->footer();
+        $footer = $this->ui->factory()->mainControls()->footer();
+        $renderer_factory = new FooterRendererFactory($this->ui);
+        $collector = $this->gs->collector()->footer();
+
+        $collector->collectOnce();
+
+        foreach ($collector->getItemsForUIRepresentation() as $item) {
+            $footer = $renderer_factory->addToFooter($item, $footer);
+        }
+
+        return $footer;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getTitle(): string
     {
         return 'title';
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getShortTitle(): string
     {
         return 'short';
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getViewTitle(): string
     {
         return 'view';
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getToastContainer(): TContainer
     {
         $toast_container = $this->ui->factory()->toast()->container();

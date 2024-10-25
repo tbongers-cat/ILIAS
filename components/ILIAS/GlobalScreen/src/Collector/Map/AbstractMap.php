@@ -74,7 +74,7 @@ abstract class AbstractMap implements Filterable, Walkable
         }
     }
 
-    public function getSingleItemFromRaw(IdentificationInterface $identification): isGlobalScreenItem
+    public function getSingleItemFromRaw(IdentificationInterface $identification): ?isGlobalScreenItem
     {
         if ($this->raw->offsetExists($identification->serialize())) {
             $item = $this->raw->offsetGet($identification->serialize());
@@ -84,7 +84,7 @@ abstract class AbstractMap implements Filterable, Walkable
         return $this->getLostItem($identification);
     }
 
-    public function getSingleItemFromFilter(IdentificationInterface $identification): isGlobalScreenItem
+    public function getSingleItemFromFilter(IdentificationInterface $identification): ?isGlobalScreenItem
     {
         $this->applyFilters();
 

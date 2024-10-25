@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,10 +16,13 @@ declare(strict_types=1);
  *
  *********************************************************************/
 
+declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Provider;
 
 use ILIAS\GlobalScreen\Scope\MainMenu\Collector\Information\ItemInformation;
 use ILIAS\GlobalScreen\Scope\MainMenu\Collector\Information\NullItemInformation;
+use ILIAS\GlobalScreen\Scope\Footer\Provider\StaticFooterProvider;
 
 /**
  * Class NullProviderFactory
@@ -49,7 +51,17 @@ class NullProviderFactory implements ProviderFactory
      */
     public function getMainBarItemInformation(): ItemInformation
     {
-        return new  NullItemInformation();
+        return new NullItemInformation();
+    }
+
+    public function getFooterProvider(): array
+    {
+        return [] ;
+    }
+
+    public function getFooterItemInformation(): \ILIAS\GlobalScreen\Scope\Footer\Collector\Information\ItemInformation
+    {
+        return new \ILIAS\GlobalScreen\Scope\Footer\Collector\Information\NullItemInformation();
     }
 
     /**

@@ -18,28 +18,21 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\GlobalScreen\Collector;
+namespace ILIAS\GlobalScreen\Scope\Footer\Factory;
+
+use ILIAS\Data\URI;
+use ILIAS\UI\Component\Signal;
 
 /**
  * @author Fabian Schmid <fabian@sr.solutions>
  */
-interface Collector
+interface hasAction extends isItem
 {
-    /**
-     * Runs the Collection of all items from the providers
-     * @deprecated
-     */
-    public function collectOnce(): void;
+    public function withAction(URI|Signal $action): self;
 
-    public function hasBeenCollected(): bool;
+    public function getAction(): URI|Signal;
 
-    public function collectStructure(): void;
+    public function withOpenInNewViewport();
 
-    public function prepareItemsForUIRepresentation(): void;
-
-    public function filterItemsByVisibilty(): void;
-
-    public function cleanupItemsForUIRepresentation(): void;
-
-    public function sortItemsForUIRepresentation(): void;
+    public function mustOpenInNewViewport(): bool;
 }

@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -16,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 namespace ILIAS\GlobalScreen\Scope\Layout\Provider\PagePart;
 
@@ -42,24 +43,17 @@ class DecoratedPagePartProvider implements PagePartProvider
     public const PURPOSE_RESPONSIVE_LOGO = 'prlogo';
     public const PURPOSE_FAVICON = 'pfavicon';
 
-    private PagePartProvider $original;
-    private Closure $deco;
-    private string $purpose;
-
     /**
      * DecoratedPagePartProvider constructor.
      * @param PagePartProvider $original
      * @param Closure          $deco
      * @param string           $purpose
      */
-    public function __construct(PagePartProvider $original, Closure $deco, string $purpose)
+    public function __construct(private readonly PagePartProvider $original, private Closure $deco, private readonly string $purpose)
     {
-        $this->original = $original;
-        $this->deco = $deco;
-        $this->purpose = $purpose;
     }
 
-    private function getDecoratedOrOriginal(string $purpose, $original)
+    private function getDecoratedOrOriginal(string $purpose, Legacy|null|MetaBar|MainBar|Breadcrumbs|Image|string|Footer|TContainer $original)
     {
         if ($this->isDecorated($purpose)) {
             $deco = $this->deco;
@@ -75,41 +69,31 @@ class DecoratedPagePartProvider implements PagePartProvider
         return $purpose === $this->purpose;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getContent(): ?Legacy
     {
         return $this->getDecoratedOrOriginal(Legacy::class, $this->original->getContent());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getMetaBar(): ?MetaBar
     {
         return $this->getDecoratedOrOriginal(MetaBar::class, $this->original->getMetaBar());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getMainBar(): ?MainBar
     {
         return $this->getDecoratedOrOriginal(MainBar::class, $this->original->getMainBar());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getBreadCrumbs(): ?Breadcrumbs
     {
         return $this->getDecoratedOrOriginal(Breadcrumbs::class, $this->original->getBreadCrumbs());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getLogo(): ?Image
     {
         return $this->getDecoratedOrOriginal(self::PURPOSE_LOGO, $this->original->getLogo());
@@ -126,47 +110,37 @@ class DecoratedPagePartProvider implements PagePartProvider
         return $this->getDecoratedOrOriginal(self::PURPOSE_FAVICON, $this->original->getFaviconPath());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getSystemInfos(): array
     {
         return $this->original->getSystemInfos();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getFooter(): ?Footer
     {
         return $this->getDecoratedOrOriginal(Footer::class, $this->original->getFooter());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getTitle(): string
     {
         return $this->getDecoratedOrOriginal(self::PURPOSE_TITLE, $this->original->getTitle());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getShortTitle(): string
     {
         return $this->getDecoratedOrOriginal(self::PURPOSE_SHORTTITLE, $this->original->getShortTitle());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function getViewTitle(): string
     {
         return $this->getDecoratedOrOriginal(self::PURPOSE_VIEWTITLE, $this->original->getViewTitle());
     }
 
-    public function getToastContainer() : ?TContainer
+    public function getToastContainer(): ?TContainer
     {
         return $this->getDecoratedOrOriginal(TContainer::class, $this->original->getToastContainer());
     }

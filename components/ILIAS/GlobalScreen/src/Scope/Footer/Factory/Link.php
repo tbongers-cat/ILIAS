@@ -18,28 +18,30 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\GlobalScreen\Collector;
+namespace ILIAS\GlobalScreen\Scope\Footer\Factory;
+
+use ILIAS\GlobalScreen\Identification\IdentificationInterface;
 
 /**
  * @author Fabian Schmid <fabian@sr.solutions>
  */
-interface Collector
+class Link extends AbstractBaseItem implements canHaveParent, hasAction
 {
-    /**
-     * Runs the Collection of all items from the providers
-     * @deprecated
-     */
-    public function collectOnce(): void;
+    use hasTitleTrait;
+    use hasActionTrait;
+    use canHaveParentTrait;
 
-    public function hasBeenCollected(): bool;
+    public function __construct(
+        IdentificationInterface $provider_identification,
+        string $title
+    ) {
+        parent::__construct($provider_identification);
+        $this->title = $title;
+    }
 
-    public function collectStructure(): void;
+    public function isTop(): bool
+    {
+        return !$this->hasParent();
+    }
 
-    public function prepareItemsForUIRepresentation(): void;
-
-    public function filterItemsByVisibilty(): void;
-
-    public function cleanupItemsForUIRepresentation(): void;
-
-    public function sortItemsForUIRepresentation(): void;
 }

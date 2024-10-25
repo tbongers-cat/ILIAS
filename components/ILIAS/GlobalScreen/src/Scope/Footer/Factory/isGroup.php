@@ -18,28 +18,27 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\GlobalScreen\Collector;
+namespace ILIAS\GlobalScreen\Scope\Footer\Factory;
 
 /**
  * @author Fabian Schmid <fabian@sr.solutions>
  */
-interface Collector
+interface isGroup extends isItem, hasTitle
 {
+    public function getEntries(): array;
+
     /**
-     * Runs the Collection of all items from the providers
-     * @deprecated
+     * @mutable
      */
-    public function collectOnce(): void;
+    public function withEntries(array $entries): isGroup;
 
-    public function hasBeenCollected(): bool;
+    /**
+     * @mutable
+     */
+    public function addEntries(canHaveParent ...$entries): isGroup;
 
-    public function collectStructure(): void;
-
-    public function prepareItemsForUIRepresentation(): void;
-
-    public function filterItemsByVisibilty(): void;
-
-    public function cleanupItemsForUIRepresentation(): void;
-
-    public function sortItemsForUIRepresentation(): void;
+    /**
+     * @mutable
+     */
+    public function addEntry(canHaveParent $entry): isGroup;
 }

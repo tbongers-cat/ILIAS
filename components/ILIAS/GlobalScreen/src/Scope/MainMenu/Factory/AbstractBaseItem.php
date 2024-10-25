@@ -26,22 +26,19 @@ use ILIAS\GlobalScreen\Scope\ComponentDecoratorTrait;
 use ILIAS\GlobalScreen\Scope\MainMenu\Collector\Information\TypeInformation;
 use ILIAS\UI\Component\Legacy\Legacy;
 use Closure;
+use ILIAS\GlobalScreen\Scope\VisibilityAvailabilityTrait;
 use ILIAS\GlobalScreen\Scope\isDecorateable;
 
 /**
- * Class AbstractBaseItem
- * @author Fabian Schmid <fs@studer-raimann.ch>
+ * @author Fabian Schmid <fabian@sr.solutions>
  */
 abstract class AbstractBaseItem implements isItem, isDecorateable
 {
     use ComponentDecoratorTrait;
+    use VisibilityAvailabilityTrait;
 
     protected int $position = 0;
-
-    private ?bool $is_visible_static = null;
-    protected ?Closure $available_callable = null;
     protected ?Closure $active_callable = null;
-    protected ?Closure $visiblility_callable = null;
     protected bool $is_always_available = false;
     protected ?TypeInformation $type_information = null;
     protected ?Legacy $non_available_reason = null;
@@ -62,71 +59,6 @@ abstract class AbstractBaseItem implements isItem, isDecorateable
         return $this->provider_identification;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function withVisibilityCallable(callable $is_visible): isItem
-    {
-        $clone = clone($this);
-        $clone->visiblility_callable = $is_visible;
-        $clone->is_visible_static = null;
-
-        return $clone;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isVisible(): bool
-    {
-        if ($this->is_visible_static !== null) {
-            return $this->is_visible_static;
-        }
-        if (!$this->isAvailable()) {
-            return $this->is_visible_static = false;
-        }
-        if (is_callable($this->visiblility_callable)) {
-            $callable = $this->visiblility_callable;
-
-            $value = (bool) $callable();
-
-            return $this->is_visible_static = $value;
-        }
-
-        return $this->is_visible_static = true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function withAvailableCallable(callable $is_available): isItem
-    {
-        $clone = clone($this);
-        $clone->available_callable = $is_available;
-
-        return $clone;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isAvailable(): bool
-    {
-        if ($this->isAlwaysAvailable()) {
-            return true;
-        }
-        if (is_callable($this->available_callable)) {
-            $callable = $this->available_callable;
-
-            return (bool) $callable();
-        }
-
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function withNonAvailableReason(Legacy $element): isItem
     {
         $clone = clone $this;

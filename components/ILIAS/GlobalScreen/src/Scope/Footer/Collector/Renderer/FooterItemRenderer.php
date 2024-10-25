@@ -18,28 +18,15 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\GlobalScreen\Collector;
+namespace ILIAS\GlobalScreen\Scope\Footer\Collector\Renderer;
+
+use ILIAS\UI\Component\Component;
+use ILIAS\GlobalScreen\Scope\Footer\Factory\isItem;
 
 /**
  * @author Fabian Schmid <fabian@sr.solutions>
  */
-interface Collector
+interface FooterItemRenderer
 {
-    /**
-     * Runs the Collection of all items from the providers
-     * @deprecated
-     */
-    public function collectOnce(): void;
-
-    public function hasBeenCollected(): bool;
-
-    public function collectStructure(): void;
-
-    public function prepareItemsForUIRepresentation(): void;
-
-    public function filterItemsByVisibilty(): void;
-
-    public function cleanupItemsForUIRepresentation(): void;
-
-    public function sortItemsForUIRepresentation(): void;
+    public function getComponentForItem(isItem $item): Component|array;
 }
