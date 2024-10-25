@@ -428,11 +428,6 @@ class SettingsFormGUI
         $info->setTitle($lng->txt("svy_settings_section_finishing"));
         $form->addItem($info);
 
-        $view_own = new \ilCheckboxInputGUI($lng->txt("svy_results_view_own"), "view_own");
-        $view_own->setInfo($lng->txt("svy_results_view_own_info"));
-        $view_own->setChecked($survey->hasViewOwnResults());
-        $form->addItem($view_own);
-
         $mail_confirm = new \ilCheckboxInputGUI($lng->txt("svy_results_mail_confirm"), "mail_confirm");
         $mail_confirm->setInfo($lng->txt("svy_results_mail_confirm_info"));
         $mail_confirm->setChecked($survey->hasMailConfirmation());
@@ -847,7 +842,6 @@ class SettingsFormGUI
             $survey->setOfflineStatus(!$form->getInput('online'));
         }
 
-        $survey->setViewOwnResults((bool) $form->getInput("view_own"));
         $survey->setMailOwnResults((bool) $form->getInput("mail_own"));
         $survey->setMailConfirmation((bool) $form->getInput("mail_confirm"));
 

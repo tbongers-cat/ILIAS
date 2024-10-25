@@ -1033,7 +1033,6 @@ class ilObjSurvey extends ilObject
             $this->setTutorResultsStatus((bool) $data["tutor_res_status"]);
             $this->setTutorResultsRecipients(explode(";", $data["tutor_res_reci"] ?? ""));
 
-            $this->setViewOwnResults((bool) $data["own_results_view"]);
             $this->setMailOwnResults((bool) $data["own_results_mail"]);
             $this->setMailConfirmation((bool) $data["confirmation_mail"]);
             $this->setCalculateSumScore((bool) $data["calculate_sum_score"]);
@@ -3268,7 +3267,6 @@ class ilObjSurvey extends ilObject
         $newObj->setAnonymize($this->getAnonymize());
         $newObj->setShowQuestionTitles($this->getShowQuestionTitles());
         $newObj->setPoolUsage($this->getPoolUsage());
-        $newObj->setViewOwnResults($this->hasViewOwnResults());
         $newObj->setMailOwnResults($this->hasMailOwnResults());
         $newObj->setMailConfirmation($this->hasMailConfirmation());
         $newObj->setAnonymousUserList($this->hasAnonymousUserList());
