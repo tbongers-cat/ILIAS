@@ -28,15 +28,10 @@ use ILIAS\LearningModule\InternalDomainService;
  */
 class GUIService
 {
-    protected InternalGUIService $gui_service;
-    protected InternalDomainService $domain_service;
-
     public function __construct(
-        InternalDomainService $domain_service,
-        InternalGUIService $gui_service
+        protected InternalDomainService $domain,
+        protected InternalGUIService $gui
     ) {
-        $this->gui_service = $gui_service;
-        $this->domain_service = $domain_service;
     }
 
     public function request(
@@ -44,10 +39,158 @@ class GUIService
         ?array $passed_post_data = null
     ): EditingGUIRequest {
         return new EditingGUIRequest(
-            $this->gui_service->http(),
-            $this->domain_service->refinery(),
+            $this->gui->http(),
+            $this->domain->refinery(),
             $passed_query_params,
             $passed_post_data
         );
+    }
+
+    public function editSubObjectsGUI(
+        string $sub_type,
+        \ilObjLearningModule $lm,
+        string $table_title
+    ): EditSubObjectsGUI {
+        return new EditSubObjectsGUI(
+            $this->domain,
+            $this->gui,
+            $sub_type,
+            $lm,
+            $table_title
+        );
+    }
+
+    public function subObjectTableGUI(
+        string $title,
+        int $lm_id,
+        string $type,
+        object $parent_gui
+    ): \ILIAS\LearningModule\Table\TableAdapterGUI {
+        $lng = $this->domain->lng();
+        $user = $this->domain->user();
+        $table = new \ILIAS\LearningModule\Table\TableAdapterGUI(
+            "subobj",
+            $title,
+            $this->domain->subObjectRetrieval(
+                $lm_id,
+                $type,
+                $this->request()->getObjId()
+            ),
+            $parent_gui
+        );
+        $table = $table
+            ->ordering("saveOrder")
+            ->textColumn("title", $lng->txt("title"));
+
+        if ($type === "st") {
+            $acts = [
+                [
+                    "editPages",
+                    $lng->txt("edit"),
+                    [\ilObjLearningModuleGUI::class, \ilStructureObjectGUI::class, EditSubObjectsGUI::class],
+                    "editPages",
+                    "obj_id"
+                ],
+                [
+                    "insertChapterAfter",
+                    $lng->txt("lm_insert_chapter_after"),
+                    [EditSubObjectsGUI::class],
+                    "insertChapterAfter",
+                    "target_id"
+                ],
+                [
+                    "insertChapterBefore",
+                    $lng->txt("lm_insert_chapter_before"),
+                    [EditSubObjectsGUI::class],
+                    "insertChapterBefore",
+                    "target_id"
+                ]
+            ];
+            if ($user->clipboardHasObjectsOfType("st")) {
+                $acts[] = [
+                    "insertChapterClipAfter",
+                    $lng->txt("lm_insert_chapter_clip_after"),
+                    [EditSubObjectsGUI::class],
+                    "insertChapterClipAfter",
+                    "target_id"
+                ];
+                $acts[] = [
+                    "insertChapterClipBefore",
+                    $lng->txt("lm_insert_chapter_clip_before"),
+                    [EditSubObjectsGUI::class],
+                    "insertChapterClipBefore",
+                    "target_id"
+                ];
+            }
+        } else {
+            $acts = [
+                [
+                    "editPage",
+                    $lng->txt("edit"),
+                    [\ilObjLearningModuleGUI::class, \ilLMPageObjectGUI::class],
+                    "edit",
+                    "obj_id"
+                ],
+                [
+                    "insertPageAfter",
+                    $lng->txt("lm_insert_page_after"),
+                    [EditSubObjectsGUI::class],
+                    "insertPageAfter",
+                    "target_id"
+                ],
+                [
+                    "insertPageBefore",
+                    $lng->txt("lm_insert_page_before"),
+                    [EditSubObjectsGUI::class],
+                    "insertPageBefore",
+                    "target_id"
+                ]
+            ];
+            if ($user->clipboardHasObjectsOfType("pg")) {
+                $acts[] = [
+                    "insertPageClipAfter",
+                    $lng->txt("lm_insert_page_clip_after"),
+                    [EditSubObjectsGUI::class],
+                    "insertPageClipAfter",
+                    "target_id"
+                ];
+                $acts[] = [
+                    "insertPageClipBefore",
+                    $lng->txt("lm_insert_page_clip_before"),
+                    [EditSubObjectsGUI::class],
+                    "insertPageClipBefore",
+                    "target_id"
+                ];
+            }
+        }
+        foreach ($acts as $a) {
+            $table = $table->singleAction($a[0], $a[1])
+                           ->redirect($a[2], $a[3], $a[4]);
+        }
+        $table = $table
+            ->standardAction(
+                "delete",
+                $lng->txt("delete")
+            )
+            ->singleAction(
+                "editTitle",
+                $lng->txt("cont_edit_title"),
+                true
+            )
+            ->standardAction(
+                "cutItems",
+                $lng->txt("cut")
+            )
+            ->standardAction(
+                "copyItems",
+                $lng->txt("copy")
+            );
+        if ($type === "pg") {
+            $table = $table->standardAction(
+                "activatePages",
+                $lng->txt("cont_de_activate")
+            );
+        }
+        return $table;
     }
 }
