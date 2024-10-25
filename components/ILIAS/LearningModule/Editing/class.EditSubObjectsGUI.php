@@ -134,6 +134,7 @@ class EditSubObjectsGUI
         $table = $this->getTable();
 
         $main_tpl->setContent($ml_head . $table->render());
+        $main_tpl->addOnloadCode("window.setTimeout(() => { il.repository.core.trigger('il-lm-editor-tree'); }, 500);");
     }
 
     public function insertChapterClipBefore(): void

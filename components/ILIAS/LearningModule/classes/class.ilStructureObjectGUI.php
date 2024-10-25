@@ -139,45 +139,6 @@ class ilStructureObjectGUI extends ilLMObjectGUI
         $this->ctrl->redirectByClass(EditSubObjectsGUI::class, "editPages");
     }
 
-    public function showHierarchy(): void
-    {
-        $lng = $this->lng;
-        $ilCtrl = $this->ctrl;
-
-        $this->setTabs();
-
-        $ilCtrl->setParameter($this, "backcmd", "showHierarchy");
-
-        $form_gui = new ilChapterHierarchyFormGUI($this->content_object->getType(), $this->requested_transl);
-        $form_gui->setFormAction($ilCtrl->getFormAction($this));
-        $form_gui->setTitle($this->obj->getTitle());
-        $form_gui->setIcon(ilUtil::getImagePath("standard/icon_st.svg"));
-        $form_gui->setTree($this->tree);
-        $form_gui->setCurrentTopNodeId($this->obj->getId());
-        $form_gui->addMultiCommand($lng->txt("delete"), "delete");
-        $form_gui->addMultiCommand($lng->txt("cut"), "cutItems");
-        $form_gui->addMultiCommand($lng->txt("copy"), "copyItems");
-        $form_gui->addMultiCommand($lng->txt("cont_de_activate"), "activatePages");
-        if ($this->content_object->getLayoutPerPage()) {
-            $form_gui->addMultiCommand($lng->txt("cont_set_layout"), "setPageLayout");
-        }
-        $form_gui->setDragIcon(ilUtil::getImagePath("standard/icon_pg.svg"));
-        $form_gui->addCommand($lng->txt("cont_save_all_titles"), "saveAllTitles");
-        $form_gui->addHelpItem($lng->txt("cont_chapters_after_pages"));
-        $up_gui = "ilobjlearningmodulegui";
-        $ilCtrl->setParameterByClass($up_gui, "active_node", $this->obj->getId());
-        $ilCtrl->setParameterByClass($up_gui, "active_node", null);
-
-        $ctpl = new ilTemplate("tpl.chap_and_pages.html", true, true, "components/ILIAS/LearningModule");
-        $ctpl->setVariable("HIERARCHY_FORM", $form_gui->getHTML());
-        $ilCtrl->setParameter($this, "obj_id", $this->requested_obj_id);
-
-        $ml_head = ilObjContentObjectGUI::getMultiLangHeader($this->content_object->getId(), $this);
-        $this->tpl->setContent($ml_head . $ctpl->get());
-        $this->tpl->addOnloadCode("window.setTimeout(() => { il.repository.core.trigger('il-lm-editor-tree'); }, 500);");
-    }
-
-
     /**
      * Save all titles of chapters/pages
      */

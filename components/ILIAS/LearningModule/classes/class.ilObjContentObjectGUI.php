@@ -2189,55 +2189,6 @@ class ilObjContentObjectGUI extends ilObjectGUI
         $ilCtrl->redirect($this, "chapters");
     }
 
-    /**
-     * Insert Chapter from clipboard
-     */
-    public function insertChapterClip(): void
-    {
-        $ilUser = $this->user;
-        $ilCtrl = $this->ctrl;
-        $ilLog = $this->log;
-
-        $node_id = ilChapterHierarchyFormGUI::getPostNodeId();
-        $first_child = ilChapterHierarchyFormGUI::getPostFirstChild();
-
-        if (!$first_child) {	// insert after node id
-            $parent_id = $this->lm_tree->getParentId($node_id);
-            $target = $node_id;
-        } else {													// insert as first child
-            $parent_id = $node_id;
-            $target = ilTree::POS_FIRST_NODE;
-        }
-
-        // copy and paste
-        $chapters = $ilUser->getClipboardObjects("st", true);
-        $copied_nodes = array();
-        foreach ($chapters as $chap) {
-            $ilLog->write("Call pasteTree, Target LM: " . $this->lm->getId() . ", Chapter ID: " . $chap["id"]
-                . ", Parent ID: " . $parent_id . ", Target: " . $target);
-            $cid = ilLMObject::pasteTree(
-                $this->lm,
-                $chap["id"],
-                $parent_id,
-                $target,
-                (string) ($chap["insert_time"] ?? ""),
-                $copied_nodes,
-                (ilEditClipboard::getAction() == "copy")
-            );
-            $target = $cid;
-        }
-        ilLMObject::updateInternalLinks($copied_nodes);
-
-        if (ilEditClipboard::getAction() == "cut") {
-            $ilUser->clipboardDeleteObjectsOfType("pg");
-            $ilUser->clipboardDeleteObjectsOfType("st");
-            ilEditClipboard::clear();
-        }
-
-        $this->lm->checkTree();
-        $ilCtrl->redirect($this, "chapters");
-    }
-
     public static function _goto(string $a_target): void
     {
         global $DIC;
