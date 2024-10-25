@@ -18,7 +18,6 @@
 declare(strict_types=1);
 
 use ILIAS\AccessControl\Log\Table;
-
 use ILIAS\HTTP\GlobalHttpState;
 use ILIAS\Refinery\Factory;
 use ILIAS\UI\Factory as UIFactory;
@@ -188,18 +187,6 @@ class ilPermissionGUI
         return $this->gui_obj->getObject();
     }
 
-    /**
-     * Called after toolbar action applyTemplateSwitch
-     */
-    public function confirmTemplateSwitch(): void
-    {
-        $this->ctrl->setReturn($this, 'perm');
-        // @todo: removed deprecated ilCtrl methods, this needs inspection by a maintainer.
-        // $this->ctrl->setCmdClass('ildidactictemplategui');
-        $dtpl_gui = new ilDidacticTemplateGUI($this->gui_obj);
-        $this->ctrl->forwardCommand($dtpl_gui);
-    }
-
     public function perm(ilTable2GUI $table = null): void
     {
         $dtpl = new ilDidacticTemplateGUI($this->gui_obj);
@@ -213,7 +200,7 @@ class ilPermissionGUI
 
         if ($this->object_definition->hasLocalRoles($this->getCurrentObject()->getType()) && !$this->isAdministrationObject()
         ) {
-            $this->toolbar->setFormAction($this->ctrl->getFormAction($this));
+            $this->toolbar->setFormAction($this->ctrl->getFormActionByClass(ilDidacticTemplateGUI::class));
 
             if (!$this->isAdminRoleFolder()) {
                 $this->toolbar->addComponent(
