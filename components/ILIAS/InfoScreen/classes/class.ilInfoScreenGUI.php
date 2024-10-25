@@ -806,17 +806,11 @@ class ilInfoScreenGUI
             $tpl->parseCurrentBlock();
         }
 
-        // tagging
         if (
             isset($this->gui_object) &&
             method_exists($this->gui_object, "getObject") &&
             is_object($this->gui_object->getObject())
         ) {
-            $tags_set = new ilSetting("tags");
-            if ($tags_set->get("enable") && $ilUser->getId() != ANONYMOUS_USER_ID) {
-                $this->addTagging();
-            }
-
             $this->addObjectSections();
         }
 
@@ -1070,46 +1064,6 @@ class ilInfoScreenGUI
     }
 
 
-    public function addTagging(): void
-    {
-        $lng = $this->lng;
-
-        $lng->loadLanguageModule("tagging");
-        $tags_set = new ilSetting("tags");
-
-        $tagging_gui = new ilTaggingGUI();
-        $tagging_gui->setObject(
-            $this->gui_object->getObject()->getId(),
-            $this->gui_object->getObject()->getType()
-        );
-
-        $this->addSection($lng->txt("tagging_tags"));
-
-        if ($tags_set->get("enable_all_users")) {
-            $this->addProperty(
-                $lng->txt("tagging_all_users"),
-                $tagging_gui->getAllUserTagsForObjectHTML()
-            );
-        }
-
-        $this->addProperty(
-            $lng->txt("tagging_my_tags"),
-            $tagging_gui->getTaggingInputHTML()
-        );
-    }
-
-    public function saveTags(): void
-    {
-        $tagging_gui = new ilTaggingGUI();
-        $tagging_gui->setObject(
-            $this->gui_object->getObject()->getId(),
-            $this->gui_object->getObject()->getType()
-        );
-        $tagging_gui->saveInput();
-
-        $this->tpl->setOnScreenMessage('success', $this->lng->txt('msg_obj_modified'), true);
-        $this->ctrl->redirect($this, ""); // #14993
-    }
 
     public function hideFurtherSections(bool $a_add_toggle = true): void
     {
