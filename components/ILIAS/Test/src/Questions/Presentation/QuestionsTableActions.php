@@ -66,7 +66,8 @@ class QuestionsTableActions
         private readonly \ilObjTest $test_obj,
         private readonly bool $is_adjusting_questions_with_results_allowed,
         private readonly bool $is_in_test_with_results,
-        private readonly bool $is_in_test_with_random_question_set
+        private readonly bool $is_in_test_with_random_question_set,
+        private readonly \ilTestQuestionSetConfigFactory $test_question_set_config_factory
     ) {
         $this->table_id = (string) $test_obj->getId();
     }

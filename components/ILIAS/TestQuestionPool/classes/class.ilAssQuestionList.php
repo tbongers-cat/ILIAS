@@ -267,10 +267,56 @@ class ilAssQuestionList implements ilTaxAssignedItemInfo
                         $expressions[] = $this->db->like('object_data.title', 'text', "%%$fieldValue%%");
                     }
                     break;
+                case 'feedback':
+                    if ($fieldValue === 'false') {
+                        $expressions[] = 'qpl_fb_generic.question_fi IS NULL';
+                    }
+                    break;
+                case 'hints':
+                    if ($fieldValue === 'false') {
+                        $expressions[] = 'qpl_hints.qht_question_fi IS NULL';
+                    }
+                    break;
             }
         }
 
         return $expressions;
+    }
+
+    private function handleFeedbackJoin(string $tableJoin): string
+    {
+        $feedback_join = match ($this->fieldFilters['feedback'] ?? null) {
+            'true' => 'INNER',
+            'false' => 'LEFT',
+            default => null
+        };
+
+        if (isset($feedback_join)) {
+            $SQL = $feedback_join . ' JOIN qpl_fb_generic ON qpl_fb_generic.question_fi = qpl_questions.question_id ';
+            if (!str_contains($tableJoin, $SQL)) {
+                $tableJoin .= $SQL;
+            }
+        }
+
+        return $tableJoin;
+    }
+
+    private function handleHintJoin(string $tableJoin): string
+    {
+        $feedback_join = match ($this->fieldFilters['hints'] ?? null) {
+            'true' => 'INNER',
+            'false' => 'LEFT',
+            default => null
+        };
+
+        if (isset($feedback_join)) {
+            $SQL = $feedback_join . ' JOIN qpl_hints ON qpl_hints.qht_question_fi = qpl_questions.question_id ';
+            if (!str_contains($tableJoin, $SQL)) {
+                $tableJoin .= $SQL;
+            }
+        }
+
+        return $tableJoin;
     }
 
     private function getTaxonomyFilterExpressions(): array
@@ -444,6 +490,16 @@ class ilAssQuestionList implements ilTaxAssignedItemInfo
 			ON			tstquest.question_fi = qpl_questions.question_id
 			";
         }
+
+        if (
+            $this->getParentObjectType() === 'tst'
+            && $this->getQuestionInstanceTypeFilter() === self::QUESTION_INSTANCE_TYPE_ALL
+        ) {
+            $tableJoin .= " INNER JOIN tst_test_question ON tst_test_question.question_fi = qpl_questions.question_id ";
+        }
+
+        $tableJoin = $this->handleFeedbackJoin($tableJoin);
+        $tableJoin = $this->handleHintJoin($tableJoin);
 
         if ($this->getAnswerStatusActiveId()) {
             $tableJoin .= "

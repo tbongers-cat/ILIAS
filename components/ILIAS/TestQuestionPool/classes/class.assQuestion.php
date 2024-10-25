@@ -1769,7 +1769,7 @@ abstract class assQuestion implements Question
         $ilDB = $DIC['ilDB'];
         $lng = $DIC['lng'];
         $questionrepository = QuestionPoolDIC::dic()['question.general_properties.repository'];
-        $question_type = $questionrepository->getForQuestionId($question_id)->getClassName();
+        $question_type = $questionrepository->getForQuestionId($question_id)?->getClassName() ?? '';
         if ($question_type === '') {
             throw new InvalidArgumentException('No question with ID ' . $question_id . ' exists');
         }
