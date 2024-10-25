@@ -26,6 +26,7 @@ use ILIAS\Data\Factory as DataFactory;
 use ILIAS\Data\Order;
 use ILIAS\Data\Range;
 use ILIAS\Test\RequestDataCollector;
+use ILIAS\Test\Utilities\TitleColumnsBuilder;
 use ILIAS\UI\Component\Table\Action\Standard as TableAction;
 use ILIAS\UI\Component\Table\Column\Column;
 use ILIAS\UI\Component\Table\DataRetrieval;
@@ -55,7 +56,6 @@ class QuestionsBrowserTable implements DataRetrieval
         protected \ilTree $tree,
         protected RequestDataCollector $testrequest,
         protected TaxonomyService $taxonomy,
-        protected \Closure $getQuestionPoolLink,
         protected string $parent_title
     ) {
     }
@@ -166,7 +166,6 @@ class QuestionsBrowserTable implements DataRetrieval
             $record['type_tag'] = $this->lng->txt($record['type_tag']);
             $record['complete'] = (bool) $record['complete'];
             $record['lifecycle'] = \ilAssQuestionLifecycle::getInstance($record['lifecycle'])->getTranslation($this->lng) ?? '';
-            $record['qpl'] = call_user_func($this->getQuestionPoolLink, $record['orig_obj_fi'] ?? null);
 
             $record['created'] = (new \DateTimeImmutable())->setTimestamp($record['created']);
             $record['tstamp'] = (new \DateTimeImmutable())->setTimestamp($record['tstamp']);

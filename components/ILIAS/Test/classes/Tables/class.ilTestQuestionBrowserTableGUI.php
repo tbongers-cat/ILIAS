@@ -64,7 +64,6 @@ class ilTestQuestionBrowserTableGUI
         private readonly ilUIService $ui_service,
         private readonly DataFactory $data_factory,
         private readonly TaxonomyService $taxonomy,
-        private readonly \Closure $questionPoolLinkBuilder
     ) {
     }
 
@@ -138,7 +137,6 @@ class ilTestQuestionBrowserTableGUI
             $this->tree,
             $this->testrequest,
             $this->taxonomy,
-            $this->questionPoolLinkBuilder,
             $parent_title
         );
     }
