@@ -17669,13 +17669,21 @@ wiki#:#wiki_whole_wiki#:#Gesamtes Wiki
 wiki#:#wiki_wiki_page#:#Wiki-Seite
 wiki#:#wiki_wiki_search#:#Suche im Wiki
 wiki#:#wiki_wpg#:#Wiki-Seite
+wopi#:#action_edit#:#Editieren
+wopi#:#action_view#:#Anzeigen
+wopi#:#activate_saving_interval#:#Speicherintervall aktivieren
 wopi#:#activate_wopi#:#WOPI aktivieren
 wopi#:#close_wopi_editor#:#Editor schliessen
 wopi#:#close_wopi_editor_info#:#Es kann bis zu mehreren Minuten dauern, bis der externe Editor die Änderungen an ILIAS übertragen hat. Besuchen Sie diese Seite zu einem späteren Zeitpunkt wieder, wenn die gemachten Änderungen noch nicht ersichtlich sind.
-wopi#:#currently_supported#:#Derzeit unterstützte Dateiendungen: %s
+wopi#:#currently_supported#:#Derzeit unterstützte Dateiendungen
 wopi#:#msg_error_wopi_invalid_discorvery_url#:#Die eingegebene Discovery-URL ist ungültig oder kann nicht erreicht werden.
 wopi#:#msg_wopi_settings_modified#:#Einstellungen gespeichert
 wopi#:#open_external_editor#:#In externem Editor öffnen
+wopi#:#open_external_viewer#:#Inhalt anzeigen
+wopi#:#save_on_exit#:#Beim Beenden des Editors automatisch speichern
+wopi#:#save_on_exit_info#:#Bei aktiviertem Speicherintervall wird nach Möglichkeit nach der festgelegten Sekundenanzahl eine neue Verison veröffentlicht. Bitte beachten Sie, dass eine tiefer Wert zu sehr vielen Dateiversionen führen kann und damit ein Vielfaches des Festplattenspeichers beanspr
+wopi#:#saving_interval#:#Speicherintervall
+wopi#:#saving_interval_byline#:#Standardmässig fügt ILIAS alle durch einen Externen Editor erhaltenen Änderungen in einer Entwurfs-Version hinzu, bis diese Version manuell veröffentlicht wird. Durch das Aktivieren des Speicherintervall wird nach Möglichkeit nach der festgelegten Sekundenanzahl eine neue Verison veröffentlicht. Bitte beachten Sie, dass eine tiefer Wert zu sehr vielen Dateiversionen führen kann und damit ein Vielfaches des Festplattenspeichers beansprucht.
 wopi#:#wopi_crawler_cronjob_description#:#Aktualisiert die Informationen des angebundenen WOPI-Dienstes.
 wopi#:#wopi_crawler_cronjob_no_apps#:#Es wurden keine WOPI-Apps in der Discovery gefunden.
 wopi#:#wopi_crawler_cronjob_not_activated#:#WOPI ist nicht aktiviert.

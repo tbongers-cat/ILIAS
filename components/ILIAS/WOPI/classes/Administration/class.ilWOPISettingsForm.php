@@ -27,8 +27,6 @@ use ILIAS\Data\URI;
 
 /**
  * @author            Fabian Schmid <fabian@sr.solutions>
- *
- * @ilCtrl_isCalledBy ilWOPIAdministrationGUI: ilObjExternalToolsSettingsGUI
  */
 class ilWOPISettingsForm
 {
@@ -64,15 +62,17 @@ class ilWOPISettingsForm
     {
         $wopi_activated = (bool) $this->settings->get("wopi_activated", '0');
         $wopi_discovery_url = $this->settings->get("wopi_discovery_url");
+        $saving_interval_value = (int) $this->settings->get("saving_interval", '0');
+        $saving_interval_value = $saving_interval_value === 0 ? null : $saving_interval_value;
 
         $wopi_url = $this->ui_factory->input()->field()->text(
             $this->lng->txt("wopi_url"),
             $this->lng->txt("wopi_url_byline")
-            /*. $this->renderLink(
-                " ➜︎ Wikipedia",
-                "https://en.wikipedia.org/wiki/Web_Application_Open_Platform_Interface",
-                true
-            )*/
+        /*. $this->renderLink(
+            " ➜︎ Wikipedia",
+            "https://en.wikipedia.org/wiki/Web_Application_Open_Platform_Interface",
+            true
+        )*/
         )->withAdditionalTransformation(
             $this->refinery->custom()->transformation(function ($v) {
                 return $v === '' ? null : $v;
@@ -94,13 +94,56 @@ class ilWOPISettingsForm
             $wopi_discovery_url ?? ''
         );
 
+        $saving_interval = $this->ui_factory->input()->field()->optionalGroup(
+            [
+                $this->ui_factory
+                    ->input()
+                    ->field()
+                    ->numeric(
+                        $this->lng->txt("saving_interval"),
+                        $this->lng->txt("saving_interval_byline")
+                    )
+                    ->withAdditionalTransformation(
+                        $this->refinery->custom()->transformation(function ($v) {
+                            return $v === '' ? null : $v;
+                        })
+                    )->withAdditionalTransformation(
+                        $this->refinery->custom()->transformation(function ($v) {
+                            if ($v === null || $v === 0) {
+                                $this->settings->delete("saving_interval");
+                                return true;
+                            }
+
+                            $this->settings->set("saving_interval", (string) $v);
+
+                            return true;
+                        })
+                    )->withValue(
+                        $saving_interval_value
+                    )
+            ],
+            $this->lng->txt("activate_saving_interval")
+        )->withValue(
+            $saving_interval_value === null ? null : [$saving_interval_value]
+        )->withAdditionalTransformation(
+            $this->refinery->custom()->transformation(function ($v) {
+                if ($v === null || $v === [null]) {
+                    $this->settings->delete("saving_interval");
+                }
+                return $v;
+            })
+        );
+
         return $this->ui_factory->input()->field()->section(
             [
                 $this->ui_factory->input()->field()->optionalGroup(
-                    [$wopi_url],
+                    [$wopi_url, $saving_interval],
                     $this->lng->txt("activate_wopi")
                 )->withValue(
-                    $wopi_discovery_url === null ? null : [$wopi_discovery_url]
+                    $wopi_discovery_url === null ? null : [
+                        $wopi_discovery_url,
+                        $saving_interval_value === null ? null : [$saving_interval_value]
+                    ]
                 )->withAdditionalTransformation(
                     $this->refinery->custom()->transformation(function ($v) {
                         if ($v === null || $v === [null]) {
