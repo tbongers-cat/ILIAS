@@ -28,11 +28,11 @@ class ilCalendarSetupAgent extends Setup\Agent\NullAgent
 {
     public function getUpdateObjective(Setup\Config $config = null): Setup\Objective
     {
-        return new ilDatabaseUpdateStepsExecutedObjective(new ilCalendarDBUpdateSteps9());
+        return new ilDatabaseUpdateStepsExecutedObjective(new ilCalendarDBUpdateSteps10());
     }
 
     public function getStatusObjective(Setup\Metrics\Storage $storage): Setup\Objective
     {
-        return new ilDatabaseUpdateStepsMetricsCollectedObjective($storage, new ilCalendarDBUpdateSteps9());
+        return new ilDatabaseUpdateStepsMetricsCollectedObjective($storage, new ilCalendarDBUpdateSteps10());
     }
 }

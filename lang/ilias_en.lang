@@ -8266,10 +8266,19 @@ dateplaner#:#cal_ch_assign_participants#:#Assign Users
 dateplaner#:#cal_ch_assigned_apps#:#Number of Appointments
 dateplaner#:#cal_ch_book#:#Book Appointment
 dateplaner#:#cal_ch_booking#:#Resource Booking
+dateplaner#:#cal_ch_booking_col_comments#:#Comments
+dateplaner#:#cal_ch_booking_comment#:#Comment:
+dateplaner#:#cal_ch_booking_link#:#Link to Consultation Hours:
 dateplaner#:#cal_ch_booking_message_tbl#:#Comment
+dateplaner#:#cal_ch_booking_num_available#:#Available Slots
+dateplaner#:#cal_ch_booking_num_free_short#:#%s free
+dateplaner#:#cal_ch_booking_other_participants#:#Other Participants:
 dateplaner#:#cal_ch_booking_owner#:#Owner
+dateplaner#:#cal_ch_booking_participants#:#Participants
 dateplaner#:#cal_ch_booking_reminder_body#:#your appointment with "%s" starts soon.
 dateplaner#:#cal_ch_booking_reminder_subject#:#Reminder for "%s"
+dateplaner#:#cal_ch_booking_start#:#Start
+dateplaner#:#cal_ch_booking_your_comment#:#Your comment:
 dateplaner#:#cal_ch_bookings#:#Participants
 dateplaner#:#cal_ch_bookings_tbl#:#Booked Appointments
 dateplaner#:#cal_ch_cancel_booking#:#Cancel Booking
@@ -8280,6 +8289,7 @@ dateplaner#:#cal_ch_ch#:#Consultation Hours
 dateplaner#:#cal_ch_cron_reminder#:#Send Consultation Hour Reminder
 dateplaner#:#cal_ch_cron_reminder_days#:#Number of Days
 dateplaner#:#cal_ch_cron_reminder_info#:#If enabled, notification mails about upcoming consultation hour events will be send.
+dateplaner#:#cal_ch_current_booking_comment#:#Comment
 dateplaner#:#cal_ch_current_bookings#:#Current Bookings
 dateplaner#:#cal_ch_deadline#:#Latest Registration
 dateplaner#:#cal_ch_deadline_info#:#Please define the number of hours until the registration is blocked.
@@ -8294,6 +8304,7 @@ dateplaner#:#cal_ch_field_ch#:#Consultation Hour Appointments
 dateplaner#:#cal_ch_form#:#Enable Consultation Hours
 dateplaner#:#cal_ch_form_header#:#Consultation Hours
 dateplaner#:#cal_ch_form_info#:#This option enables the management of personal consultation hours in the calendar.
+dateplaner#:#cal_ch_free_of_available#:#%s of %s
 dateplaner#:#cal_ch_grp_add_tbl#:#Create new Consultation Hour Group
 dateplaner#:#cal_ch_grp_delete_sure#:#Do you really want to delete the following consultation hour groups?
 dateplaner#:#cal_ch_grp_header#:#Consultation Hour Group
@@ -8306,6 +8317,7 @@ dateplaner#:#cal_ch_grps#:#Consultation Hour Groups
 dateplaner#:#cal_ch_manager#:#Consultation Hour Manager
 dateplaner#:#cal_ch_manager_info#:#Login of the user who will manage your consultation hours.
 dateplaner#:#cal_ch_max_books#:#Bookings per User
+dateplaner#:#cal_ch_minutes#:#Duration (min)
 dateplaner#:#cal_ch_multi_edit_sequence#:#Edit multiple appointments
 dateplaner#:#cal_ch_num_appointments#:#Number of Appointments
 dateplaner#:#cal_ch_num_appointments_info#:#Please define the number of sequent appointments.
@@ -8313,11 +8325,17 @@ dateplaner#:#cal_ch_num_bookings#:#Booking per Appointment
 dateplaner#:#cal_ch_personal_book#:#Personal Bookings
 dateplaner#:#cal_ch_personal_ch#:#Personal Consultation Hours
 dateplaner#:#cal_ch_reject_booking#:#Cancel Booking
+dateplaner#:#cal_ch_send_mail#:#Send Mail
 dateplaner#:#cal_ch_target_object#:#Repository Object
 dateplaner#:#cal_ch_target_object_info#:#Consultation hours will be displayed in a block to the right of the course / group content. To restrict the display of consultation hours to specific courses or groups, please enter the Ref-ID of the said objects. You find the Ref-ID in the URL of the respective objects. Add more than one Ref-ID separated by comma. Regardless of that, consultation hours may also appear in your e-portfolios.
 dateplaner#:#cal_ch_unknown_repository_object#:#The given repository object ref-id is not valid.
 dateplaner#:#cal_ch_unknown_user#:#The given login does not match any user.
 dateplaner#:#cal_ch_user_assignment_failed_info#:#The following users could not be assigned to appointments, since the maximum number of bookings is exceeded.
+dateplaner#:#cal_ch_vm_period_all#:#All
+dateplaner#:#cal_ch_vm_period_past#:#Past
+dateplaner#:#cal_ch_vm_status_all#:#All
+dateplaner#:#cal_ch_vm_status_booked#:#Booked Slots
+dateplaner#:#cal_ch_vm_status_open#:#Open Slots
 dateplaner#:#cal_change_calendar_view#:#Change Calendar View
 dateplaner#:#cal_change_responsible_users#:#Change Responsible Users
 dateplaner#:#cal_changed_events_header#:#New and Changed Appointments
@@ -8369,6 +8387,7 @@ dateplaner#:#cal_default_settings#:#Default settings
 dateplaner#:#cal_del_app_sure#:#Do you really want to delete the selected appointments?
 dateplaner#:#cal_del_cal_sure#:#Do you really want to delete the chosen calendars?
 dateplaner#:#cal_delete_app_sure#:#Do you really want to delete the following appointments?
+dateplaner#:#cal_delete_booking_info#:#Please confirm the deletion of this booking
 dateplaner#:#cal_delete_cal#:#Delete Calendar
 dateplaner#:#cal_delete_recurrence_rule#:#Delete Series of Appoinments
 dateplaner#:#cal_delete_recurrences#:#Delete all recurrences
@@ -17789,4 +17808,4 @@ wsp#:#wsp_type_ltiv#:#Certificate: LTI Consumer
 wsp#:#wsp_type_scov#:#Certificate: SCORM
 wsp#:#wsp_type_tstv#:#Certificate: Test
 wsp#:#wsp_type_webr#:#Weblink
-wsp#:#wsp_type_wfld#:#Folder
+wsp#:#wsp_type_wfld#:#Folderdateplaner#:#cal_ch_vm_period_upcoming#:#Upcoming

@@ -8271,10 +8271,18 @@ dateplaner#:#cal_ch_assign_participants#:#Für andere buchen
 dateplaner#:#cal_ch_assigned_apps#:#Anzahl Termine
 dateplaner#:#cal_ch_book#:#Sprechstunde buchen
 dateplaner#:#cal_ch_booking#:#Ressourcen-Buchung
+dateplaner#:#cal_ch_booking_col_comments#:#Commentare
+dateplaner#:#cal_ch_booking_comment#:#Kommentar:
+dateplaner#:#cal_ch_booking_link#:#Link zur Sprechstundenverwaltung:
 dateplaner#:#cal_ch_booking_message_tbl#:#Kommentar zur Anmeldung
+dateplaner#:#cal_ch_booking_num_available#:#Freie Termine
+dateplaner#:#cal_ch_booking_num_free_short#:#%s frei
+dateplaner#:#cal_ch_booking_other_participants#:#Andere Teilnehmende:
 dateplaner#:#cal_ch_booking_owner#:#Sprechstunde bei###Modified as part of gender mainstreaming activities for ILIAS 8
 dateplaner#:#cal_ch_booking_reminder_body#:#Ihr Termin mit „%s“ findet in wenigen Tagen statt.
 dateplaner#:#cal_ch_booking_reminder_subject#:#Terminerinnerung „%s“
+dateplaner#:#cal_ch_booking_start#:#Start
+dateplaner#:#cal_ch_booking_your_comment#:#Ihr Kommentar:
 dateplaner#:#cal_ch_bookings#:#Gebucht von
 dateplaner#:#cal_ch_bookings_tbl#:#Gebuchte Termine
 dateplaner#:#cal_ch_cancel_booking#:#Buchung stornieren
@@ -8285,6 +8293,7 @@ dateplaner#:#cal_ch_ch#:#Sprechstundentermine
 dateplaner#:#cal_ch_cron_reminder#:#Sprechstunden-Benachrichtigungen versenden
 dateplaner#:#cal_ch_cron_reminder_days#:#Anzahl Tage
 dateplaner#:#cal_ch_cron_reminder_info#:#Wenn aktiviert, erhalten Benutzer, die einen Sprechstundentermin gebucht haben, eine Erinnerungsmail über bevorstehende Termine. Bitte legen Sie fest, wieviele Tage im voraus die Erinnerungen verschickt werden sollen.
+dateplaner#:#cal_ch_current_booking_comment#:#Kommentar
 dateplaner#:#cal_ch_current_bookings#:#Angemeldete Personen
 dateplaner#:#cal_ch_deadline#:#Späteste Anmeldung
 dateplaner#:#cal_ch_deadline_info#:#Bitte legen Sie fest, bis zu wie viel Stunden vor der Sprechstunde eine Anmeldung ermöglicht werden soll.
@@ -8299,6 +8308,7 @@ dateplaner#:#cal_ch_field_ch#:#Sprechstundentermine
 dateplaner#:#cal_ch_form#:#Sprechstundenverwaltung aktivieren
 dateplaner#:#cal_ch_form_header#:#Sprechstundenverwaltung
 dateplaner#:#cal_ch_form_info#:#Diese Option aktiviert die Sprechstundenverwaltung im Kalender
+dateplaner#:#cal_ch_free_of_available#:#%s von %s
 dateplaner#:#cal_ch_grp_add_tbl#:#Neue Sprechstundengruppe anlegen
 dateplaner#:#cal_ch_grp_delete_sure#:#Sind Sie sicher, dass Sie die folgenden Sprechstundengruppen löschen möchten?
 dateplaner#:#cal_ch_grp_header#:#Sprechstundengruppe
@@ -8311,6 +8321,7 @@ dateplaner#:#cal_ch_grps#:#Sprechstundengruppen
 dateplaner#:#cal_ch_manager#:#Sprechstunden-Manager
 dateplaner#:#cal_ch_manager_info#:#Um Ihre Sprechstunden von einer anderen Person verwalten zu lassen, müssen Sie hier deren Anmeldename eintragen.
 dateplaner#:#cal_ch_max_books#:#Bookings per User###26 08 2024 new variable
+dateplaner#:#cal_ch_minutes#:#Dauer (min)
 dateplaner#:#cal_ch_multi_edit_sequence#:#Termine editieren
 dateplaner#:#cal_ch_num_appointments#:#Anzahl an Terminen pro Sprechstunde
 dateplaner#:#cal_ch_num_appointments_info#:#Legen Sie fest, wie viel aufeinander folgende Termine generiert werden sollen.
@@ -8318,11 +8329,18 @@ dateplaner#:#cal_ch_num_bookings#:#Maximale Anzahl Personen pro Termin
 dateplaner#:#cal_ch_personal_book#:#Persönliche Buchungen
 dateplaner#:#cal_ch_personal_ch#:#Persönliche Sprechstundentermine
 dateplaner#:#cal_ch_reject_booking#:#Terminbuchung absagen
+dateplaner#:#cal_ch_send_mail#:#Mail verschicken
 dateplaner#:#cal_ch_target_object#:#Objekt im Magazin
 dateplaner#:#cal_ch_target_object_info#:#Die Sprechstunden werden in Kursen und Gruppen in einem kleinen Block rechts angezeigt. Um dies auf bestimmte Kurse oder Gruppen zu beschränken, geben Sie die Ref-ID des betreffenden Objektes ein. Sie finden diese in der URL des entsprechenden Objekts. Mehrere Ref-IDs geben Sie kommagetrennt ein. Unabhängig davon können Sprechstunden auch in Ihren E-Portfolios erscheinen.
 dateplaner#:#cal_ch_unknown_repository_object#:#Die angegebene Kennung des Objekts ist nicht gültig.
 dateplaner#:#cal_ch_unknown_user#:#Der eingegebene Anmeldename existiert nicht.
 dateplaner#:#cal_ch_user_assignment_failed_info#:#Die folgenden Benutzer konnten keinem Termin zugeordnet werden, da die maximale Anzahl an Buchungen überschritten wurde.
+dateplaner#:#cal_ch_vm_period_all#:#Alle
+dateplaner#:#cal_ch_vm_period_past#:#Vergangene Termine
+dateplaner#:#cal_ch_vm_period_upcoming#:#Zukünftige Termine
+dateplaner#:#cal_ch_vm_status_all#:#Alle
+dateplaner#:#cal_ch_vm_status_booked#:#Belegte Termine
+dateplaner#:#cal_ch_vm_status_open#:#Freie Termine
 dateplaner#:#cal_change_calendar_view#:#Kalenderansicht ändern
 dateplaner#:#cal_change_responsible_users#:#Verantwortliche Mitglieder ändern
 dateplaner#:#cal_changed_events_header#:#Neue und geänderte Termine
@@ -8374,6 +8392,7 @@ dateplaner#:#cal_default_settings#:#Standardwerte
 dateplaner#:#cal_del_app_sure#:#Sind Sie sicher, dass Sie die folgenden Termine löschen möchten?
 dateplaner#:#cal_del_cal_sure#:#Möchten Sie wirklich die ausgewählten Kalender löschen?
 dateplaner#:#cal_delete_app_sure#:#Sind Sie sicher, dass Sie die folgenden Termine löschen möchten?
+dateplaner#:#cal_delete_booking_info#:#Bitte bestätigen Sie das Löschen diese Termins
 dateplaner#:#cal_delete_cal#:#Kalender löschen
 dateplaner#:#cal_delete_recurrence_rule#:#Terminserie löschen
 dateplaner#:#cal_delete_recurrences#:#Alle Wiederholungen löschen
@@ -17809,4 +17828,4 @@ wsp#:#wsp_type_ltiv#:#Zertifikat: LTI-Konsument
 wsp#:#wsp_type_scov#:#Zertifikat: SCORM
 wsp#:#wsp_type_tstv#:#Zertifikat: Test
 wsp#:#wsp_type_webr#:#Weblink
-wsp#:#wsp_type_wfld#:#Ordner
+wsp#:#wsp_type_wfld#:#Ordnerdateplaner#:#cal_ch_booking_participants#:#Teilnehmer
