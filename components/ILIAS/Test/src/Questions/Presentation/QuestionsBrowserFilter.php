@@ -18,11 +18,10 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\Test\Questions;
+namespace ILIAS\Test\Questions\Presentation;
 
 use ilAssQuestionLifecycle;
 use ILIAS\UI\Component\Input\Field\Factory as FieldFactory;
-use ILIAS\UI\Component\Input\Input;
 use ILIAS\UI\Factory as UIFactory;
 use ILIAS\UI\Component\Input\Container\Filter\Filter;
 use ilLanguage;

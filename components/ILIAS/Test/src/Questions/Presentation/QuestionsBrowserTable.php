@@ -18,7 +18,7 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\Test\Questions;
+namespace ILIAS\Test\Questions\Presentation;
 
 use ILIAS\Taxonomy\DomainService as TaxonomyService;
 use GuzzleHttp\Psr7\ServerRequest;
@@ -26,7 +26,6 @@ use ILIAS\Data\Factory as DataFactory;
 use ILIAS\Data\Order;
 use ILIAS\Data\Range;
 use ILIAS\Test\RequestDataCollector;
-use ILIAS\Test\Utilities\TitleColumnsBuilder;
 use ILIAS\UI\Component\Table\Action\Standard as TableAction;
 use ILIAS\UI\Component\Table\Column\Column;
 use ILIAS\UI\Component\Table\DataRetrieval;
