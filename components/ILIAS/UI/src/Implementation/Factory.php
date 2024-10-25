@@ -22,7 +22,6 @@ namespace ILIAS\UI\Implementation;
 
 use ILIAS\UI\Component as C;
 use ILIAS\UI\Help;
-
 // TODO: This might cache the created factories.
 use ILIAS\UI\Implementation\Component\SignalGenerator;
 
@@ -35,6 +34,7 @@ class Factory implements \ILIAS\UI\Factory
         protected C\Image\Factory $image_factory,
         protected C\Panel\Factory $panel_factory,
         protected C\Modal\Factory $modal_factory,
+        protected C\Progress\Factory $progress_factory,
         protected C\Dropzone\Factory $dropzone_factory,
         protected C\Popover\Factory $popover_factory,
         protected C\Divider\Factory $divider_factory,
@@ -135,6 +135,11 @@ class Factory implements \ILIAS\UI\Factory
     public function modal(): C\Modal\Factory
     {
         return $this->modal_factory;
+    }
+
+    public function progress(): C\Progress\Factory
+    {
+        return $this->progress_factory;
     }
 
     /**

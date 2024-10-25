@@ -34,6 +34,7 @@ class InitUIFramework
                 $c["ui.factory.image"],
                 $c["ui.factory.panel"],
                 $c["ui.factory.modal"],
+                $c["ui.factory.progress"],
                 $c["ui.factory.dropzone"],
                 $c["ui.factory.popover"],
                 $c["ui.factory.divider"],
@@ -97,6 +98,23 @@ class InitUIFramework
                 $c["ui.factory.input.field"],
             );
         };
+        $c["ui.factory.progress.refresh_interval"] = static fn(\ILIAS\DI\Container $c) =>
+            new class () implements \ILIAS\UI\Component\Progress\AsyncRefreshInterval {
+                public function getRefreshIntervalInMs(): int
+                {
+                    return 1_000;
+                }
+            };
+        $c["ui.factory.progress"] = static fn(\ILIAS\DI\Container $c) =>
+            new \ILIAS\UI\Implementation\Component\Progress\Factory(
+                $c["ui.factory.progress.refresh_interval"],
+                $c["ui.signal_generator"],
+                $c["ui.factory.progress.state"],
+            );
+        $c["ui.factory.progress.state"] = static fn(\ILIAS\DI\Container $c) =>
+            new \ILIAS\UI\Implementation\Component\Progress\State\Factory(
+                new \ILIAS\UI\Implementation\Component\Progress\State\Bar\Factory(),
+            );
         $c["ui.factory.dropzone"] = function ($c) {
             return new ILIAS\UI\Implementation\Component\Dropzone\Factory($c["ui.factory.dropzone.file"]);
         };
