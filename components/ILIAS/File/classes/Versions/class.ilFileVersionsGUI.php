@@ -31,6 +31,7 @@ use ILIAS\UI\Component\Modal\Modal;
 use ILIAS\components\WOPI\Discovery\ActionTarget;
 use ILIAS\FileUpload\MimeType;
 use ILIAS\MetaData\Services\ServicesInterface as LOMServices;
+use ILIAS\File\Capabilities\Capabilities;
 
 /**
  * @author Fabian Schmid <fabian@sr.solutions>
@@ -60,7 +61,7 @@ class ilFileVersionsGUI
     public const CMD_CREATE_NEW_VERSION = 'saveVersion';
     public const CMD_ADD_REPLACING_VERSION = 'addReplacingVersion';
     public const CMD_CREATE_REPLACING_VERSION = 'createReplacingVersion';
-    public const CMD_UNZIP_CURRENT_REVISION = 'unzipCurrentRevision';
+    public const CMD_UNZIP_CURRENT_REVISION = Capabilities::UNZIP->value;
     public const CMD_PROCESS_UNZIP = 'processUnzip';
     public const CMD_RENDER_DELETE_SELECTED_VERSIONS_MODAL = 'renderDeleteSelectedVersionsModal';
     public const CMD_PUBLISH = 'publish';
@@ -375,14 +376,14 @@ class ilFileVersionsGUI
             $this->ctrl->redirect($this, self::CMD_DEFAULT);
         }
 
-        if($this->current_revision->getStatus() === RevisionStatus::DRAFT) {
+        if ($this->current_revision->getStatus() === RevisionStatus::DRAFT) {
             $this->tpl->setOnScreenMessage('failure', $this->lng->txt("file_rollback_rollback_first"), true);
             $this->ctrl->redirect($this, self::CMD_DEFAULT);
         }
 
         // rollback the version
         $version_id = $version_ids[0];
-        if($version_id === $this->current_revision->getVersionNumber()) {
+        if ($version_id === $this->current_revision->getVersionNumber()) {
             $this->tpl->setOnScreenMessage('info', $this->lng->txt("file_rollback_same_version"), true);
             $this->ctrl->redirect($this, self::CMD_DEFAULT);
         }
@@ -558,7 +559,7 @@ class ilFileVersionsGUI
             $this->current_revision->getStatus() === RevisionStatus::DRAFT
         ) {
             $this->tpl->setOnScreenMessage('failure', $this->lng->txt('publish_before_delete'), $redirect);
-            if($redirect) {
+            if ($redirect) {
                 $this->ctrl->redirect($this, self::CMD_DEFAULT);
             }
         }
@@ -566,7 +567,7 @@ class ilFileVersionsGUI
         // no checkbox has been selected
         if (count($requested_deletion_version) < 1) {
             $this->tpl->setOnScreenMessage('failure', $this->lng->txt("no_checkbox"), $redirect);
-            if($redirect) {
+            if ($redirect) {
                 $this->ctrl->redirect($this, self::CMD_DEFAULT);
             }
         }
@@ -649,12 +650,10 @@ class ilFileVersionsGUI
             $this->lng->txt('take_over_structure_info'),
         );
 
-        // return form at this point if copyright selection is not enabled
         if (!$this->lom_services->copyrightHelper()->isCopyrightSelectionActive()) {
             return $this->ui->factory()->input()->container()->form()->standard($form_action, $inputs);
         }
 
-        // add the option for letting all unzipped files inherit the copyright of their parent zip (if a copyright has been set for the zip)
         $lom_reader = $this->lom_services->read($this->file->getId(), 0, $this->file->getType());
         $lom_cp_helper = $this->lom_services->copyrightHelper();
 
@@ -679,7 +678,6 @@ class ilFileVersionsGUI
             );
         }
 
-        // add the option to collectively select the copyright for all unzipped files independent of the original copyright of the zip
         $copyright_selection_input = $this->getCopyrightSelectionInput('set_license_for_all_files');
         $copyright_options[self::KEY_SELECT_COPYRIGHT] = $this->ui->factory()->input()->field()->group(
             [self::KEY_COPYRIGHT_ID => $copyright_selection_input],

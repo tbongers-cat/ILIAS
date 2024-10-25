@@ -25,6 +25,7 @@ use ILIAS\Refinery;
 use ILIAS\Setup;
 use ILIAS\Setup\Objective;
 use ILIAS\Setup\Environment;
+use ILIAS\BookingManager\Setup\AccessRBACOperationClonedObjective;
 
 /**
  * @author Fabian Schmid <fabian@sr.solutions>
@@ -42,7 +43,20 @@ class ilFileObjectRBACDatabase extends ilDatabaseUpdateStepsExecutedObjective
                     "object",
                     5990,
                     ["file"]
-                )
+                ),
+                new \ilAccessCustomRBACOperationAddedObjective(
+                    "view_content",
+                    "View Content in external Editor",
+                    "object",
+                    5991,
+                    ["file"]
+                ),
+                new AccessRBACOperationClonedObjective(
+                    "file",
+                    "read",
+                    "view_content"
+                ),
+
             ]
         );
     }

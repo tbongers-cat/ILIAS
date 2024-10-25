@@ -93,14 +93,20 @@ class ilWOPIAdministrationGUI
     private function index(): void
     {
         $supported_suffixes = $this->getSupportedSuffixes();
+        $info = '';
         if (!empty($supported_suffixes)) {
-            $this->maint_tpl->setOnScreenMessage(
-                'info',
-                sprintf(
-                    $this->lng->txt("currently_supported"),
-                    implode(", ", $supported_suffixes)
+            $listing = $this->ui_factory->panel()->secondary()->legacy(
+                $this->lng->txt("currently_supported"),
+                $this->ui_factory->legacy(
+                    $this->ui_renderer->render(
+                        $this->ui_factory->listing()->descriptive([
+                            $this->lng->txt('action_edit') => implode(", ", $supported_suffixes[ActionTarget::EDIT->value]),
+                            $this->lng->txt('action_view') => implode(", ", $supported_suffixes[ActionTarget::VIEW->value]),
+                        ])
+                    )
                 )
             );
+            $info = $this->ui_renderer->render($listing);
         }
 
         $form = new ilWOPISettingsForm($this->settings);
@@ -108,6 +114,8 @@ class ilWOPIAdministrationGUI
         $this->maint_tpl->setContent(
             $form->getHTML()
         );
+
+        $this->maint_tpl->setRightContent($info);
     }
 
     private function getSupportedSuffixes(): array
@@ -116,7 +124,10 @@ class ilWOPIAdministrationGUI
         if (!$wopi_activated) {
             return [];
         }
-        return $this->action_repo->getSupportedSuffixes(ActionTarget::EDIT);
+        return [
+            ActionTarget::EDIT->value => $this->action_repo->getSupportedSuffixes(ActionTarget::EDIT),
+            ActionTarget::VIEW->value => $this->action_repo->getSupportedSuffixes(ActionTarget::VIEW),
+        ];
     }
 
     private function show(): void
