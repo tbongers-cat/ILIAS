@@ -32,7 +32,6 @@ use ILIAS\MetaData\Copyright\EntryInterface;
 use ILIAS\FileUpload\MimeType;
 use ILIAS\ResourceStorage\Services as IRSS;
 use ILIAS\MetaData\Copyright\Database\Wrapper;
-use ILIAS\MetaData\Settings\Copyright\Usage\Searcher as UsageSearcher;
 
 /**
  * @ilCtrl_Calls ilMDCopyrightConfigurationGUI: ilMDCopyrightUsageGUI, ilMDCopyrightImageUploadHandlerGUI
