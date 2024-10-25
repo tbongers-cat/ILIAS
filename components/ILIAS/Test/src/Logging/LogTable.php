@@ -141,7 +141,7 @@ class LogTable implements Table\DataRetrieval
             true,
             true
         );
-        $this->filter_data = $ui_service->filter()->getData($filter);
+        $this->filter_data = $ui_service->filter()->getData($filter) ?? [];
         return $filter;
     }
 

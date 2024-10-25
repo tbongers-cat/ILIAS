@@ -202,9 +202,20 @@ class SettingsMainGUI extends TestSettingsGUI
             return;
         }
 
-        $data[self::AVAILABILITY_SETTINGS_SECTION_LABEL]['is_online'] =
-            $this->test_object->getObjectProperties()->getPropertyIsOnline()->withOffline();
-        $this->testQuestionSetConfigFactory->getQuestionSetConfig()->removeQuestionSetRelatedData();
+        $current_question_set_type = $this->main_settings->getGeneralSettings()->getQuestionSetType();
+        $current_question_config = $this->testQuestionSetConfigFactory->getQuestionSetConfig();
+        $new_question_set_type = $data[self::GENERAL_SETTINGS_SECTION_LABEL]['question_set_type'];
+
+        if ($new_question_set_type !== $current_question_set_type
+            && $current_question_config->doesQuestionSetRelatedDataExist()) {
+            $data[self::AVAILABILITY_SETTINGS_SECTION_LABEL]['is_online'] =
+                $this->test_object->getObjectProperties()->getPropertyIsOnline()->withOffline();
+            $this->testQuestionSetConfigFactory->getQuestionSetConfig()->removeQuestionSetRelatedData();
+        }
+
+        if ($this->anonymityChanged($data[self::GENERAL_SETTINGS_SECTION_LABEL]['anonymity'])) {
+            $this->logger->deleteParticipantInteractionsForTest($this->test_object->getRefId());
+        }
 
         $this->finalizeSave($data);
     }
@@ -258,18 +269,14 @@ class SettingsMainGUI extends TestSettingsGUI
             );
         }
 
-        if ($this->anonymityChanged($data[self::GENERAL_SETTINGS_SECTION_LABEL]['anonymity'])) {
-            $this->logger->deleteParticipantInteractionsForTest($this->test_object->getRefId());
-        }
-
         $this->tpl->setOnScreenMessage('success', $this->lng->txt('msg_obj_modified'), true);
         $this->showForm();
     }
 
-    private function anonymityChanged(bool $anonymity_from_data): bool
+    private function anonymityChanged(bool $anonymity_form_data): bool
     {
         return $this->main_settings->getGeneralSettings()->getAnonymity() === false
-            && $anonymity_from_data === true
+            && $anonymity_form_data === true
             && $this->logger->testHasParticipantInteractions($this->test_object->getRefId());
     }
 
