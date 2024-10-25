@@ -19,11 +19,13 @@
 declare(strict_types=1);
 
 use ILIAS\Test\Scoring\Manual\TestScoring;
-use ILIAS\Test\ExportImport\Factory as ExportImportFactory;
-use ILIAS\Test\ExportImport\Types as ExportImportTypes;
 use ILIAS\UI\Factory as UIFactory;
 use ILIAS\UI\Renderer as UIRenderer;
 use ILIAS\ResourceStorage\Services as IRSS;
+use ILIAS\UI\Component\Input\Container\Form\Standard as StandardForm;
+use ILIAS\DI\UIServices as UIServices;
+use ILIAS\Test\ExportImport\Factory as ExportImportFactory;
+use ILIAS\Test\ExportImport\Types as ExportImportTypes;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -31,6 +33,7 @@ use Psr\Http\Message\ServerRequestInterface;
  *
  * @author       Michael Jansen <mjansen@databay.de>
  * @author       Maximilian Becker <mbecker@databay.de>
+ * @ilCtrl_Calls ilTestExportGUI: ilExportGUI
  */
 class ilTestExportGUI extends ilExportGUI
 {
@@ -49,10 +52,6 @@ class ilTestExportGUI extends ilExportGUI
         private readonly array $selected_files,
     ) {
         parent::__construct($parent_gui, null);
-
-        $this->addFormat('xml', $this->lng->txt('ass_create_export_file'));
-        $this->addFormat('xmlres', $this->lng->txt('ass_create_export_file_with_results'), $this, 'createTestExportWithResults');
-        $this->addFormat('arc', $this->lng->txt('ass_create_export_test_archive'), $this, 'createTestArchiveExport');
     }
 
     /**
