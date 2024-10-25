@@ -439,7 +439,7 @@ class ilOpenIdConnectSettingsGUI
         $url = $this->settings->getProvider();
         if ($url !== '') {
             $this->toolbar->setFormAction($this->ctrl->getFormAction($this));
-            $this->toolbar->addFormButton($this->lng->txt('auth_oidc_configured_scopes'), 'discoverScopesFromServer');
+            $this->toolbar->addFormButton($this->lng->txt('auth_oidc_discover_scopes'), 'discoverScopesFromServer');
         }
 
         $form = $this->initScopesForm();
