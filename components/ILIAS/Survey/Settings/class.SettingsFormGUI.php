@@ -205,18 +205,6 @@ class SettingsFormGUI
         $desc->setRows(4);
         $desc->setValue($survey->getLongDescription());
         $form->addItem($desc);
-        //}
-
-        // pool usage
-        $pool_usage = new \ilRadioGroupInputGUI($lng->txt("survey_question_pool_usage"), "use_pool");
-        $opt = new \ilRadioOption($lng->txt("survey_question_pool_usage_active"), "1");
-        $opt->setInfo($lng->txt("survey_question_pool_usage_active_info"));
-        $pool_usage->addOption($opt);
-        $opt = new \ilRadioOption($lng->txt("survey_question_pool_usage_inactive"), "0");
-        $opt->setInfo($lng->txt("survey_question_pool_usage_inactive_info"));
-        $pool_usage->addOption($opt);
-        $pool_usage->setValue((string) (int) $survey->getPoolUsage());
-        $form->addItem($pool_usage);
 
         if ($feature_config->usesAppraisees()) {
             $self_rate = new \ilCheckboxInputGUI($lng->txt("survey_360_self_raters"), "self_rate");
@@ -882,7 +870,6 @@ class SettingsFormGUI
         $survey->setIntroduction($form->getInput("introduction"));
         $survey->setOutro($form->getInput("outro"));
         $survey->setShowQuestionTitles((bool) $form->getInput("show_question_titles"));
-        $survey->setPoolUsage((bool) $form->getInput("use_pool"));
 
         // "separate mail for each participant finished"
         $survey->setMailNotification((bool) $form->getInput('mailnotification'));

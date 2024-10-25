@@ -725,7 +725,6 @@ class ilObjSurvey extends ilObject
                 "mailaddresses" => array('text', $this->getMailAddresses()),
                 "mailparticipantdata" => array('text', $this->getMailParticipantData()),
                 "tstamp" => array("integer", time()),
-                "pool_usage" => array("integer", $this->getPoolUsage()),
                 // Mode type
                 "mode" => array("integer", $this->getMode()),
                 // 360°
@@ -772,7 +771,6 @@ class ilObjSurvey extends ilObject
                 "mailaddresses" => array('text', $this->getMailAddresses()),
                 "mailparticipantdata" => array('text', $this->getMailParticipantData()),
                 "tstamp" => array("integer", time()),
-                "pool_usage" => array("integer", $this->getPoolUsage()),
                 //MODE TYPE
                 "mode" => array("integer", $this->getMode()),
                 // 360°
@@ -3017,7 +3015,6 @@ class ilObjSurvey extends ilObject
         $custom_properties["evaluation_access"] = $this->getEvaluationAccess();
         $custom_properties["status"] = !$this->getOfflineStatus();
         $custom_properties["display_question_titles"] = $this->getShowQuestionTitles();
-        $custom_properties["pool_usage"] = (int) $this->getPoolUsage();
 
         $custom_properties["own_results_view"] = (int) $this->hasViewOwnResults();
         $custom_properties["own_results_mail"] = (int) $this->hasMailOwnResults();
@@ -3266,7 +3263,6 @@ class ilObjSurvey extends ilObject
         $newObj->setEndDate($this->getEndDate());
         $newObj->setAnonymize($this->getAnonymize());
         $newObj->setShowQuestionTitles($this->getShowQuestionTitles());
-        $newObj->setPoolUsage($this->getPoolUsage());
         $newObj->setMailOwnResults($this->hasMailOwnResults());
         $newObj->setMailConfirmation($this->hasMailConfirmation());
         $newObj->setAnonymousUserList($this->hasAnonymousUserList());
