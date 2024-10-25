@@ -18,13 +18,25 @@
 
 declare(strict_types=1);
 
-class ilObjBadgeAdministration extends ilObject
+use ILIAS\ResourceStorage\Stakeholder\AbstractResourceStakeholder;
+
+class ilBadgeFileStakeholder extends AbstractResourceStakeholder
 {
-    public function __construct(
-        int $a_id = 0,
-        bool $a_call_by_reference = true
-    ) {
-        $this->type = 'bdga';
-        parent::__construct($a_id, $a_call_by_reference);
+    private int $default_owner;
+
+    public function __construct()
+    {
+        global $DIC;
+        $this->default_owner = $DIC->isDependencyAvailable('user') ? $DIC->user()->getId() : 6;
+    }
+
+    public function getId(): string
+    {
+        return 'badge';
+    }
+
+    public function getOwnerOfNewResources(): int
+    {
+        return $this->default_owner;
     }
 }

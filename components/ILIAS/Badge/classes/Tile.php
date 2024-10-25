@@ -39,6 +39,7 @@ class Tile
     private readonly Modal $modal;
     /** @var Closure(int): string */
     private readonly Closure $format_date;
+    private readonly ilBadgeImage $badge_image_service;
 
     /**
      * @param Closure(string): string $sign_file
@@ -61,6 +62,7 @@ class Tile
             );
         }
         $this->format_date = $format_date;
+        $this->badge_image_service = new ilBadgeImage($container->resourceStorage(), $container->upload(), $container->ui()->mainTemplate());
     }
 
     /**
@@ -111,7 +113,7 @@ class Tile
         ];
     }
 
-    private function card(ModalContent $content)
+    private function card(ModalContent $content): Component
     {
         return $this->container
             ->ui()
@@ -130,19 +132,22 @@ class Tile
 
     private function image(Component $modal, ilBadge $badge): Component
     {
-        return $this->container->ui()
-                               ->factory()
-                               ->image()
-                               ->responsive(($this->sign_file)($badge->getImagePath()), $badge->getImage())
-                               ->withAction($modal->getShowSignal());
+        $image_src = $this->badge_image_service->getImageFromBadge($badge);
+        return $this->container
+            ->ui()
+            ->factory()
+            ->image()
+            ->responsive(($this->sign_file)($image_src), $image_src)
+            ->withAction($modal->getShowSignal());
     }
 
     private function title(Component $modal, ilBadge $badge): Component
     {
-        return $this->container->ui()
-                               ->factory()
-                               ->button()
-                               ->shy($badge->getTitle(), $modal->getShowSignal());
+        return $this->container
+            ->ui()
+            ->factory()
+            ->button()
+            ->shy($badge->getTitle(), $modal->getShowSignal());
     }
 
     public function modalContent(ilBadge $badge): ModalContent
@@ -150,7 +155,7 @@ class Tile
         $awarded_by = $this->parent->asProperty($badge);
         return new ModalContent($badge, [
             $this->txt('criteria') => $badge->getCriteria(),
-            ...(null !== $awarded_by ? [$this->txt('awarded_by') => $awarded_by] : []),
+            ...($awarded_by !== null ? [$this->txt('awarded_by') => $awarded_by] : []),
             $this->txt('valid_until') => $this->tryFormating($badge->getValid()),
         ]);
     }
@@ -177,6 +182,7 @@ class Tile
         if (!$valid) {
             return $this->txt('endless');
         }
+
         try {
             return ($this->format_date)($valid, IL_CAL_DATE);
         } catch (ilDateTimeException $x) {

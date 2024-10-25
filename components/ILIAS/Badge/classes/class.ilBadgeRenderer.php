@@ -19,9 +19,6 @@
 use ILIAS\Badge\Tile;
 use ILIAS\UI\Renderer;
 
-/**
- * @author Jörg Lützenkirchen <luetzenkirchen@leifos.com>
- */
 class ilBadgeRenderer
 {
     private readonly ilLanguage $lng;

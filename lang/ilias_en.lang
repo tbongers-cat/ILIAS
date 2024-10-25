@@ -2246,6 +2246,7 @@ background_tasks#:#ui_msg_no_files_found#:#No files have been found. The downloa
 background_tasks#:#ui_msg_num_files#:#%s file(-s) were detected for download, do you want to continue?
 background_tasks#:#ui_msg_sum_file_sizes#:#The total download size before creating the zip-folder is %s. Do you want to continue?
 background_tasks#:#waiting#:#Waiting
+badge#:##:#Are you sure you want to delete the following badges and all their respective assignments?
 badge#:#awarded_by#:#Awarded by
 badge#:#badge_activity_badges#:#Activity Badges
 badge#:#badge_add_template#:#Add Template
@@ -2266,6 +2267,7 @@ badge#:#badge_create#:#Create Badge
 badge#:#badge_create_image_processing_failed#:#The badge could not be created, an error occurred while processing the image.
 badge#:#badge_criteria#:#Criteria
 badge#:#badge_crs_merit#:#Merit
+badge#:#badge_deletion#:#Badge successfully deleted.
 badge#:#badge_deletion_confirmation#:#Are you sure you want to delete the following badges and all their respective assignments?
 badge#:#badge_edit_with_published#:#%s users have already added this badge to their backpack. Because of this changing badge attributes will lead to inconsistencies. Creating a new badge might be a better solution.
 badge#:#badge_image_from_template#:#Use Template
@@ -2302,6 +2304,7 @@ badge#:#badge_profile_more#:#Show all
 badge#:#badge_profile_view#:#View
 badge#:#badge_remove_badge#:#Revoke Badge
 badge#:#badge_remove_from_profile#:#Remove from Profile
+badge#:#badge_select_one#:#You have to select at least one badge
 badge#:#badge_service_activate#:#Activate Service
 badge#:#badge_service_activate_info#:#Activate the service to make badges available.
 badge#:#badge_settings#:#Badge Settings

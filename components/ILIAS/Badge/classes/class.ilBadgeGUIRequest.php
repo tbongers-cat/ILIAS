@@ -21,6 +21,8 @@ use ILIAS\Refinery;
 
 class ilBadgeGUIRequest
 {
+    private const ACTION_PARAMETER_TOKEN = 'tid_id';
+
     protected HTTP\Services $http;
     protected Refinery\Factory $refinery;
 
@@ -149,6 +151,38 @@ class ilBadgeGUIRequest
         }
         return $badge_ids;
     }
+
+    public function getBadgeIdFromUrl(): int
+    {
+        $id = 0;
+        $query = $this->http->wrapper()->query();
+        if ($query->has(self::ACTION_PARAMETER_TOKEN)) {
+            $tmpl_ids = $query->retrieve(
+                self::ACTION_PARAMETER_TOKEN,
+                $this->refinery->kindlyTo()->listOf($this->refinery->kindlyTo()->string())
+            );
+            if (count($tmpl_ids) === 1) {
+                $id = (int) array_pop($tmpl_ids);
+            }
+        }
+
+        return $id;
+    }
+
+    public function getMultiActionBadgeIdsFromUrl(): array
+    {
+        $tmpl_ids = [];
+        $query = $this->http->wrapper()->query();
+        if ($query->has(self::ACTION_PARAMETER_TOKEN)) {
+            $tmpl_ids = $query->retrieve(
+                self::ACTION_PARAMETER_TOKEN,
+                $this->refinery->kindlyTo()->listOf($this->refinery->kindlyTo()->string())
+            );
+        }
+
+        return $tmpl_ids;
+    }
+
 
     public function getBadgeId(): int
     {
