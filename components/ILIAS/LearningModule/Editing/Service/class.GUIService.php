@@ -23,15 +23,17 @@ namespace ILIAS\LearningModule\Editing;
 use ILIAS\LearningModule\InternalGUIService;
 use ILIAS\LearningModule\InternalDomainService;
 
-/**
- * @author Alexander Killing <killing@leifos.de>
- */
 class GUIService
 {
+    protected array $page_layouts;
+
     public function __construct(
         protected InternalDomainService $domain,
         protected InternalGUIService $gui
     ) {
+        $this->page_layouts = \ilPageLayout::activeLayouts(
+            \ilPageLayout::MODULE_LM
+        );
     }
 
     public function request(
@@ -159,6 +161,22 @@ class GUIService
                     $lng->txt("lm_insert_page_clip_before"),
                     [EditSubObjectsGUI::class],
                     "insertPageClipBefore",
+                    "target_id"
+                ];
+            }
+            if (count($this->page_layouts) > 0) {
+                $acts[] = [
+                    "insertLayoutAfter",
+                    $lng->txt("lm_insert_layout_after"),
+                    [EditSubObjectsGUI::class],
+                    "insertLayoutAfter",
+                    "target_id"
+                ];
+                $acts[] = [
+                    "insertLayoutBefore",
+                    $lng->txt("lm_insert_layout_before"),
+                    [EditSubObjectsGUI::class],
+                    "insertLayoutBefore",
                     "target_id"
                 ];
             }

@@ -289,4 +289,9 @@ class EditingGUIRequest
         return $this->int("target_id");
     }
 
+    public function getBefore(): bool
+    {
+        return (bool) $this->int("before");
+    }
+
 }

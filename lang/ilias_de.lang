@@ -6301,7 +6301,6 @@ content#:#cont_change_object_reference#:#Ändere Objektreferenz
 content#:#cont_change_style#:#Style ändern
 content#:#cont_change_type#:#Typ ändern
 content#:#cont_change_width#:#Breite ändern
-content#:#cont_chap_and_pages#:#Kapitel und Seiten
 content#:#cont_chap_select_target_now#:#Wählen Sie jetzt die Checkbox, hinter die das Kapitel verschoben werden soll.
 content#:#cont_chapters#:#Kapitel
 content#:#cont_chapters_after_pages#:#Beachten Sie, dass innerhalb einer Ebene zunächst alle Seiten und dann erst die Unterkapitel aufgeführt werden.
@@ -8279,6 +8278,7 @@ dateplaner#:#cal_ch_booking_num_available#:#Freie Termine
 dateplaner#:#cal_ch_booking_num_free_short#:#%s frei
 dateplaner#:#cal_ch_booking_other_participants#:#Andere Teilnehmende:
 dateplaner#:#cal_ch_booking_owner#:#Sprechstunde bei###Modified as part of gender mainstreaming activities for ILIAS 8
+dateplaner#:#cal_ch_booking_participants#:#Teilnehmer
 dateplaner#:#cal_ch_booking_reminder_body#:#Ihr Termin mit „%s“ findet in wenigen Tagen statt.
 dateplaner#:#cal_ch_booking_reminder_subject#:#Terminerinnerung „%s“
 dateplaner#:#cal_ch_booking_start#:#Start
@@ -10966,6 +10966,8 @@ lm#:#lm_est_reading_time_info#:#In Lernmodulen kann eine geschätzte Lesezeit er
 lm#:#lm_insert_chapter#:#Kapitel einfügen
 lm#:#lm_insert_chapter_after#:#Kapitel danach einfügen
 lm#:#lm_insert_chapter_before#:#Kapitel davor einfügen
+lm#:#lm_insert_layout_after#:#Vorlage danach einfügen
+lm#:#lm_insert_layout_before#:#Vorlage davor einfügen
 lm#:#lm_insert_page#:#Seite einfügen
 lm#:#lm_insert_page_after#:#Seite danach einfügen
 lm#:#lm_insert_page_before#:#Seite davor einfügen
@@ -17837,4 +17839,4 @@ wsp#:#wsp_type_ltiv#:#Zertifikat: LTI-Konsument
 wsp#:#wsp_type_scov#:#Zertifikat: SCORM
 wsp#:#wsp_type_tstv#:#Zertifikat: Test
 wsp#:#wsp_type_webr#:#Weblink
-wsp#:#wsp_type_wfld#:#Ordnerdateplaner#:#cal_ch_booking_participants#:#Teilnehmer
+wsp#:#wsp_type_wfld#:#Ordner

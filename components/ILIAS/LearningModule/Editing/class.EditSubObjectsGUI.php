@@ -25,9 +25,11 @@ use ILIAS\LearningModule\InternalGUIService;
 use ILIAS\Repository\Form\FormAdapterGUI;
 use ilLMObject;
 use ILIAS\LearningModule\Table\TableAdapterGUI;
+use ILIAS\UI\Component\Input\Container\Form\Standard;
 
 class EditSubObjectsGUI
 {
+    protected array $page_layouts;
     protected EditingGUIRequest $request;
     protected int $lm_id;
     protected \ilLMTree $lm_tree;
@@ -45,6 +47,9 @@ class EditSubObjectsGUI
         $this->lm_id = $lm->getId();
         $this->lm_tree = $this->domain->lmTree($this->lm_id);
         $this->request = $this->gui->editing()->request();
+        $this->page_layouts = \ilPageLayout::activeLayouts(
+            \ilPageLayout::MODULE_LM
+        );
     }
 
     public function executeCommand(): void
@@ -63,7 +68,8 @@ class EditSubObjectsGUI
                     "confirmedDelete", "delete", "cancelDelete",
                     "insertPageClip", "insertPageClipBefore", "insertPageClipAfter",
                     "insertChapterClip", "insertChapterClipBefore", "insertChapterClipAfter",
-                    "activatePages"
+                    "activatePages",
+                    "insertLayoutBefore", "insertLayoutAfter", "insertPageFromLayout"
                 ])) {
                     $this->$cmd();
                 }
@@ -644,4 +650,91 @@ class EditSubObjectsGUI
         $ctrl->redirect($this, "list");
     }
 
+    public function insertLayoutBefore(): void
+    {
+        $this->insertLayout(true);
+    }
+
+    public function insertLayoutAfter(): void
+    {
+        $this->insertLayout();
+    }
+
+    public function insertLayout(bool $before = false): void
+    {
+        $ctrl = $this->gui->ctrl();
+        $ui = $this->gui->ui();
+        $mt = $this->gui->mainTemplate();
+        if ($before) {
+            $ctrl->setParameterByClass(self::class, "before", "1");
+        }
+        $ctrl->saveParameterByClass(self::class, ["obj_id", "target_id"]);
+        $form = $this->initInsertTemplateForm();
+        $mt->setContent($ui->renderer()->render($form) . \ilLMPageObjectGUI::getLayoutCssFix());
+    }
+
+    public function initInsertTemplateForm(): Standard
+    {
+        $ui = $this->gui->ui();
+        $f = $ui->factory();
+        $ctrl = $this->gui->ctrl();
+        $lng = $this->domain->lng();
+
+        $fields["title"] = $f->input()->field()->text($lng->txt("title"), "");
+        $ts = \ilPageLayoutGUI::getTemplateSelection((string) \ilPageLayout::MODULE_LM);
+        if (!is_null($ts)) {
+            $fields["layout_id"] = $ts;
+        }
+
+        // section
+        $section1 = $f->input()->field()->section($fields, $lng->txt("cont_insert_pagelayout"));
+
+        $form_action = $ctrl->getLinkTarget($this, "insertPageFromLayout");
+        return $f->input()->container()->form()->standard($form_action, ["sec" => $section1]);
+    }
+
+    public function insertPageFromLayout(): void
+    {
+        global $DIC;
+
+        $ctrl = $this->gui->ctrl();
+        $mt = $this->gui->mainTemplate();
+        $lng = $this->domain->lng();
+
+
+        $parent = $this->sub_obj_id;
+        $target_id = $this->request->getTargetId();
+
+        $first_child = false;
+        if ($this->request->getBefore()) {
+            $before_target = \ilTree::POS_FIRST_NODE;
+            $first_child = true;
+            foreach ($this->lm_tree->getChildsByType($parent, "pg") as $node) {
+                if ((int) $node["obj_id"] !== $target_id) {
+                    $before_target = (int) $node["obj_id"];
+                    $first_child = false;
+                } else {
+                    break;
+                }
+            }
+            $target_id = $before_target;
+        }
+
+        $form = $this->initInsertTemplateForm();
+        $form = $form->withRequest($DIC->http()->request());
+        $data = $form->getData();
+        $layout_id = $data["sec"]["layout_id"];
+        $page_ids = \ilLMPageObject::insertPagesFromTemplate(
+            $this->lm->getId(),
+            1,
+            $target_id,
+            $first_child,
+            (int) $layout_id,
+            $data["sec"]["title"]
+        );
+
+        $mt->setOnScreenMessage("success", $lng->txt("lm_page_added"), true);
+
+        $ctrl->redirect($this, "list");
+    }
 }

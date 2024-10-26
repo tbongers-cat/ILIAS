@@ -149,16 +149,6 @@ class ilPCPlaceHolderGUI extends ilPageContentGUI
                 $this->ctrl->forwardCommand($question_gui);
                 break;
 
-            case self::TYPE_VERIFICATION:
-                // @todo: removed deprecated ilCtrl methods, this needs inspection by a maintainer.
-                // $this->ctrl->setCmdClass("ilpcverificationgui");
-                // $this->ctrl->setCmd("insert");
-                /** @var ilPCVerification $ver */
-                $ver = $this->content_obj;
-                $cert_gui = new ilPCVerificationGUI($this->pg_obj, $ver, $this->hier_id, $this->pc_id);
-                $this->ctrl->forwardCommand($cert_gui);
-                break;
-
             default:
                 break;
         }

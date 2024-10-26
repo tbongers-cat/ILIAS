@@ -8333,6 +8333,7 @@ dateplaner#:#cal_ch_unknown_user#:#The given login does not match any user.
 dateplaner#:#cal_ch_user_assignment_failed_info#:#The following users could not be assigned to appointments, since the maximum number of bookings is exceeded.
 dateplaner#:#cal_ch_vm_period_all#:#All
 dateplaner#:#cal_ch_vm_period_past#:#Past
+dateplaner#:#cal_ch_vm_period_upcoming#:#Upcoming
 dateplaner#:#cal_ch_vm_status_all#:#All
 dateplaner#:#cal_ch_vm_status_booked#:#Booked Slots
 dateplaner#:#cal_ch_vm_status_open#:#Open Slots
@@ -10961,6 +10962,8 @@ lm#:#lm_est_reading_time_info#:#In Learning Modules in the repository the estima
 lm#:#lm_insert_chapter#:#Insert chapter
 lm#:#lm_insert_chapter_after#:#Insert chapter after
 lm#:#lm_insert_chapter_before#:#Insert chapter before
+lm#:#lm_insert_layout_after#:#Insert template after
+lm#:#lm_insert_layout_before#:#Insert template before
 lm#:#lm_insert_page#:#Insert page
 lm#:#lm_insert_page_after#:#Insert page after
 lm#:#lm_insert_page_before#:#Insert page before
@@ -17817,4 +17820,4 @@ wsp#:#wsp_type_ltiv#:#Certificate: LTI Consumer
 wsp#:#wsp_type_scov#:#Certificate: SCORM
 wsp#:#wsp_type_tstv#:#Certificate: Test
 wsp#:#wsp_type_webr#:#Weblink
-wsp#:#wsp_type_wfld#:#Folderdateplaner#:#cal_ch_vm_period_upcoming#:#Upcoming
+wsp#:#wsp_type_wfld#:#Folder

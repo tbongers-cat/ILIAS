@@ -90,6 +90,7 @@ class ilStructureObjectGUI extends ilLMObjectGUI
 
             case strtolower(EditSubObjectsGUI::class):
                 $this->setTabs();
+                $this->tabs->activateTab("sub_pages");
                 if ($this->request->getSubType() === "pg") {
                     $this->addSubTabs("sub_pages");
                     $table_title = $this->lng->txt("cont_pages");
@@ -139,254 +140,6 @@ class ilStructureObjectGUI extends ilLMObjectGUI
         $this->ctrl->redirectByClass(EditSubObjectsGUI::class, "editPages");
     }
 
-    /**
-     * Save all titles of chapters/pages
-     */
-    public function saveAllTitles(): void
-    {
-        $ilCtrl = $this->ctrl;
-
-        $titles = $this->request->getTitles();
-        ilLMObject::saveTitles($this->content_object, $titles, $this->requested_transl);
-
-        $this->tpl->setOnScreenMessage('success', $this->lng->txt("lm_save_titles"), true);
-        $ilCtrl->redirect($this, "showHierarchy");
-    }
-
-    /**
-     * display subchapters of structure object
-     */
-    public function subchap(): void
-    {
-        $ilCtrl = $this->ctrl;
-        $ilUser = $this->user;
-
-        $this->setTabs();
-
-        $this->tpl->addBlockFile("ADM_CONTENT", "adm_content", "tpl.structure_edit.html", "components/ILIAS/LearningModule");
-        $num = 0;
-
-        $this->tpl->setCurrentBlock("form");
-        $this->ctrl->setParameter($this, "backcmd", "subchap");
-        $this->tpl->setVariable("FORMACTION", $this->ctrl->getFormAction($this));
-        $this->tpl->setVariable("HEADER_TEXT", $this->lng->txt("cont_subchapters"));
-        $this->tpl->setVariable("CHECKBOX_TOP", ilTree::POS_FIRST_NODE);
-
-        $cnt = 0;
-        $childs = $this->tree->getChilds($this->obj->getId());
-        foreach ($childs as $child) {
-            if ($child["type"] != "st") {
-                continue;
-            }
-            $this->tpl->setCurrentBlock("table_row");
-
-            // checkbox
-            $this->tpl->setVariable("CHECKBOX_ID", $child["obj_id"]);
-            $this->tpl->setVariable("IMG_OBJ", ilUtil::getImagePath("standard/icon_st.svg"));
-
-            // type
-            $this->ctrl->setParameterByClass("ilStructureObjectGUI", "obj_id", $child["obj_id"]);
-            $link = $this->ctrl->getLinkTargetByClass("ilStructureObjectGUI", "view");
-            $this->tpl->setVariable("LINK_TARGET", $link);
-
-            // title
-            $this->tpl->setVariable(
-                "TEXT_CONTENT",
-                ilStructureObject::_getPresentationTitle(
-                    $child["obj_id"],
-                    ilLMObject::CHAPTER_TITLE,
-                    $this->content_object->isActiveNumbering()
-                )
-            );
-
-            $this->tpl->parseCurrentBlock();
-            $cnt++;
-        }
-
-        if ($cnt == 0) {
-            $this->tpl->setCurrentBlock("notfound");
-            $this->tpl->setVariable("NUM_COLS", 3);
-            $this->tpl->setVariable("TXT_OBJECT_NOT_FOUND", $this->lng->txt("obj_not_found"));
-            $this->tpl->parseCurrentBlock();
-        }
-        //else
-        //{
-        // SHOW VALID ACTIONS
-        $this->tpl->setVariable("NUM_COLS", 3);
-        $acts = array("delete" => "delete", "cutChapter" => "cut",
-                "copyChapter" => "copyChapter");
-        if ($ilUser->clipboardHasObjectsOfType("st")) {
-            $acts["pasteChapter"] = "pasteChapter";
-        }
-        $this->showActions($acts);
-        //}
-
-        // SHOW POSSIBLE SUB OBJECTS
-        $this->tpl->setVariable("NUM_COLS", 3);
-        $subobj = array("st");
-        $opts = ilLegacyFormElementsUtil::formSelect(12, "new_type", $subobj);
-        $this->tpl->setCurrentBlock("add_object");
-        $this->tpl->setVariable("SELECT_OBJTYPE", $opts);
-        $this->tpl->setVariable("BTN_NAME", "create");
-        $this->tpl->setVariable("TXT_ADD", $this->lng->txt("insert"));
-        $this->tpl->parseCurrentBlock();
-
-        $this->tpl->setCurrentBlock("form");
-        $this->tpl->parseCurrentBlock();
-
-        $ilCtrl->setParameter($this, "obj_id", $this->requested_obj_id);
-    }
-
-    public function save(): void
-    {
-        $form = $this->getCreateForm();
-
-        if ($form->checkInput()) {
-            $this->obj = new ilStructureObject($this->content_object);
-            $this->obj->setType("st");
-            $this->obj->setTitle($form->getInput("title"));
-            $this->obj->setDescription($form->getInput("desc"));
-            $this->obj->setLMId($this->content_object->getId());
-            $this->obj->create();
-
-            $this->putInTree();
-
-            // check the tree
-            $this->checkTree();
-        }
-
-        if ($this->requested_obj_id > 0) {
-            $this->ctrl->redirect($this, "subchap");
-        }
-    }
-
-    /**
-     * put chapter into tree
-     */
-    public function putInTree(
-        ?int $target = null
-    ): void {
-        $target = $this->requested_target;
-        //echo "st:putInTree";
-        // chapters should be behind pages in the tree
-        // so if target is first node, the target is substituted with
-        // the last child of type pg
-        if ($target == ilTree::POS_FIRST_NODE) {
-            $tree = new ilTree($this->content_object->getId());
-            $tree->setTableNames('lm_tree', 'lm_data');
-            $tree->setTreeTablePK("lm_id");
-
-            // determine parent node id
-            $parent_id = ($this->requested_obj_id > 0)
-                ? $this->requested_obj_id
-                : $tree->getRootId();
-            // determine last child of type pg
-            $childs = $tree->getChildsByType($parent_id, "pg");
-            if (count($childs) != 0) {
-                $target = $childs[count($childs) - 1]["obj_id"];
-            }
-        }
-        if ($target == "") {
-            $target = ilTree::POS_LAST_NODE;
-        }
-
-        parent::putInTree($target);
-    }
-
-    public function cutPage(): void
-    {
-        $this->cutItems();
-    }
-
-    public function copyPage(): void
-    {
-        $this->copyItems();
-    }
-
-    public function pastePage(): void
-    {
-        $ilUser = $this->user;
-
-        if (!$ilUser->clipboardHasObjectsOfType("pg")) {
-            throw new ilLMException($this->lng->txt("no_page_in_clipboard"));
-        }
-
-        $this->insertPageClip();
-    }
-
-    public function cutChapter(): void
-    {
-        $this->cutItems("subchap");
-    }
-
-    /**
-     * copy a single chapter (selection)
-     */
-    public function copyChapter(): void
-    {
-        $this->copyItems("subchap");
-    }
-
-    public function pasteChapter(): void
-    {
-        $this->insertChapterClip(false, "subchap");
-    }
-
-    public function activatePages(): void
-    {
-        $lng = $this->lng;
-
-        $ids = $this->request->getIds();
-        if (count($ids) > 0) {
-            $act_items = array();
-            // get all "top" ids, i.e. remove ids, that have a selected parent
-            foreach ($ids as $id) {
-                $path = $this->tree->getPathId($id);
-                $take = true;
-                foreach ($path as $path_id) {
-                    if ($path_id != $id && in_array($path_id, $ids)) {
-                        $take = false;
-                    }
-                }
-                if ($take) {
-                    $act_items[] = $id;
-                }
-            }
-
-
-            foreach ($act_items as $id) {
-                $childs = $this->tree->getChilds($id);
-                foreach ($childs as $child) {
-                    if (ilLMObject::_lookupType($child["child"]) == "pg") {
-                        $act = ilLMPage::_lookupActive(
-                            $child["child"],
-                            $this->content_object->getType()
-                        );
-                        ilLMPage::_writeActive(
-                            $child["child"],
-                            $this->content_object->getType(),
-                            !$act
-                        );
-                    }
-                }
-                if (ilLMObject::_lookupType($id) == "pg") {
-                    $act = ilLMPage::_lookupActive(
-                        $id,
-                        $this->content_object->getType()
-                    );
-                    ilLMPage::_writeActive(
-                        $id,
-                        $this->content_object->getType(),
-                        !$act
-                    );
-                }
-            }
-        } else {
-            $this->tpl->setOnScreenMessage('failure', $lng->txt("no_checkbox"), true);
-        }
-
-        $this->ctrl->redirect($this, "view");
-    }
 
     public function initConditionHandlerInterface(): void
     {
@@ -420,30 +173,28 @@ class ilStructureObjectGUI extends ilLMObjectGUI
         $lng = $this->lng;
 
         // subelements
-        $ilTabs->addTarget(
-            "cont_pages_and_subchapters",
-            $this->ctrl->getLinkTarget($this, 'showHierarchy'),
-            array("view", "showHierarchy"),
-            get_class($this)
+        $this->ctrl->setParameterByClass(static::class, "sub_type", "pg");
+        $ilTabs->addTab(
+            "sub_pages",
+            $lng->txt("cont_content"),
+            $this->ctrl->getLinkTargetByClass(EditSubObjectsGUI::class)
         );
 
         // preconditions
-        $ilTabs->addTarget(
+        $ilTabs->addTab(
             "preconditions",
-            $this->ctrl->getLinkTarget($this, 'listConditions'),
-            "listConditions",
-            get_class($this)
+            $lng->txt("preconditions"),
+            $this->ctrl->getLinkTarget($this, 'listConditions')
         );
 
         // metadata
         $mdgui = new ilObjectMetaDataGUI($this->content_object, $this->obj->getType(), $this->obj->getId());
         $mdtab = $mdgui->getTab();
         if ($mdtab) {
-            $ilTabs->addTarget(
+            $ilTabs->addTab(
                 "meta_data",
-                $mdtab,
-                "",
-                "ilmdeditorgui"
+                $lng->txt("meta_data"),
+                $mdtab
             );
         }
 
@@ -621,80 +372,5 @@ class ilStructureObjectGUI extends ilLMObjectGUI
 
         $ilCtrl->setParameter($this, "transl", $this->requested_totransl);
         $ilCtrl->redirect($this, "showHierarchy");
-    }
-
-    /**
-     * Displays GUI to select template for page
-     */
-    public function insertTemplate(): void
-    {
-        $ctrl = $this->ctrl;
-        $ui = $this->ui;
-        $lng = $this->lng;
-
-        $this->setTabs();
-        $tabs = $this->tabs;
-        $tabs->clearTargets();
-        $tabs->setBackTarget($lng->txt("back"), $ctrl->getLinkTarget($this, "showHierarchy"));
-
-        $ctrl->setParameter($this, "multi", ilChapterHierarchyFormGUI::getPostMulti());
-        $ctrl->setParameter($this, "node_id", ilChapterHierarchyFormGUI::getPostNodeId());
-        $ctrl->setParameter($this, "first_child", (int) ilChapterHierarchyFormGUI::getPostFirstChild());
-        $ctrl->saveParameter($this, "obj_id");
-        $form = $this->initInsertTemplateForm();
-        $this->tpl->setContent($ui->renderer()->render($form) . ilLMPageObjectGUI::getLayoutCssFix());
-    }
-
-    public function initInsertTemplateForm(): Form\Standard
-    {
-        $ui = $this->ui;
-        $f = $ui->factory();
-        $ctrl = $this->ctrl;
-        $lng = $this->lng;
-
-        $fields["title"] = $f->input()->field()->text($lng->txt("title"), "");
-        $ts = ilPageLayoutGUI::getTemplateSelection(ilPageLayout::MODULE_LM);
-        if (!is_null($ts)) {
-            $fields["layout_id"] = $ts;
-        }
-
-        // section
-        $section1 = $f->input()->field()->section($fields, $lng->txt("cont_insert_pagelayout"));
-
-        $form_action = $ctrl->getLinkTarget($this, "insertPageFromTemplate");
-        return $f->input()->container()->form()->standard($form_action, ["sec" => $section1]);
-    }
-
-    /**
-     * Insert (multiple) pages templates at node
-     */
-    public function insertPageFromTemplate(): void
-    {
-        global $DIC;
-
-        $ilCtrl = $this->ctrl;
-
-        $form = $this->initInsertTemplateForm();
-        $form = $form->withRequest($DIC->http()->request());
-        $data = $form->getData();
-        $layout_id = $data["sec"]["layout_id"];
-        $node_id = $this->request->getNodeId();
-        $page_ids = ilLMPageObject::insertPagesFromTemplate(
-            $this->content_object->getId(),
-            $this->request->getMulti(),
-            $node_id,
-            $this->request->getFirstChild(),
-            $layout_id,
-            $data["sec"]["title"]
-        );
-
-        if ($this->request->getMulti() <= 1) {
-            $this->tpl->setOnScreenMessage("success", $this->lng->txt("lm_page_added"), true);
-        } else {
-            $this->tpl->setOnScreenMessage("success", $this->lng->txt("lm_pages_added"), true);
-        }
-
-        //$ilCtrl->setParameter($this, "highlight", $page_ids);
-        $ilCtrl->redirect($this, "showHierarchy", "node_" . $node_id);
     }
 }
