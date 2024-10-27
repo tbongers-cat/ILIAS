@@ -231,6 +231,9 @@ class ilPageLayout
 
     private function getXSLPath(): string
     {
+        if (is_file("./components/ILIAS/COPage/Layout/xml/layout2html.xsl")) {
+            return "./components/ILIAS/COPage/Layout/xml/layout2html.xsl";
+        }
         return "../components/ILIAS/COPage/Layout/xml/layout2html.xsl";
     }
 
