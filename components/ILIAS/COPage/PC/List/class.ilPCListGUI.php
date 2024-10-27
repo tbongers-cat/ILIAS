@@ -305,7 +305,7 @@ class ilPCListGUI extends ilPageContentGUI
 
         // save and cancel commands
         if ($a_mode == "create") {
-            $this->form->addCommandButton("create_list", $lng->txt("save"));
+            $this->form->addCommandButton("create", $lng->txt("save"));
             $this->form->addCommandButton("cancelCreate", $lng->txt("cancel"));
             $this->form->setTitle($lng->txt("cont_insert_list"));
         } else {

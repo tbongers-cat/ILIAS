@@ -196,7 +196,7 @@ class ilPCMediaObjectGUI extends ilPageContentGUI
 
     public function insert(
         $a_post_cmd = "edpost",
-        $a_submit_cmd = "create_mob",
+        $a_submit_cmd = "",
         $a_input_error = false
     ): void {
         $ilTabs = $this->tabs;
@@ -239,9 +239,9 @@ class ilPCMediaObjectGUI extends ilPageContentGUI
                     $mob_gui->initForm("create");
                     $form = $mob_gui->getForm();
                 }
-                $form->setFormAction($ilCtrl->getFormAction($this, "create_mob"));
+                $form->setFormAction($ilCtrl->getFormAction($this, "create"));
                 $form->clearCommandButtons();
-                $form->addCommandButton("create_mob", $lng->txt("save"));
+                $form->addCommandButton("create", $lng->txt("save"));
                 $form->addCommandButton("cancelCreate", $lng->txt("cancel"));
 
                 $this->displayValidationError();
@@ -538,7 +538,7 @@ class ilPCMediaObjectGUI extends ilPageContentGUI
 
         if (!$mob_gui->checkFormInput()) {
             $this->form = $mob_gui->getForm();
-            $this->insert("edpost", "create_mob", true);
+            $this->insert("edpost", "", true);
             return null;
         }
         // create dummy object in db (we need an id)

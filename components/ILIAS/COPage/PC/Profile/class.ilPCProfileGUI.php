@@ -146,7 +146,7 @@ class ilPCProfileGUI extends ilPageContentGUI
         $profile->showPublicProfileFields($form, $prefs, $mode_manual, $is_template);
 
         if ($a_insert) {
-            $form->addCommandButton("create_profile", $this->lng->txt("save"));
+            $form->addCommandButton("create", $this->lng->txt("save"));
             $form->addCommandButton("cancelCreate", $this->lng->txt("cancel"));
         } else {
             $form->addCommandButton("update", $this->lng->txt("save"));

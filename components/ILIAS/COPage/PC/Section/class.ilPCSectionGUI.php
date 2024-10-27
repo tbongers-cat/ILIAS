@@ -384,7 +384,7 @@ class ilPCSectionGUI extends ilPageContentGUI
 
         // save/cancel buttons
         if ($a_insert) {
-            $form->addCommandButton("create_section", $lng->txt("save"));
+            $form->addCommandButton("create", $lng->txt("save"));
             $form->addCommandButton("cancelCreate", $lng->txt("cancel"));
         } else {
             $form->addCommandButton("update", $lng->txt("save"));

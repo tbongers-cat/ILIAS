@@ -118,7 +118,7 @@ class ilPCBlogGUI extends ilPageContentGUI
         $form->addItem($obj);
 
         if ($a_insert) {
-            $form->addCommandButton("create_blog", $this->lng->txt("select"));
+            $form->addCommandButton("create", $this->lng->txt("select"));
             $form->addCommandButton("cancelCreate", $this->lng->txt("cancel"));
         } else {
             $obj->setValue($this->content_obj->getBlogId());
@@ -272,7 +272,7 @@ class ilPCBlogGUI extends ilPageContentGUI
         $form->addItem($blog_id);
 
         if ($a_insert) {
-            $form->addCommandButton("create_blog", $this->lng->txt("save"));
+            $form->addCommandButton("create", $this->lng->txt("save"));
             $form->addCommandButton("cancelCreate", $this->lng->txt("cancel"));
         } else {
             $obj->setValue($this->content_obj->getPostings());

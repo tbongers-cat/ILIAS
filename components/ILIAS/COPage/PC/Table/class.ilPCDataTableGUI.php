@@ -352,7 +352,7 @@ class ilPCDataTableGUI extends ilPCTableGUI
         $cb = new ilCheckboxInputGUI($lng->txt("cont_has_row_header"), "has_row_header");
         $form->addItem($cb);
 
-        $form->addCommandButton("create_tab", $lng->txt("save"));
+        $form->addCommandButton("create", $lng->txt("save"));
         $form->addCommandButton("cancelCreate", $lng->txt("cancel"));
 
         return $form;
@@ -478,7 +478,7 @@ class ilPCDataTableGUI extends ilPCTableGUI
         $form->addItem($cb);
 
 
-        $form->addCommandButton("create_tab", $lng->txt("save"));
+        $form->addCommandButton("create", $lng->txt("save"));
         $form->addCommandButton("cancelCreate", $lng->txt("cancel"));
 
         return $form;

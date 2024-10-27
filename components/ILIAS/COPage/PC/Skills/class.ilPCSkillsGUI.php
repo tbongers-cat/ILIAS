@@ -135,7 +135,7 @@ class ilPCSkillsGUI extends ilPageContentGUI
         $form->addItem($obj);
 
         if ($a_insert) {
-            $form->addCommandButton("create_skill", $this->lng->txt("select"));
+            $form->addCommandButton("create", $this->lng->txt("select"));
             $form->addCommandButton("cancelCreate", $this->lng->txt("cancel"));
         } else {
             $obj->setValue($this->content_obj->getSkillId());
