@@ -37,7 +37,8 @@ use ILIAS\UI\URLBuilderToken;
 use ILIAS\DI\Container;
 use ilBadge;
 use ilBadgeAuto;
-use ILIAS\UI\Component\Table\Column\Text;
+use ILIAS\Filesystem\Stream\Streams;
+use ILIAS\UI\Component\Table\Column\Column;
 
 class ilBadgeTableGUI
 {
@@ -68,7 +69,7 @@ class ilBadgeTableGUI
     }
 
     /**
-     * @return array{image_rid: Text, title: Text, type: Text, active: Text}
+     * @return array<string, Column>
      */
     private function buildColumns(): array
     {
@@ -131,6 +132,7 @@ class ilBadgeTableGUI
                     $title = $badge->getTitle();
                     $image_html = '';
                     $badge_rid = $badge->getImageRid();
+                    // TODO gvollbach: Check if this is correct
                     $image_src = $this->badge_image_service->getImageFromResourceId($badge, $badge_rid);
                     $badge_image_large = $this->badge_image_service->getImageFromResourceId(
                         $badge,
@@ -242,7 +244,7 @@ class ilBadgeTableGUI
     }
 
     /**
-     * @return array<string,\ILIAS\UI\Component\Table\Action\Action>
+     * @return array<string, \ILIAS\UI\Component\Table\Action\Action>
      */
     private function getActions(
         URLBuilder $url_builder,
@@ -320,14 +322,22 @@ class ilBadgeTableGUI
                 foreach ($ids as $id) {
                     $items[] = $f->modal()->interruptiveItem()->keyValue($id, $row_id_token->getName(), $id);
                 }
-                $r->renderAsync([
-                    $f->modal()->interruptive(
-                        $this->lng->txt('badge_deletion'),
-                        $this->lng->txt('badge_deletion_confirmation'),
-                        '#'
-                    )->withAffectedItems($items)
-                      ->withAdditionalOnLoadCode(static fn($id): string => "console.log('ASYNC JS');")
-                ]);
+
+                $this->http->saveResponse(
+                    $this->http
+                        ->response()
+                        ->withBody(
+                            Streams::ofString($r->renderAsync([
+                                $f->modal()->interruptive(
+                                    $this->lng->txt('badge_deletion'),
+                                    $this->lng->txt('badge_deletion_confirmation'),
+                                    '#'
+                                )->withAffectedItems($items)
+                            ]))
+                        )
+                );
+                $this->http->sendResponse();
+                $this->http->close();
             }
         }
 

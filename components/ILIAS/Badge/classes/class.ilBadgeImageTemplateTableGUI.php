@@ -36,6 +36,7 @@ use Generator;
 use ILIAS\UI\Component\Table\DataRetrieval;
 use ILIAS\UI\URLBuilderToken;
 use ILIAS\DI\Container;
+use ILIAS\Filesystem\Stream\Streams;
 
 class ilBadgeImageTemplateTableGUI
 {
@@ -149,11 +150,13 @@ class ilBadgeImageTemplateTableGUI
                         [],
                         fn($ret, $key, $value) => [$key, $value]
                     );
+
                     usort($data, fn($a, $b) => $a[$order_field] <=> $b[$order_field]);
                     if ($order_direction === 'DESC') {
                         $data = array_reverse($data);
                     }
                 }
+
                 if ($range) {
                     $data = \array_slice($data, $range->getStart(), $range->getLength());
                 }
@@ -258,15 +261,24 @@ class ilBadgeImageTemplateTableGUI
 
             $action = $query->retrieve($action_parameter_token->getName(), $this->refinery->to()->string());
             if ($action === 'badge_image_template_delete') {
-                $r->renderAsync([
-                    $f->modal()->interruptive(
-                        $this->lng->txt('badge_deletion'),
-                        $this->lng->txt('badge_deletion_confirmation'),
-                        '#'
-                    )->withAffectedItems($items)
-                ]);
+                $this->http->saveResponse(
+                    $this->http
+                        ->response()
+                        ->withBody(
+                            Streams::ofString($r->renderAsync([
+                                $f->modal()->interruptive(
+                                    $this->lng->txt('badge_deletion'),
+                                    $this->lng->txt('badge_deletion_confirmation'),
+                                    '#'
+                                )->withAffectedItems($items)
+                            ]))
+                        )
+                );
+                $this->http->sendResponse();
+                $this->http->close();
             }
         }
+
         $this->tpl->setContent($r->render($out));
     }
 }

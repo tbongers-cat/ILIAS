@@ -41,6 +41,7 @@ use ILIAS\UI\Implementation\Component\Link\Standard;
 use ilObject;
 use ilLink;
 use ilObjBadgeAdministrationGUI;
+use ILIAS\Filesystem\Stream\Streams;
 
 class ilObjectBadgeTableGUI
 {
@@ -104,7 +105,7 @@ class ilObjectBadgeTableGUI
             {
                 if ($this->user_has_write_permission === null) {
                     $parent_ref_id = ilObject::_getAllReferences($parent_id);
-                    if (count($parent_ref_id) > 0) {
+                    if (\count($parent_ref_id) > 0) {
                         $parent_ref_id = array_pop($parent_ref_id);
                     }
                     $this->user_has_write_permission = $this->access->checkAccess('write', '', $parent_ref_id);
@@ -132,7 +133,7 @@ class ilObjectBadgeTableGUI
                 ?array $filter_data,
                 ?array $additional_parameters
             ): ?int {
-                return count($this->getRecords());
+                return \count($this->getRecords());
             }
 
             /**
@@ -163,7 +164,7 @@ class ilObjectBadgeTableGUI
                     $type_caption = ilBadge::getExtendedTypeCaption($types[$badge_item['type_id']]);
                     $badge_rid = $badge_item['image_rid'];
                     $image_src = $this->badge_image_service->getImageFromResourceId($badge_item, $badge_rid);
-                    if ($badge_rid != '') {
+                    if ($badge_rid) {
                         $badge_template_image = $image_src;
                         if ($badge_template_image !== '') {
                             $badge_img = $this->factory->image()->responsive(
@@ -187,6 +188,8 @@ class ilObjectBadgeTableGUI
 
                     $ref_ids = ilObject::_getAllReferences($badge_item['parent_id']);
                     $ref_id = array_shift($ref_ids);
+
+                    // TODO gvollbach: It seems now the "listObjectBadgeUsers" is now missing in 10.x
 
                     $container_url_link = '';
                     if ($this->access->checkAccess('read', '', $ref_id)) {
@@ -229,6 +232,7 @@ class ilObjectBadgeTableGUI
                         'container_type' => $badge_item['parent_type'],
                     ];
                 }
+
                 if ($order) {
                     [$order_field, $order_direction] = $order->join(
                         [],
@@ -245,7 +249,7 @@ class ilObjectBadgeTableGUI
                 }
 
                 if ($range) {
-                    $data = array_slice($data, $range->getStart(), $range->getLength());
+                    $data = \array_slice($data, $range->getStart(), $range->getLength());
                 }
 
                 return $data;
@@ -254,7 +258,7 @@ class ilObjectBadgeTableGUI
     }
 
     /**
-     * @return array<string,\ILIAS\UI\Component\Table\Action\Action>
+     * @return array<string, \ILIAS\UI\Component\Table\Action\Action>
      */
     private function getActions(
         URLBuilder $url_builder,
@@ -338,14 +342,10 @@ class ilObjectBadgeTableGUI
         if ($query->has($action_parameter_token->getName())) {
             $action = $query->retrieve($action_parameter_token->getName(), $refinery->to()->string());
             $ids = $query->retrieve($row_id_token->getName(), $refinery->custom()->transformation(fn($v) => $v));
-            $listing = $f->listing()->characteristicValue()->text([
-                'table_action' => $action,
-                'id' => print_r($ids, true),
-            ]);
 
             if ($action === 'obj_badge_delete') {
                 $items = [];
-                if (is_array($ids) && count($ids) > 0) {
+                if (\is_array($ids) && \count($ids) > 0) {
                     foreach ($ids as $id) {
                         $badge = new ilBadge($id);
                         $items[] = $f->modal()->interruptiveItem()->keyValue(
@@ -354,13 +354,22 @@ class ilObjectBadgeTableGUI
                             $badge->getTitle()
                         );
                     }
-                    $r->renderAsync([
-                       $f->modal()->interruptive(
-                           $this->lng->txt('badge_deletion'),
-                           $this->lng->txt('badge_deletion_confirmation'),
-                           '#'
-                       )->withAffectedItems($items)
-                    ]);
+
+                    $this->http->saveResponse(
+                        $this->http
+                            ->response()
+                            ->withBody(
+                                Streams::ofString($r->renderAsync([
+                                    $f->modal()->interruptive(
+                                        $this->lng->txt('badge_deletion'),
+                                        $this->lng->txt('badge_deletion_confirmation'),
+                                        '#'
+                                    )->withAffectedItems($items)
+                                ]))
+                            )
+                    );
+                    $this->http->sendResponse();
+                    $this->http->close();
                 }
             }
         }
