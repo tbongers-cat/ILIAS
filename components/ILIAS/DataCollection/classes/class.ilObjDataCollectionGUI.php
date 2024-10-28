@@ -490,11 +490,9 @@ class ilObjDataCollectionGUI extends ilObject2GUI
             $this->ui_factory->input()->field(),
             $this->refinery
         );
-        //This is currently broken in core
-        //$inputs['presentation'] = $this->ui_factory->input()->field()->section($presentation, $this->lng->txt('cont_presentation'))
-        //    ->withValue(['tile_image' => $this->object->getObjectProperties()->getPropertyTileImage()]);
+        $inputs['presentation'] = $this->ui_factory->input()->field()->section($presentation, $this->lng->txt('cont_presentation'));
 
-        return $this->ui_factory->input()->container()->form()->standard($this->ctrl->getFormAction($this, 'save'), $inputs);
+        return $this->ui_factory->input()->container()->form()->standard($this->ctrl->getFormAction($this, 'update'), $inputs);
     }
 
     public function edit(): void
@@ -509,7 +507,7 @@ class ilObjDataCollectionGUI extends ilObject2GUI
         $this->tpl->setContent($this->ui_renderer->render($this->initForm()));
     }
 
-    public function save(): void
+    public function update(): void
     {
         if (!$this->checkPermissionBool('write')) {
             $this->error->raiseError($this->lng->txt('permission_denied'), $this->error->MESSAGE);
@@ -526,8 +524,7 @@ class ilObjDataCollectionGUI extends ilObject2GUI
             $this->object->setDescription($data['edit']['description']);
             $this->object->setNotification($data['edit']['notification']);
             $this->object->setOnline($data['availability']['online']);
-            //This is currentyl broken in core
-            //$this->object->getObjectProperties()->storePropertyTileImage($data['presentation']['tile_image']);
+            $this->object->getObjectProperties()->storePropertyTileImage($data['presentation']['tile_image']);
             $this->object->update();
             $this->tpl->setOnScreenMessage('success', $this->lng->txt('msg_obj_modified'), true);
         }
