@@ -23,64 +23,64 @@ use PHPUnit\Framework\TestCase;
 class PostingReplySubjectBuilderTest extends TestCase
 {
     /**
-     * @return Generator<string, array{"subject": string, "prefix": string, "repetition_prefix": string, "expected": string}>
+     * @return Generator<string, array{"subject": string, "reply_prefix": string, "optimized_repeated_reply_prefix": string, "expected_result": string}>
      */
     public static function postingSubjectProvider(): Generator
     {
         yield 'Subject without reply prefix' => [
             'subject' => 'This is a subject',
-            'prefix' => 'Re:',
-            'repetition_prefix' => 'Re (%s):',
-            'expected' => 'Re: This is a subject'
+            'reply_prefix' => 'Re:',
+            'optimized_repeated_reply_prefix' => 'Re (%s):',
+            'expected_result' => 'Re: This is a subject'
         ];
 
         yield 'Subject without reply prefix and prefix without expected end character' => [
             'subject' => 'This is a subject',
-            'prefix' => 'Re',
-            'repetition_prefix' => 'Re (%s):',
-            'expected' => 'Re: This is a subject'
+            'reply_prefix' => 'Re',
+            'optimized_repeated_reply_prefix' => 'Re (%s):',
+            'expected_result' => 'Re: This is a subject'
         ];
 
         yield 'Subject with repeated reply prefix' => [
             'subject' => 'Re: Re: Re: This is a subject',
-            'prefix' => 'Re:',
-            'repetition_prefix' => 'Re (%s):',
-            'expected' => 'Re (4): This is a subject'
+            'reply_prefix' => 'Re:',
+            'optimized_repeated_reply_prefix' => 'Re (%s):',
+            'expected_result' => 'Re (4): This is a subject'
         ];
 
         yield 'Subject with optimized repeated reply prefix' => [
             'subject' => 'Re (3): This is a subject',
-            'prefix' => 'Re:',
-            'repetition_prefix' => 'Re (%s):',
-            'expected' => 'Re (4): This is a subject'
+            'reply_prefix' => 'Re:',
+            'optimized_repeated_reply_prefix' => 'Re (%s):',
+            'expected_result' => 'Re (4): This is a subject'
         ];
 
         yield 'Subject with optimized repeated reply prefix (without spaces)' => [
             'subject' => 'Re(3): This is a subject',
-            'prefix' => 'Re:',
-            'repetition_prefix' => 'Re (%s):',
-            'expected' => 'Re(4): This is a subject'
+            'reply_prefix' => 'Re:',
+            'optimized_repeated_reply_prefix' => 'Re (%s):',
+            'expected_result' => 'Re(4): This is a subject'
         ];
 
         yield 'Subject with repeated reply prefix and repetition-prefix without expected end character' => [
             'subject' => 'Re: Re: Re: This is a subject',
-            'prefix' => 'Re:',
-            'repetition_prefix' => 'Re (%s)',
-            'expected' => 'Re (4): This is a subject'
+            'reply_prefix' => 'Re:',
+            'optimized_repeated_reply_prefix' => 'Re (%s)',
+            'expected_result' => 'Re (4): This is a subject'
         ];
 
         yield 'Subject with optimized repeated reply prefix and repetition-prefix without expected end character' => [
             'subject' => 'Re (3): This is a subject',
-            'prefix' => 'Re:',
-            'repetition_prefix' => 'Re (%s)',
-            'expected' => 'Re (4): This is a subject'
+            'reply_prefix' => 'Re:',
+            'optimized_repeated_reply_prefix' => 'Re (%s)',
+            'expected_result' => 'Re (4): This is a subject'
         ];
 
         yield 'Subject with optimized repeated reply prefix (without spaces) and repetition-prefix without expected end character' => [
             'subject' => 'Re(3): This is a subject',
-            'prefix' => 'Re:',
-            'repetition_prefix' => 'Re (%s)',
-            'expected' => 'Re(4): This is a subject'
+            'reply_prefix' => 'Re:',
+            'optimized_repeated_reply_prefix' => 'Re (%s)',
+            'expected_result' => 'Re(4): This is a subject'
         ];
     }
 
