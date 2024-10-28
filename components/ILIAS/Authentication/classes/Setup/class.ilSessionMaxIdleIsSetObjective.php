@@ -89,6 +89,8 @@ class ilSessionMaxIdleIsSetObjective implements Setup\Objective
                 $e->getTraceAsString()
             );
 
+            $client_ini->setVariable('session', 'expire', (string) $session_max_idle);
+
             return $environment;
         } finally {
             unlink("public/$filename");
