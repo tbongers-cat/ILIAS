@@ -43,7 +43,7 @@ class ilCertificateCourseLearningProgressEvaluationTest extends TestCase
 {
     public function testOnlyOneCourseIsCompletedOnLPChange(): void
     {
-        $this->markTestSkipped('Data Provider needs to be revisited.');
+        //$this->markTestSkipped('Data Provider needs to be revisited.');
 
         $templateRepository = $this->getMockBuilder(ilCertificateTemplateRepository::class)->getMock();
 
@@ -99,7 +99,7 @@ class ilCertificateCourseLearningProgressEvaluationTest extends TestCase
                 function (string $k) use (&$consecutive_get): string {
                     list($expected, $ret) = array_shift($consecutive_get);
                     $this->assertEquals($expected, $k);
-                    return $k;
+                    return $ret;
                 }
             );
 
@@ -131,7 +131,7 @@ class ilCertificateCourseLearningProgressEvaluationTest extends TestCase
             ->method('lookUpStatus')
             ->willReturnCallback(
                 function (int $id) use (&$consecutive_status): int {
-                    list($expected, $ret) = array_shift($consecutive_lookup);
+                    list($expected, $ret) = array_shift($consecutive_status);
                     $this->assertEquals($expected, $id);
 
                     return $ret;
@@ -157,7 +157,7 @@ class ilCertificateCourseLearningProgressEvaluationTest extends TestCase
 
     public function testAllCoursesAreCompletedOnLPChange(): void
     {
-        $this->markTestSkipped('Data Provider needs to be revisited.');
+        //$this->markTestSkipped('Data Provider needs to be revisited.');
 
         $templateRepository = $this->getMockBuilder(ilCertificateTemplateRepository::class)->getMock();
 
@@ -217,7 +217,7 @@ class ilCertificateCourseLearningProgressEvaluationTest extends TestCase
                 function (string $k) use (&$consecutive_get): string {
                     list($expected, $ret) = array_shift($consecutive_get);
                     $this->assertEquals($expected, $k);
-                    return $k;
+                    return $ret;
                 }
             );
 
@@ -255,7 +255,7 @@ class ilCertificateCourseLearningProgressEvaluationTest extends TestCase
             ->method('lookUpStatus')
             ->willReturnCallback(
                 function (int $id) use (&$consecutive_status): int {
-                    list($expected, $ret) = array_shift($consecutive_lookup);
+                    list($expected, $ret) = array_shift($consecutive_status);
                     $this->assertEquals($expected, $id);
 
                     return $ret;
