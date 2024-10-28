@@ -39,7 +39,7 @@ class ilSessionMaxIdleIsSetObjective implements Setup\Objective
 
     public function isNotable(): bool
     {
-        return false;
+        return true;
     }
 
     public function getPreconditions(Setup\Environment $environment): array
@@ -85,8 +85,7 @@ class ilSessionMaxIdleIsSetObjective implements Setup\Objective
                 "An error occurred while trying to determine the values for 'session.cookie_lifetime' and" . PHP_EOL .
                 "'session.gc_maxlifetime' in your php.ini: {$e->getMessage()}" . PHP_EOL .
                 'You can IGNORE the the error if you are sure these settings comply with our expection to' . PHP_EOL .
-                'to ensure a proper session handling.' . PHP_EOL .
-                $e->getTraceAsString()
+                'ensure a proper session handling.'
             );
 
             $client_ini->setVariable('session', 'expire', (string) $session_max_idle);
