@@ -79,12 +79,18 @@ class ilBadgeUserTableGUI
             }
 
             /**
-             * TODO gvollbach: Please provide the exaxct shape of the list of arrays
-             * @return array<string,string>
+             * @return list<array{
+             *     user_id: string,
+             *     name: string,
+             *     login: string,
+             *     type: string,
+             *     title: string,
+             *     issued: int,
+             *     parent_id: string,
+             *     parent_meta: array}>
              */
             private function getBadgeImageTemplates(Container $DIC): array
             {
-                $a_parent_obj_id = null;
                 $assignments = null;
                 $user_ids = null;
                 $parent_ref_id = $this->parent_ref_id;
@@ -93,9 +99,7 @@ class ilBadgeUserTableGUI
                 $badges = [];
                 $tree = $DIC->repositoryTree();
 
-                if (!$a_parent_obj_id) {// TODO gvollbach: $a_parent_obj_id is always null
-                    $a_parent_obj_id = ilObject::_lookupObjId($parent_ref_id);
-                }
+                $a_parent_obj_id = ilObject::_lookupObjId($parent_ref_id);
 
                 if ($parent_ref_id) {
                     $user_ids = ilBadgeHandler::getInstance()->getUserIds($parent_ref_id, $a_parent_obj_id);
@@ -146,7 +150,7 @@ class ilBadgeUserTableGUI
                             $type = ilBadge::getExtendedTypeCaption($badge->getTypeInstance());
                             $title = $badge->getTitle();
                             $issued = $immutable->setTimestamp($timestamp);
-                            $parent_id = $parent['id'] ?? 0; //TODO gvollbach: According to mit SCA the offset "id" always exists
+                            $parent_id = $parent['id'];
                             $data[$idx] = [
                                 'user_id' => $user_id,
                                 'name' => $name,
@@ -188,10 +192,8 @@ class ilBadgeUserTableGUI
             ): Generator {
                 $records = $this->getRecords($range, $order);
                 foreach ($records as $idx => $record) {
-                    if (isset($idx)) {// TODO gvollbach: Why do we have to check the index agains NULL?
-                        $row_id = (string) $idx;
-                        yield $row_builder->buildDataRow($row_id, $record);
-                    }
+                    $row_id = (string) $idx;
+                    yield $row_builder->buildDataRow($row_id, $record);
                 }
             }
 
@@ -203,7 +205,15 @@ class ilBadgeUserTableGUI
             }
 
             /**
-             * TODO gvollbach: Please provide the exaxct shape of the list of arrays
+             * @return list<array{
+             *     user_id: string,
+             *     name: string,
+             *     login: string,
+             *     type: string,
+             *     title: string,
+             *     issued: int,
+             *     parent_id: string,
+             *     parent_meta: array}>
              */
             private function getRecords(Range $range = null, Order $order = null): array
             {

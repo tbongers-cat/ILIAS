@@ -234,14 +234,6 @@ class ilBadgeManagementGUI
                     $tt[] = $badge->getTitle();
                 }
                 $ttid = 'bdgpst';
-                ilTooltipGUI::addTooltip(
-                    $ttid,
-                    implode('<br />', $tt),
-                    '',
-                    'bottom center',
-                    'top center',
-                    false
-                );
 
                 $lng->loadLanguageModule('content');
                 $ilToolbar->addButton(

@@ -54,11 +54,13 @@ class ModalBuilder
      * @param array<string, string> $badge_properties
      */
     public function constructModal(
-        Image $badge_image,
+        ?Image $badge_image,
         string $badge_title,
         array $badge_properties = []
     ): Modal {
-        $modal_content[] = $badge_image;
+        if ($badge_image !== null) {
+            $modal_content[] = $badge_image;
+        }
 
         if ($this->assignment) {
             $badge_properties['badge_issued_on'] = ilDatePresentation::formatDate(

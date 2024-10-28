@@ -69,8 +69,7 @@ class ilBadgeImageTemplateTableGUI
             }
 
             /**
-             * TODO gvollbach: Please provide the exaxct shape of the list of arrays
-             * @return array<string,string>
+             * @return list<array{id: int, image_rid: string, title: string}>
              */
             private function getBadgeImageTemplates(Container $DIC): array
             {
@@ -137,7 +136,7 @@ class ilBadgeImageTemplateTableGUI
             }
 
             /**
-             * TODO gvollbach: Please provide the exaxct shape of the list of arrays
+             * @return list<array{id: int, image_rid: string, title: string}>
              */
             private function getRecords(Range $range = null, Order $order = null): array
             {
@@ -259,15 +258,12 @@ class ilBadgeImageTemplateTableGUI
 
             $action = $query->retrieve($action_parameter_token->getName(), $this->refinery->to()->string());
             if ($action === 'badge_image_template_delete') {
-                // TODO gvollbach: Please provide the HTTP service to to send a response and close the connection
                 echo($r->renderAsync([
                     $f->modal()->interruptive(
                         $this->lng->txt('badge_deletion'),
                         $this->lng->txt('badge_deletion_confirmation'),
                         '#'
                     )->withAffectedItems($items)
-                        // TODO gvollbach: Why the console.log?
-                      ->withAdditionalOnLoadCode(static fn($id): string => "console.log('ASYNC JS');")
                 ]));
                 exit();
             }

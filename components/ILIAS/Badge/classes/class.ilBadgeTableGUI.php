@@ -37,6 +37,7 @@ use ILIAS\UI\URLBuilderToken;
 use ILIAS\DI\Container;
 use ilBadge;
 use ilBadgeAuto;
+use ILIAS\UI\Component\Table\Column\Text;
 
 class ilBadgeTableGUI
 {
@@ -67,7 +68,7 @@ class ilBadgeTableGUI
     }
 
     /**
-     * TODO gvollbach: Please provide the exaxct shape of the list of arrays
+     * @return array{image_rid: Text, title: Text, type: Text, active: Text}
      */
     private function buildColumns(): array
     {
@@ -110,8 +111,15 @@ class ilBadgeTableGUI
             }
 
             /**
-             * TODO gvollbach: Please provide the exaxct shape of the list of arrays
-             * @return array<string,string>
+             * @return list<array{
+             *     id: int,
+             *     badge: ilBadge,
+             *     active: bool,
+             *     type: string,
+             *     manual: bool,
+             *     image_rid: string,
+             *     title: string,
+             *     renderer: string}>
              */
             private function getBadges(Container $DIC): array
             {
@@ -199,7 +207,15 @@ class ilBadgeTableGUI
             }
 
             /**
-             * TODO gvollbach: Please provide the exaxct shape of the list of arrays
+             * @return list<array{
+             *     id: int,
+             *     badge: ilBadge,
+             *     active: bool,
+             *     type: string,
+             *     manual: bool,
+             *     image_rid: string,
+             *     title: string,
+             *     renderer: string}>
              */
             private function getRecords(Range $range = null, Order $order = null): array
             {
