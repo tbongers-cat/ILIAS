@@ -770,7 +770,7 @@ class ilObjLTIConsumer extends ilObject2
             "tool_consumer_info_version" => ILIAS_VERSION,
             "lis_result_sourcedid" => $token,
             "lis_outcome_service_url" => self::getIliasHttpPath(
-                ) . "/components/ILIAS/LTIConsumer/result.php?client_id=" . CLIENT_ID,
+            ) . "/components/ILIAS/LTIConsumer/result.php?client_id=" . CLIENT_ID,
             "role_scope_mentor" => ""
         ];
 
@@ -897,7 +897,7 @@ class ilObjLTIConsumer extends ilObject2
             "lis_result_sourcedid" => "",
             //$token,
             "lis_outcome_service_url" => self::getIliasHttpPath(
-                ) . "/components/ILIAS/LTIConsumer/result.php?client_id=" . CLIENT_ID,
+            ) . "/components/ILIAS/LTIConsumer/result.php?client_id=" . CLIENT_ID,
             "role_scope_mentor" => ""
         ];
 
@@ -911,12 +911,12 @@ class ilObjLTIConsumer extends ilObject2
         if ($this->getProvider()->isGradeSynchronization()) {
             $gradeservice = new ilLTIConsumerGradeService();
             $launch_vars['custom_lineitem_url'] = self::getIliasHttpPath(
-                ) . "/components/ILIAS/LTIConsumer/ltiservices.php/gradeservice/" . $contextId . "/lineitems/" . $this->id . "/lineitem";
+            ) . "/components/ILIAS/LTIConsumer/ltiservices.php/gradeservice/" . $contextId . "/lineitems/" . $this->id . "/lineitem";
 
             // ! Moodle as tool provider requires a custom_lineitems_url even though this should be optional in launch request, especially if only posting score scope is permitted by platform
             // http://www.imsglobal.org/spec/lti-ags/v2p0#example-link-has-a-single-line-item-tool-can-only-post-score
             $launch_vars['custom_lineitems_url'] = self::getIliasHttpPath(
-                ) . "/components/ILIAS/LTIConsumer/ltiservices.php/gradeservice/" . $contextId . "/linetitems/";
+            ) . "/components/ILIAS/LTIConsumer/ltiservices.php/gradeservice/" . $contextId . "/linetitems/";
 
             $launch_vars['custom_ags_scopes'] = implode(",", $gradeservice->getPermittedScopes());
         }
