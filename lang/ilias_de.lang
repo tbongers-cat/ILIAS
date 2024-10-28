@@ -1548,6 +1548,7 @@ assessment#:#tst_input_dynamic_question_set_question_ordering_by_date#:#Ordne Fr
 assessment#:#tst_input_dynamic_question_set_question_ordering_by_tax#:#Ordne Fragen nach Taxonomieknoten
 assessment#:#tst_input_dynamic_question_set_source_questionpool#:#Fragenpool
 assessment#:#tst_input_dynamic_question_set_taxonomie_filter_enabled#:#Zeige Taxonomiefilter
+assessment#:#tst_insert_in_test#:#Insert in Test###28 10 2024 new variable
 assessment#:#tst_insert_missing_question#:#Bitte wählen Sie mindestens eine Frage aus, die Sie in dem Test hinzufügen wollen!
 assessment#:#tst_insert_questions#:#Sind Sie sicher, dass Sie die folgenden Fragen dem Test hinzufügen wollen?
 assessment#:#tst_instant_feedback#:#Direkte Rückmeldung
@@ -2467,7 +2468,6 @@ blog#:#blog_approve#:#Beitrag freischalten
 blog#:#blog_author#:#Beiträge von
 blog#:#blog_authors#:#Beitragende Personen###Modified as part of gender mainstreaming activities for ILIAS 8
 blog#:#blog_back_to_blog_owner#:#Blog bearbeiten
-blog#:#blog_banner#:#Banner
 blog#:#blog_change_notification_body_approve#:#der folgende Beitrag muss noch freigeschaltet werden:
 blog#:#blog_change_notification_body_comment#:#der folgende Beitrag wurde kommentiert:
 blog#:#blog_change_notification_body_new#:#der folgende Beitrag wurde neu angelegt:
@@ -2547,10 +2547,6 @@ blog#:#blog_postings#:#Beiträge
 blog#:#blog_presentation_frame#:#Darstellung
 blog#:#blog_presentation_overview#:#Präsentation der Beiträge
 blog#:#blog_preview#:#Vorschau
-blog#:#blog_preview_banner#:#Personalisiertes Banner
-blog#:#blog_preview_banner_height#:#Höhe des Banners
-blog#:#blog_preview_banner_info#:#Standardgröße ist 1370x100 Pixel.
-blog#:#blog_preview_banner_width#:#Breite des Banners
 blog#:#blog_profile_picture#:#Profil-Bild anzeigen
 blog#:#blog_profile_picture_repository_info#:#Profilbilder werden nur für einzelne Beiträge angezeigt, nicht auf Übersichtsseiten.###Modified as part of gender mainstreaming activities for ILIAS 8
 blog#:#blog_properties#:#Blog-Eigenschaften
@@ -3190,8 +3186,11 @@ cmix#:#completed_info#:#Die Aktivität wurde normal beendet oder abgeschlossen.
 cmix#:#completed_label#:#Statements mit dem Verb 'completed'
 cmix#:#conf_availability#:#Verwendbarkeit
 cmix#:#conf_availability_0#:#nicht verwendbar / deaktiviert
+cmix#:#conf_availability_0_info#:#Existing xAPI/cmi5 objects that use this LRS type can no longer be used.###28 10 2024 new variable
 cmix#:#conf_availability_1#:#ausschließlich in bestehenden Objekten
+cmix#:#conf_availability_1_info#:#This LRS type is not offered when creating new xAPI/cmi5 objects. Existing xAPI/cmi5 objects that use this type can continue to write or read data. Use this option to be able to delete data in the connected LRS at a later time.###28 10 2024 new variable
 cmix#:#conf_availability_2#:#in neuen und bestehenden Objekten
+cmix#:#conf_availability_2_info#:#This LRS type can be selected when creating xAPI/cmi5 objects.###28 10 2024 new variable
 cmix#:#conf_bypass_proxy#:#Erkennung des Lernfortschritts
 cmix#:#conf_bypass_proxy_disabled#:#xAPI-Proxy, um sofort Daten zu erhalten.
 cmix#:#conf_bypass_proxy_enabled#:#CronJob zur Abfrage des Learning Record Store
@@ -4040,8 +4039,6 @@ common#:#enable_export_scorm_desc#:#Anzeige persönlicher Daten in den Protokoll
 common#:#enable_fora_statistics#:#Forenstatistik aktivieren
 common#:#enable_fora_statistics_desc#:#Nur wenn diese aktiviert ist, kann auf die Forenstatistik zugegriffen werden.
 common#:#enable_hide_user_toggle#:#Mitglied darf Benachrichtigung nicht deaktivieren
-common#:#enable_hist_user_comments#:#Überarbeitungskommentare###Modified as part of gender mainstreaming activities for ILIAS 8
-common#:#enable_hist_user_comments_desc#:#Sie können Überarbeitungskommentare zu Seiten hinterlegen. Die Kommentare werden im Reiter „Inhalt“, Unterreiter „Verlauf“ des Lernmoduls angezeigt und unterstützen gemeinsames Editieren.###Modified as part of gender mainstreaming activities for ILIAS 8
 common#:#enable_multi_download#:#„Mehrere Objekte herunterladen“ aktivieren
 common#:#enable_multi_download_info#:#Wenn aktiviert, können mehrere Ordner bzw. Dateien gleichzeitig ausgewählt werden, um sie dann als Zip-Archiv herunterzuladen.
 common#:#enable_password_assistance#:#Passwort-Unterstützung aktivieren
@@ -6167,8 +6164,6 @@ contact#:#contact_awrn_req_contacts_info#:#Alle Kontaktanfragen werden aufgelist
 content#:#Pages#:#Seiten
 content#:#add_menu_entry#:#Menüeintrag hinzufügen →
 content#:#all_pages#:#für das gesamte Lernmodul
-content#:#choose_public_mode#:#Zugriffsrecht für nicht angemeldete Benutzer
-content#:#choose_public_pages#:#Öffentlich zugängliche Seiten auswählen
 content#:#citate#:#Zitieren
 content#:#citate_from#:#Zitieren von ...
 content#:#citate_page#:#Diese Seite zitieren
@@ -6298,6 +6293,7 @@ content#:#cont_change_object_reference#:#Ändere Objektreferenz
 content#:#cont_change_style#:#Style ändern
 content#:#cont_change_type#:#Typ ändern
 content#:#cont_change_width#:#Breite ändern
+content#:#cont_chap_and_pages#:#Chapters and Pages###28 10 2024 new variable
 content#:#cont_chap_select_target_now#:#Wählen Sie jetzt die Checkbox, hinter die das Kapitel verschoben werden soll.
 content#:#cont_chapters#:#Kapitel
 content#:#cont_chapters_after_pages#:#Beachten Sie, dass innerhalb einer Ebene zunächst alle Seiten und dann erst die Unterkapitel aufgeführt werden.
@@ -7380,7 +7376,6 @@ content#:#scplayer_suspendall#:#Bearbeitung unterbrechen
 content#:#selectFooter#:#Als Fußzeile auswählen
 content#:#selectHeader#:#Als Kopfzeile auswählen
 content#:#select_a_file#:#Wählen Sie bitte eine Datei aus.
-content#:#selected_pages_only#:#nur für die unten ausgewählten Seiten
 content#:#seq_close#:#Bitte schließen Sie das Fenster des SCORM-Lernmoduls.
 content#:#seq_endsession#:#Die aktuelle Kurssitzung wurde beendet.
 content#:#seq_error#:#Es ist ein interner Ausnahmefehler im Sequencer aufgetreten.
@@ -11872,7 +11867,6 @@ mep#:#mep_content_snippet_used_in_older_versions#:#Achtung: Der Inhaltsbaustein 
 mep#:#mep_copy_to_mep#:#In Medienpool kopieren
 mep#:#mep_create_content_snippet#:#Inhaltsbaustein anlegen
 mep#:#mep_create_folder#:#Ordner anlegen
-mep#:#mep_create_from_upload_dir#:#Medienobjekte aus Upload-Verzeichnis hinzufügen
 mep#:#mep_create_media_files#:#Mediaobjekte anlegen
 mep#:#mep_create_mob#:#Medienobjekt anlegen
 mep#:#mep_default_height#:#Standardhöhe
@@ -11897,7 +11891,6 @@ mep#:#mep_new_content_snippet#:#Neuer Inhaltsbaustein
 mep#:#mep_new_folder#:#Neuer Ordner
 mep#:#mep_page_properties#:#Eigenschaften des Bausteins
 mep#:#mep_page_type_mep#:#Inhaltsbaustein
-mep#:#mep_sel_upload_dir_files#:#Wählen Sie Dateien / Verzeichnisse aus.
 mep#:#mep_thumbnail#:#Miniaturbild
 mep#:#mep_title_and_description#:#Titel und Beschreibung
 mep#:#mep_trans_import_info#:#Wenn Sie dieses Modul als "XML (Basissprache für Übersetzung - Master)" in eine andere Installation exportiert haben, können Sie hier die übersetzten Export-Dateien dieser Installation wieder importieren.
@@ -13671,10 +13664,6 @@ prg#:#will_not_set_top_progress_to_irrelevant#:#Oberste Zuordnung kann nicht irr
 prg#:#will_not_update_cert_for_unsuccessful_progress#:#kein Zertifikat erzeugt, da nicht abgeschlossen oder akkreditiert
 prtf#:#pdf_export#:#PDF Export
 prtf#:#prtf_add_assignment#:#Zuordnung hinzufügen
-prtf#:#prtf_add_blog#:#Blog hinzufügen
-prtf#:#prtf_add_existing_blog#:#Vorhandenes Blog nutzen
-prtf#:#prtf_add_new_blog#:#Neues Blog hinzufügen
-prtf#:#prtf_add_new_blog_info#:#Das neue Blog wird Ihren persönlichen Ressourcen hinzugefügt.
 prtf#:#prtf_add_page#:#Seite hinzufügen
 prtf#:#prtf_add_portfolio#:#Portfolio hinzufügen
 prtf#:#prtf_add_portfolio_from_template#:#Portfolio aus Vorlage hinzufügen
@@ -13685,7 +13674,6 @@ prtf#:#prtf_allow_my_courses#:#Seitenelement "Meine Kurse"
 prtf#:#prtf_allow_my_courses_info#:#Ermöglicht eine Liste der aktuellen Kursmitgliedschaften in ein Portfolio aufzunehmen.
 prtf#:#prtf_author#:#Erstellt von###Modified as part of gender mainstreaming activities for ILIAS 8
 prtf#:#prtf_back_to_portfolio_owner#:#Portfolio bearbeiten
-prtf#:#prtf_banner#:#Banner
 prtf#:#prtf_blog_page_created#:#Blog wurde hinzugefügt.
 prtf#:#prtf_copy_blog_pg#:#Blogseite kopieren
 prtf#:#prtf_copy_page#:#Portfolio-Seite(n) kopieren
@@ -13738,10 +13726,6 @@ prtf#:#prtf_portfolio_created_from_template#:#Dies ist die Vorschau Ihres neuen 
 prtf#:#prtf_portfolio_deleted#:#Portfolio wurde gelöscht
 prtf#:#prtf_portfolio_page_deleted#:#Portfolio- bzw. Blog-Seite wurde gelöscht.
 prtf#:#prtf_portfolios#:#Portfolios
-prtf#:#prtf_preview_banner#:#Personalisiertes Banner
-prtf#:#prtf_preview_banner_height#:#Banner Höhe
-prtf#:#prtf_preview_banner_info#:#Standardgröße ist 1370x100 Pixel.
-prtf#:#prtf_preview_banner_width#:#Banner Breite
 prtf#:#prtf_print_options#:#Auswahl zum PDF
 prtf#:#prtf_print_selection#:#Auswahl
 prtf#:#prtf_profile_picture#:#Profil-Bild anzeigen
@@ -13752,8 +13736,6 @@ prtf#:#prtf_role_title#:#Rolle
 prtf#:#prtf_save_status_and_titles#:#Status und Titel speichern
 prtf#:#prtf_sec_protected_info#:#Geschützte Blöcke können im Portfolio nicht bearbeitet werden.
 prtf#:#prtf_selected_pages#:#Ausgewählte Teile des Portfolios
-prtf#:#prtf_set_as_default#:#Als Mein Profil setzen
-prtf#:#prtf_set_default_publish_confirmation#:#Das Portfolio muss mindestens für alle registrierten Benutzer freigegeben werden. Soll es auch für das ganze Internet ohne Registrierung sichtbar sein?
 prtf#:#prtf_set_default_publish_global#:#Auch für unregistrierte Benutzer freigeben
 prtf#:#prtf_set_default_publish_registered#:#Nur für registrierte Nutzer freigeben
 prtf#:#prtf_set_offline#:#Offline setzen
@@ -17759,8 +17741,6 @@ wopi#:#msg_error_wopi_invalid_discorvery_url#:#Die eingegebene Discovery-URL ist
 wopi#:#msg_wopi_settings_modified#:#Einstellungen gespeichert
 wopi#:#open_external_editor#:#In externem Editor öffnen
 wopi#:#open_external_viewer#:#Inhalt anzeigen
-wopi#:#save_on_exit#:#Beim Beenden des Editors automatisch speichern
-wopi#:#save_on_exit_info#:#Bei aktiviertem Speicherintervall wird nach Möglichkeit nach der festgelegten Sekundenanzahl eine neue Verison veröffentlicht. Bitte beachten Sie, dass eine tiefer Wert zu sehr vielen Dateiversionen führen kann und damit ein Vielfaches des Festplattenspeichers beanspr
 wopi#:#saving_interval#:#Speicherintervall
 wopi#:#saving_interval_byline#:#Standardmässig fügt ILIAS alle durch einen Externen Editor erhaltenen Änderungen in einer Entwurfs-Version hinzu, bis diese Version manuell veröffentlicht wird. Durch das Aktivieren des Speicherintervall wird nach Möglichkeit nach der festgelegten Sekundenanzahl eine neue Verison veröffentlicht. Bitte beachten Sie, dass eine tiefer Wert zu sehr vielen Dateiversionen führen kann und damit ein Vielfaches des Festplattenspeichers beansprucht.
 wopi#:#wopi_crawler_cronjob_description#:#Aktualisiert die Informationen des angebundenen WOPI-Dienstes.
