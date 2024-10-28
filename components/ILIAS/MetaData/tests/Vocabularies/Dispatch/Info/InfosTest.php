@@ -105,7 +105,7 @@ class InfosTest extends TestCase
         };
     }
 
-    public function activeCountProvider(): array
+    public static function activeCountProvider(): array
     {
         return [
             [5, true, true, true],

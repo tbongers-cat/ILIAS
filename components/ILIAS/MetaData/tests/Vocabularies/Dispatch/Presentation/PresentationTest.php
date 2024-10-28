@@ -259,7 +259,7 @@ class PresentationTest extends TestCase
         }
     }
 
-    public function singleValueProvider(): array
+    public static function singleValueProvider(): array
     {
         return [
             ['v1', true, true, true, 'copyright label for v1'],
