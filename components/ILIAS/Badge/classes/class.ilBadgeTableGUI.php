@@ -320,15 +320,14 @@ class ilBadgeTableGUI
                 foreach ($ids as $id) {
                     $items[] = $f->modal()->interruptiveItem()->keyValue($id, $row_id_token->getName(), $id);
                 }
-                echo($r->renderAsync([
+                $r->renderAsync([
                     $f->modal()->interruptive(
                         $this->lng->txt('badge_deletion'),
                         $this->lng->txt('badge_deletion_confirmation'),
                         '#'
                     )->withAffectedItems($items)
                       ->withAdditionalOnLoadCode(static fn($id): string => "console.log('ASYNC JS');")
-                ]));
-                exit();
+                ]);
             }
         }
 

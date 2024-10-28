@@ -258,14 +258,13 @@ class ilBadgeImageTemplateTableGUI
 
             $action = $query->retrieve($action_parameter_token->getName(), $this->refinery->to()->string());
             if ($action === 'badge_image_template_delete') {
-                echo($r->renderAsync([
+                $r->renderAsync([
                     $f->modal()->interruptive(
                         $this->lng->txt('badge_deletion'),
                         $this->lng->txt('badge_deletion_confirmation'),
                         '#'
                     )->withAffectedItems($items)
-                ]));
-                exit();
+                ]);
             }
         }
         $this->tpl->setContent($r->render($out));

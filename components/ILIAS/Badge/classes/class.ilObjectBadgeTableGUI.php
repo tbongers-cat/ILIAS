@@ -354,14 +354,13 @@ class ilObjectBadgeTableGUI
                             $badge->getTitle()
                         );
                     }
-                    echo($r->renderAsync([
+                    $r->renderAsync([
                        $f->modal()->interruptive(
                            $this->lng->txt('badge_deletion'),
                            $this->lng->txt('badge_deletion_confirmation'),
                            '#'
                        )->withAffectedItems($items)
-                    ]));
-                    exit();
+                    ]);
                 }
             }
         }
