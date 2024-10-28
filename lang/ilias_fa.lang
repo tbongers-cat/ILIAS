@@ -426,6 +426,8 @@ adve#:#adve_use_physical#:#از b/i/u instead of str/emp/imp استفاده کن
 adve#:#adve_use_physical_info#:#This setting replaces the semantic style class buttons for strong, emphatic and important with physical attribute buttons b (bold), i (italic) and u (underline). Please note, that this may result in inconsistencies, if the style editor is used and other phyiscal attributes are assigned to the strong/emphatic/important style classes.
 adve#:#adve_use_tiny_mce#:#Enable TinyMCE for WYSIWYG Editing
 assessment#:#activate_logging#:#فعال کردن ثبت وقایع تست و ارزیابی
+assessment#:#activate_manual_scoring#:#Enable Manual Scoring###28 10 2024 new variable
+assessment#:#activate_manual_scoring_desc#:#Enables manual Scoring for all question types.###28 10 2024 new variable
 assessment#:#addSuggestedSolution#:#اضافه کردن راه حل پیشنهادی
 assessment#:#add_answers#:#Add Antworten ###23 12 2015 new variable
 assessment#:#add_circle#:#Add circle area
@@ -433,6 +435,7 @@ assessment#:#add_gap#:#Add Gap Text
 assessment#:#add_imagemap#:#وارد کردن تصویر نقشه
 assessment#:#add_poly#:#Add polygon area
 assessment#:#add_rect#:#Add rectangle area
+assessment#:#add_users#:#Add Users###28 10 2024 new variable
 assessment#:#additional_rating_info#:#Please note that the values given here are expressed as percentages and these must add up to 100.###26 03 2014 new variable
 assessment#:#advanced_rating#:#Advanced Rating###24 10 2013 new variable
 assessment#:#advanced_rating_info#:#The advanced rating is only available if a unit is assigned to the result.###24 10 2013 new variable
@@ -441,6 +444,7 @@ assessment#:#all_participants#:#All participants###28 08 2012 new variable
 assessment#:#allow_images#:#Image Support for Answers
 assessment#:#allowedextensions#:#فایلهای با پسوند مجاز
 assessment#:#allowedextensions_info#:#لیستی از پسوندها که با کاما از هم جدا شده اند وارد کنید، مانند doc,xls,odt
+assessment#:#already_added_extra_time#:#already added: %s min###28 10 2024 new variable
 assessment#:#analyze_errortext#:#آنالیز متن خطا
 assessment#:#answer#:#Answer
 assessment#:#answer_characters#:# characters allowed, entered number of characters:
@@ -548,6 +552,9 @@ assessment#:#backtocallingpage#:#Back to the question page###29 07 2022 new vari
 assessment#:#backtocallingpool#:#Back to the question pool###29 07 2022 new variable
 assessment#:#backtocallingtest#:#Back to the calling test
 assessment#:#baseunit#:#Base Unit###24 10 2013 new variable
+assessment#:#bulkedit_author#:#Set Author###28 10 2024 new variable
+assessment#:#bulkedit_lifecycle#:#Set Lifecycle###28 10 2024 new variable
+assessment#:#bulkedit_taxonomies#:#Set Taxonomies###28 10 2024 new variable
 assessment#:#button_request_next_question_hint#:#Request Next Hint###28 08 2012 new variable
 assessment#:#button_request_question_hint#:#Request Hint###28 08 2012 new variable
 assessment#:#cancel_test#:#تعلیق تست
@@ -566,6 +573,7 @@ assessment#:#checkbox_unchecked#:#انتخاب نشده
 assessment#:#circle#:#Circle
 assessment#:#circle_click_center#:#Please click on center of the desired area.
 assessment#:#circle_click_circle#:#Please click on a circle point of the desired area.
+assessment#:#client_ip_range#:#Client IP Range###28 10 2024 new variable
 assessment#:#clientip#:#Client IP
 assessment#:#close_text_hint#:#برای ایجاد شکاف می توانید از [gap][/gap] هم استفاده کنید.
 assessment#:#cloze_answer_text_info#:#Spaces preceding or following the answer text will be deleted when the form is saved.###26 08 2024 new variable
@@ -590,6 +598,7 @@ assessment#:#correct_answers#:#Correct Answers ###23 12 2015 new variable
 assessment#:#counter#:#Counter
 assessment#:#create_gaps#:#ایجاد شکاف
 assessment#:#create_new#:#Create New
+assessment#:#created#:#Created###28 10 2024 new variable
 assessment#:#customstyle#:#Custom Style
 assessment#:#dashboard_tab#:#Dashboard###10 11 2018 new variable
 assessment#:#date_time#:#زمان/تاریخ
@@ -617,6 +626,7 @@ assessment#:#direct_feedback#:#Verify Your Solution
 assessment#:#discard_answer#:#Discard Answer###30 08 2015 new variable
 assessment#:#discard_answer_confirmation#:#Your answer will be finally and completly discarded. The question keeps as unanswered until you submit another answer.<br /><br />Would you really like to discard your answer?###30 08 2015 new variable
 assessment#:#dont_use_questionpool#:#سوالها را در یک مخزن سوال درج نکن. این مورد فقط برای این تست موجود است
+assessment#:#download_all_files#:#Download All Files###28 10 2024 new variable
 assessment#:#duplicate#:#Duplicate
 assessment#:#duplicate_matching_values_selected#:#You have selected duplicate matching values!
 assessment#:#duplicate_order_values_entered#:#You have entered duplicate order values!
@@ -672,6 +682,7 @@ assessment#:#eval_legend_link#:#Please refer to the legend for the meaning of th
 assessment#:#evaluated_users#:#Evaluated Users###07 02 2020 new variable
 assessment#:#exam_id#:#Exam Id: ###24 10 2013 new variable
 assessment#:#exam_id_label#:#Exam Id###29 07 2022 new variable
+assessment#:#exam_id_of_attempt#:#ID of Attempt###28 10 2024 new variable
 assessment#:#examid_in_test_pass#:#Display Testpass ID###27 01 2015 new variable
 assessment#:#examid_in_test_pass_desc#:#A testpass ID is diplayed in the test. A new ID is generated for every testpass.###27 01 2015 new variable
 assessment#:#examid_in_test_res#:#ILIAS Testpass ID###27 01 2015 new variable
@@ -680,7 +691,7 @@ assessment#:#exp_all_test_runs#:#All test attempts###26 08 2024 new variable
 assessment#:#exp_eval_data#:#صدور داده ارزیابی به
 assessment#:#exp_file_created#:#Export file created.###24 10 2013 new variable
 assessment#:#exp_grammar_as#:#as###26 08 2024 new variable
-assessment#:#exp_scored_test_run#:#Scored test attempt###26 08 2024 new variable
+assessment#:#exp_scored_test_attempt#:#Scored Test Attempt###28 10 2024 new variable
 assessment#:#exp_type_certificate#:#Certificate (PDF)
 assessment#:#exp_type_excel#:#Microsoft Excel
 assessment#:#exp_type_spss#:#مقادیر جدا شده با کاما (CSV)
@@ -693,7 +704,13 @@ assessment#:#export_cert_no_users#:#A certificate archive cannot be created due 
 assessment#:#export_essay_qst_with_html#:#Export Essay Question with HTML code###25 10 2016 new variable
 assessment#:#export_essay_qst_with_html_desc#:#If activated it is possible to export Essay Question with HTML to Excel.###25 10 2016 new variable
 assessment#:#export_legacy_logs#:#Legacy Log-Daten exportieren###26 08 2024 new variable
+assessment#:#extra_time_byline#:#Put in extra time in minutes. Already entered extra time is added up.###28 10 2024 new variable
+assessment#:#extra_time_for_all_participants#:#You are adding some extra time to all participants.###28 10 2024 new variable
+assessment#:#extra_time_for_selected_participants#:#You are adding extra time to the selected participants.###28 10 2024 new variable
+assessment#:#extra_time_for_selected_participants_different#:#You have selected participants with different additional times.###28 10 2024 new variable
+assessment#:#extra_time_for_single_participant#:#Your are adding extra time to the following participant:###28 10 2024 new variable
 assessment#:#extratime#:#Extra Time###24 10 2013 new variable
+assessment#:#extratime_added#:#The extra time has been added to the selected participants.###28 10 2024 new variable
 assessment#:#factor#:#Factor###24 10 2013 new variable
 assessment#:#failed_official#:#ناموفق
 assessment#:#failed_short#:#ناموفق
@@ -725,8 +742,16 @@ assessment#:#finish_pass_for_all_users_in_processing_time#:#You cannot finish th
 assessment#:#finish_pass_for_user_confirmation#:#Are you sure you want to finish this test pass?###25 10 2016 new variable
 assessment#:#finish_pass_for_user_in_processing_time#:#WARNING: the processing time for this user is not over yet! You should only end the test run if there is a compelling reason (e.g. exclusion from the test).###26 08 2024 new variable
 assessment#:#finish_test#:#تمام کردن تست
+assessment#:#finish_test_all#:#Are you sure you want to finish the test attempts for all users?###28 10 2024 new variable
+assessment#:#finish_test_multiple#:#Are you sure you want to finish the test attempts for the following participants?###28 10 2024 new variable
+assessment#:#finish_test_single#:#Are you sure you want to finish the test attempt for the participant "%s"?###28 10 2024 new variable
 assessment#:#finish_unfinished_passes#:#Finish open Passes###25 10 2016 new variable
 assessment#:#finish_unfinished_passes_desc#:#Passes which have a Finishing time or a Duration limit configured will be closed by this cron job. ###25 10 2016 new variable
+assessment#:#finished_by_administrator#:#Finished by Administrator###28 10 2024 new variable
+assessment#:#finished_by_cronjob#:#Finished by Cronjob###28 10 2024 new variable
+assessment#:#finished_by_duration#:#Finished by time limit###28 10 2024 new variable
+assessment#:#finished_by_participant#:#Finished by Participant###28 10 2024 new variable
+assessment#:#finished_by_unknown#:#Finished by Unknown###28 10 2024 new variable
 assessment#:#fixed_participants_hint#:#This test is only accessible for a fixed set of participants shown below. You can change this setting by deactivating the fixed participants checkbox in the test settings.
 assessment#:#fixedparticipants_subtab#:#Manually Selected Participants###10 11 2018 new variable
 assessment#:#flashfile#:#فایل فلش
@@ -744,6 +769,7 @@ assessment#:#glossary_term#:#اصطلاح لغتنامه
 assessment#:#grading_mark_msg#:#Your resulting mark is: &quot;[mark]&quot;###26 09 2014 new variable
 assessment#:#grading_status_failed_msg#:#Sorry, you <b>failed</b> the test.###26 09 2014 new variable
 assessment#:#grading_status_passed_msg#:#Congratulations, you <b>passed</b> the test.###26 09 2014 new variable
+assessment#:#hide_best_solution#:#Hide best solution###28 10 2024 new variable
 assessment#:#hints#:#Hints###26 08 2024 new variable
 assessment#:#identical_scoring#:#امتیازدهی یکسان
 assessment#:#identical_scoring_desc#:#اگر انتخاب شود، شکافها با پاسخهای یکسان امتیازدهی می شوند، حتی اگر یک جواب دو بار یا بیشتر مورد استفاده قرار گرفته باشد.
@@ -762,8 +788,13 @@ assessment#:#internal_links#:#Internal Links
 assessment#:#intprecision#:#Divisible By###24 10 2013 new variable
 assessment#:#intprecision_info#:#"Divisible by" affects only the creation of variables, if the value for the precision is 0. In this case, you define for "Divisible by" an integer value, which must be divisible by with the created variable. A value of 10 thus generates only integers that are divisible by 10. A value of 5 produces integers that are divisible by 5, etc. For a precision of 0, "Divisible by" is a mandatory field and must contain a positive integer. The default value is 1 for any integers.###26 03 2014 new variable
 assessment#:#invalid_ip#:#Invalid IP###26 08 2024 new variable
+assessment#:#ip_range_byline#:#Only IP addresses within the defined range can start the test. You can either use IPv4 OR IPv6 addresses.###28 10 2024 new variable
+assessment#:#ip_range_for_all_participants#:#You are changing the IP Range of all participants###28 10 2024 new variable
+assessment#:#ip_range_for_selected_participants#:#You are changing the IP Range of the following participant.###28 10 2024 new variable
+assessment#:#ip_range_for_single_participant#:#You are changing the IP Range of the selected participants.###28 10 2024 new variable
 assessment#:#ip_range_info#:#Only clients with an IP in the provided range will be able to access the test.###26 08 2024 new variable
 assessment#:#ip_range_label#:#IP Range###26 08 2024 new variable
+assessment#:#ip_range_updated#:#The IP-Range has been update for the selected participants.###28 10 2024 new variable
 assessment#:#javaapplet#:#جاوا اپلت
 assessment#:#kiosk#:#حالت کیوسک
 assessment#:#kiosk_description#:#تست را در حالت کیوسک اجرا می کند. همه المانهای محتوا که قسمتی از تست نیستند از دسترس کاربران مخفی می شوند تا از خروج وی جلوگیری کنند.
@@ -812,6 +843,7 @@ assessment#:#lacex_assSingleChoice_NumberOfResultExpression_e#:#R = +2+###30 08 
 assessment#:#lacex_assTextSubset_StringResultExpression_d#:#For the second answer option the answer „sodium chloride“ was entered###30 08 2015 new variable
 assessment#:#lacex_assTextSubset_StringResultExpression_e#:#R[2] = ~sodium chloride~###30 08 2015 new variable
 assessment#:#lacex_example_header#:#Examples###30 08 2015 new variable
+assessment#:#list_of_participants#:#Participants###28 10 2024 new variable
 assessment#:#locked#:#locked
 assessment#:#log_deletion_not_allowed#:#You don't have the necessary permissions to delete log entries.###26 08 2024 new variable
 assessment#:#log_entry_type#:#Log Entry Type###26 08 2024 new variable
@@ -875,6 +907,7 @@ assessment#:#manscoring_not_allowed#:#The Manual Scoring wasn't activated for a 
 assessment#:#manscoring_questions_not_found#:#This test pass does not contain question types which can be scored manually.
 assessment#:#manscoring_results_pass#:#Manual scoreable Questions for Pass %s
 assessment#:#manual_editing#:#Manual Editing###30 08 2015 new variable
+assessment#:#manual_entry#:#Manual Entry###28 10 2024 new variable
 assessment#:#mark_schema#:#طرح نمره
 assessment#:#mark_schema_invalid#:#The mark schema does not validate. Please create a correct schema.###28 08 2012 new variable
 assessment#:#matches#:#matches
@@ -917,7 +950,9 @@ assessment#:#no_selection#:#--- No Selection ---
 assessment#:#no_selection_for_move#:#No question selected for moving###28 08 2012 new variable
 assessment#:#no_target_selected_for_move#:#You must select a target position!
 assessment#:#no_user_or_group_selected#:#Please check an option what are you searching for (users, groups, roles)!
+assessment#:#no_valid_participant_selection#:#No valid Participants selected.###28 10 2024 new variable
 assessment#:#not_evaluated_users#:#Not Yet Evaluated User###07 02 2020 new variable
+assessment#:#not_started#:#Not started yet###28 10 2024 new variable
 assessment#:#not_yet_accessed#:#Not yet accessed
 assessment#:#nr_of_correct_answers#:#تعداد جوابهای درخواستی
 assessment#:#number_of_answers#:#تعداد پاسخ ها
@@ -968,6 +1003,7 @@ assessment#:#passed_short#:#پاس شد
 assessment#:#passed_status#:#Passed Status###08 10 2015 new variable
 assessment#:#passes_finished#:#%s passes
 assessment#:#percentage#:#درصد
+assessment#:#percentage_points_achieved#:#Reached Points###28 10 2024 new variable
 assessment#:#percentile#:#Percentile
 assessment#:#picture#:#Picture
 assessment#:#point#:#نمره
@@ -988,9 +1024,13 @@ assessment#:#postponed#:#postponed
 assessment#:#precision#:#Precision###24 10 2013 new variable
 assessment#:#previous_question#:#Previous
 assessment#:#previous_question_rows#:#<< Questions %d - %d of %d
+assessment#:#print_answers#:#Print Answers###28 10 2024 new variable
 assessment#:#qpl_assessment_no_assessment_of_questions#:#هیچ ارزیابی از برای این سوال وجود ندارد. سوال در هیچ تستی استفاده نشده است.
 assessment#:#qpl_assessment_total_of_answers#:#Total of Answers
 assessment#:#qpl_assessment_total_of_right_answers#:#Total Percentage of Correct Answers (percentage of maximum points)
+assessment#:#qpl_bulk_save_add#:#Add###28 10 2024 new variable
+assessment#:#qpl_bulk_save_overwrite#:#Overwrite###28 10 2024 new variable
+assessment#:#qpl_bulkedit_success#:#Modifications saved.###28 10 2024 new variable
 assessment#:#qpl_cancel_skill_assigns_update#:#Cancel###30 08 2015 new variable
 assessment#:#qpl_confirm_delete_questions#:#Are you sure you want to delete the following question(s)?
 assessment#:#qpl_copy_insert_clipboard#:#The selected question(s) are copied to the clipboard
@@ -1131,9 +1171,11 @@ assessment#:#redirect_always#:#always to defined webpage###27 01 2015 new variab
 assessment#:#redirect_in_kiosk_mode#:#Redirect only in kiosk mode###24 10 2013 new variable
 assessment#:#redirection_url#:#Redirection target###24 10 2013 new variable
 assessment#:#region#:#Region
+assessment#:#remaining_duration#:#Remaining Duration###28 10 2024 new variable
 assessment#:#remove_gap#:#Remove Gap###26 09 2014 new variable
 assessment#:#remove_participants#:#Remove Participant(s)
 assessment#:#remove_question#:#Remove
+assessment#:#remove_selected_participants_confirmation#:#Are you sure you want to remove the selected participants from the test?###28 10 2024 new variable
 assessment#:#remove_solution#:#حذف راه حل پیشنهادی
 assessment#:#res_contains_undef_res#:#A result formula contains an undefined result!###24 10 2013 new variable
 assessment#:#res_contains_undef_var#:#A result formula contains an undefined variable!###24 10 2013 new variable
@@ -1160,6 +1202,7 @@ assessment#:#resulttable_incorrect#:#Incorrect/Incomplete###26 08 2024 new varia
 assessment#:#resulttable_vc_sort_iooa#:#in order of appearance###26 08 2024 new variable
 assessment#:#resulttable_vc_sort_posscore#:#highest possible score first###26 08 2024 new variable
 assessment#:#review_view#:#Review###24 10 2013 new variable
+assessment#:#running#:#Running###28 10 2024 new variable
 assessment#:#saveOrder#:#ذخیره ترتیب
 assessment#:#saveOrderAndObligations#:#Save Order and Obligations###28 08 2012 new variable
 assessment#:#save_and_next#:#Save and Continue###26 09 2014 new variable
@@ -1181,6 +1224,7 @@ assessment#:#select_at_least_one_feedback_type_and_trigger#:#Please Select at le
 assessment#:#select_gap#:#Select Gap
 assessment#:#select_max_one_item#:#Please select one item only
 assessment#:#select_one_user#:#لطفا حداقل یک کاربر انتخاب کنید.
+assessment#:#select_question#:#Select a Question###28 10 2024 new variable
 assessment#:#select_target_position_for_move_question#:#Please select a target position to move the question(s) and press one of the insert buttons!
 assessment#:#select_unit#:#--- Select Unit ---###24 10 2013 new variable
 assessment#:#selected_category#:#Selected Category: %s###24 10 2013 new variable
@@ -1194,21 +1238,27 @@ assessment#:#showSuggestedSolution#:#راه حل پیشنهادی
 assessment#:#show_all_test_properties_on_info_page#:#نمایش کامل صفحه اطلاعات
 assessment#:#show_all_test_properties_on_info_page_byline#:#اگر انتخاب شده باشد، صفحه اطلاعات تست بطور کامل نشان داده خواهد شد. اگر انتخاب نشده باشد، ، فقط متن دستورالعمل و ویژگی های مورد نیاز نمایش داده خواهد شد.
 assessment#:#show_answer_overview#:#Show Answer Overview###24 10 2013 new variable
+assessment#:#show_best_solution#:#Show best solution###28 10 2024 new variable
 assessment#:#show_detailed_results#:#نمایش نتایج دقیق کاربر
 assessment#:#show_examview_html#:#Show exam view on the test submission page.###24 10 2013 new variable
+assessment#:#show_hide_best_solution#:#Show or hide best solution###28 10 2024 new variable
 assessment#:#show_old_concluding_remarks#:#Show old conlcuding remarks###26 08 2024 new variable
 assessment#:#show_old_introduction#:#Show old introduction###26 08 2024 new variable
 assessment#:#show_pass_overview#:#نمایش مرور کلی دوره انتخاب شده
 assessment#:#show_requested_question_hints#:#Show Requested Hints###28 08 2012 new variable
+assessment#:#show_results#:#Show Results###28 10 2024 new variable
 assessment#:#show_user_answers#:#نمایش پاسخهای کاربر انتخاب شده
 assessment#:#shuffle_answers#:#قاطی کردن جوابها
 assessment#:#skip_question#:#Do not Answer and Next###08 10 2015 new variable
+assessment#:#solution#:#Solution###28 10 2024 new variable
 assessment#:#solutionText#:#متن
 assessment#:#solution_contain_keywords#:#Score is granted based on the occurence of the following keywords:###28 08 2012 new variable
 assessment#:#solution_hint#:#راه حل پیشنهادی
+assessment#:#solutions#:#Solutions###28 10 2024 new variable
 assessment#:#start_tag#:#برچسب شروع
 assessment#:#statistical_data#:#Statistical Data
 assessment#:#statistics#:#آمار
+assessment#:#status_of_attempt#:#Status of Attempt###28 10 2024 new variable
 assessment#:#submit_and_check#:#Submit and Check Answer###30 08 2015 new variable
 assessment#:#submit_answer#:#Submit Answer###30 08 2015 new variable
 assessment#:#suggest_range#:#Suggest Range###24 10 2013 new variable
@@ -1220,10 +1270,13 @@ assessment#:#ta_resulttable_vc_mode_aria#:#switch question mode###26 08 2024 new
 assessment#:#tab_nest_answers#:#Nesting###29 07 2022 new variable
 assessment#:#tax_filter#:#Taxonomy###26 08 2024 new variable
 assessment#:#tax_filter_notax#:#Questions without assigned Taxonomy###26 08 2024 new variable
+assessment#:#taxonomy_node_title#:#Taxonomy Node Title###28 10 2024 new variable
+assessment#:#taxonomy_title#:#Taxonomy Title###28 10 2024 new variable
 assessment#:#term#:#اصطلاح
 assessment#:#term_image#:#عکس اصطلاح
 assessment#:#term_text#:#متن اصطلاح
 assessment#:#terms#:#اصطلاحات
+assessment#:#test_attempts_finished#:#The test pass has been finished for the selected participants.###28 10 2024 new variable
 assessment#:#test_confirm_template_reset#:#Are you sure that you do not want to use the template anymore?
 assessment#:#test_delete_page#:#Delete Question
 assessment#:#test_edit_settings#:#ویرایش تنظیمات
@@ -1243,6 +1296,7 @@ assessment#:#test_question_set_type_random_info#:#Every testee will see an indiv
 assessment#:#test_results#:#Results Options###24 10 2013 new variable
 assessment#:#test_scoring#:#Scoring Options###24 10 2013 new variable
 assessment#:#test_template_reset#:#The template has been removed.
+assessment#:#test_title#:#Test Title###28 10 2024 new variable
 assessment#:#test_using_template#:#This test uses the template %s. If you do not want to use a template and have access to all settings, please click here: %s.
 assessment#:#test_using_template_link#:#Do not use template anymore
 assessment#:#text_correct#:#Correct Text
@@ -1270,6 +1324,8 @@ assessment#:#toplist_col_percentage#:#Percentage###28 08 2012 new variable
 assessment#:#toplist_col_rank#:#Rank###28 08 2012 new variable
 assessment#:#toplist_col_score#:#Score###28 08 2012 new variable
 assessment#:#toplist_col_wtime#:#Working Time###28 08 2012 new variable
+assessment#:#total_attempts#:#Total Attempts###28 10 2024 new variable
+assessment#:#total_duration#:#Total Duration###28 10 2024 new variable
 assessment#:#true#:#True
 assessment#:#tst_access_code_created#:#To provide you with permanent access to your test results and to offer you a possibility to resume this test, a unique test access code was created. Please write down this code use it for further actions.
 assessment#:#tst_activate_skill_service#:#Activate Competence Service###26 09 2014 new variable
@@ -1492,6 +1548,7 @@ assessment#:#tst_input_dynamic_question_set_question_ordering_by_date#:#Order Qu
 assessment#:#tst_input_dynamic_question_set_question_ordering_by_tax#:#Order Questions by Taxonomy###24 10 2013 new variable
 assessment#:#tst_input_dynamic_question_set_source_questionpool#:#Source Question Pool###24 10 2013 new variable
 assessment#:#tst_input_dynamic_question_set_taxonomie_filter_enabled#:#Provide Taxonomy Filter###24 10 2013 new variable
+assessment#:#tst_insert_in_test#:#Insert in Test###28 10 2024 new variable
 assessment#:#tst_insert_missing_question#:#Please select at least one question to insert it into the test!
 assessment#:#tst_insert_questions#:#Are you sure you want to insert the following question(s) to the test?
 assessment#:#tst_instant_feedback#:#درج بازخورد
@@ -1908,6 +1965,7 @@ assessment#:#tst_stat_result_resultsmarks#:#Test Results in Marks
 assessment#:#tst_stat_result_resultspoints#:#Test Results in Points
 assessment#:#tst_stat_result_timeontask#:#Time of Work
 assessment#:#tst_stat_result_total_participants#:#Total Number of Participants
+assessment#:#tst_stat_result_total_timeontask#:#Total Time On Task (All Test Attempts)###28 10 2024 new variable
 assessment#:#tst_submit_results#:#Yes, I do confirm the submission.
 assessment#:#tst_tab_competences#:#Competences###26 09 2014 new variable
 assessment#:#tst_tab_results_objective_oriented#:#Results by Learning Objectives###30 08 2015 new variable
@@ -1985,6 +2043,7 @@ assessment#:#unit_placeholder#:#** New Unit **###24 10 2013 new variable
 assessment#:#units#:#Units###24 10 2013 new variable
 assessment#:#unlimited#:#نامحدود
 assessment#:#unlock#:#Unlock
+assessment#:#updated#:#Updated###28 10 2024 new variable
 assessment#:#uploaded_material#:#Uploaded Material
 assessment#:#use_previous_solution#:#Use Previous Solution###31 08 2017 new variable
 assessment#:#use_previous_solution_advice#:#The shown solution for the question is your previously given one. You have to confirm the adoption of the solution, if you like to use it without any change. ###31 08 2017 new variable
@@ -1999,11 +2058,14 @@ assessment#:#variables#:#Variables###24 10 2013 new variable
 assessment#:#wait_for_next_pass_hint_msg#:#Additional pass is possible on time: %s###25 10 2016 new variable
 assessment#:#warning_question_not_complete#:#سوال کامل نیست!
 assessment#:#width#:#عرض
+assessment#:#with_solution#:#Participants with solution###28 10 2024 new variable
 assessment#:#with_solutions_participants#:#Participants with solutions###28 08 2012 new variable
+assessment#:#without_solution#:#Participants without solution###28 10 2024 new variable
 assessment#:#without_solutions_participants#:#Participants without solutions###28 08 2012 new variable
 assessment#:#worked_through#:#Answered
 assessment#:#working_time#:#زمان کار
 assessment#:#you_received_a_of_b_points#:#You received %s of %s possible points
+assessment#:#your_results#:#Your Results###28 10 2024 new variable
 auth#:#auth_account_code#:#Code
 auth#:#auth_account_code_info#:#To re-activate your account you can use a ILIAS account code.
 auth#:#auth_account_code_title#:#Account Code
@@ -2027,23 +2089,33 @@ auth#:#auth_info_add#:#Choose this option if you have never registered to ILIAS.
 auth#:#auth_info_migrate#:#If you have already an ILIAS account enter username and password to migrate your personal data (Mail, Test results...).
 auth#:#auth_ldap_server_ds#:#LDAP-Server###25 10 2016 new variable
 auth#:#auth_login_editor#:#ویرایشگر صفحه ورود
+auth#:#auth_odic_scope_info#:#In this mask, the standard claims are displayed as a suggestion for a profile data assignment based on the OpenID Connect scopes configured %s. You can adopt this suggestion as an effective profile data assignment by clicking on "%s" or make your own adjustments by changing the text fields.###28 10 2024 new variable
+auth#:#auth_odic_scope_tab_info#:#In this mask you can assign OpenID Connect claims to ILIAS profile data. To do this, enter the scope from which the information should be taken over upon successful authentication in the corresponding text fields for the respective profile date. Activate the corresponding checkbox if the data should also be transferred to an existing ILIAS user account. You can view a list of standard claims %s.###28 10 2024 new variable
 auth#:#auth_oidc#:#OpenId Connect###10 11 2018 new variable
+auth#:#auth_oidc_configured_scopes#:#Pre-fill Scope-based Mapping###28 10 2024 new variable
+auth#:#auth_oidc_discover_scopes#:#Perform Scope Auto Discovery###28 10 2024 new variable
+auth#:#auth_oidc_discover_scopes_info#:#The automatic scope discovery was performed. Scopes are added to the field "Additional Scopes" in the form below. Please define your relevant scopes and save the form afterwards.###28 10 2024 new variable
 auth#:#auth_oidc_failed#:#Login via OpenID Connect failed###26 08 2024 new variable
+auth#:#auth_oidc_here#:#here###28 10 2024 new variable
 auth#:#auth_oidc_login_element_info#:#Login to ILIAS via OpenID Connect###29 07 2022 new variable
 auth#:#auth_oidc_mapping_table#:#Zuordnung von ILIAS-Benutzerdaten zu OpenId Connect Attributen  ###10 11 2018 new variable
 auth#:#auth_oidc_profile#:#Zuordnung der Profildaten###10 11 2018 new variable
 auth#:#auth_oidc_role_info#:#OpenID Connect Attribute::Value (e.g: "roles::employee").###07 02 2020 new variable
 auth#:#auth_oidc_role_mapping_table#:#Zurodnung von ILIAS-Rollen zu OpenId Connect Attributen###10 11 2018 new variable
 auth#:#auth_oidc_roles#:#Rollenzuordnung###10 11 2018 new variable
+auth#:#auth_oidc_saved_values#:#Effective Attribute Mapping###28 10 2024 new variable
+auth#:#auth_oidc_scopes#:#Scopes###28 10 2024 new variable
 auth#:#auth_oidc_settings#:#Server-Einstellungen###10 11 2018 new variable
 auth#:#auth_oidc_settings_activation#:#OpenID Connect aktivieren###10 11 2018 new variable
 auth#:#auth_oidc_settings_additional_scopes#:#Additional Scopes###29 07 2022 new variable
+auth#:#auth_oidc_settings_additional_scopes_info#:#Standard scopes: address, email, phone, profile###28 10 2024 new variable
 auth#:#auth_oidc_settings_client_id#:#Client-ID###10 11 2018 new variable
 auth#:#auth_oidc_settings_custom_session_duration#:#Sitzungsdauer###10 11 2018 new variable
 auth#:#auth_oidc_settings_custom_session_duration_option#:#Eigene Sitzungsdauer###10 11 2018 new variable
 auth#:#auth_oidc_settings_custom_session_duration_type#:#Einstellungen zur Sitzungsdauer###10 11 2018 new variable
 auth#:#auth_oidc_settings_default_role#:#Rollenzuordnung###10 11 2018 new variable
 auth#:#auth_oidc_settings_default_role_info#:#Bitte wählen Sie eine globale Rolle für neu anzulegende ILIAS-Benutzer###10 11 2018 new variable
+auth#:#auth_oidc_settings_default_scopes#:#Default Scope###28 10 2024 new variable
 auth#:#auth_oidc_settings_discovery_error#:#Retrieving the Discovery URL failed with: %s###26 08 2024 new variable
 auth#:#auth_oidc_settings_discovery_url#:#Discovery URL of the provider###26 08 2024 new variable
 auth#:#auth_oidc_settings_img#:#Bild###10 11 2018 new variable
@@ -2111,12 +2183,26 @@ auth#:#auth_saml_username_claim_info#:#Define the attribute ILIAS uses to genera
 auth#:#auth_sync#:#User Synchronisation
 auth#:#auth_sync_cas#:#Automatic generation of user accounts
 auth#:#auth_sync_cas_info#:#Creates automatically ILIAS user accounts, for users that successfully authenticated against CAS, without having an ILIAS account yet.
+auth#:#destination_after_logout#:#Destination After Logout###28 10 2024 new variable
+auth#:#destination_external_ressource#:#Show External Ressource###28 10 2024 new variable
+auth#:#destination_external_ressource_url#:#External URL###28 10 2024 new variable
+auth#:#destination_internal_ressource#:#Show Internal Ressource###28 10 2024 new variable
+auth#:#destination_internal_ressource_ref_id#:#Internal Reference Id###28 10 2024 new variable
+auth#:#destination_login_screen#:#Show Login Screen###28 10 2024 new variable
+auth#:#destination_login_screen_info#:#Make sure that, for example, an SSO is not addressed that leads to immediate login.###28 10 2024 new variable
+auth#:#destination_logout_screen#:#Show Logout Screen###28 10 2024 new variable
 auth#:#err_auth_ldap_failed#:#Authentication failed. Please contact your ILIAS administrator.###29 07 2022 new variable
 auth#:#err_auth_saml_failed#:#Authentication failed. Please contact your system administrator.###31 08 2017 new variable
 auth#:#err_auth_saml_no_ilias_user#:#Authentication failed. Please contact your system administrator.###31 08 2017 new variable
 auth#:#language_does_not_exist#:#The selected language does not exist.###26 08 2024 new variable
 auth#:#login_page#:#Language of Login-Page###26 08 2024 new variable
 auth#:#login_pages#:#Login-Pages###26 08 2024 new variable
+auth#:#logout_behaviour#:#Logout Behaviour###28 10 2024 new variable
+auth#:#logout_behaviour_invalid_ref_id#:#Please make sure the internal resource id exists and is not in trash###28 10 2024 new variable
+auth#:#logout_behaviour_invalid_url#:#The external ressource given is not a valid URL.###28 10 2024 new variable
+auth#:#logout_behaviour_ref_id_no_access#:#Please make sure the "Anonymous" user has access to the defined ressource.###28 10 2024 new variable
+auth#:#logout_behaviour_ref_id_valid_status_changed#:#The configured internal resource is no longer valid. If the resource has been deleted or access for the "Anonymous" user has been restricted, please configure a new valid internal resource. Without a valid configuration, the user will be redirected to the logout screen by default.###28 10 2024 new variable
+auth#:#logout_behaviour_settings#:#Logout Behaviour Settings###28 10 2024 new variable
 auth#:#logout_editor#:#Design Logout-Page###26 08 2024 new variable
 auth#:#logout_page#:#Language of Logout-Page###26 08 2024 new variable
 auth#:#logout_pages#:#Logout-Pages###26 08 2024 new variable
@@ -2180,6 +2266,7 @@ badge#:#badge_create#:#Create Badge###26 08 2024 new variable
 badge#:#badge_create_image_processing_failed#:#The badge could not be created, an error occurred while processing the image.###26 08 2024 new variable
 badge#:#badge_criteria#:#Criteria###25 10 2016 new variable
 badge#:#badge_crs_merit#:#Merit###25 10 2016 new variable
+badge#:#badge_deletion#:#Badge successfully deleted.###28 10 2024 new variable
 badge#:#badge_deletion_confirmation#:#Are you sure you want to delete the following badges and all their respective assignments? ###25 10 2016 new variable
 badge#:#badge_edit_with_published#:#%s users have already added this badge to their backpack. Because of this changing badge attributes will lead to inconsistencies. Creating a new badge might be a better solution.###25 10 2016 new variable
 badge#:#badge_image_from_template#:#Use Template###25 10 2016 new variable
@@ -2216,6 +2303,7 @@ badge#:#badge_profile_more#:#Show all###25 10 2016 new variable
 badge#:#badge_profile_view#:#View###25 10 2016 new variable
 badge#:#badge_remove_badge#:#Revoke Badge###25 10 2016 new variable
 badge#:#badge_remove_from_profile#:#Remove from Profile###25 10 2016 new variable
+badge#:#badge_select_one#:#You have to select at least one badge###28 10 2024 new variable
 badge#:#badge_service_activate#:#Activate Service###25 10 2016 new variable
 badge#:#badge_service_activate_info#:#Activate the service to make badges available###25 10 2016 new variable
 badge#:#badge_settings#:#Badge Settings###25 10 2016 new variable
@@ -2306,6 +2394,7 @@ bibl#:#bibtex#:#Bibtex###10 11 2018 new variable
 bibl#:#changes_saved#:#Changes were saved.###10 11 2018 new variable
 bibl#:#custom#:#Custom###10 11 2018 new variable
 bibl#:#detail_view#:#Detail View###24 10 2013 new variable
+bibl#:#detailed_information#:#Detailed Information###28 10 2024 new variable
 bibl#:#download_original_file#:#Download Original File###24 10 2013 new variable
 bibl#:#field#:#Field###10 11 2018 new variable
 bibl#:#fields#:#Fields###10 11 2018 new variable
@@ -2353,6 +2442,12 @@ bibl#:#ris_default_u2#:#User Defined###23 10 2017 new variable
 bibl#:#ris_default_ur#:#URL###24 10 2013 new variable
 bibl#:#ris_default_vl#:#Volume###24 10 2013 new variable
 bibl#:#ris_default_y1#:#Year###22 11 2017 new variable
+bibl#:#sorting_1#:#By Title (Ascending)###28 10 2024 new variable
+bibl#:#sorting_2#:#By Title (Descending)###28 10 2024 new variable
+bibl#:#sorting_3#:#By Author (Ascending)###28 10 2024 new variable
+bibl#:#sorting_4#:#By Author (Descending)###28 10 2024 new variable
+bibl#:#sorting_5#:#By Year (Ascending)###28 10 2024 new variable
+bibl#:#sorting_6#:#By Year (Descending)###28 10 2024 new variable
 bibl#:#standard#:#Standard###10 11 2018 new variable
 bibl#:#translate#:#Translate###10 11 2018 new variable
 bkm#:#bkm_fold_created#:#Bookmark folder has been created.###25 10 2015 new variable
@@ -2373,7 +2468,6 @@ blog#:#blog_approve#:#Approve###02 09 2012 new variable
 blog#:#blog_author#:#Author###02 09 2012 new variable
 blog#:#blog_authors#:#Authors###02 09 2012 new variable
 blog#:#blog_back_to_blog_owner#:#Edit Blog###30 08 2015 new variable
-blog#:#blog_banner#:#Banner
 blog#:#blog_change_notification_body_approve#:#the following blog posting needs approval.###26 09 2014 new variable
 blog#:#blog_change_notification_body_comment#:#the following blog posting has been commented.###10 11 2018 new variable
 blog#:#blog_change_notification_body_new#:#the following blog posting was created
@@ -2453,10 +2547,6 @@ blog#:#blog_postings#:#Postings###29 07 2022 new variable
 blog#:#blog_presentation_frame#:#Blog Presentation###26 09 2014 new variable
 blog#:#blog_presentation_overview#:#Initial Overview###26 09 2014 new variable
 blog#:#blog_preview#:#پیش نمایش
-blog#:#blog_preview_banner#:#سر صفحه سفارشی
-blog#:#blog_preview_banner_height#:#طول سر صفحه
-blog#:#blog_preview_banner_info#:#اندازه پیش فرض 880x100 پیکسل است.
-blog#:#blog_preview_banner_width#:#عرض سر صفحه
 blog#:#blog_profile_picture#:#نمایش عکس نمایه
 blog#:#blog_profile_picture_repository_info#:#Profile pictures of the authors are only shown on the postings pages, not on overview pages.###27 01 2015 new variable
 blog#:#blog_properties#:#Blog Properties###24 10 2013 new variable
@@ -2466,6 +2556,7 @@ blog#:#blog_settings#:#مدیریت بلاگ
 blog#:#blog_settings_navigation#:#Navigation Column###26 09 2014 new variable
 blog#:#blog_show_latest#:#Show latest postings/drafts###25 10 2016 new variable
 blog#:#blog_show_print_view#:#Show Print View###29 07 2022 new variable
+blog#:#blog_side_blocks#:#Side Blocks###28 10 2024 new variable
 blog#:#blog_starting_page#:#Starting Page###26 08 2024 new variable
 blog#:#blog_task_publishing_draft_title#:#Publishing of Draft "%s"###07 02 2020 new variable
 blog#:#blog_toggle_draft#:#Save As Draft
@@ -2884,7 +2975,6 @@ chatroom#:#chat_mainroom#:#Main room
 chatroom#:#chat_message#:#Message
 chatroom#:#chat_message_display#:#Options
 chatroom#:#chat_message_options#:#Display
-chatroom#:#chat_message_to_all#:#to all
 chatroom#:#chat_no_use_typing_broadcast#:#Typing will not be broadcasted###29 07 2022 new variable
 chatroom#:#chat_not_use_osc#:#Not Using On-Screen-Chat###29 07 2022 new variable
 chatroom#:#chat_osc_accept_msg#:#Allow On-Screen Chat Conversations###25 10 2016 new variable
@@ -2997,9 +3087,10 @@ chatroom#:#server_further_information#:#برای توضیحات بیشتر در 
 chatroom#:#session#:#Session
 chatroom#:#settings_general#:#همگانی
 chatroom#:#settings_title#:#تنظیمات
-chatroom#:#speak_to#:#Whisper to <b>#user#</b>
+chatroom#:#start_private_chat#:#Start Private Chat###28 10 2024 new variable
 chatroom#:#unable_to_connect#:#The connection to the chatserver could not be established.
 chatroom#:#unban#:#از ممنوعیت در آوردن
+chatroom#:#user_banned#:#The user #user# has been banned.###28 10 2024 new variable
 chatroom#:#user_in_ilias#:#Search and invite user from ILIAS
 chatroom#:#user_in_room#:#Invite user from current chatroom
 chatroom#:#user_invited#:#The user <b>#user#</b> has been invited.
@@ -3007,7 +3098,6 @@ chatroom#:#user_invited_self#:#<b>#user#</b> invited you to the chatroom <b>#roo
 chatroom#:#user_kicked#:#The user <b>#user#</b> has been kicked.
 chatroom#:#users#:#کاربران
 chatroom#:#welcome_to_chat#:#Welcome to the chatroom
-chatroom#:#whisper_to#:#Speak to <b>#user#</b>
 chatroom#:#write_message#:#New Message###26 08 2024 new variable
 chatroom_adm#:#chat_cannot_connect_to_server#:#ILIAS cannot build a socket connection to the chatserver.
 chatroom_adm#:#chat_enabled#:#فعال کردن چت
@@ -3096,14 +3186,24 @@ cmix#:#completed_info#:#Indicates the actor finished or concluded the activity n
 cmix#:#completed_label#:#Statements with the verb 'completed'###29 07 2022 new variable
 cmix#:#conf_availability#:#Availability###07 02 2020 new variable
 cmix#:#conf_availability_0#:#Not available###07 02 2020 new variable
+cmix#:#conf_availability_0_info#:#Existing xAPI/cmi5 objects that use this LRS type can no longer be used.###28 10 2024 new variable
 cmix#:#conf_availability_1#:#Existing ones allowed###07 02 2020 new variable
+cmix#:#conf_availability_1_info#:#This LRS type is not offered when creating new xAPI/cmi5 objects. Existing xAPI/cmi5 objects that use this type can continue to write or read data. Use this option to be able to delete data in the connected LRS at a later time.###28 10 2024 new variable
 cmix#:#conf_availability_2#:#New producible###07 02 2020 new variable
+cmix#:#conf_availability_2_info#:#This LRS type can be selected when creating xAPI/cmi5 objects.###28 10 2024 new variable
 cmix#:#conf_bypass_proxy#:#Detection of Learning Progress###07 02 2020 new variable
 cmix#:#conf_bypass_proxy_disabled#:#xAPI-Proxy to get immediately data###07 02 2020 new variable
 cmix#:#conf_bypass_proxy_enabled#:#CronJob to check Learning Record Store###07 02 2020 new variable
 cmix#:#conf_bypass_proxy_info#:#In most cases it is recommended to use the xAPI-Proxy. Use the CronJob in case of Limitations regarding Resource or Server.###07 02 2020 new variable
 cmix#:#conf_cronjob_neccessary#:#CronJob necessary for Learning Progress###07 02 2020 new variable
 cmix#:#conf_cronjob_neccessary_info#:#By activating this option, xAPI-Objects using this LRS-Type could not use the xAPI-Proxy to get immediately data for Detection of Learning Progress. Use only the CronJob in case of limitations regarding resources or server.###07 02 2020 new variable
+cmix#:#conf_delete_data#:#Delete Data in LRS###28 10 2024 new variable
+cmix#:#conf_delete_data_info#:#Deletion is currently only possible with the Learning Record Store (LRS) LearningLocker. Only use the options for deleting the user identification if the data has been pseudonymized in the LRS.###28 10 2024 new variable
+cmix#:#conf_delete_data_opt0#:#Never###28 10 2024 new variable
+cmix#:#conf_delete_data_opt1#:#Never - but if users are deleted and if xAPI/cmi objects are moved to the trash or deleted, data will no longer be assignable for ILIAS by deleting the - user identification###28 10 2024 new variable
+cmix#:#conf_delete_data_opt11#:#When users are deleted and when xAPI/cmi objects are moved to the trash or deleted###28 10 2024 new variable
+cmix#:#conf_delete_data_opt12#:#Additionally when users are removed from courses or groups###28 10 2024 new variable
+cmix#:#conf_delete_data_opt2#:#Never - but additionally when users are removed from courses or groups, data will no longer be assignable for ILIAS by deleting the user identification###28 10 2024 new variable
 cmix#:#conf_description#:#Description###07 02 2020 new variable
 cmix#:#conf_external_lrs#:#External LRS###07 02 2020 new variable
 cmix#:#conf_keep_lp#:#Keep Learning Progress###07 02 2020 new variable
@@ -3124,14 +3224,16 @@ cmix#:#conf_own_window#:#Own Window###07 02 2020 new variable
 cmix#:#conf_own_window_info#:#The content is opened in the same window and replaces the ILIAS Screen. When leaving the content the user returns to ILIAS.###07 02 2020 new variable
 cmix#:#conf_privacy_comment_default#:#Indication to user###07 02 2020 new variable
 cmix#:#conf_privacy_ident#:#User identification###26 08 2024 new variable
-cmix#:#conf_privacy_ident_il_uuid_SHA256#:#Hash combined with a unique ILIAS platform id formatted as an E-Mail address###26 08 2024 new variable
-cmix#:#conf_privacy_ident_il_uuid_SHA256_info#:#This is identical to each call, but does not permit any direct conclusions about the ILIAS user.###26 08 2024 new variable
 cmix#:#conf_privacy_ident_il_uuid_ext_account#:#External User ID combined with a unique ILIAS platform id formatted as an E-Mail address###26 08 2024 new variable
 cmix#:#conf_privacy_ident_il_uuid_ext_account_info#:#This is identical to each call, but may allow a direct conclusion about the user.###26 08 2024 new variable
 cmix#:#conf_privacy_ident_il_uuid_login#:#ILIAS Login combined with a unique ILIAS platform id formatted as an E-Mail address###26 08 2024 new variable
 cmix#:#conf_privacy_ident_il_uuid_login_info#:#Sends the login name. This is identical to each call, but may allow a direct conclusion about the ILIAS user.###26 08 2024 new variable
 cmix#:#conf_privacy_ident_il_uuid_random#:#Random ID combined with a unique ILIAS platform ID formatted as an E-Mail address###26 08 2024 new variable
 cmix#:#conf_privacy_ident_il_uuid_random_info#:#For each ILIAS object and ILIAS user a random ID is generated which remains identical for each call. Conclusions about a user are very limited because it is practically impossible to create user profiles across objects.###26 08 2024 new variable
+cmix#:#conf_privacy_ident_il_uuid_sha256#:#Hash combined with a unique ILIAS platform id formatted as an E-Mail address###28 10 2024 new variable
+cmix#:#conf_privacy_ident_il_uuid_sha256_info#:#This is identical to each call, but does not permit any direct conclusions about the ILIAS user.###28 10 2024 new variable
+cmix#:#conf_privacy_ident_il_uuid_sha256url#:#Hash combined with the ILIAS Domain formatted as an E-Mail address###28 10 2024 new variable
+cmix#:#conf_privacy_ident_il_uuid_sha256url_info#:#This is identical to each call, with with a maximum of 80 characters significantly shorter than the variant with the ILIAS platform ID and allows only very limited conclusions about the ILIAS user.###28 10 2024 new variable
 cmix#:#conf_privacy_ident_il_uuid_user_id#:#ILIAS user id combined with a unique ILIAS platform id formatted as an E-Mail address###26 08 2024 new variable
 cmix#:#conf_privacy_ident_il_uuid_user_id_info#:#Sends the internal numeric user id. This is identical to each call, but may allow conclusions about the ILIAS user.###26 08 2024 new variable
 cmix#:#conf_privacy_ident_info#:#Standard is frequently the E-Mail address. The unique ILIAS platform id is:###26 08 2024 new variable
@@ -3153,6 +3255,10 @@ cmix#:#conf_privacy_setting_force#:#Settings are not changeable for Objects###07
 cmix#:#conf_privacy_setting_info#:#Configuration Options for Privacy Settings###07 02 2020 new variable
 cmix#:#conf_remarks#:#Internal comments###07 02 2020 new variable
 cmix#:#conf_title#:#Title###07 02 2020 new variable
+cmix#:#conf_use_proxy#:#xAPI-Proxy###28 10 2024 new variable
+cmix#:#conf_use_proxy_info#:#The xAPI proxy provides real-time data to determine learning progress in ILIAS. The proxy reduces personal data in accordance with the selected data protection options. If the xAPI proxy is deactivated, the learning content writes the learning progress directly to the LRS. This data must then also be retrieved directly from the LRS. The cron job "xAPI/cmi5 get results" is required to determine the learning progress. The xAPI proxy is mandatory for cmi5 objects and is activated automatically.###28 10 2024 new variable
+cmix#:#conf_use_proxy_info_cmi5#:#The xAPI proxy provides real-time data to determine learning progress in ILIAS. The proxy reduces personal data in accordance with the selected data protection options. The xAPI proxy is mandatory for cmi5 objects.###28 10 2024 new variable
+cmix#:#conf_use_proxy_info_xapi#:#The xAPI proxy provides real-time data to determine learning progress in ILIAS. The proxy reduces personal data in accordance with the selected data protection options. If the xAPI proxy is deactivated, the learning content writes the learning progress directly to the LRS. This data must then also be retrieved directly from the LRS. The cron job "xAPI/cmi5 get results" is required to determine the learning progress.###28 10 2024 new variable
 cmix#:#conf_user_ident#:#User identification###07 02 2020 new variable
 cmix#:#conf_user_ident_il_uuid_ext_account#:#External User Id combined with a unique ILIAS platform id formated as an email adress.###07 02 2020 new variable
 cmix#:#conf_user_ident_il_uuid_ext_account_info#:#This is identical to each call, but may allow a direct conclusion about the user.###07 02 2020 new variable
@@ -3667,7 +3773,6 @@ common#:#chta_write#:#Edit Chatroom Administration###28 08 2012 new variable
 common#:#chtr_copy#:#کپی کردن اتاق چت
 common#:#chtr_import#:#Import Chatroom###31 08 2017 new variable
 common#:#city#:#استان، شهر
-common#:#cld_abandoned#:#The Cloud Object has been abandoned as of ILIAS 8. No data has been lost. Contact your System Administration for more information.###29 07 2022 new variable
 common#:#cleaned_file#:#File has been cleaned.
 common#:#cleaning_failed#:#Cleaning failed.
 common#:#clear#:#Clear
@@ -3690,6 +3795,7 @@ common#:#collapse#:#Collapse
 common#:#collapse_all#:#Collapse All
 common#:#collapse_content#:#Collapse Content###29 07 2022 new variable
 common#:#collapsed#:#بسته شده
+common#:#column_selection#:#Column Selection###28 10 2024 new variable
 common#:#columns#:#ستونها
 common#:#comma_separated#:#جدا شده با کاما
 common#:#comment#:#نظر
@@ -3753,7 +3859,6 @@ common#:#create_stylesheet#:#Create Style
 common#:#created#:#تاریخ ساخت
 common#:#cron_forum_notification#:#ارسال آگاه سازهای ایمیل
 common#:#cron_forum_notification_crob_desc#:#If enabled, all users who have enabled forum notifications will get a daily mail about all new posts but no immediate notification for each submitted posting.###30 12 2013 new variable
-common#:#cron_forum_notification_desc#:#اگر فعال شود، همه کاربرانی که می خواهند درباره پست های جدید در مباحث فروم خاصی مطلع شوند، با یک ایمیل آگاه سازی می شوند.
 common#:#cron_forum_notification_disabled#:#Can't be disabled when the Cron Job is active.###26 08 2024 new variable
 common#:#cron_jobs#:#کارهای Cron
 common#:#cron_lucene_index#:#Update Lucene search index
@@ -3807,6 +3912,7 @@ common#:#current_ip_alert#:#توجه: اگر IP اشتباه وارد کنید �
 common#:#current_password#:#رمز عبور فعلی
 common#:#current_user_avatar#:#Your User Avatar###29 07 2022 new variable
 common#:#currently_used_disk_space#:#Currently used disk space
+common#:#customize_page#:#Customize Page###28 10 2024 new variable
 common#:#cut#:#برش
 common#:#cutPage#:#Cut
 common#:#daily#:#روزانه
@@ -3933,8 +4039,6 @@ common#:#enable_export_scorm_desc#:#allow Export of User Data of SCORM-Learning 
 common#:#enable_fora_statistics#:#فعال کردن آمار در فروم
 common#:#enable_fora_statistics_desc#:#اگر غیر فعال شود، هیچ کس به آمار فروم دسترسی نخواهد داشت.
 common#:#enable_hide_user_toggle#:#Member is not allowed to deactivate
-common#:#enable_hist_user_comments#:#فعال کردن نظر کاربران در تاریخچه
-common#:#enable_hist_user_comments_desc#:#.
 common#:#enable_multi_download#:#«Download multiple objects» enabled###24 10 2013 new variable
 common#:#enable_multi_download_info#:#Enables that multiple folders/files can be selected to download them as zip archive.###24 10 2013 new variable
 common#:#enable_password_assistance#:#فعال کردن دستیار رمز عبور
@@ -3950,6 +4054,7 @@ common#:#enable_trash_info#:#اگر فعال باشد، شی های پاک شد�
 common#:#enable_webdav#:#Enable WebDAV access
 common#:#enable_webdav_info#:#Allows WebDAV clients to access the repository as a webfolder. Users can open webfolders using the "open as webfolder" action in the repository, or by entering the following address in a WebDAV client: <a href="%1$s" folder="%1$s">%1$s</a>
 common#:#enabled#:#فعال
+common#:#enlarge#:#Enlarge###28 10 2024 new variable
 common#:#enter_in_mb_desc#:#Enter a value in MB.
 common#:#enter_new_name#:#Please enter a name###23 12 2015 new variable
 common#:#entered_notification#:#"%s" has joined the session "%s".###07 02 2020 new variable
@@ -3963,6 +4068,7 @@ common#:#err_auth_mode_inactive#:#Your authentication method is deactivated.
 common#:#err_auth_soap_no_ilias_user#:#Login failed. SOAP authentication successful, but no corresponding ILIAS user exists. Please contact your system administrator.
 common#:#err_check_input#:#The settings could not be saved. Please check your input.
 common#:#err_count_param#:#Reason: Wrong parameter count
+common#:#err_disabled#:#Account creation via Shibboleth has been disabled. Please contact the system administrator for further information.###28 10 2024 new variable
 common#:#err_double_entries#:#Reason: Duplicate Entries###26 08 2024 new variable
 common#:#err_in_line#:#Error in line
 common#:#err_inactive#:#This account has not been activated. Please contact the system administrator for access.
@@ -4251,7 +4357,6 @@ common#:#hist_webr_add#:#لینک وب جدید با عنوان "%1" اضافه 
 common#:#hist_webr_delete#:#Deleted Weblink with title: "%1"
 common#:#hist_webr_update#:#Modified Weblink with title: "%1"
 common#:#history#:#تاریخچه
-common#:#hits_per_page#:#صفحه
 common#:#hobby#:#علایق/سرگرمی
 common#:#home#:#Public Area
 common#:#host#:#میزبان
@@ -4458,6 +4563,7 @@ common#:#links_user_name#:#ILIAS username
 common#:#links_value#:#Parameter Value
 common#:#list#:#لیست
 common#:#list_of_questions#:#Question List
+common#:#list_view#:#List View###28 10 2024 new variable
 common#:#listaction_learning_progress_settings#:#Learning Progress Settings###26 08 2024 new variable
 common#:#lm#:#ماژول یادگیری ILIAS
 common#:#lm_add#:#اضافه کردن ماژول یادگیری ILIAS
@@ -4834,7 +4940,6 @@ common#:#obj_chap#:#Chapter
 common#:#obj_chta#:#اتاق های چت
 common#:#obj_chtr#:#اتاق چت
 common#:#obj_chtr_duplicate#:#Copy Chat Room###29 07 2022 new variable
-common#:#obj_cld#:#Cloud Object###24 10 2013 new variable
 common#:#obj_cmis#:#xAPI/cmi5###07 02 2020 new variable
 common#:#obj_cmis_desc#:#Learning Record Store Types Configuration###07 02 2020 new variable
 common#:#obj_cmix#:#xAPI/cmi5###07 02 2020 new variable
@@ -4916,6 +5021,8 @@ common#:#obj_ltis#:#LTI###31 08 2017 new variable
 common#:#obj_ltis_desc#:#Learning Tools Interoperability###31 08 2017 new variable
 common#:#obj_mail#:#ایمیل
 common#:#obj_mail_desc#:#تنظیمات ایمیل را اینجا پیکربندی کنید.
+common#:#obj_mailr#:#Read Mail###28 10 2024 new variable
+common#:#obj_mailu#:#Unread Mail###28 10 2024 new variable
 common#:#obj_mcst#:#پوشش رسانه ای
 common#:#obj_mcst_duplicate#:#Copy Mediacast###28 08 2012 new variable
 common#:#obj_mcts#:#پوشش رسانه ای
@@ -5081,7 +5188,6 @@ common#:#objs_book#:#Booking Pools
 common#:#objs_cat#:#دسته ها
 common#:#objs_catr#:#مرجع های دسته
 common#:#objs_chtr#:#چت ها
-common#:#objs_cld#:#Cloud Objects###24 10 2013 new variable
 common#:#objs_cmix#:#Objects xAPI/cmi5###07 02 2020 new variable
 common#:#objs_copa#:#Content Pages###10 11 2018 new variable
 common#:#objs_crs#:#درس ها
@@ -5120,6 +5226,7 @@ common#:#objs_rglo#:#ECS Glossaries###28 08 2012 new variable
 common#:#objs_rgrp#:#ECS Groups###28 08 2012 new variable
 common#:#objs_rlm#:#ECS Learning Modules###28 08 2012 new variable
 common#:#objs_role#:#نقش ها
+common#:#objs_rolf#:#Role Folders###28 10 2024 new variable
 common#:#objs_rtst#:#ECS Tests###28 08 2012 new variable
 common#:#objs_rwik#:#ECS Wikis###28 08 2012 new variable
 common#:#objs_sahs#:#ماژولهای یادگیری SCORM/AICC
@@ -5443,6 +5550,7 @@ common#:#save_settings#:#Save Settings
 common#:#save_user_related_data#:#Save user related access data
 common#:#saved_successfully#:#با موفقیت ذخیره شد
 common#:#saving#:#در حال ذخیره کردن ...
+common#:#scope#:#Scope###28 10 2024 new variable
 common#:#scorm_create_export_file_html#:#ساختن فایل صدور (HTML)
 common#:#scorm_create_export_file_pdf#:#ساختن فایل صدور (PDF)
 common#:#scorm_create_export_file_scrom12#:#ساختن فایل صدور (SCORM 1.2)
@@ -5509,6 +5617,7 @@ common#:#session_mail_subject_registered#:#Registration of user "%s" for session
 common#:#session_reminder#:#یادآور جلسه
 common#:#session_reminder_alert#:#Your session expires in %1$s at %2$s!\n\nChoose OK to continue your session.\nIf you click Cancel you will not be reminded during the current browser session anymore.\n\nInstallation: %3$s.###28 11 2012 new variable
 common#:#session_reminder_info#:#اگر فعال باشد، یک یادآور قبل از اینکه جلسه آنلاین مروگر منقضی شود دریافت خواهید کرد.
+common#:#session_reminder_input#:#Session Reminder (in Minutes)###28 10 2024 new variable
 common#:#session_reminder_lead_time#:#Leadtime
 common#:#session_reminder_lead_time_info#:#Please specify the leadtime for the session reminder in minutes. The reminder displays a warning when only this time span is left before the session expires. Recommended value is 5 (minutes)<br / >The current length of a user session is %s.
 common#:#session_reminder_session_duration#:#(مدت جلسه: %s).
@@ -5589,6 +5698,7 @@ common#:#soap_user_administration#:#مدیریت از طرق SOAP
 common#:#soap_user_administration_desc#:#اگر فعال شودف سیستم می تواند از طریق SOAP مدیریت شود.
 common#:#soap_wsdl_path#:#مسیر WSDL
 common#:#soap_wsdl_path_info#:#Please enter the path to the ilias wsdl file which should be used for the webservice. If you leave this field blank, the following path will be used per default:%s
+common#:#sort#:#Sort###28 10 2024 new variable
 common#:#sort_ascending#:#Sort Ascending###29 07 2022 new variable
 common#:#sort_ascending_long#:#Change Sort Direction to Ascending###26 08 2024 new variable
 common#:#sort_by_this_column#:#مرتب بر اساس این ستوت
@@ -5670,6 +5780,7 @@ common#:#tests#:#Tests
 common#:#textbox#:#Textbox
 common#:#thread#:#Thread
 common#:#thumbnail#:#Thumbnail
+common#:#tile_view#:#Tile View###28 10 2024 new variable
 common#:#time#:#زمان
 common#:#time_limit#:#دسترسی
 common#:#time_limit_add_time_limit_for_selected#:#Please enter a time period for the selected user(s).
@@ -6045,6 +6156,7 @@ cont#:#cont_tile_size_3#:#extra large (up to two tiles in a row)###29 07 2022 ne
 cont#:#cont_tile_size_4#:#full (one tile in a row)###29 07 2022 new variable
 cont#:#cont_tile_view#:#Tiles###10 11 2018 new variable
 cont#:#cont_tile_view_info#:#Objects located within this container are displayed in the form of thumbnail-style tiles. Images for these tiles can be uploaded in the settings of each individual object.###26 08 2024 new variable
+cont#:#cont_trash_general_usage#:#If you want to remove a huge amount of old, deleted objects from the system it is highly advisable to start with non-container objects (i.e. Files, Glossaries, Tests,..) and thus removing all objects from the containers (Categories, Courses, Groups, Learning Sequences,...) . Using the filters "Type" and "Deleted on" helps this process. Then finally remove the containers.###28 10 2024 new variable
 contact#:#contact_awrn_ap_contacts#:#Approved Contacts###30 08 2015 new variable
 contact#:#contact_awrn_ap_contacts_info#:#All contacts approved by the user are listed.###30 08 2015 new variable
 contact#:#contact_awrn_req_contacts#:#Contact Requests###30 08 2015 new variable
@@ -6052,8 +6164,6 @@ contact#:#contact_awrn_req_contacts_info#:#All contact requests are listed.###30
 content#:#Pages#:#صفحات
 content#:#add_menu_entry#:#اضافه کردن مورد در منو
 content#:#all_pages#:#the entire Learning module
-content#:#choose_public_mode#:#Unregistered users may access
-content#:#choose_public_pages#:#Choose public accessible pages
 content#:#citate#:#Citate
 content#:#citate_from#:#Citate From ...
 content#:#citate_page#:#Citate this Page
@@ -7266,7 +7376,6 @@ content#:#scplayer_suspendall#:#Suspend All
 content#:#selectFooter#:#انتخاب به عنوان پاورقی
 content#:#selectHeader#:#انتخاب به عنوان سربرگ
 content#:#select_a_file#:#لطفا یک فایل انتخاب کنید.
-content#:#selected_pages_only#:#only that pages selected below
 content#:#seq_close#:#Please close the player-window.
 content#:#seq_endsession#:#The current course session has ended.
 content#:#seq_error#:#An internal error in the sequencer occurred.
@@ -8012,6 +8121,12 @@ crs#:#timings_usr_edit#:#Edit Timings
 crs#:#tutor_email#:#E-Mail
 crs#:#tutor_name#:#Name
 crs#:#tutor_phone#:#Phone
+crs#:#tutorial_support_block_byline#:#The 'Tutorial Support' block is displayed in the 'Contents' tab. The user selected as "Contact Person" in the "Members" Tab is shown.###28 10 2024 new variable
+crs#:#tutorial_support_block_contact#:#Contact###28 10 2024 new variable
+crs#:#tutorial_support_block_send_mail#:#send email###28 10 2024 new variable
+crs#:#tutorial_support_block_setting_desc#:#The 'Tutorial Support' block is displayed in the 'Contents' tab.###28 10 2024 new variable
+crs#:#tutorial_support_block_setting_title#:#Tutorial Support Block###28 10 2024 new variable
+crs#:#tutorial_support_block_title#:#Contact Person###28 10 2024 new variable
 crs#:#user_fields#:#User Fields
 crsv#:#crsv_create#:#Create Course Certificate###30 12 2013 new variable
 crsv#:#crsv_create_info#:#Select a completed course to generate a certificate for it###30 12 2013 new variable
@@ -8020,6 +8135,9 @@ dash#:#dash_added_to_favs#:#Recommendation has been added to personal favourites
 dash#:#dash_avail_presentation#:#Available Presentations###07 02 2020 new variable
 dash#:#dash_avail_sortation#:#Available Sortations###07 02 2020 new variable
 dash#:#dash_click_here#:#Click here###07 02 2020 new variable
+dash#:#dash_co_delete#:#Delete Dashboard style###28 10 2024 new variable
+dash#:#dash_co_lang#:#Dashboard style by languages###28 10 2024 new variable
+dash#:#dash_customization#:#Customize Dashboard Content###28 10 2024 new variable
 dash#:#dash_dashboard#:#Dashboard###07 02 2020 new variable
 dash#:#dash_default_presentation#:#Default Presentation###07 02 2020 new variable
 dash#:#dash_default_sortation#:#Default Sortation###07 02 2020 new variable
@@ -8041,6 +8159,7 @@ dash#:#dash_main_panel#:#Main Panel###07 02 2020 new variable
 dash#:#dash_make_favourite#:#Add to Favourites###07 02 2020 new variable
 dash#:#dash_member_main_alt#:#Courses and groups can also be configured as a separate main menu entry.###07 02 2020 new variable
 dash#:#dash_memberships#:#My Courses and Groups###07 02 2020 new variable
+dash#:#dash_page_edit_info#:#The content of this page is displayed to all users on their dashboard. The contents of the various blocks of the dashboard are presented below.###28 10 2024 new variable
 dash#:#dash_presentation#:#Presentation###07 02 2020 new variable
 dash#:#dash_recommended_content#:#Recommended Content###26 08 2024 new variable
 dash#:#dash_remove_from_list#:#Remove from List###07 02 2020 new variable
@@ -8143,10 +8262,19 @@ dateplaner#:#cal_ch_assign_participants#:#Assign Users###24 10 2013 new variable
 dateplaner#:#cal_ch_assigned_apps#:#Number of Appointments###24 10 2013 new variable
 dateplaner#:#cal_ch_book#:#Book Appointment
 dateplaner#:#cal_ch_booking#:#Ressource Booking
+dateplaner#:#cal_ch_booking_col_comments#:#Comments###28 10 2024 new variable
+dateplaner#:#cal_ch_booking_comment#:#Comment:###28 10 2024 new variable
+dateplaner#:#cal_ch_booking_link#:#Link to Consultation Hours:###28 10 2024 new variable
 dateplaner#:#cal_ch_booking_message_tbl#:#Comment###24 10 2013 new variable
+dateplaner#:#cal_ch_booking_num_available#:#Available Slots###28 10 2024 new variable
+dateplaner#:#cal_ch_booking_num_free_short#:#%s free###28 10 2024 new variable
+dateplaner#:#cal_ch_booking_other_participants#:#Other Participants:###28 10 2024 new variable
 dateplaner#:#cal_ch_booking_owner#:#Owner
+dateplaner#:#cal_ch_booking_participants#:#Participants###28 10 2024 new variable
 dateplaner#:#cal_ch_booking_reminder_body#:#your appointment with "%s" starts soon.###24 10 2013 new variable
 dateplaner#:#cal_ch_booking_reminder_subject#:#Reminder for "%s"###24 10 2013 new variable
+dateplaner#:#cal_ch_booking_start#:#Start###28 10 2024 new variable
+dateplaner#:#cal_ch_booking_your_comment#:#Your comment:###28 10 2024 new variable
 dateplaner#:#cal_ch_bookings#:#شرکت کنندگان
 dateplaner#:#cal_ch_bookings_tbl#:#Booked Appointments###24 10 2013 new variable
 dateplaner#:#cal_ch_cancel_booking#:#Cancel Booking
@@ -8157,6 +8285,7 @@ dateplaner#:#cal_ch_ch#:#Consultation Hours
 dateplaner#:#cal_ch_cron_reminder#:#Send Consultation Hour Reminder###24 10 2013 new variable
 dateplaner#:#cal_ch_cron_reminder_days#:#Number of Days###24 10 2013 new variable
 dateplaner#:#cal_ch_cron_reminder_info#:#If enabled, notification mails about upcoming consultation hour events will be send.###24 10 2013 new variable
+dateplaner#:#cal_ch_current_booking_comment#:#Comment###28 10 2024 new variable
 dateplaner#:#cal_ch_current_bookings#:#Current Bookings
 dateplaner#:#cal_ch_deadline#:#Latest Registration
 dateplaner#:#cal_ch_deadline_info#:#Please define the number of hours until the registration is blocked.
@@ -8171,6 +8300,7 @@ dateplaner#:#cal_ch_field_ch#:#Consultation Hour Appointments###24 10 2013 new v
 dateplaner#:#cal_ch_form#:#فعال کردن ساعات مشاوره
 dateplaner#:#cal_ch_form_header#:#ساعات مشاوره
 dateplaner#:#cal_ch_form_info#:#این گزینه مدیریت ساعات مشاوره شخصی در تقویم را فعال می کند.
+dateplaner#:#cal_ch_free_of_available#:#%s of %s###28 10 2024 new variable
 dateplaner#:#cal_ch_grp_add_tbl#:#Create new Consultation Hour Group###24 10 2013 new variable
 dateplaner#:#cal_ch_grp_delete_sure#:#Do you really want to delete the following consultation hour groups?###24 10 2013 new variable
 dateplaner#:#cal_ch_grp_header#:#Consultation Hour Group###24 10 2013 new variable
@@ -8183,6 +8313,7 @@ dateplaner#:#cal_ch_grps#:#Consultation Hour Groups###24 10 2013 new variable
 dateplaner#:#cal_ch_manager#:#Consultation Hour Manager
 dateplaner#:#cal_ch_manager_info#:#Login of the user who will manage your consultation hours.
 dateplaner#:#cal_ch_max_books#:#Bookings per User###24 10 2013 new variable
+dateplaner#:#cal_ch_minutes#:#Duration (min)###28 10 2024 new variable
 dateplaner#:#cal_ch_multi_edit_sequence#:#Edit multiple appointments
 dateplaner#:#cal_ch_num_appointments#:#Number of Appointments
 dateplaner#:#cal_ch_num_appointments_info#:#Please define the number of sequent appointments.
@@ -8190,11 +8321,18 @@ dateplaner#:#cal_ch_num_bookings#:#Booking per Appointment
 dateplaner#:#cal_ch_personal_book#:#Personal Bookings
 dateplaner#:#cal_ch_personal_ch#:#Personal Consultation Hours
 dateplaner#:#cal_ch_reject_booking#:#Cancel Booking###24 10 2013 new variable
+dateplaner#:#cal_ch_send_mail#:#Send Mail###28 10 2024 new variable
 dateplaner#:#cal_ch_target_object#:#Repository Object
 dateplaner#:#cal_ch_target_object_info#:#Restrict appointments to given repository object.
 dateplaner#:#cal_ch_unknown_repository_object#:#The given repository object ref-id is not valid.
 dateplaner#:#cal_ch_unknown_user#:#The given login does not match any user.
 dateplaner#:#cal_ch_user_assignment_failed_info#:#The following users could not be assigned to appointments, since the maximum number of bookings is exceeded.###24 10 2013 new variable
+dateplaner#:#cal_ch_vm_period_all#:#All###28 10 2024 new variable
+dateplaner#:#cal_ch_vm_period_past#:#Past###28 10 2024 new variable
+dateplaner#:#cal_ch_vm_period_upcoming#:#Upcoming###28 10 2024 new variable
+dateplaner#:#cal_ch_vm_status_all#:#All###28 10 2024 new variable
+dateplaner#:#cal_ch_vm_status_booked#:#Booked Slots###28 10 2024 new variable
+dateplaner#:#cal_ch_vm_status_open#:#Open Slots###28 10 2024 new variable
 dateplaner#:#cal_change_calendar_view#:#Change Calendar View###29 07 2022 new variable
 dateplaner#:#cal_change_responsible_users#:#Change Responsible Users
 dateplaner#:#cal_changed_events_header#:#New and Changed Appointments
@@ -8246,6 +8384,7 @@ dateplaner#:#cal_default_settings#:#Default settings###29 07 2022 new variable
 dateplaner#:#cal_del_app_sure#:#Do you really want to delete the selected appointments?
 dateplaner#:#cal_del_cal_sure#:#Do you really want to delete the chosen calendars?
 dateplaner#:#cal_delete_app_sure#:#Do you really want to delete the following appointments?
+dateplaner#:#cal_delete_booking_info#:#Please confirm the deletion of this booking###28 10 2024 new variable
 dateplaner#:#cal_delete_cal#:#Delete Calendar###31 08 2017 new variable
 dateplaner#:#cal_delete_recurrence_rule#:#Delete Series of Appoinments###29 07 2022 new variable
 dateplaner#:#cal_delete_recurrences#:#Delete all recurrences
@@ -8690,7 +8829,6 @@ dcl#:#dcl_table_create#:#Create Table###28 08 2012 new variable
 dcl#:#dcl_table_edit#:#Update Table###28 08 2012 new variable
 dcl#:#dcl_table_id#:#Table ID###28 08 2012 new variable
 dcl#:#dcl_table_info#:#Users with the permission "edit settings" (see tab "Permission") always have permission to add/edit/delete entries. Users with permission "edit entry" (see tab "Permissions") only have permissions according to the settings specified in the form below.###04 09 2012 new variable
-dcl#:#dcl_table_info_title#:#Info###27 10 2012 new variable
 dcl#:#dcl_table_list_fields#:#List Fields of current Table###28 08 2012 new variable
 dcl#:#dcl_table_list_tables#:#Available Tables###25 10 2016 new variable
 dcl#:#dcl_table_settings_saved#:#Table Settings have been saved.###28 08 2012 new variable
@@ -9034,6 +9172,7 @@ ecs#:#ecs_protocol#:#Protocol
 ecs#:#ecs_publish_as#:#Publish as:
 ecs#:#ecs_publish_for#:#Release for:
 ecs#:#ecs_published_for#:#Published for:
+ecs#:#ecs_rcat_created_body_a#:#A new ECS Category has been created:###28 10 2024 new variable
 ecs#:#ecs_rcrs_created_body_a#:#A new Remote Course has been created:
 ecs#:#ecs_read_remote_links#:#Update Remote-Courses
 ecs#:#ecs_refresh_participants#:#Refresh ECS-Participants###27 01 2015 new variable
@@ -9627,6 +9766,7 @@ exp#:#exp_error_disabled#:#The export feature is disabled for containers. You ma
 exp#:#exp_error_too_many_objects#:#The export exceeds the maximum number of allowerd objects (%1). Please select a lower number of objects.###07 02 2020 new variable
 exp#:#exp_export_files#:#صدور فایل ها
 exp#:#exp_file_created#:#The export file has been created.###10 07 2013 new variable
+exp#:#exp_html#:#HTML###28 10 2024 new variable
 exp#:#exp_import_validation_err_no_matching_xsd#:#No valid schema file for version %s exists.###26 08 2024 new variable
 exp#:#exp_print_pdf#:#Print/PDF###29 07 2022 new variable
 exp#:#exp_print_pdf_info#:#To create a PDF please use the "Print to PDF" target as soon as the print view is presented.###29 07 2022 new variable
@@ -9635,10 +9775,21 @@ exp#:#exp_show_print_view#:#Show Print View###29 07 2022 new variable
 exp#:#exp_xml#:#XML
 exp#:#export_created#:#یک فایل جدید صدور ساخته شد.
 exp#:#export_files_deleted#:#The selected export files have been deleted.###26 08 2024 new variable
+exp#:#export_options#:#Export Options###28 10 2024 new variable
+exp#:#export_type#:#Export Type###28 10 2024 new variable
+export#:#exp_export_dropdown#:#Export###28 10 2024 new variable
+export#:#exp_file#:#File Name###28 10 2024 new variable
+export#:#exp_public_access#:#Public Access###28 10 2024 new variable
+export#:#exp_size#:#File Size (MB)###28 10 2024 new variable
+export#:#exp_timestamp#:#Creation Date###28 10 2024 new variable
+export#:#exp_toggle_public_access#:#Toggle Public Access###28 10 2024 new variable
+export#:#exp_type#:#Type###28 10 2024 new variable
 export#:#export_create#:#Create
 export#:#export_create_new_file#:#ساختن فایل صدور جدید
 export#:#export_existing#:#Reuse
 export#:#export_export_date#:#صدور تاریخ
+export#:#export_info_public_access#:#Public Access Export###28 10 2024 new variable
+export#:#export_info_public_access_download#:#Download###28 10 2024 new variable
 export#:#export_last_export#:#آخرین صدور
 export#:#export_last_export_file#:#Use Last Export File
 export#:#export_last_file#:#Last File
@@ -9871,6 +10022,8 @@ forum#:#forums_download_attachment#:#Download file
 forum#:#forums_edit_draft#:#Edit draft###25 10 2016 new variable
 forum#:#forums_edit_post#:#Edit Article
 forum#:#forums_enable_notification#:#Enable Notification for this Topic
+forum#:#forums_forum_notification#:#Send Forum Notifications###28 10 2024 new variable
+forum#:#forums_forum_notification_desc#:#If enabled, all users, who want to be informed about new posts in specified forum threads, will get notifications by mail.###28 10 2024 new variable
 forum#:#forums_forum_notification_disabled#:#You will no longer be notified about new messages in this forum.###28 08 2012 new variable
 forum#:#forums_info_censor2_post#:#Revoke Censorship?
 forum#:#forums_info_censor_post#:#Are you sure you want to hide this article?
@@ -10121,6 +10274,7 @@ grp#:#crs_grp_no_courses_assigned#:#هیچ گروهی انتصاب داده نش
 grp#:#events#:#Sessions###02 09 2012 new variable
 grp#:#grouping_change_assignment#:#تغییر انتصاب
 grp#:#grp_activate_notification#:#فعال کردن آگاه سازی
+grp#:#grp_activation_online_info#:#Set the group online to make it visible and available for group members. If not, only group administrators and roles with permission "Edit Settings" have access to it.###28 10 2024 new variable
 grp#:#grp_add_to_group#:#Add to Group###31 08 2017 new variable
 grp#:#grp_add_user#:#Add User###31 08 2017 new variable
 grp#:#grp_add_user_to_group#:#Add user to group###31 08 2017 new variable
@@ -10292,6 +10446,52 @@ grp#:#grp_wrong_reg_time_limit#:#Please check the registration start and end tim
 grp#:#reg_grp_max_members#:#تعداد اعضای محدود
 grp#:#reg_grp_max_members_short#:#تعداد اعضا
 grp#:#reg_grp_min_members#:#Minimum Number of Members###30 08 2015 new variable
+gsfo#:#accessibility#:#Accessibility###28 10 2024 new variable
+gsfo#:#confirm_delete#:#Do you really want to delete the following Item(s)?###28 10 2024 new variable
+gsfo#:#confirm_reset#:#Resetting the footer will restore all entries to their original state. All customizations and manual entries will be deleted. Do you want to continue?###28 10 2024 new variable
+gsfo#:#entries_add#:#Add Entry###28 10 2024 new variable
+gsfo#:#entries_edit#:#entries_edit###28 10 2024 new variable
+gsfo#:#entries_parent#:#Select Group###28 10 2024 new variable
+gsfo#:#entries_select_parent#:#Move Entry to Group###28 10 2024 new variable
+gsfo#:#entry_action#:#Link###28 10 2024 new variable
+gsfo#:#entry_action_info#:#Provide the full URL including the protocol (e.g. https://www.ilias.de)###28 10 2024 new variable
+gsfo#:#entry_activation_toggled#:#Activation has been toggled###28 10 2024 new variable
+gsfo#:#entry_active#:#Active###28 10 2024 new variable
+gsfo#:#entry_active_info#:#Activate this Entry###28 10 2024 new variable
+gsfo#:#entry_add#:#Add Entry###28 10 2024 new variable
+gsfo#:#entry_delete#:#Delete###28 10 2024 new variable
+gsfo#:#entry_deleted#:#Deleted###28 10 2024 new variable
+gsfo#:#entry_edit#:#Edit###28 10 2024 new variable
+gsfo#:#entry_external#:#Open in new Tab###28 10 2024 new variable
+gsfo#:#entry_move#:#Move###28 10 2024 new variable
+gsfo#:#entry_moved#:#Entry has been moved###28 10 2024 new variable
+gsfo#:#entry_title#:#Title (Default Language)###28 10 2024 new variable
+gsfo#:#entry_toggle_activation#:#(De-)Activate###28 10 2024 new variable
+gsfo#:#group_activation_toggled#:#Activation has been toggled###28 10 2024 new variable
+gsfo#:#group_active#:#Active###28 10 2024 new variable
+gsfo#:#group_active_info#:#Activate this Group###28 10 2024 new variable
+gsfo#:#group_add#:#Add Group###28 10 2024 new variable
+gsfo#:#group_delete#:#Delete###28 10 2024 new variable
+gsfo#:#group_deleted#:#Deleted###28 10 2024 new variable
+gsfo#:#group_edit#:#Edit Group###28 10 2024 new variable
+gsfo#:#group_edit_entries#:#Edit Entries###28 10 2024 new variable
+gsfo#:#group_items#:#Items###28 10 2024 new variable
+gsfo#:#group_not_empty#:#This Group contains Entries. Please move or delete them first.###28 10 2024 new variable
+gsfo#:#group_title#:#Title (Default Language)###28 10 2024 new variable
+gsfo#:#group_title_info#:#Additional Translations can be added with the Action "Add Translation" after saving the Group.###28 10 2024 new variable
+gsfo#:#group_toggle_activation#:#(De-)Activate###28 10 2024 new variable
+gsfo#:#group_translate#:#Translate###28 10 2024 new variable
+gsfo#:#info_not_deletable_core#:#Default Items cannot be deleted.###28 10 2024 new variable
+gsfo#:#info_not_deletable_not_empty#:#Groups with Entries cannot be deleted.###28 10 2024 new variable
+gsfo#:#legal_information#:#Legal Information###28 10 2024 new variable
+gsfo#:#obj_gsfo#:#Footer###28 10 2024 new variable
+gsfo#:#obj_gsfo_desc#:#Administrate Footer Layout and Content###28 10 2024 new variable
+gsfo#:#order_saved#:#Order saved###28 10 2024 new variable
+gsfo#:#permanent#:#permanent###28 10 2024 new variable
+gsfo#:#reset_footer#:#Reset Footer###28 10 2024 new variable
+gsfo#:#reset_success#:#Footer has been reset successfully###28 10 2024 new variable
+gsfo#:#services#:#Services###28 10 2024 new variable
+gsfo#:#support#:#Support###28 10 2024 new variable
 help#:#help_all#:#All###28 08 2012 new variable
 help#:#help_component#:#Component###28 08 2012 new variable
 help#:#help_filter#:#Filter###28 08 2012 new variable
@@ -10755,6 +10955,17 @@ lm#:#lm_edit_chapters#:#Edit Chapters###26 08 2024 new variable
 lm#:#lm_edit_lm_settings#:#Edit Learning Module Settings###26 08 2024 new variable
 lm#:#lm_est_reading_time#:#Estimated Reading Time###29 07 2022 new variable
 lm#:#lm_est_reading_time_info#:#In Learning Modules in the repository the estimated reading time can be determined and displayed.###29 07 2022 new variable
+lm#:#lm_insert_chapter#:#Insert chapter###28 10 2024 new variable
+lm#:#lm_insert_chapter_after#:#Insert chapter after###28 10 2024 new variable
+lm#:#lm_insert_chapter_before#:#Insert chapter before###28 10 2024 new variable
+lm#:#lm_insert_layout_after#:#Insert template after###28 10 2024 new variable
+lm#:#lm_insert_layout_before#:#Insert template before###28 10 2024 new variable
+lm#:#lm_insert_page#:#Insert page###28 10 2024 new variable
+lm#:#lm_insert_page_after#:#Insert page after###28 10 2024 new variable
+lm#:#lm_insert_page_before#:#Insert page before###28 10 2024 new variable
+lm#:#lm_insert_page_clip#:#Insert page from clipboard###28 10 2024 new variable
+lm#:#lm_insert_page_clip_after#:#Insert page from clipboard after###28 10 2024 new variable
+lm#:#lm_insert_page_clip_before#:#Insert page from clipboard before###28 10 2024 new variable
 lm#:#lm_page_added#:#Page has been added.###26 08 2024 new variable
 lm#:#lm_page_type_lm#:#LM Page###29 07 2022 new variable
 lm#:#lm_pages_added#:#Pages have been added.###26 08 2024 new variable
@@ -11214,6 +11425,7 @@ mail#:#link_check_affected_links#:#Affected Links###07 11 2014 new variable
 mail#:#link_check_introduction#:#the following weblinks are invalid:###07 11 2014 new variable
 mail#:#link_check_perma_link#:#Permanent Link###07 11 2014 new variable
 mail#:#link_check_reason#:#You recife this mail because you enabled the notification for invalid links.###07 11 2014 new variable
+mail#:#mail_1#:#1 Mail###28 10 2024 new variable
 mail#:#mail_absence_auto_responder_body#:#Message###26 08 2024 new variable
 mail#:#mail_absence_auto_responder_body_hint#:#This is an automatically generated message. If you send further messages to this user during their absence, you will not receive another automatic reply until [NEXT_AUTO_RESPONDER_DATETIME].###26 08 2024 new variable
 mail#:#mail_absence_auto_responder_body_info#:#This message will be sent automatically during your absence if users send you a Mail from within ILIAS. <br>Users will be notified of your absence every %1$s days if they send further messages.###26 08 2024 new variable
@@ -11229,6 +11441,7 @@ mail#:#mail_add_folder#:#Add New Subfolder###10 07 2013 new variable
 mail#:#mail_add_recipient#:#Please enter a recipient
 mail#:#mail_add_subfolder#:#اضافه کردن زیر پوشه
 mail#:#mail_add_subject#:#Please enter a subject
+mail#:#mail_all_in_trash#:#All in Trash###28 10 2024 new variable
 mail#:#mail_allow_external#:#External Emails###31 08 2017 new variable
 mail#:#mail_allow_external_info#:#If disabled, the delivery of external emails (via SMTP) is globally disabled.###31 08 2017 new variable
 mail#:#mail_assign_entry_to_mailing_list#:#Assign an Entry of Your Contacts to Mailing List
@@ -11252,6 +11465,7 @@ mail#:#mail_crs_list_members_not_available_for_at_least_one_crs#:#The members of
 mail#:#mail_crs_roles#:#Send Mail to Course Roles###08 10 2015 new variable
 mail#:#mail_deleted#:#The mail is deleted
 mail#:#mail_deleted_entry#:#The entries are deleted
+mail#:#mail_download_attachment#:#Download Attachment###28 10 2024 new variable
 mail#:#mail_download_zip_no_attachments#:#Could not find any attachments.###10 11 2018 new variable
 mail#:#mail_edit_tpl#:#Edit Text Templates###30 08 2015 new variable
 mail#:#mail_email_sys_body#:#This is a test e-mail to test the delivery of system mails to the external mail account.###29 07 2022 new variable
@@ -11283,15 +11497,17 @@ mail#:#mail_files_deleted#:#The file(s) are deleted
 mail#:#mail_filter#:#Filter###24 10 2013 new variable
 mail#:#mail_filter_attach#:#Attachments###24 10 2013 new variable
 mail#:#mail_filter_body#:#Body###24 10 2013 new variable
+mail#:#mail_filter_display#:#Display###28 10 2024 new variable
 mail#:#mail_filter_field_placeholder#:#Filter these messages ...###24 10 2013 new variable
-mail#:#mail_filter_only_unread#:#Only Unread###10 11 2018 new variable
-mail#:#mail_filter_only_user_mails#:#Hide System Notifications###29 07 2022 new variable
-mail#:#mail_filter_only_with_attachments#:#With Attachments###10 11 2018 new variable
 mail#:#mail_filter_period#:#Period###10 11 2018 new variable
-mail#:#mail_filter_period_from#:#From###10 11 2018 new variable
-mail#:#mail_filter_period_until#:#Until###10 11 2018 new variable
 mail#:#mail_filter_recipients#:#Recipients###24 10 2013 new variable
 mail#:#mail_filter_sender#:#Sender###24 10 2013 new variable
+mail#:#mail_filter_show_read#:#Show Read###28 10 2024 new variable
+mail#:#mail_filter_show_system_mails#:#Show System Notifications###28 10 2024 new variable
+mail#:#mail_filter_show_unread#:#Show Unread###28 10 2024 new variable
+mail#:#mail_filter_show_user_mails#:#Show User Mails###28 10 2024 new variable
+mail#:#mail_filter_show_with_attachments#:#Show With Attachments###28 10 2024 new variable
+mail#:#mail_filter_show_without_attachment#:#Show Without Attachment###28 10 2024 new variable
 mail#:#mail_filter_subject#:#Subject###24 10 2013 new variable
 mail#:#mail_filter_txt#:#Filter messages by###24 10 2013 new variable
 mail#:#mail_first_email#:#First Email Address###31 08 2017 new variable
@@ -11421,10 +11637,12 @@ mail#:#mail_smtp_user#:#User###31 08 2017 new variable
 mail#:#mail_subject_prefix#:#موضوع ایمیل
 mail#:#mail_subject_prefix_info#:#متنی وارد کنید که برای ایمیل های اتوماتیک ارسالی به خارج از سیستم به متن موضوع ایمیل اضافه خواهد شد.
 mail#:#mail_subject_too_long#:#The subject is too long.###26 08 2024 new variable
+mail#:#mail_success_removed_user#:#User(s) successfully removed from mailing list.###28 10 2024 new variable
 mail#:#mail_sure_delete#:#Are you sure you want to delete the marked mail(s)?
 mail#:#mail_sure_delete_entry#:#Are sure you want to delete the following entries?
 mail#:#mail_sure_delete_file#:#The file will be removed permanently
 mail#:#mail_sure_delete_folder#:#The folder and its contents will be removed permanently
+mail#:#mail_sure_remove_user#:#Are you sure you want to remove the following user(s) from the members list?###28 10 2024 new variable
 mail#:#mail_system_sys_env_from_addr#:#Technical Sender###31 08 2017 new variable
 mail#:#mail_system_sys_env_from_addr_info#:#If you leave this field empty, the sender email address will be used if SMTP transfer is enabled. Otherwise it is the server administrator's responsibility to configure this value.###31 08 2017 new variable
 mail#:#mail_system_sys_from_addr#:#Sender Email (From)###31 08 2017 new variable
@@ -11649,7 +11867,6 @@ mep#:#mep_content_snippet_used_in_older_versions#:#Please note: This snippet is 
 mep#:#mep_copy_to_mep#:#Copy to Media Pool
 mep#:#mep_create_content_snippet#:#Create Content Snippet
 mep#:#mep_create_folder#:#ساختن پوشه
-mep#:#mep_create_from_upload_dir#:#Create Media Objects from Upload Directory
 mep#:#mep_create_media_files#:#Create Media Objects
 mep#:#mep_create_mob#:#ساختن شی رسانه
 mep#:#mep_default_height#:#طول پیش فرض
@@ -11674,7 +11891,6 @@ mep#:#mep_new_content_snippet#:#New Content Snippet
 mep#:#mep_new_folder#:#پوشه جدید
 mep#:#mep_page_properties#:#Page Properties
 mep#:#mep_page_type_mep#:#Content Snippet###29 07 2022 new variable
-mep#:#mep_sel_upload_dir_files#:#Select Files/Directories
 mep#:#mep_thumbnail#:#Thumbnail
 mep#:#mep_title_and_description#:#عنوان و توضیح
 mep#:#mep_trans_import_info#:#If you exported this module as XML/Master Language for Translation to another installation, you can now re-import translated export files from this second installation here.###30 08 2015 new variable
@@ -11757,6 +11973,7 @@ meta#:#md_advanced#:#Advanced Metadata
 meta#:#md_aria_language_selection#:#Language Selection###29 07 2022 new variable
 meta#:#md_copyright#:#حق نشر
 meta#:#md_copyright_add#:#Add Copyright Presetting
+meta#:#md_copyright_admin_tab#:#Copyright & OER###28 10 2024 new variable
 meta#:#md_copyright_alt_text#:#Text Representation###26 08 2024 new variable
 meta#:#md_copyright_alt_text_info#:#Used for image ‘alt’ attribute###26 08 2024 new variable
 meta#:#md_copyright_default#:#Default###26 08 2024 new variable
@@ -11780,14 +11997,55 @@ meta#:#md_days#:#روزها:
 meta#:#md_delete_cp_sure#:#Do you really want to delete the following entries ?
 meta#:#md_delimiter#:#Delimiter
 meta#:#md_delimiter_info#:#The delimiter is used in the quick editing screen for keywords and authors separation. Default is ','.
+meta#:#md_editor_custom_input#:#Custom###28 10 2024 new variable
+meta#:#md_editor_from_vocab_input#:#From Vocabulary###28 10 2024 new variable
+meta#:#md_editor_value#:#Value###28 10 2024 new variable
 meta#:#md_fields#:#Fields
+meta#:#md_import_file_vocab#:#Import File###28 10 2024 new variable
+meta#:#md_import_vocab#:#Import###28 10 2024 new variable
+meta#:#md_import_vocab_modal#:#Import From File###28 10 2024 new variable
 meta#:#md_months#:#ماه:
+meta#:#md_oai_contact_mail#:#Contact E-Mail###28 10 2024 new variable
+meta#:#md_oai_identifier_prefix#:#OAI Prefix###28 10 2024 new variable
+meta#:#md_oai_identifier_prefix_info#:#This prefix is used as a namespace in the identifiers of returned OER records.###28 10 2024 new variable
+meta#:#md_oai_pmh_enabled#:#Allow Querying via OAI-PMH Interface###28 10 2024 new variable
+meta#:#md_oai_pmh_enabled_info#:#If enabled, harvested OER can be queried by external interested parties, e.g. OER referatories.###28 10 2024 new variable
+meta#:#md_oai_repository_name#:#Repository Name###28 10 2024 new variable
+meta#:#md_oai_repository_name_info#:#This is returned as the name of this ILIAS installation when queried.###28 10 2024 new variable
 meta#:#md_obj_types#:#Assigned Objects
 meta#:#md_record_export_table#:#صدور فایل ها
 meta#:#md_record_list_table#:#Available Metadata Sets
 meta#:#md_separated_by#:#جدا شده با %s
 meta#:#md_time#:#زمان:
+meta#:#md_unknown_vocabulary_flag#:#(unknown vocabulary)###28 10 2024 new variable
 meta#:#md_used#:#کاربرد
+meta#:#md_vocab_activate_action#:#Activate###28 10 2024 new variable
+meta#:#md_vocab_active_column#:#Active###28 10 2024 new variable
+meta#:#md_vocab_all_values_title#:#Values for %s (%s)###28 10 2024 new variable
+meta#:#md_vocab_allow_custom_input_action#:#Allow Custom Input###28 10 2024 new variable
+meta#:#md_vocab_custom_input_column#:#Custom Input Allowed###28 10 2024 new variable
+meta#:#md_vocab_deactivate_action#:#Deactivate###28 10 2024 new variable
+meta#:#md_vocab_delete_action#:#Delete###28 10 2024 new variable
+meta#:#md_vocab_delete_confirmation_text#:#Are you sure you want to delete the vocabulary for %s (%s) with the following values?###28 10 2024 new variable
+meta#:#md_vocab_delete_confirmation_title#:#Delete Vocabulary###28 10 2024 new variable
+meta#:#md_vocab_deletion_successful#:#Vocabulary successfully deleted.###28 10 2024 new variable
+meta#:#md_vocab_disallow_custom_input_action#:#Disallow Custom Input###28 10 2024 new variable
+meta#:#md_vocab_element_column#:#Element###28 10 2024 new variable
+meta#:#md_vocab_element_with_condition#:#%s where %s is %s###28 10 2024 new variable
+meta#:#md_vocab_import_invalid#:#The import file is invalid:<br/>%s###28 10 2024 new variable
+meta#:#md_vocab_import_successful#:#Vocabulary successfully imported.###28 10 2024 new variable
+meta#:#md_vocab_import_upload_failed#:#Upload of the import file failed.###28 10 2024 new variable
+meta#:#md_vocab_preview_column#:#Preview###28 10 2024 new variable
+meta#:#md_vocab_show_all_action#:#Show All Values###28 10 2024 new variable
+meta#:#md_vocab_source_column#:#Source###28 10 2024 new variable
+meta#:#md_vocab_table_title#:#Vocabularies###28 10 2024 new variable
+meta#:#md_vocab_type_column#:#Type###28 10 2024 new variable
+meta#:#md_vocab_type_controlled_string#:#Controlled Text###28 10 2024 new variable
+meta#:#md_vocab_type_controlled_vocab_value#:#Controlled Selection###28 10 2024 new variable
+meta#:#md_vocab_type_copyright#:#Copyright###28 10 2024 new variable
+meta#:#md_vocab_type_standard#:#Standard###28 10 2024 new variable
+meta#:#md_vocab_update_successful#:#Vocabulary successfully updated.###28 10 2024 new variable
+meta#:#md_vocabularies_config#:#LOM Vocabularies###28 10 2024 new variable
 meta#:#meta_1#:#1###26 08 2024 new variable
 meta#:#meta_2#:#2###26 08 2024 new variable
 meta#:#meta_3#:#3###26 08 2024 new variable
@@ -12076,6 +12334,7 @@ meta#:#meta_contribute_plural#:#Contribute###26 08 2024 new variable
 meta#:#meta_copyright#:#حق نشر
 meta#:#meta_copyright_and_other_restrictions#:#حق چاپ و دیگر محدودیتها
 meta#:#meta_copyright_change_info#:#You are going to change the licence assigned to this content. This should only be done in accordance with the copyright owner. Please continue only if the new licence is not more restrictive than the one used before.###10 11 2018 new variable
+meta#:#meta_copyright_change_oer_info#:#The copyright licence you have selected makes this object eligible to be harvested as an Open Educational Resource. If you continue, it might be listed as such along with an export file, and it might get published beyond this platform.###28 10 2024 new variable
 meta#:#meta_copyright_change_warning_title#:#Modification of Copyright Settings###10 11 2018 new variable
 meta#:#meta_copyright_in_use#:#In use###10 11 2018 new variable
 meta#:#meta_copyright_outdated#:#Outdated###10 11 2018 new variable
@@ -12144,6 +12403,7 @@ meta#:#meta_idea#:#ایده
 meta#:#meta_identifier#:#شناسه
 meta#:#meta_identifier_plural#:#Identifiers###26 08 2024 new variable
 meta#:#meta_index#:#ایندکس
+meta#:#meta_info_licence_section#:#Licence and Use###28 10 2024 new variable
 meta#:#meta_info_only_repository_objects#:#Only repository objects are listed below (and no media objects or LM pages).###10 11 2018 new variable
 meta#:#meta_initiator#:#Initiator
 meta#:#meta_installation_remarks#:#ملاحظات راه اندازی
@@ -12343,8 +12603,10 @@ meta#:#meta_oer_blocked#:#Ignored by OER Harvester###10 11 2018 new variable
 meta#:#meta_oer_blocked_info#:#Will not be listed automatically as Open Educational Ressource (OER)###10 11 2018 new variable
 meta#:#meta_oer_copyright_selection#:#Lizenzauswahl###10 11 2018 new variable
 meta#:#meta_oer_copyright_selection_info#:#Nur Objekte, die unter den/der ausgewählten Lizenz veröffentlicht sind, werden in die OER-Kategorie verknüpft.###10 11 2018 new variable
+meta#:#meta_oer_exposed_source#:#Category for Published OER Content###28 10 2024 new variable
 meta#:#meta_oer_harvester#:#OER Harvester###10 11 2018 new variable
 meta#:#meta_oer_harvester_desc#:#OER Harvester###10 11 2018 new variable
+meta#:#meta_oer_object_type_selection#:#Harvested Object Types###28 10 2024 new variable
 meta#:#meta_oer_target#:#Category for Release OER Content###10 11 2018 new variable
 meta#:#meta_opera#:#Opera###26 08 2024 new variable
 meta#:#meta_operating_system#:#سیستم عامل
@@ -12998,6 +13260,7 @@ poll#:#poll_block_message_already_voted#:#You already voted in this poll.###28 0
 poll#:#poll_block_message_no_answers#:#This poll is incomplete.###28 08 2012 new variable
 poll#:#poll_block_results_available_on#:#The results will be available on %s.###04 09 2012 new variable
 poll#:#poll_cannot_set_online_no_answers#:#The status cannot be changed to &quot;online&quot; because this poll has no question!###26 08 2024 new variable
+poll#:#poll_chart_votes#:#Votes###28 10 2024 new variable
 poll#:#poll_comments#:#Comments###26 09 2014 new variable
 poll#:#poll_copy#:#Copy Poll###28 08 2012 new variable
 poll#:#poll_delete_votes#:#Delete All Votes###28 08 2012 new variable
@@ -13022,7 +13285,6 @@ poll#:#poll_notification_deactivated#:#Notification Deactivated###26 08 2024 new
 poll#:#poll_notification_subscribe#:#Activate Notification###26 09 2014 new variable
 poll#:#poll_notification_unsubscribe#:#Deactivate Notification###26 09 2014 new variable
 poll#:#poll_percentage#:#Current Percentage###28 08 2012 new variable
-poll#:#poll_piechart#:#Pie Chart###26 09 2014 new variable
 poll#:#poll_population#:#%s Votes###28 08 2012 new variable
 poll#:#poll_population_singular#:#1 Participant###26 08 2024 new variable
 poll#:#poll_question#:#Question###28 08 2012 new variable
@@ -13034,6 +13296,7 @@ poll#:#poll_result_sorting_votes#:#By number of votes (descending)###26 09 2014 
 poll#:#poll_result_users#:#Participants###26 09 2014 new variable
 poll#:#poll_show_results_as#:#Show Results as###26 09 2014 new variable
 poll#:#poll_sortorder#:#Order###28 08 2012 new variable
+poll#:#poll_stacked_chart#:#Stacked Chart###28 10 2024 new variable
 poll#:#poll_view_results#:#Display Results###28 08 2012 new variable
 poll#:#poll_view_results_after_period#:#After Voting Period ###28 08 2012 new variable
 poll#:#poll_view_results_after_period_impossible#:#The voting period is not limited.###27 01 2015 new variable
@@ -13165,6 +13428,7 @@ prg#:#prg_auto_member_select_crs#:#Courses###07 02 2020 new variable
 prg#:#prg_auto_member_select_grp#:#Groups###07 02 2020 new variable
 prg#:#prg_auto_member_select_role#:#Roles###07 02 2020 new variable
 prg#:#prg_autoassignment#:#(auto)###07 02 2020 new variable
+prg#:#prg_availability_action_not_allowed#:#Cannot set Availability Period on Study Programmes.###28 10 2024 new variable
 prg#:#prg_belongs_to#:#Belongs to###30 08 2015 new variable
 prg#:#prg_can_not_manage_in_repo#:#You're not allowed to manage this Study Programme, because of user assignments.###23 12 2015 new variable
 prg#:#prg_cancel#:#Cancel###29 07 2022 new variable
@@ -13181,6 +13445,7 @@ prg#:#prg_create_new_leaf#:#Create new leaf###30 08 2015 new variable
 prg#:#prg_create_new_node#:#Create new node###30 08 2015 new variable
 prg#:#prg_cron_job_configuration#:#Configuration automatic Mails###07 02 2020 new variable
 prg#:#prg_custom_plan#:#Custom Plan###30 08 2015 new variable
+prg#:#prg_cut_action_not_allowed#:#Cannot move Study Programmes###28 10 2024 new variable
 prg#:#prg_dash_label_finish_until#:#Finish until###07 02 2020 new variable
 prg#:#prg_dash_label_gain#:#Current Completion###07 02 2020 new variable
 prg#:#prg_dash_label_minimum#:#Minimum Completion###07 02 2020 new variable
@@ -13207,6 +13472,7 @@ prg#:#prg_description#:#Description###29 07 2022 new variable
 prg#:#prg_edit#:#Edit Study Programme###30 08 2015 new variable
 prg#:#prg_expiry_date#:#Expiry date###07 02 2020 new variable
 prg#:#prg_formatted_period#:#%d days###07 02 2020 new variable
+prg#:#prg_import_action_not_allowed#:#Cannot import into Study Programmes.###28 10 2024 new variable
 prg#:#prg_invalidate_expired_progresses_desc#:#Marks expired progresses at Studyprogrammes as 'not passed'###07 02 2020 new variable
 prg#:#prg_invalidate_expired_progresses_title#:#Limited validity of Studyprogramme progress###07 02 2020 new variable
 prg#:#prg_link#:#Link###29 07 2022 new variable
@@ -13398,10 +13664,6 @@ prg#:#will_not_set_top_progress_to_irrelevant#:#Cannot change top node to irrele
 prg#:#will_not_update_cert_for_unsuccessful_progress#:#No certificate for unsuccessful programme###26 08 2024 new variable
 prtf#:#pdf_export#:#PDF Export###31 08 2017 new variable
 prtf#:#prtf_add_assignment#:#Add Assignment###29 07 2022 new variable
-prtf#:#prtf_add_blog#:#اضافه کردن بلاگ
-prtf#:#prtf_add_existing_blog#:#Use Existing Blog###31 08 2017 new variable
-prtf#:#prtf_add_new_blog#:#Add New Blog###31 08 2017 new variable
-prtf#:#prtf_add_new_blog_info#:#The new blog will be added to your personal workspace.###31 08 2017 new variable
 prtf#:#prtf_add_page#:#اضافه کردن صفحه
 prtf#:#prtf_add_portfolio#:#اضافه کردن نمونه کار
 prtf#:#prtf_add_portfolio_from_template#:#Add Portfolio From Template###26 08 2024 new variable
@@ -13412,7 +13674,6 @@ prtf#:#prtf_allow_my_courses#:#Page Element "My Courses"###27 01 2015 new variab
 prtf#:#prtf_allow_my_courses_info#:#Enables to include a list of current course memberships in a portfolio.###27 01 2015 new variable
 prtf#:#prtf_author#:#Author###31 08 2017 new variable
 prtf#:#prtf_back_to_portfolio_owner#:#Edit Portfolio ###30 08 2015 new variable
-prtf#:#prtf_banner#:#Banner
 prtf#:#prtf_blog_page_created#:#Blog has been added.###27 01 2015 new variable
 prtf#:#prtf_copy_blog_pg#:#Copy Blog Page###29 07 2022 new variable
 prtf#:#prtf_copy_page#:#کپی صفحه
@@ -13465,10 +13726,6 @@ prtf#:#prtf_portfolio_created_from_template#:#This is the preview of your new po
 prtf#:#prtf_portfolio_deleted#:#Portfolios deleted
 prtf#:#prtf_portfolio_page_deleted#:#Portfolio pages deleted
 prtf#:#prtf_portfolios#:#نمونه کارها
-prtf#:#prtf_preview_banner#:#بنر سفارشی
-prtf#:#prtf_preview_banner_height#:#ارتفاع بنر
-prtf#:#prtf_preview_banner_info#:#اندازه پیش فرض 880x100 پیکسل است.
-prtf#:#prtf_preview_banner_width#:#عرض بنر
 prtf#:#prtf_print_options#:#Options###31 08 2017 new variable
 prtf#:#prtf_print_selection#:#Page Selection###31 08 2017 new variable
 prtf#:#prtf_profile_picture#:#نمایش عکس نمایه
@@ -13479,8 +13736,6 @@ prtf#:#prtf_role_title#:#Role###29 07 2022 new variable
 prtf#:#prtf_save_status_and_titles#:#ذخیره کردن وضعیت و عنوان
 prtf#:#prtf_sec_protected_info#:#Protected sections cannot be edited by portfolio owners.###29 07 2022 new variable
 prtf#:#prtf_selected_pages#:#Selected Pages###31 08 2017 new variable
-prtf#:#prtf_set_as_default#:#Set As Default
-prtf#:#prtf_set_default_publish_confirmation#:#The portfolio needs to be shared at least with all registered users. Should it be visible to the internet without registration, too?
 prtf#:#prtf_set_default_publish_global#:#Share with unregistered users also###23 12 2015 new variable
 prtf#:#prtf_set_default_publish_registered#:#Share with registered users only###23 12 2015 new variable
 prtf#:#prtf_set_offline#:#Set Offline###10 11 2018 new variable
@@ -13738,6 +13993,8 @@ rbac#:#blog_write#:#User can edit blog settings###28 08 2012 new variable
 rbac#:#book_copy#:#User can copy booking pool###31 08 2017 new variable
 rbac#:#book_delete#:#User can move or delete booking pool###28 08 2012 new variable
 rbac#:#book_edit_permission#:#User can change permission settings for booking pool###28 08 2012 new variable
+rbac#:#book_manage_all_reservations#:#User can manage all reservations###28 10 2024 new variable
+rbac#:#book_manage_own_reservations#:#User can manage own reservations###28 10 2024 new variable
 rbac#:#book_read#:#User can book resources / objects in booking pool###28 08 2012 new variable
 rbac#:#book_visible#:#Booking pool is visible###28 08 2012 new variable
 rbac#:#book_write#:#User can edit settings and content of booking pool###28 08 2012 new variable
@@ -13806,6 +14063,7 @@ rbac#:#coms_visible#:#Administration of Comments is visible.###29 07 2022 new va
 rbac#:#coms_write#:#User can edit settings of administration of Comments.###29 07 2022 new variable
 rbac#:#condition_failed#:#Failed###26 09 2014 new variable
 rbac#:#condition_learning_progress#:#Derive from Learning Progress###26 09 2014 new variable
+rbac#:#condition_result_range_percentage#:#Result Range###28 10 2024 new variable
 rbac#:#contribute#:#Contribute###28 08 2012 new variable
 rbac#:#copa_copy#:#Copy Content Page###10 11 2018 new variable
 rbac#:#copa_delete#:#User can move or delete Content Page###10 11 2018 new variable
@@ -14074,9 +14332,11 @@ rbac#:#mail_smtp_mail#:#User can send e-mails per SMTP to external addresses###2
 rbac#:#mail_to_global_roles#:#ایمیل به نقش های سراسری
 rbac#:#mail_visible#:#Mail administration is visible###28 08 2012 new variable
 rbac#:#mail_write#:#User can edit settings in Mail administration###28 08 2012 new variable
+rbac#:#manage_all_reservations#:#Manage All Reservations###28 10 2024 new variable
 rbac#:#manage_comp#:#User can edit Competences###29 07 2022 new variable
 rbac#:#manage_comp_temp#:#User can edit Competence Templates###29 07 2022 new variable
 rbac#:#manage_materials#:#Manage Materials###10 11 2018 new variable
+rbac#:#manage_own_reservations#:#Manage Own Reservations###28 10 2024 new variable
 rbac#:#manage_profiles#:#User can edit Competence Profiles###29 07 2022 new variable
 rbac#:#mcst_copy#:#User can copy mediacast###28 08 2012 new variable
 rbac#:#mcst_delete#:#User can move or delete mediacast###28 08 2012 new variable
@@ -14170,6 +14430,9 @@ rbac#:#precondition_obligatory#:#واجب
 rbac#:#precondition_obligatory_alt#:#Precondition must be fulfilled
 rbac#:#precondition_obligatory_info#:#Obligatory preconditions must be fulfilled, for having access.
 rbac#:#precondition_obligatory_settings#:#تنظیمات پیش شرط
+rbac#:#precondition_operator_range_err_min_max#:#The minimum value must be less than the maximum value.###28 10 2024 new variable
+rbac#:#precondition_operator_range_max#:#Maximum Percentage###28 10 2024 new variable
+rbac#:#precondition_operator_range_min#:#Minimum Percentage###28 10 2024 new variable
 rbac#:#prfa_edit_permission#:#تغییر تنظیمات مجوز
 rbac#:#prfa_read#:#دسترسی خوندن به مدیریت نمونه کار
 rbac#:#prfa_visible#:#نمونه کار قابل مشاهده است
@@ -14239,7 +14502,6 @@ rbac#:#rbac_create_book#:#Create Booking Pool
 rbac#:#rbac_create_cat#:#Create Categories###28 08 2012 new variable
 rbac#:#rbac_create_catr#:#ساختن مرجع دسته
 rbac#:#rbac_create_chtr#:#ساختن چت روم
-rbac#:#rbac_create_cld#:#Create new Cloud Object###24 10 2013 new variable
 rbac#:#rbac_create_cmix#:#Create xAPI/cmi5 Object###07 02 2020 new variable
 rbac#:#rbac_create_copa#:#Create Content Page###10 11 2018 new variable
 rbac#:#rbac_create_crs#:#ساختن درس
@@ -15117,7 +15379,6 @@ search#:#lucene_port#:#Port
 search#:#lucene_prefix_wildcard#:#Prefix Wildcard Queries###24 10 2013 new variable
 search#:#lucene_prefix_wildcard_info#:#If enabled, prefix wildcard queries (*LIAS finds ILIAS) are supported.###24 10 2013 new variable
 search#:#lucene_relevance#:#مربوط بودن نتایج جستجو
-search#:#lucene_relevance_short#:#Relevance
 search#:#lucene_settings_tab#:#جستجوی ویژه
 search#:#lucene_settings_title#:#تنظیمات جستجوی ویژه
 search#:#lucene_show_relevance#:#نمایش ربط
@@ -15189,6 +15450,14 @@ search#:#search_show_inactive_user#:#Show Inactive Users###30 08 2015 new variab
 search#:#search_show_inactive_user_info#:#If enabled, the user search will show inactive users.###30 08 2015 new variable
 search#:#search_show_limited_user#:#Show Limited Users###30 08 2015 new variable
 search#:#search_show_limited_user_info#:#If enabled, the user search will show users with limited access and outside their allowed time period.###30 08 2015 new variable
+search#:#search_sort_by#:#Sortation: %s###28 10 2024 new variable
+search#:#search_sort_creation_date_asc#:#Oldest###28 10 2024 new variable
+search#:#search_sort_creation_date_desc#:#Latest###28 10 2024 new variable
+search#:#search_sort_generic_asc#:#%s, asc.###28 10 2024 new variable
+search#:#search_sort_generic_desc#:#%s, desc.###28 10 2024 new variable
+search#:#search_sort_relevance#:#By Relevance###28 10 2024 new variable
+search#:#search_sort_title_asc#:#Alphabetically: A-Z###28 10 2024 new variable
+search#:#search_sort_title_desc#:#Alphabetically: Z-A###28 10 2024 new variable
 search#:#search_term_combination#:#ترکیب
 search#:#search_title_description#:#عنوان / توضیح
 search#:#search_tst_svy#:#تستها/بررسی ها
@@ -15293,8 +15562,14 @@ sess#:#sess_users_added#:#Registered selected users for the session.###26 09 201
 sess#:#sess_users_already_assigned#:#The user is already registered for this session.###26 09 2014 new variable
 sess#:#sess_users_removed_from_list#:#The selected users have been removed from the waiting list.###26 09 2014 new variable
 sess#:#sess_warn_sess_type_changed#:#Do you really want to change the session type? All permission settings will be reset.###29 07 2022 new variable
-shib#:#shib_activate_new#:#New Accounts with Approval###31 08 2017 new variable
-shib#:#shib_activate_new_info#:#If checked any new account creation has to be approved by an administrator.###31 08 2017 new variable
+shib#:#shib_account_creation#:#Account Creation###28 10 2024 new variable
+shib#:#shib_account_creation_disabled#:#Disabled###28 10 2024 new variable
+shib#:#shib_account_creation_disabled_info#:#No new account is created.###28 10 2024 new variable
+shib#:#shib_account_creation_enabled#:#Enabled###28 10 2024 new variable
+shib#:#shib_account_creation_enabled_info#:#An active new account is created.###28 10 2024 new variable
+shib#:#shib_account_creation_info#:#Account creation is triggered, when a user without a pre-existing ILIAS Account tries to log in via Shibboleth.###28 10 2024 new variable
+shib#:#shib_account_creation_with_approval#:#With approval###28 10 2024 new variable
+shib#:#shib_account_creation_with_approval_info#:#An inactive new account is created. The account remains inactive until activated by an administrator.###28 10 2024 new variable
 shib#:#shib_add_missing#:#Assign Missing Roles
 shib#:#shib_add_remove#:#Add/Remove Roles
 shib#:#shib_assignment_type#:#Kind of Assignment
@@ -16287,6 +16562,7 @@ survey#:#survey_360_mode#:#360° Feedback###24 10 2013 new variable
 survey#:#survey_360_mode_info#:#Use for peer-reviewing of persons###24 10 2013 new variable
 survey#:#survey_360_no_appraisees#:#There are currently no appraisees for you to rate.###24 10 2013 new variable
 survey#:#survey_360_no_closed_appraisees#:#No appraisee has closed his survey yet.###24 10 2013 new variable
+survey#:#survey_360_rate_other_appraisee#:#Rate Appraisee###28 10 2024 new variable
 survey#:#survey_360_rate_other_appraisees#:#Rate appraisees###24 10 2013 new variable
 survey#:#survey_360_rater_finished#:#Survey Finished###24 10 2013 new variable
 survey#:#survey_360_rater_mail_sent#:#Mail sent###24 10 2013 new variable
@@ -16577,12 +16853,16 @@ survey#:#warning_question_not_complete#:#The question is not complete!
 survey#:#workingtime#:#زمان کار
 svy#:#survey_360_appraisees_remind_info#:#If self evaluation is activated, appraisees that have not yet finished the survey will be reminded.###31 08 2017 new variable
 svy#:#survey_360_raters_remind_info#:#Raters that have not yet finished the survey will be reminded.###31 08 2017 new variable
+svy#:#svy_0_open_appraisees#:#You cannot perform the survey for any appraisee anymore.###28 10 2024 new variable
 svy#:#svy_all_pages#:#All Pages###29 07 2022 new variable
 svy#:#svy_all_participants#:#All Participants###29 07 2022 new variable
 svy#:#svy_all_questions#:#All Questions###29 07 2022 new variable
+svy#:#svy_code#:#Access Code###28 10 2024 new variable
 svy#:#svy_codes#:#Access Codes###07 02 2020 new variable
 svy#:#svy_current_page#:#Current Page###29 07 2022 new variable
 svy#:#svy_finish_survey#:#Finish survey '%1'###07 02 2020 new variable
+svy#:#svy_finished_x_appraisees#:#You have finished the survey for %s appraisee(s).###28 10 2024 new variable
+svy#:#svy_information#:#Information###28 10 2024 new variable
 svy#:#svy_invite_participants#:#Invite Participants###07 02 2020 new variable
 svy#:#svy_link_to_svy#:#Link to Survey###26 08 2024 new variable
 svy#:#svy_part_overview#:#Overview###07 02 2020 new variable
@@ -16605,6 +16885,11 @@ svy#:#svy_user_added_rater_mail#:#You have been added as a rater to the survey.#
 svy#:#svy_user_added_rater_reminder_mail#:#Please finish to rate the following appraisees:###26 08 2024 new variable
 svy#:#svy_user_not_found#:#User not found.###26 08 2024 new variable
 svy#:#svy_users_invited#:#Users have been invited.###07 02 2020 new variable
+svy#:#svy_x_appraisees_closed_for_raters#:#%s appraisee(s) has/have closed the survey for raters.###28 10 2024 new variable
+svy#:#svy_x_open_appraisees#:#%s appraisee(s) are open for you to rate.###28 10 2024 new variable
+svy#:#svy_your_appraisees#:#Your Appraisees###28 10 2024 new variable
+svy#:#svy_your_raters#:#Your Raters###28 10 2024 new variable
+svy#:#svy_your_raters_finished#:#%s of your raters have finished the survey.###28 10 2024 new variable
 sysc#:#sysc_action_list_tree#:#Create Repository Tree Dump###30 08 2015 new variable
 sysc#:#sysc_action_repair#:#Repair###30 08 2015 new variable
 sysc#:#sysc_action_show_tree#:#Show Repository Tree Dump###30 08 2015 new variable
@@ -16666,6 +16951,7 @@ tagging#:#tagging_enable_all_users_info#:#یک قسمت با عنوان "همه 
 tagging#:#tagging_enable_tagging#:#فعال کردن برچسب گذاری
 tagging#:#tagging_forbidden_tags#:#برچسبهای ممنوع
 tagging#:#tagging_no_obj_for_tag#:#No Resources tagged with %s.###29 07 2022 new variable
+tagging#:#tagging_no_perm_write#:#You have no permission to change this data.###28 10 2024 new variable
 tagging#:#tagging_other_users#:#Other Users###26 09 2014 new variable
 tagging#:#tagging_resources_for_tag#:#منابع با برچسب %s گذاری شدند
 tagging#:#tagging_search_users#:#جستجوی کاربران
@@ -17005,6 +17291,11 @@ ui#:#duration_default_label_end#:#end###29 07 2022 new variable
 ui#:#duration_default_label_start#:#start###29 07 2022 new variable
 ui#:#duration_end_must_not_be_earlier_than_start#:#Start must not be later than end.###29 07 2022 new variable
 ui#:#filter_nodes_in#:#Filter Nodes in %s###26 08 2024 new variable
+ui#:#footer_icons#:#Footer Icons###28 10 2024 new variable
+ui#:#footer_link_groups#:#Footer Link-Groups###28 10 2024 new variable
+ui#:#footer_links#:#Footer Links###28 10 2024 new variable
+ui#:#footer_permanent_link#:#Footer Permanent Link###28 10 2024 new variable
+ui#:#footer_texts#:#Footer Texts###28 10 2024 new variable
 ui#:#label_fieldselection#:#Field Selection###26 08 2024 new variable
 ui#:#label_fieldselection_refresh#:#Apply###26 08 2024 new variable
 ui#:#label_pagination_limit#:#Pagination Number of Rows###26 08 2024 new variable
@@ -17027,6 +17318,7 @@ ui#:#table_posinput_col_title#:#Position###26 08 2024 new variable
 ui#:#ui_chars_max#:#Maximum:###10 11 2018 new variable
 ui#:#ui_chars_min#:#Minimum:###10 11 2018 new variable
 ui#:#ui_chars_remaining#:#Characters remaining:###10 11 2018 new variable
+ui#:#ui_error#:#Error###28 10 2024 new variable
 ui#:#ui_error_in_group#:#There is some error in this part.###29 07 2022 new variable
 ui#:#ui_error_switchable_group_required#:#Please select an option.###29 07 2022 new variable
 ui#:#ui_file_input_general_error#:#An error occurred! You can check the JavaScript console of your browser for more information and/or contact your ILIAS system administration about this incident.###29 07 2022 new variable
@@ -17045,6 +17337,12 @@ ui#:#ui_table_no_records#:#No records###26 08 2024 new variable
 ui#:#ui_transcription#:#Transcript###29 07 2022 new variable
 user#:#all_roles_has_starting_point#:#All the roles have starting points###31 08 2017 new variable
 user#:#back_to_starting_points_list#:#Back to Starting Points###31 08 2017 new variable
+user#:#change_email_email_confirmation_body#:#The email address for the account %s was changed. To confirm this change, please click on this link %s. The link is valid for %s minutes.###28 10 2024 new variable
+user#:#change_email_email_confirmation_subject#:#Confirm Email Address###28 10 2024 new variable
+user#:#change_email_email_information_body#:#The process to change the email address for the account %s to %s was started. An email with a link to confirm the change was sent to the new address. The link is valid for %s minutes.###28 10 2024 new variable
+user#:#change_email_email_information_subject#:#Information about Change of Email Address###28 10 2024 new variable
+user#:#change_email_email_sent#:#An email with a link to confirm your change has been sent. Please check your inbox and make sure to also look in the spam-folder if the email doesn't arrive within the next minutes.###28 10 2024 new variable
+user#:#change_email_info_message#:#There is a pending request to change the email address for this account.###28 10 2024 new variable
 user#:#clipboard_add_btn#:#Add to Clipboard###25 10 2016 new variable
 user#:#clipboard_add_from_btn#:#Add from Clipboard###23 10 2017 new variable
 user#:#clipboard_empty_btn#:#Empty Clipboard###25 10 2016 new variable
@@ -17053,6 +17351,7 @@ user#:#clipboard_table_title#:#Clipboard (User Accounts)###25 10 2016 new variab
 user#:#clipboard_user_added#:#Added selected users to clipboard.###25 10 2016 new variable
 user#:#confirm_delete_starting_point#:#Are you sure you want to delete this rule?###31 08 2017 new variable
 user#:#confirm_logout_for_email_change#:#You changed your email. To finalize this change, you will need to provide your password. The system is thus going to log you out and you will have 5 minutes to log in again. All other changes will be saved before logging you out.###26 08 2024 new variable
+user#:#confirm_logout_for_email_change_with_confirmation#:#Additionally, a confirmation that you control the new email address will be required. After you have logged in again, an email will be sent to you. Please click on the link in the email to confirm that you contoll the address. The change of the email address will only take effect once this second step is also finalized.###28 10 2024 new variable
 user#:#create_starting_point#:#Create Rule###31 08 2017 new variable
 user#:#criteria#:#Criteria###31 08 2017 new variable
 user#:#del_mail_body#:#Hello %1$s, %2$s you haven't logged in for a long period of time, on %3$s. So your account will be deleted in %4$s days. You have to login again to prevent the deletion of your account.###26 09 2014 new variable
@@ -17154,6 +17453,7 @@ user#:#user_profile_info_text_info#:#This text is presented on top of the form f
 user#:#user_profile_portfolio#:#می توانید یک نمونه کار را به عنوان نمایه عمومی بکار ببرید.
 user#:#user_profile_portfolio_selected#:#You are currently using a portfolio as your profile.
 user#:#user_profile_preview#:#پیش نمایش
+user#:#user_profile_prompt_text#:#Prompt Text###28 10 2024 new variable
 user#:#user_profile_prompt_text_info#:#This text will replace the default info text, if a user has been prompted to the profile.###10 11 2018 new variable
 user#:#user_prompt_incomplete#:#Only if profile is incomplete###10 11 2018 new variable
 user#:#user_prompt_incomplete_info#:#If the user has to enter required fields, the profile will be shown after login.###10 11 2018 new variable
@@ -17430,6 +17730,9 @@ wiki#:#wiki_whole_wiki#:#تمام ویکی
 wiki#:#wiki_wiki_page#:#صفحه ویکی
 wiki#:#wiki_wiki_search#:#جستجوی ویکی
 wiki#:#wiki_wpg#:#Wiki Page###26 09 2014 new variable
+wopi#:#action_edit#:#Edit###28 10 2024 new variable
+wopi#:#action_view#:#View###28 10 2024 new variable
+wopi#:#activate_saving_interval#:#Activate Saving Interval###28 10 2024 new variable
 wopi#:#activate_wopi#:#Activate WOPI###26 08 2024 new variable
 wopi#:#close_wopi_editor#:#Close Editor###26 08 2024 new variable
 wopi#:#close_wopi_editor_info#:#It can take up to several minutes for the external editor to transfer the changes to ILIAS. Visit this page again at a later time if the changes you have made are not yet visible.###26 08 2024 new variable
@@ -17437,6 +17740,9 @@ wopi#:#currently_supported#:#Currently supported Suffixes: %s###26 08 2024 new v
 wopi#:#msg_error_wopi_invalid_discorvery_url#:#The Discovery URL entered is invalid or cannot be accessed.###26 08 2024 new variable
 wopi#:#msg_wopi_settings_modified#:#Settings stored###26 08 2024 new variable
 wopi#:#open_external_editor#:#Open in external Editor###26 08 2024 new variable
+wopi#:#open_external_viewer#:#Show Content###28 10 2024 new variable
+wopi#:#saving_interval#:#Interval###28 10 2024 new variable
+wopi#:#saving_interval_byline#:#By default, ILIAS adds all changes made by an external editor to a draft version until this version is published manually. Activating the save interval causes a new version to be published after the specified number of seconds, if possible. Please note that a low value can lead to a large number of file versions, which in turn takes up a multiple of the hard disk space.###28 10 2024 new variable
 wopi#:#wopi_crawler_cronjob_description#:#Updates the information of the connected WOPI service.###26 08 2024 new variable
 wopi#:#wopi_crawler_cronjob_no_apps#:#No WOPI apps were found in the discovery.###26 08 2024 new variable
 wopi#:#wopi_crawler_cronjob_not_activated#:#WOPI is not activated.###26 08 2024 new variable
