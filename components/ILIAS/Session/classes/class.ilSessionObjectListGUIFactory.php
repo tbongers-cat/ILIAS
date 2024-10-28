@@ -65,7 +65,6 @@ class ilSessionObjectListGUIFactory
         $item_list_gui->enablePath(false);
         $item_list_gui->enableLinkedPath(false);
         $item_list_gui->enableSearchFragments(false);
-        $item_list_gui->enableRelevance(false);
         $item_list_gui->enableCheckbox(false);
         return self::$item_list_gui[$a_type] = $item_list_gui;
     }
