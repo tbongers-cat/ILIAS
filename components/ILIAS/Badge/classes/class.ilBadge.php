@@ -381,6 +381,7 @@ class ilBadge
 
             return "img" . $this->getId() . "." . $suffix;
         } else {
+            // TODO gvollbach: This seems to be dead code, the $image_rid is never used 
             $image_rid = $this->getImageRid();
             #  $image_src = $this->badge_image_service->getImageFromBadge($a_badge);
         }
