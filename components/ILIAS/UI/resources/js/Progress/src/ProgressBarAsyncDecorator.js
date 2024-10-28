@@ -132,7 +132,7 @@ export default class ProgressBarAsyncDecorator {
       const state = await this.#asyncRenderer.loadContent(this.#asyncUrl);
       this.#handleState(state);
     } catch (error) {
-      this.#progressBar.failure(error.message);
+      this.failure(error.message);
     } finally {
       this.#isFetching = false;
     }
