@@ -150,7 +150,6 @@ class ilBadgeImageTemplateTableGUI
                         [],
                         fn($ret, $key, $value) => [$key, $value]
                     );
-
                     usort($data, fn($a, $b) => $a[$order_field] <=> $b[$order_field]);
                     if ($order_direction === 'DESC') {
                         $data = array_reverse($data);

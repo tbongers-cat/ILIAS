@@ -105,7 +105,7 @@ class ilBadgePersonalTableGUI
                 return count($this->getRecords());
             }
 
-            protected function getRecords(Range $range = null, Order $order = null): array
+            private function getRecords(Range $range = null, Order $order = null): array
             {
                 $data = [];
                 $a_user_id = $this->user->getId();
@@ -178,6 +178,7 @@ class ilBadgePersonalTableGUI
                         'active' => (bool) $ass->getPosition()
                     ];
                 }
+
                 return $data;
             }
         };

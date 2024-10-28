@@ -130,14 +130,14 @@ class ilBadgeUserTableGUI
                 }
 
                 $tmp['set'] = [];
-                if (count($user_ids) > 0) {
+                if (\count($user_ids) > 0) {
                     $uquery = new ilUserQuery();
                     $uquery->setLimit(9999);
                     $uquery->setUserFilter($user_ids);
                     $tmp = $uquery->query();
                 }
                 foreach ($tmp['set'] as $user) {
-                    if (is_array($assignments) && array_key_exists($user['usr_id'], $assignments)) {
+                    if (\is_array($assignments) && \array_key_exists($user['usr_id'], $assignments)) {
                         foreach ($assignments[$user['usr_id']] as $user_ass) {
                             $idx = $user_ass->getBadgeId() . '-' . $user['usr_id'];
                             $badge = $badges[$user_ass->getBadgeId()];
@@ -201,7 +201,7 @@ class ilBadgeUserTableGUI
                 ?array $filter_data,
                 ?array $additional_parameters
             ): ?int {
-                return count($this->getRecords());
+                return \count($this->getRecords());
             }
 
             /**
@@ -231,8 +231,9 @@ class ilBadgeUserTableGUI
                         $data = array_reverse($data);
                     }
                 }
+
                 if ($range) {
-                    $data = array_slice($data, $range->getStart(), $range->getLength());
+                    $data = \array_slice($data, $range->getStart(), $range->getLength());
                 }
 
                 return $data;

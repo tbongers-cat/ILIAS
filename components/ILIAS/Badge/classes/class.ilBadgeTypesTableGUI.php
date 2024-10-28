@@ -139,6 +139,7 @@ class ilBadgeTypesTableGUI
                         $data = array_reverse($data);
                     }
                 }
+
                 if ($range) {
                     $data = \array_slice($data, $range->getStart(), $range->getLength());
                 }
