@@ -143,7 +143,6 @@ class ilObjectListGUI
     protected bool $search_fragments_enabled = false;
     protected string $search_fragment = '';
     protected bool $path_linked = false;
-    protected bool $enabled_relevance = false;
     protected int $relevance = 0;
     protected bool $expand_enabled = false;
     protected bool $is_expanded = true;
@@ -329,16 +328,6 @@ class ilObjectListGUI
     public function enableLinkedPath(bool $status): void
     {
         $this->path_linked = $status;
-    }
-
-    public function enableRelevance(bool $status): void
-    {
-        $this->enabled_relevance = $status;
-    }
-
-    public function enabledRelevance(): bool
-    {
-        return $this->enabled_relevance;
     }
 
     public function setRelevance(int $rel): void
@@ -1193,20 +1182,6 @@ class ilObjectListGUI
             $this->tpl->setVariable('TXT_SEARCH_FRAGMENT', $this->getSearchFragment() . ' ...');
             $this->tpl->parseCurrentBlock();
         }
-    }
-
-    public function insertRelevance(): void
-    {
-        if (!$this->enabledRelevance() or !$this->getRelevance()) {
-            return;
-        }
-
-        $pbar = ilProgressBar::getInstance();
-        $pbar->setCurrent($this->getRelevance());
-
-        $this->tpl->setCurrentBlock('relevance');
-        $this->tpl->setVariable('REL_PBAR', $pbar->render());
-        $this->tpl->parseCurrentBlock();
     }
 
     /**
@@ -2811,9 +2786,6 @@ class ilObjectListGUI
 
         if ($this->getSearchFragmentStatus()) {
             $this->insertSearchFragment();
-        }
-        if ($this->enabledRelevance()) {
-            $this->insertRelevance();
         }
 
         // properties
