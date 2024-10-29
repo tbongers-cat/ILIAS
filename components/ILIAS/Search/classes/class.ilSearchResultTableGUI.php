@@ -255,8 +255,6 @@ class ilSearchResultTableGUI extends ilTable2GUI
 
     protected function enabledRelevance(): bool
     {
-        return
-            ilSearchSettings::getInstance()->enabledLucene() &&
-            ilSearchSettings::getInstance()->isRelevanceVisible();
+        return ilSearchSettings::getInstance()->enabledLucene();
     }
 }
