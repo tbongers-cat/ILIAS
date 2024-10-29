@@ -10,6 +10,18 @@ use ILIAS\UI\URLBuilder;
 use Psr\Http\Message\ServerRequestInterface;
 use ILIAS\Data\URI;
 
+/**
+ * ---
+ * description: >
+ *   Example showing an Ordering Table.
+ *
+ * expected output: >
+ *   ILIAS shows the rendered Component.
+ *   You may drag a row or give a new value for its position.
+ *   Clicking "Save" will return an array with the updated positions
+ *   and display the table with the new order applied.
+ * ---
+ */
 function base()
 {
     global $DIC;
@@ -139,7 +151,7 @@ function base()
         && $request_wrapper->has('ordering_example')
         && $request_wrapper->retrieve('ordering_example', $refinery->kindlyTo()->int()) === 1
     ) {
-        if($data = $table->getData()) {
+        if ($data = $table->getData()) {
             $out[] = $f->legacy('<pre>' . print_r($data, true) . '</pre>');
         }
         $data_retrieval->setOrder($data);

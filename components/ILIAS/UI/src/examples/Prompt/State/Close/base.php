@@ -13,7 +13,7 @@ use ILIAS\UI\URLBuilder;
  *   The example demonstrates how to use commands in the Response.
  *
  * expected output: >
- *   When clicking the button, the Prompt shows a Mesaae Box with a Link.
+ *   When clicking the button, the Prompt shows a Message Box with a Link.
  *   Using the Link will close the Prompt.
  * ---
  */

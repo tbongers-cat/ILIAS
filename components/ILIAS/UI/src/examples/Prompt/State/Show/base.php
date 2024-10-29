@@ -11,6 +11,8 @@ use ILIAS\UI\URLBuilder;
  * ---
  * description: >
  *   The example displays the HTML of a State.
+ * expected output: >
+ *   HTML is rendered to the preview; it sports several section-tags with a data-section attribute.
  * ---
  */
 function base()

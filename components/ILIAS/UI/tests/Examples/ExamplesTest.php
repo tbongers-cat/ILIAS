@@ -134,8 +134,6 @@ class ExamplesTest extends ILIAS_UI_TestBase
      */
     public function testAllExamplesRenderAString(string $example_function_name, string $example_path): void
     {
-        $this->markTestSkipped("2024-10-25: Shall be fixed soon by CaT");
-
         global $DIC;
         $DIC = $this->dic;
 
@@ -152,8 +150,6 @@ class ExamplesTest extends ILIAS_UI_TestBase
      */
     public function testAllExamplesHaveExpectedOutcomeInDocs(string $example_function_name, string $example_path)
     {
-        $this->markTestSkipped("2024-10-25: Shall be fixed soon by CaT");
-
         $docs = $this->example_parser->parseYamlStringArrayFromFile($example_path);
         $this->assertArrayHasKey('expected output', $docs);
     }

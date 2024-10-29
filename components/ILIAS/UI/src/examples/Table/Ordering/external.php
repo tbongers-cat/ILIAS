@@ -8,6 +8,17 @@ use ILIAS\UI\Implementation\Component\Table as T;
 use ILIAS\UI\Component\Table as I;
 use ILIAS\Data\URI;
 
+/**
+ * ---
+ * description: >
+ *   Example showing an Ordering Table with validation on the ordering.
+ *
+ * expected output: >
+ *   ILIAS shows the rendered Component.
+ *   You may order rows in any way, but upon saving, only the correct order is
+ *   accepted. A Message will tell you.
+ * ---
+ */
 function external()
 {
     global $DIC;
@@ -99,7 +110,7 @@ function external()
         && $request_wrapper->retrieve('ordering_example', $refinery->kindlyTo()->int()) === 3
     ) {
         $data = $table->withRequest($request)->getData();
-        if($data === range(65, 68)) {
+        if ($data === range(65, 68)) {
             $data_retrieval->setOrder($data);
             $out[] = $f->messageBox()->success("ok. great ordering!");
         } else {
