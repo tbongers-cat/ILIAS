@@ -30,7 +30,7 @@ class ilWebResourceDatabaseRepositoryTest extends TestCase
 {
     protected ?Container $dic = null;
     protected ilObjUser $user;
-    protected ilWebLinkRepository $web_link_repo;
+    protected ilWebLinkRepository&MockObject $web_link_repo;
 
     protected function setUp(): void
     {
@@ -82,7 +82,12 @@ class ilWebResourceDatabaseRepositoryTest extends TestCase
 
         $this->web_link_repo = $this->getMockBuilder(ilWebLinkDatabaseRepository::class)
                                     ->setConstructorArgs([$webr_id, $update_history])
-                                    ->onlyMethods(['getCurrentTime', 'getNewDateTimeImmutable'])
+                                    ->onlyMethods([
+                                        'getCurrentTime',
+                                        'getNewDateTimeImmutable',
+                                        'createHistoryEntry',
+                                        'isInternalLink'
+                                    ])
                                     ->getMock();
 
         $this->web_link_repo->method('getCurrentTime')
@@ -186,15 +191,6 @@ class ilWebResourceDatabaseRepositoryTest extends TestCase
                     ] => 3
                 });
 
-        $history = Mockery::mock('alias:' . ilHistory::class);
-        $history->shouldReceive('_createEntry')
-                ->once()
-                ->with(0, 'add', ['title']);
-
-        $link_input = Mockery::mock('alias:' . ilLinkInputGUI::class);
-        $link_input->shouldReceive('isInternalLink')
-                   ->never();
-
         $param1 = new ilWebLinkDraftParameter(
             ilWebLinkBaseParameter::VALUES['user_id'],
             'name1'
@@ -222,6 +218,12 @@ class ilWebResourceDatabaseRepositoryTest extends TestCase
             12345678,
             [$datetime1, $datetime2]
         );
+
+        $this->web_link_repo->expects($this->once())
+                            ->method('createHistoryEntry')
+                            ->with(0, 'add', ['title']);
+        $this->web_link_repo->expects($this->never())
+                            ->method('isInternalLink');
 
         $expected_param1 = new ilWebLinkParameter(
             $this->user,
@@ -308,17 +310,6 @@ class ilWebResourceDatabaseRepositoryTest extends TestCase
                     ] => 2
                 });
 
-        $history = Mockery::mock('alias:' . ilHistory::class);
-        $history->shouldReceive('_createEntry')
-                ->once()
-                ->with(0, 'add', ['title']);
-
-        $link_input = Mockery::mock('alias:' . ilLinkInputGUI::class);
-        $link_input->shouldReceive('isInternalLink')
-                   ->once()
-                   ->with('trg|123')
-                   ->andReturn(true);
-
         $param1 = new ilWebLinkDraftParameter(
             23,
             'name1'
@@ -346,6 +337,14 @@ class ilWebResourceDatabaseRepositoryTest extends TestCase
             12345678,
             [$datetime1, $datetime2]
         );
+
+        $this->web_link_repo->expects($this->once())
+                            ->method('createHistoryEntry')
+                            ->with(0, 'add', ['title']);
+        $this->web_link_repo->expects($this->once())
+                            ->method('isInternalLink')
+                            ->with('trg|123')
+                            ->willReturn(true);
 
         $expected_param2 = new ilWebLinkParameter(
             $this->user,
@@ -390,16 +389,6 @@ class ilWebResourceDatabaseRepositoryTest extends TestCase
         $mock_db->expects($this->never())
                 ->method('insert');
 
-        $history = Mockery::mock('alias:' . ilHistory::class);
-        $history->shouldReceive('_createEntry')
-                ->never();
-
-        $link_input = Mockery::mock('alias:' . ilLinkInputGUI::class);
-        $link_input->shouldReceive('isInternalLink')
-                   ->once()
-                   ->with('wrong link')
-                   ->andReturn(false);
-
         $param1 = new ilWebLinkDraftParameter(
             ilWebLinkBaseParameter::VALUES['user_id'],
             'name1'
@@ -427,6 +416,13 @@ class ilWebResourceDatabaseRepositoryTest extends TestCase
             12345678,
             [$datetime1, $datetime2]
         );
+
+        $this->web_link_repo->expects($this->never())
+                            ->method('createHistoryEntry');
+        $this->web_link_repo->expects($this->once())
+                            ->method('isInternalLink')
+                            ->with('wrong link')
+                            ->willReturn(false);
 
         $this->expectException(ilWebLinkDatabaseRepositoryException::class);
         $this->web_link_repo->createItem($item);
@@ -458,11 +454,6 @@ class ilWebResourceDatabaseRepositoryTest extends TestCase
                     ]
                 );
 
-        $history = Mockery::mock('alias:' . ilHistory::class);
-        $history->shouldReceive('_createEntry')
-                ->once()
-                ->with(0, 'add', ['title']);
-
         $list = new ilWebLinkDraftList(
             'title',
             null
@@ -478,6 +469,10 @@ class ilWebResourceDatabaseRepositoryTest extends TestCase
             12345678,
             [$datetime1, $datetime2]
         );
+
+        $this->web_link_repo->expects($this->once())
+                            ->method('createHistoryEntry')
+                            ->with(0, 'add', ['title']);
 
         $this->assertEquals(
             new ilWebLinkList(
