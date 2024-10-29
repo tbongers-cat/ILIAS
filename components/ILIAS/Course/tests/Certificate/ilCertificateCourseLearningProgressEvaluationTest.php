@@ -43,8 +43,6 @@ class ilCertificateCourseLearningProgressEvaluationTest extends TestCase
 {
     public function testOnlyOneCourseIsCompletedOnLPChange(): void
     {
-        //$this->markTestSkipped('Data Provider needs to be revisited.');
-
         $templateRepository = $this->getMockBuilder(ilCertificateTemplateRepository::class)->getMock();
 
         $templateRepository->method('fetchActiveCertificateTemplatesForCoursesWithDisabledLearningProgress')
@@ -157,8 +155,6 @@ class ilCertificateCourseLearningProgressEvaluationTest extends TestCase
 
     public function testAllCoursesAreCompletedOnLPChange(): void
     {
-        //$this->markTestSkipped('Data Provider needs to be revisited.');
-
         $templateRepository = $this->getMockBuilder(ilCertificateTemplateRepository::class)->getMock();
 
         $templateRepository->method('fetchActiveCertificateTemplatesForCoursesWithDisabledLearningProgress')
