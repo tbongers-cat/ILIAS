@@ -22,7 +22,7 @@ function with_string_action()
 
     //Generating and rendering the image and modal
     $image = $f->image()->standard(
-        "assets/ui-examples/imagesImage/HeaderIconLarge.svg",
+        "assets/ui-examples/images/Image/HeaderIconLarge.svg",
         "Thumbnail Example"
     )->withAction("https://www.ilias.de");
 

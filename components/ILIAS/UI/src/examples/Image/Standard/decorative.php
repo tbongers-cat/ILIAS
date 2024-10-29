@@ -24,7 +24,7 @@ function decorative()
 
     //Generating and rendering the image
     $image = $f->image()->standard(
-        "assets/ui-examples/imagesImage/HeaderIconLarge.svg",
+        "assets/ui-examples/images/Image/HeaderIconLarge.svg",
         ""
     );
     $html = $renderer->render($image);
