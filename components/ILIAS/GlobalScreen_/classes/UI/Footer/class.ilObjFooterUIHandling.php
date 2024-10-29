@@ -148,7 +148,7 @@ final class ilObjFooterUIHandling
         $this->tabs_gui->clearTargets();
 
         if (
-            $this->ctrl->getCmd() !== ilFooterEntriesGUI::CMD_DEFAULT
+            $this->ctrl->getCmd(ilFooterEntriesGUI::CMD_DEFAULT) !== ilFooterEntriesGUI::CMD_DEFAULT
             && $this->ctrl->getCmdClass() === strtolower(ilFooterEntriesGUI::class)
         ) {
             $this->tabs_gui->setBackTarget(
