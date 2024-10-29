@@ -59,6 +59,7 @@ class ilCertificateGUI
     private readonly ilCertificateTemplateExportAction $exportAction;
     private readonly ilCertificateTemplatePreviewAction $previewAction;
     private readonly FileUpload $fileUpload;
+    private readonly Filesystem $file_system;
     private readonly string $certificatePath;
     private readonly ilPageFormats $pageFormats;
     private readonly ilLogger $logger;
@@ -79,7 +80,7 @@ class ilCertificateGUI
         ilCertificateTemplatePreviewAction $previewAction = null,
         FileUpload $fileUpload = null,
         private readonly ilSetting $settings = new ilSetting('certificate'),
-        Filesystem $fileSystem = null,
+        Filesystem $file_system = null,
         Filesystem $tmp_file_system = null
     ) {
         global $DIC;
@@ -138,6 +139,7 @@ class ilCertificateGUI
             $this->irss
         );
         $this->fileUpload = $fileUpload ?? $DIC->upload();
+        $this->file_system = $file_system ?? $DIC->filesystem()->web();
         $this->database = $DIC->database();
     }
 
@@ -390,6 +392,22 @@ class ilCertificateGUI
         ) {
             $new_background_rid = null;
         }
+        if (
+            is_string($new_background_rid) &&
+            is_string($this->global_certificate_settings->getBackgroundImageIdentification()) &&
+            $new_background_rid === $this->global_certificate_settings->getBackgroundImageIdentification()
+        ) {
+            if ($this->file_system->has($new_background_rid)) {
+                $new_background_rid = $this->irss->manage()->stream(
+                    $this->file_system->readStream($new_background_rid),
+                    $this->stakeholder
+                );
+            } else {
+                $old_background_image = $new_background_rid;
+                $new_background_rid = null;
+            }
+        }
+
         $new_thumbnail_rid = !$should_delete_thumbnail ? $current_thumbnail_rid : null;
         if ($form->checkInput()) {
             try {
