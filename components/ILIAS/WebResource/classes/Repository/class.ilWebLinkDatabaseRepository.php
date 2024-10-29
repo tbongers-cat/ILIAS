@@ -120,7 +120,7 @@ class ilWebLinkDatabaseRepository implements ilWebLinkRepository
         );
 
         if ($this->isUpdateHistory()) {
-            ilHistory::_createEntry(
+            $this->createHistoryEntry(
                 $this->getWebrId(),
                 "add",
                 [$new_item->getTitle()]
@@ -154,7 +154,7 @@ class ilWebLinkDatabaseRepository implements ilWebLinkRepository
         );
 
         if ($this->isUpdateHistory()) {
-            ilHistory::_createEntry(
+            $this->createHistoryEntry(
                 $this->getWebrId(),
                 "add",
                 [$new_list->getTitle()]
@@ -427,7 +427,7 @@ class ilWebLinkDatabaseRepository implements ilWebLinkRepository
         }
 
         if ($this->isUpdateHistory()) {
-            ilHistory::_createEntry(
+            $this->createHistoryEntry(
                 $this->getWebrId(),
                 "update",
                 [$item->getTitle()]
@@ -458,7 +458,7 @@ class ilWebLinkDatabaseRepository implements ilWebLinkRepository
         );
 
         if ($this->isUpdateHistory()) {
-            ilHistory::_createEntry(
+            $this->createHistoryEntry(
                 $this->getWebrId(),
                 "update",
                 [$list->getTitle()]
@@ -498,7 +498,7 @@ class ilWebLinkDatabaseRepository implements ilWebLinkRepository
         );
 
         if (isset($title)) {
-            ilHistory::_createEntry(
+            $this->createHistoryEntry(
                 $this->getWebrId(),
                 "delete",
                 [$title]
@@ -530,7 +530,7 @@ class ilWebLinkDatabaseRepository implements ilWebLinkRepository
         );
 
         if (isset($title)) {
-            ilHistory::_createEntry(
+            $this->createHistoryEntry(
                 $this->getWebrId(),
                 "delete",
                 [$title]
@@ -586,12 +586,17 @@ class ilWebLinkDatabaseRepository implements ilWebLinkRepository
     {
         if (
             $item->isInternal() &&
-            !ilLinkInputGUI::isInternalLink($item->getTarget())
+            !$this->isInternalLink($item->getTarget())
         ) {
             throw new ilWebLinkDatabaseRepositoryException(
                 'The target of this internal link item is not internal.'
             );
         }
+    }
+
+    protected function isInternalLink(string $value): bool
+    {
+        return ilLinkInputGUI::isInternalLink($value);
     }
 
     public function getWebrId(): int
@@ -617,5 +622,13 @@ class ilWebLinkDatabaseRepository implements ilWebLinkRepository
     protected function getNewDateTimeImmutable(): DateTimeImmutable
     {
         return new DateTimeImmutable();
+    }
+
+    protected function createHistoryEntry(
+        int $webr_id,
+        string $action,
+        array $parameters
+    ): void {
+        ilHistory::_createEntry($webr_id, $action, $parameters);
     }
 }

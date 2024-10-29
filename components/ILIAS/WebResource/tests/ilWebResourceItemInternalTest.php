@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
@@ -40,80 +40,61 @@ class ilWebResourceItemInternalTest extends TestCase
                          new DateTimeImmutable(),
                          $parameters
                      ])
-                     ->onlyMethods(['appendParameter'])
+                     ->onlyMethods(['appendParameter', 'getStaticLink'])
                      ->getMock();
         $item->method('appendParameter')->willReturnCallback(
             fn(string $link, string $key, string $value) => $link . '.' . $key . '.' . $value
         );
+        $item->method('getStaticLink')->willReturnCallback(
+            fn(int $ref_id, string $type) => $type . ':' . $ref_id
+        );
         return $item;
     }
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
     public function testGetResolvedLink(): void
     {
-        $array_util = Mockery::mock('alias:' . ilLink::class);
-        $array_util->shouldReceive('_getStaticLink')
-                   ->twice()
-                   ->with(13, 'tar')
-                   ->andReturn('tar.13');
-        $array_util->shouldReceive('_getStaticLink')
-                   ->once()
-                   ->with(0, 'wiki', true)
-                   ->andReturn('wiki_page');
-        $array_util->shouldReceive('_getStaticLink')
-                   ->once()
-                   ->with(0, 'git', true)
-                   ->andReturn('gl_term');
-        $array_util->shouldReceive('_getStaticLink')
-                   ->once()
-                   ->with(16, 'pg')
-                   ->andReturn('lm_page.16');
-
         $param1 = $this->getMockBuilder(ilWebLinkParameter::class)
                        ->disableOriginalConstructor()
                        ->onlyMethods(['appendToLink'])
                        ->getMock();
         $param1->expects($this->once())
                ->method('appendToLink')
-               ->with('tar.13')
-               ->willReturn('tar.13?param1');
+               ->with('tar:13')
+               ->willReturn('tar:13?param1');
         $param2 = $this->getMockBuilder(ilWebLinkParameter::class)
                        ->disableOriginalConstructor()
                        ->onlyMethods(['appendToLink'])
                        ->getMock();
         $param2->expects($this->once())
                ->method('appendToLink')
-               ->with('tar.13?param1')
-               ->willReturn('tar.13?param1&param2');
+               ->with('tar:13?param1')
+               ->willReturn('tar:13?param1&param2');
 
         $item = $this->getItem('tar|13', $param1, $param2);
         $this->assertSame(
-            'tar.13?param1&param2',
+            'tar:13?param1&param2',
             $item->getResolvedLink(true)
         );
         $this->assertSame(
-            'tar.13',
+            'tar:13',
             $item->getResolvedLink(false)
         );
 
         $item = $this->getItem('wpage|14', $param1, $param2);
         $this->assertSame(
-            'wiki_page.target.wiki_wpage_14',
+            'wiki:0.target.wiki_wpage_14',
             $item->getResolvedLink(false)
         );
 
         $item = $this->getItem('term|15', $param1, $param2);
         $this->assertSame(
-            'gl_term.target.git_15',
+            'git:0.target.git_15',
             $item->getResolvedLink(false)
         );
 
         $item = $this->getItem('page|16', $param1, $param2);
         $this->assertSame(
-            'lm_page.16',
+            'pg:16',
             $item->getResolvedLink(false)
         );
     }
