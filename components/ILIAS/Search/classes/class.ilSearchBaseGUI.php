@@ -426,7 +426,6 @@ class ilSearchBaseGUI implements ilDesktopItemHandling, ilAdministrationCommandH
 
     protected function renderSearch(string $term, int $root_node = 0)
     {
-        ilOverlayGUI::initJavascript();
         $this->tpl->addJavascript("assets/js/Search.js");
 
         $this->tpl->setVariable("FORM_ACTION", $this->ctrl->getFormAction($this, "performSearch"));
