@@ -169,7 +169,9 @@ class ilUserCertificateGUI
                 if ($thumbnail_image_identification === '' || $thumbnail_image_identification === '-') {
                     $thumbnail_image_identification = $certificateData['thumbnail_image_path'] ?? '';
                     if ($thumbnail_image_identification !== '' && $this->filesystem->has($thumbnail_image_identification)) {
-                        $imagePath = ilFileUtils::getWebspaceDir() . $thumbnail_image_identification;
+                        $imagePath = ilWACSignedPath::signFile(
+                            ilFileUtils::getWebspaceDir() . $thumbnail_image_identification
+                        );
                     }
                 } else {
                     $thumb_rid = $this->irss->manage()->find($thumbnail_image_identification);
@@ -179,7 +181,7 @@ class ilUserCertificateGUI
                 }
 
                 if ($imagePath === '') {
-                    $imagePath = ilUtil::getImagePath('standard/icon_cert.svg');
+                    $imagePath = ilWACSignedPath::signFile(ilUtil::getImagePath('standard/icon_cert.svg'));
                 }
 
                 $cardImage = $this->uiFactory->image()->standard(
