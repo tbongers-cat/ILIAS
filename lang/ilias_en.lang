@@ -275,6 +275,8 @@ administration#:#obj_blga_desc#:#Global Blog Settings
 administration#:#obj_chta_desc#:#Chat Administration
 administration#:#obj_excs#:#Exercise
 administration#:#obj_excs_desc#:#Global Exercise Settings
+administration#:#obj_gsfo#:#Footer
+administration#:#obj_gsfo_desc#:#Administrate Footer Layout and Content
 administration#:#obj_impr#:#Legal Notice
 administration#:#obj_impr_desc#:#Deployment of Legal Notice
 administration#:#obj_mds#:#Metadata

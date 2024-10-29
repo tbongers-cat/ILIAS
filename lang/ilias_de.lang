@@ -275,6 +275,8 @@ administration#:#obj_blga_desc#:#Globale Blogeinstellungen
 administration#:#obj_chta_desc#:#Administration des Chat-Objekts und des Chat-Servers
 administration#:#obj_excs#:#Übung
 administration#:#obj_excs_desc#:#Globale Übungseinstellungen
+administration#:#obj_gsfo#:#Fußzeile
+administration#:#obj_gsfo_desc#:#Layout und Inhalt der Fußzeile verwalten
 administration#:#obj_impr#:#Impressum
 administration#:#obj_impr_desc#:#Bereitstellung des Impressums
 administration#:#obj_mds#:#Metadaten
