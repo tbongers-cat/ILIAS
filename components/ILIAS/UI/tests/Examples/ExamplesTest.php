@@ -74,6 +74,7 @@ class ExamplesTest extends ILIAS_UI_TestBase
             new ILIAS\Data\Factory(),
             $this->getLanguage()
         );
+
         (new InitUIFramework())->init($this->dic);
 
         $this->dic["ui.template_factory"] = $this->getTemplateFactory();

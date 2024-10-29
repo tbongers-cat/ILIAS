@@ -98,12 +98,21 @@ class DefaultRendererTest extends ILIAS_UI_TestBase
             }
         );
 
-        $renderer = new class ($component_renderer) extends DefaultRenderer {
+        $renderer = new class (
+            $this->createMock(Render\Loader::class),
+            $this->createMock(JavaScriptBinding::class),
+            $this->createMock(\ILIAS\Language\Language::class),
+            $component_renderer,
+        ) extends DefaultRenderer {
             public array $context_history = [];
 
             public function __construct(
+                Render\Loader $component_renderer_loader,
+                JavaScriptBinding $java_script_binding,
+                \ILIAS\Language\Language $language,
                 protected ComponentRenderer $component_renderer
             ) {
+                parent::__construct($component_renderer_loader, $java_script_binding, $language);
             }
 
             protected function getRendererFor(Component $component): ComponentRenderer
@@ -211,7 +220,7 @@ class DefaultRendererTest extends ILIAS_UI_TestBase
         $loader = $this->createMock(Loader::class);
         $loader->method('getRendererFor')->willReturn($this->component_renderer);
 
-        $renderer = new TestDefaultRenderer($loader, $this->getJavaScriptBinding());
+        $renderer = new TestDefaultRenderer($loader, $this->getJavaScriptBinding(), $this->getLanguage());
 
         $this->component_renderer->expects($this->once())
             ->method("render")
@@ -232,7 +241,7 @@ class DefaultRendererTest extends ILIAS_UI_TestBase
         $loader = $this->createMock(Loader::class);
         $loader->method('getRendererFor')->willReturn($this->component_renderer);
 
-        $renderer = new TestDefaultRenderer($loader, $this->getJavaScriptBinding());
+        $renderer = new TestDefaultRenderer($loader, $this->getJavaScriptBinding(), $this->getLanguage());
 
         $this->component_renderer->expects($this->once())
             ->method("render")

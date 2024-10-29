@@ -13,16 +13,21 @@
  * us at:
  * https://www.ilias.de
  * https://github.com/ILIAS-eLearning
- *
- *********************************************************************/
+ */
 
-use ILIAS\UICore\GlobalTemplate;
+declare(strict_types=1);
+
+namespace ILIAS\UI\Implementation\Component\Progress;
+
+use ILIAS\UI\Component\Progress\AsyncRefreshInterval;
 
 /**
- * @author Stefan Kesseler <skesseler@databay.de>
- * @author Sascha Hofmann <shofmann@databay.de>
  * @author Thibeau Fuhrer <thibeau@sr.solutions>
  */
-interface ilGlobalTemplateInterface extends GlobalTemplate
+class DefaultAsyncRefreshInterval implements AsyncRefreshInterval
 {
+    public function getRefreshIntervalInMs(): int
+    {
+        return 1_000;
+    }
 }

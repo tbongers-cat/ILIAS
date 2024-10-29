@@ -480,6 +480,19 @@ functions in form of arguments. While at it, all other dependencies such as the 
 injected this way too, ultimately getting rid of all the `$DIC` usages. To achieve this, we need to adjust every example
 function signature, as well as the Kitchensink where the examples are built.
 
+### Remove `LegacyInitialisation` class from unit tests (advanced, ~3d)
+
+As part of the component revision we have migrated the UI framework to the new bootstrap mechanism.
+This resulted in the removal of the `InitUIFramework` class inside the Init component, which was
+responsible for a full initialisation of the UI framework. Some unit tests however, mostly for example and
+T&A rendering tests, still rely on this.
+
+The problem is that we cannot properly inject the our components into unit tests using the bootstrap
+mechanism. This means, we either need a way to combine these two worlds, like we did with the "bridge" to the
+legacy initialisation of the Init component (see https://github.com/ILIAS-eLearning/ILIAS/pull/7969),
+or refactor our unit tests in a way where no fully initialised UI framework is required. For the time being
+we have moved a copy of the `InitUIFramework` into our `tests/` directory, so unit tests still pass.
+
 ## Ideas and Food for Thought
 
 * Create a mechanism to wire less-files to delos.less that is more automatic than

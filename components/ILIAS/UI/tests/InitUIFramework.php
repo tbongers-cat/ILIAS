@@ -16,17 +16,21 @@
  *
  *********************************************************************/
 
-use ILIAS\Data\Factory;
+declare(strict_types=1);
 
 /**
- * Responsible for loading the UI Framework into the dependency injection container of ILIAS
+ * This is more or less a copy of the removed InitUIFramework file inside the Init component.
+ * We keep it here since some unit tests depend on a fully initialised UI framework, which
+ * is populated in the global DIC using the old offsets.
+ *
+ * @deprecated don't use this. we should try to find a better way to perform rendering
+ *             tests that rely on a fully initialised UI framework.
  */
 class InitUIFramework
 {
     public function init(\ILIAS\DI\Container $c): void
     {
         $c["ui.factory"] = function ($c) {
-            $c["lng"]->loadLanguageModule("ui");
             return new ILIAS\UI\Implementation\Factory(
                 $c["ui.factory.counter"],
                 $c["ui.factory.button"],
@@ -61,10 +65,18 @@ class InitUIFramework
         };
         $c["ui.upload_limit_resolver"] = function ($c) {
             return new \ILIAS\UI\Implementation\Component\Input\UploadLimitResolver(
-                (int) \ilFileUtils::getPhpUploadSizeLimitInBytes(),
-                ($c->offsetExists('upload_policy_resolver')) ?
-                    $c['upload_policy_resolver']->getUserUploadSizeLimitInBytes() :
-                    null
+                new class() implements ILIAS\UI\Component\Input\Field\PhpUploadLimit {
+                    public function getPhpUploadLimitInBytes(): int
+                    {
+                        return 0;
+                    }
+                },
+                new class() implements ILIAS\UI\Component\Input\Field\GlobalUploadLimit {
+                    public function getGlobalUploadLimitInBytes(): ?int
+                    {
+                        return null;
+                    }
+                },
             );
         };
         $c["ui.data_factory"] = function ($c) {
@@ -98,23 +110,23 @@ class InitUIFramework
                 $c["ui.factory.input.field"],
             );
         };
-        $c["ui.factory.progress.refresh_interval"] = static fn(\ILIAS\DI\Container $c) =>
-            new class () implements \ILIAS\UI\Component\Progress\AsyncRefreshInterval {
-                public function getRefreshIntervalInMs(): int
-                {
-                    return 1_000;
-                }
-            };
-        $c["ui.factory.progress"] = static fn(\ILIAS\DI\Container $c) =>
-            new \ILIAS\UI\Implementation\Component\Progress\Factory(
-                $c["ui.factory.progress.refresh_interval"],
-                $c["ui.signal_generator"],
-                $c["ui.factory.progress.state"],
-            );
-        $c["ui.factory.progress.state"] = static fn(\ILIAS\DI\Container $c) =>
-            new \ILIAS\UI\Implementation\Component\Progress\State\Factory(
-                new \ILIAS\UI\Implementation\Component\Progress\State\Bar\Factory(),
-            );
+        $c["ui.factory.progress.refresh_interval"] = static fn (\ILIAS\DI\Container $c) =>
+        new class() implements \ILIAS\UI\Component\Progress\AsyncRefreshInterval {
+            public function getRefreshIntervalInMs(): int
+            {
+                return 1_000;
+            }
+        };
+        $c["ui.factory.progress"] = static fn (\ILIAS\DI\Container $c) =>
+        new \ILIAS\UI\Implementation\Component\Progress\Factory(
+            $c["ui.factory.progress.refresh_interval"],
+            $c["ui.signal_generator"],
+            $c["ui.factory.progress.state"],
+        );
+        $c["ui.factory.progress.state"] = static fn (\ILIAS\DI\Container $c) =>
+        new \ILIAS\UI\Implementation\Component\Progress\State\Factory(
+            new \ILIAS\UI\Implementation\Component\Progress\State\Bar\Factory(),
+        );
         $c["ui.factory.dropzone"] = function ($c) {
             return new ILIAS\UI\Implementation\Component\Dropzone\Factory($c["ui.factory.dropzone.file"]);
         };
@@ -283,6 +295,7 @@ class InitUIFramework
             return new ILIAS\UI\Implementation\DefaultRenderer(
                 $c["ui.component_renderer_loader"],
                 $c["ui.javascript_binding"],
+                $c["lng"],
             );
         };
         $c["ui.component_renderer_loader"] = function ($c) {
@@ -383,7 +396,7 @@ class InitUIFramework
         // currently this is will be a session storage because we cannot store
         // data on the client, see https://mantis.ilias.de/view.php?id=38503.
         $c["ui.storage"] = function ($c): ArrayAccess {
-            return new class () implements ArrayAccess {
+            return new class() implements ArrayAccess {
                 public function offsetExists(mixed $offset): bool
                 {
                     return ilSession::has($offset);
