@@ -15378,12 +15378,8 @@ search#:#lucene_or#:#ODER
 search#:#lucene_port#:#Port
 search#:#lucene_prefix_wildcard#:#Platzhalter am Wortbeginn
 search#:#lucene_prefix_wildcard_info#:#Erlaubt die Nutzung von Platzhaltern auch am Beginn eines Suchbegriffes: "*LIAS" findet "ILIAS"
-search#:#lucene_relevance#:#Relevanz der Suchergebnisse
 search#:#lucene_settings_tab#:#Lucene
 search#:#lucene_settings_title#:#Einstellungen zur Lucene-Suche
-search#:#lucene_show_relevance#:#Relevanz anzeigen
-search#:#lucene_show_relevance_info#:#Suchergebnisse werden nach ihrer Relevanz sortiert ausgegeben. Die Relevanz des jeweiligen Suchergebnisses wird als zusätzliche Information für alle Treffer angezeigt.
-search#:#lucene_show_sub_relevance#:#Relevanz von Unterobjekten anzeigen
 search#:#lucene_size_frag_info#:#Bitte bestimmen Sie die maximale Länge der Textabschnitte, die zur Hervorhebung der Suchtreffer ausgegeben werden. Geben Sie dazu die Anzahl der Zeichen einschließlich Leerzeichen ein.
 search#:#lucene_size_fragments#:#Länge der Textabschnitte
 search#:#lucene_tbl_create_ini#:#Java-Server Konfigurationsdatei erstellen

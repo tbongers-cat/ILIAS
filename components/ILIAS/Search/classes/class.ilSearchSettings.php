@@ -26,7 +26,6 @@ class ilSearchSettings
     protected int $fragmentSize = 30;
     protected int $fragmentCount = 3;
     protected int $numSubitems = 5;
-    protected bool $showRelevance = true;
     protected ?ilDateTime $last_index_date = null;
     protected bool $lucene_item_filter_enabled = false;
     protected array $lucene_item_filter = array();
@@ -39,7 +38,6 @@ class ilSearchSettings
     protected bool $hide_adv_search = false;
     protected bool $lucene_mime_filter_enabled = false;
     protected array $lucene_mime_filter = array();
-    protected bool $showSubRelevance = false;
     protected bool $prefix_wildcard = false;
     protected bool $user_search = false;
     protected bool $date_filter = false;
@@ -246,16 +244,6 @@ class ilSearchSettings
         return $this->numSubitems;
     }
 
-    public function isRelevanceVisible(): bool
-    {
-        return $this->showRelevance;
-    }
-
-    public function showRelevance(bool $a_status): void
-    {
-        $this->showRelevance = $a_status;
-    }
-
     public function getLastIndexTime(): ilDateTime
     {
         return $this->last_index_date instanceof ilDateTime ?
@@ -294,14 +282,9 @@ class ilSearchSettings
         return $this->lucene_offline_filter;
     }
 
-    public function showSubRelevance(bool $a_stat): void
-    {
-        $this->showSubRelevance = $a_stat;
-    }
-
     public function isSubRelevanceVisible(): bool
     {
-        return $this->showSubRelevance;
+        return false;
     }
 
 
@@ -401,7 +384,6 @@ class ilSearchSettings
         $this->setting->set('lucene_fragment_size', (string) $this->getFragmentSize());
         $this->setting->set('lucene_fragment_count', (string) $this->getFragmentCount());
         $this->setting->set('lucene_max_subitems', (string) $this->getMaxSubitems());
-        $this->setting->set('lucene_show_relevance', (string) $this->isRelevanceVisible());
         $this->setting->set('lucene_last_index_time', (string) $this->getLastIndexTime()->get(IL_CAL_UNIX));
         $this->setting->set('hide_adv_search', (string) $this->getHideAdvancedSearch());
         $this->setting->set('auto_complete_length', (string) $this->getAutoCompleteLength());
@@ -409,7 +391,6 @@ class ilSearchSettings
         $this->setting->set('lucene_item_filter', serialize($this->getLuceneItemFilter()));
         $this->setting->set('lucene_offline_filter', (string) $this->isLuceneOfflineFilterEnabled());
         $this->setting->set('lucene_mime_filter', serialize($this->getLuceneMimeFilter()));
-        $this->setting->set('lucene_sub_relevance', (string) $this->isSubRelevanceVisible());
         $this->setting->set('lucene_mime_filter_enabled', (string) $this->isLuceneMimeFilterEnabled());
         $this->setting->set('lucene_prefix_wildcard', (string) $this->isPrefixWildcardQueryEnabled());
         $this->setting->set('lucene_user_search', (string) $this->isLuceneUserSearchEnabled());
@@ -427,7 +408,6 @@ class ilSearchSettings
         $this->setFragmentSize((int) $this->setting->get('lucene_fragment_size', "50"));
         $this->setFragmentCount((int) $this->setting->get('lucene_fragment_count', "3"));
         $this->setMaxSubitems((int) $this->setting->get('lucene_max_subitems', "5"));
-        $this->showRelevance((bool) $this->setting->get('lucene_show_relevance', "1"));
         if ($time = $this->setting->get('lucene_last_index_time', '0')) {
             $this->setLastIndexTime(new ilDateTime($time, IL_CAL_UNIX));
         } else {
@@ -442,7 +422,6 @@ class ilSearchSettings
         $this->enableLuceneMimeFilter((bool) $this->setting->get('lucene_mime_filter_enabled', (string) $this->lucene_item_filter_enabled));
         $filter = (string) $this->setting->get('lucene_mime_filter', serialize($this->getLuceneMimeFilter()));
         $this->setLuceneMimeFilter(unserialize($filter));
-        $this->showSubRelevance((bool) $this->setting->get('lucene_sub_relevance', (string) $this->showSubRelevance));
         $this->enablePrefixWildcardQuery((bool) $this->setting->get('lucene_prefix_wildcard', (string) $this->prefix_wildcard));
         $this->enableLuceneUserSearch((bool) $this->setting->get('lucene_user_search', (string) $this->user_search));
         $this->showInactiveUser((bool) $this->setting->get('search_show_inactiv_user', (string) $this->show_inactiv_user));
