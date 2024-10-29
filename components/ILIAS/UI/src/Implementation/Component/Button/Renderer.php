@@ -83,7 +83,7 @@ class Renderer extends AbstractComponentRenderer
 
         $tpl->setVariable("LABEL", $component->getLabel());
         $symbol = $component->getSymbol();
-        if($symbol !== null) {
+        if ($symbol !== null) {
             if ($component->getLabel() !== '') {
                 $symbol = $symbol->withLabel('');
             }
@@ -284,31 +284,15 @@ class Renderer extends AbstractComponentRenderer
 
     protected function renderMonth(Component\Button\Month $component): string
     {
-        $def = $component->getDefault();
-
-        for ($i = 1; $i <= 12; $i++) {
-            $this->toJS(array("month_" . str_pad((string) $i, 2, "0", STR_PAD_LEFT) . "_short"));
-        }
-
         $tpl = $this->getTemplate("tpl.month.html", true, true);
-
-        $month = explode("-", $def);
-        $tpl->setVariable("DEFAULT_LABEL", $this->txt("month_" . str_pad($month[0], 2, "0", STR_PAD_LEFT) . "_short") . " " . $month[1]);
-        $tpl->setVariable("DEF_DATE", $month[0] . "/1/" . $month[1]);
-        // see https://github.com/moment/moment/tree/develop/locale
-        $lang_key = in_array($this->getLangKey(), array("ar", "bg", "cs", "da", "de", "el", "en", "es", "et", "fa", "fr", "hu", "it",
-            "ja", "ka", "lt", "nl", "pl", "pt", "ro", "ru", "sk", "sq", "sr", "tr", "uk", "vi", "zh"))
-            ? $this->getLangKey()
-            : "en";
-        if ($lang_key == "zh") {
-            $lang_key = "zh-cn";
-        }
-        $tpl->setVariable("LANG", $lang_key);
 
         $component = $component->withAdditionalOnLoadCode(fn($id) => "il.UI.button.initMonth('$id');");
         $id = $this->bindJavaScript($component);
-
         $tpl->setVariable("ID", $id);
+
+        $def = $component->getDefault();
+        $value = implode('-', array_reverse(explode("-", $def)));
+        $tpl->setVariable("DEFAULT", $value);
 
         return $tpl->get();
     }
