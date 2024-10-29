@@ -9,6 +9,12 @@ use ILIAS\UI\Component\Chart\Bar\BarConfig;
 use ILIAS\UI\Component\Chart\Bar\GroupConfig;
 use ILIAS\UI\Component\Chart\Bar\XAxis;
 
+/**
+ * ---
+ * expected output: >
+ *   ILIAS shows the rendered Component.
+ * ---
+ */
 function stacked()
 {
     //Loading factories

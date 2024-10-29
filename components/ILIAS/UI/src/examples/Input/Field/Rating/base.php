@@ -6,6 +6,21 @@ namespace ILIAS\UI\examples\Input\Field\Rating;
 
 use ILIAS\Data\FiveStarRatingScale;
 
+/**
+ * ---
+ * description: >
+ *   Base example showing how use a Rating Input.
+ *
+ * expected output: >
+ *   ILIAS shows 4 Rating Inputs:
+ *   1: > You may change the rating by clicking on a star (or "neutral")
+ *   2: > You MUST change the rating, otherwise the form will display an error when submitted
+ *   3: > disabled, You cannot change the rating
+ *   4: > A Rating Input with a little line above.
+ *
+ *   When submitted, the selected values are displayed (in an array of Enums, with name and value).
+ * ---
+ */
 function base()
 {
     global $DIC;
