@@ -62,7 +62,8 @@ il.UI.Input = il.UI.Input || {};
       settings.templates.tag = function (tagData) {
         return `<tag contenteditable='false'
                             spellcheck="false" class='tagify__tag'
-                            value="${tagData.value}">
+                            value="${tagData.value}"
+                            tabindex="0">
                             <x title='remove tag' class='tagify__tag__removeBtn'></x>
                             <div>
                                 <span class='tagify__tag-text'>${tagData.display}</span>
@@ -70,7 +71,7 @@ il.UI.Input = il.UI.Input || {};
                     </tag>`;
       };
       settings.templates.dropdownItem = function (tagData) {
-        return `<div class='tagify__dropdown__item' tagifySuggestionIdx="${tagData.tagifySuggestionIdx}">
+        return `<div class='tagify__dropdown__item' tagifySuggestionIdx="${tagData.tagifySuggestionIdx}" value="${tagData.value}">
                             <span>${tagData.display}</span>
                         </div>`;
       };
@@ -81,20 +82,6 @@ il.UI.Input = il.UI.Input || {};
       tagify.addTags(value);
 
       instances[raw_id] = tagify;
-
-    	    // see https://github.com/yairEO/tagify "Submit on `Enter` key"
-    	    const onTagifyKeyDown = function (e) {
-        const { key } = e.detail.originalEvent;
-        if (key === 'Enter'
-                    && !tagify.state.inputText // assuming user is not in the middle oy adding a tag
-                    && !tagify.state.editing // user not editing a tag
-        ) {
-          const input_values = input.value;
-          const values = input_values.trim() ? input_values.split(',') : [];
-
-          setTimeout(() => il.UI.viewcontrol.tag.submit(values));
-        }
-      };
     };
 
     const getTagifyInstance = function (raw_id) {
