@@ -22,14 +22,14 @@ function with_signal_action()
 
     //Generating and rendering the image and modal
     $image_in_modal = $f->image()->standard(
-        "assets/ui-examples/imagesImage/mountains.jpg",
+        "assets/ui-examples/images/Image/mountains.jpg",
         ""
     );
     $page = $f->modal()->lightboxImagePage($image_in_modal, "Nice view");
     $modal = $f->modal()->lightbox($page);
 
     $image = $f->image()->standard(
-        "assets/ui-examples/imagesImage/HeaderIconLarge.svg",
+        "assets/ui-examples/images/Image/HeaderIconLarge.svg",
         "Thumbnail Example"
     )->withAction($modal->getShowSignal());
 

@@ -23,7 +23,7 @@ function with_additional_on_load_code()
 
     //Generating and rendering the image and modal
     $image = $f->image()->standard(
-        "assets/ui-examples/imagesImage/HeaderIconLarge.svg",
+        "assets/ui-examples/images/Image/HeaderIconLarge.svg",
         "Thumbnail Example"
     )->withAction("#")
      ->withAdditionalOnLoadCode(function ($id) {

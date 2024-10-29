@@ -39,7 +39,7 @@ function base()
 
     //Generating and rendering the image
     $image = $f->image()->standard(
-        "assets/ui-examples/imagesImage/HeaderIconLarge.svg",
+        "assets/ui-examples/images/Image/HeaderIconLarge.svg",
         "Thumbnail Example"
     );
     $html = $renderer->render($image);
