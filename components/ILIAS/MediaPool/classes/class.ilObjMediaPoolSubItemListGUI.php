@@ -79,11 +79,6 @@ class ilObjMediaPoolSubItemListGUI extends ilSubItemListGUI
                 $this->tpl->setVariable('SEPERATOR', ':');
             }
 
-
-            if (count($this->getSubItemIds(true)) > 1) {
-                $this->parseRelevance($sub_item);
-            }
-
             $this->tpl->parseCurrentBlock();
         }
 
@@ -113,7 +108,7 @@ class ilObjMediaPoolSubItemListGUI extends ilSubItemListGUI
                 );
                 $this->tpl->setVariable('LINKED_TARGET', '_blank');
                 $this->tpl->setVariable("LINKED_IMAGE", ilUtil::img($target));
-            // end-patch mime_filter
+                // end-patch mime_filter
             } else {
                 $this->tpl->setVariable("SUB_ITEM_IMAGE", ilUtil::img(ilUtil::getImagePath("standard/icon_" . "mob" . ".gif")));
             }
