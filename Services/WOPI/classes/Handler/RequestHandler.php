@@ -20,6 +20,8 @@ declare(strict_types=1);
 
 namespace ILIAS\Services\WOPI\Handler;
 
+use ILIAS\HTTP\Services;
+use ILIAS\ResourceStorage\Identification\ResourceIdentification;
 use ILIAS\Filesystem\Stream\Streams;
 use ILIAS\FileDelivery\Token\DataSigner;
 use ILIAS\ResourceStorage\Stakeholder\ResourceStakeholder;
@@ -40,8 +42,17 @@ final class RequestHandler
     public const HEADER_X_WOPI_LOCK = 'X-WOPI-Lock';
     public const HEADER_X_WOPI_FILE_CONVERSION = 'X-WOPI-FileConversion';
 
-    private \ILIAS\HTTP\Services $http;
+    /**
+     * @readonly
+     */
+    private Services $http;
+    /**
+     * @readonly
+     */
     private \ILIAS\ResourceStorage\Services $irss;
+    /**
+     * @readonly
+     */
     private DataSigner $data_signer;
     private ?int $token_user_id = null;
     private ?string $token_resource_id = null;
@@ -55,7 +66,6 @@ final class RequestHandler
         $this->http = $DIC->http();
         $this->data_signer = $DIC['file_delivery.data_signer'];
         $this->irss = $DIC->resourceStorage();
-        $this->saving_interval = (int) $DIC->settings()->get('saving_interval');
     }
 
     protected function checkAuth(): void
@@ -81,14 +91,14 @@ final class RequestHandler
         $this->token_user_id = (int) ($token_data['user_id'] ?? 0);
         $this->token_resource_id = (string) ($token_data['resource_id'] ?? '');
         $this->editable = (bool) ($token_data['editable'] ?? '');
-        $stakeholder = $token_data['stakeholder'] ?? null;
-        if ($stakeholder !== null) {
-            try {
-                $this->stakeholder = new WOPIStakeholderWrapper();
-                $this->stakeholder->init($stakeholder, $this->token_user_id);
-            } catch (\Throwable $t) {
-                $this->stakeholder = new WOPIUnknownStakeholder($this->token_user_id);
-            }
+
+        // Init Stakeholder
+        $stakeholder = $token_data['stakeholder'] ?? WOPIUnknownStakeholder::class;
+        try {
+            $this->stakeholder = new WOPIStakeholderWrapper();
+            $this->stakeholder->init(new $stakeholder(), $this->token_user_id);
+        } catch (\Throwable) {
+            $this->stakeholder = new WOPIUnknownStakeholder();
         }
     }
 
@@ -114,7 +124,7 @@ final class RequestHandler
             }
 
             $resource_id = $this->irss->manage()->find($resource_id);
-            if (!$resource_id instanceof \ILIAS\ResourceStorage\Identification\ResourceIdentification) {
+            if (!$resource_id instanceof ResourceIdentification) {
                 $this->http->close();
             }
             $resource = $this->irss->manage()->getResource($resource_id);
@@ -229,9 +239,7 @@ final class RequestHandler
             $message = $t->getMessage();
             // append simple stacktrace
             $trace = array_map(
-                static function ($trace): string {
-                    return $trace['file'] . ':' . $trace['line'];
-                },
+                static fn(array $trace): string => $trace['file'] . ':' . $trace['line'],
                 $t->getTrace()
             );
 
