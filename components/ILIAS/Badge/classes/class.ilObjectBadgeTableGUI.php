@@ -42,6 +42,8 @@ use ilObject;
 use ilLink;
 use ilObjBadgeAdministrationGUI;
 use ILIAS\Filesystem\Stream\Streams;
+use ILIAS\UI\Component\Table\Action\Action;
+use ilAccess;
 
 class ilObjectBadgeTableGUI
 {
@@ -53,6 +55,8 @@ class ilObjectBadgeTableGUI
     private readonly ilLanguage $lng;
     private readonly ilGlobalTemplateInterface $tpl;
     private ilObjBadgeAdministrationGUI $parent_obj;
+    private ?bool $user_has_write_permission = null;
+    private ilAccess $access;
 
     public function __construct(ilObjBadgeAdministrationGUI $parentObj)
     {
@@ -65,8 +69,24 @@ class ilObjectBadgeTableGUI
         $this->refinery = $DIC->refinery();
         $this->request = $DIC->http()->request();
         $this->http = $DIC->http();
+        $this->access = $DIC->access();
         $this->parent_obj = $parentObj;
+
     }
+
+    private function userHasWritePermission(int $parent_id): bool
+    {
+        if ($this->user_has_write_permission === null) {
+            $parent_ref_id = ilObject::_getAllReferences($parent_id);
+            if (\count($parent_ref_id) > 0) {
+                $parent_ref_id = array_pop($parent_ref_id);
+            }
+            $this->user_has_write_permission = $this->access->checkAccess('write', '', $parent_ref_id);
+        }
+
+        return $this->user_has_write_permission;
+    }
+
 
     private function buildDataRetrievalObject(
         Factory $f,
@@ -99,19 +119,6 @@ class ilObjectBadgeTableGUI
                 $this->ctrl = $DIC->ctrl();
                 $this->lng = $DIC->language();
                 $this->access = $DIC->access();
-            }
-
-            private function userHasWritePermission(int $parent_id): bool
-            {
-                if ($this->user_has_write_permission === null) {
-                    $parent_ref_id = ilObject::_getAllReferences($parent_id);
-                    if (\count($parent_ref_id) > 0) {
-                        $parent_ref_id = array_pop($parent_ref_id);
-                    }
-                    $this->user_has_write_permission = $this->access->checkAccess('write', '', $parent_ref_id);
-                }
-
-                return $this->user_has_write_permission;
             }
 
             public function getRows(
@@ -189,8 +196,6 @@ class ilObjectBadgeTableGUI
                     $ref_ids = ilObject::_getAllReferences($badge_item['parent_id']);
                     $ref_id = array_shift($ref_ids);
 
-                    // TODO gvollbach: It seems now the "listObjectBadgeUsers" is now missing in 10.x
-
                     $container_url_link = '';
                     if ($this->access->checkAccess('read', '', $ref_id)) {
                         $container_url = ilLink::_getLink($ref_id);
@@ -258,7 +263,7 @@ class ilObjectBadgeTableGUI
     }
 
     /**
-     * @return array<string, \ILIAS\UI\Component\Table\Action\Action>
+     * @return array<string, Action>
      */
     private function getActions(
         URLBuilder $url_builder,
@@ -266,8 +271,7 @@ class ilObjectBadgeTableGUI
         URLBuilderToken $row_id_token
     ): array {
         $f = $this->factory;
-
-        return [
+        $actions = [
             'obj_badge_activate' => $f->table()->action()->multi(
                 $this->lng->txt('activate'),
                 $url_builder->withParameter($action_parameter_token, 'obj_badge_activate'),
@@ -292,6 +296,8 @@ class ilObjectBadgeTableGUI
                     $row_id_token
                 )
         ];
+
+        return $actions;
     }
 
     public function renderTable(): void
@@ -310,9 +316,7 @@ class ilObjectBadgeTableGUI
             'active' => $f->table()->column()->boolean(
                 $this->lng->txt('active'),
                 $this->lng->txt('yes'),
-                $this->lng->txt(
-                    'no'
-                )
+                $this->lng->txt('no')
             ),
         ];
 
@@ -340,14 +344,14 @@ class ilObjectBadgeTableGUI
 
         $query = $this->http->wrapper()->query();
         if ($query->has($action_parameter_token->getName())) {
-            $action = $query->retrieve($action_parameter_token->getName(), $refinery->to()->string());
+            $action = $query->retrieve($action_parameter_token->getName(), $refinery->kindlyTo()->string());
             $ids = $query->retrieve($row_id_token->getName(), $refinery->custom()->transformation(fn($v) => $v));
 
             if ($action === 'obj_badge_delete') {
                 $items = [];
                 if (\is_array($ids) && \count($ids) > 0) {
                     foreach ($ids as $id) {
-                        $badge = new ilBadge($id);
+                        $badge = new ilBadge((int) $id);
                         $items[] = $f->modal()->interruptiveItem()->keyValue(
                             $id,
                             (string) $badge->getId(),

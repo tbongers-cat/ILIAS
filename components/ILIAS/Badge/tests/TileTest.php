@@ -210,7 +210,7 @@ class TileTest extends TestCase
 
         $badge->method('getImagePath')->willReturn($badge_image_path);
         $badge->method('getImage')->willReturn($badge_image_name);
-        $badge->method('getImageRid')->willReturn(new ResourceIdentification($badge_image_rid_name));
+        $badge->method('getImageRid')->willReturn($badge_image_rid_name);
         $badge_image->method('getImageFromBadge')->willReturn('dfsafdsaf');
 
         $modal_content->method('badge')->willReturn($badge);

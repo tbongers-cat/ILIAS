@@ -132,7 +132,6 @@ class ilBadgeTableGUI
                     $title = $badge->getTitle();
                     $image_html = '';
                     $badge_rid = $badge->getImageRid();
-                    // TODO gvollbach: Check if this is correct
                     $image_src = $this->badge_image_service->getImageFromResourceId($badge, $badge_rid);
                     $badge_image_large = $this->badge_image_service->getImageFromResourceId(
                         $badge,
@@ -250,9 +249,10 @@ class ilBadgeTableGUI
     private function getActions(
         URLBuilder $url_builder,
         URLBuilderToken $action_parameter_token,
-        URLBuilderToken $row_id_token
+        URLBuilderToken $row_id_token,
     ): array {
         $f = $this->factory;
+
         return [
             'badge_table_activate' =>
                 $f->table()->action()->multi(
@@ -275,6 +275,12 @@ class ilBadgeTableGUI
                 $f->table()->action()->standard(
                     $this->lng->txt('delete'),
                     $url_builder->withParameter($action_parameter_token, 'badge_table_delete'),
+                    $row_id_token
+                ),
+            'award_revoke_badge' =>
+                $f->table()->action()->single(
+                    $this->lng->txt('badge_award_revoke'),
+                    $url_builder->withParameter($action_parameter_token, 'award_revoke_badge'),
                     $row_id_token
                 )
         ];
@@ -305,8 +311,8 @@ class ilBadgeTableGUI
                 'id'
             );
 
-        $actions = $this->getActions($url_builder, $action_parameter_token, $row_id_token);
         $data_retrieval = $this->buildDataRetrievalObject($f, $r, $this->parent_id, $this->parent_type);
+        $actions = $this->getActions($url_builder, $action_parameter_token, $row_id_token);
         $table = $f->table()->data('', $columns, $data_retrieval)
                    ->withActions($actions)
                    ->withRequest($request);

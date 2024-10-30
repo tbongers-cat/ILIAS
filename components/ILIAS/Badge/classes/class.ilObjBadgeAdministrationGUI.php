@@ -142,7 +142,7 @@ class ilObjBadgeAdministrationGUI extends ilObjectGUI
                     $this->listObjectBadgeUsers();
                     $render_default = false;
                 } elseif ($table_action === 'badge_image_template_delete') {
-                    $this->deleteImageTemplates();
+                    $this->confirmDeleteImageTemplates();
                     $render_default = false;
                 }
 
@@ -558,7 +558,14 @@ class ilObjBadgeAdministrationGUI extends ilObjectGUI
 
         $this->checkPermission('write');
 
-        $tmpl_ids = $this->badge_request->getIds();
+        $tmpl_ids = $this->badge_request->getBadgeAssignableUsers();
+        if ($tmpl_ids === ['ALL_OBJECTS']) {
+            $tmpl_ids = [];
+            foreach (ilBadgeImageTemplate::getInstances() as $template) {
+                $tmpl_ids[] = $template->getId();
+            }
+        }
+
         if (!$tmpl_ids) {
             $ilCtrl->redirect($this, 'listImageTemplates');
         }
@@ -586,7 +593,7 @@ class ilObjBadgeAdministrationGUI extends ilObjectGUI
     protected function deleteImageTemplates(): void
     {
         $lng = $this->lng;
-        $tmpl_ids = $this->getTemplateIdsFromUrl();
+        $tmpl_ids = $this->badge_request->getIds();
 
         if ($this->checkPermissionBool('write') && count($tmpl_ids) > 0) {
             if (current($tmpl_ids) === self::TABLE_ALL_OBJECTS_ACTION) {

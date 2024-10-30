@@ -223,9 +223,9 @@ class ilBadgeImageTemplateTableGUI
 
         $out = [$table];
         $query = $this->http->wrapper()->query();
-        if ($query->has('tid_id')) {
+        if ($query->has('tid')) {
             $query_values = $query->retrieve(
-                'tid_id',
+                'tid',
                 $this->refinery->kindlyTo()->listOf($this->refinery->kindlyTo()->string())
             );
 
@@ -242,9 +242,9 @@ class ilBadgeImageTemplateTableGUI
                 }
             } elseif (\is_array($query_values)) {
                 foreach ($query_values as $id) {
-                    $badge = new ilBadgeImageTemplate($id);
+                    $badge = new ilBadgeImageTemplate((int) $id);
                     $items[] = $f->modal()->interruptiveItem()->keyValue(
-                        $id,
+                        (string) $id,
                         (string) $badge->getId(),
                         $badge->getTitle()
                     );
@@ -257,27 +257,27 @@ class ilBadgeImageTemplateTableGUI
                     $badge->getTitle()
                 );
             }
-
-            $action = $query->retrieve($action_parameter_token->getName(), $this->refinery->to()->string());
-            if ($action === 'badge_image_template_delete') {
-                $this->http->saveResponse(
-                    $this->http
-                        ->response()
-                        ->withBody(
-                            Streams::ofString($r->renderAsync([
-                                $f->modal()->interruptive(
-                                    $this->lng->txt('badge_deletion'),
-                                    $this->lng->txt('badge_deletion_confirmation'),
-                                    '#'
-                                )->withAffectedItems($items)
-                            ]))
-                        )
-                );
-                $this->http->sendResponse();
-                $this->http->close();
+            if ($query->has($action_parameter_token->getName())) {
+                $action = $query->retrieve($action_parameter_token->getName(), $this->refinery->kindlyTo()->string());
+                if ($action === 'badge_image_template_delete') {
+                    $this->http->saveResponse(
+                        $this->http
+                            ->response()
+                            ->withBody(
+                                Streams::ofString($r->renderAsync([
+                                    $f->modal()->interruptive(
+                                        $this->lng->txt('badge_deletion'),
+                                        $this->lng->txt('badge_deletion_confirmation'),
+                                        '#'
+                                    )->withAffectedItems($items)
+                                ]))
+                            )
+                    );
+                    $this->http->sendResponse();
+                    $this->http->close();
+                }
             }
         }
-
         $this->tpl->setContent($r->render($out));
     }
 }
