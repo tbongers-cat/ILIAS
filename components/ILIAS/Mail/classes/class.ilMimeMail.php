@@ -272,15 +272,18 @@ class ilMimeMail
         $this->finalBody = str_replace('{PLACEHOLDER}', $this->body, $this->getHtmlEnvelope($skin, $style));
     }
 
+    private function getPathToRootDirectory(): string
+    {
+        return realpath(dirname(__DIR__, 4) . '/');
+    }
+
     protected function getHtmlEnvelope(string $skin, string $style): string
     {
-        $bracket_path = '../components/ILIAS/Mail/templates/default/tpl.html_mail_template.html';
-
+        $bracket_path = $this->getPathToRootDirectory() . '/components/ILIAS/Mail/templates/default/tpl.html_mail_template.html';
         if ($skin !== 'default') {
-            $tplpath = '../Customizing/global/skin/' . $skin . '/' . $style . '/components/ILIAS/Mail/tpl.html_mail_template.html';
-
-            if (is_file($tplpath)) {
-                $bracket_path = '../Customizing/global/skin/' . $skin . '/' . $style . '/components/ILIAS/Mail/tpl.html_mail_template.html';
+            $custom_path = $this->getPathToRootDirectory() . '/public/Customizing/global/skin/' . $skin . '/' . $style . '/components/ILIAS/Mail/tpl.html_mail_template.html';
+            if (is_file($custom_path)) {
+                $bracket_path = $custom_path;
             }
         }
 
@@ -289,12 +292,14 @@ class ilMimeMail
 
     protected function buildHtmlInlineImages(string $skin, string $style): void
     {
-        $this->gatherImagesFromDirectory('../components/ILIAS/Mail/templates/default/img');
+        $this->gatherImagesFromDirectory(
+            $this->getPathToRootDirectory() . '/components/ILIAS/Mail/templates/default/img'
+        );
 
         if ($skin !== 'default') {
-            $skinDirectory = '../Customizing/global/skin/' . $skin . '/' . $style . '/components/ILIAS/Mail/img';
-            if (is_dir($skinDirectory) && is_readable($skinDirectory)) {
-                $this->gatherImagesFromDirectory($skinDirectory, true);
+            $custom_directory = $this->getPathToRootDirectory() . '/public/Customizing/global/skin/' . $skin . '/' . $style . '/components/ILIAS/Mail/img';
+            if (is_dir($custom_directory) && is_readable($custom_directory)) {
+                $this->gatherImagesFromDirectory($custom_directory, true);
             }
         }
     }
