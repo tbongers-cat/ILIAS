@@ -659,6 +659,10 @@ class ilExport
         $this->log->debug("process tail dependencies of " . $a_entity);
         $sequence = $exp->getXmlExportTailDependencies($a_entity, $a_target_release, $a_id);
         foreach ($sequence as $s) {
+            if (empty((array) ($s["ids"] ?? []))) {
+                continue;
+            }
+
             $comp = explode("/", $s["component"]);
             $component = str_replace("_", "", $comp[2]);
             $exp_class = "il" . $component . "Exporter";
