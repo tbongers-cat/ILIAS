@@ -1307,7 +1307,6 @@ abstract class assQuestion implements Question
         }
         // duplicate the question in database
         $clone = clone $this;
-        $original_id = $this->questionrepository->getForQuestionId($this->id)->getOriginalId();
         $clone->id = -1;
         $source_parent_id = $this->getObjId();
         $clone->setObjId($target_parent_id);
@@ -1315,11 +1314,11 @@ abstract class assQuestion implements Question
             $clone->setTitle($title);
         }
         $clone->saveToDb();
-        $clone->clonePageOfQuestion($original_id);
-        $clone->cloneXHTMLMediaObjectsOfQuestion($original_id);
+        $clone->clonePageOfQuestion($this->id);
+        $clone->cloneXHTMLMediaObjectsOfQuestion($this->id);
         $clone = $this->cloneQuestionTypeSpecificProperties($clone);
 
-        $clone->onCopy($source_parent_id, $original_id, $clone->getObjId(), $clone->getId());
+        $clone->onCopy($source_parent_id, $this->id, $clone->getObjId(), $clone->getId());
 
         return $clone->id;
     }
