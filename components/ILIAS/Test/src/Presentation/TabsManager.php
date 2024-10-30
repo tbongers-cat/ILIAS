@@ -71,6 +71,9 @@ class TabsManager
     public const SETTINGS_SUBTAB_ID_ASSIGN_SKILLS_TO_QUESTIONS = 'qpl_skl_sub_tab_quest_assign';
     private const SETTINGS_SUBTAB_ID_PERSONAL_DEFAULT_SETTINGS = 'tst_default_settings';
 
+    private const QUESTIONS_SUBTAB_ID_RANDOM_SETTINGS = 'tst_rnd_quest_cfg_tab_general';
+    private const QUESTIONS_SUBTAB_ID_RANDOM_POOLS = 'tst_rnd_quest_cfg_tab_pool';
+
     protected ?string $parent_back_href = null;
     protected ?string $parent_back_label = null;
 
@@ -548,22 +551,22 @@ class TabsManager
         $this->tabs->activateTab(self::TAB_ID_QUESTIONS);
 
         if ($this->test_object->isRandomTest()) {
-            $this->tabs->addSubTab(
-                'tstRandQuestSetGeneralConfig',
-                $this->lng->txt('tst_rnd_quest_cfg_tab_general'),
+            $this->tabs->addSubTabTarget(
+                self::QUESTIONS_SUBTAB_ID_RANDOM_SETTINGS,
                 $this->ctrl->getLinkTargetByClass(
                     \ilTestRandomQuestionSetConfigGUI::class,
                     \ilTestRandomQuestionSetConfigGUI::CMD_SHOW_GENERAL_CONFIG_FORM
-                )
+                ),
+                ['', 'showGeneralConfigForm', 'saveGeneralConfigForm']
             );
 
-            $this->tabs->addSubTab(
-                'tstRandQuestSetPoolConfig',
-                $this->lng->txt('tst_rnd_quest_cfg_tab_pool'),
+            $this->tabs->addSubTabTarget(
+                self::QUESTIONS_SUBTAB_ID_RANDOM_POOLS,
                 $this->ctrl->getLinkTargetByClass(
                     \ilTestRandomQuestionSetConfigGUI::class,
                     \ilTestRandomQuestionSetConfigGUI::CMD_SHOW_SRC_POOL_DEF_LIST
-                )
+                ),
+                ['showSourcePoolDefinitionList']
             );
         }
 

@@ -663,6 +663,7 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
                     $this->obj_data_cache,
                     $test_process_locker_factory,
                     $this->testrequest,
+                    $this->title_builder,
                     $this->questionrepository
                 );
                 $this->ctrl->forwardCommand($gui);
