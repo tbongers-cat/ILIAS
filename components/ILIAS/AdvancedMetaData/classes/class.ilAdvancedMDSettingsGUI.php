@@ -387,7 +387,11 @@ class ilAdvancedMDSettingsGUI
             $this->ctrl->redirect($this, "showPresentation");
         }
 
-        foreach (ilAdvancedMDRecord::_getActivatedObjTypes() as $obj_type) {
+        if (!$visible_records = ilAdvancedMDRecord::_getAllRecordsByObjectType()) {
+            return;
+        }
+
+        foreach ($visible_records as $obj_type => $record) {
             $perm = null;
 
             if (in_array($obj_type, $this->permissions->getAllowedObjectTypes())) {
