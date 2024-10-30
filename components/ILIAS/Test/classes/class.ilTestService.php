@@ -216,22 +216,19 @@ class ilTestService
                 }
             }
 
-
-
-            // fau: testNav - add number parameter for getQuestionTitle()
             $data[] = [
-                'order' => $value["nr"],
-                'title' => $this->object->getQuestionTitle($value["title"], $value["nr"], $value["points"]),
+                'order' => $value['nr'],
+                'title' => $this->object->getQuestionTitle($value['title'], $value['nr'], $value['points']),
                 'description' => $description,
                 'disabled' => $disableLink,
-                'worked_through' => $value["worked_through"],
-                'postponed' => $value["postponed"],
+                'worked_through' => $value['worked_through'],
+                'postponed' => $value['postponed'],
                 'points' => $points,
                 'marked' => $marked,
-                'sequence' => $value["sequence"],
-                'isAnswered' => $value['isAnswered']
+                'sequence' => $value['sequence'],
+                'isAnswered' => $value['isAnswered'],
+                'has_authorized_answer' => $value['has_authorized_answer']
             ];
-
             $firstQuestion = false;
             // fau.
         }
