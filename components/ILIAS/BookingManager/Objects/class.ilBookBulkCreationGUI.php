@@ -159,7 +159,7 @@ class ilBookBulkCreationGUI
             return <<<EOT
             const book_bulk_button = document.getElementById("$id");
             book_bulk_button.addEventListener("click", (event) => {
-                book_bulk_button.closest(".modal").querySelector("form").submit();
+                book_bulk_button.closest(".c-modal").querySelector(".modal-body").querySelector("form").submit();
             });
 EOT;
         });
