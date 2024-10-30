@@ -2235,7 +2235,7 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
         $title->setMaxLength(ilObject::TITLE_LENGTH);
         $form->addItem($title);
 
-        if ($this->getCreationMode() === false && count($trans->getLanguages()) === 1) {
+        if ($this->getCreationMode() === false && count($trans->getLanguages()) > 1) {
             $languages = $this->domain->metadata()->getLOMLanguagesForSelectInputs();
             $title->setInfo(
                 $this->lng->txt("language") . ": " . $languages[$trans->getDefaultLanguage()] .
