@@ -27,8 +27,8 @@ class MainSettingsDatabaseRepository implements MainSettingsRepository
     public const TABLE_NAME = 'tst_tests';
     public const STORAGE_DATE_FORMAT = 'YmdHis';
 
-    private static array $instances_by_obj_fi = [];
-    private static array $instances_by_test_fi = [];
+    private array $instances_by_obj_fi = [];
+    private array $instances_by_test_fi = [];
 
     protected \ilDBInterface $db;
 
@@ -39,24 +39,24 @@ class MainSettingsDatabaseRepository implements MainSettingsRepository
 
     public function getForObjFi(int $obj_fi): MainSettings
     {
-        if (!isset(self::$instances_by_obj_fi[$obj_fi])) {
+        if (!isset($this->instances_by_obj_fi[$obj_fi])) {
             $where_part = 'WHERE obj_fi = ' . $this->db->quote($obj_fi, 'integer');
-            self::$instances_by_obj_fi[$obj_fi] = $this->doSelect($where_part);
-            $test_id = self::$instances_by_obj_fi[$obj_fi]->getTestId();
-            self::$instances_by_test_fi[$test_id] = self::$instances_by_obj_fi[$obj_fi];
+            $this->instances_by_obj_fi[$obj_fi] = $this->doSelect($where_part);
+            $test_id = $this->instances_by_obj_fi[$obj_fi]->getTestId();
+            $this->instances_by_test_fi[$test_id] = $this->instances_by_obj_fi[$obj_fi];
         }
-        return self::$instances_by_obj_fi[$obj_fi];
+        return $this->instances_by_obj_fi[$obj_fi];
     }
 
     public function getFor(int $test_id): MainSettings
     {
         if (!isset(self::$instances_by_test_fi[$test_id])) {
             $where_part = 'WHERE test_id = ' . $this->db->quote($test_id, 'integer');
-            self::$instances_by_test_fi[$test_id] = $this->doSelect($where_part);
-            $obj_id = self::$instances_by_test_fi[$test_id]->getObjId();
-            self::$instances_by_obj_fi[$obj_id] = self::$instances_by_test_fi[$test_id];
+            $this->instances_by_test_fi[$test_id] = $this->doSelect($where_part);
+            $obj_id = $this->instances_by_test_fi[$test_id]->getObjId();
+            $this->instances_by_obj_fi[$obj_id] = $this->instances_by_test_fi[$test_id];
         }
-        return self::$instances_by_test_fi[$test_id];
+        return $this->instances_by_test_fi[$test_id];
     }
 
     protected function doSelect(string $where_part): MainSettings
@@ -233,7 +233,7 @@ class MainSettingsDatabaseRepository implements MainSettingsRepository
             $values,
             ['test_id' => ['integer', $settings->getTestId()]]
         );
-        unset(self::$instances_by_test_fi[$settings->getTestId()]);
-        unset(self::$instances_by_obj_fi[$settings->getObjId()]);
+        unset($this->instances_by_test_fi[$settings->getTestId()]);
+        unset($this->instances_by_obj_fi[$settings->getObjId()]);
     }
 }
