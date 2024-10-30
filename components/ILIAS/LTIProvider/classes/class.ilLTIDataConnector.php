@@ -21,6 +21,7 @@ declare(strict_types=1);
 use ceLTIc\LTI\Context;
 use ceLTIc\LTI\DataConnector\DataConnector;
 use ceLTIc\LTI\Enum\IdScope;
+use ceLTIc\LTI\Enum\LtiVersion;
 use ceLTIc\LTI\Platform;
 use ceLTIc\LTI\PlatformNonce;
 use ceLTIc\LTI\ResourceLink;
@@ -113,7 +114,7 @@ class ilLTIDataConnector extends DataConnector
             $platform->clientId = $row->client_id;
             $platform->deploymentId = $row->deployment_id;
             $platform->rsaKey = $row->public_key;
-            $platform->ltiVersion = $row->lti_version;
+            $platform->ltiVersion = LtiVersion::from($row->lti_version);
             $platform->signatureMethod = $row->signature_method;
             $platform->consumerName = $row->consumer_name;
             $platform->consumerVersion = $row->consumer_version;
