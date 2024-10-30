@@ -153,7 +153,7 @@ class ilTermDefinitionBulkCreationGUI
         $f = $this->gui->ui()->factory();
         $r = $this->gui->ui()->renderer();
 
-        $conf_tpl = new ilTemplate("tpl.bulk_creation_confirmation.html", true, true, "Modules/Glossary");
+        $conf_tpl = new ilTemplate("tpl.bulk_creation_confirmation.html", true, true, "components/ILIAS/Glossary");
 
         $button = $f->button()->standard(
             $lng->txt("glo_create_term_definition_pairs"),
@@ -162,7 +162,7 @@ class ilTermDefinitionBulkCreationGUI
             return <<<EOT
             const glo_bulk_button = document.getElementById("$id");
             glo_bulk_button.addEventListener("click", (event) => {
-                glo_bulk_button.closest(".modal").querySelector("form").submit();
+                glo_bulk_button.closest(".c-modal").querySelector(".modal-body").querySelector("form").submit();
             });
 EOT;
         });
