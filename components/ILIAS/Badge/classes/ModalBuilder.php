@@ -28,6 +28,7 @@ use ilDateTime;
 use ilDatePresentation;
 use ILIAS\UI\Renderer;
 use ILIAS\UI\Factory;
+use ILIAS\UI\Implementation\Component\Card\Card;
 
 class ModalBuilder
 {
@@ -69,9 +70,19 @@ class ModalBuilder
         }
 
         $badge_properties = $this->translateKeysWithValidDataAttribute($badge_properties);
-        $modal_content[] = $this->ui_factory->listing()->descriptive($badge_properties);
 
-        return $this->ui_factory->modal()->roundtrip($badge_title, $modal_content);
+        $modal_content[] = $this->ui_factory->item()
+                ->standard($badge_title)
+                ->withDescription('')
+                ->withProperties($badge_properties);
+
+        $card = $this->ui_factory->card()
+            ->standard($badge_title)
+            ->withHiddenSections($modal_content);
+
+        return $this->ui_factory->modal()->lightbox(
+            $this->ui_factory->modal()->lightboxCardPage($card)
+        );
     }
 
     public function renderModal(Modal $modal): string

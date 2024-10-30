@@ -39,6 +39,7 @@ use ilBadge;
 use ilBadgeAssignment;
 use ilUserQuery;
 use DateTimeImmutable;
+use ILIAS\UI\URLBuilderToken;
 
 class ilBadgeUserTableGUI
 {
@@ -94,10 +95,10 @@ class ilBadgeUserTableGUI
                 $assignments = null;
                 $user_ids = null;
                 $parent_ref_id = $this->parent_ref_id;
-                $a_restrict_badge_id = 0;
                 $data = [];
                 $badges = [];
                 $tree = $DIC->repositoryTree();
+                $restrict_badge_id = 0;
 
                 $a_parent_obj_id = ilObject::_lookupObjId($parent_ref_id);
 
@@ -115,16 +116,19 @@ class ilBadgeUserTableGUI
                     foreach (ilBadge::getInstancesByParentId($obj_id) as $badge) {
                         $badges[$badge->getId()] = $badge;
                     }
-
                     foreach (ilBadgeAssignment::getInstancesByParentId($obj_id) as $ass) {
-                        if ($a_restrict_badge_id !== $ass->getBadgeId()) {
+                        if ($restrict_badge_id &&
+                            $restrict_badge_id !== $ass->getBadgeId()) {
+                            continue;
+                        }
+                        if ($this->award_badge &&
+                            $ass->getBadgeId() !== $this->award_badge->getId()) {
                             continue;
                         }
 
                         $assignments[$ass->getUserId()][] = $ass;
                     }
                 }
-
                 if (!$user_ids && $assignments !== null) {
                     $user_ids = array_keys($assignments);
                 }
@@ -152,6 +156,7 @@ class ilBadgeUserTableGUI
                             $issued = $immutable->setTimestamp($timestamp);
                             $parent_id = $parent['id'];
                             $data[$idx] = [
+                                'id' => $user_id,
                                 'user_id' => $user_id,
                                 'name' => $name,
                                 'login' => $login,
@@ -168,12 +173,12 @@ class ilBadgeUserTableGUI
                         $name = $user['lastname'] . ', ' . $user['firstname'];
                         $login = $user['login'];
                         $data[$idx] = [
+                            'id' => $user_id,
                             'user_id' => $user_id,
                             'name' => $name,
                             'login' => $login,
                             'type' => '',
                             'title' => '',
-                            'issued' => '',
                             'parent_id' => ''
                         ];
                     }
@@ -192,7 +197,12 @@ class ilBadgeUserTableGUI
             ): Generator {
                 $records = $this->getRecords($range, $order);
                 foreach ($records as $idx => $record) {
-                    $row_id = (string) $idx;
+
+                    $row_id = (string) $record['id'];
+                    if ($this->award_badge !== null) {
+                        $row_id = $record['id'] . '_' . $this->award_badge->getId();
+                    }
+
                     yield $row_builder->buildDataRow($row_id, $record);
                 }
             }
@@ -241,6 +251,36 @@ class ilBadgeUserTableGUI
         };
     }
 
+    /**
+     * @return array<string, \ILIAS\UI\Component\Table\Action\Action>
+     */
+    private function getActions(
+        URLBuilder $url_builder,
+        URLBuilderToken $action_parameter_token,
+        URLBuilderToken $row_id_token,
+    ): array {
+        $f = $this->factory;
+        if ($this->award_badge) {
+
+            return [
+                'badge_award_badge' =>
+                    $f->table()->action()->multi(
+                        $this->lng->txt('badge_award_badge'),
+                        $url_builder->withParameter($action_parameter_token, 'assignBadge'),
+                        $row_id_token
+                    ),
+                'badge_revoke_badge' =>
+                    $f->table()->action()->multi(
+                        $this->lng->txt('badge_remove_badge'),
+                        $url_builder->withParameter($action_parameter_token, 'revokeBadge'),
+                        $row_id_token
+                    ),
+            ];
+        }
+
+        return [];
+    }
+
     public function renderTable(): void
     {
         $f = $this->factory;
@@ -271,9 +311,15 @@ class ilBadgeUserTableGUI
             );
 
         $data_retrieval = $this->buildDataRetrievalObject($f, $r, $this->parent_ref_id, $this->award_badge);
+        $actions = $this->getActions($url_builder, $action_parameter_token, $row_id_token);
 
+        $title = '';
+        if ($this->award_badge) {
+            $title = $this->lng->txt("badge_award_badge") . ": " . $this->award_badge->getTitle();
+        }
         $table = $f->table()
-                   ->data('', $columns, $data_retrieval)
+                   ->data($title, $columns, $data_retrieval)
+                   ->withActions($actions)
                    ->withRequest($request);
 
         $out = [$table];

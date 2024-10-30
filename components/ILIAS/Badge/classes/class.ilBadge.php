@@ -31,7 +31,7 @@ class ilBadge
     protected string $title = "";
     protected string $desc = "";
     protected string $image = "";
-    protected ?ResourceIdentification $image_rid = null;
+    protected ?string $image_rid = null;
     protected string $valid = "";
     protected ?array $config = null;
     protected string $criteria = "";
@@ -380,11 +380,8 @@ class ilBadge
             }
 
             return "img" . $this->getId() . "." . $suffix;
-        } else {
-            // TODO gvollbach: This seems to be dead code, the $image_rid is never used 
-            $image_rid = $this->getImageRid();
-            #  $image_src = $this->badge_image_service->getImageFromBadge($a_badge);
         }
+
         return "";
     }
 
@@ -495,7 +492,7 @@ class ilBadge
         } else {
             if ($this->getImageRid() !== null) {
                 try {
-                    $this->resource_storage->manage()->remove($this->getImageRid(), new ilBadgeFileStakeholder());
+                    $this->resource_storage->manage()->remove(new ResourceIdentification($this->getImageRid()), new ilBadgeFileStakeholder());
                 } catch (Exception $e) {
                 }
             }
@@ -606,15 +603,13 @@ class ilBadge
                 : $lng->txt("badge_subtype_manual")) . ")";
     }
 
-    public function getImageRid(): ?ResourceIdentification
+    public function getImageRid(): ?string
     {
         return $this->image_rid;
     }
 
     public function setImageRid(?string $image_rid): void
     {
-        if ($image_rid !== null) {
-            $this->image_rid = new ResourceIdentification($image_rid);
-        }
+        $this->image_rid = $image_rid;
     }
 }

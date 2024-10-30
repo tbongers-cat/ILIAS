@@ -2255,6 +2255,7 @@ badge#:#badge_add_to_backpack_multi#:#Trying to add %s to Backpack
 badge#:#badge_add_to_profile#:#Add to Profile
 badge#:#badge_assignment_deletion_confirmation#:#Are you sure you want to revoke the following badge assignments for "%s"?
 badge#:#badge_award_badge#:#Award Badge
+badge#:#badge_award_revoke#:#Award/Revoke Badge
 badge#:#badge_backpack_connect_failed#:#The Mozilla Backpack could not be requested for %s.
 badge#:#badge_backpack_email#:#Mozilla Backpack Account (E-Mail)
 badge#:#badge_backpack_gallery_info#:#These are your published badge collections in your Mozilla Backpack.
