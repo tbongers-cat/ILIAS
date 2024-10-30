@@ -59,13 +59,12 @@ export default class Modal {
     if (this.#triggeredSignalsStorage[signalData.id] === true) {
       return;
     }
-
     this.#triggeredSignalsStorage[signalData.id] = true;
 
     if (options.ajaxRenderUrl) {
       this.#jquery(component).load(options.ajaxRenderUrl, () => {
         const dialog = component.querySelector('dialog');
-        if(!dialog) {
+        if (!dialog) {
           throw new Error('url did not return a dialog');
         }
         dialog.showModal();
@@ -76,5 +75,7 @@ export default class Modal {
       this.#triggeredSignalsStorage[signalData.id] = false;
     }
     this.#initializedModalboxes[signalData.id] = component.id;
+
+    il.UI.lightbox.maybeInitCarousel(component);
   }
 }
