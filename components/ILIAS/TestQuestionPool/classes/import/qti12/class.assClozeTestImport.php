@@ -69,7 +69,16 @@ class assClozeTestImport extends assQuestionImport
                         $presentation->material[$entry["index"]]
                     );
 
-                    array_push($clozetext_array, $material_string);
+                    if ($questiontext === '&nbsp;') {
+                        /**
+                         * 2024-11-06, sk: This is needed because the question-text
+                         * is actually saved as the first entry in the material-
+                         * node.
+                         */
+                        $questiontext = $material_string;
+                    } else {
+                        array_push($clozetext_array, $material_string);
+                    }
 
                     break;
                 case "response":
@@ -98,10 +107,11 @@ class assClozeTestImport extends assQuestionImport
                                 case ilQTIRenderFib::FIBTYPE_STRING:
                                     array_push(
                                         $gaps,
-                                        ["ident" => $response->getIdent(),
-                                              "type" => assClozeGap::TYPE_TEXT,
-                                              "answers" => [],
-                                              'gap_size' => $response->getRenderType()->getMaxchars()
+                                        [
+                                            "ident" => $response->getIdent(),
+                                            "type" => assClozeGap::TYPE_TEXT,
+                                            "answers" => [],
+                                            'gap_size' => $response->getRenderType()->getMaxchars()
                                         ]
                                     );
                                     break;
@@ -255,7 +265,7 @@ class assClozeTestImport extends assQuestionImport
         $this->object->setIdenticalScoring((bool) $item->getMetadataEntry("identicalScoring"));
         $this->object->setFeedbackMode(
             strlen($item->getMetadataEntry("feedback_mode")) ?
-            $item->getMetadataEntry("feedback_mode") : ilAssClozeTestFeedback::FB_MODE_GAP_QUESTION
+                $item->getMetadataEntry("feedback_mode") : ilAssClozeTestFeedback::FB_MODE_GAP_QUESTION
         );
         $combinations = json_decode(base64_decode($item->getMetadataEntry("combinations")));
         if (strlen($textgap_rating) == 0) {
@@ -321,7 +331,7 @@ class assClozeTestImport extends assQuestionImport
         if (is_array(ilSession::get("import_mob_xhtml"))) {
             foreach (ilSession::get("import_mob_xhtml") as $mob) {
                 $importfile = $importdirectory . DIRECTORY_SEPARATOR . $mob["uri"];
-                global $DIC; /* @var ILIAS\DI\Container $DIC */
+                global $DIC;
                 $DIC['ilLog']->write(__METHOD__ . ': import mob from dir: ' . $importfile);
 
                 $media_object = ilObjMediaObject::_saveTempFileAsMediaObject(basename($importfile), $importfile, false);
