@@ -2,7 +2,7 @@
 // Hide all on load
 var ilTableHideFilter = new Object();
 
-/** 
+/**
 * Hide all ilFormHelpLink elements
 */
 function ilInitTableFilters()
@@ -98,14 +98,19 @@ var ilTableFailureHandler = function(o)
 
 function ilTableJSHandler(sUrl)
 {
-	var ilTableCallback =
-	{
-		success: ilTableSuccessHandler,
-		failure: ilTableFailureHandler
-	};
-
-	var request = YAHOO.util.Connect.asyncRequest('GET', sUrl, ilTableCallback);
-	
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', sUrl);
+  xhr.onload = (e) => {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      ilTableSuccessHandler(e);
+    } else {
+      ilTableFailureHandler(e);
+    }
+  };
+  xhr.onerror = (e) => {
+    ilTableFailureHandler(e);
+  };
+  xhr.send();
 	return false;
 }
 
