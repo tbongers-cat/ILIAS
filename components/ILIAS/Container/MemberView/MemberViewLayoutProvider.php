@@ -55,9 +55,9 @@ class MemberViewLayoutProvider extends AbstractModificationProvider
         $ref_id = $mv->getCurrentRefId();
         $url = new URI(ilLink::_getLink(
             $ref_id,
-            ilObject::_lookupType(ilObject::_lookupObjId($ref_id)),
-            ['mv' => 0]
+            ilObject::_lookupType(ilObject::_lookupObjId($ref_id))
         ));
+        $url = $url->withParameter('mv', 0);
 
         $modeinfo = $dic->ui()->factory()->mainControls()->modeInfo(
             $dic->language()->txt('mem_view_long'),
