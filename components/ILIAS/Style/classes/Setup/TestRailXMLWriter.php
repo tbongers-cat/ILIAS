@@ -34,15 +34,32 @@ class TestRailXMLWriter
 
     protected SimpleXMLElement $xml;
 
+    protected int $no_found_ids = 0;
+    protected int $no_expexted_ids = 0;
+    protected int $no_new_ids = 0;
+    protected int $no_components = 2; //initUISection calls getCaseId twice, updating new_ids/found_ids; this is to make total numbers match up
+
+    protected array $expected_by_caseids = [];
+
     public function __construct(
         protected \ilTemplate $case_tpl,
-        protected ExamplesYamlParser $parser
+        protected ExamplesYamlParser $parser,
+        protected bool $only_new_cases
     ) {
         $this->xml = new SimpleXMLElement('<?xml version="1.0"?><sections></sections>');
+        foreach (self::$CASEIDS as $k => $v) {
+            $this->no_expexted_ids += count($v);
+            $this->expected_by_caseids = array_merge($this->expected_by_caseids, array_values($v));
+        }
     }
 
     public function getXML(): SimpleXMLElement
     {
+        print "\n found " . $this->no_components . ' components/cases';
+        print "\n update for " . $this->no_found_ids . ' of ' . $this->no_expexted_ids . ' known IDs';
+        print "\n new cases: " . $this->no_new_ids;
+        print "\n known ids unaccounted for: " . implode(',', $this->expected_by_caseids);
+        print "\n";
         return $this->xml;
     }
 
@@ -62,6 +79,7 @@ class TestRailXMLWriter
 
             foreach ($components as $component) {
                 list($component_name, $entry) = $component;
+                $this->no_components += 2;
                 $this->addComponentCases($xml_cases, $section, $component_name, $entry);
             }
         }
@@ -111,22 +129,28 @@ class TestRailXMLWriter
         );
         $xml_cases = $xml_section->addChild('cases');
 
-        $this->addCase(
-            $xml_cases,
-            $this->maybeGetCaseId(self::BASE, self::OPEN),
-            $this->getBlockContents('suite_case_open_title'),
-            $this->getBlockContents('suite_case_open_precond'),
-            $this->getBlockContents('suite_case_open_steps'),
-            $this->getBlockContents('suite_case_open_expected')
-        );
-        $this->addCase(
-            $xml_cases,
-            $this->maybeGetCaseId(self::BASE, self::PREPARE),
-            $this->getBlockContents('suite_case_validate_title'),
-            $this->getBlockContents('suite_case_validate_precond'),
-            $this->getBlockContents('suite_case_validate_steps'),
-            $this->getBlockContents('suite_case_validate_expected')
-        );
+        list($build, $case_id) = $this->getCaseId(self::BASE, self::OPEN);
+        if ($build) {
+            $this->addCase(
+                $xml_cases,
+                $case_id,
+                $this->getBlockContents('suite_case_open_title'),
+                $this->getBlockContents('suite_case_open_precond'),
+                $this->getBlockContents('suite_case_open_steps'),
+                $this->getBlockContents('suite_case_open_expected')
+            );
+        }
+        list($build, $case_id) = $this->getCaseId(self::BASE, self::PREPARE);
+        if ($build) {
+            $this->addCase(
+                $xml_cases,
+                $case_id,
+                $this->getBlockContents('suite_case_validate_title'),
+                $this->getBlockContents('suite_case_validate_precond'),
+                $this->getBlockContents('suite_case_validate_steps'),
+                $this->getBlockContents('suite_case_validate_expected')
+            );
+        }
 
         return $xml_section;
     }
@@ -139,47 +163,53 @@ class TestRailXMLWriter
     ): void {
 
         $preconditions = $this->getBlockContents('preconditions');
-        $steps = $this->getTemplate();
-        $steps->setCurrentBlock('steps_show');
-        $steps->setVariable('SECTION', $section);
-        $steps->setVariable('CLICKPATH', $this->getClickpath($entry));
-        $steps->setVariable('TITLE', $entry->getTitle());
-        $steps->parseCurrentBlock();
-        $steps = $steps->get();
 
-        $expected = $this->getTemplate();
-        $expected_examples = $this->getExpectedExamples($entry->getExamples());
-        $expected->setVariable('EXAMPLE_COUNTER', (string) count($entry->getExamples()));
-        $expected->setVariable('EXPECTED', $expected_examples);
-        $expected = $expected->get();
+        list($build, $case_id) = $this->getCaseId($section . '/' . $component_name, self::SHOW);
+        if ($build) {
+            $steps = $this->getTemplate();
+            $steps->setCurrentBlock('steps_show');
+            $steps->setVariable('SECTION', $section);
+            $steps->setVariable('CLICKPATH', $this->getClickpath($entry));
+            $steps->setVariable('TITLE', $entry->getTitle());
+            $steps->parseCurrentBlock();
+            $steps = $steps->get();
 
-        $this->addCase(
-            $xml_parent_node,
-            $this->maybeGetCaseId($section . '/' . $component_name, self::SHOW),
-            $section . ' - ' . $component_name . ': ' . self::SHOW,
-            $preconditions,
-            $steps,
-            $expected
-        );
+            $expected = $this->getTemplate();
+            $expected_examples = $this->getExpectedExamples($entry->getExamples());
+            $expected->setVariable('EXAMPLE_COUNTER', (string) count($entry->getExamples()));
+            $expected->setVariable('EXPECTED', $expected_examples);
+            $expected = $expected->get();
+            $this->addCase(
+                $xml_parent_node,
+                $case_id,
+                $section . ' - ' . $component_name . ': ' . self::SHOW,
+                $preconditions,
+                $steps,
+                $expected
+            );
+        }
 
-        $steps = $this->getTemplate();
-        $steps->setCurrentBlock('steps_validate');
-        $steps->setVariable('SECTION', $section);
-        $steps->setVariable('CLICKPATH', $this->getClickpath($entry));
-        $steps->setVariable('TITLE', $entry->getTitle());
-        $steps->parseCurrentBlock();
-        $steps = $steps->get();
+        list($build, $case_id) = $this->getCaseId($section . '/' . $component_name, self::VALIDATE);
+        if ($build) {
+            $steps = $this->getTemplate();
+            $steps->setCurrentBlock('steps_validate');
+            $steps->setVariable('SECTION', $section);
+            $steps->setVariable('CLICKPATH', $this->getClickpath($entry));
+            $steps->setVariable('TITLE', $entry->getTitle());
+            $steps->parseCurrentBlock();
+            $steps = $steps->get();
 
-        $expected = $this->getBlockContents('expected_validate');
+            $expected = $this->getBlockContents('expected_validate');
 
-        $this->addCase(
-            $xml_parent_node,
-            $this->maybeGetCaseId($section . '/' . $component_name, self::VALIDATE),
-            $section . ' - ' . $component_name . ': ' . self::VALIDATE,
-            $preconditions,
-            $steps,
-            $expected
-        );
+            $this->addCase(
+                $xml_parent_node,
+                $case_id,
+                $section . ' - ' . $component_name . ': ' . self::VALIDATE,
+                $preconditions,
+                $steps,
+                $expected
+            );
+        }
     }
 
     protected function getTemplate(): ilTemplate
@@ -201,17 +231,29 @@ class TestRailXMLWriter
         return implode(' -> ', $clickpath);
     }
 
-
-    protected function maybeGetCaseId(string $component_path, string $subkey): string
+    protected function getCaseId(string $component_path, string $subkey): array
     {
+        $case_id = '';
         if (array_key_exists($component_path, self::$CASEIDS)
             && array_key_exists($subkey, self::$CASEIDS[$component_path])
         ) {
-            return self::$CASEIDS[$component_path][$subkey];
+            $case_id = self::$CASEIDS[$component_path][$subkey];
+            $this->no_found_ids += 1;
+            print "\n caseId for: $component_path ($subkey)";
+            unset(
+                $this->expected_by_caseids[
+                    array_search($case_id, $this->expected_by_caseids)
+                ]
+            );
         } else {
-            print "\nno caseId for: $component_path ($subkey)";
+            $this->no_new_ids += 1;
+            print "\n no caseId for: $component_path ($subkey)";
         }
-        return '';
+
+        $build = ($case_id === '' && $this->only_new_cases)
+            || ($case_id !== '' && !$this->only_new_cases);
+
+        return [$build, $case_id];
     }
 
     protected function getExpectedExamples(array $examples): string
