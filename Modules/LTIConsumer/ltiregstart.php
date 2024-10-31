@@ -40,6 +40,10 @@ $typeId = '';
 
 if ($params->has('url')) {
     $url = $params->retrieve('url', $DIC->refinery()->kindlyTo()->string());
+
+    if (empty($_POST["url"]) || $_POST["url"] != $url) {
+        ilObjLTIConsumer::sendResponseError(400, "url parameter in request does not match url parameter in post");
+    }
 } else {
     ilObjLTIConsumer::sendResponseError(400, "missing required url parameter in request");
 }
