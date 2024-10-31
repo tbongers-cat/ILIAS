@@ -147,7 +147,7 @@ class ilLanguageFolderTable implements DataTableInterface\DataRetrieval
         foreach ($this->getItems($range, $order) as $idx => $record) {
             $obj_id = (string) $record['obj_id'];
             $language = $record['name'];
-            if ($record["status"]) {
+            if (isset($record["status"]) && $record["status"]) {
                 $language .= ' (' . $this->lng->txt($record["status"]) . ')';
             }
             $to_language = $this->url_builder
