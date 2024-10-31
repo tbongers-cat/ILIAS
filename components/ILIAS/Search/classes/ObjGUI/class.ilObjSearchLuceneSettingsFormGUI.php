@@ -114,6 +114,7 @@ class ilObjSearchLuceneSettingsFormGUI
         $settings = $this->getSettings();
         $data = $form->getData()['section'];
 
+        $settings->enableLuceneUserSearch((bool) $data['user_search_enabled']);
         $settings->setFragmentCount((int) $data['fragmentCount']);
         $settings->setFragmentSize((int) $data['fragmentSize']);
         $settings->setMaxSubitems((int) $data['maxSubitems']);
@@ -152,6 +153,12 @@ class ilObjSearchLuceneSettingsFormGUI
     {
         $settings = $this->getSettings();
         $field_factory = $this->factory->input()->field();
+
+        // User search
+        $user_search = $field_factory->checkbox(
+            $this->lng->txt('search_user_search_form'),
+            $this->lng->txt('search_user_search_info_form')
+        )->withValue($settings->isLuceneUserSearchEnabled());
 
         // Item filter
         $filter = $settings->getLuceneMimeFilter();
@@ -234,6 +241,7 @@ class ilObjSearchLuceneSettingsFormGUI
          */
         $section = $this->factory->input()->field()->section(
             [
+                'user_search_enabled' => $user_search,
                 'mime' => $item_filter,
                 'prefix' => $prefix,
                 'fragmentCount' => $frag_count,
