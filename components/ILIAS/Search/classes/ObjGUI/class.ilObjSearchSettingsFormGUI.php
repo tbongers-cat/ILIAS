@@ -268,10 +268,10 @@ class ilObjSearchSettingsFormGUI
                 'max_hits' => $hits,
                 'search_type' => $type,
                 'operator' => $operator,
+                'hide_adv_search' => $hide_adv,
                 'user_search_enabled' => $user_search,
                 'filter' => $item_filter,
                 'cdate' => $cdate,
-                'hide_adv_search' => $hide_adv,
                 'auto_complete_length' => $auto_complete,
                 'inactive_user' => $inactive_user,
                 'limited_user' => $limited_user
