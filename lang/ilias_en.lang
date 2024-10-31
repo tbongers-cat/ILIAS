@@ -15467,6 +15467,7 @@ search#:#search_user_search_info_form#:#Users can be found in the global search.
 search#:#search_users#:#Search Users
 search#:#select_orgu#:#Select Organisational Units
 search#:#until#:#up to
+search#:#user_search_settings_section#:#User Search in 'Member'-tabs
 sess#:#il_sess_participant#:#Session Participants
 sess#:#il_sess_status_open#:#Open Session
 sess#:#mail_sess_roles#:#Send Mail to Session Roles

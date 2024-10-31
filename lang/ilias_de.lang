@@ -15466,6 +15466,7 @@ search#:#search_user_search_info_form#:#Anmeldekonten können in der globalen Su
 search#:#search_users#:#Benutzer suchen
 search#:#select_orgu#:#Organisationseinheiten auswählen
 search#:#until#:#bis
+search#:#user_search_settings_section#:#Suche im Reiter 'Mitglieder'
 sess#:#il_sess_participant#:#Teilnahme an Sitzung
 sess#:#il_sess_status_open#:#Offene Sitzung
 sess#:#mail_sess_roles#:#alle Personen mit folgenden lokalen Rollen###Modified as part of gender mainstreaming activities for ILIAS 8. Label is now generalised for all components that support ‘mail to members‘
