@@ -81,7 +81,7 @@ trait TestrailCaseIds
             'show' => 'C31830',
             'validate' => 'C42346',
         ],
-        'Chart/ScaleBar' => [
+        'Chart/Scale Bar' => [
             'show' => 'C31829',
             'validate' => 'C42345',
         ],
@@ -117,11 +117,11 @@ trait TestrailCaseIds
             'show' => 'C49997',
             'validate' => 'C50021',
         ],
-        'Icon/Custom' => [
+        'Symbol/Icon/Custom' => [
             'show' => 'C25154',
             'validate' => 'C42282',
         ],
-        'Icon/Standard' => [
+        'Symbol/Icon/Standard' => [
             'show' => 'C25153',
             'validate' => 'C42281',
         ],
@@ -213,7 +213,7 @@ trait TestrailCaseIds
             'show' => 'C31845',
             'validate' => 'C42359',
         ],
-        'Input/Field/URL' => [
+        'Input/Field/Url' => [
             'show' => 'C52583',
             'validate' => 'C52584',
         ],
@@ -273,15 +273,18 @@ trait TestrailCaseIds
             'show' => 'C31867',
             'validate' => 'C42370',
         ],
+/*
         'Mainbar/MehrMenueinträge' => [
             '' => 'C32105',
         ],
+*/
         'Menu/Drilldown' => [
             'show' => 'C50008',
             'validate' => 'C50032',
         ],
         'Menu/Sub' => [
             'show' => 'C50009',
+            'validate' => 'C77485'
         ],
         'MessageBox/Confirmation' => [
             'show' => 'C50003',
@@ -307,7 +310,7 @@ trait TestrailCaseIds
             'show' => 'C31964',
             'validate' => 'C42385',
         ],
-        'Modal/InterruptiveItem' => [
+        'Modal/InterruptiveItem/Standard' => [
             'show' => 'C31960',
             'validate' => 'C42381',
         ],
@@ -571,9 +574,6 @@ trait TestrailCaseIds
             'show' => 'C50007',
             'validate' => 'C50031',
         ],
-        'Tree/Node/Bylined' => [
-            'validate' => 'C50030',
-        ],
         'Tree/Node/Key Value' => [
             'validate' => 'C49988',
             'show' => 'C49987',
@@ -582,8 +582,10 @@ trait TestrailCaseIds
             'show' => 'C50005',
             'validate' => 'C50029',
         ],
-        'Tree/Note/Bylined' => [
+        'Tree/Node/Bylined' => [
             'show' => 'C50006',
+            'validate' => 'C50030',
+            //'validate' => 'C77562'
         ],
         'ViewControl/Mode' => [
             'show' => 'C31825',
@@ -601,5 +603,270 @@ trait TestrailCaseIds
             'show' => 'C31827',
             'validate' => 'C42343',
         ],
+        'Button/Minimize' => [
+            'show' => 'C77429',
+            'validate' => 'C77430'
+        ],
+        'Chart/Bar/Vertical' => [
+            'show' => 'C77431',
+            'validate' => 'C77432'
+        ],
+        'Chart/Bar/Horizontal' => [
+            'show' => 'C77433',
+            'validate' => 'C77434'
+        ],
+        'Entity/Standard' => [
+            'show' => 'C77435',
+            'validate' => 'C77436'
+        ],
+        'Input/Field/Color Picker' => [
+            'show' => 'C77437',
+            'validate' => 'C77438'
+        ],
+        'Input/Field/Markdown' => [
+            'show' => 'C77439',
+            'validate' => 'C77440'
+        ],
+        'Input/Field/Rating' => [
+            'show' => 'C77441',
+            'validate' => 'C77442'
+        ],
+        'Input/Container/ViewControl/Standard' => [
+            'show' => 'C77443',
+            'validate' => 'C77444'
+        ],
+        'Input/ViewControl/Field Selection' => [
+            'show' => 'C77445',
+            'validate' => 'C77446'
+        ],
+        'Input/ViewControl/Sortation' => [
+            'show' => 'C77447',
+            'validate' => 'C77448'
+        ],
+        'Input/ViewControl/Pagination' => [
+            'show' => 'C77449',
+            'validate' => 'C77450'
+        ],
+        'Input/ViewControl/Group' => [
+            'show' => 'C77451',
+            'validate' => 'C77452'
+        ],
+        'Input/ViewControl/Null Control' => [
+            'show' => 'C77453',
+            'validate' => 'C77454'
+        ],
+        'Launcher/Inline' => [
+            'show' => 'C77455',
+            'validate' => 'C77456'
+        ],
+        'Layout/Alignment/Vertical' => [
+            'show' => 'C77457',
+            'validate' => 'C77458'
+        ],
+        'Layout/Alignment/Horizontal/Evenly Distributed' => [
+            'show' => 'C77459',
+            'validate' => 'C77460'
+        ],
+        'Layout/Alignment/Horizontal/Dynamically Distributed' => [
+            'show' => 'C77461',
+            'validate' => 'C77462'
+        ],
+        'Listing/Property' => [
+            'show' => 'C77463',
+            'validate' => 'C77464'
+        ],
+        'Listing/Entity/Standard' => [
+            'show' => 'C77465',
+            'validate' => 'C77466'
+        ],
+        'MainControls/Meta Bar' => [
+            'show' => 'C77467',
+            'validate' => 'C77468'
+        ],
+        'MainControls/Main Bar' => [
+            'show' => 'C77469',
+            'validate' => 'C77470'
+        ],
+        'MainControls/Footer' => [
+            'show' => 'C77471',
+            'validate' => 'C77472'
+        ],
+        'MainControls/Mode Info' => [
+            'show' => 'C77473',
+            'validate' => 'C77474'
+        ],
+        'MainControls/System Info' => [
+            'show' => 'C77475',
+            'validate' => 'C77476'
+        ],
+        'MainControls/Slate/Legacy' => [
+            'show' => 'C77477',
+            'validate' => 'C77478'
+        ],
+        'MainControls/Slate/Combined' => [
+            'show' => 'C77479',
+            'validate' => 'C77480'
+        ],
+        'MainControls/Slate/Notification' => [
+            'show' => 'C77481',
+            'validate' => 'C77482'
+        ],
+        'MainControls/Slate/Drilldown' => [
+            'show' => 'C77483',
+            'validate' => 'C77484'
+        ],
+        'Modal/Lightbox Card Page' => [
+            'show' => 'C77486',
+            'validate' => 'C77487'
+        ],
+        'Modal/InterruptiveItem/Key Value' => [
+            'show' => 'C77488',
+            'validate' => 'C77489'
+        ],
+        'Progress/Bar' => [
+            'show' => 'C77490',
+            'validate' => 'C77491'
+        ],
+        'Progress/State/Bar/Indeterminate' => [
+            'show' => 'C77492',
+            'validate' => 'C77493'
+        ],
+        'Progress/State/Bar/Determinate' => [
+            'show' => 'C77494',
+            'validate' => 'C77495'
+        ],
+        'Progress/State/Bar/Success' => [
+            'show' => 'C77496',
+            'validate' => 'C77497'
+        ],
+        'Progress/State/Bar/Failure' => [
+            'show' => 'C77498',
+            'validate' => 'C77499'
+        ],
+        'Prompt/Standard' => [
+            'show' => 'C77500',
+            'validate' => 'C77501'
+        ],
+        'Prompt/State/Show' => [
+            'show' => 'C77502',
+            'validate' => 'C77503'
+        ],
+        'Prompt/State/Close' => [
+            'show' => 'C77504',
+            'validate' => 'C77505'
+        ],
+        'Prompt/State/Redirect' => [
+            'show' => 'C77506',
+            'validate' => 'C77507'
+        ],
+        'Symbol/Glyph/Header' => [
+            'show' => 'C77508',
+            'validate' => 'C77509'
+        ],
+        'Symbol/Glyph/Italic' => [
+            'show' => 'C77510',
+            'validate' => 'C77511'
+        ],
+        'Symbol/Glyph/Bold' => [
+            'show' => 'C77512',
+            'validate' => 'C77513'
+        ],
+        'Symbol/Glyph/Link' => [
+            'show' => 'C77514',
+            'validate' => 'C77515'
+        ],
+        'Symbol/Glyph/Launch' => [
+            'show' => 'C77516',
+            'validate' => 'C77517'
+        ],
+        'Symbol/Glyph/Enlarge' => [
+            'show' => 'C77518',
+            'validate' => 'C77519'
+        ],
+        'Symbol/Glyph/List View' => [
+            'show' => 'C77520',
+            'validate' => 'C77521'
+        ],
+        'Symbol/Glyph/Preview' => [
+            'show' => 'C77522',
+            'validate' => 'C77523'
+        ],
+        'Symbol/Glyph/Sort' => [
+            'show' => 'C77524',
+            'validate' => 'C77525'
+        ],
+        'Symbol/Glyph/Column Selection' => [
+            'show' => 'C77526',
+            'validate' => 'C77527'
+        ],
+        'Symbol/Glyph/Tile View' => [
+            'show' => 'C77528',
+            'validate' => 'C77529'
+        ],
+        'Table/Data' => [
+            'show' => 'C77530',
+            'validate' => 'C77531'
+        ],
+        'Table/Ordering' => [
+            'show' => 'C77532',
+            'validate' => 'C77533'
+        ],
+        'Table/Column/Text' => [
+            'show' => 'C77534',
+            'validate' => 'C77535'
+        ],
+        'Table/Column/Number' => [
+            'show' => 'C77536',
+            'validate' => 'C77537'
+        ],
+        'Table/Column/Date' => [
+            'show' => 'C77538',
+            'validate' => 'C77539'
+        ],
+        'Table/Column/Status' => [
+            'show' => 'C77540',
+            'validate' => 'C77541'
+        ],
+        'Table/Column/Status Icon' => [
+            'show' => 'C77542',
+            'validate' => 'C77543'
+        ],
+        'Table/Column/Boolean' => [
+            'show' => 'C77544',
+            'validate' => 'C77545'
+        ],
+        'Table/Column/EMail' => [
+            'show' => 'C77546',
+            'validate' => 'C77547'
+        ],
+        'Table/Column/Time Span' => [
+            'show' => 'C77548',
+            'validate' => 'C77549'
+        ],
+        'Table/Column/Link' => [
+            'show' => 'C77550',
+            'validate' => 'C77551'
+        ],
+        'Table/Column/Link Listing' => [
+            'show' => 'C77552',
+            'validate' => 'C77553'
+        ],
+        'Table/Action/Standard' => [
+            'show' => 'C77554',
+            'validate' => 'C77555'
+        ],
+        'Table/Action/Single' => [
+            'show' => 'C77556',
+            'validate' => 'C77557'
+        ],
+        'Table/Action/Multi' => [
+            'show' => 'C77558',
+            'validate' => 'C77559'
+        ],
+        'Topic/Help Topics' => [
+            'show' => 'C77560',
+            'validate' => 'C77561'
+        ],
+
     ];
 }

@@ -105,10 +105,17 @@ class ilStyleSetupAgent implements Setup\Agent
     public function getNamedObjectives(?Setup\Config $config = null): array
     {
         return [
-            'buildUIFrameworkExampleTestCases' => new Setup\ObjectiveConstructor(
-                'builds an import file for testrail.',
-                fn() => new ilUITestRailExampleTestCasesObjective()
-            )
+            'buildUIFrameworkExampleTestCases.update' => new Setup\ObjectiveConstructor(
+                'builds an import file for testrail for all KNOWN ids.',
+                fn() => new ilUITestRailExampleTestCasesObjective(false)
+            ),
+
+            'buildUIFrameworkExampleTestCases.new' => new Setup\ObjectiveConstructor(
+                'builds an import file for testrail with ONLY NEW cases.',
+                fn() => new ilUITestRailExampleTestCasesObjective(true)
+            ),
+
+
         ];
     }
 }

@@ -25,11 +25,17 @@ use ILIAS\UI\Implementation\Crawler as Crawler;
 class ilUITestRailExampleTestCasesObjective extends Setup\Artifact\BuildArtifactObjective
 {
     private const TESTCASEWRITER = 'ui.testrail.xmlwriter';
-    private const FILENAME = 'testcases.xml';
+    private const FILENAME_UPDATE = 'testcases_update.xml';
+    private const FILENAME_NEW = 'testcases_new.xml';
+
+    public function __construct(
+        protected bool $only_new_cases
+    ) {
+    }
 
     public function getArtifactName(): string
     {
-        return self::FILENAME;
+        return ($this->only_new_cases) ? self::FILENAME_NEW : self::FILENAME_UPDATE;
     }
 
     public function getPreconditions(Setup\Environment $environment): array
@@ -41,7 +47,7 @@ class ilUITestRailExampleTestCasesObjective extends Setup\Artifact\BuildArtifact
 
     protected function getPath(): string
     {
-        return Setup\Artifact\BuildArtifactObjective::ARTIFACTS . "/" . self::FILENAME;
+        return Setup\Artifact\BuildArtifactObjective::ARTIFACTS . "/" . $this->getArtifactName();
     }
 
     public function achieve(Setup\Environment $environment): Setup\Environment
@@ -57,7 +63,7 @@ class ilUITestRailExampleTestCasesObjective extends Setup\Artifact\BuildArtifact
         $path = 'components/ILIAS/Style/classes/Setup/templates/testrail.case.xml';
         $tpl = new ilTemplate($path, true, true);
         $parser = new Crawler\ExamplesYamlParser();
-        $testcases = new TestRailXMLWriter($tpl, $parser);
+        $testcases = new TestRailXMLWriter($tpl, $parser, $this->only_new_cases);
 
         $environment = $environment->withResource(self::TESTCASEWRITER, $testcases);
 
