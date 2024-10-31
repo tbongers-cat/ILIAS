@@ -22,7 +22,9 @@ namespace ILIAS\Export\ExportHandler\Table;
 
 use ilCalendarSettings;
 use ilCtrl;
+use ilExportExportOptionXML;
 use ILIAS\Data\Factory as ilDataFactory;
+use ILIAS\Data\ObjectId;
 use ILIAS\DI\UIServices as ilUIServices;
 use ILIAS\Export\ExportHandler\Factory as ilExportHandler;
 use ILIAS\Export\ExportHandler\I\Consumer\Context\HandlerInterface as ilExportHandlerConsumerContextInterface;
@@ -41,6 +43,7 @@ use JetBrains\PhpStorm\NoReturn;
 
 class Handler implements ilExportHandlerTableInterface
 {
+    protected const ALL_OBJECTS = "ALL_OBJECTS";
     protected const TABLE_COL_LNG_TYPE = 'exp_type';
     protected const TABLE_COL_LNG_FILE = 'exp_file';
     protected const TABLE_COL_LNG_SIZE = 'exp_size';
@@ -246,7 +249,7 @@ class Handler implements ilExportHandlerTableInterface
     }
 
     /**
-     * @param array<string, ilExportHandlerTableRowCollectionInterface> $ids_sorted
+     * @param array<string, ilExportHandlerConsumerFileIdentifierCollectionInterface> $ids_sorted
      */
     protected function downloadItems(array $ids_sorted): void
     {
@@ -277,6 +280,56 @@ class Handler implements ilExportHandlerTableInterface
             ->withRequest($this->http_services->request());
     }
 
+    /**
+     * @return array<string, ilExportHandlerConsumerFileIdentifierCollectionInterface>
+     */
+    protected function readIdsFromExportOptions(): array
+    {
+        $ids_sorted = [];
+        $key = $this->export_handler->repository()->key()->handler()
+            ->withObjectId($this->data_factory->objId($this->context->exportObject()->getId()));
+        $key_collection = $this->export_handler->repository()->key()->collection()
+            ->withElement($key);
+        $elements = $this->export_handler->repository()->handler()->getElements($key_collection);
+        foreach ($this->export_options as $export_option) {
+            $export_option_id = $export_option->getExportOptionId();
+            $ids_sorted[$export_option_id] = $this->export_handler->consumer()->file()->identifier()->collection();
+            foreach ($export_option->getFiles($this->context) as $file_info) {
+                $file_identifier = $this->export_handler->consumer()->file()->identifier()->handler()
+                    ->withIdentifier($file_info->getFileIdentifier());
+                $ids_sorted[$export_option_id] = $ids_sorted[$export_option_id]
+                    ->withElement($file_identifier);
+            }
+        }
+        return $ids_sorted;
+    }
+
+    /**
+     * @return array<string, ilExportHandlerConsumerFileIdentifierCollectionInterface>
+     */
+    protected function readIdsFromQuery(): array
+    {
+        $tokens = $this->http_services->wrapper()->query()->retrieve(
+            $this->row_id_token->getName(),
+            $this->refinery->custom()->transformation(fn($v) => $v)
+        );
+        $composit_ids = is_array($tokens) ? $tokens : [$tokens];
+        $ids_sorted = [];
+        foreach ($composit_ids as $composit_id) {
+            $table_row_id = $this->export_handler->table()->rowId()->handler()
+                ->withCompositId($composit_id);
+            $file_identifier = $this->export_handler->consumer()->file()->identifier()->handler()
+                ->withIdentifier($table_row_id->getFileIdentifier());
+            $export_option = $this->export_options->getById($table_row_id->getExportOptionId());
+            if (!isset($ids_sorted[$table_row_id->getExportOptionId()])) {
+                $ids_sorted[$table_row_id->getExportOptionId()] = $this->export_handler->consumer()->file()->identifier()->collection();
+            }
+            $ids_sorted[$table_row_id->getExportOptionId()] = $ids_sorted[$table_row_id->getExportOptionId()]
+                ->withElement($file_identifier);
+        }
+        return $ids_sorted;
+    }
+
     public function handleCommands(): void
     {
         $this->initTable();
@@ -287,22 +340,17 @@ class Handler implements ilExportHandlerTableInterface
             $this->action_parameter_token->getName(),
             $this->refinery->to()->string()
         );
-        $composit_ids = $this->http_services->wrapper()->query()->retrieve(
+        $tokens = $this->http_services->wrapper()->query()->retrieve(
             $this->row_id_token->getName(),
             $this->refinery->custom()->transformation(fn($v) => $v)
         );
-        $composit_ids = is_array($composit_ids) ? $composit_ids : [$composit_ids];
+        $all_entries = ($tokens[0] ?? "") === self::ALL_OBJECTS;
         $ids_sorted = [];
-        foreach ($composit_ids as $composit_id) {
-            $table_row_id = $this->export_handler->table()->rowId()->handler()
-                ->withCompositId($composit_id);
-            $file_identifier = $this->export_handler->consumer()->file()->identifier()->handler()->withIdentifier($table_row_id->getFileIdentifier());
-            $export_option = $this->export_options->getById($table_row_id->getExportOptionId());
-            if (!isset($ids_sorted[$table_row_id->getExportOptionId()])) {
-                $ids_sorted[$table_row_id->getExportOptionId()] = $this->export_handler->consumer()->file()->identifier()->collection();
-            }
-            $ids_sorted[$table_row_id->getExportOptionId()] = $ids_sorted[$table_row_id->getExportOptionId()]
-                ->withElement($file_identifier);
+        if ($all_entries) {
+            $ids_sorted = $this->readIdsFromExportOptions();
+        }
+        if (!$all_entries) {
+            $ids_sorted = $this->readIdsFromQuery();
         }
         switch ($action) {
             case self::ACTION_PUBLIC_ACCESS:
