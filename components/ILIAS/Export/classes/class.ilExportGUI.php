@@ -131,22 +131,6 @@ class ilExportGUI
 
     }
 
-    /**
-     * @depricated
-     */
-    public function addCustomColumn(): void
-    {
-
-    }
-
-    /**
-     * @depricated
-     */
-    public function addCustomMultiCommand(): void
-    {
-
-    }
-
     public function listExportFiles(): void
     {
         $this->displayExportFiles();
@@ -238,7 +222,7 @@ class ilExportGUI
 
     final protected function createXMLExportFile(): void
     {
-        if ($this->parent_gui instanceof  ilContainerGUI) {
+        if ($this->parent_gui instanceof ilContainerGUI) {
             $this->showItemSelection();
             return;
         }
@@ -279,12 +263,26 @@ class ilExportGUI
             return;
         }
         // create export
-        $this->createXMLExport();
+        $this->createXMLContainerExport();
         $this->tpl->setOnScreenMessage('success', $this->lng->txt('export_created'), true);
         $this->ctrl->redirect($this, self::CMD_LIST_EXPORT_FILES);
     }
 
     final protected function createXMLExport()
+    {
+        $manager = $this->export_handler->manager()->handler();
+        $export_info = $manager->getExportInfo(
+            $this->data_factory->objId($this->obj->getId()),
+            time()
+        );
+        $element = $manager->createExport(
+            $this->il_user->getId(),
+            $export_info,
+            ""
+        );
+    }
+
+    final protected function createXMLContainerExport()
     {
         $tree_nodes = $this->tree->getSubTree($this->tree->getNodeData($this->parent_gui->getObject()->getRefId()));
         $post_export_options = $this->initExportOptionsFromPost();
@@ -297,7 +295,6 @@ class ilExportGUI
             $tree_nodes,
             $post_export_options
         );
-
         $ref_ids_export = [$this->parent_gui->getObject()->getRefId()];
         $ref_ids_all = [$this->parent_gui->getObject()->getRefId()];
         $tree_ref_ids = array_map(function ($node) { return (int) $node['ref_id']; }, $tree_nodes);
@@ -351,7 +348,6 @@ class ilExportGUI
             );
             $element = $manager->createContainerExport($this->il_user->getId(), $container_export_info);
         }
-
         $eo->delete();
     }
 }
