@@ -126,7 +126,6 @@ class ilObjSearchSettingsFormGUI
         $settings->showInactiveUser((bool) $data['inactive_user']);
         $settings->showLimitedUser((bool) $data['limited_user']);
         $settings->enableDateFilter((bool) $data['cdate']);
-        $settings->enableLuceneUserSearch((bool) $data['user_search_enabled']);
         $settings->update();
 
         // refresh lucene server
@@ -198,12 +197,6 @@ class ilObjSearchSettingsFormGUI
         )->withRequired(true)
          ->withValue((string) $settings->getDefaultOperator());
 
-        // User search
-        $user_search = $field_factory->checkbox(
-            $this->lng->txt('search_user_search_form'),
-            $this->lng->txt('search_user_search_info_form')
-        )->withValue($settings->isLuceneUserSearchEnabled());
-
         // Item filter
         $filter = $settings->getLuceneItemFilter();
         $checks = [];
@@ -269,7 +262,6 @@ class ilObjSearchSettingsFormGUI
                 'search_type' => $type,
                 'operator' => $operator,
                 'hide_adv_search' => $hide_adv,
-                'user_search_enabled' => $user_search,
                 'filter' => $item_filter,
                 'cdate' => $cdate,
                 'auto_complete_length' => $auto_complete,
