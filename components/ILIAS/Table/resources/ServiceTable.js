@@ -8,10 +8,10 @@ var ilTableHideFilter = new Object();
 function ilInitTableFilters()
 {
 	// hide filters
-	filtrs = YAHOO.util.Dom.getElementsByClassName('ilTableFilterSec');
+	filtrs = document.getElementsByClassName('ilTableFilterSec');
 	for (var i = 0; i < filtrs.length; i++)
 	{
-		if (ilTableHideFilter[filtrs[i].id] == 1)
+		if (ilTableHideFilter[filtrs[i].id] === 1)
 		{
 			filtrs[i].style.display = 'none';
 		}
@@ -22,10 +22,10 @@ function ilInitTableFilters()
 	}
 
 	// show filter activators
-	filactvtrs = YAHOO.util.Dom.getElementsByClassName('ilTableFilterActivator');
+	filactvtrs = document.getElementsByClassName('ilTableFilterActivator');
 	for (var i = 0; i < filactvtrs.length; i++)
 	{
-		if (ilTableHideFilter[filactvtrs[i].id] == 1)
+		if (ilTableHideFilter[filactvtrs[i].id] === 1)
 		{
 			filactvtrs[i].style.display = '';
 		}
@@ -36,10 +36,10 @@ function ilInitTableFilters()
 	}
 
 	// hide filter deactivators
-	fildctvtrs = YAHOO.util.Dom.getElementsByClassName('ilTableFilterDeactivator');
+	fildctvtrs = document.getElementsByClassName('ilTableFilterDeactivator');
 	for (var i = 0; i < fildctvtrs.length; i++)
 	{
-		if (ilTableHideFilter[fildctvtrs[i].id] == 1)
+		if (ilTableHideFilter[fildctvtrs[i].id] === 1)
 		{
 			fildctvtrs[i].style.display = 'none';
 		}
@@ -53,14 +53,13 @@ function ilInitTableFilters()
 
 function ilShowTableFilter(id, sUrl)
 {
-	var obj = document.getElementById(id);
-	obj.style.display = '';
-	var obj2 = document.getElementById("a" + id);
-	obj2.style.display = 'none';
-	var obj3 = document.getElementById("d" + id);
-	obj3.style.display = '';
-	if (sUrl != "")
-	{
+	document.getElementById(id).style.display = '';
+	document.getElementById('a' + id).style.display = 'none';
+	const elem = document.getElementById('d' + id);
+  if (elem !== null) {
+    elem.style.display = '';
+  }
+	if (sUrl !== '') {
 		ilTableJSHandler(sUrl);
 	}
 	return false;
@@ -68,14 +67,13 @@ function ilShowTableFilter(id, sUrl)
 
 function ilHideTableFilter(id, sUrl)
 {
-	var obj = document.getElementById(id);
-	obj.style.display = 'none';
-	var obj2 = document.getElementById("a" + id);
-	obj2.style.display = '';
-	var obj3 = document.getElementById("d" + id);
-	obj3.style.display = 'none';
-	if (sUrl != "")
-	{
+	document.getElementById(id).style.display = 'none';
+  document.getElementById('a' + id).style.display = '';
+	const elem = document.getElementById('d' + id);
+  if (elem !== null) {
+    elem.style.display = 'none';
+  }
+	if (sUrl !== '') {
 		ilTableJSHandler(sUrl);
 	}
 	return false;
