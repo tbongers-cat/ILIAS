@@ -16,6 +16,8 @@
  *
  *********************************************************************/
 
+use ILIAS\Test\Settings\GlobalSettings\Repository as TestSettingsRepository;
+
 /**
  * Class ilPCQuestionGUI
  * Adapter User Interface class for assessment questions
@@ -32,6 +34,7 @@ class ilPCQuestionGUI extends ilPageContentGUI
     protected ilObjUser $user;
     protected ilTree $tree;
     protected ilToolbarGUI $toolbar;
+    protected TestSettingsRepository $global_test_settings_repository;
 
     public function __construct(
         ilPageObject $a_pg_obj,
@@ -52,6 +55,7 @@ class ilPCQuestionGUI extends ilPageContentGUI
         $ilCtrl = $DIC->ctrl();
         $this->scormlmid = $a_pg_obj->parent_id;
         $this->questioninfo = $DIC->testQuestion();
+        $this->global_test_settings_repository = new TestSettingsRepository(new ilSetting('assessment'));
         parent::__construct($a_pg_obj, $a_content_obj, $a_hier_id, $a_pc_id);
         $ilCtrl->saveParameter($this, array("qpool_ref_id"));
     }
@@ -158,7 +162,7 @@ class ilPCQuestionGUI extends ilPageContentGUI
 
         // additional content editor
         // assessment
-        if (ilObjTestFolder::isAdditionalQuestionContentEditingModePageObjectEnabled()) {
+        if ($this->global_test_settings_repository->getGlobalSettings()->isPageEditorEnabled()) {
             $ri = new ilRadioGroupInputGUI($this->lng->txt("tst_add_quest_cont_edit_mode"), "add_quest_cont_edit_mode");
 
             $option_rte = new ilRadioOption(
@@ -279,7 +283,7 @@ class ilPCQuestionGUI extends ilPageContentGUI
 
                 // feedback editing mode
                 $add_quest_cont_edit_mode = $this->request->getString("add_quest_cont_edit_mode");
-                if (ilObjTestFolder::isAdditionalQuestionContentEditingModePageObjectEnabled()
+                if ($this->global_test_settings_repository->getGlobalSettings()->isPageEditorEnabled()
                     && $add_quest_cont_edit_mode != "") {
                     $addContEditMode = $add_quest_cont_edit_mode;
                 } else {
