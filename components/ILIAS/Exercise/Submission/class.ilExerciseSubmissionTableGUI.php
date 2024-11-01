@@ -428,7 +428,7 @@ abstract class ilExerciseSubmissionTableGUI extends ilTable2GUI
                     // see #22076
                     $this->tpl->setVariable(
                         "VAL_" . strtoupper($col),
-                        ilLegacyFormElementsUtil::prepareFormOutput(trim((string) $a_row[$col]))
+                        ilLegacyFormElementsUtil::prepareFormOutput(trim((string) ($a_row[$col] ?? "")))
                     );
                     break;
 
@@ -438,7 +438,7 @@ abstract class ilExerciseSubmissionTableGUI extends ilTable2GUI
                     $this->tpl->setVariable("LCOMMENT_ID", $comment_id . "_snip");
 
                     // see #22076
-                    $this->tpl->setVariable("VAL_" . strtoupper($col), (trim((string) $a_row[$col]) !== "")
+                    $this->tpl->setVariable("VAL_" . strtoupper($col), (trim((string) ($a_row[$col] ?? "")) !== "")
                         ? nl2br(trim((string) $a_row[$col]))
                         : "&nbsp;");
                     break;
