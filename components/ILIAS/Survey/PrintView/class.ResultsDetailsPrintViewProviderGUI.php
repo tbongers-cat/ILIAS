@@ -178,8 +178,8 @@ class ResultsDetailsPrintViewProviderGUI extends Export\AbstractPrintViewProvide
             $this->lng->txt("date") => \ilDatePresentation::formatDate(new \ilDateTime(time(), IL_CAL_UNIX)),
         );
 
-        $f = $this->gui->ui->factory();
-        $r = $this->gui->ui->renderer();
+        $f = $this->gui->ui()->factory();
+        $r = $this->gui->ui()->renderer();
         $l = $f->listing()->descriptive($props);
 
         return $head . $r->render($l);
