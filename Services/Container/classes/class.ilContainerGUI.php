@@ -1759,11 +1759,10 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
                 // get subnodes of top nodes
                 $subnodes[$ref_id] = $this->tree->getSubTree($top_node);
             }
-
             // now move all subtrees to new location
             foreach ($subnodes as $key => $subnode) {
                 // first paste top_node....
-                $obj_data = ilObjectFactory::getInstanceByRefId($ref_id);
+                $obj_data = ilObjectFactory::getInstanceByRefId($key);
                 $new_ref_id = $obj_data->createReference();
                 $obj_data->putInTree($this->requested_ref_id);
                 $obj_data->setPermissions($this->requested_ref_id);
