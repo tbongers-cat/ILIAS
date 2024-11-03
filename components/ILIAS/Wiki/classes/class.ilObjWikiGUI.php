@@ -19,6 +19,8 @@
 use ILIAS\Wiki\Export;
 use ILIAS\GlobalScreen\ScreenContext\ContextServices;
 use ILIAS\Wiki\WikiGUIRequest;
+use ILIAS\UI\Component\Input\Container\Form\Standard as StandardForm;
+use ILIAS\Wiki\Settings\SettingsGUI;
 
 /**
  * @author Alexander Killing <killing@leifos.de>
@@ -305,7 +307,7 @@ class ilObjWikiGUI extends ilObjectGUI
                 $this->ctrl->forwardCommand($lti_gui);
                 break;
 
-            case strtolower(\ILIAS\Wiki\Settings\SettingsGUI::class):
+            case strtolower(SettingsGUI::class):
                 $this->addHeaderAction();
                 $ilTabs->activateTab("settings");
                 $this->setSettingsSubTabs("general_settings");
@@ -343,72 +345,42 @@ class ilObjWikiGUI extends ilObjectGUI
         $this->gotoStartPageObject();
     }
 
-    protected function initCreateForm(string $new_type): ilPropertyFormGUI
+    protected function initCreateForm(string $new_type): StandardForm
     {
-        $this->initSettingsForm("create");
-        $this->getSettingsFormValues("create");
-
-        return $this->form_gui;
-    }
-
-    public function saveObject(): void
-    {
-        $tpl = $this->tpl;
+        $f = $this->gui->ui()->factory();
         $lng = $this->lng;
-
-        if (!$this->checkPermissionBool("create", "", "wiki", $this->requested_ref_id)) {
-            throw new ilPermissionException($this->lng->txt("permission_denied"));
-        }
-
-        $this->initSettingsForm("create");
-        if ($this->form_gui->checkInput()) {
-            if (!ilObjWiki::checkShortTitleAvailability($this->form_gui->getInput("shorttitle"))) {
-                $short_item = $this->form_gui->getItemByPostVar("shorttitle");
-                $short_item->setAlert($lng->txt("wiki_short_title_already_in_use"));
-            } else {
-                $new_obj = new ilObjWiki();
-                $new_obj->setType($this->requested_new_type);
-                $new_obj->processAutoRating();
-                $new_obj->setTitle($this->form_gui->getInput('title'));
-                $new_obj->setDescription($this->form_gui->getInput('description'));
-                $new_obj->create();
-
-                $this->putObjectInTree($new_obj);
-                $this->afterSave($new_obj);
-                return;
-            }
-        }
-
-        $this->form_gui->setValuesByPost();
-        $tpl->setContent($this->getCreationFormsHTML($this->form_gui));
+        $form = parent::initCreateForm($new_type);
+        $inputs = $form->getInputs();
+        $inputs["start_page"] = $f->input()->field()->text(
+            $lng->txt("wiki_start_page")
+        )->withRequired(true);
+        return $this->ui_factory->input()->container()->form()->standard(
+            $this->ctrl->getFormAction($this, 'save'),
+            $inputs
+        )->withSubmitLabel($this->lng->txt($new_type . '_add'));
     }
-
+    
     protected function afterSave(ilObject $new_object): void
     {
-        $ilSetting = $this->settings;
-
-        $new_object->setIntroduction($this->form_gui->getInput("intro"));
-        $new_object->setStartPage($this->form_gui->getInput("startpage"));
-        $new_object->setShortTitle((string) $this->form_gui->getInput("shorttitle"));
-        $new_object->setRating($this->form_gui->getInput("rating"));
-        // $new_object->setRatingAsBlock($this->form_gui->getInput("rating_side"));
-        $new_object->setRatingForNewPages($this->form_gui->getInput("rating_new"));
-        $new_object->setRatingCategories($this->form_gui->getInput("rating_ext"));
-
-        $new_object->setRatingOverall($this->form_gui->getInput("rating_overall"));
-        $new_object->setPageToc($this->form_gui->getInput("page_toc"));
-
-
-
-        if (!$ilSetting->get("disable_comments")) {
-            $new_object->setPublicNotes($this->form_gui->getInput("public_notes"));
-        }
-        $new_object->setOnline($this->form_gui->getInput("online"));
+        $form = $this
+            ->initCreateForm($this->requested_new_type)
+            ->withRequest($this->request);
+        $data = $form->getData();
+        $new_object->setStartPage($data["start_page"]);
         $new_object->update();
 
         // always send a message
         $this->tpl->setOnScreenMessage('success', $this->lng->txt("object_added"), true);
-        ilUtil::redirect(self::getGotoLink($new_object->getRefId()));
+        $this->ctrl->setParameterByClass(
+            static::class,
+            "ref_id",
+            $new_object->getRefId()
+        );
+        $this->ctrl->redirectByClass([
+            ilWikiHandlerGUI::class,
+            ilObjWikiGUI::class,
+            SettingsGUI::class
+        ]);
     }
 
     /**
@@ -575,7 +547,7 @@ class ilObjWikiGUI extends ilObjectGUI
 
 
         // wiki tabs
-        if (in_array(strtolower($ilCtrl->getNextClass($this)), [strtolower(\ILIAS\Wiki\Settings\SettingsGUI::class)]) ||
+        if (in_array(strtolower($ilCtrl->getNextClass($this)), [strtolower(SettingsGUI::class)]) ||
             in_array(
                 strtolower($ilCtrl->getCmdClass()),
                 array("", "ilobjectcontentstylesettingsgui", "ilobjwikigui",
@@ -630,7 +602,7 @@ class ilObjWikiGUI extends ilObjectGUI
                 $this->tabs_gui->addTab(
                     "settings",
                     $lng->txt("settings"),
-                    $this->ctrl->getLinkTargetByClass(\ILIAS\Wiki\Settings\SettingsGUI::class)
+                    $this->ctrl->getLinkTargetByClass(SettingsGUI::class)
                 );
 
                 // metadata
@@ -771,7 +743,7 @@ class ilObjWikiGUI extends ilObjectGUI
 
     public function editSettingsObject(): void
     {
-        $this->ctrl->redirectByClass(\ILIAS\Wiki\Settings\SettingsGUI::class);
+        $this->ctrl->redirectByClass(SettingsGUI::class);
     }
 
     public function listContributorsObject(): void
