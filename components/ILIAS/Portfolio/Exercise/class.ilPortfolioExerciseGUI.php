@@ -189,9 +189,9 @@ class ilPortfolioExerciseGUI
             }
 
             ilDatePresentation::setUseRelativeDates($rel);
-            $info_arr["submitted_date"] = ilDatePresentation::formatDate(new ilDateTime($submitted["ts"], IL_CAL_DATETIME));
+            $info_arr["submitted_date"] = ilDatePresentation::formatDate(new ilDateTime($submitted?->getTimestamp(), IL_CAL_DATETIME));
             $info_arr["submitted"] = true;
-            if ($submitted["ts"] == "") {
+            if ($submitted?->getTimestamp() == "") {
                 $info_arr["submitted"] = false;
             }
         }
