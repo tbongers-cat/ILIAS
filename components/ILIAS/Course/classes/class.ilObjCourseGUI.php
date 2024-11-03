@@ -188,10 +188,10 @@ class ilObjCourseGUI extends ilContainerGUI
      */
     public function infoScreenObject(): void
     {
-        // @todo: removed deprecated ilCtrl methods, this needs inspection by a maintainer.
-        // $this->ctrl->setCmd("showSummary");
-        // $this->ctrl->setCmdClass("ilinfoscreengui");
-        $this->infoScreen();
+        $this->ctrl->redirectByClass([
+            static::class,
+            ilInfoScreenGUI::class
+        ]);
     }
 
     public function infoScreen(): void
