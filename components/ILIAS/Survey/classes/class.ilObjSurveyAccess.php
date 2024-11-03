@@ -89,7 +89,8 @@ class ilObjSurveyAccess extends ilObjectAccess implements ilConditionHandling
 
         switch ($cmd) {
             case "run":
-                if (!self::_lookupCreationComplete($obj_id)) {
+                if (!self::_lookupCreationComplete($obj_id) &&
+                    !$is_admin) {
                     $ilAccess->addInfoItem(ilAccessInfo::IL_NO_OBJECT_ACCESS, $lng->txt("warning_survey_not_complete"));
                     return false;
                 }
