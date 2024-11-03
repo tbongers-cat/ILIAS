@@ -226,18 +226,16 @@ class ilSurveyEditorGUI
                 "createQuestion"
             )->submit()->toToolbar(true);
 
-            /*
-            if ($this->object->getPoolUsage()) {
-                $cmd = ((int) $ilUser->getPref('svy_insert_type') === 1 ||
-                    ($ilUser->getPref('svy_insert_type') ?? '') === '')
-                    ? 'browseForQuestions'
-                    : 'browseForQuestionblocks';
 
-                $this->gui->button(
-                    $this->lng->txt("browse_for_questions"),
-                    $this->ctrl->getLinkTarget($this, $cmd)
-                )->toToolbar(true);
-            }*/
+            $cmd = ((int) $ilUser->getPref('svy_insert_type') === 1 ||
+                ($ilUser->getPref('svy_insert_type') ?? '') === '')
+                ? 'browseForQuestions'
+                : 'browseForQuestionblocks';
+
+            $this->gui->button(
+                $this->lng->txt("browse_for_questions"),
+                $this->ctrl->getLinkTarget($this, $cmd)
+            )->toToolbar(true);
 
             if ($this->object->hasQuestions()) {
                 $ilToolbar->addSeparator();

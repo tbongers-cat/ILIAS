@@ -90,6 +90,11 @@ class SettingsGUI
             $form->saveOnline($this->obj_id, "spl");
             $form->saveStdAvailability($this->ref_id);
 
+            // we still need the svy_qpl record for now
+            // but it may be abandoned in the future, if it does not contain new properties
+            $pool = new \ilObjSurveyQuestionPool($this->ref_id);
+            $pool->saveToDb();
+
             $mt->setOnScreenMessage("success", $lng->txt("msg_obj_modified"), true);
             $ctrl->redirectByClass(self::class, "edit");
         } else {
