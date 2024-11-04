@@ -621,8 +621,7 @@ class ilLMPresentationGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInt
     protected function addResourceFiles(): void
     {
         iljQueryUtil::initjQuery($this->tpl);
-        iljQueryUtil::initjQueryUI($this->tpl);
-        ilUIFramework::init($this->tpl);
+        //iljQueryUtil::initjQueryUI($this->tpl);
 
         if (!$this->offlineMode()) {
             ilAccordionGUI::addJavaScript();
@@ -688,8 +687,7 @@ class ilLMPresentationGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInt
         $this->renderPageTitle();
 
         iljQueryUtil::initjQuery($this->tpl);
-        iljQueryUtil::initjQueryUI($this->tpl);
-        ilUIFramework::init($this->tpl);
+        //iljQueryUtil::initjQueryUI($this->tpl);
         ilAccordionGUI::addJavaScript($this->tpl);
         ilAccordionGUI::addCss($this->tpl);
 
