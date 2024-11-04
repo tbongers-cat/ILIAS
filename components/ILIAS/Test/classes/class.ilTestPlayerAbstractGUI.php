@@ -102,7 +102,6 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
         $this->question_related_objectives_list = new ilTestQuestionRelatedObjectivesList();
 
         iljQueryUtil::initjQuery();
-        ilYuiUtil::initConnectionWithAnimation();
 
         $this->handlePasswordProtectionRedirect();
 
