@@ -18,6 +18,7 @@
 
 use ILIAS\GlobalScreen\ScreenContext\ContextServices;
 use ILIAS\Portfolio\Settings\SettingsGUI;
+use ILIAS\Repository\Form\FormAdapterGUI;
 
 /**
  * @ilCtrl_Calls ilObjPortfolioGUI: ilPortfolioPageGUI, ilPageObjectGUI
@@ -275,13 +276,9 @@ class ilObjPortfolioGUI extends ilObjPortfolioBaseGUI
             $this->lng->loadLanguageModule($new_type);
             $this->ctrl->setParameter($this, "new_type", $new_type);
 
-            $forms = $this->initCreationForms($new_type);
+            $form = $this->getCreationForm();
 
-            // copy form validation error: do not show other creation forms
-            if ($this->port_request->getCopyFormProcess() && isset($forms[self::CFORM_CLONE])) {
-                $forms = array(self::CFORM_CLONE => $forms[self::CFORM_CLONE]);
-            }
-            $tpl->setContent($this->getCreationFormsHTML($forms));
+            $tpl->setContent($form->render());
         }
     }
 
@@ -318,27 +315,17 @@ class ilObjPortfolioGUI extends ilObjPortfolioBaseGUI
         return $message;
     }
 
-    protected function initCreateForm(string $new_type): ilPropertyFormGUI
+    protected function getCreationForm(): FormAdapterGUI
     {
         $ilSetting = $this->settings;
-
         $this->ctrl->setParameter($this, "new_type", $this->getType());
 
-        $form = new ilPropertyFormGUI();
-        $form->setFormAction($this->ctrl->getFormAction($this));
-
-        // title
-        $ti = new ilTextInputGUI($this->lng->txt("title"), "title");
-        $ti->setSize(min(40, ilObject::TITLE_LENGTH));
-        $ti->setMaxLength(ilObject::TITLE_LENGTH);
-        $ti->setRequired(true);
-        $form->addItem($ti);
-
-        $form->setTitle($this->lng->txt("prtf_create_portfolio"));
-        $form->addCommandButton("save", $this->lng->txt("create"));
-        $form->addCommandButton("toRepository", $this->lng->txt("cancel"));
-
-        return $form;
+        return $this->gui->form([static::class], "save")
+            ->section("prop", $this->lng->txt("prtf_create_portfolio"))
+            ->addStdTitle(
+                0,
+                "prtf"
+            );
     }
 
     protected function initCreateFromTemplateForm(): ilPropertyFormGUI
@@ -381,8 +368,15 @@ class ilObjPortfolioGUI extends ilObjPortfolioBaseGUI
 
     public function save(): void
     {
-        $form = $this->initCreateForm("prtf");
-        parent::save();
+        $form = $this->getCreationForm();
+        if ($form->isValid()) {
+            $port = new ilObjPortfolio();
+            $port->setTitle($form->getData("title"));
+            $port->create();
+            $this->ctrl->setParameter($this, "prt_id", $port->getId());
+            $this->ctrl->redirect($this, "view");
+        }
+        $this->tpl->setContent($form->render());
     }
 
     public function saveFromTemplate(): void
