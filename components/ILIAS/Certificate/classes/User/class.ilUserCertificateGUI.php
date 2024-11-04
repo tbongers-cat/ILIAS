@@ -181,7 +181,7 @@ class ilUserCertificateGUI
                 }
 
                 if ($imagePath === '') {
-                    $imagePath = ilWACSignedPath::signFile(ilUtil::getImagePath('standard/icon_cert.svg'));
+                    $imagePath = ilUtil::getImagePath('standard/icon_cert.svg');
                 }
 
                 $cardImage = $this->uiFactory->image()->standard(
