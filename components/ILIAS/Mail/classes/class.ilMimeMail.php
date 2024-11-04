@@ -281,9 +281,18 @@ class ilMimeMail
     {
         $bracket_path = $this->getPathToRootDirectory() . '/components/ILIAS/Mail/templates/default/tpl.html_mail_template.html';
         if ($skin !== 'default') {
-            $custom_path = $this->getPathToRootDirectory() . '/public/Customizing/global/skin/' . $skin . '/' . $style . '/components/ILIAS/Mail/tpl.html_mail_template.html';
-            if (is_file($custom_path)) {
-                $bracket_path = $custom_path;
+            $locations = [
+                $skin,
+                $skin . '/' . $style
+            ];
+
+            foreach ($locations as $location) {
+                $custom_path = $this->getPathToRootDirectory(
+                ) . '/public/Customizing/global/skin/' . $location . '/components/ILIAS/Mail/tpl.html_mail_template.html';
+                if (is_file($custom_path)) {
+                    $bracket_path = $custom_path;
+                    break;
+                }
             }
         }
 
@@ -297,9 +306,18 @@ class ilMimeMail
         );
 
         if ($skin !== 'default') {
-            $custom_directory = $this->getPathToRootDirectory() . '/public/Customizing/global/skin/' . $skin . '/' . $style . '/components/ILIAS/Mail/img';
-            if (is_dir($custom_directory) && is_readable($custom_directory)) {
-                $this->gatherImagesFromDirectory($custom_directory, true);
+            $locations = [
+                $skin,
+                $skin . '/' . $style
+            ];
+
+            foreach ($locations as $location) {
+                $custom_directory = $this->getPathToRootDirectory(
+                ) . '/public/Customizing/global/skin/' . $location . '/components/ILIAS/Mail/img';
+                if (is_dir($custom_directory) && is_readable($custom_directory)) {
+                    $this->gatherImagesFromDirectory($custom_directory, true);
+                    break;
+                }
             }
         }
     }
