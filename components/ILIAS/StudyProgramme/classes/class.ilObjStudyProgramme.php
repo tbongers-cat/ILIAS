@@ -778,6 +778,9 @@ class ilObjStudyProgramme extends ilContainer
                         , "prg_obj_id" => $containing_prg->getId()
                         , "crsr_ref_id" => (int) $ref["child"]
                         , "crsr_id" => (int) $ref["obj_id"]
+                        , "crs_ref_id" => (int) $crs_ref_id
+                        , "crs_id" => (int) $crs_id
+
                         , "title" => ilContainerReference::_lookupTitle((int) $ref["obj_id"])
                     ];
                 }
@@ -1839,11 +1842,12 @@ class ilObjStudyProgramme extends ilContainer
         $acting_usr_id = $this->getLoggedInUserId();
         $assignment = $this->assignment_repository->get($assignment_id);
         foreach ($nodes as $nodeinfo) {
-            [$node_obj_id, $courseref_obj_id] = $nodeinfo;
+            [$node_obj_id, $course_obj_id] = $nodeinfo;
+
             $assignment = $assignment->succeed(
                 $this->settings_repository,
                 $node_obj_id,
-                $courseref_obj_id
+                $course_obj_id
             );
 
             $msg = sprintf(
