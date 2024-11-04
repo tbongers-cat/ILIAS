@@ -378,6 +378,7 @@ class ilOpenIdConnectSettingsGUI
             if (!$this->upload->hasBeenProcessed()) {
                 $this->upload->process();
             }
+
             foreach ($this->upload->getResults() as $single_file_upload) {
                 if ($single_file_upload->isOK()) {
                     $this->settings->deleteImageFile();
@@ -453,10 +454,11 @@ class ilOpenIdConnectSettingsGUI
         $ui_container = [];
         $ui_container = $this->buildScopeSelection($ui_container);
 
+        /** @var Form $form */
         $form = $this->ui->input()->container()->form()->standard(
             $this->ctrl->getFormAction($this, 'saveScopes'),
             $ui_container
-        );
+        )->withAdditionalTransformation($this->saniziteArrayElementsTrafo());
 
         return $form;
     }
@@ -491,6 +493,7 @@ class ilOpenIdConnectSettingsGUI
             ->input()
             ->field()
             ->text($this->lng->txt('auth_oidc_settings_default_scopes'), '')
+            ->withAdditionalTransformation($this->trimIfStringTrafo())
             ->withValue(ilOpenIdConnectSettings::DEFAULT_SCOPE)
             ->withDedicatedName('default_scope')
             ->withDisabled(true);
@@ -518,6 +521,7 @@ class ilOpenIdConnectSettingsGUI
                     ->text(
                         $this->lng->txt('auth_oidc_settings_discovery_url')
                     )
+                    ->withAdditionalTransformation($this->trimIfStringTrafo())
                     ->withValue(
                         $this->settings->getCustomDiscoveryUrl() ?? ''
                     )
@@ -561,20 +565,21 @@ class ilOpenIdConnectSettingsGUI
                 $this->mainTemplate->setOnScreenMessage('failure', $this->lng->txt('err_check_input'));
                 $this->scopes();
                 return;
-            } else {
-                foreach ($form->getInputs() as $group => $groups) {
-                    foreach ($groups->getInputs() as $key => $input) {
-                        $dedicated_name = $input->getDedicatedName();
-                        $result_data = $result[$group][$key];
-                        if ($dedicated_name === 'validate_scopes') {
-                            $type = (int) $result_data[0];
-                            $url = array_pop($result_data[1]);
-                        } elseif ($dedicated_name === 'custom_scope') {
-                            $custom_scopes = $result_data;
-                        }
+            }
+
+            foreach ($form->getInputs() as $group => $groups) {
+                foreach ($groups->getInputs() as $key => $input) {
+                    $dedicated_name = $input->getDedicatedName();
+                    $result_data = $result[$group][$key];
+                    if ($dedicated_name === 'validate_scopes') {
+                        $type = (int) $result_data[0];
+                        $url = array_pop($result_data[1]);
+                    } elseif ($dedicated_name === 'custom_scope') {
+                        $custom_scopes = $result_data;
                     }
                 }
             }
+
             if ($url === null && $type === ilOpenIdConnectSettings::URL_VALIDATION_PROVIDER) {
                 $url = $this->settings->getProvider();
             }
@@ -658,27 +663,28 @@ class ilOpenIdConnectSettingsGUI
         return true;
     }
 
-    private function saveProfile(): void
+    private function saveProfileMapping(): void
     {
         $this->checkAccessBool('write');
 
         $form = $this->initUserMappingForm();
-        if ($this->request->getMethod() === 'POST'
-            && $this->request->getQueryParams()['opic'] === 'opic_user_data_mapping') {
+        if ($this->request->getMethod() === 'POST' &&
+            $this->request->getQueryParams()['opic'] === 'opic_user_data_mapping') {
             $request_form = $form->withRequest($this->request);
             $result = $request_form->getData();
             if ($result === null) {
                 $this->mainTemplate->setOnScreenMessage('failure', $this->lng->txt('err_check_input'));
                 $this->profile();
                 return;
-            } else {
-                foreach ($this->settings->getProfileMappingFields() as $field => $lng_key) {
-                    $this->updateProfileMappingFieldValue($field);
-                }
-                foreach ($this->udf->getDefinitions() as $definition) {
-                    $field = self::UDF_STRING . $definition['field_id'];
-                    $this->updateProfileMappingFieldValue($field);
-                }
+            }
+
+            foreach ($this->settings->getProfileMappingFields() as $field => $lng_key) {
+                $this->updateProfileMappingFieldValue($field);
+            }
+
+            foreach ($this->udf->getDefinitions() as $definition) {
+                $field = self::UDF_STRING . $definition['field_id'];
+                $this->updateProfileMappingFieldValue($field);
             }
         }
 
@@ -920,14 +926,17 @@ class ilOpenIdConnectSettingsGUI
             'opic_user_data_mapping'
         );
 
-        return $this->ui
+        /** @var Form $form */
+        $form = $this->ui
             ->input()
             ->container()
             ->form()
             ->standard(
-                $this->ctrl->getFormAction($this, 'saveProfile'),
+                $this->ctrl->getFormAction($this, 'saveProfileMapping'),
                 $ui_container
-            );
+            )->withAdditionalTransformation($this->saniziteArrayElementsTrafo());
+
+        return $form;
     }
 
     /**
@@ -944,6 +953,7 @@ class ilOpenIdConnectSettingsGUI
             ->input()
             ->field()
             ->text($definition['field_name'], '')
+            ->withAdditionalTransformation($this->trimIfStringTrafo())
             ->withValue($value)
             ->withDedicatedName(self::UDF_STRING . $definition['field_id'] . self::VALUE_STRING);
         $checkbox_input = $this->ui
@@ -974,6 +984,7 @@ class ilOpenIdConnectSettingsGUI
             ->input()
             ->field()
             ->text($lang, '')
+            ->withAdditionalTransformation($this->trimIfStringTrafo())
             ->withValue($value)
             ->withDedicatedName($mapping . self::VALUE_STRING);
         $checkbox_input = $this->ui
@@ -983,7 +994,10 @@ class ilOpenIdConnectSettingsGUI
             ->withValue($update)
             ->withDedicatedName($mapping . self::UPDATE_STRING);
         $group = $this->ui->input()->field()->group(
-            [$text_input, $checkbox_input]
+            [
+                $text_input,
+                $checkbox_input
+            ]
         );
         $ui_container[] = $group;
 
@@ -1040,5 +1054,23 @@ class ilOpenIdConnectSettingsGUI
             );
             $this->ctrl->redirect($this, 'settings');
         }
+    }
+
+    private function saniziteArrayElementsTrafo(): \ILIAS\Refinery\Transformation
+    {
+        return $this->refinery->custom()->transformation(static function (array $values): array {
+            return ilArrayUtil::stripSlashesRecursive($values);
+        });
+    }
+
+    private function trimIfStringTrafo(): \ILIAS\Refinery\Transformation
+    {
+        return $this->refinery->custom()->transformation(static function ($value) {
+            if (is_string($value)) {
+                $value = trim($value);
+            }
+
+            return $value;
+        });
     }
 }
