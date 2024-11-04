@@ -38,6 +38,8 @@ abstract class ilAbstractBuddySystemRelationStateButtonRenderer implements ilBud
             'components/ILIAS/Contact/BuddySystem'
         );
 
+        $this->tpl->setVariable('MENU_ID', uniqid('buddy-system-menu'));
+
         $this->lng = $lng ?? $DIC['lng'];
     }
 
