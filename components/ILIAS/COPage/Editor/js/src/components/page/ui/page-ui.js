@@ -96,7 +96,7 @@ export default class PageUI {
     toolSlate,
     pageModifier,
   ) {
-    this.debug = true;
+    this.debug = false;
     this.droparea = "<div class='il_droparea'></div>";
     this.add = "<span class='glyphicon glyphicon-plus-sign'></span>";
     this.model = {};
@@ -321,7 +321,7 @@ export default class PageUI {
       const originalHTML = area.innerHTML;
       area.innerHTML = uiModel.dropdown;
 
-      console.log(uiModel.dropdown);
+      this.log(uiModel.dropdown);
 
       const { model } = this;
 
@@ -364,7 +364,7 @@ export default class PageUI {
             li.querySelector('a').innerHTML = txt;
             li.querySelector('a').addEventListener('click', (event) => {
               event.isDropDownSelectionEvent = true;
-              console.log(area.dataset);
+              this.log(area.dataset);
               dispatch.dispatch(action.page().editor().editListItem(listCommand, area.dataset.pcid));
             });
             ul.appendChild(li);
@@ -426,7 +426,7 @@ export default class PageUI {
         if (event.shiftKey || event.ctrlKey || event.metaKey) {
           area.dispatchEvent(new Event('areaCmdClick'));
         } else {
-          console.log('*** DISPATCH areaClick');
+          this.log('*** DISPATCH areaClick');
           area.dispatchEvent(new Event('areaClick'));
         }
       });
@@ -435,7 +435,7 @@ export default class PageUI {
     // init add buttons
     document.querySelectorAll(coverSelector).forEach((cover) => {
       cover.addEventListener('click', (event) => {
-        console.log('---COVER CLICKED---');
+        this.log('---COVER CLICKED---');
         if (event.isDropDownToggleEvent === true
             || event.isDropDownSelectionEvent === true) {
           return;
@@ -768,8 +768,8 @@ export default class PageUI {
       .style.display = 'none';
     document.querySelector('#il-copg-format-media')
       .style.display = 'none';
-    console.log('***INIT FORMAT');
-    console.log(selected);
+    this.log('***INIT FORMAT');
+    this.log(selected);
     selected.forEach((id) => {
       cname = this.getCnameForPCID(id.split(':')[1]);
       switch (cname) {
