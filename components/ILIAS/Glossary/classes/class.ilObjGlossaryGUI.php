@@ -286,7 +286,9 @@ class ilObjGlossaryGUI extends ilObjectGUI implements \ILIAS\Taxonomy\Settings\M
                 $this->checkPermission("write");
                 $gui = $this->gui->settings()->settingsGUI(
                     $this->object->getId(),
-                    $this->requested_ref_id
+                    $this->requested_ref_id,
+                    $this->getCreationMode(),
+                    $this
                 );
                 $this->ctrl->forwardCommand($gui);
                 break;

@@ -25,6 +25,9 @@ use ILIAS\Glossary\InternalGUIService;
 use ILIAS\Repository\Form\FormAdapterGUI;
 use ILIAS\Glossary\InternalDataService;
 
+/**
+ * @ilCtrl_Calls ILIAS\Glossary\Settings\SettingsGUI: ilDidacticTemplateGUI
+ */
 class SettingsGUI
 {
     public function __construct(
@@ -32,7 +35,9 @@ class SettingsGUI
         protected InternalDomainService $domain,
         protected InternalGUIService $gui,
         protected int $obj_id,
-        protected int $ref_id
+        protected int $ref_id,
+        protected bool $creation_mode,
+        protected object $parent_gui
     ) {
     }
 
@@ -43,6 +48,15 @@ class SettingsGUI
         $cmd = $ctrl->getCmd("edit");
 
         switch ($next_class) {
+            case strtolower(\ilDidacticTemplateGUI::class):
+                $ctrl->setReturn($this, 'edit');
+                $did = new \ilDidacticTemplateGUI(
+                    $this->parent_gui,
+                    $this->getEditForm()->getDidacticTemplateIdFromRequest()
+                );
+                $ctrl->forwardCommand($did);
+                break;
+
             default:
                 if (in_array($cmd, ["edit", "save"])) {
                     $this->$cmd();
@@ -81,13 +95,20 @@ class SettingsGUI
             ->addStdTitleAndDescription(
                 $this->obj_id,
                 "glo"
-            )
-            ->radio(
-                "glo_mode",
-                $lng->txt("glo_content_assembly"),
-                $lng->txt("glo_mode_desc"),
-                $settings->getVirtualMode()
-            )
+            );
+
+        $form = $form->addDidacticTemplates(
+            "glo",
+            $this->ref_id,
+            $this->creation_mode
+        );
+
+        $form = $form->radio(
+            "glo_mode",
+            $lng->txt("glo_content_assembly"),
+            $lng->txt("glo_mode_desc"),
+            $settings->getVirtualMode()
+        )
             ->radioOption(
                 "none",
                 $lng->txt("glo_mode_normal"),
@@ -198,6 +219,13 @@ class SettingsGUI
             );
 
             $this->domain->glossarySettings()->update($settings);
+
+            // check if template is changed
+            $form->redirectToDidacticConfirmationIfChanged(
+                $this->ref_id,
+                "glo",
+                static::class
+            );
 
             $mt->setOnScreenMessage("success", $lng->txt("msg_obj_modified"), true);
             $ctrl->redirectByClass(self::class, "edit");
