@@ -380,7 +380,7 @@ class ilPasswordAssistanceGUI implements ilCtrlSecurityInterface
     {
         global $DIC;
 
-        require_once 'cli/inc.pwassist_session_handler.php';
+        require_once __DIR__ . '/../../../../cli/inc.pwassist_session_handler.php';
         $pwassist_session['pwassist_id'] = db_pwassist_create_id();
         db_pwassist_session_write(
             $pwassist_session['pwassist_id'],
@@ -523,7 +523,7 @@ class ilPasswordAssistanceGUI implements ilCtrlSecurityInterface
             $pwassist_id = $this->retrieveRequestedKey();
         }
 
-        require_once 'cli/inc.pwassist_session_handler.php';
+        require_once __DIR__ . '/../../../../cli/inc.pwassist_session_handler.php';
         $pwassist_session = db_pwassist_session_read($pwassist_id);
         if (!is_array($pwassist_session) || $pwassist_session['expires'] < time()) {
             $this->tpl->setOnScreenMessage('failure', $this->lng->txt('pwassist_session_expired'));
@@ -584,7 +584,7 @@ class ilPasswordAssistanceGUI implements ilCtrlSecurityInterface
         $password = $form_data[self::PROP_PASSWORD];
         $pwassist_id = $form_data[self::PROP_KEY];
 
-        require_once 'cli/inc.pwassist_session_handler.php';
+        require_once __DIR__ . '/../../../../cli/inc.pwassist_session_handler.php';
         $pwassist_session = db_pwassist_session_read($pwassist_id);
         if (!is_array($pwassist_session) || $pwassist_session['expires'] < time()) {
             $this->tpl->setOnScreenMessage(
