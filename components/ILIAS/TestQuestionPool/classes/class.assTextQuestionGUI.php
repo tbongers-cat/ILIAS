@@ -486,7 +486,6 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         $questionoutput .= $this->getJsCode();
 
         $pageoutput = $this->outQuestionPage("", $is_question_postponed, $active_id, $questionoutput);
-        ilYuiUtil::initDomEvent();
         return $pageoutput;
     }
 
