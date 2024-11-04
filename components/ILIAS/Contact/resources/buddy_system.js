@@ -147,9 +147,20 @@
 	};
 
 	$(document).ready(function() {
-		document.addEventListener('click', function(e){
+		const root = $('#buddy_system_tbl,.il-deck');
+		root.attr('aria-live', 'polite');
+		root.on('keydown', function(e){
+			if (e.key === 'Enter' && e.target.nodeName === 'A') {
+				e.target.click();
+			}
+		});
+		root.on('click', function(e){
 			if (e.target.classList.contains('dropdown-toggle')) {
 				e.target.parentNode.classList.toggle('open');
+				e.target.setAttribute('aria-expanded', String(e.target.parentNode.classList.contains('open')));
+				if (root.attr('id') === 'buddy_system_tbl') {
+					e.target.parentNode.querySelector(':scope > .dropdown-menu').classList.add('dropdown-menu__left');
+				}
 			}
 		});
 		$("#awareness_trigger").on("awrn:shown", function(event) {
