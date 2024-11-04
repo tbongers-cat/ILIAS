@@ -24,7 +24,11 @@ use ILIAS\BookingManager\InternalDomainService;
 use ILIAS\BookingManager\InternalGUIService;
 use ILIAS\Repository\Form\FormAdapterGUI;
 use ILIAS\BookingManager\InternalDataService;
+use ilDidacticTemplateGUI;
 
+/**
+ * @ilCtrl_Calls ILIAS\BookingManager\Settings\SettingsGUI: ilDidacticTemplateGUI
+ */
 class SettingsGUI
 {
     public function __construct(
@@ -33,7 +37,8 @@ class SettingsGUI
         protected InternalGUIService $gui,
         protected int $obj_id,
         protected int $ref_id,
-        protected bool $creation_mode
+        protected bool $creation_mode,
+        protected object $parent_gui
     ) {
     }
 
@@ -44,6 +49,15 @@ class SettingsGUI
         $cmd = $ctrl->getCmd("edit");
 
         switch ($next_class) {
+            case strtolower(ilDidacticTemplateGUI::class):
+                $ctrl->setReturn($this, 'edit');
+                $did = new ilDidacticTemplateGUI(
+                    $this->parent_gui,
+                    $this->getEditForm()->getDidacticTemplateIdFromRequest()
+                );
+                $ctrl->forwardCommand($did);
+                break;
+
             default:
                 if (in_array($cmd, ["edit", "save"])) {
                     $this->$cmd();
@@ -68,7 +82,6 @@ class SettingsGUI
                               $this->obj_id,
                               "book"
                           );
-
         $form = $form->addDidacticTemplates(
             "book",
             $this->ref_id,
@@ -245,7 +258,7 @@ class SettingsGUI
             $form->redirectToDidacticConfirmationIfChanged(
                 $this->ref_id,
                 "book",
-                self::class
+                static::class
             );
 
             $mt->setOnScreenMessage("success", $lng->txt("msg_obj_modified"), true);

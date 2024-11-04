@@ -199,7 +199,7 @@ class ilBookingReservationsTableGUI extends ilTable2GUI
     protected function showMessages(): bool
     {
         return $this->pool->usesMessages() &&
-            $this->access->checkAccess('write', '', $this->ref_id);
+            $this->access->canManageAllReservations($this->ref_id);
     }
 
     public function getSelectableColumns(): array
