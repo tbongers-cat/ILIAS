@@ -121,7 +121,6 @@ abstract class ilBlockGUI
         $this->obj_def = $DIC["objDefinition"];
         $this->ui = $DIC->ui();
 
-        ilYuiUtil::initConnection();
         $this->main_tpl->addJavaScript("./assets/js/ilblockcallback.js");
 
         $this->setLimit(25);
