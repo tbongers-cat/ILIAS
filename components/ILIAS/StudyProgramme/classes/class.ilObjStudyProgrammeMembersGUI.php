@@ -398,7 +398,7 @@ class ilObjStudyProgrammeMembersGUI
             );
             $options = [];
             foreach ($completed_crss as $opt) {
-                $options[implode(';', [$ass->getId(), $opt['prg_obj_id'],$opt['crsr_id']])] = $opt['title'];
+                $options[implode(';', [$ass->getId(), $opt['prg_obj_id'],$opt['crs_id']])] = $opt['title'];
             }
 
             $completed_courses[] = $this->ui_factory->input()->field()->multiselect($label, $options);
@@ -728,11 +728,11 @@ class ilObjStudyProgrammeMembersGUI
         if ($data) {
             $acknowledge = [];
             foreach ($data as $ack) {
-                [$assignment_id, $node_obj_id, $courseref_obj_id] = $ack;
+                [$assignment_id, $node_obj_id, $course_obj_id] = $ack;
                 if (! array_key_exists($assignment_id, $acknowledge)) {
                     $acknowledge[$assignment_id] = [];
                 }
-                $acknowledge[$assignment_id][] = [(int) $node_obj_id, (int) $courseref_obj_id];
+                $acknowledge[$assignment_id][] = [(int) $node_obj_id, (int) $course_obj_id];
             }
             foreach ($acknowledge as $ass_id => $nodes) {
                 $this->object->acknowledgeCourses(
