@@ -753,8 +753,6 @@ class ilObjStudyProgramme extends ilContainer
 
     /**
      * Get courses in this program that the given user already completed.
-     *
-     * @return int[]
      */
     public function getCompletedCourses(int $usr_id): array
     {
