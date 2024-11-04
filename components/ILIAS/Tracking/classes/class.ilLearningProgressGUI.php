@@ -129,12 +129,10 @@ class ilLearningProgressGUI extends ilLearningProgressBaseGUI
 
     public function __setCmdClass(string $a_class): void
     {
-        if (strcasecmp(ilLearningProgressGUI::class, $this->ctrl->getCmdClass()) === 0) {
-            // @todo: removed deprecated ilCtrl methods, this needs inspection by a maintainer.
-            // $this->ctrl->setCmdClass($a_class);
-        }
-        // note, this was removed prior to the deprecated ilCtrl methods already.
         //$this->ctrl->setCmdClass($a_class);
+        if (strtolower($this->ctrl->getCmdClass()) !== strtolower($a_class)) {
+            $this->ctrl->redirectByClass($a_class);
+        }
     }
 
     public function __getNextClass(): string
