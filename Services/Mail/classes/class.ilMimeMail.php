@@ -309,6 +309,7 @@ class ilMimeMail
                 $skin_directory = './Customizing/global/skin/' . $location . '/Services/Mail/img';
                 if (is_dir($skin_directory) && is_readable($skin_directory)) {
                     $this->gatherImagesFromDirectory($skin_directory, true);
+                    break;
                 }
             }
         }
