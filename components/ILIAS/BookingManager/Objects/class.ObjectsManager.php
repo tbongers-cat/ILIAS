@@ -175,9 +175,20 @@ class ObjectsManager
         int $from_booking_obj_id,
         int $to_booking_obj_id
     ): void {
-        if ($this->object_repo->hasObjectInfo($from_booking_obj_id)) {
+        if ($this->object_repo->hasObjectInfo($from_booking_obj_id) ||
+            $this->object_repo->hasBookingInfo($from_booking_obj_id)) {
             $this->object_repo->clone($from_booking_obj_id, $to_booking_obj_id);
         }
+    }
+
+    public function getObjectInfoPath(int $booking_object_id): int
+    {
+        return $this->object_repo->getObjectInfoPath($booking_object_id);
+    }
+
+    public function getBookingInfoPath(int $booking_object_id): int
+    {
+        return $this->object_repo->getBookingInfoPath($booking_object_id);
     }
 
 }
