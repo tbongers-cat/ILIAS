@@ -119,7 +119,6 @@ class assSingleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         $this->populateQuestionSpecificFormPart($form, $is_singleline);
         $this->populateAnswerSpecificFormPart($form, $is_singleline);
 
-
         $this->populateTaxonomyFormSection($form);
 
         $this->addQuestionFormCommandButtons($form);
@@ -169,20 +168,35 @@ class assSingleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         return $errors;
     }
 
-    /**
-    * Upload an image
-    */
     public function uploadchoice(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $this->editQuestion();
     }
 
     public function removeimagechoice(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $position = key($this->request->raw('cmd')['removeimagechoice']);
         $this->object->removeAnswerImage($position);
+        $this->editQuestion();
+    }
+
+    public function addchoice(): void
+    {
+        $this->writePostData(true);
+        $position = key($this->request->raw('cmd')['addchoice']);
+        $this->object->addAnswer("", 0, $position + 1);
+        $this->editQuestion();
+    }
+
+    public function removechoice(): void
+    {
+        $this->writePostData(true);
+        $position = key($this->request->raw('cmd')['removechoice']);
+        $this->object->deleteAnswer($position);
         $this->editQuestion();
     }
 
