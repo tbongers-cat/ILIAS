@@ -11,7 +11,7 @@ function ilInitTableFilters()
 	filtrs = document.getElementsByClassName('ilTableFilterSec');
 	for (var i = 0; i < filtrs.length; i++)
 	{
-		if (ilTableHideFilter[filtrs[i].id] === 1)
+		if (ilTableHideFilter[filtrs[i].id] == 1)
 		{
 			filtrs[i].style.display = 'none';
 		}
@@ -25,7 +25,7 @@ function ilInitTableFilters()
 	filactvtrs = document.getElementsByClassName('ilTableFilterActivator');
 	for (var i = 0; i < filactvtrs.length; i++)
 	{
-		if (ilTableHideFilter[filactvtrs[i].id] === 1)
+		if (ilTableHideFilter[filactvtrs[i].id] == 1)
 		{
 			filactvtrs[i].style.display = '';
 		}
@@ -39,7 +39,7 @@ function ilInitTableFilters()
 	fildctvtrs = document.getElementsByClassName('ilTableFilterDeactivator');
 	for (var i = 0; i < fildctvtrs.length; i++)
 	{
-		if (ilTableHideFilter[fildctvtrs[i].id] === 1)
+		if (ilTableHideFilter[fildctvtrs[i].id] == 1)
 		{
 			fildctvtrs[i].style.display = 'none';
 		}
