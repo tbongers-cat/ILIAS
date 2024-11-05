@@ -21,7 +21,6 @@ declare(strict_types=1);
 use ILIAS\TestQuestionPool\Questions\QuestionLMExportable;
 use ILIAS\TestQuestionPool\Questions\QuestionAutosaveable;
 use ILIAS\TestQuestionPool\ManipulateImagesInChoiceQuestionsTrait;
-
 use ILIAS\Test\Logging\AdditionalInformationGenerator;
 
 /**
@@ -120,7 +119,7 @@ class assSingleChoice extends assQuestion implements ilObjQuestionScoringAdjusta
             if ($data['thumb_size'] !== null && $data['thumb_size'] >= self::MINIMUM_THUMB_SIZE) {
                 $this->setThumbSize($data['thumb_size']);
             }
-            $this->is_singleline = $data['allow_images'] === '0';
+            $this->is_singleline = $data['allow_images'] === null || $data['allow_images'] === '0';
             $this->lastChange = $data['tstamp'];
             $this->feedback_setting = $data['feedback_setting'] ?? self::FEEDBACK_MODE_SELECTED_ANSWERS;
 
