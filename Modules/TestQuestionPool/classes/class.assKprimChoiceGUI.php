@@ -252,8 +252,6 @@ class assKprimChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringAd
 
         if (!$this->object->getSelfAssessmentEditingMode()) {
             $this->object->setAnswerType($form->getItemByPostVar('answer_type')->getValue());
-        } else {
-            $this->object->setAnswerType(assKprimChoice::ANSWER_TYPE_MULTI_LINE);
         }
 
         if (!$this->object->getSelfAssessmentEditingMode() && $this->object->isSingleLineAnswerType($old_answer_type)) {
@@ -290,11 +288,7 @@ class assKprimChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringAd
         $kprimAnswers->setRequired(true);
         $kprimAnswers->setAllowMove(true);
         $kprimAnswers->setQuestionObject($this->object);
-        if (!$this->object->getSelfAssessmentEditingMode()) {
-            $kprimAnswers->setSingleline($this->object->isSingleLineAnswerType($this->object->getAnswerType()));
-        } else {
-            $kprimAnswers->setSingleline(false);
-        }
+        $kprimAnswers->setSingleline($this->object->isSingleLineAnswerType($this->object->getAnswerType()));
         $kprimAnswers->setValues($this->object->getAnswers());
         $form->addItem($kprimAnswers);
 
