@@ -9,6 +9,7 @@
 	background-color: $il-footer-bg-color;
 	font-size: $il-font-size-base;
 	color: $il-footer-color;
+	border-top: $il-main-border;
 
 	& a,
 	& .btn-link {
@@ -29,7 +30,7 @@
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		column-gap: $il-footer-gap-base;
-		border-top: $il-main-border;
+		padding: $il-padding-small-horizontal 0;
 	}
 
 	&-grid__item {
@@ -60,7 +61,7 @@
 			grid-template-columns: repeat(1, 1fr);
 		}
 		& ul li {
-			padding: $il-padding-large-vertical 0;
+			padding: $il-padding-large-vertical 0 0 0;
 		}
 	}
 }
