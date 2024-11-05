@@ -25,6 +25,9 @@ namespace ILIAS\ResourceStorage\Flavour\Engine;
  */
 class ImagickEngineWithOptionalFFMpeg extends ImagickEngine
 {
+    /**
+     * @readonly
+     */
     private FFMpegEngine $ffmpeg;
 
     protected array $supported;
@@ -37,6 +40,10 @@ class ImagickEngineWithOptionalFFMpeg extends ImagickEngine
 
     public function supports(string $suffix): bool
     {
+        if ($suffix === 'pdf' && defined('PATH_TO_GHOSTSCRIPT') && PATH_TO_GHOSTSCRIPT !== "") {
+            return true;
+        }
+
         if ($this->ffmpeg->isRunning() && $this->ffmpeg->supports($suffix)) {
             return true;
         }
