@@ -735,6 +735,7 @@ JS;
     */
     public function createGaps(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $this->object->saveToDb();
         $this->editQuestion();
@@ -742,6 +743,7 @@ JS;
 
     public function removegap(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $this->object->deleteAnswerText($this->gapIndex, key($_POST['cmd']['removegap_' . $this->gapIndex]));
         $this->editQuestion();
@@ -749,6 +751,7 @@ JS;
 
     public function addgap(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $this->object->addGapAnswer($this->gapIndex, key($_POST['cmd']['addgap_' . $this->gapIndex]) + 1, "");
         $this->editQuestion();

@@ -519,8 +519,9 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
 
     public function addSuggestedSolution(): void
     {
-        ilSession::set("subquestion_index", 0);
-        if ($_POST["cmd"]["addSuggestedSolution"]) {
+        $this->setAdditionalContentEditingModeFromPost();
+        ilSession::set('subquestion_index', 0);
+        if ($_POST['cmd']['addSuggestedSolution']) {
             if ($this->writePostData()) {
                 $this->tpl->setOnScreenMessage('info', $this->getErrorMessage());
                 $this->editQuestion();

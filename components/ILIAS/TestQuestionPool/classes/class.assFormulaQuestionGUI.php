@@ -62,6 +62,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
 
     public function suggestRange(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $suggest_range_for_result = $this->request->string('suggest_range_for');
         if ($this->writePostData()) {
             $this->tpl->setOnScreenMessage('info', $this->getErrorMessage());
@@ -761,6 +762,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
 
     public function parseQuestion(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData();
         $this->addSaveOnEnterOnLoadCode();
         $this->setTestSpecificProperties();

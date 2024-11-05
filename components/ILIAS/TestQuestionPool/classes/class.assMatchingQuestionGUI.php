@@ -200,12 +200,14 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
     public function uploadterms(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $this->editQuestion();
     }
 
     public function removeimageterms(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $position = key($_POST['cmd']['removeimageterms']);
         $this->object->removeTermImage($position);
@@ -214,12 +216,14 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
     public function uploaddefinitions(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $this->editQuestion();
     }
 
     public function removeimagedefinitions(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $position = key($_POST['cmd']['removeimagedefinitions']);
         $this->object->removeDefinitionImage($position);
@@ -228,6 +232,7 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
     public function addterms(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $position = key($_POST["cmd"]["addterms"]);
         $this->object->insertTerm($position + 1);
@@ -236,6 +241,7 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
     public function removeterms(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $position = key($_POST["cmd"]["removeterms"]);
         $this->object->deleteTerm($position);
@@ -244,6 +250,7 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
     public function adddefinitions(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $position = key($_POST["cmd"]["adddefinitions"]);
         $this->object->insertDefinition($position + 1);
@@ -252,6 +259,7 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
     public function removedefinitions(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $position = key($_POST["cmd"]["removedefinitions"]);
         $this->object->deleteDefinition($position);
@@ -260,6 +268,7 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
     public function addpairs(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $position = key($_POST["cmd"]["addpairs"]);
         $this->object->insertMatchingPair($position + 1);
@@ -268,6 +277,7 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
     public function removepairs(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $position = key($_POST["cmd"]["removepairs"]);
         $this->object->deleteMatchingPair($position);
