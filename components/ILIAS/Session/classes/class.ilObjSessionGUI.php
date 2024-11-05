@@ -493,10 +493,10 @@ class ilObjSessionGUI extends ilObjectGUI implements ilDesktopItemHandling
     */
     public function infoScreenObject(): void
     {
-        // @todo: removed deprecated ilCtrl methods, this needs inspection by a maintainer.
-        // $this->ctrl->setCmd("showSummary");
-        // $this->ctrl->setCmdClass("ilinfoscreengui");
-        $this->infoScreen();
+        $this->ctrl->redirectByClass(
+            [self::class, ilInfoScreenGUI::class],
+            'showSummary'
+        );
     }
 
     public function modifyItemGUI(ilObjectListGUI $a_item_list_gui, array $a_item_data, bool $a_show_path): void
