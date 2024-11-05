@@ -265,12 +265,16 @@ th.c-table-data__cell:after {
 }
 
 .c-table-data__positioninput {
-    label {
-        display:none;
+    .c-input[data-il-ui-component] {
+        grid-template-columns: 0% 100%;
+        > label {
+            display:none;
+        }
+        input {
+            width : 65px;
+        }
     }
-    input {
-        width : 65px;
-    }
+
 }
 
 //

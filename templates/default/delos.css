@@ -10381,10 +10381,13 @@ th.c-table-data__cell {
   z-index: 2;
 }
 
-.c-table-data__positioninput label {
+.c-table-data__positioninput .c-input[data-il-ui-component] {
+  grid-template-columns: 0% 100%;
+}
+.c-table-data__positioninput .c-input[data-il-ui-component] > label {
   display: none;
 }
-.c-table-data__positioninput input {
+.c-table-data__positioninput .c-input[data-il-ui-component] input {
   width: 65px;
 }
 
