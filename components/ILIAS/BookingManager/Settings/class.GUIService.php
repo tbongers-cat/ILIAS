@@ -36,7 +36,8 @@ class GUIService
     public function settingsGUI(
         int $obj_id,
         int $ref_id,
-        bool $creation_mode
+        bool $creation_mode,
+        object $parent_gui
     ): SettingsGUI {
         return new SettingsGUI(
             $this->data,
@@ -44,7 +45,8 @@ class GUIService
             $this->gui,
             $obj_id,
             $ref_id,
-            $creation_mode
+            $creation_mode,
+            $parent_gui
         );
     }
 }

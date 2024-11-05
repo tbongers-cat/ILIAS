@@ -1058,7 +1058,6 @@ class ilPageObjectGUI
 
         // jquery and jquery ui are always provided for components
         iljQueryUtil::initjQuery();
-        iljQueryUtil::initjQueryUI();
 
         //		$this->initSelfAssessmentRendering();
         ilObjMediaObjectGUI::includePresentationJS($main_tpl);

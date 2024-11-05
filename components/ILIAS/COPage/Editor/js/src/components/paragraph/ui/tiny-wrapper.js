@@ -210,6 +210,7 @@ export default class TinyWrapper {
         language: 'en',
         height: '100%',
         plugins: 'save,paste,lists',
+        license_key: 'gpl',
         smart_paste: false,
         save_onsavecallback: 'saveParagraph',
         mode: 'exact',
