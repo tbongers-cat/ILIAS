@@ -42,7 +42,7 @@ class DB100 implements \ilDatabaseUpdateSteps
     public function step_2(): void
     {
         if ($this->db->tableExists('gs_footer_items')) {
-            $this->db->dropTable('gs_footer_items'); //
+            return;
         }
         $this->db->createTable(
             'gs_footer_items',
@@ -58,6 +58,23 @@ class DB100 implements \ilDatabaseUpdateSteps
                 'core' => ['type' => 'integer', 'length' => 1, 'notnull' => true],
             ]
         );
+    }
+
+    public function step_3(): void
+    {
+        if ($this->db->tableExists('gs_item_translation')) {
+            return;
+        }
+        $this->db->createTable(
+            'gs_item_translation',
+            [
+                'id' => ['type' => 'text', 'length' => 255, 'notnull' => true],
+                'language_code' => ['type' => 'text', 'length' => 4, 'notnull' => true],
+                'translation' => ['type' => 'text', 'length' => 4000, 'notnull' => true],
+                'status' => ['type' => 'integer', 'length' => 1, 'notnull' => true, 'default' => 0],
+            ]
+        );
+        $this->db->addPrimaryKey('gs_item_translation', ['id', 'language_code']);
     }
 
 }

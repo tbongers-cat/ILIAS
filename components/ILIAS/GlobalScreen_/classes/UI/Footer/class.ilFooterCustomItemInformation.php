@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 use ILIAS\GlobalScreen\Identification\IdentificationFactory;
 use ILIAS\DI\Container;
 use ILIAS\GlobalScreen\UI\Footer\Groups\GroupsRepositoryDB;
@@ -25,13 +26,14 @@ use ILIAS\GlobalScreen\Scope\Footer\Collector\Information\ItemInformation;
 use ILIAS\GlobalScreen\Identification\IdentificationInterface;
 use ILIAS\GlobalScreen\Scope\Footer\Factory\isItem;
 use ILIAS\GlobalScreen\Scope\Footer\Factory\hasTitle;
-use ILIAS\GlobalScreen\Identification\NullIdentification;
 use ILIAS\GlobalScreen\UI\Footer\Groups\GroupsRepository;
 use ILIAS\GlobalScreen\UI\Footer\Entries\EntriesRepository;
 use ILIAS\GlobalScreen\Scope\Footer\Factory\canHaveParent;
 use ILIAS\GlobalScreen\Scope\Footer\Factory\isGroup;
 use ILIAS\GlobalScreen\UI\Footer\Groups\Group;
 use ILIAS\GlobalScreen\UI\Footer\Entries\Entry;
+use ILIAS\GlobalScreen\UI\Footer\Translation\TranslationsRepository;
+use ILIAS\GlobalScreen\UI\Footer\Translation\TranslationsRepositoryDB;
 
 /**
  * @author Fabian Schmid <fabian@sr.solutions>
@@ -41,9 +43,29 @@ final class ilFooterCustomItemInformation implements ItemInformation
     private ?GroupsRepositoryDB $groups_repository = null;
     private ?EntriesRepositoryDB $entries_repository = null;
     private ?IdentificationFactory $identifications = null;
+    private ?TranslationsRepositoryDB $translations_repository = null;
+    private ?string $user_language = null;
 
     public function __construct(private readonly Container $dic)
     {
+    }
+
+    private function translations(): TranslationsRepository
+    {
+        if ($this->translations_repository !== null) {
+            return $this->translations_repository;
+        }
+
+        $this->translations_repository = new TranslationsRepositoryDB($this->dic->database());
+        return $this->translations_repository;
+    }
+
+    private function userLanguage(): string
+    {
+        if ($this->user_language !== null) {
+            return $this->user_language;
+        }
+        return $this->user_language = $this->dic->user()->getLanguage();
     }
 
     private function groups(): GroupsRepository
@@ -110,6 +132,13 @@ final class ilFooterCustomItemInformation implements ItemInformation
         $d = $this->maybeGetItem($item);
         if ($d === null) {
             return $item;
+        }
+
+        if (
+            (($translation = $this->translations()->get($d)->getLanguageCode($this->userLanguage())) !== null)
+            && $translation->getTranslation() !== ''
+        ) {
+            return $item->withTitle($translation->getTranslation());
         }
 
         return $item->withTitle($d->getTitle());

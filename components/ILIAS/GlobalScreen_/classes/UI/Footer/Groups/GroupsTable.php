@@ -29,6 +29,7 @@ use ILIAS\GlobalScreen\Scope\MainMenu\Collector\Renderer\Hasher;
 use ILIAS\UI\Component\Table\OrderingBinding;
 use ILIAS\UI\Component\Table\OrderingRowBuilder;
 use ILIAS\GlobalScreen_\UI\UIHelper;
+use ILIAS\GlobalScreen\UI\Footer\Translation\TranslationsRepository;
 
 class GroupsTable implements OrderingBinding
 {
@@ -41,17 +42,16 @@ class GroupsTable implements OrderingBinding
     private Factory $ui_factory;
     private ServerRequestInterface $request;
     private ?URLBuilderToken $id_token = null;
-    private \ilCtrlInterface $ctrl;
     private ?URLBuilder $url_builder = null;
 
     public function __construct(
         private readonly GroupsRepository $repository,
+        private readonly TranslationsRepository $translations_repository,
         private readonly Translator $translator
     ) {
         global $DIC;
         $this->ui_factory = $DIC->ui()->factory();
         $this->request = $DIC->http()->request();
-        $this->ctrl = $DIC->ctrl();
     }
 
     public function getRows(OrderingRowBuilder $row_builder, array $visible_column_ids): \Generator
@@ -60,11 +60,12 @@ class GroupsTable implements OrderingBinding
         $nok = $this->nok($this->ui_factory);
 
         foreach ($this->repository->all() as $group) {
+            $title = $this->translations_repository->get($group)->getDefault()?->getTranslation() ?? $group->getTitle();
             $row = $row_builder->buildOrderingRow(
                 $this->hash($group->getId()),
                 [
                     self::COLUMN_TITLE => $this->ui_factory->link()->standard(
-                        $group->getTitle(),
+                        $title,
                         $this->url_builder
                             ->withParameter($this->id_token, $this->hash($group->getId()))
                             ->buildURI()
@@ -77,6 +78,7 @@ class GroupsTable implements OrderingBinding
 
             if ($group->isCore()) {
                 $row = $row->withDisabledAction('delete')
+                           ->withDisabledAction('translate')
                            ->withDisabledAction('move');
             }
 
@@ -84,9 +86,13 @@ class GroupsTable implements OrderingBinding
         }
     }
 
-    public function get(URI $target): Ordering
-    {
-        $uri_builder = $this->initURIBuilder($target);
+    public function get(
+        URI $here_uri,
+        URI $translations_uri
+    ): Ordering {
+        $uri_builder = $this->initURIBuilder($here_uri);
+
+        $async_translation = false;
 
         return $this->ui_factory
             ->table()
@@ -104,40 +110,45 @@ class GroupsTable implements OrderingBinding
                     ),
                 ],
                 $this,
-                $target
+                $here_uri
             )
             ->withRequest($this->request)
             ->withActions(
                 [
                     'edit_entries' => $this->ui_factory->table()->action()->single(
                         $this->translator->translate('edit_entries', 'group'),
-                        $uri_builder->withURI($target->withParameter('cmd', 'editEntries')),
+                        $uri_builder->withURI($here_uri->withParameter('cmd', 'editEntries')),
                         $this->id_token
                     )->withAsync(false),
 
                     'edit' => $this->ui_factory->table()->action()->single(
                         $this->translator->translate('edit', 'group'),
-                        $uri_builder->withURI($target->withParameter('cmd', 'edit')),
+                        $uri_builder->withURI($here_uri->withParameter('cmd', 'edit')),
                         $this->id_token
                     )->withAsync(true),
 
                     'toggle_activation' => $this->ui_factory->table()->action()->standard(
                         $this->translator->translate('toggle_activation', 'group'),
-                        $uri_builder->withURI($target->withParameter('cmd', 'toggleActivation')),
+                        $uri_builder->withURI($here_uri->withParameter('cmd', 'toggleActivation')),
                         $this->id_token
                     )->withAsync(false),
 
                     'delete' => $this->ui_factory->table()->action()->standard(
                         $this->translator->translate('delete', 'group'),
-                        $uri_builder->withURI($target->withParameter('cmd', 'confirmDelete')),
+                        $uri_builder->withURI($here_uri->withParameter('cmd', 'confirmDelete')),
                         $this->id_token
                     )->withAsync(true),
 
-                    /*'translate' => $this->ui_factory->table()->action()->single(
+                    'translate' => $this->ui_factory->table()->action()->single(
                         $this->translator->translate('translate', 'group'),
-                        $uri_builder->withURI($target->withParameter('cmd', 'translate')),
+                        $uri_builder->withURI(
+                            $translations_uri->withParameter('async', 'true')->withParameter(
+                                'cmd',
+                                \ilFooterTranslationGUI::CMD_TRANSLATE_IN_MODAL
+                            )
+                        ),
                         $this->id_token
-                    )->withAsync(false),*/
+                    )->withAsync(true),
                 ]
             );
     }

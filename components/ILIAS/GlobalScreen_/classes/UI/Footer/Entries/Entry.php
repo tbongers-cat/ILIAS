@@ -18,7 +18,9 @@
 
 namespace ILIAS\GlobalScreen\UI\Footer\Entries;
 
-interface Entry
+use ILIAS\GlobalScreen\UI\Footer\Translation\TranslatableItem;
+
+interface Entry extends TranslatableItem
 {
     public function getId(): string;
 

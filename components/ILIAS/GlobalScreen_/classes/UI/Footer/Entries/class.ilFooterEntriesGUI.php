@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 use ILIAS\UI\Component\Input\Container\Form\Standard;
 use ILIAS\UI\Factory;
 use Psr\Http\Message\ServerRequestInterface;
@@ -29,6 +30,7 @@ use ILIAS\GlobalScreen\UI\Footer\Entries\EntryForm;
 use ILIAS\GlobalScreen\UI\Footer\Groups\Group;
 use ILIAS\GlobalScreen\Scope\MainMenu\Collector\Renderer\Hasher;
 use ILIAS\GlobalScreen\UI\Footer\Groups\GroupsRepository;
+use ILIAS\GlobalScreen\UI\Footer\Translation\TranslationsRepositoryDB;
 
 /**
  * @author            Fabian Schmid <fabian@sr.solutions>
@@ -79,16 +81,24 @@ final class ilFooterEntriesGUI
         $this->repository->syncWithGlobalScreen(
             $this->dic->globalScreen()->collector()->footer()
         );
-
         // Table
         $table = new EntriesTable(
             $this->group,
             $this->repository,
+            new TranslationsRepositoryDB($this->dic->database()),
             $this->translator
         );
 
         $this->ui_handling->out(
-            $table->get($this->ui_handling->getHereAsURI(self::CMD_SAVE_ORDER)),
+            $table->get(
+                $this->ui_handling->getHereAsURI(self::CMD_SAVE_ORDER),
+                $this->ui_handling->buildURI(
+                    $this->ctrl->getLinkTargetByClass(
+                        ilFooterTranslationGUI::class,
+                        ilFooterTranslationGUI::CMD_DEFAULT
+                    )
+                )
+            ),
             ...$components
         );
     }
@@ -341,15 +351,37 @@ final class ilFooterEntriesGUI
         $next_class = $this->ctrl->getNextClass($this) ?? '';
         $cmd = $this->ctrl->getCmd(self::CMD_DEFAULT);
 
-        switch ($cmd) {
-            case self::CMD_ADD:
-            case self::CMD_CREATE:
-            case self::CMD_EDIT:
-            case self::CMD_UPDATE:
+        switch (strtolower($next_class)) {
+            case strtolower(ilFooterTranslationGUI::class):
+                $item = $this->repository->get(
+                    $this->ui_handling->getIdentificationsFromRequest(self::GSFO_ID)[0]
+                );
+                $back_target = null;
+                if ($this->request->getQueryParams()['async'] ?? false) {
+                    $back_target = $this->ui_handling->buildURI($this->ctrl->getLinkTarget($this, self::CMD_DEFAULT));
+                }
+                $translation = new ilFooterTranslationGUI(
+                    $this->dic,
+                    $this->translator,
+                    $this->ui_handling,
+                    $item,
+                    $back_target
+                );
+
+                $this->ctrl->forwardCommand($translation);
+
+                return;
             default:
-                $this->ui_handling->backToMainTab();
-                $this->ui_handling->requireWritable();
-                $this->$cmd();
+                switch ($cmd) {
+                    case self::CMD_ADD:
+                    case self::CMD_CREATE:
+                    case self::CMD_EDIT:
+                    case self::CMD_UPDATE:
+                    default:
+                        $this->ui_handling->backToMainTab();
+                        $this->ui_handling->requireWritable();
+                        $this->$cmd();
+                }
         }
     }
 

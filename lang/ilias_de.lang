@@ -10440,6 +10440,7 @@ grp#:#reg_grp_min_members#:#Minimale Anzahl
 gsfo#:#accessibility#:#Barrierefreiheit
 gsfo#:#confirm_delete#:#Möchten Sie die folgenden Elemente wirklich löschen?
 gsfo#:#confirm_reset#:#Durch das Zurücksetzen der Fußzeile werden alle Einträge in ihren ursprünglichen Zustand zurückversetzt. Alle Anpassungen und manuellen Einträge werden gelöscht. Möchten Sie fortfahren?
+gsfo#:#edit_translations#:#Übersetzungen bearbeiten
 gsfo#:#entries_add#:#Eintrag hinzufügen
 gsfo#:#entries_edit#:#Einträge bearbeiten
 gsfo#:#entries_parent#:#Gruppe auswählen
@@ -10481,6 +10482,7 @@ gsfo#:#reset_footer#:#Fußzeile zurücksetzen
 gsfo#:#reset_success#:#Fußzeile erfolgreich zurückgesetzt
 gsfo#:#services#:#Services
 gsfo#:#support#:#Support
+gsfo#:#translations#:#Übersetzungen
 help#:#help_all#:#Alle
 help#:#help_component#:#Komponente
 help#:#help_filter#:#Filter

@@ -26,10 +26,10 @@ use ILIAS\GlobalScreen\UI\Footer\Groups\GroupsRepositoryDB;
 use ILIAS\GlobalScreen\UI\Footer\Groups\GroupsTable;
 use ILIAS\GlobalScreen\UI\Footer\Groups\GroupForm;
 use ILIAS\GlobalScreen\Scope\MainMenu\Collector\Renderer\Hasher;
-use ILIAS\UI\Component\Modal\Modal;
 use ILIAS\GlobalScreen\UI\Footer\Entries\EntriesRepositoryDB;
-use ILIAS\Data\URI;
 use ILIAS\GlobalScreen_\UI\UIHelper;
+use ILIAS\GlobalScreen\UI\Footer\Groups\GroupsRepository;
+use ILIAS\GlobalScreen\UI\Footer\Translation\TranslationsRepositoryDB;
 
 /**
  * @author            Fabian Schmid <fabian@sr.solutions>
@@ -51,23 +51,19 @@ final class ilFooterGroupsGUI
     public const CMD_SAVE_ORDER = 'saveOrder';
     public const GSFO_ID = 'gsfo_group_id';
     private const CMD_CONFIRM_RESET = 'confirmReset';
-    private ilGlobalTemplateInterface $main_tpl;
-    private GroupsRepositoryDB $repository;
+    private GroupsRepository $repository;
     private Factory $ui_factory;
     private ilCtrlInterface $ctrl;
     private ServerRequestInterface $request;
-    private ilErrorHandling $error;
 
     public function __construct(
         private Container $dic,
         private Translator $translator,
         private ilObjFooterUIHandling $ui_handling
     ) {
-        $this->main_tpl = $this->dic->ui()->mainTemplate();
         $this->ui_factory = $this->dic->ui()->factory();
         $this->ctrl = $this->dic->ctrl();
         $this->request = $this->dic->http()->request();
-        $this->error = $this->dic['ilErr'];
         $this->repository = new GroupsRepositoryDB(
             $this->dic->database(),
             new ilFooterCustomGroupsProvider($dic)
@@ -144,11 +140,20 @@ final class ilFooterGroupsGUI
         // Table
         $table = new GroupsTable(
             $this->repository,
+            new TranslationsRepositoryDB($this->dic->database()),
             $this->translator
         );
 
         $this->ui_handling->out(
-            $table->get($this->ui_handling->getHereAsURI(self::CMD_SAVE_ORDER)),
+            $table->get(
+                $this->ui_handling->getHereAsURI(self::CMD_SAVE_ORDER),
+                $this->ui_handling->buildURI(
+                    $this->ctrl->getLinkTargetByClass(
+                        ilFooterTranslationGUI::class,
+                        ilFooterTranslationGUI::CMD_DEFAULT
+                    )
+                )
+            ),
             ...$components
         );
     }
@@ -340,6 +345,9 @@ final class ilFooterGroupsGUI
         $entries_repo = new EntriesRepositoryDB($this->dic->database(), new ilFooterCustomGroupsProvider($this->dic));
         $entries_repo->reset($this->dic->globalScreen()->collector()->footer());
 
+        $translations = new TranslationsRepositoryDB($this->dic->database());
+        $translations->reset();
+
         $this->ui_handling->sendMessageAndRedirect(
             'success',
             $this->translator->translate('reset_success'),
@@ -358,6 +366,7 @@ final class ilFooterGroupsGUI
         $this->ctrl->redirectByClass(ilFooterEntriesGUI::class);
     }
 
+
     // HELPERS AND NEEDED IMPLEMENATIONS
 
     public function executeCommand(): void
@@ -368,6 +377,25 @@ final class ilFooterGroupsGUI
         $cmd = $this->ctrl->getCmd(self::CMD_DEFAULT);
 
         switch (strtolower($next_class)) {
+            case strtolower(ilFooterTranslationGUI::class):
+                $item = $this->repository->get(
+                    $this->ui_handling->getIdentificationsFromRequest(self::GSFO_ID)[0]
+                );
+                $back_target = null;
+                if ($this->request->getQueryParams()['async'] ?? false) {
+                    $back_target = $this->ui_handling->buildURI($this->ctrl->getLinkTarget($this, self::CMD_DEFAULT));
+                }
+                $translation = new ilFooterTranslationGUI(
+                    $this->dic,
+                    $this->translator,
+                    $this->ui_handling,
+                    $item,
+                    $back_target
+                );
+
+                $this->ctrl->forwardCommand($translation);
+
+                return;
             case strtolower(ilFooterEntriesGUI::class):
                 $id = $this->ui_handling->getIdentificationsFromRequest(self::GSFO_ID)[0];
                 $this->ui_handling->saveIdentificationsToRequest(

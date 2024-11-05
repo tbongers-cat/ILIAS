@@ -10439,6 +10439,7 @@ grp#:#reg_grp_max_members#:#Maximum Number of Members
 grp#:#reg_grp_max_members_short#:#Limited Number of Members
 grp#:#reg_grp_min_members#:#Minimum Number of Members
 gsfo#:#accessibility#:#Accessibility
+gsfo#:#accessibility#:#Translations
 gsfo#:#confirm_delete#:#Do you really want to delete the following Item(s)?
 gsfo#:#confirm_reset#:#Resetting the footer will restore all entries to their original state. All customizations and manual entries will be deleted. Do you want to continue?
 gsfo#:#entries_add#:#Add Entry
