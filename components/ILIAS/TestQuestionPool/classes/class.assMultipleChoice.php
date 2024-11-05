@@ -55,11 +55,6 @@ class assMultipleChoice extends assQuestion implements ilObjQuestionScoringAdjus
         $this->is_singleline = $is_singleline;
     }
 
-    public function getIsSingleline(): bool
-    {
-        return $this->is_singleline;
-    }
-
     /**
      * assMultipleChoice constructor
      *
@@ -138,7 +133,7 @@ class assMultipleChoice extends assQuestion implements ilObjQuestionScoringAdjus
             if ($data['thumb_size'] !== null && $data['thumb_size'] >= self::MINIMUM_THUMB_SIZE) {
                 $this->setThumbSize($data['thumb_size']);
             }
-            $this->is_singleline = $data['allow_images'] === '0';
+            $this->is_singleline = $data['allow_images'] === null || $data['allow_images'] === '0';
             $this->lastChange = $data['tstamp'];
             $this->setSelectionLimit((int) $data['selection_limit'] > 0 ? (int) $data['selection_limit'] : null);
             if (isset($data['feedback_setting'])) {
@@ -884,9 +879,9 @@ class assMultipleChoice extends assQuestion implements ilObjQuestionScoringAdjus
         return $config;
     }
 
-    public function isSingleline()
+    public function isSingleline(): bool
     {
-        return (bool) $this->is_singleline;
+        return $this->is_singleline;
     }
 
     public function toLog(AdditionalInformationGenerator $additional_info): array

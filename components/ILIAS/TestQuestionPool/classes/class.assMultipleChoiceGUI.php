@@ -87,6 +87,10 @@ class assMultipleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScorin
      */
     protected function getEditAnswersSingleLine($checkonly = false): bool
     {
+        if ($this->object->getSelfAssessmentEditingMode()) {
+            return $this->object->isSingleline();
+        }
+
         if ($checkonly) {
             return $this->request->int('types') === 0;
         }
