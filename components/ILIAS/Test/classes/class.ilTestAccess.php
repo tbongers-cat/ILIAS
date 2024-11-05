@@ -175,8 +175,12 @@ class ilTestAccess
 
     public function isParticipantAllowed(int $obj_id, int $user_id): ParticipantAccess
     {
-        $access_settings = $this->main_settings_repository->getForObjFi($obj_id)
-            ->getAccessSettings();
+        try {
+            $access_settings = $this->main_settings_repository->getForObjFi($obj_id)
+                ->getAccessSettings();
+        } catch (\Exception $e) {
+            return ParticipantAccess::BROKEN_TEST;
+        }
 
         $participant = $this->participant_repository->getParticipantByUserId(
             ilObjTest::_getTestIDFromObjectID(

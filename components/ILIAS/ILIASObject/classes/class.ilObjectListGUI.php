@@ -171,6 +171,7 @@ class ilObjectListGUI
     protected string $title_link = '';
     protected bool $title_link_disabled = false;
     protected bool $lp_cmd_enabled = false;
+    protected bool $lp_settings_cmd_enabled = true;
     protected array $current_actions = [];
     protected ?ilPathGUI $path_gui = null;
     protected array $default_command_params = [];
@@ -476,6 +477,11 @@ class ilObjectListGUI
     protected function enableLearningProgress(bool $enabled): void
     {
         $this->lp_cmd_enabled = $enabled;
+    }
+
+    protected function enableLPSettingsCommand(bool $enabled): void
+    {
+        $this->lp_settings_cmd_enabled = $enabled;
     }
 
     /**
@@ -3321,7 +3327,8 @@ class ilObjectListGUI
      */
     private function insertLPSettingsCommand(): void
     {
-        if (!ilObjUserTracking::_enabledLearningProgress()
+        if (!$this->lp_settings_cmd_enabled
+            || !ilObjUserTracking::_enabledLearningProgress()
             || ilObjectLP::getTypeClass($this->type) === ''
             || ! $this->checkCommandAccess('edit_learning_progress', '', $this->ref_id, $this->type)
         ) {

@@ -28,6 +28,7 @@ enum ParticipantAccess: string
     case NOT_INVITED = 'tst_user_not_invited';
     case INDIVIDUAL_CLIENT_IP_MISMATCH = 'individual_client_ip_mismatch';
     case TEST_LEVEL_CLIENT_IP_MISMATCH = 'test_level_client_ip_mismatch';
+    case BROKEN_TEST = 'object_is_broken';
 
     public function getAccessForbiddenMessage(Language $lng): string
     {
@@ -35,6 +36,7 @@ enum ParticipantAccess: string
             self::NOT_INVITED => $lng->txt('tst_user_not_invited'),
             self::INDIVIDUAL_CLIENT_IP_MISMATCH,
             self::TEST_LEVEL_CLIENT_IP_MISMATCH => $lng->txt('user_ip_outside_range'),
+            self::BROKEN_TEST => $lng->txt('broken_test'),
             default => ''
         };
     }

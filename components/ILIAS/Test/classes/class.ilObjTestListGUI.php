@@ -69,7 +69,19 @@ class ilObjTestListGUI extends ilObjectListGUI
                 $this->enableInfoScreen(false);
             }
         } catch (Exception $e) {
-
+            $this->disableTitleLink(true);
+            $this->enableInfoScreen(false);
+            $this->enableLearningProgress(false);
+            $this->enableLPSettingsCommand(false);
+            $this->enableTimings(false);
+            $this->enableLink(false);
+            $this->enableCut(false);
+            $this->enableCopy(false);
+            $this->enableComments(false);
+            $this->enableNotes(false);
+            $this->enableTags(false);
+            $this->enableSubscribe(false);
+            $this->enableMultiDownload(false);
         }
         $this->test_access = new ilTestAccess($ref_id);
         parent::initItem($ref_id, $obj_id, $type, $title, $description);
@@ -123,6 +135,10 @@ class ilObjTestListGUI extends ilObjectListGUI
 
     public function getCommands(): array
     {
+        if ($this->test_access->isParticipantAllowed($this->obj_id, $this->user->getId())
+            === ParticipantAccess::BROKEN_TEST) {
+            return [];
+        }
         $commands = parent::getCommands();
         if ($this->access->checkAccess('read', '', $this->ref_id)) {
             $this->insertCommand($this->getCommandLink('testScreen'), $this->lng->txt('tst_start_test'));
