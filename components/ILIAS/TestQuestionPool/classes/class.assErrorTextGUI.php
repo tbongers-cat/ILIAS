@@ -217,6 +217,7 @@ class assErrorTextGUI extends assQuestionGUI implements ilGuiQuestionScoringAdju
     */
     public function analyze(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $this->saveTaxonomyAssignments();
         $this->object->setErrorsFromParsedErrorText();

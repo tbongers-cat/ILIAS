@@ -140,23 +140,35 @@ class assMultipleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScorin
         $form->getItemByPostVar('question')->setInitialRteWidth('100');
     }
 
-    /**
-     * Upload an image
-     */
     public function uploadchoice(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $this->editQuestion();
     }
 
-    /**
-     * Remove an image
-     */
     public function removeimagechoice(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $position = key($this->request->raw('cmd')['removeimagechoice']);
         $this->object->removeAnswerImage($position);
+        $this->editQuestion();
+    }
+
+    public function addchoice(): void
+    {
+        $this->writePostData(true);
+        $position = key($this->request->raw('cmd')['addchoice']);
+        $this->object->addAnswer("", 0, $position + 1);
+        $this->editQuestion();
+    }
+
+    public function removechoice(): void
+    {
+        $this->writePostData(true);
+        $position = key($this->request->raw('cmd')['removechoice']);
+        $this->object->deleteAnswer($position);
         $this->editQuestion();
     }
 

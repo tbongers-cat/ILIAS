@@ -307,7 +307,7 @@ abstract class assQuestionGUI
         return $ha->getHeaderAction($this->ui->mainTemplate());
     }
 
-    public function geCommentsPanelHTML(): string
+    public function getCommentsPanelHTML(): string
     {
         $comment_gui = new ilCommentGUI($this->object->getObjId(), $this->object->getId(), 'quest');
         return $comment_gui->getListHTML();
@@ -691,6 +691,7 @@ abstract class assQuestionGUI
     public function saveReturn(): void
     {
         $old_id = $this->request->getQuestionId();
+        $this->setAdditionalContentEditingModeFromPost();
         $result = $this->writePostData();
         if ($result == 0) {
             $this->object->getCurrentUser()->setPref("tst_lastquestiontype", $this->object->getQuestionType());
@@ -712,6 +713,7 @@ abstract class assQuestionGUI
 
     public function saveQuestion(): bool
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $result = $this->writePostData();
 
         if ($result !== 0) {
@@ -737,12 +739,13 @@ abstract class assQuestionGUI
         return true;
     }
 
-    public function apply(): void
+    public function setAdditionalContentEditingModeFromPost(): void
     {
-        $this->writePostData();
-        $this->object->saveToDb();
-        $this->ctrl->setParameter($this, 'q_id', $this->object->getId());
-        $this->editQuestion();
+        $additional_content_editing_mode = $this->request->retrieveStringValueFromPost('additional_content_editing_mode');
+        if ($additional_content_editing_mode !== null
+            && in_array($additional_content_editing_mode, $this->object->getValidAdditionalContentEditingModes())) {
+            $this->object->setAdditionalContentEditingMode($additional_content_editing_mode);
+        }
     }
 
     protected function setTestSpecificProperties(): void
@@ -840,8 +843,7 @@ abstract class assQuestionGUI
 
     public function addBasicQuestionFormProperties(ilPropertyFormGUI $form): void
     {
-        // title
-        $title = new ilTextInputGUI($this->lng->txt("title"), "title");
+        $title = new ilTextInputGUI($this->lng->txt('title'), 'title');
         $title->setMaxLength(100);
         $title->setValue($this->object->getTitle());
         $title->setRequired(true);
@@ -849,20 +851,20 @@ abstract class assQuestionGUI
 
         if (!$this->object->getSelfAssessmentEditingMode()) {
             // author
-            $author = new ilTextInputGUI($this->lng->txt("author"), "author");
+            $author = new ilTextInputGUI($this->lng->txt('author'), 'author');
             $author->setValue($this->object->getAuthor());
             $author->setMaxLength(512);
             $author->setRequired(true);
             $form->addItem($author);
 
             // description
-            $description = new ilTextInputGUI($this->lng->txt("description"), "comment");
+            $description = new ilTextInputGUI($this->lng->txt('description'), 'comment');
             $description->setValue($this->object->getComment());
             $description->setRequired(false);
             $form->addItem($description);
         } else {
             // author as hidden field
-            $hi = new ilHiddenInputGUI("author");
+            $hi = new ilHiddenInputGUI('author');
             $author = ilLegacyFormElementsUtil::prepareFormOutput($this->object->getAuthor());
             if (trim($author) == "") {
                 $author = "-";
@@ -878,7 +880,7 @@ abstract class assQuestionGUI
         $form->addItem($lifecycle);
 
         // questiontext
-        $question = new ilTextAreaInputGUI($this->lng->txt("question"), "question");
+        $question = new ilTextAreaInputGUI($this->lng->txt('question'), 'question');
         $question->setValue($this->object->getQuestion());
         $question->setRequired(true);
         $question->setRows(10);
@@ -887,13 +889,14 @@ abstract class assQuestionGUI
         if (!$this->object->getSelfAssessmentEditingMode()) {
             if ($this->object->getAdditionalContentEditingMode() !== assQuestion::ADDITIONAL_CONTENT_EDITING_MODE_IPE) {
                 $question->setUseRte(true);
-                $question->setRteTags(ilObjAdvancedEditing::_getUsedHTMLTags("assessment"));
-                $question->setRTESupport($this->object->getId(), "qpl", "assessment");
+                $question->setRteTags(ilObjAdvancedEditing::_getUsedHTMLTags('assessment'));
+                $question->setRTESupport($this->object->getId(), 'qpl', 'assessment');
             }
         } else {
             $question->setRteTags(ilAssSelfAssessmentQuestionFormatter::getSelfAssessmentTags());
             $question->setUseTagsForRteOnly(false);
         }
+        $form->addItem($question);
 
         $question_type = new ilHiddenInputGUI('question_type');
         $question_type->setValue((string) $this->getQuestionType());
@@ -917,7 +920,10 @@ abstract class assQuestionGUI
             $form->addItem($move_after_question_id);
         }
 
-        $form->addItem($question);
+        $additional_content_editing_mode = new ilHiddenInputGUI('additional_content_editing_mode');
+        $additional_content_editing_mode->setValue($this->object->getAdditionalContentEditingMode());
+        $form->addItem($additional_content_editing_mode);
+
         $this->addNumberOfTriesToFormIfNecessary($form);
     }
 

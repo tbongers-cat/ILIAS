@@ -21,7 +21,6 @@ declare(strict_types=1);
 use ILIAS\TestQuestionPool\Questions\QuestionLMExportable;
 use ILIAS\TestQuestionPool\Questions\QuestionAutosaveable;
 use ILIAS\TestQuestionPool\ManipulateImagesInChoiceQuestionsTrait;
-
 use ILIAS\Test\Logging\AdditionalInformationGenerator;
 
 /**
@@ -47,7 +46,7 @@ class assMultipleChoice extends assQuestion implements ilObjQuestionScoringAdjus
     public const OUTPUT_RANDOM = 1;
 
     public array $answers = [];
-    public bool $is_singleline = false;
+    public bool $is_singleline = true;
     public int $feedback_setting = 0;
     protected ?int $selection_limit = null;
 
