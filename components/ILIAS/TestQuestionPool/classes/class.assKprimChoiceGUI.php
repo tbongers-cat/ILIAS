@@ -255,8 +255,6 @@ class assKprimChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringAd
 
         if (!$this->object->getSelfAssessmentEditingMode()) {
             $this->object->setAnswerType($form->getItemByPostVar('answer_type')->getValue());
-        } else {
-            $this->object->setAnswerType(assKprimChoice::ANSWER_TYPE_MULTI_LINE);
         }
 
         if (!$this->object->getSelfAssessmentEditingMode() && $this->object->isSingleLineAnswerType($old_answer_type)) {
