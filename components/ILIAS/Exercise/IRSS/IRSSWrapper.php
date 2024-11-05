@@ -33,6 +33,7 @@ use ILIAS\Filesystem\Stream\Stream;
 use ILIAS\Filesystem\Util\Archive\Archives;
 use ILIAS\Filesystem\Util\Archive\Unzip;
 use ILIAS\Filesystem\Stream\ZIPStream;
+use ILIAS\ResourceStorage\Resource\StorableResource;
 
 class IRSSWrapper
 {
@@ -286,6 +287,15 @@ class IRSSWrapper
             return $stream->getMetadata('uri') ?? '';
         }
         return "";
+    }
+
+    public function getResource(string $rid): ?StorableResource
+    {
+        $id = $this->getResourceIdForIdString($rid);
+        if ($id) {
+            return $this->irss->manage()->getResource($id);
+        }
+        return null;
     }
 
     public function getCollectionResourcesInfo(

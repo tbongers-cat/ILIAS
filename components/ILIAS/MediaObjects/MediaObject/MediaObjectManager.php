@@ -25,6 +25,7 @@ use ILIAS\Filesystem\Util\Convert\Images;
 use ILIAS\Filesystem\Util\Convert\ImageOutputOptions;
 use ILIAS\Filesystem\Stream\Stream;
 use _PHPStan_9815bbba4\Nette\Neon\Exception;
+use ILIAS\ResourceStorage\Resource\StorableResource;
 
 class MediaObjectManager
 {
@@ -67,6 +68,12 @@ class MediaObjectManager
     public function getLocationSrc(int $mob_id, string $location): string
     {
         return $this->repo->getLocationSrc($mob_id, $location);
+    }
+
+    public function getContainerResource(
+        int $mob_id
+    ): ?StorableResource {
+        return $this->repo->getContainerResource($mob_id);
     }
 
     public function generatePreview(

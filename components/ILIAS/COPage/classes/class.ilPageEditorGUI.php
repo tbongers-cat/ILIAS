@@ -213,7 +213,7 @@ class ilPageEditorGUI
 
         // Step CS (strip base command)
         $com = null;
-        if ($cmdClass != "ilfilesystemgui") {
+        if ($cmdClass != "ilcontainerresourcegui") {
             $com = explode("_", $cmd);
             $cmd = $com[0];
         }
@@ -223,7 +223,6 @@ class ilPageEditorGUI
         // Step NC (determine next class)
         $next_class = $this->ctrl->getNextClass($this);
         $this->log->debug("step NC: next class: " . $next_class);
-
 
         // Step PH (placeholder handling, placeholders from preview mode come without hier_id)
         if ($next_class == "ilpcplaceholdergui" && $hier_id == "" && $this->requested_pl_pc_id != "") {
@@ -258,7 +257,7 @@ class ilPageEditorGUI
                 $cmd != "delete" && $cmd != "paste" &&
                 $cmd != "cancelDeleteSelected" && $cmd != "confirmedDeleteSelected" &&
                 $cmd != "copy" && $cmd != "cut" &&
-                ($cmd != "displayPage" || $this->request->getString("editImagemapForward_x") != "") &&
+                ($cmd != "displayPage" || $this->request->getString("editImagemapForward_x") != "" || $cmdClass == "ilcontainerresourcegui") &&
                 $cmd != "activate" && $cmd != "characteristic" &&
                 $cmd != "assignCharacteristic" &&
                 $cmdClass != "ilrepositoryselector2inputgui" &&
@@ -299,7 +298,6 @@ class ilPageEditorGUI
 
         $this->cont_obj = $cont_obj;
 
-
         $this->ctrl->setParameter($this, "hier_id", $hier_id);
         $this->ctrl->setParameter($this, "pc_id", $pc_id);
         if ($next_class == "") {
@@ -313,12 +311,11 @@ class ilPageEditorGUI
 
         // ... do not do this while imagemap editing is ongoing
         // Step IM (handle image map editing)
-        if ($cmd == "displayPage" &&
+        if ($cmd == "displayPage" && $next_class !== "ilpcmediaobjectgui" &&
             $this->request->getString("editImagemapForward_x") == ""
             && $this->request->getString("imagemap_x") == "") {
             $next_class = "";
         }
-
 
         switch ($next_class) {
             case "ilinternallinkgui":
