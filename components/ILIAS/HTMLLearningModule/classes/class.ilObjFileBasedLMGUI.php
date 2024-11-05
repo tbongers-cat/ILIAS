@@ -25,7 +25,7 @@ use ILIAS\components\ResourceStorage\Container\View\ActionBuilder;
 /**
  * User Interface class for file based learning modules (HTML)
  * @author       Alexander Killing <killing@leifos.de>
- * @ilCtrl_Calls ilObjFileBasedLMGUI: ilFileSystemGUI, ilObjectMetaDataGUI, ilPermissionGUI, ilLearningProgressGUI, ilInfoScreenGUI
+ * @ilCtrl_Calls ilObjFileBasedLMGUI: ilObjectMetaDataGUI, ilPermissionGUI, ilLearningProgressGUI, ilInfoScreenGUI
  * @ilCtrl_Calls ilObjFileBasedLMGUI: ilCommonActionDispatcherGUI
  * @ilCtrl_Calls ilObjFileBasedLMGUI: ilExportGUI
  * @ilCtrl_Calls ilObjFileBasedLMGUI: ilContainerResourceGUI
@@ -139,10 +139,6 @@ class ilObjFileBasedLMGUI extends ilObjectGUI
                 $this->tabs->activateTab('id_meta_data');
                 $md_gui = new ilObjectMetaDataGUI($this->object);
                 $this->ctrl->forwardCommand($md_gui);
-                break;
-
-            case "ilfilesystemgui":
-                throw new ilException("ilfilesystemgui is not supported anymore");
                 break;
 
             case "ilinfoscreengui":
@@ -295,8 +291,11 @@ class ilObjFileBasedLMGUI extends ilObjectGUI
     {
         // If we already have a RID, we can redirect to Container GUI
         // otherwise we display an message which informs the user that the resource is not yet available
-
-        // $ilCtrl->redirectByClass("ilfilesystemgui", "listFiles"); // FSX TODO
+        if ($this->object->getRID() != "") {
+            $this->ctrl->redirectByClass(ilContainerResourceGUI::class);
+        } else {
+            $this->ctrl->redirectByClass(static::class, "properties");
+        }
     }
 
     public function saveProperties(): void

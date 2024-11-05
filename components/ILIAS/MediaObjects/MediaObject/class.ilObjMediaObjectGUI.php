@@ -18,15 +18,18 @@
 
 use ILIAS\MediaObjects\SubTitles\SubtitlesGUIRequest;
 use ILIAS\MediaObjects\Metadata\MetadataManager;
+use ILIAS\components\ResourceStorage\Container\View\Configuration;
+use ILIAS\components\ResourceStorage\Container\View\Mode;
 
 /**
  * Editing User Interface for MediaObjects within LMs (see ILIAS DTD)
  *
  * @author Alexander Killing <killing@leifos.de>
- * @ilCtrl_Calls ilObjMediaObjectGUI: ilObjectMetaDataGUI, ilImageMapEditorGUI, ilFileSystemGUI
+ * @ilCtrl_Calls ilObjMediaObjectGUI: ilObjectMetaDataGUI, ilImageMapEditorGUI, ilContainerResourceGUI
  */
 class ilObjMediaObjectGUI extends ilObjectGUI
 {
+    protected \ILIAS\MediaObjects\MediaObjectManager $media_manager;
     protected \ILIAS\MediaObjects\Video\GUIService $video_gui;
     protected ilFileServicesSettings $file_service_settings;
     protected SubtitlesGUIRequest $sub_title_request;
@@ -69,10 +72,10 @@ class ilObjMediaObjectGUI extends ilObjectGUI
         $this->user = $DIC->user();
         $lng = $DIC->language();
         $ilCtrl = $DIC->ctrl();
-        $this->media_type = $DIC->mediaObjects()
-            ->internal()
-            ->domain()
-            ->mediaType();
+        $domain = $DIC->mediaObjects()
+                      ->internal()
+                      ->domain();
+        $this->media_type = $domain->mediaType();
 
         $this->ctrl = $ilCtrl;
         parent::__construct($a_data, $a_id, $a_call_by_reference, $a_prepare_output);
@@ -90,6 +93,7 @@ class ilObjMediaObjectGUI extends ilObjectGUI
         $this->file_service_settings = $DIC->fileServiceSettings();
         $this->video_gui = $DIC->mediaObjects()->internal()->gui()->video();
         $this->md = $DIC->mediaObjects()->internal()->domain()->metadata();
+        $this->media_manager = $domain->mediaObject();
     }
 
     /**
@@ -222,30 +226,27 @@ class ilObjMediaObjectGUI extends ilObjectGUI
                 $this->checkFixSize();
                 break;
 
-            case "ilfilesystemgui":
-                $fs_gui = new ilFileSystemGUI(ilFileUtils::getWebspaceDir() . "/mobs/mm_" . $this->object->getId());
-                $fs_gui->setAllowedSuffixes(iterator_to_array($this->media_type->getAllowedSuffixes()));
-                //$fs_gui->setForbiddenSuffixes(ilObjMediaObject::getForbiddenFileTypes());
-                $fs_gui->activateLabels(true, $this->lng->txt("cont_purpose"));
-                $fs_gui->setTableId("mobfs" . $this->object->getId());
-                $fs_gui->labelFile(
-                    $this->object->getMediaItem("Standard")->getLocation(),
-                    $this->lng->txt("cont_std_view")
+            case strtolower(ilContainerResourceGUI::class):
+                $res = $this->media_manager->getContainerResource($this->object->getId());
+                // Build the view configuration
+                $view_configuration = new Configuration(
+                    $res,
+                    new ilMobStakeholder(),
+                    $this->lng->txt('files'),
+                    Mode::DATA_TABLE,
+                    250,
+                    true,
+                    true
                 );
-                if ($this->object->hasFullscreenItem()) {
-                    $fs_gui->labelFile(
-                        $this->object->getMediaItem("Fullscreen")->getLocation(),
-                        $this->lng->txt("cont_fullscreen")
-                    );
-                }
-                $fs_gui->addCommand($this, "assignStandardObject", $this->lng->txt("cont_assign_std"));
-                $fs_gui->addCommand($this, "assignFullscreenObject", $this->lng->txt("cont_assign_full"));
-                ilObjMediaObject::renameExecutables(ilObjMediaObject::_getDirectory($this->object->getId()));	// see #20187
-                $ret = $this->ctrl->forwardCommand($fs_gui);
-                ilObjMediaObject::renameExecutables(ilObjMediaObject::_getDirectory($this->object->getId()));	// see #20187
-                ilMediaSvgSanitizer::sanitizeDir(ilObjMediaObject::_getDirectory($this->object->getId()));	// see #20339
-                break;
 
+                // build the collection GUI
+                $container_gui = new ilContainerResourceGUI(
+                    $view_configuration
+                );
+
+                // forward the command
+                $this->ctrl->forwardCommand($container_gui);
+                break;
 
             default:
                 $cmd .= "Object";
@@ -1229,7 +1230,7 @@ class ilObjMediaObjectGUI extends ilObjectGUI
         $std_item->setFormat($format);
         $this->object->update();
         //		$this->ctrl->saveParameter($this, "cdir");
-        $this->ctrl->redirectByClass("ilfilesystemgui", "listFiles");
+        $this->ctrl->redirectByClass(ilContainerResourceGUI::class, "listFiles");
     }
 
 
@@ -1273,7 +1274,7 @@ class ilObjMediaObjectGUI extends ilObjectGUI
         }
         $this->object->update();
         //		$this->ctrl->saveParameter($this, "cdir");
-        $this->ctrl->redirectByClass("ilfilesystemgui", "listFiles");
+        $this->ctrl->redirectByClass(ilContainerResourceGUI::class, "listFiles");
     }
 
 
@@ -1528,11 +1529,11 @@ class ilObjMediaObjectGUI extends ilObjectGUI
                 $this->tabs_gui->addTarget(
                     "cont_files",
                     $this->ctrl->getLinkTargetByClass(
-                        array("ilobjmediaobjectgui", "ilfilesystemgui"),
-                        "listFiles"
+                        array("ilobjmediaobjectgui", ilContainerResourceGUI::class),
+                        ""
                     ),
                     "",
-                    "ilfilesystemgui"
+                    "ilContainerResourceGUI"
                 );
             }
 
