@@ -57,13 +57,6 @@ class ilObjectSetupAgent extends NullAgent
         );
     }
 
-    public function getMigrations(): array
-    {
-        return [
-            new ilObjectTileImageMigration()
-        ];
-    }
-
     public function getBuildObjective(): Objective
     {
         return new ilObjectTypeSpecificPropertiesArtifactObjective();
