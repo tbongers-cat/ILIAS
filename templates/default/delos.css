@@ -6720,6 +6720,7 @@ code {
   background-color: white;
   font-size: 0.875rem;
   color: #161616;
+  border-top: 1px solid #dddddd;
 }
 .c-maincontrols__footer a, .c-maincontrols__footer .btn-link {
   color: #4c6586;
@@ -6736,7 +6737,7 @@ code {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 6px;
-  border-top: 1px solid #dddddd;
+  padding: 6px 0;
 }
 .c-maincontrols__footer-grid__item {
   height: auto;
@@ -6767,7 +6768,7 @@ code {
     grid-template-columns: repeat(1, 1fr);
   }
   .c-maincontrols__footer ul li {
-    padding: 6px 0;
+    padding: 6px 0 0 0;
   }
 }
 
