@@ -521,16 +521,16 @@ class ilBookingObjectGUI
 
                 $file = $form->getItemByPostVar("file");
                 if ($_FILES["file"]["tmp_name"]) {
-                    $obj->uploadFile($_FILES["file"]);
+                    $this->objects_manager->importObjectInfoFromLegacyUpload($obj->getId(), $_FILES["file"]);
                 } elseif ($file !== null && $file->getDeletionFlag()) {
-                    $obj->deleteFile();
+                    $this->objects_manager->deleteObjectInfo($obj->getId());
                 }
 
                 $pfile = $form->getItemByPostVar("post_file");
                 if ($_FILES["post_file"]["tmp_name"]) {
-                    $obj->uploadPostFile($_FILES["post_file"]);
+                    $this->objects_manager->importBookingInfoFromLegacyUpload($obj->getId(), $_FILES["post_file"]);
                 } elseif ($pfile !== null && $pfile->getDeletionFlag()) {
-                    $obj->deletePostFile();
+                    $this->objects_manager->deleteBookingInfo($obj->getId());
                 }
 
                 if ($this->hasPoolSchedule()) {
@@ -544,7 +544,7 @@ class ilBookingObjectGUI
                 }
 
                 $this->tpl->setOnScreenMessage('success', $lng->txt("book_object_updated"), true);
-                $ilCtrl->redirect($this, "render");
+                $ilCtrl->redirect($this, "edit");
             }
         }
 
