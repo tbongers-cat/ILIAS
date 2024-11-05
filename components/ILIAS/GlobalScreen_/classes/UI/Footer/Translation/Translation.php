@@ -16,29 +16,14 @@
  *
  *********************************************************************/
 
-namespace ILIAS\GlobalScreen\UI\Footer\Groups;
+namespace ILIAS\GlobalScreen\UI\Footer\Translation;
 
-use ILIAS\GlobalScreen\UI\Footer\Translation\TranslatableItem;
-
-interface Group extends TranslatableItem
+interface Translation
 {
     public function getId(): string;
 
-    public function withId(string $id): self;
+    public function getLanguageCode(): string;
 
-    public function getTitle(): string;
+    public function getTranslation(): string;
 
-    public function withTitle(string $title): self;
-
-    public function withActive(bool $active): self;
-
-    public function isActive(): bool;
-
-    public function withPosition(int $position): self;
-
-    public function getPosition(): int;
-
-    public function isCore(): bool;
-
-    public function getItems(): int;
 }

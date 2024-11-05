@@ -29,7 +29,6 @@ use ILIAS\GlobalScreen\Scope\MainMenu\Collector\Renderer\Hasher;
 use ILIAS\Data\URI;
 use ILIAS\Filesystem\Stream\Streams;
 use ILIAS\UI\Component\Input\Container\Form\Form;
-use ILIAS\UI\Component\Modal\InterruptiveItem\InterruptiveItem;
 use ILIAS\UI\Implementation\Component\Modal\InterruptiveItem\KeyValue;
 
 final class ilObjFooterUIHandling
@@ -41,6 +40,7 @@ final class ilObjFooterUIHandling
     private ilGlobalTemplateInterface $main_tpl;
     private Renderer $ui_renderer;
     private Factory $ui_factory;
+
 
     public function __construct(
         private UIServices $ui,
@@ -204,6 +204,11 @@ final class ilObjFooterUIHandling
             return $uri->withParameter('cmd', $cmd);
         }
         return $uri;
+    }
+    public function buildURI(string $from_path): URI
+    {
+        $request = $this->http->request()->getUri();
+        return new URI($request->getScheme() . '://' . $request->getHost() . '/' . ltrim($from_path, '/'));
     }
 
     public function sendMessageAndRedirect(

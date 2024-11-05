@@ -30,6 +30,7 @@ use ILIAS\UI\Component\Table\OrderingBinding;
 use ILIAS\UI\Component\Table\OrderingRowBuilder;
 use ILIAS\GlobalScreen\UI\Footer\Groups\Group;
 use ILIAS\GlobalScreen_\UI\UIHelper;
+use ILIAS\GlobalScreen\UI\Footer\Translation\TranslationsRepository;
 
 class EntriesTable implements OrderingBinding
 {
@@ -46,6 +47,7 @@ class EntriesTable implements OrderingBinding
     public function __construct(
         private readonly Group $group,
         private readonly EntriesRepository $repository,
+        private readonly TranslationsRepository $translations_repository,
         private readonly Translator $translator
     ) {
         global $DIC;
@@ -59,10 +61,11 @@ class EntriesTable implements OrderingBinding
         $nok = $this->nok($this->ui_factory);
 
         foreach ($this->repository->allForParent($this->group->getId()) as $entry) {
+            $title = $this->translations_repository->get($entry)->getDefault()?->getTranslation() ?? $entry->getTitle();
             $row = $row_builder->buildOrderingRow(
                 $this->hash($entry->getId()),
                 [
-                    self::COLUMN_TITLE => $entry->getTitle(),
+                    self::COLUMN_TITLE => $title,
                     self::COLUMN_ACTIVE => $entry->isActive() ? $ok : $nok,
                 ]
             );
@@ -70,6 +73,7 @@ class EntriesTable implements OrderingBinding
             if ($entry->isCore()) {
                 $row = $row->withDisabledAction('delete')
                            ->withDisabledAction('edit')
+                           ->withDisabledAction('translate')
                            ->withDisabledAction('move');
             }
 
@@ -77,9 +81,11 @@ class EntriesTable implements OrderingBinding
         }
     }
 
-    public function get(URI $target): Ordering
-    {
-        $uri_builder = $this->initURIBuilder($target);
+    public function get(
+        URI $here_uri,
+        URI $translations_uri
+    ): Ordering {
+        $uri_builder = $this->initURIBuilder($here_uri);
 
         return $this->ui_factory
             ->table()
@@ -94,40 +100,45 @@ class EntriesTable implements OrderingBinding
                     )
                 ],
                 $this,
-                $target
+                $here_uri
             )
             ->withRequest($this->request)
             ->withActions(
                 [
                     'edit' => $this->ui_factory->table()->action()->single(
                         $this->translator->translate('edit', 'entry'),
-                        $uri_builder->withURI($target->withParameter('cmd', 'edit')),
+                        $uri_builder->withURI($here_uri->withParameter('cmd', 'edit')),
                         $this->id_token
                     )->withAsync(true),
 
                     'toggle_activation' => $this->ui_factory->table()->action()->standard(
                         $this->translator->translate('toggle_activation', 'entry'),
-                        $uri_builder->withURI($target->withParameter('cmd', 'toggleActivation')),
+                        $uri_builder->withURI($here_uri->withParameter('cmd', 'toggleActivation')),
                         $this->id_token
                     )->withAsync(false),
 
                     'delete' => $this->ui_factory->table()->action()->standard(
                         $this->translator->translate('delete', 'entry'),
-                        $uri_builder->withURI($target->withParameter('cmd', 'confirmDelete')),
+                        $uri_builder->withURI($here_uri->withParameter('cmd', 'confirmDelete')),
                         $this->id_token
                     )->withAsync(true),
 
                     'move' => $this->ui_factory->table()->action()->standard(
                         $this->translator->translate('move', 'entry'),
-                        $uri_builder->withURI($target->withParameter('cmd', 'selectMove')),
+                        $uri_builder->withURI($here_uri->withParameter('cmd', 'selectMove')),
                         $this->id_token
                     )->withAsync(true),
 
-                    /*'translate' => $this->ui_factory->table()->action()->single(
-                        $this->translator->translate('translate', 'entry'),
-                        $uri_builder->withURI($target->withParameter('cmd', 'translate')),
+                    'translate' => $this->ui_factory->table()->action()->single(
+                        $this->translator->translate('translate', 'group'),
+                        $uri_builder->withURI(
+                            $translations_uri->withParameter('async', 'true')->withParameter(
+                                'cmd',
+                                \ilFooterTranslationGUI::CMD_TRANSLATE_IN_MODAL
+                            )
+                        ),
                         $this->id_token
-                    )->withAsync(false),*/
+                    )->withAsync(true),
                 ]
             );
     }
