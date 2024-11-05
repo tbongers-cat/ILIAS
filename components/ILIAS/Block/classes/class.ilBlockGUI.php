@@ -798,32 +798,35 @@ abstract class ilBlockGUI
                 $this->tpl->parseCurrentBlock();
             }*/
 
+            $parent_type = ilObject::_lookupType($this->requested_ref_id, true);
+            $parent_gui = "ilObj" . $obj_def->getClassName($parent_type) . "GUI";
+
             if ($access->checkAccess("delete", "", $this->getRefId())) {
+                $this->ctrl->setParameterByClass($parent_gui, 'ref_id', $this->requested_ref_id);
+                $this->ctrl->setParameterByClass($parent_gui, 'item_ref_id', $this->getRefId());
+
                 $this->addBlockCommand(
-                    "ilias.php?baseClass=ilRepositoryGUI&ref_id=" . $this->requested_ref_id . "&cmd=delete" .
-                    "&item_ref_id=" . $this->getRefId(),
+                    $this->ctrl->getLinkTargetByClass($parent_gui, 'delete'),
                     $lng->txt("delete")
                 );
 
                 $this->addBlockCommand(
-                    "ilias.php?baseClass=ilRepositoryGUI&ref_id=" . $this->requested_ref_id . "&cmd=link" .
-                    "&item_ref_id=" . $this->getRefId(),
+                    $this->ctrl->getLinkTargetByClass($parent_gui, 'link'),
                     $lng->txt("link")
                 );
 
                 // see ilObjectListGUI::insertCutCommand();
                 $this->addBlockCommand(
-                    "ilias.php?baseClass=ilRepositoryGUI&ref_id=" . $this->requested_ref_id . "&cmd=cut" .
-                    "&item_ref_id=" . $this->getRefId(),
+                    $this->ctrl->getLinkTargetByClass($parent_gui, 'cut'),
                     $lng->txt("move")
                 );
+
+                $this->ctrl->clearParameterByClass($parent_gui, 'ref_id');
+                $this->ctrl->clearParameterByClass($parent_gui, 'item_ref_id');
             }
 
             // #14595 - see ilObjectListGUI::insertCopyCommand()
             if ($access->checkAccess("copy", "", $this->getRefId())) {
-                $parent_type = ilObject::_lookupType($this->requested_ref_id, true);
-                $parent_gui = "ilObj" . $obj_def->getClassName($parent_type) . "GUI";
-
                 $ctrl->setParameterByClass("ilobjectcopygui", "source_id", $this->getRefId());
                 $copy_cmd = $ctrl->getLinkTargetByClass(
                     array("ilrepositorygui", $parent_gui, "ilobjectcopygui"),

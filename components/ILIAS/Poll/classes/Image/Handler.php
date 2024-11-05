@@ -76,6 +76,11 @@ class Handler implements ilPollImageInterface
         $key_original = $this->repository->key()->handler()
             ->withObjectId($original_object_id);
         $element_original = $this->repository->handler()->getElement($key_original);
+
+        if ($element_original === null) {
+            return;
+        }
+
         $rid_original = $element_original->getIRSS()->getResourceIdentification();
         $rid_clone = $this->irss->manage()->clone($rid_original);
         $values_clone = $this->repository->values()->handler()
