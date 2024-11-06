@@ -780,7 +780,6 @@ class assMultipleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScorin
         if ($this->object->getSelfAssessmentEditingMode()) {
             $choices->setSize(40);
         }
-        $choices->setMaxLength(800);
         if ($this->object->getAnswerCount() == 0) {
             $this->object->addAnswer("", 0, 0, 0);
         }

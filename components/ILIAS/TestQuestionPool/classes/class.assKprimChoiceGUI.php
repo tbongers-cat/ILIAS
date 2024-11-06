@@ -290,7 +290,6 @@ class assKprimChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringAd
         $answers = new ilKprimChoiceWizardInputGUI($this->lng->txt('answers'), 'kprimanswers');
         $answers->setInfo($this->lng->txt('kprim_answers_info'));
         $answers->setSize(64);
-        $answers->setMaxLength(1000);
         $answers->setRequired(true);
         $answers->setAllowMove(true);
         $answers->setQuestionObject($this->object);
