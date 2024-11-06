@@ -4709,7 +4709,7 @@ hr.il-divider-with-label {
 }
 .c-form .c-input[data-il-ui-component] input:invalid {
   background-color: rgb(255, 214.54, 214.54);
-  border: 1px solid rgb(255, 214.54, 214.54);
+  border: 1px solid #d00;
 }
 .c-form .c-input__help-byline {
   margin-top: 3px;
@@ -10273,8 +10273,7 @@ div.alert ul > li:before {
   background-color: white;
 }
 .c-table-data__table-wrapper {
-  box-shadow: inset 0 0 1px 1px #dddddd;
-  background-color: #f0f0f0;
+  box-shadow: none;
 }
 
 .c-table-data__cell {
@@ -10802,6 +10801,9 @@ div#agreement {
 .alert-danger {
   color: #161616;
   background-color: rgb(255, 214.54, 214.54);
+}
+.alert-danger hr {
+  border-top-color: rgb(195.5, 0, 0);
   border-color: rgb(255, 214.54, 214.54);
 }
 .alert-danger hr {
