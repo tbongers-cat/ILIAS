@@ -207,8 +207,7 @@ class ilStructureObjectGUI extends ilLMObjectGUI
         $ilTabs->addNonTabbedLink(
             "pres_mode",
             $lng->txt("cont_presentation_view"),
-            ILIAS_HTTP_PATH . "/goto.php?target=st_" . $this->obj->getId(),
-            "_top"
+            ILIAS_HTTP_PATH . "/goto.php?target=st_" . $this->obj->getId()
         );
     }
 

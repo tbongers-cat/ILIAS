@@ -831,8 +831,7 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
         // back to upper context
         $this->tabs_gui->setBackTarget(
             $this->lng->txt("obj_cat"),
-            $this->ctrl->getLinkTarget($this, ""),
-            ilFrameTargetInfo::_getFrame("MainContent")
+            $this->ctrl->getLinkTarget($this, "")
         );
 
         $this->tabs_gui->addTarget(

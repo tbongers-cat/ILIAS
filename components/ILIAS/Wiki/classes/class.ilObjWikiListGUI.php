@@ -42,18 +42,7 @@ class ilObjWikiListGUI extends ilObjectListGUI
         // general commands array
         $this->commands = ilObjWikiAccess::_getCommands();
     }
-
-    public function getCommandFrame(string $cmd): string
-    {
-        switch ($cmd) {
-            default:
-                $frame = ilFrameTargetInfo::_getFrame("MainContent");
-                break;
-        }
-
-        return $frame;
-    }
-
+    
     public function getProperties(): array
     {
         $lng = $this->lng;
