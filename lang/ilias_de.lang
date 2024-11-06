@@ -2800,11 +2800,6 @@ cert#:#cert_sortable_by_title_asc#:#Sortiert nach Titel (A→Z)
 cert#:#cert_sortable_by_title_desc#:#Sortiert nach Titel (Z→A)
 cert#:#certificate_achievement#:#%1$s erhalten.
 cert#:#certificate_achievement_sub_obj#:#Zertifikat für %1$s
-cert#:#certificate_migration_confirm_start#:#Ihre Zertifikate bleiben seit ILIAS 5.4 immer in Ihrer Hand. Auch wenn Kurse, Tests oder Lernmodule gelöscht werden, können Sie weiterhin auf alle erworbenen Zertifikate zugreifen. Um diese neue Funktion zu nutzen, müssen Sie Ihre alten Zertifikate einmalig migrieren.
-cert#:#certificate_migration_confirm_started#:#Die Migration wurde gestartet.
-cert#:#certificate_migration_go#:#Starte Migration
-cert#:#certificate_migration_lastrun_failed#:#Die Migration der Zertifikate ist fehlgeschlagen. Erneut versuchen?
-cert#:#certificate_no_object_desc#:#Keine Beschreibung vorhanden
 cert#:#certificate_no_object_title#:#Kein Titel vorhanden
 cert#:#certificate_same_not_saved#:#Es wurde keine neue Version der Zertifikatsvorlage gespeichert, da die entsprechenden Werte nicht verändert wurden.
 cert#:#error_creating_certificate_pdf#:#Das Zertifikat konnte nicht erstellt werden. Bitte kontaktieren Sie Ihre technische Betreuung und bitten um die Prüfung des Zertifikatsservers.
@@ -2862,12 +2857,7 @@ certificate#:#certificate_ph_mark#:#Erreichte Note
 certificate#:#certificate_ph_marklong#:#Erreichte Note (Offizielle Bezeichnung)
 certificate#:#certificate_ph_markshort#:#Erreichte Note (Kurzbezeichnung)
 certificate#:#certificate_ph_matriculation#:#Matrikelnummer
-certificate#:#certificate_ph_maxpoints#:#Maximal erreichbare Punktezahl
 certificate#:#certificate_ph_no_sco#:#Wenn Materialien zur Bestimmung des Lernfortschritts ausgewählt werden, können Titel und Punktestand auch im Zertifikat angezeigt werden.
-certificate#:#certificate_ph_passed#:#„bestanden“ oder „nicht bestanden“, abhängig vom Testergebnis
-certificate#:#certificate_ph_passed_exercise#:#„bestanden“ oder „nicht bestanden“
-certificate#:#certificate_ph_resultpercent#:#Erreichte Gesamtprozentzahl
-certificate#:#certificate_ph_resultpoints#:#Erreichte Punkte
 certificate#:#certificate_ph_salutation#:#Anrede
 certificate#:#certificate_ph_sco_points_max#:#Platzhalter<br/>für Punkte<br/>maximal
 certificate#:#certificate_ph_sco_points_raw#:#Platzhalter<br/>für Punkte
@@ -2911,12 +2901,6 @@ certificate#:#certificate_var_user_salutation#:#Frau
 certificate#:#certificate_var_user_street#:#Heidestraße 17
 certificate#:#certificate_var_user_title#:#Dr.
 certificate#:#certificate_var_user_zipcode#:#51147
-certificate#:#certificate_visibility#:#Sichtbarkeit###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_always#:#Immer sichtbar###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_introduction#:#Den Teilnehmern wird in der Ergebnisansicht des Tests das Zertifikat zum Herunterladen angeboten.###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_never#:#Nicht sichtbar###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_passed#:#Nur sichtbar, wenn der Teilnehmer oder die Teilnehmerin den Test bestanden hat###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_passed_exercise#:#Nur sichtbar, wenn der Teilnehmer oder die Teilnehmerin die Übung bestanden hat###Suspected obsolescence - should be removed with 10.
 certificate#:#cmix_cert_ph_object_description#:#Beschreibung
 certificate#:#cmix_cert_ph_object_title#:#Titel des xAPI/cmi5-Objekts
 certificate#:#cmix_cert_ph_reached_score#:#Erreichte Punktzahl in Prozent

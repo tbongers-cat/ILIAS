@@ -2801,11 +2801,6 @@ cert#:#cert_sortable_by_title_asc#:#Title Ascending
 cert#:#cert_sortable_by_title_desc#:#Title Descending
 cert#:#certificate_achievement#:#%1$s achieved.
 cert#:#certificate_achievement_sub_obj#:#Certificate for %1$s
-cert#:#certificate_migration_confirm_start#:#Since ILIAS 5.4, certificates in ILIAS are persistent. Even if courses, tests or learning modules are deleted, you are still able to access any certificate you might have earned by them. In order to use this new functionality, you need to migrate your old certificates once.
-cert#:#certificate_migration_confirm_started#:#The migration was started.
-cert#:#certificate_migration_go#:#Start Migration
-cert#:#certificate_migration_lastrun_failed#:#The migration of the certificates failed. Try again?
-cert#:#certificate_no_object_desc#:#No object description available
 cert#:#certificate_no_object_title#:#No object title available
 cert#:#certificate_same_not_saved#:#No new version of certificate template was saved, because the values didn't change.
 cert#:#error_creating_certificate_pdf#:#The certificate could not be created. Please contact the administrator to check the certificate server.
@@ -2863,12 +2858,7 @@ certificate#:#certificate_ph_mark#:#Users mark
 certificate#:#certificate_ph_marklong#:#Users mark (official version)
 certificate#:#certificate_ph_markshort#:#Users mark (short version)
 certificate#:#certificate_ph_matriculation#:#Matriculation number of the user
-certificate#:#certificate_ph_maxpoints#:#Maximum available points
 certificate#:#certificate_ph_no_sco#:#If items are selected to determine the overall learning progress status, titles and points for these items could be displayed in certificate.
-certificate#:#certificate_ph_passed#:#‘passed’ or ‘failed’, depending on the test results
-certificate#:#certificate_ph_passed_exercise#:#‘Passed’ or ‘Failed’
-certificate#:#certificate_ph_resultpercent#:#Reached percentage of the user
-certificate#:#certificate_ph_resultpoints#:#Score of user
 certificate#:#certificate_ph_salutation#:#Salutation
 certificate#:#certificate_ph_sco_points_max#:#placeholder<br/>for points<br/>max
 certificate#:#certificate_ph_sco_points_raw#:#placeholder<br/>for points
@@ -2912,12 +2902,6 @@ certificate#:#certificate_var_user_salutation#:#Mrs.
 certificate#:#certificate_var_user_street#:#100 Main Street
 certificate#:#certificate_var_user_title#:#Dr.
 certificate#:#certificate_var_user_zipcode#:#12345
-certificate#:#certificate_visibility#:#Visibility###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_always#:#Always Visible###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_introduction#:#Participants will be offered to download the certificate from the test results screen.###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_never#:#Not Visible###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_passed#:#Only Visible if a User Passed the Test###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_passed_exercise#:#Only Visible if a User Passed the Exercise###Suspected obsolescence - should be removed with 10.
 certificate#:#cmix_cert_ph_object_description#:#Description
 certificate#:#cmix_cert_ph_object_title#:#Title of the xAPI/cmi5 Object
 certificate#:#cmix_cert_ph_reached_score#:#Reached score as percentage
