@@ -131,8 +131,7 @@ $il-table-presentation-details-viewcontrols-btn-bg: white;
 .c-table-data__table {
     background-color: $il-main-bg;
     &-wrapper {
-        box-shadow: inset 0 0 1px 1px $il-main-border-color;
-        background-color: $il-main-darker-bg;
+        box-shadow: none;
     }
 }
 
