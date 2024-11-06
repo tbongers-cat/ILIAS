@@ -99,13 +99,13 @@ up-to-date for fixes from the main repo.
 Do not froget to re-compile the scss-file after each change. Switch to the delos scss folder and execute:
 
 ```
-sass delos.scss mystyle.css
+./node_modules/sass/sass.js delos.scss mystyle.css
 ```
 
 or
 
 ```
-sass --style=compressed delos.scss mystyle.css
+./node_modules/sass/sass.js --style=compressed delos.scss mystyle.css
 ```
 
 for a minified CSS version.
