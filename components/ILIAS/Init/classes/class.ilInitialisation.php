@@ -1685,7 +1685,7 @@ class ilInitialisation
                 $_GET['offset'] = (int) $_GET['offset'];        // old code
             }
 
-            self::initGlobal("lti", "ilLTIViewGUI", "./components/ILIAS/LTI/classes/class.ilLTIViewGUI.php");
+            self::initGlobal("lti", "ilLTIViewGUI", "./components/ILIAS/LTIProvider/classes/class.ilLTIViewGUI.php");
             $GLOBALS["DIC"]["lti"]->init();
             self::initKioskMode($GLOBALS["DIC"]);
         }
