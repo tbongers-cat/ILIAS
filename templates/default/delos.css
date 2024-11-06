@@ -3602,7 +3602,7 @@ button .minimize, button .close {
 }
 
 .il-toggle-item {
-  display: flex;
+  display: block;
 }
 .il-toggle-item label {
   margin: auto;
