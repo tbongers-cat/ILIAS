@@ -246,7 +246,7 @@ class ilSingleChoiceWizardInputGUI extends ilTextInputGUI
                     }
 
                     if (mb_strlen($answervalue) > $this->getMaxLength()) {
-                        $this->setAlert($lng->txt("msg_input_char_limit_max"));
+                        $this->setAlert($this->lng->txt("msg_input_char_limit_max"));
                         return false;
                     }
                 }
