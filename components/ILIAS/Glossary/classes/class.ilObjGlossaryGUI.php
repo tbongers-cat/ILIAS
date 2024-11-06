@@ -1135,8 +1135,7 @@ class ilObjGlossaryGUI extends ilObjectGUI implements \ILIAS\Taxonomy\Settings\M
         $this->tabs_gui->addNonTabbedLink(
             "presentation_view",
             $this->lng->txt("glo_presentation_view"),
-            "ilias.php?baseClass=ilGlossaryPresentationGUI&amp;ref_id=" . $this->object->getRefId(),
-            "_top"
+            "ilias.php?baseClass=ilGlossaryPresentationGUI&amp;ref_id=" . $this->object->getRefId()
         );
     }
 

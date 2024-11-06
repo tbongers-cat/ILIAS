@@ -1847,8 +1847,7 @@ class ilObjContentObjectGUI extends ilObjectGUI
         $ilTabs->addNonTabbedLink(
             "pres_mode",
             $lng->txt("cont_presentation_view"),
-            "ilias.php?baseClass=ilLMPresentationGUI&ref_id=" . $this->lm->getRefId(),
-            "_top"
+            "ilias.php?baseClass=ilLMPresentationGUI&ref_id=" . $this->lm->getRefId()
         );
     }
 

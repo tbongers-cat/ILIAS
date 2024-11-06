@@ -938,8 +938,7 @@ class ilGlossaryPresentationGUI implements ilCtrlBaseClassInterface
                     $this->tabs_gui->addNonTabbedLink(
                         "editing_view",
                         $lng->txt("glo_editing_view"),
-                        "ilias.php?baseClass=ilGlossaryEditorGUI&amp;ref_id=" . $this->requested_ref_id,
-                        "_top"
+                        "ilias.php?baseClass=ilGlossaryEditorGUI&amp;ref_id=" . $this->requested_ref_id
                     );
                 }
             }

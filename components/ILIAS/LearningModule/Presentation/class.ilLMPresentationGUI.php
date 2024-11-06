@@ -774,7 +774,6 @@ class ilLMPresentationGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInt
             return;
         }
 
-        $buttonTarget = ilFrameTargetInfo::_getFrame("MainContent");
 
         $tpl_menu = new ilTemplate("tpl.lm_sub_menu.html", true, true, "components/ILIAS/LearningModule");
 
@@ -794,7 +793,6 @@ class ilLMPresentationGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInt
                     "&obj_id=" . $page_id . "&to_page=1"
                 );
                 $tpl_menu->setVariable("EDIT_TXT", $this->lng->txt("edit_page"));
-                $tpl_menu->setVariable("EDIT_TARGET", $buttonTarget);
                 $tpl_menu->parseCurrentBlock();
             }
 

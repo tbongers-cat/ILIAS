@@ -963,8 +963,7 @@ class ilPageObjectGUI
                     $this->tabs_gui->addNonTabbedLink(
                         "pres_view",
                         $this->getViewPageText(),
-                        $this->getViewPageLink(),
-                        $this->getViewPageTarget()
+                        $this->getViewPageLink()
                     );
                 }
                 $ret = $this->$cmd();

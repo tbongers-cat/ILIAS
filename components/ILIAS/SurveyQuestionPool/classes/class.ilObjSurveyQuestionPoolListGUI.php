@@ -39,21 +39,6 @@ class ilObjSurveyQuestionPoolListGUI extends ilObjectListGUI
         $this->commands = ilObjSurveyQuestionPoolAccess::_getCommands();
     }
 
-    public function getCommandFrame(string $cmd): string
-    {
-        $frame = "";
-        switch ($cmd) {
-            case "":
-            case "questions":
-                $frame = ilFrameTargetInfo::_getFrame("MainContent");
-                break;
-
-            default:
-        }
-
-        return $frame;
-    }
-
     public function getCommandLink(string $cmd): string
     {
         return "ilias.php?baseClass=ilObjSurveyQuestionPoolGUI&amp;ref_id=" . $this->ref_id . "&amp;cmd=$cmd";

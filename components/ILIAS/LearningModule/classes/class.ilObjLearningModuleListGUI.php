@@ -126,26 +126,6 @@ class ilObjLearningModuleListGUI extends ilObjectListGUI
         return $cmd_link;
     }
 
-    public function getCommandFrame(string $cmd): string
-    {
-        switch ($cmd) {
-            case "view":
-            case "continue":
-            case "properties":
-            case "infoScreen":
-            case "edit":
-            case 'list':
-                $frame = ilFrameTargetInfo::_getFrame("MainContent");
-                break;
-
-            default:
-                $frame = "";
-                break;
-        }
-
-        return $frame;
-    }
-
     public function getProperties(): array
     {
         $lng = $this->lng;

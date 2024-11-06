@@ -35,17 +35,6 @@ class ilObjMediaCastListGUI extends ilObjectListGUI
         $this->commands = ilObjMediaCastAccess::_getCommands();
     }
 
-    public function getCommandFrame(string $cmd): string
-    {
-        switch ($cmd) {
-            default:
-                $frame = ilFrameTargetInfo::_getFrame("MainContent");
-                break;
-        }
-
-        return $frame;
-    }
-
     public function getCommandLink(string $cmd): string
     {
         $this->ctrl->setParameterByClass(ilMediaCastHandlerGUI::class, "ref_id", $this->ref_id);
