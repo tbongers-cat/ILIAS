@@ -10288,6 +10288,10 @@ div.alert ul > li:before {
   }
 }
 
+.c-table-data__selection_none {
+  display: none;
+}
+
 th.c-table-data__cell {
   padding: 0;
 }
