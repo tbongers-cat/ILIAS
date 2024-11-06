@@ -114,7 +114,7 @@ class ilLTIDataConnector extends DataConnector
             $platform->clientId = $row->client_id;
             $platform->deploymentId = $row->deployment_id;
             $platform->rsaKey = $row->public_key;
-            $platform->ltiVersion = LtiVersion::from($row->lti_version);
+            $platform->ltiVersion = isset($row->lti_version) ? LtiVersion::from($row->lti_version) : LtiVersion::V1;
             $platform->signatureMethod = $row->signature_method;
             $platform->consumerName = $row->consumer_name;
             $platform->consumerVersion = $row->consumer_version;

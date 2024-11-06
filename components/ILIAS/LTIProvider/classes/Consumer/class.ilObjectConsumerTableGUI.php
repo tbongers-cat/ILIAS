@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -16,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 /**
  * TableGUI class for LTI consumer listing
@@ -53,7 +54,7 @@ class ilObjectConsumerTableGUI extends ilTable2GUI
         $this->addColumn($DIC->language()->txt("actions"), "");
 
         $this->setFormAction($DIC->ctrl()->getFormAction($a_parent_obj));
-        $this->setRowTemplate("tpl.lti_consumer_list_row.html", "components/ILIAS/LTI");
+        $this->setRowTemplate("tpl.lti_consumer_list_row.html", "components/ILIAS/LTIProvider");
         $this->setDefaultOrderField("title");
 
         $this->getItems();
