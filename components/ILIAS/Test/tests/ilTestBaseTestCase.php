@@ -67,6 +67,7 @@ class ilTestBaseTestCase extends TestCase
         $this->addGlobal_upload();
         $this->addGlobal_ilCtrl();
         $this->addGlobal_ilBench();
+        $this->addGlobal_ilSetting();
 
         $this->defineGlobalConstants();
 
