@@ -4640,6 +4640,9 @@ hr.il-divider-with-label {
   display: none;
 }
 
+.c-form {
+  margin-bottom: 12px;
+}
 .c-form .c-form__header,
 .c-form .c-form__footer {
   display: grid;

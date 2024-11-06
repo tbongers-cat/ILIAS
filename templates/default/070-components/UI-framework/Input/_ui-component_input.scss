@@ -41,6 +41,8 @@
 
 /// general form container styling
 .c-form {
+  margin-bottom: l.$il-margin-xxlarge-vertical;
+  
   .c-form__header,
   .c-form__footer {
     display: grid;
