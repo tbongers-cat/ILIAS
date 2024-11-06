@@ -456,7 +456,7 @@ Division with a slash (e.g. "10px / 2") outside of calc() is deprecated and MUST
 CSS is obtained by using the latest Dart Sass compiler on delos.scss, e.g. like so:
 
 ```
-sass templates/default/delos.scss templates/default/delos.css
+./node_modules/sass/sass.js templates/default/delos.scss templates/default/delos.css
 ```
 
 Note that the output heavily depends on the used sass version. You MUST use the latest release version of Dart Sass: https://github.com/sass/dart-sass/releases
