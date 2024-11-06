@@ -49,18 +49,13 @@ class ilMultipleChoiceWizardInputGUI extends ilSingleChoiceWizardInputGUI
     */
     public function checkInput(): bool
     {
-        global $DIC;
-        $lng = $DIC['lng'];
-
         $post_var = $this->getPostVar();
         if (!$this->post_wrapper->has($post_var)) {
             return false;
         }
 
-        $values = $this->post_wrapper->retrieve($post_var, $this->refinery->custom()->transformation(fn($v) => $v));
-
         $values = ilArrayUtil::stripSlashesRecursive( //TODO: move into transform
-            $values,
+            $this->post_wrapper->retrieve($post_var, $this->refinery->custom()->transformation(fn($v) => $v)),
             false,
             ilObjAdvancedEditing::_getUsedHTMLTagsAsString("assessment")
         );
@@ -72,12 +67,12 @@ class ilMultipleChoiceWizardInputGUI extends ilSingleChoiceWizardInputGUI
             if (is_array($foundvalues['answer'])) {
                 foreach ($foundvalues['answer'] as $aidx => $answervalue) {
                     if (((strlen($answervalue)) == 0) && (!isset($foundvalues['imagename']) || !isset($foundvalues['imagename'][$aidx]) || strlen($foundvalues['imagename'][$aidx]) == 0)) {
-                        $this->setAlert($lng->txt("msg_input_is_required"));
+                        $this->setAlert($this->lng->txt("msg_input_is_required"));
                         return false;
                     }
 
-                    if (strlen($answervalue) > $this->getMaxLength()) {
-                        $this->setAlert($lng->txt("msg_input_char_limit_max"));
+                    if (mb_strlen($answervalue) > $this->getMaxLength()) {
+                        $this->setAlert($this->lng->txt("msg_input_char_limit_max"));
                         return false;
                     }
                 }
@@ -90,21 +85,21 @@ class ilMultipleChoiceWizardInputGUI extends ilSingleChoiceWizardInputGUI
                     if ($points > $max) {
                         $max = $points;
                     }
-                    if (((strlen($points)) == 0) || (!is_numeric($points))) {
-                        $this->setAlert($lng->txt("form_msg_numeric_value_required"));
+                    if ($points === '' || !is_numeric($points)) {
+                        $this->setAlert($this->lng->txt("form_msg_numeric_value_required"));
                         return false;
                     }
                 }
                 foreach ($foundvalues['points_unchecked'] as $points) {
                     $points = str_replace(',', '.', $points);
-                    if (((strlen($points)) == 0) || (!is_numeric($points))) {
-                        $this->setAlert($lng->txt("form_msg_numeric_value_required"));
+                    if ($points === '' || !is_numeric($points)) {
+                        $this->setAlert($this->lng->txt("form_msg_numeric_value_required"));
                         return false;
                     }
                 }
             }
             if ($max == 0) {
-                $this->setAlert($lng->txt("enter_enough_positive_points_checked"));
+                $this->setAlert($this->lng->txt("enter_enough_positive_points_checked"));
                 return false;
             }
 
@@ -117,36 +112,36 @@ class ilMultipleChoiceWizardInputGUI extends ilSingleChoiceWizardInputGUI
                                 switch ($error) {
                                     case UPLOAD_ERR_FORM_SIZE:
                                     case UPLOAD_ERR_INI_SIZE:
-                                        $this->setAlert($lng->txt("form_msg_file_size_exceeds"));
+                                        $this->setAlert($this->lng->txt("form_msg_file_size_exceeds"));
                                         return false;
                                         break;
 
                                     case UPLOAD_ERR_PARTIAL:
-                                        $this->setAlert($lng->txt("form_msg_file_partially_uploaded"));
+                                        $this->setAlert($this->lng->txt("form_msg_file_partially_uploaded"));
                                         return false;
                                         break;
 
                                     case UPLOAD_ERR_NO_FILE:
                                         if ($this->getRequired()) {
                                             if (isset($a_value['imagename']) && (!strlen($foundvalues['imagename'][$index])) && (!strlen($foundvalues['answer'][$index]))) {
-                                                $this->setAlert($lng->txt("form_msg_file_no_upload"));
+                                                $this->setAlert($this->lng->txt("form_msg_file_no_upload"));
                                                 return false;
                                             }
                                         }
                                         break;
 
                                     case UPLOAD_ERR_NO_TMP_DIR:
-                                        $this->setAlert($lng->txt("form_msg_file_missing_tmp_dir"));
+                                        $this->setAlert($this->lng->txt("form_msg_file_missing_tmp_dir"));
                                         return false;
                                         break;
 
                                     case UPLOAD_ERR_CANT_WRITE:
-                                        $this->setAlert($lng->txt("form_msg_file_cannot_write_to_disk"));
+                                        $this->setAlert($this->lng->txt("form_msg_file_cannot_write_to_disk"));
                                         return false;
                                         break;
 
                                     case UPLOAD_ERR_EXTENSION:
-                                        $this->setAlert($lng->txt("form_msg_file_upload_stopped_ext"));
+                                        $this->setAlert($this->lng->txt("form_msg_file_upload_stopped_ext"));
                                         return false;
                                         break;
                                 }
@@ -154,7 +149,7 @@ class ilMultipleChoiceWizardInputGUI extends ilSingleChoiceWizardInputGUI
                         }
                     } else {
                         if ($this->getRequired()) {
-                            $this->setAlert($lng->txt("form_msg_file_no_upload"));
+                            $this->setAlert($this->lng->txt("form_msg_file_no_upload"));
                             return false;
                         }
                     }
@@ -170,7 +165,7 @@ class ilMultipleChoiceWizardInputGUI extends ilSingleChoiceWizardInputGUI
                                 // check suffixes
                                 if (strlen($tmpname) && is_array($this->getSuffixes())) {
                                     if (!in_array(strtolower($suffix), $this->getSuffixes())) {
-                                        $this->setAlert($lng->txt("form_msg_file_wrong_file_type"));
+                                        $this->setAlert($this->lng->txt("form_msg_file_wrong_file_type"));
                                         return false;
                                     }
                                 }
@@ -190,7 +185,7 @@ class ilMultipleChoiceWizardInputGUI extends ilSingleChoiceWizardInputGUI
                                 if (strlen($tmpname)) {
                                     $vir = ilVirusScanner::virusHandling($tmpname, $filename);
                                     if ($vir[0] == false) {
-                                        $this->setAlert($lng->txt("form_msg_file_virus_found") . "<br />" . $vir[1]);
+                                        $this->setAlert($this->lng->txt("form_msg_file_virus_found") . "<br />" . $vir[1]);
                                         return false;
                                     }
                                 }
@@ -200,7 +195,7 @@ class ilMultipleChoiceWizardInputGUI extends ilSingleChoiceWizardInputGUI
                 }
             }
         } else {
-            $this->setAlert($lng->txt("msg_input_is_required"));
+            $this->setAlert($this->lng->txt("msg_input_is_required"));
             return false;
         }
 
