@@ -42,7 +42,7 @@ class ilObjWikiListGUI extends ilObjectListGUI
         // general commands array
         $this->commands = ilObjWikiAccess::_getCommands();
     }
-    
+
     public function getProperties(): array
     {
         $lng = $this->lng;
