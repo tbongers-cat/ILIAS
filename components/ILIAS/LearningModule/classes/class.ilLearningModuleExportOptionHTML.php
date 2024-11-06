@@ -174,6 +174,7 @@ class ilLearningModuleExportOptionHTML extends ilBasicExportOption
         $object_id = new ObjectId($context->exportObject()->getId());
         foreach ($files as $lang_dir => $file_names) {
             foreach ($file_names as $file_name) {
+                // alternative withResourceIdentifier
                 $collection_builder = $collection_builder->withSPLFileInfo(
                     new SplFileInfo($lang_dir . DIRECTORY_SEPARATOR . $file_name),
                     $object_id,
