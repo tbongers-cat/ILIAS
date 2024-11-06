@@ -325,16 +325,6 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
         return $ret;
     }
 
-    public function prepareOutput(bool $show_subobjects = true): bool
-    {
-        if (parent::prepareOutput($show_subobjects)) {    // return false in admin mode
-            if ($show_subobjects === true && $this->getCreationMode() === false) {
-                ilMemberViewGUI::showMemberViewSwitch($this->object->getRefId());
-            }
-        }
-        return true;
-    }
-
     protected function setTitleAndDescription(): void
     {
         if (ilContainer::_lookupContainerSetting($this->object->getId(), "hide_header_icon_and_title")) {
@@ -433,6 +423,9 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
 
             if (!$this->edit_order) {
                 $this->showPossibleSubObjects();
+                if (!$this->isActiveAdministrationPanel() && $this->getCreationMode() === false) {
+                    ilMemberViewGUI::showMemberViewSwitch($this->object->getRefId());
+                }
             }
             if ($this->isActiveAdministrationPanel()) {
                 $this->addImportButtonToToolbar();
