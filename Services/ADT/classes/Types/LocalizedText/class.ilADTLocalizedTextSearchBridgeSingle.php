@@ -124,7 +124,9 @@ class ilADTLocalizedTextSearchBridgeSingle extends ilADTTextSearchBridgeSingle
             foreach ($a_adt->getTranslations() as $language => $text) {
                 $search_term = strtolower(trim((string) $this->getADT()->getText()));
                 $text = strtolower(trim((string) $text));
-                return str_contains($text, $search_term);
+                if (str_contains($text, $search_term)) {
+                    return true;
+                }
             }
         }
         return false;
