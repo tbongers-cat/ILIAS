@@ -1226,7 +1226,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
             );
         }
 
-        return $this->ui_factory->input()->field()->radio('tst_add_quest_cont_edit_mode')
+        return $this->ui_factory->input()->field()->radio($this->lng->txt('tst_add_quest_cont_edit_mode'))
             ->withOption(
                 assQuestion::ADDITIONAL_CONTENT_EDITING_MODE_IPE,
                 $this->lng->txt('tst_add_quest_cont_edit_mode_IPE'),

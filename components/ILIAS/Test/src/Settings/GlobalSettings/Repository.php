@@ -42,7 +42,8 @@ class Repository
     private ?TestLoggingSettings $test_logging_settings = null;
 
     public function __construct(
-        private \ilSetting $settings
+        private \ilSetting $settings_global,
+        private \ilSetting $settings_test
     ) {
     }
 
@@ -59,52 +60,52 @@ class Repository
         $global_settings = new GlobalTestSettings();
 
         if (($process_lock_mode = ProcessLockModes::tryFrom(
-            $this->settings->get(self::SETTINGS_KEY_PROCESS_LOCK_MODE) ?? ''
+            $this->settings_test->get(self::SETTINGS_KEY_PROCESS_LOCK_MODE) ?? ''
         )) !== null
         ) {
             $global_settings = $global_settings->withProcessLockMode($process_lock_mode);
         }
 
-        if (($image_map_line_color = $this->settings->get(self::SETTINGS_KEY_IMAGE_MAP_LINE_COLOR)) !== null) {
+        if (($image_map_line_color = $this->settings_test->get(self::SETTINGS_KEY_IMAGE_MAP_LINE_COLOR)) !== null) {
             $global_settings = $global_settings->withImageMapLineColor($image_map_line_color);
         }
 
         if (($user_identifier = UserIdentifiers::tryFrom(
-            $this->settings->get(self::SETTINGS_KEY_UNIQUE_USER_IDENTIFIER) ?? ''
+            $this->settings_test->get(self::SETTINGS_KEY_UNIQUE_USER_IDENTIFIER) ?? ''
         )) !== null
         ) {
             $global_settings = $global_settings->withUserIdentifier($user_identifier);
         }
 
-        if (($skill_triggering_number_of_answers = $this->settings->get(self::SETTINGS_KEY_SKILL_TRIGGERING_NUMBER_OF_ANSWERS)) !== null) {
+        if (($skill_triggering_number_of_answers = $this->settings_test->get(self::SETTINGS_KEY_SKILL_TRIGGERING_NUMBER_OF_ANSWERS)) !== null) {
             $global_settings = $global_settings->withSkillTriggeringNumberOfAnswers((int) $skill_triggering_number_of_answers);
         }
 
-        if (($export_essay_questions_as_html = $this->settings->get(self::SETTINGS_KEY_EXPORT_ESSAY_QUESTIONS_AS_HTML)) !== null) {
+        if (($export_essay_questions_as_html = $this->settings_test->get(self::SETTINGS_KEY_EXPORT_ESSAY_QUESTIONS_AS_HTML)) !== null) {
             $global_settings = $global_settings->withExportEssayQuestionsAsHtml($export_essay_questions_as_html === '1');
         }
 
-        if (($disabled_question_types_legacy = $this->settings->get(self::SETTINGS_KEY_DISABLED_QUESTION_TYPES_LEGACY)) !== null) {
+        if (($disabled_question_types_legacy = $this->settings_test->get(self::SETTINGS_KEY_DISABLED_QUESTION_TYPES_LEGACY)) !== null) {
             $this->migrateLegacyQuestionTypes($disabled_question_types_legacy);
         }
 
-        if (($disabled_question_types = $this->settings->get(self::SETTINGS_KEY_DISABLED_QUESTION_TYPES)) !== null) {
+        if (($disabled_question_types = $this->settings_test->get(self::SETTINGS_KEY_DISABLED_QUESTION_TYPES)) !== null) {
             $global_settings = $global_settings->withDisabledQuestionTypes(explode(',', $disabled_question_types));
         }
 
-        if (($manual_scoring_legacy = $this->settings->get(self::SETTINGS_KEY_MANUAL_SCORING_LEGACY)) !== null) {
+        if (($manual_scoring_legacy = $this->settings_test->get(self::SETTINGS_KEY_MANUAL_SCORING_LEGACY)) !== null) {
             $this->migrateLegacyManualScoring($manual_scoring_legacy);
         }
 
-        if (($manual_scoring_enabled = $this->settings->get(self::SETTINGS_KEY_MANUAL_SCORING_ENABLED)) !== null) {
+        if (($manual_scoring_enabled = $this->settings_test->get(self::SETTINGS_KEY_MANUAL_SCORING_ENABLED)) !== null) {
             $global_settings = $global_settings->withManualScoringEnabled($manual_scoring_enabled === '1');
         }
 
-        if (($adjusting_questions_with_results_allowed = $this->settings->get(self::SETTINGS_KEY_ADJUSTING_QUESTIONS_WITH_RESULTS_ALLOWED)) !== null) {
+        if (($adjusting_questions_with_results_allowed = $this->settings_test->get(self::SETTINGS_KEY_ADJUSTING_QUESTIONS_WITH_RESULTS_ALLOWED)) !== null) {
             $global_settings = $global_settings->withAdjustingQuestionsWithResultsAllowed($adjusting_questions_with_results_allowed === '1');
         }
 
-        if (($page_editor_enabled = $this->settings->get(self::SETTINGS_KEY_PAGE_EDITOR_ENABLED)) !== null) {
+        if (($page_editor_enabled = $this->settings_global->get(self::SETTINGS_KEY_PAGE_EDITOR_ENABLED)) !== null) {
             $global_settings = $global_settings->withPageEditorEnabled($page_editor_enabled === '1');
         }
 
@@ -113,14 +114,14 @@ class Repository
 
     public function storeGlobalSettings(GlobalTestSettings $global_settings): void
     {
-        $this->settings->set(self::SETTINGS_KEY_PROCESS_LOCK_MODE, $global_settings->getProcessLockMode()->value);
-        $this->settings->set(self::SETTINGS_KEY_IMAGE_MAP_LINE_COLOR, $global_settings->getImageMapLineColor());
-        $this->settings->set(self::SETTINGS_KEY_UNIQUE_USER_IDENTIFIER, $global_settings->getUserIdentifier()->value);
-        $this->settings->set(self::SETTINGS_KEY_SKILL_TRIGGERING_NUMBER_OF_ANSWERS, (string) $global_settings->getSkillTriggeringNumberOfAnswers());
-        $this->settings->set(self::SETTINGS_KEY_EXPORT_ESSAY_QUESTIONS_AS_HTML, $global_settings->getExportEssayQuestionsAsHtml() ? '1' : '0');
-        $this->settings->set(self::SETTINGS_KEY_DISABLED_QUESTION_TYPES, implode(',', $global_settings->getDisabledQuestionTypes()));
-        $this->settings->set(self::SETTINGS_KEY_MANUAL_SCORING_ENABLED, $global_settings->isManualScoringEnabled() ? '1' : '0');
-        $this->settings->set(self::SETTINGS_KEY_ADJUSTING_QUESTIONS_WITH_RESULTS_ALLOWED, $global_settings->isAdjustingQuestionsWithResultsAllowed() ? '1' : '0');
+        $this->settings_test->set(self::SETTINGS_KEY_PROCESS_LOCK_MODE, $global_settings->getProcessLockMode()->value);
+        $this->settings_test->set(self::SETTINGS_KEY_IMAGE_MAP_LINE_COLOR, $global_settings->getImageMapLineColor());
+        $this->settings_test->set(self::SETTINGS_KEY_UNIQUE_USER_IDENTIFIER, $global_settings->getUserIdentifier()->value);
+        $this->settings_test->set(self::SETTINGS_KEY_SKILL_TRIGGERING_NUMBER_OF_ANSWERS, (string) $global_settings->getSkillTriggeringNumberOfAnswers());
+        $this->settings_test->set(self::SETTINGS_KEY_EXPORT_ESSAY_QUESTIONS_AS_HTML, $global_settings->getExportEssayQuestionsAsHtml() ? '1' : '0');
+        $this->settings_test->set(self::SETTINGS_KEY_DISABLED_QUESTION_TYPES, implode(',', $global_settings->getDisabledQuestionTypes()));
+        $this->settings_test->set(self::SETTINGS_KEY_MANUAL_SCORING_ENABLED, $global_settings->isManualScoringEnabled() ? '1' : '0');
+        $this->settings_test->set(self::SETTINGS_KEY_ADJUSTING_QUESTIONS_WITH_RESULTS_ALLOWED, $global_settings->isAdjustingQuestionsWithResultsAllowed() ? '1' : '0');
 
         $this->global_test_settings = $global_settings;
     }
@@ -129,8 +130,8 @@ class Repository
     {
         if ($this->test_logging_settings === null) {
             $this->test_logging_settings = new TestLoggingSettings(
-                $this->settings->get(self::SETTINGS_KEY_LOGGING_ENABLED) === '1',
-                $this->settings->get(self::SETTINGS_KEY_IP_LOGGING_ENABLED) !== '0'
+                $this->settings_test->get(self::SETTINGS_KEY_LOGGING_ENABLED) === '1',
+                $this->settings_test->get(self::SETTINGS_KEY_IP_LOGGING_ENABLED) !== '0'
             );
         }
         return $this->test_logging_settings;
@@ -138,19 +139,19 @@ class Repository
 
     public function storeLoggingSettings(TestLoggingSettings $logging_settings): void
     {
-        $this->settings->set(self::SETTINGS_KEY_LOGGING_ENABLED, $logging_settings->isLoggingEnabled() ? '1' : '0');
-        $this->settings->set(self::SETTINGS_KEY_IP_LOGGING_ENABLED, $logging_settings->isIPLoggingEnabled() ? '1' : '0');
+        $this->settings_test->set(self::SETTINGS_KEY_LOGGING_ENABLED, $logging_settings->isLoggingEnabled() ? '1' : '0');
+        $this->settings_test->set(self::SETTINGS_KEY_IP_LOGGING_ENABLED, $logging_settings->isIPLoggingEnabled() ? '1' : '0');
     }
 
     private function migrateLegacyQuestionTypes(string $legacy_types): void
     {
-        $this->settings->delete(self::SETTINGS_KEY_DISABLED_QUESTION_TYPES_LEGACY);
-        $this->settings->set(self::SETTINGS_KEY_DISABLED_QUESTION_TYPES, implode(',', unserialize($legacy_types, ['allowed_classes' => false]) ?? []));
+        $this->settings_test->delete(self::SETTINGS_KEY_DISABLED_QUESTION_TYPES_LEGACY);
+        $this->settings_test->set(self::SETTINGS_KEY_DISABLED_QUESTION_TYPES, implode(',', unserialize($legacy_types, ['allowed_classes' => false]) ?? []));
     }
 
     private function migrateLegacyManualScoring(string $legacy_manual_scoring): void
     {
-        $this->settings->delete(self::SETTINGS_KEY_MANUAL_SCORING_LEGACY);
-        $this->settings->set(self::SETTINGS_KEY_MANUAL_SCORING_ENABLED, array_filter(array_map('intval', explode(',', $legacy_manual_scoring))) !== [] ? '1' : '0');
+        $this->settings_test->delete(self::SETTINGS_KEY_MANUAL_SCORING_LEGACY);
+        $this->settings_test->set(self::SETTINGS_KEY_MANUAL_SCORING_ENABLED, array_filter(array_map('intval', explode(',', $legacy_manual_scoring))) !== [] ? '1' : '0');
     }
 }
