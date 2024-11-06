@@ -20,7 +20,7 @@ declare(strict_types=1);
 
 namespace ILIAS;
 
-class LTI implements Component\Component
+class LTIProvider implements Component\Component
 {
     public function init(
         array | \ArrayAccess &$define,

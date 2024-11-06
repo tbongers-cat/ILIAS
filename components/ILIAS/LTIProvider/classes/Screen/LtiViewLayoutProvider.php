@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 namespace ILIAS\LTI\Screen;
 
@@ -55,7 +55,7 @@ class LtiViewLayoutProvider extends AbstractModificationProvider implements Modi
      */
     public function getPageBuilderDecorator(CalledContexts $screen_context_stack): ?PageBuilderModification
     {
-        $this->globalScreen()->layout()->meta()->addCss('./components/ILIAS/LTI/templates/default/lti.css');
+        $this->globalScreen()->layout()->meta()->addCss('./components/ILIAS/LTIProvider/templates/default/lti.css');
         $is_exit_mode = $this->isLTIExitMode($screen_context_stack);
         $external_css = ($is_exit_mode) ? '' : $this->dic["lti"]->getExternalCss();
         if ($external_css !== '') {
