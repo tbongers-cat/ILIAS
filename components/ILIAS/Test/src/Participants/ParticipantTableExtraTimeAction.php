@@ -203,4 +203,9 @@ class ParticipantTableExtraTimeAction implements TableAction
             );
         }
     }
+
+    public function getSelectionErrorMessage(): ?string
+    {
+        return null;
+    }
 }

@@ -24,6 +24,7 @@ class Settings
 {
     public function __construct(
         protected int $id,
+        protected bool $online,
         protected string $virtual,
         protected bool $glo_menu_active,
         protected string $pres_mode,
@@ -37,6 +38,11 @@ class Settings
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getOnline(): bool
+    {
+        return $this->online;
     }
 
     public function getVirtualMode(): string

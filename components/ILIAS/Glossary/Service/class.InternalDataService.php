@@ -52,6 +52,7 @@ class InternalDataService
 
     public function settings(
         int $id,
+        bool $online,
         string $virtual,
         bool $glo_menu_active,
         string $pres_mode,
@@ -62,6 +63,7 @@ class InternalDataService
     ): Settings {
         return new Settings(
             $id,
+            $online,
             $virtual,
             $glo_menu_active,
             $pres_mode,

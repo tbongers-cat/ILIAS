@@ -140,4 +140,9 @@ class ParticipantTableDeleteResultsAction implements TableAction
 
         return $this->lng->txt('delete_selected_user_data_confirmation');
     }
+
+    public function getSelectionErrorMessage(): ?string
+    {
+        return $this->lng->txt('delete_result_no_valid_participants_selected');
+    }
 }

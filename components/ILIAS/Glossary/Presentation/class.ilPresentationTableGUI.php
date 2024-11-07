@@ -147,7 +147,7 @@ class ilPresentationTableGUI
             $this->filter_data["letter"] ?? "",
             $this->filter_data["definition"] ?? "",
             $this->tax_node,
-            true,
+            false,
             true,
             $adt_search_bridges,
             false,

@@ -41,9 +41,14 @@ The Scope Tool has a lot to do with the Scope MainBar, since the elements can be
 
 For more information see [Scope/Tools/README.md](Scope/Tool/README.md).
 
-# Scope Notifications
+## Scope Notifications
 
 For more information, see [Scope/Notification/README.md](Scope/Notification/README.md).
+
+## Scope Footer
+This scope allows components and plug-ins to add elements to the footer of ILIAS.
+
+For more information, see [Scope/Footer/README.md](Scope/Layout/README.md).
 
 ## Scope Layout
 
