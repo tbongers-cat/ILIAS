@@ -153,7 +153,37 @@ class ilContainerReferenceGUI extends ilObjectGUI
             return;
         }
 
-        parent::saveObject();
+        if (!$this->checkPermissionBool("create", "", $this->requested_new_type)) {
+            $this->error->raiseError($this->lng->txt("no_create_permission"), $this->error->MESSAGE);
+        }
+
+        $this->lng->loadLanguageModule($this->requested_new_type);
+        $this->ctrl->setParameter($this, "new_type", $this->requested_new_type);
+
+        $form = $this->initCreateForm($this->requested_new_type);
+        if ($form->checkInput()) {
+            $this->ctrl->setParameter($this, "new_type", "");
+
+            $class_name = "ilObj" . $this->obj_definition->getClassName($this->requested_new_type);
+            $newObj = new $class_name();
+            $newObj->setType($this->requested_new_type);
+            $newObj->setTitle($form->getInput("title"));
+            $newObj->setDescription($form->getInput("desc"));
+            $newObj->processAutoRating();
+            $newObj->create();
+
+            $this->putObjectInTree($newObj);
+
+            $dtpl = $this->getDidacticTemplateVar("dtpl");
+            if ($dtpl) {
+                $newObj->applyDidacticTemplate($dtpl);
+            }
+
+            $this->afterSave($newObj);
+        }
+
+        $form->setValuesByPost();
+        $this->tpl->setContent($form->getHTML());
     }
 
     protected function initCreateForm(string $new_type): ilPropertyFormGUI

@@ -8656,7 +8656,7 @@ dcl#:#dcl_edit_entry_rules#:#Entry Editing
 dcl#:#dcl_edit_field#:#Edit Field
 dcl#:#dcl_edit_perm#:#User can edit entries
 dcl#:#dcl_edit_record#:#Edit Entry
-dcl#:#dcl_edit_table#:#Edit Table Settings
+dcl#:#dcl_edit_table#:#Edit Settings of Table "%s"
 dcl#:#dcl_editable_in_table_gui#:#Please vote in the table view.
 dcl#:#dcl_empty_detailed_view#:#Delete this detailed view
 dcl#:#dcl_empty_detailed_view_success#:#The detailed view definition has been deleted successfully.
@@ -8742,6 +8742,7 @@ dcl#:#dcl_new_field#:#New Field
 dcl#:#dcl_new_table#:#New Table
 dcl#:#dcl_next_record#:#Next Entry
 dcl#:#dcl_no_content_warning#:#Attention, the Data Collection is online but does not have content yet!
+dcl#:#dcl_no_entries#:#No entries
 dcl#:#dcl_no_entry#:#No entry
 dcl#:#dcl_no_export_content_available#:#No data available for export.
 dcl#:#dcl_no_export_data_available#:#No data or fields available for export.
@@ -8820,7 +8821,6 @@ dcl#:#dcl_table#:#Table
 dcl#:#dcl_table_create#:#Create Table
 dcl#:#dcl_table_edit#:#Update Table
 dcl#:#dcl_table_id#:#Table ID
-dcl#:#dcl_table_info#:#Users with the permission ‘edit settings’ (see tab ‘Permission’) always have permission to add/edit/delete entries. Users with permission ‘edit entry’ (see tab ‘Permissions’) only have permissions according to the settings specified in the form below.
 dcl#:#dcl_table_list_fields#:#Fields Of Selected Table
 dcl#:#dcl_table_list_tables#:#Available Tables
 dcl#:#dcl_table_settings_saved#:#Table Settings have been saved.
