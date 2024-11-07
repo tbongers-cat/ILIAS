@@ -1,121 +1,124 @@
 il.Awareness = {
 
   rendered: false,
-  base_url: '',
-  $body: $(document.body),
-  loader_src: '',
+  base_url: "",
+  $body:  $(document.body),
+  loader_src: "",
 
-  setBaseUrl(url) {
-    const t = il.Awareness;
+
+  setBaseUrl: function(url) {
+    var t = il.Awareness;
     t.base_url = url;
   },
 
-  getBaseUrl() {
-    const t = il.Awareness;
+  getBaseUrl: function() {
+    var t = il.Awareness;
     return t.base_url;
   },
 
-  setLoaderSrc(loader) {
-    const t = il.Awareness;
+  setLoaderSrc: function(loader) {
+    var t = il.Awareness;
     t.loader_src = loader;
   },
 
-  getLoaderSrc() {
-    const t = il.Awareness;
+  getLoaderSrc: function() {
+    var t = il.Awareness;
     return t.loader_src;
   },
 
-  init() {
-    console.log('**************************INIT***********************');
-    document.querySelectorAll('.ilAwarenessItem').forEach((el) => {
+  init: function() {
+    document.querySelectorAll('.ilAwarenessItem div[role="button"]').forEach((el) => {
       el.addEventListener('click', () => {
-        const ul = el.querySelector('ul');
+        const ul = el.parentNode.querySelector('ul');
         if (ul.style.display === 'none') {
-          ul.style.display === 'block';
+          ul.style.display = 'block';
+          el.setAttribute('aria-expanded', 'true');
         } else {
-          ul.style.display === 'none';
+          ul.style.display = 'none';
+          el.setAttribute('aria-expanded', 'false');
         }
       });
     });
   },
 
-  getContent() {
-    const t = il.Awareness;
+
+  getContent: function () {
+    var t = il.Awareness;
     if (!t.rendered) {
-      t.content = $('#awareness-content-container').html();
-      $('#awareness-content-container').html('');
-      t.updateList('');
+      t.content = $("#awareness-content-container").html();
+      $("#awareness-content-container").html("");
+      t.updateList("");
       t.rendered = true;
     }
     return t.content;
   },
 
-  ajaxReplaceSuccess(o) {
-    const t = il.Awareness; let
-      cnt;
+  ajaxReplaceSuccess: function(o) {
+    var t = il.Awareness, cnt;
 
     // perform page modification
-    if (o.html !== undefined) {
+    if(o.html !== undefined)
+    {
       t.content = o.html;
       $('#awareness-content').replaceWith(o.html);
       $('#il_awareness_filter').val(o.filter_val);
       t.afterListUpdate();
 
-      cnt = o.cnt.split(':');
+      cnt = o.cnt.split(":");
       t.setCounter(cnt[0], false);
       t.setCounter(cnt[1], true);
 
       // throw custom event
-      $('#awareness_trigger a').trigger('awrn:shown');
+      $("#awareness_trigger a").trigger("awrn:shown");
     }
   },
 
-  afterListUpdate() {
-    let t = il.Awareness;
+  afterListUpdate: function() {
+    var t = il.Awareness;
 
-    $('#il_awrn_filter_form').submit((e) => {
-      const t = il.Awareness;
-      $('#il_awrn_filer_btn').html(`<img src='${t.loader_src}' />`);
-      t.updateList($('#il_awareness_filter').val());
+    $("#il_awrn_filter_form").submit(function (e) {
+      var t = il.Awareness;
+      $("#il_awrn_filer_btn").html("<img src='" + t.loader_src + "' />");
+      t.updateList($("#il_awareness_filter").val());
       e.preventDefault();
     });
-    $('#il_awareness_filter').each(function () {
+    $("#il_awareness_filter").each(function() {
       t = this;
       t.focus();
       if (t.setSelectionRange) {
-        const len = $(t).val().length * 2;
+        var len = $(t).val().length * 2;
         t.setSelectionRange(len, len);
       }
     });
 
-    $('#awareness-list').trigger('il.user.actions.updated', ['awareness-list']);
+    $("#awareness-list").trigger("il.user.actions.updated", ["awareness-list"]);
   },
 
-  updateList(filter) {
-    const t = il.Awareness;
+  updateList: function(filter) {
+    var t = il.Awareness;
     $.ajax({
-      url: `${t.getBaseUrl()}&cmd=getAwarenessList`
-				+ `&filter=${encodeURIComponent(filter)}`,
-      dataType: 'json',
+      url: t.getBaseUrl() + "&cmd=getAwarenessList"
+        + "&filter=" + encodeURIComponent(filter),
+      dataType: "json"
     }).done(t.ajaxReplaceSuccess);
   },
 
-  setCounter(c, highlighted) {
-    let id = '#awareness_badge';
+  setCounter: function(c, highlighted) {
+    var id = "#awareness_badge";
 
     if (highlighted) {
-      id = '#awareness_hbadge';
+      id = "#awareness_hbadge";
     }
-    $(`${id} span`).html(c);
+    $(id + " span").html(c);
     if (c > 0) {
-      $(`${id} .badge`).removeClass('ilAwrnBadgeHidden');
+      $(id + " .badge").removeClass("ilAwrnBadgeHidden");
     } else {
-      $(`${id} .badge`).addClass('ilAwrnBadgeHidden');
+      $(id + " .badge").addClass("ilAwrnBadgeHidden");
     }
-  },
+  }
 };
 
 /* temporary fix, since initial ajax loading does not work */
-il.Util.addOnLoad(() => {
+il.Util.addOnLoad(function() {
   il.Awareness.afterListUpdate();
-});
+})
