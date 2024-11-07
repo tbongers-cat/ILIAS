@@ -120,4 +120,9 @@ class ParticipantTableShowResultsAction implements TableAction
             $this->test_obj->getTestId()
         );
     }
+
+    public function getSelectionErrorMessage(): ?string
+    {
+        return null;
+    }
 }

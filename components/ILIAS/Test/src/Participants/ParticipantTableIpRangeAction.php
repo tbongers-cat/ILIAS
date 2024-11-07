@@ -29,10 +29,6 @@ use ILIAS\UI\URLBuilderToken;
 use Psr\Http\Message\ServerRequestInterface;
 use ILIAS\Refinery\Factory as Refinery;
 
-use function array_map;
-use function array_unique;
-use function count;
-
 class ParticipantTableIpRangeAction implements TableAction
 {
     public const ACTION_ID = 'client_ip_range';
@@ -82,6 +78,30 @@ class ParticipantTableIpRangeAction implements TableAction
                 || filter_var($ip, FILTER_VALIDATE_IP) !== false,
             $this->lng->txt('invalid_ip')
         );
+        $validate_order = $this->refinery->custom()->constraint(
+            function (?array $vs): bool {
+                if ($vs === null) {
+                    return true;
+                }
+                return $this->checkIpRangeValidity(
+                    $vs['from'],
+                    $vs['to']
+                );
+            },
+            sprintf($this->lng->txt('not_greater_than'), $this->lng->txt('max_ip_label'), $this->lng->txt('min_ip_label'))
+        );
+        $ip_range_group_trafo = $this->refinery->custom()->transformation(
+            static function (?array $vs): array {
+                if ($vs === null) {
+                    $vs = [
+                        'from' => null,
+                        'to' => null
+                    ];
+                }
+                return $vs;
+            }
+        );
+
 
         $participant_rows = array_map(
             fn(Participant $participant) => sprintf(
@@ -91,8 +111,6 @@ class ParticipantTableIpRangeAction implements TableAction
             ),
             $selected_participants
         );
-
-        $is_unique_ip_range = $this->isUniqueClientIp($selected_participants);
 
         return $this->ui_factory->modal()->roundtrip(
             $this->lng->txt('client_ip_range'),
@@ -111,22 +129,21 @@ class ParticipantTableIpRangeAction implements TableAction
                 'ip_range' => $this->ui_factory->input()->field()->group([
                     'from' => $this->ui_factory->input()->field()->text(
                         $this->lng->txt('min_ip_label')
-                    )->withAdditionalTransformation($valid_ip_constraint)
-                        ->withValue(
-                            $is_unique_ip_range ?
-                            $selected_participants[0]->getClientIpFrom() ?? '' :
-                            ''
-                        ),
+                    )->withAdditionalTransformation($valid_ip_constraint),
                     'to' => $this->ui_factory->input()->field()->text(
                         $this->lng->txt('max_ip_label'),
                         $this->lng->txt('ip_range_byline')
-                    )->withAdditionalTransformation($valid_ip_constraint)
-                        ->withValue(
-                            $is_unique_ip_range ?
-                            $selected_participants[0]->getClientIpTo() ?? '' :
-                            ''
-                        ),
-                ])
+                    )->withAdditionalTransformation($valid_ip_constraint),
+                ])->withValue(
+                    $this->isUniqueClientIp($selected_participants) ?
+                        [
+                            'from' => $selected_participants[0]->getClientIpFrom() ?? '',
+                            'to' => $selected_participants[0]->getClientIpTo() ?? ''
+                        ] :
+                        null
+                )
+                    ->withAdditionalTransformation($ip_range_group_trafo)
+                    ->withAdditionalTransformation($validate_order)
             ],
             $url_builder->buildURI()->__toString()
         )->withSubmitLabel($this->lng->txt('change'));
@@ -195,5 +212,24 @@ class ParticipantTableIpRangeAction implements TableAction
                 fn(Participant $participant) => $participant->getClientIpFrom() . '-' . $participant->getClientIpTo(),
                 $selected_participants
             ))) === 1;
+    }
+
+    private function checkIpRangeValidity(string $start, string $end): bool
+    {
+        if (filter_var($start, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false
+            && filter_var($end, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false) {
+            return ip2long($start) <= ip2long($end);
+        }
+
+        if (filter_var($start, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false
+            && filter_var($end, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false) {
+            return bin2hex(inet_pton($start)) <= bin2hex(inet_pton($end));
+        }
+        return false;
+    }
+
+    public function getSelectionErrorMessage(): ?string
+    {
+        return null;
     }
 }

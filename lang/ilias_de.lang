@@ -576,7 +576,7 @@ assessment#:#checkbox_unchecked#:#Nicht ausgewählt
 assessment#:#circle#:#Kreis
 assessment#:#circle_click_center#:#Bitte klicken Sie auf den Mittelpunkt der gewünschten Region
 assessment#:#circle_click_circle#:#Bitte klicken Sie auf einen Punkt auf dem Umkreis der gewünschten Region
-assessment#:#client_ip_range#:#Client IP Range
+assessment#:#client_ip_range#:#Client IP Bereich
 assessment#:#clientip#:#Client IP
 assessment#:#close_text_hint#:#Um eine Lücke in den Text einzufügen, setzen Sie den Cursor an die entsprechende Position und nutzen Sie die Schaltfläche "Textlücke". Anschließend stehen weiter unten entsprechende Bearbeitungsbereiche zur Verfügung. Ebenso können Sie die Lücken zur Bearbeitung im Lückentext direkt anklicken.
 assessment#:#cloze_answer_text_info#:#Vorangestellte oder nachfolgende Leerzeichen werden beim Speichern aus der Antwort gelöscht.
@@ -613,6 +613,8 @@ assessment#:#deleteSuggestedSolution#:#Inhalte zur Wiederholung entfernen
 assessment#:#delete_all_user_data_confirmation#:#Wollen Sie wirklich die Testergebnisse aller Teilnehmer löschen?
 assessment#:#delete_image_header#:#Bild entfernen
 assessment#:#delete_image_question#:#Möchten Sie das Bild wirklich entfernen?
+assessment#:#delete_participant_no_valid_participants_selected#:#Für die gewählten Teilnehmer liegen bereits Testergebnisse vor und können deshalb nicht entfernt werden.
+assessment#:#delete_result_no_valid_participants_selected#:#Für die gewählten Teilnehmer liegen keine Testergebnisse vor und können deshalb nicht entfernt werden.
 assessment#:#delete_selected_user_data_confirmation#:#Sind Sie sicher, dass Sie alle Testdaten der ausgewählten Teilnehmenden entfernen wollen?
 assessment#:#delete_user_data#:#Testergebnisse entfernen
 assessment#:#description_maxchars#:#Wenn nichts eingegeben wird, ist die maximale Anzahl von Zeichen für diese Textantwort unbegrenzt.
@@ -747,6 +749,7 @@ assessment#:#finish_pass_for_user_in_processing_time#:#WARNUNG: die Bearbeitungs
 assessment#:#finish_test#:#Test beenden
 assessment#:#finish_test_all#:#Sind Sie sicher, dass die den Testdurchlauf für alle Teilnehmer beenden möchten?
 assessment#:#finish_test_multiple#:#Sind Sie sicher, dass Sie den Testdurchlauf für folgende Teilnehmer beenden möchten?
+assessment#:#finish_test_no_valid_participants_selected#:#Für die gewählten Teilnehmer gibt es keine aktiven Testdurchläufe und können daher nicht beendet werden.
 assessment#:#finish_test_single#:#Sind Sie sicher, dass Sie den Testdurchlauf für den Teilnehmer "%s" beenden möchten?
 assessment#:#finish_unfinished_passes#:#Beendet noch offene Testdurchläufe
 assessment#:#finish_unfinished_passes_desc#:#Noch nicht beendete Testdurchläufe werden automatisch beendet – vorausgesetzt, es wurde für diese Tests ein Endzeitpunkt festgelegt oder Teilnehmende haben die maximale Bearbeitungsdauer überschritten.
@@ -791,10 +794,10 @@ assessment#:#internal_links#:#Interne Verweise
 assessment#:#intprecision#:#Teilbar durch
 assessment#:#intprecision_info#:#"Teilbar durch" hat nur Auswirkungen auf die Variablenerzeugung, wenn der Wert für die Präzision 0 beträgt. In diesem Fall legt "Teilbar durch" fest, durch welche ganze Zahl die erzeugte Variable teilbar sein muss. Ein Wert von 10 erzeugt also nur ganze Zahlen, die durch 10 teilbar sind, ein Wert von 5 erzeugt ganze Zahlen, die durch 5 teilbar sind usw. Bei einer Präzision von 0 ist "Teilbar durch" ein Pflichtfeld und muss eine positive, ganze Zahl enthalten. Voreingestellt ist der Wert 1 für beliebige ganze Zahlen.
 assessment#:#invalid_ip#:#Ungültige IP
-assessment#:#ip_range_byline#:#Nur IP Adressen die innerhalb der IP Range liegen, können den Test starten. Sie können entweder IPv4 ODER IPv6 verwenden.
-assessment#:#ip_range_for_all_participants#:#Sie bearbeiten die IP Range für alle Teilnehmer.
-assessment#:#ip_range_for_selected_participants#:#Sie bearbeiten die IP Range für die folgende Teilnehmer:
-assessment#:#ip_range_for_single_participant#:#Sie bearbeiten die IP Range für folgenden Teilnehmer:
+assessment#:#ip_range_byline#:#Nur IP Adressen die innerhalb der IP Bereich liegen, können den Test starten. Sie können entweder IPv4 ODER IPv6 verwenden.
+assessment#:#ip_range_for_all_participants#:#Sie bearbeiten die IP Bereich für alle Teilnehmer.
+assessment#:#ip_range_for_selected_participants#:#Sie bearbeiten die IP Bereich für die folgende Teilnehmer:
+assessment#:#ip_range_for_single_participant#:#Sie bearbeiten die IP Bereich für folgenden Teilnehmer:
 assessment#:#ip_range_info#:#Nur Geräte mit einer IP aus der festgelegten Spanne können den Test starten.
 assessment#:#ip_range_label#:#Beschränkung auf IPs
 assessment#:#ip_range_updated#:#Die IP-Rang wurde für die gewählten Teilnehmer aktualisiert.
