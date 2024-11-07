@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 use ILIAS\InfoScreen\StandardGUIRequest;
 use ILIAS\MetaData\Services\ServicesInterface as Metadata;
@@ -363,11 +363,10 @@ class ilInfoScreenGUI
         // output
 
         // description
-        /* see https://mantis.ilias.de/view.php?id=39079
         if ($description != "") {
             $this->addSection($lng->txt("description"));
             $this->addProperty("", nl2br($description));
-        }*/
+        }
 
         // general section
         $this->addSection($lng->txt("meta_general"));
