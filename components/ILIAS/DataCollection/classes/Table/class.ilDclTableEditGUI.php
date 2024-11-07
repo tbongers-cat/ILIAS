@@ -85,12 +85,12 @@ class ilDclTableEditGUI
 
     public function create(): void
     {
-        $this->tpl->setContent($this->ui_renderer->render($this->initForm()));
+        $this->tpl->setContent($this->lng->txt('dcl_new_table') . $this->ui_renderer->render($this->initForm()));
     }
 
     public function edit(): void
     {
-        $this->tpl->setContent($this->ui_renderer->render($this->initForm('edit')));
+        $this->tpl->setContent(sprintf($this->lng->txt('dcl_edit_table'), $this->table->getTitle()) . $this->ui_renderer->render($this->initForm('edit')));
     }
 
     public function cancel(): void
@@ -133,24 +133,23 @@ class ilDclTableEditGUI
         );
 
         $user = [];
-        $user['add_perm'] = $this->ui_factory->input()->field()->checkbox($this->lng->txt('dcl_add_perm'), $this->lng->txt('dcl_add_perm_desc'))->withValue(true);
-        $user['save_confirmation'] = $this->ui_factory->input()->field()->checkbox($this->lng->txt('dcl_save_confirmation'), $this->lng->txt('dcl_save_confirmation_desc'));
-        $user['edit_perm'] = $this->ui_factory->input()->field()->optionalGroup(
+        $user['add_perm'] = $this->ui_factory->input()->field()->optionalGroup(
             [
-                'edit_perm_mode' => $this->ui_factory->input()->field()->radio('')
-                    ->withOption('all', $this->lng->txt('dcl_all_entries'))
-                    ->withOption('own', $this->lng->txt('dcl_own_entries'))
+                'save_confirmation' => $this->ui_factory->input()->field()->checkbox($this->lng->txt('dcl_save_confirmation'), $this->lng->txt('dcl_save_confirmation_desc'))
             ],
-            $this->lng->txt('dcl_edit_perm')
-        )->withValue(['edit_perm_mode' => 'own']);
-        $user['delete_perm'] = $this->ui_factory->input()->field()->optionalGroup(
-            [
-                'delete_perm_mode' => $this->ui_factory->input()->field()->radio('')
-                    ->withOption('all', $this->lng->txt('dcl_all_entries'))
-                    ->withOption('own', $this->lng->txt('dcl_own_entries'))
-            ],
-            $this->lng->txt('dcl_delete_perm')
-        )->withValue(['delete_perm_mode' => 'own']);
+            $this->lng->txt('dcl_add_perm'),
+            $this->lng->txt('dcl_add_perm_desc')
+        )->withValue(['save_confirmation' => false]);
+        $user['edit_perm'] = $this->ui_factory->input()->field()->radio($this->lng->txt('dcl_edit_perm'))
+            ->withOption('all', $this->lng->txt('dcl_all_entries'))
+            ->withOption('own', $this->lng->txt('dcl_own_entries'))
+            ->withOption('none', $this->lng->txt('dcl_no_entries'))
+            ->withValue('own');
+        $user['delete_perm'] = $this->ui_factory->input()->field()->radio($this->lng->txt('dcl_delete_perm'))
+            ->withOption('all', $this->lng->txt('dcl_all_entries'))
+            ->withOption('own', $this->lng->txt('dcl_own_entries'))
+            ->withOption('none', $this->lng->txt('dcl_no_entries'))
+            ->withValue('own');
         $user['view_own_records_perm'] = $this->ui_factory->input()->field()->checkbox($this->lng->txt('dcl_view_own_records_perm'));
         $user['export_enabled'] = $this->ui_factory->input()->field()->checkbox($this->lng->txt('dcl_export_enabled'), $this->lng->txt('dcl_export_enabled_desc'));
         $user['import_enabled'] = $this->ui_factory->input()->field()->checkbox($this->lng->txt('dcl_import_enabled'), $this->lng->txt('dcl_import_enabled_desc'));
@@ -164,8 +163,7 @@ class ilDclTableEditGUI
         )->withValue(null);
         $inputs['user'] = $this->ui_factory->input()->field()->section(
             $user,
-            $this->lng->txt('dcl_permissions_form'),
-            $this->lng->txt('dcl_table_info'),
+            $this->lng->txt('dcl_permissions_form')
         );
 
         if ($a_mode === 'edit') {
@@ -184,28 +182,14 @@ class ilDclTableEditGUI
             'default_sort_field_order' => $this->table->getDefaultSortFieldOrder(),
             'description' => $this->table->getDescription(),
         ]);
-
-        if ($this->table->getEditPerm()) {
-            $edit = ['edit_perm_mode' => ($this->table->getEditByOwner() ? 'own' : 'all')];
-        }
-        if ($this->table->getDeletePerm()) {
-            $delete = ['delete_perm_mode' => ($this->table->getDeleteByOwner() ? 'own' : 'all')];
-        }
-        if ($this->table->getLimited()) {
-            $limit = [
-                'limit_start' => $this->table->getLimitStart(),
-                'limit_end' => $this->table->getLimitEnd(),
-            ];
-        }
         $inputs['user'] = $inputs['user']->withValue([
-            'add_perm' => $this->table->getAddPerm(),
-            'save_confirmation' => $this->table->getSaveConfirmation(),
-            'edit_perm' => $edit ?? null,
-            'delete_perm' => $delete ?? null,
+            'add_perm' => $this->table->getAddPerm() ? ['save_confirmation' => $this->table->getSaveConfirmation()] : null,
+            'edit_perm' => $this->table->getEditPerm() ? ($this->table->getEditByOwner() ? 'own' : 'all') : 'none',
+            'delete_perm' => $this->table->getDeletePerm() ? ($this->table->getDeleteByOwner() ? 'own' : 'all') : 'none',
             'view_own_records_perm' => $this->table->getViewOwnRecordsPerm(),
             'export_enabled' => $this->table->getExportEnabled(),
             'import_enabled' => $this->table->getImportEnabled(),
-            'limited' => $limit ?? null
+            'limited' => $this->table->getLimited() ? ['limit_start' => $this->table->getLimitStart(), 'limit_end' => $this->table->getLimitEnd()] : null
         ]);
 
         return $inputs;
@@ -237,12 +221,12 @@ class ilDclTableEditGUI
             }
             $this->table->setDescription($data['edit']['description']);
 
-            $this->table->setAddPerm($data['user']['add_perm']);
-            $this->table->setSaveConfirmation($data['user']['save_confirmation']);
-            $this->table->setEditPerm($data['user']['edit_perm'] !== null);
-            $this->table->setEditByOwner($data['user']['edit_perm']['edit_perm_mode'] === 'own');
-            $this->table->setDeletePerm($data['user']['delete_perm'] !== null);
-            $this->table->setDeleteByOwner($data['user']['delete_perm']['delete_perm_mode'] === 'own');
+            $this->table->setAddPerm($data['user']['add_perm'] !== null);
+            $this->table->setSaveConfirmation($data['user']['add_perm']['save_confirmation'] ?? false);
+            $this->table->setEditPerm($data['user']['edit_perm'] !== 'none');
+            $this->table->setEditByOwner($data['user']['edit_perm'] === 'own');
+            $this->table->setDeletePerm($data['user']['delete_perm'] !== 'none');
+            $this->table->setDeleteByOwner($data['user']['delete_perm'] === 'own');
             $this->table->setViewOwnRecordsPerm($data['user']['view_own_records_perm']);
             $this->table->setExportEnabled($data['user']['export_enabled']);
             $this->table->setImportEnabled($data['user']['import_enabled']);

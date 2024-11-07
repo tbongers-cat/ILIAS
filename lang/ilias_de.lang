@@ -8655,7 +8655,7 @@ dcl#:#dcl_edit_entry_rules#:#Eintragsbearbeitung
 dcl#:#dcl_edit_field#:#Feld bearbeiten
 dcl#:#dcl_edit_perm#:#Einträge bearbeiten
 dcl#:#dcl_edit_record#:#Eintrag bearbeiten
-dcl#:#dcl_edit_table#:#Einstellungen der Tabelle
+dcl#:#dcl_edit_table#:#Einstellungen der Tabelle "%s"
 dcl#:#dcl_editable_in_table_gui#:#Ein Eintrag kann nur über die Tabellenansicht bewertet werden.
 dcl#:#dcl_empty_detailed_view#:#Vorlage für Einzelansicht löschen
 dcl#:#dcl_empty_detailed_view_success#:#Die Vorlage wurde erfolgreich gelöscht.
@@ -8741,6 +8741,7 @@ dcl#:#dcl_new_field#:#Neues Feld
 dcl#:#dcl_new_table#:#Neue Tabelle
 dcl#:#dcl_next_record#:#Nächster Eintrag
 dcl#:#dcl_no_content_warning#:#Achtung: die Datensammlung ist bereits online, hat aber noch keinen Felder
+dcl#:#dcl_no_entries#:#Keine Einträge
 dcl#:#dcl_no_entry#:#Kein Eintrag
 dcl#:#dcl_no_export_content_available#:#Keine Daten für den Export verfügbar.
 dcl#:#dcl_no_export_data_available#:#Keine Daten oder Felder für den Export verfügbar.
@@ -8819,7 +8820,6 @@ dcl#:#dcl_table#:#Tabelle
 dcl#:#dcl_table_create#:#Erstelle Tabelle
 dcl#:#dcl_table_edit#:#Speichern
 dcl#:#dcl_table_id#:#Tabellen ID
-dcl#:#dcl_table_info#:#Nachfolgend legen Sie fest, was Personen in dieser Tabelle tun dürfen, die für die Datensammlung das Recht „Eintragen“ besitzen.
 dcl#:#dcl_table_list_fields#:#Felder der ausgewählten Tabelle
 dcl#:#dcl_table_list_tables#:#Verfügbare Tabellen
 dcl#:#dcl_table_settings_saved#:#Tabellen Einstellungen wurden gespeichert.
