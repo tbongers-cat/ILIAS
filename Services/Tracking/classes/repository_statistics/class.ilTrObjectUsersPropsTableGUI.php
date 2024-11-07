@@ -230,7 +230,7 @@ class ilTrObjectUsersPropsTableGUI extends ilLPTableBaseGUI
          * (nor should it), so it needs to be added here.
          */
         if (in_array('org_units', $additional_fields)) {
-            foreach ($tr_data['set'] as $key => $data) {
+            foreach (($tr_data['set'] ?? []) as $key => $data) {
                 if (!isset($data['usr_id'])) {
                     continue;
                 }
