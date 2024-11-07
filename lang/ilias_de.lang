@@ -1262,6 +1262,7 @@ assessment#:#test_question_set_type_random_info#:#Jedem Teilnehmenden werden unt
 assessment#:#test_results#:#Bekanntgabe des Testergebnisses
 assessment#:#test_scoring#:#Bewertung des Tests
 assessment#:#test_template_reset#:#Die Vorlage wurde entfernt.
+assessment#:#test_using_removed_template#:#Dieser Test verwendet eine gelöschte Vorlage. Bitte entfernen Sie die Verknüpfung hier: %s.
 assessment#:#test_using_template#:#Dieser Test verwendet die Vorlage %s. Wenn Sie keine Vorlage und alle Einstellungen verwenden wollen, klicken Sie bitte hier: %s.
 assessment#:#test_using_template_link#:#Vorlage nicht mehr verwenden
 assessment#:#text_correct#:#Korrekter Text

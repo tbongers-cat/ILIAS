@@ -1262,6 +1262,7 @@ assessment#:#test_question_set_type_random_info#:#Each test participant will see
 assessment#:#test_results#:#Summary Test Results
 assessment#:#test_scoring#:#Scoring Options
 assessment#:#test_template_reset#:#The template has been removed.
+assessment#:#test_using_removed_template#:#This test uses a deleted template. Please remove the connection here: %s.
 assessment#:#test_using_template#:#This test uses the template %s. If you do not want to use a template and have access to all settings, please click here: %s.
 assessment#:#test_using_template_link#:#Do not use template anymore
 assessment#:#text_correct#:#Correct Text
