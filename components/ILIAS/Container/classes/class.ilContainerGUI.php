@@ -423,9 +423,6 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
 
             if (!$this->edit_order) {
                 $this->showPossibleSubObjects();
-                if (!$this->isActiveAdministrationPanel() && $this->getCreationMode() === false) {
-                    ilMemberViewGUI::showMemberViewSwitch($this->object->getRefId());
-                }
             }
             if ($this->isActiveAdministrationPanel()) {
                 $this->addImportButtonToToolbar();
@@ -445,6 +442,11 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
                             $ilCtrl->getLinkTarget($this, "editPageFrame")
                         );
                     }
+                }
+            }
+            if (!$this->edit_order) {
+                if (!$this->isActiveAdministrationPanel() && $this->getCreationMode() === false) {
+                    ilMemberViewGUI::showMemberViewSwitch($this->object->getRefId());
                 }
             }
         }
