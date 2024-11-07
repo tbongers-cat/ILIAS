@@ -1452,6 +1452,7 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
         $new_obj->createReference();
         $new_obj->putInTree($this->testrequest->getRefId());
         $new_obj->setPermissions($this->testrequest->getRefId());
+        $new_obj->saveToDb();
 
         $selected_questions = [];
         if (!$skip_retrieve_selected_questions) {
@@ -1463,56 +1464,29 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
             );
         }
 
+        ilSession::set('tst_import_selected_questions', $selected_questions);
+
+        $imp = new ilImport($this->testrequest->getRefId());
+        $map = $imp->getMapping();
+        $map->addMapping('components/ILIAS/Test', 'tst', 'new_id', (string) $new_obj->getId());
+
         if (is_file($importdir . DIRECTORY_SEPARATOR . "/manifest.xml")) {
-            $new_obj->saveToDb();
-
-            ilSession::set('tst_import_selected_questions', $selected_questions);
-            ilSession::set('tst_import_qst_parent', $new_obj->getId());
-
-            $imp = new ilImport($this->testrequest->getRefId());
-            $map = $imp->getMapping();
-            $map->addMapping('components/ILIAS/Test', 'tst', 'new_id', (string) $new_obj->getId());
             $imp->importObject($new_obj, $file_to_import, basename($file_to_import), 'tst', 'components/ILIAS/Test', true);
         } else {
-            $qti_parser = new ilQTIParser(
-                $importdir,
-                $qtifile,
-                ilQTIParser::IL_MO_PARSE_QTI,
-                $new_obj->getId(),
-                $selected_questions
+            $test_importer = new ilTestImporter();
+            $test_importer->setImport($imp);
+            $test_importer->setInstallId(IL_INST_ID);
+            $test_importer->setImportDirectory($importdir . '/' . $subdir);
+            $test_importer->init();
+
+            $test_importer->importXmlRepresentation(
+                '',
+                '',
+                '',
+                $map,
             );
-
-            $results_file = $this->buildResultsFilePath($importdir, $subdir);
-            if (!file_exists($results_file) && $selected_questions === []) {
-                $qti_parser->setIgnoreItemsEnabled(true);
-            }
-            $qti_parser->setTestObject($new_obj);
-            $qti_parser->startParsing();
-            $new_obj->saveToDb();
-            $question_page_parser = new ilQuestionPageParser(
-                $new_obj,
-                $xmlfile,
-                $importdir
-            );
-            $question_page_parser->setQuestionMapping($qti_parser->getImportMapping());
-            $question_page_parser->startParsing();
-
-            if (file_exists($results_file)) {
-                $results = new ilTestResultsImportParser(
-                    $results_file,
-                    $new_obj,
-                    $this->db,
-                    $new_obj->getTestlogger()
-                );
-                $results->setQuestionIdMapping($qti_parser->getQuestionIdMapping());
-                $results->startParsing();
-            }
-
-            $new_obj->update();
         }
 
-
-        // delete import directory
         ilFileUtils::delDir($importdir);
         $this->deleteUploadedImportFile($path_to_uploaded_file_in_temp_dir);
         ilSession::clear('path_to_import_file');
