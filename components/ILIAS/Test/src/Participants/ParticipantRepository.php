@@ -22,7 +22,6 @@ namespace ILIAS\Test\Participants;
 
 use ILIAS\Data\Order;
 use ILIAS\Data\Range;
-use ILIAS\Test\Results\Data\StatusOfAttempt;
 
 class ParticipantRepository
 {
@@ -171,6 +170,18 @@ class ParticipantRepository
     {
         $this->database->manipulate(
             "DELETE FROM tst_invited_user WHERE test_fi = {$selected_participants[0]->getTestId()} AND "
+                . $this->database->in(
+                    'user_fi',
+                    array_map(
+                        fn(Participant $participant): int => $participant->getUserId(),
+                        $selected_participants
+                    ),
+                    false,
+                    \ilDBConstants::T_INTEGER
+                )
+        );
+        $this->database->manipulate(
+            "DELETE FROM tst_addtime WHERE test_fi = {$selected_participants[0]->getTestId()} AND "
                 . $this->database->in(
                     'user_fi',
                     array_map(

@@ -140,10 +140,11 @@ class ParticipantTableActions
         );
 
         if ($selected_participants === []) {
+            $error_message = $action->getSelectionErrorMessage() ?? $this->lng->txt('no_valid_participant_selection');
             $this->test_response->sendAsync(
                 $this->ui_renderer->renderAsync(
                     $this->ui_factory->messageBox()->failure(
-                        $this->lng->txt('no_valid_participant_selection')
+                        $error_message
                     )
                 )
             );

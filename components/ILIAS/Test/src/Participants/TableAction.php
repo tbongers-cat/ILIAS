@@ -54,4 +54,5 @@ interface TableAction
         bool $all_participants_selected
     ): ?Modal;
     public function allowActionForRecord(Participant $record): bool;
+    public function getSelectionErrorMessage(): ?string;
 }
