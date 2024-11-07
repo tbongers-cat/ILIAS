@@ -68,7 +68,7 @@ trait TestQuestionsImportTrait
     private function buildResultsFilePath(string $importdir, string $subdir): string
     {
         return $importdir . DIRECTORY_SEPARATOR
-                . str_replace('tst', 'results', $subdir) . 'xml';
+                . str_replace('tst', 'results', $subdir) . '.xml';
     }
 
     private function getImportTempDirectory(): string
