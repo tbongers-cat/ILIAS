@@ -53,7 +53,7 @@ class Modal
         $image_src = $this->badge_image_service->getImageFromBadge($content->badge());
 
         $modal_content[] = $this->container->ui()->factory()->image()->responsive(
-            ($this->sign_file)($image_src),
+            $image_src,
             $image_src
         );
         $modal_content[] = $this->container->ui()->factory()->divider()->horizontal();
