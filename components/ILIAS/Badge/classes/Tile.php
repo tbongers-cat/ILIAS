@@ -132,12 +132,12 @@ class Tile
 
     private function image(Component $modal, ilBadge $badge): Component
     {
-        $image_src = $this->badge_image_service->getImageFromBadge($badge);
+        $image_src = $this->badge_image_service->getImageFromBadge($badge, ilBadgeImage::IMAGE_SIZE_M);
         return $this->container
             ->ui()
             ->factory()
             ->image()
-            ->responsive(($this->sign_file)($image_src), $image_src)
+            ->responsive($image_src, $image_src)
             ->withAction($modal->getShowSignal());
     }
 
