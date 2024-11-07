@@ -27,14 +27,15 @@ il.Awareness = {
 	},
 
 	init: function() {
-		console.log("**************************INIT***********************");
-		document.querySelectorAll('.ilAwarenessItem').forEach((el) => {
+		document.querySelectorAll('.ilAwarenessItem div[role="button"]').forEach((el) => {
 			el.addEventListener('click', () => {
-				const ul = el.querySelector('ul');
+				const ul = el.parentNode.querySelector('ul');
 				if (ul.style.display === 'none') {
-					ul.style.display === 'block';
+					ul.style.display = 'block';
+					el.setAttribute('aria-expanded', 'true');
 				} else {
-					ul.style.display === 'none';
+					ul.style.display = 'none';
+					el.setAttribute('aria-expanded', 'false');
 				}
 			});
 		});
