@@ -486,7 +486,7 @@ class ilTrMatrixTableGUI extends ilLPTableBaseGUI
              * (nor should it), so it needs to be added here.
              */
             if (in_array('org_units', $a_user_fields)) {
-                foreach ($data['set'] as $key => $usr_data) {
+                foreach (($data['set'] ?? []) as $key => $usr_data) {
                     if (!isset($usr_data['usr_id'])) {
                         continue;
                     }
