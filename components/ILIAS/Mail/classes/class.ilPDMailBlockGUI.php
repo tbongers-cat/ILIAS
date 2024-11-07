@@ -51,7 +51,6 @@ class ilPDMailBlockGUI extends ilBlockGUI
         $this->rbacsystem = $DIC->rbac()->system();
         $this->http = $DIC->http();
         $this->refinery = $DIC->refinery();
-        $this->new_rendering = true;
 
         parent::__construct();
 
