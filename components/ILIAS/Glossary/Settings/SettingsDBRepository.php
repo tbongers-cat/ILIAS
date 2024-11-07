@@ -36,6 +36,7 @@ class SettingsDBRepository
         $this->db->update(
             'glossary',
             [
+                'is_online' => ['text', $this->boolToText($settings->getOnline())],
                 'virtual' => ['text', $settings->getVirtualMode()],
                 'glo_menu_active' => ['text', $this->boolToText($settings->getActiveGlossaryMenu())],
                 'pres_mode' => ['text', $settings->getPresentationMode()],
@@ -70,6 +71,7 @@ class SettingsDBRepository
     {
         return $this->data->settings(
             (int) $record['id'],
+            $this->textToBool($record['is_online']),
             (string) $record['virtual'],
             $this->textToBool($record['glo_menu_active']),
             (string) $record['pres_mode'],
