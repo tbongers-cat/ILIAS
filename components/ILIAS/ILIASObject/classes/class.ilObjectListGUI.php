@@ -1967,9 +1967,14 @@ class ilObjectListGUI
     private function populateCommands(
         bool $for_header
     ): void {
-        if (!$this->getCommandsStatus() || $this->commandsNeedToBeHidden(
-            $for_header
-        )) {
+        $commands = $this->getCommands();
+        if (!$this->getCommandsStatus() || $this->commandsNeedToBeHidden($for_header)) {
+            foreach ($commands as $command) {
+                if ($command['default'] === true) {
+                    $this->default_command = $command['granted'] === true ? $this->createDefaultCommand($command) : [];
+                }
+                return;
+            }
             return;
         }
 
@@ -1982,7 +1987,6 @@ class ilObjectListGUI
         // we only allow the following commands inside the header actions
         $valid_header_commands = ['mount_webfolder'];
 
-        $commands = $this->getCommands();
         foreach ($commands as $command) {
             if ($for_header && !in_array($command['cmd'], $valid_header_commands)
                 || $command['granted'] === false) {
