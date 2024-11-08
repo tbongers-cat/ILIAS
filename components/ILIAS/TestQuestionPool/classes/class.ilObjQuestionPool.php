@@ -52,7 +52,7 @@ class ilObjQuestionPool extends ilObject
 
         $this->type = 'qpl';
 
-        parent::__construct($a_id, $a_call_by_reference);
+        parent::__construct((int) $a_id, $a_call_by_reference);
 
         $this->skill_service_enabled = false;
     }
@@ -345,7 +345,7 @@ class ilObjQuestionPool extends ilObject
         $a_xml_writer->xmlStartTag('ContentObject', $attrs);
 
         // MetaData
-        $this->exportXMLMetaData($a_xml_writer);
+        $this->exportTitleAndDescription($a_xml_writer);
 
         // Settings
         $this->exportXMLSettings($a_xml_writer);
@@ -395,18 +395,10 @@ class ilObjQuestionPool extends ilObject
         $skillQuestionAssignmentExporter->export();
     }
 
-    /**
-     * export content objects meta data to xml (see ilias_co.dtd)
-     *
-     * @param object $a_xml_writer            ilXmlWriter object that receives the
-     *                                        xml data
-     */
-    public function exportXMLMetaData(&$a_xml_writer): void
+    public function exportTitleAndDescription(ilXmlWriter &$a_xml_writer): void
     {
-        $md2xml = new ilMD2XML($this->getId(), 0, $this->getType());
-        $md2xml->setExportMode(true);
-        $md2xml->startExport();
-        $a_xml_writer->appendXML($md2xml->getXML());
+        $a_xml_writer->xmlElement('Title', null, $this->getTitle());
+        $a_xml_writer->xmlElement('Description', null, $this->getDescription());
     }
 
     public function modifyExportIdentifier($a_tag, $a_param, $a_value)
