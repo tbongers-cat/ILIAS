@@ -8870,6 +8870,7 @@ dcl#:#dcl_update_record#:#Eintrag aktualisieren
 dcl#:#dcl_url#:#URL oder E-Mail
 dcl#:#dcl_view_configuration#:#Ansichtskonfiguration
 dcl#:#dcl_view_own_records_perm#:#Nur eigene Einträge anzeigen
+dcl#:#dcl_view_own_records_perm_desc#:#Einträge von anderen Personen werden nicht angezeigt.
 dcl#:#dcl_view_settings#:#Ansichtseinstellungen
 dcl#:#dcl_view_viewdefinition#:#Vorlage für Einzelansicht
 dcl#:#dcl_visible#:#Für alle Benutzer sichtbar

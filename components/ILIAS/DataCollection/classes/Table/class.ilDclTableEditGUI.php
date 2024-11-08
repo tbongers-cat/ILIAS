@@ -150,7 +150,10 @@ class ilDclTableEditGUI
             ->withOption('own', $this->lng->txt('dcl_own_entries'))
             ->withOption('none', $this->lng->txt('dcl_no_entries'))
             ->withValue('own');
-        $user['view_own_records_perm'] = $this->ui_factory->input()->field()->checkbox($this->lng->txt('dcl_view_own_records_perm'));
+        $user['view_own_records_perm'] = $this->ui_factory->input()->field()->checkbox(
+            $this->lng->txt('dcl_view_own_records_perm'),
+            $this->lng->txt('dcl_view_own_records_perm_desc'),
+        );
         $user['export_enabled'] = $this->ui_factory->input()->field()->checkbox($this->lng->txt('dcl_export_enabled'), $this->lng->txt('dcl_export_enabled_desc'));
         $user['import_enabled'] = $this->ui_factory->input()->field()->checkbox($this->lng->txt('dcl_import_enabled'), $this->lng->txt('dcl_import_enabled_desc'));
         $user['limited'] = $this->ui_factory->input()->field()->optionalGroup(
