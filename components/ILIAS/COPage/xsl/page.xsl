@@ -3293,35 +3293,55 @@
 			<xsl:attribute name="style">width: <xsl:value-of select="$cwidth" />px; <xsl:value-of select="$halign" /><xsl:if test="$mode='edit'"> background-color:white;</xsl:if></xsl:attribute>
 		</xsl:if>-->
 		<xsl:if test="@Type = 'Carousel'">
-			<xsl:choose>
+			<!-- <xsl:choose>
 				<xsl:when test="$cwidth != 'null'">
 					<xsl:attribute name="style">display: grid; width: <xsl:value-of select="$cwidth" />px; <xsl:value-of select="$halign" /></xsl:attribute>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:attribute name="style">display: grid;</xsl:attribute>
 				</xsl:otherwise>
-			</xsl:choose>
+			</xsl:choose> -->
 		</xsl:if>
 		<xsl:variable name="cheight">null</xsl:variable>
 		<div>
+		<xsl:attribute name="id">ilc_accordion_<xsl:value-of select = "$pg_id"/>_<xsl:number count="Tabs" level="any" /></xsl:attribute>
+		<xsl:attribute name="data-copg-tabs-type"><xsl:value-of select="@Type" /></xsl:attribute>
 		<xsl:choose>
 		<xsl:when test="$mode = 'edit' or $mode = 'print' or $compare_mode = 'y'">
 			<xsl:attribute name="class">ilc_va_cntr_AccordCntr</xsl:attribute>
 		</xsl:when>
 		<xsl:when test="@Type = 'VerticalAccordion' or @Type = 'HorizontalAccordion'">
+			<xsl:variable name="beh">
+				<xsl:choose>
+					<xsl:when test="$mode = 'print'">ForceAllOpen</xsl:when>
+					<xsl:when test="$compare_mode = 'y'">ForceAllOpen</xsl:when>
+					<xsl:otherwise><xsl:value-of select="@Behavior"/></xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
+			<xsl:variable name="aheadclass">
+				<xsl:choose>
+					<xsl:when test="@Template and //StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_iheada']/@Value">ilc_va_iheada_<xsl:value-of select = "//StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_iheada']/@Value"/></xsl:when>
+					<xsl:otherwise>ilc_va_iheada_AccordIHeadActive</xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
 			<xsl:attribute name="class">ilc_va_cntr_AccordCntr</xsl:attribute>
-			<xsl:attribute name="id">ilc_accordion_<xsl:value-of select = "$pg_id"/>_<xsl:number count="Tabs" level="any" /></xsl:attribute>
 			<xsl:if test="@Template and //StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_cntr']/@Value">
 				<xsl:attribute name = "class">ilc_va_cntr_<xsl:value-of select = "//StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_cntr']/@Value"/></xsl:attribute>
 			</xsl:if>
+			<xsl:attribute name="data-copg-tabs-toggle-class">il_VAccordionToggleDef</xsl:attribute>
+			<xsl:attribute name="data-copg-tabs-toggle-act-class">il_VAccordionToggleActiveDef</xsl:attribute>
+			<xsl:attribute name="data-copg-tabs-content-class">il_VAccordionContentDef</xsl:attribute>
+			<xsl:attribute name="data-copg-tabs-behaviour"><xsl:value-of select = "$beh"/></xsl:attribute>
+			<xsl:attribute name="data-copg-tabs-save-url"><xsl:value-of select = "$acc_save_url"/></xsl:attribute>
+			<xsl:attribute name="data-copg-tabs-active-head-class"><xsl:value-of select = "$aheadclass"/></xsl:attribute>
 		</xsl:when>
 		<xsl:when test="@Type = 'Carousel'">
-			<xsl:attribute name="class">ilc_ca_cntr_CarouselCntr owl-carousel</xsl:attribute>
-			<xsl:attribute name="id">ilc_accordion_<xsl:value-of select = "$pg_id"/>_<xsl:number count="Tabs" level="any" /></xsl:attribute>
+			<xsl:attribute name="class">ilc_ca_cntr_CarouselCntr</xsl:attribute>
+			<xsl:attribute name="data-copg-tabs-auto-anim-wait"><xsl:value-of select = "number(@AutoAnimWait)"/></xsl:attribute>
+			<xsl:attribute name="data-copg-tabs-random-start"><xsl:value-of select = "number(@RandomStart)"/></xsl:attribute>
 			<xsl:if test="@Template and //StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='ca_cntr']/@Value">
 				<xsl:attribute name = "class">ilc_ca_cntr_<xsl:value-of select = "//StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='ca_cntr']/@Value"/> owl-carousel</xsl:attribute>
 			</xsl:if>
-			<xsl:attribute name="style">overflow: hidden;</xsl:attribute>
 		</xsl:when>
 		</xsl:choose>
 			<xsl:apply-templates select="Tab">
@@ -3366,49 +3386,6 @@
 						<xsl:otherwise>ilc_va_iheada_AccordIHeadActive</xsl:otherwise>
 					</xsl:choose>
 				</xsl:variable>
-				<script type="text/javascript">
-					if (typeof ilAccordionsInits === 'undefined') {
-						var ilAccordionsInits = [];
-					}
-					ilAccordionsInits.push({
-							id: 'ilc_accordion_<xsl:value-of select = "$pg_id"/>_<xsl:number count="Tabs" level="any" />',
-							toggle_class: 'il_VAccordionToggleDef',
-							toggle_act_class: 'il_VAccordionToggleActiveDef',
-							content_class: 'il_VAccordionContentDef',
-							width: null,
-							height: null,
-							orientation: 'vertical',
-							behaviour: '<xsl:value-of select = "$beh"/>',
-							save_url: '<xsl:value-of select = "$acc_save_url"/>',
-							active_head_class: '<xsl:value-of select="$aheadclass"/>',
-							int_id: '',
-							multi: false
-							}
-					);
-				</script>
-			</xsl:if>
-			<xsl:if test="@Type = 'Carousel' and $mode != 'print' and $compare_mode = 'n'">
-				<script type="text/javascript">
-					if (typeof ilAccordionsInits === 'undefined') {
-						var ilAccordionsInits = [];
-					}
-					ilAccordionsInits.push({
-					id: 'ilc_accordion_<xsl:value-of select = "$pg_id"/>_<xsl:number count="Tabs" level="any" />',
-					toggle_class: '',
-					toggle_act_class: '',
-					content_class: '',
-					width: <xsl:value-of select="$cwidth" />,
-					height: null,
-					orientation: 'carousel',
-					behaviour: 'Carousel',
-					save_url: '',
-					active_head_class: '',
-					int_id: '',
-					multi: false,
-					auto_anim_wait: <xsl:value-of select="number(@AutoAnimWait)" />,
-					random_start: <xsl:value-of select="number(@RandomStart)" />
-					});
-				</script>
 			</xsl:if>
 		</xsl:if>
 	</div>
