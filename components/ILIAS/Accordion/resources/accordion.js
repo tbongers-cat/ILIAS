@@ -59,7 +59,7 @@ il.Accordion = {
 
 	init: function (id) {
 		var t, el, next_el, acc_el, a = il.Accordion.data[id], apt, sp;
-
+		console.log("acc init 1");
 		if (a.behaviour == "Carousel") {
 			apt = (a.auto_anim_wait > 100)
 				? a.auto_anim_wait
@@ -71,7 +71,7 @@ il.Accordion = {
 			$("#" + id).owlCarousel({items: 1, autoplay: true, loop: true, dots: false, autoplayTimeout: apt, startPosition: sp});
 			return;
 		}
-
+		console.log("acc init");
 		// open the inital opened tabs
 		if (a.initial_opened.length > 0) {
 			for (var i = 0; i < a.initial_opened.length; i++) {
@@ -294,7 +294,8 @@ il.Accordion = {
 
 			const save_url = il.Accordion.getSaveUrl(a);
 			if (save_url != "") {
-				il.Util.sendAjaxGetRequestToUrl(save_url + "&act=clear&tab_nr=", {}, {}, null);
+				// il.Util.sendAjaxGetRequestToUrl(save_url + "&act=clear&tab_nr=", {}, {}, null);
+				$.get(save_url + "&act=clear&tab_nr=", null);
 			}
 		}
 		return false;
@@ -326,7 +327,8 @@ il.Accordion = {
 					? "&act=rem"
 					: "&act=clear";
 				tab_nr = il.Accordion.getTabNr(a.clicked_acc);
-				il.Util.sendAjaxGetRequestToUrl(save_url + act + "&tab_nr=" + tab_nr, {}, {}, null);
+				$.get(save_url + act + "&tab_nr=" + tab_nr, null);
+				//il.Util.sendAjaxGetRequestToUrl(save_url + act + "&tab_nr=" + tab_nr, {}, {}, null);
 			}
 		});
 	},
@@ -380,7 +382,8 @@ il.Accordion = {
 		const save_url = il.Accordion.getSaveUrl(a);
 		if (save_url !== "") {
 			tab_nr = il.Accordion.getAllNr(id);
-			il.Util.sendAjaxGetRequestToUrl(save_url + "&act=set&tab_nr=" + tab_nr, {}, {}, null);
+			$.get(save_url + "&act=set&tab_nr=" + tab_nr, null);
+			// il.Util.sendAjaxGetRequestToUrl(save_url + "&act=set&tab_nr=" + tab_nr, {}, {}, null);
 		}
 	},
 
@@ -405,7 +408,8 @@ il.Accordion = {
 				tab_nr = il.Accordion.getTabNr(a.last_opened_acc);
 			}
 			act = "&act=set";
-			il.Util.sendAjaxGetRequestToUrl(save_url + act + "&tab_nr=" + tab_nr, {}, {}, null);
+			$.get(save_url + act + "&tab_nr=" + tab_nr, null);
+			//il.Util.sendAjaxGetRequestToUrl(save_url + act + "&tab_nr=" + tab_nr, {}, {}, null);
 		}
 	},
 

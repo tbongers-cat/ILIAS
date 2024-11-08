@@ -253,6 +253,12 @@ class ilAccordionGUI
 
     public static function getLocalJavascriptFiles(): array
     {
+        $debug = false;
+        if ($debug) {
+            return array(
+                "../components/ILIAS/Accordion/resources/accordion.js"
+            );
+        }
         return array(
             "assets/js/accordion.js",
             "assets/js" . self::$owl_js_path
