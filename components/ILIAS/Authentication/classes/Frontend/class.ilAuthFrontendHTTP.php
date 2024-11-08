@@ -67,6 +67,8 @@ class ilAuthFrontendHTTP extends ilAuthFrontend implements ilAuthFrontendInterfa
      */
     protected function handleAuthenticationFail(): bool
     {
+        parent::handleAuthenticationFail();
+
         header("WWW-Authenticate: Basic realm=\"" . CLIENT_ID . "\"");
         header('HTTP/1.0 401 Unauthorized');
         return false;
