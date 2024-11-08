@@ -396,11 +396,12 @@ class ilObjBadgeAdministrationGUI extends ilObjectGUI
         $form->setTitle($lng->txt('badge_image_template_form'));
 
         $title = new ilTextInputGUI($lng->txt('title'), 'title');
+        $title->setMaxLength(255);
         $title->setRequired(true);
         $form->addItem($title);
 
         $img = new ilImageFileInputGUI($lng->txt('image'), 'img');
-        $img->setSuffixes(array('png', 'svg'));
+        $img->setSuffixes(['png', 'svg']);
         if ($a_mode === 'create') {
             $img->setRequired(true);
         }
