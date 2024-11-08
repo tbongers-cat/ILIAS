@@ -55,7 +55,7 @@ export default class TinyDomTransform {
 
   removeIds(node) {
     const { dom } = this.tiny;
-    tinyMCE.each(dom.select('*[id!=""]', node), (el) => {
+    tinyMCE.each(dom.select('[id]', node), (el) => {
       el.id = '';
     });
   }
