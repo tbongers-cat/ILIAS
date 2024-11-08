@@ -1061,7 +1061,13 @@ class ilPageObjectGUI
         //		$this->initSelfAssessmentRendering();
         ilObjMediaObjectGUI::includePresentationJS($main_tpl);
 
-        $main_tpl->addJavaScript("components/ILIAS/COPage/js/ilCOPagePres.js");
+        $debug = false;
+        if ($debug) {
+            $main_tpl->addJavaScript("../components/ILIAS/COPage/js/ilCOPagePres.js");
+        } else {
+            $main_tpl->addJavaScript("components/ILIAS/COPage/js/ilCOPagePres.js");
+        }
+
 
         // init template
         if ($this->getOutputMode() == "edit") {
