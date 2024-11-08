@@ -211,7 +211,7 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
         }
         parent::__construct("", $ref_id, true, false);
 
-        $this->ctrl->saveParameter($this, ['ref_id', 'test_ref_id', 'q_id']);
+        $this->ctrl->saveParameter($this, ['ref_id', 'test_ref_id']);
 
         $this->lng->loadLanguageModule('assessment');
 
