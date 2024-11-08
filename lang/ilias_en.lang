@@ -8873,6 +8873,7 @@ dcl#:#dcl_update_record#:#Update Entry
 dcl#:#dcl_url#:#URL or E-Mail
 dcl#:#dcl_view_configuration#:#View Configuration
 dcl#:#dcl_view_own_records_perm#:#View only own entries
+dcl#:#dcl_view_own_records_perm_desc#:#Dont show entries of other users.
 dcl#:#dcl_view_settings#:#View Settings
 dcl#:#dcl_view_viewdefinition#:#Detailed View
 dcl#:#dcl_visible#:#Visible for all users
