@@ -37,23 +37,15 @@ abstract class ilDclSelectionFieldRepresentation extends ilDclBaseFieldRepresent
         );
         $selection_type->setRequired(true);
 
-        $option_1 = new ilRadioOption(
-            $this->lng->txt('dcl_' . ilDclSelectionFieldModel::SELECTION_TYPE_SINGLE),
-            ilDclSelectionFieldModel::SELECTION_TYPE_SINGLE
-        );
-        $selection_type->addOption($option_1);
-
-        $option_2 = new ilRadioOption(
-            $this->lng->txt('dcl_' . ilDclSelectionFieldModel::SELECTION_TYPE_MULTI),
+        $options = [
+            ilDclSelectionFieldModel::SELECTION_TYPE_SINGLE,
+            ilDclSelectionFieldModel::SELECTION_TYPE_COMBOBOX,
             ilDclSelectionFieldModel::SELECTION_TYPE_MULTI
-        );
-        $selection_type->addOption($option_2);
+        ];
 
-        $option_3 = new ilRadioOption(
-            $this->lng->txt('dcl_' . ilDclSelectionFieldModel::SELECTION_TYPE_COMBOBOX),
-            ilDclSelectionFieldModel::SELECTION_TYPE_COMBOBOX
-        );
-        $selection_type->addOption($option_3);
+        foreach ($options as $option) {
+            $selection_type->addOption(new ilRadioOption($this->lng->txt('dcl_' . $option), $option));
+        }
 
         $opt->addSubItem($selection_type);
 

@@ -121,6 +121,8 @@ class ilDclTextFieldRepresentation extends ilDclBaseFieldRepresentation
             $this->lng->txt('dcl_link_detail_page'),
             $this->getPropertyInputFieldId(ilDclBaseFieldModel::PROP_LINK_DETAIL_PAGE_TEXT)
         );
+        $prop_page_details->setInfo($this->lng->txt('dcl_link_detail_page_desc'));
+
         $opt->addSubItem($prop_page_details);
 
         return $opt;
