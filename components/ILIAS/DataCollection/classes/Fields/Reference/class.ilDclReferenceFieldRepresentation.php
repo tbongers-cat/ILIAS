@@ -182,6 +182,7 @@ class ilDclReferenceFieldRepresentation extends ilDclBaseFieldRepresentation
             'prop_' . ilDclBaseFieldModel::PROP_REFERENCE
         );
         $prop_table_selection->setOptions($options);
+        $prop_table_selection->setInfo($this->lng->txt('dcl_reference_title_desc'));
 
         $opt->addSubItem($prop_table_selection);
 

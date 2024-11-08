@@ -59,12 +59,14 @@ class ilDclMobFieldRepresentation extends ilDclFileFieldRepresentation
         $opt->setInfo(sprintf($opt->getInfo(), implode(", ", $this->getField()->getSupportedExtensions())));
 
         $prop_width = new ilNumberInputGUI($this->lng->txt('dcl_width'), 'prop_' . ilDclBaseFieldModel::PROP_WIDTH);
+        $prop_width->setInfo($this->lng->txt('dcl_width_desc'));
         $prop_width->setSize(5);
         $prop_width->setMaxValue(4000);
 
         $opt->addSubItem($prop_width);
 
         $prop_height = new ilNumberInputGUI($this->lng->txt('dcl_height'), 'prop_' . ilDclBaseFieldModel::PROP_HEIGHT);
+        $prop_height->setInfo($this->lng->txt('dcl_height_desc'));
         $prop_height->setSize(5);
         $prop_height->setMaxValue(4000);
 
@@ -74,6 +76,8 @@ class ilDclMobFieldRepresentation extends ilDclFileFieldRepresentation
             $this->lng->txt('dcl_link_detail_page'),
             'prop_' . ilDclBaseFieldModel::PROP_LINK_DETAIL_PAGE_MOB
         );
+        $prop_page_details->setInfo($this->lng->txt('dcl_link_detail_page_desc'));
+
         $opt->addSubItem($prop_page_details);
 
         return $opt;

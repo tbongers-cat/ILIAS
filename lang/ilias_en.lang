@@ -8650,7 +8650,8 @@ dcl#:#dcl_deleted_records#:#Successfully deleted %s Entries
 dcl#:#dcl_desc#:#Descending Order (DESC)
 dcl#:#dcl_description#:#Field Description
 dcl#:#dcl_detailed_view#:#Single
-dcl#:#dcl_display_action_menu#:#Enable possibility to copy or link the referenced module
+dcl#:#dcl_display_action_menu#:#Copy
+dcl#:#dcl_display_action_menu_desc#:#Enable possibility to copy or link the referenced module
 dcl#:#dcl_display_record_alt#:#Display this entry
 dcl#:#dcl_duplicate_non_unique_entries_exist#:#This may also concern existing records.###23 02 2024 new variable
 dcl#:#dcl_edit#:#Edit Data Collection
@@ -8670,6 +8671,7 @@ dcl#:#dcl_export_finished#:#Export finished
 dcl#:#dcl_export_started#:#Asynchronous Export started
 dcl#:#dcl_field_datatype#:#Field Data Type
 dcl#:#dcl_field_description#:#Description
+dcl#:#dcl_field_description_desc#:#The description will be shown below the field inside the entry form.
 dcl#:#dcl_field_required#:#Required
 dcl#:#dcl_field_title_change_warning#:#You changed the title of the field hence some placeholders in the view definition might be broken. Those have to be fixed manually should the occasion arise.
 dcl#:#dcl_field_title_unique#:#There exists already a field with this title. Title must be unique.
@@ -8685,6 +8687,7 @@ dcl#:#dcl_formula#:#Formula
 dcl#:#dcl_formula_desc#:#You can aggregate several entries in a record with a formula.
 dcl#:#dcl_formula_detail_desc#:#Entries are generated automatically, you are not able to edit the entry.
 dcl#:#dcl_height#:#Height
+dcl#:#dcl_height_desc#:#The file will be resized to the given height
 dcl#:#dcl_hello#:#Dear
 dcl#:#dcl_id#:#ID
 dcl#:#dcl_id_description#:#The internal ID.
@@ -8703,7 +8706,8 @@ dcl#:#dcl_last_edited_by#:#Last edited by
 dcl#:#dcl_last_edited_by_description#:#The user that edited this entry last.
 dcl#:#dcl_last_update#:#Last Edited
 dcl#:#dcl_last_update_description#:#The date the entry was last edited.
-dcl#:#dcl_learning_progress#:#Show the learning progress of the linked module of the viewer
+dcl#:#dcl_learning_progress#:#Learning Progress
+dcl#:#dcl_learning_progress_desc#:#Show the learning progress of the linked module of the viewer
 dcl#:#dcl_legend_placeholders#:#Placeholders
 dcl#:#dcl_length#:#Length
 dcl#:#dcl_length_info#:#Number of characters a user can enter (maximum 4000). For more than 200 characters, use the additional option Text Area.
@@ -8712,6 +8716,7 @@ dcl#:#dcl_limit_start#:#Start
 dcl#:#dcl_limited#:#Limited Add / Edit / Delete Period
 dcl#:#dcl_limited_desc#:#Users can only edit entries in the given time span.
 dcl#:#dcl_link_detail_page#:#Link to detailed view
+dcl#:#dcl_link_detail_page_desc#:#Additionaly, the detailed view must be activated and configured within the tab "Single".
 dcl#:#dcl_list_fields#:#Fields
 dcl#:#dcl_list_visibility_and_filter#:#Overview
 dcl#:#dcl_locked#:#Locked
@@ -8794,6 +8799,7 @@ dcl#:#dcl_reference_desc#:#Field to reference options stored in a different fiel
 dcl#:#dcl_reference_link#:#Show as link to referenced entry
 dcl#:#dcl_reference_link_info#:#Detailed View must be active in referenced table
 dcl#:#dcl_reference_title#:#Reference to table and field
+dcl#:#dcl_reference_title_desc#:#Entries of the selected field are options of the target field.
 dcl#:#dcl_regex#:#Regular Expression
 dcl#:#dcl_regex_info#:#(without delimiter)
 dcl#:#dcl_required#:#Required Field
@@ -8806,9 +8812,9 @@ dcl#:#dcl_save_record#:#Save Entry
 dcl#:#dcl_select#:#Select for Presentation
 dcl#:#dcl_selection_options#:#Options
 dcl#:#dcl_selection_type#:#Type
-dcl#:#dcl_selection_type_combobox#:#Combobox (Dropdown)
-dcl#:#dcl_selection_type_multi#:#Multiple Selection
-dcl#:#dcl_selection_type_single#:#Single Selection
+dcl#:#dcl_selection_type_combobox#:#Single Combobox Selection (Dropdown)
+dcl#:#dcl_selection_type_multi#:#Multiple List Selection
+dcl#:#dcl_selection_type_single#:#Single List Selection
 dcl#:#dcl_simulate_import#:#Simulate Import
 dcl#:#dcl_simulate_info#:#Simulating the import will not add any fields into the Data Collection but may give you feedback on problems with the import file, thus helping you to prevent corrupted entries.
 dcl#:#dcl_skipped_delete_records#:#%s Entries were not deleted due to permission settings
@@ -8872,6 +8878,7 @@ dcl#:#dcl_view_viewdefinition#:#Detailed View
 dcl#:#dcl_visible#:#Visible for all users
 dcl#:#dcl_visible_desc#:#Users can access this table.
 dcl#:#dcl_width#:#Width
+dcl#:#dcl_width_desc#:#The file will be resized to the given width.
 dcl#:#dcl_wrong_input_type#:#The value you entered does not match the specification (Wrong Type).
 dcl#:#dcl_wrong_length#:#The text you entered is to long.
 dcl#:#dcl_wrong_regex#:#The text you entered does not match the specification for this field (Regular Expression).
