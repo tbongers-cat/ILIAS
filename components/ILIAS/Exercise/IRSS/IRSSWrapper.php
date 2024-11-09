@@ -166,7 +166,7 @@ class IRSSWrapper
         $this->irss->collection()->store($collection);
     }
 
-    protected function getResourceIdForIdString(string $rid): ?ResourceIdentification
+    public function getResourceIdForIdString(string $rid): ?ResourceIdentification
     {
         return $this->irss->manage()->find($rid);
     }
@@ -467,10 +467,6 @@ class IRSSWrapper
         foreach ($iterator as $file) {
             if (!$file->isDir()) {
                 $file->getRealPath();
-                var_dump($rid);
-                var_dump($file->getRealPath());
-                var_dump(substr($file->getRealPath(), strlen($real_dir_path) + 1));
-                exit;
                 $this->addLocalFileToContainer(
                     $rid,
                     $file->getRealPath(),
