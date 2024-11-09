@@ -350,15 +350,21 @@ class ilObjSurveyGUI extends ilObjectGUI implements ilCtrlBaseClassInterface
 
     protected function afterSave(ilObject $new_object): void
     {
+        $form = $this
+            ->initCreateForm($this->requested_new_type)
+            ->withRequest($this->request);
+        $data = $form->getData();
+        $dtemplate = $data["didactic_templates"];
+
         // #16446
         $new_object->loadFromDb();
 
-        //set the mode depending on didactic template
-        if ($this->getDidacticTemplateVar("svy360")) {
+        // set the mode depending on didactic template
+        if (str_starts_with($dtemplate, "svy360_")) {
             $new_object->setMode(ilObjSurvey::MODE_360);
-        } elseif ($this->getDidacticTemplateVar("svyselfeval")) {
+        } elseif (str_starts_with($dtemplate, "svyselfeval_")) {
             $new_object->setMode(ilObjSurvey::MODE_SELF_EVAL);
-        } elseif ($this->getDidacticTemplateVar("individfeedb")) {
+        } elseif (str_starts_with($dtemplate, "individfeedb_")) {
             $new_object->setMode(ilObjSurvey::MODE_IND_FEEDB);
         }
 

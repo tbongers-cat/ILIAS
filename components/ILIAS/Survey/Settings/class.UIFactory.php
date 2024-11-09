@@ -42,7 +42,6 @@ class UIFactory
         $this->ui_service = $ui_service;
         $this->object_service = $object_service;
         $this->domain_service = $domain_service;
-
         $mode_ui_modifier = $ui_service->modeUIModifier($survey->getMode());
         $this->settings_form_gui = new SettingsFormGUI(
             $ui_service,
