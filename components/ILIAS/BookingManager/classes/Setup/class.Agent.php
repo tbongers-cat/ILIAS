@@ -71,6 +71,8 @@ class Agent extends Setup\Agent\NullAgent
         // db update steps
         $objectives[] = new \ilDatabaseUpdateStepsExecutedObjective(new ilBookingManagerDBUpdateSteps());
 
+        $objectives[] = new \ilDatabaseUpdateStepsExecutedObjective(new ilBookingManager8HotfixDBUpdateSteps());
+
         return $objectives;
     }
 

@@ -31,20 +31,11 @@ class Agent extends Setup\Agent\NullAgent
 {
     public function getUpdateObjective(Setup\Config $config = null): Setup\Objective
     {
-<<<<<<< HEAD:components/ILIAS/COPage/IntLink/Setup/class.Agent.php
         return new \ilDatabaseUpdateStepsExecutedObjective(new LinkDBUpdateSteps());
     }
 
     public function getStatusObjective(Metrics\Storage $storage): Objective
     {
         return new \ilDatabaseUpdateStepsMetricsCollectedObjective($storage, new LinkDBUpdateSteps());
-=======
-        return new Setup\ObjectiveCollection(
-            'Booking Manager Update',
-            true,
-            new \ilDatabaseUpdateStepsExecutedObjective(new ilBookingManagerDBUpdateSteps()),
-            new \ilDatabaseUpdateStepsExecutedObjective(new ilBookingManager8HotfixDBUpdateSteps())
-        );
->>>>>>> 6760c1bc365 (42614: BookingPool: Cloning of schedules does not work correctly, ID 1 seems to be stored for the booking objectt):Modules/BookingManager/classes/Setup/class.Agent.php
     }
 }
