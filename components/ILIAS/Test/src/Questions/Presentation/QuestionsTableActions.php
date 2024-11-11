@@ -115,7 +115,7 @@ class QuestionsTableActions
             self::ACTION_PREVIEW => $ag('single', 'preview', self::ACTION_PREVIEW),
             self::ACTION_ADJUST => $ag('single', 'tst_corrections_qst_form', self::ACTION_ADJUST),
             self::ACTION_STATISTICS => $ag('single', 'statistics', self::ACTION_STATISTICS),
-            self::ACTION_EDIT_QUESTION => $ag('single', 'tst_question_hints_tab', self::ACTION_EDIT_QUESTION),
+            self::ACTION_EDIT_QUESTION => $ag('single', 'edit_question', self::ACTION_EDIT_QUESTION),
             self::ACTION_EDIT_PAGE => $ag('single', 'edit_page', self::ACTION_EDIT_PAGE),
             self::ACTION_FEEDBACK => $ag('single', 'tst_feedback', self::ACTION_FEEDBACK),
             self::ACTION_HINTS => $ag('single', 'tst_question_hints_tab', self::ACTION_HINTS),
