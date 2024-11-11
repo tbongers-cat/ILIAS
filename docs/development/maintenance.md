@@ -418,6 +418,20 @@ of ILIAS. The file contains the following fields:
 
 [//]: # (END ContentPage)
 
+[//]: # (BEGIN Context)
+
+* **Context**
+    * Authority to Sign off on Conceptual Changes: [rklees](https://docu.ilias.de/go/usr/34047)
+    * Authority to Sign off on Code Changes: [rklees](https://docu.ilias.de/go/usr/34047)
+    * Authority to Curate Test Cases: [rklees](https://docu.ilias.de/go/usr/34047)
+    * Authority to (De-)Assign Authorities: [rklees](https://docu.ilias.de/go/usr/34047)
+	* Tester: [TESTER MISSING](https://docu.ilias.de/go/pg/64423_4793)
+    * Assignee for Security Reports: [rklees](https://docu.ilias.de/go/usr/34047)
+    * Assignee for Security Issues: [rklees](https://docu.ilias.de/go/usr/34047)
+    * Unit-specific Guidelines, Rules, and Regulations: [LINK MISSING]('')
+
+[//]: # (END Context)
+
 [//]: # (BEGIN CourseManagement)
 
 * **Course Management**
@@ -584,6 +598,20 @@ of ILIAS. The file contains the following fields:
     * Unit-specific Guidelines, Rules, and Regulations: [LINK MISSING]('')
 
 [//]: # (END EmployeeTalk)
+
+[//]: # (BEGIN EventHandling)
+
+* **EventHandling**
+    * Authority to Sign off on Conceptual Changes: [rklees](https://docu.ilias.de/go/usr/34047)
+    * Authority to Sign off on Code Changes: [rklees](https://docu.ilias.de/go/usr/34047)
+    * Authority to Curate Test Cases: [rklees](https://docu.ilias.de/go/usr/34047)
+    * Authority to (De-)Assign Authorities: [rklees](https://docu.ilias.de/go/usr/34047)
+	* Tester: [TESTER MISSING](https://docu.ilias.de/go/pg/64423_4793)
+    * Assignee for Security Reports: [rklees](https://docu.ilias.de/go/usr/34047)
+    * Assignee for Security Issues: [rklees](https://docu.ilias.de/go/usr/34047)
+    * Unit-specific Guidelines, Rules, and Regulations: [LINK MISSING]('')
+
+[//]: # (END EventHandling)
 
 [//]: # (BEGIN Excel)
 
