@@ -336,7 +336,7 @@ class ilObjectBadgeTableGUI
         $actions = $this->getActions($url_builder, $action_parameter_token, $row_id_token);
 
         $table = $f->table()
-                   ->data('', $columns, $data_retrieval)
+                   ->data($this->lng->txt('badge_object_badges'), $columns, $data_retrieval)
                    ->withActions($actions)
                    ->withRequest($request);
 

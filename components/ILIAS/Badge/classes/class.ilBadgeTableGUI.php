@@ -313,7 +313,7 @@ class ilBadgeTableGUI
 
         $data_retrieval = $this->buildDataRetrievalObject($f, $r, $this->parent_id, $this->parent_type);
         $actions = $this->getActions($url_builder, $action_parameter_token, $row_id_token);
-        $table = $f->table()->data('', $columns, $data_retrieval)
+        $table = $f->table()->data($this->lng->txt('obj_bdga'), $columns, $data_retrieval)
                    ->withActions($actions)
                    ->withRequest($request);
         $out = [$table];

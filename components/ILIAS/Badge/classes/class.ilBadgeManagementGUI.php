@@ -864,22 +864,6 @@ class ilBadgeManagementGUI
         $tbl->renderTable();
     }
 
-    protected function applyAwardBadgeUserSelection(): void
-    {
-        $tbl = new ilBadgeUserTableGUI($this, 'awardBadgeUserSelection', $this->parent_ref_id);
-        $tbl->resetOffset();
-        $tbl->writeFilterToSession();
-        $this->awardBadgeUserSelection();
-    }
-
-    protected function resetAwardBadgeUserSelection(): void
-    {
-        $tbl = new ilBadgeUserTableGUI($this, 'awardBadgeUserSelection', $this->parent_ref_id);
-        $tbl->resetOffset();
-        $tbl->resetFilter();
-        $this->awardBadgeUserSelection();
-    }
-
     protected function assignBadge(): void
     {
         $ilCtrl = $this->ctrl;

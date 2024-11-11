@@ -229,7 +229,7 @@ class ilBadgeTypesTableGUI
         $data_retrieval = $this->buildDataRetrievalObject($f, $r);
 
         $table = $f->table()
-                   ->data('', $columns, $data_retrieval)
+                   ->data($this->lng->txt('badge_types'), $columns, $data_retrieval)
                    ->withActions($actions)
                    ->withRequest($request);
 

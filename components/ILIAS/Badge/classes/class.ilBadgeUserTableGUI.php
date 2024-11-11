@@ -40,6 +40,7 @@ use ilBadgeAssignment;
 use ilUserQuery;
 use DateTimeImmutable;
 use ILIAS\UI\URLBuilderToken;
+use ilObjectDataDeletionLog;
 
 class ilBadgeUserTableGUI
 {
@@ -47,12 +48,14 @@ class ilBadgeUserTableGUI
     private readonly Renderer $renderer;
     private readonly ServerRequestInterface|RequestInterface $request;
     private readonly int $parent_ref_id;
-    private readonly ?ilBadge $award_badge;
     private readonly ilLanguage $lng;
     private readonly ilGlobalTemplateInterface $tpl;
 
-    public function __construct(int $parent_ref_id, ?ilBadge $award_badge = null)
-    {
+    public function __construct(
+        int $parent_ref_id,
+        private readonly ?ilBadge $award_badge = null,
+        private readonly int $restrict_badge_id = 0
+    ) {
         global $DIC;
 
         $this->lng = $DIC->language();
@@ -61,7 +64,6 @@ class ilBadgeUserTableGUI
         $this->renderer = $DIC->ui()->renderer();
         $this->request = $DIC->http()->request();
         $this->parent_ref_id = $parent_ref_id;
-        $this->award_badge = $award_badge;
     }
 
     private function buildDataRetrievalObject(
@@ -196,7 +198,7 @@ class ilBadgeUserTableGUI
                 ?array $additional_parameters
             ): Generator {
                 $records = $this->getRecords($range, $order);
-                foreach ($records as $idx => $record) {
+                foreach ($records as $record) {
 
                     $row_id = (string) $record['id'];
                     if ($this->award_badge !== null) {
@@ -313,9 +315,28 @@ class ilBadgeUserTableGUI
         $data_retrieval = $this->buildDataRetrievalObject($f, $r, $this->parent_ref_id, $this->award_badge);
         $actions = $this->getActions($url_builder, $action_parameter_token, $row_id_token);
 
-        $title = '';
         if ($this->award_badge) {
-            $title = $this->lng->txt("badge_award_badge") . ": " . $this->award_badge->getTitle();
+            $title = $this->lng->txt('badge_award_badge') . ': ' . $this->award_badge->getTitle();
+        } else {
+            $parent = '';
+            $parent_obj_id = ilObject::_lookupObjId($this->parent_ref_id);
+            if ($parent_obj_id) {
+                $title = ilObject::_lookupTitle($parent_obj_id);
+                if (!$title) {
+                    $title = ilObjectDataDeletionLog::get($parent_obj_id);
+                    if ($title) {
+                        $title = $title['title'];
+                    }
+                }
+
+                if ($this->restrict_badge_id) {
+                    $badge = new ilBadge($this->restrict_badge_id);
+                    $title .= ' - ' . $badge->getTitle();
+                }
+
+                $parent = $title . ': ';
+            }
+            $title = $parent . $this->lng->txt('users');
         }
         $table = $f->table()
                    ->data($title, $columns, $data_retrieval)
