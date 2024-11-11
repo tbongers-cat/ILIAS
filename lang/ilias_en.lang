@@ -2256,17 +2256,10 @@ badge#:##:#Are you sure you want to delete the following badges and all their re
 badge#:#awarded_by#:#Awarded by
 badge#:#badge_activity_badges#:#Activity Badges
 badge#:#badge_add_template#:#Add Template
-badge#:#badge_add_to_backpack#:#Add to Backpack
-badge#:#badge_add_to_backpack_multi#:#Trying to add %s to Backpack
 badge#:#badge_add_to_profile#:#Add to Profile
 badge#:#badge_assignment_deletion_confirmation#:#Are you sure you want to revoke the following badge assignments for "%s"?
 badge#:#badge_award_badge#:#Award Badge
 badge#:#badge_award_revoke#:#Award/Revoke Badge
-badge#:#badge_backpack_connect_failed#:#The Mozilla Backpack could not be requested for %s.
-badge#:#badge_backpack_email#:#Mozilla Backpack Account (E-Mail)
-badge#:#badge_backpack_gallery_info#:#These are your published badge collections in your Mozilla Backpack.
-badge#:#badge_backpack_list#:#My Backpack
-badge#:#badge_backpack_no_groups#:#The Mozilla Backpack is empty or non-public.
 badge#:#badge_badge#:#Badge
 badge#:#badge_course_lp#:#Course LP
 badge#:#badge_course_lp_invalid#:#The following objects have a LP mode which is not supported: %s.
@@ -2276,7 +2269,6 @@ badge#:#badge_criteria#:#Criteria
 badge#:#badge_crs_merit#:#Merit
 badge#:#badge_deletion#:#Badge successfully deleted.
 badge#:#badge_deletion_confirmation#:#Are you sure you want to delete the following badges and all their respective assignments?
-badge#:#badge_edit_with_published#:#%s users have already added this badge to their backpack. Because of this changing badge attributes will lead to inconsistencies. Creating a new badge might be a better solution.
 badge#:#badge_image_from_template#:#Use Template
 badge#:#badge_image_from_upload#:#Upload Image
 badge#:#badge_image_template_form#:#Image Template
@@ -2295,20 +2287,9 @@ badge#:#badge_notification_osd#:#You just received new badges: [BADGE_LIST]
 badge#:#badge_notification_parent_goto#:#To repository
 badge#:#badge_notification_reason#:#You are receiving this message to be able to add the badges to your profile.
 badge#:#badge_notification_subject#:#Badges received
-badge#:#badge_obi_activate#:#Activate Mozilla Open Badges Infrastructure
-badge#:#badge_obi_activate_info#:#Users can export badges from ILIAS. They can use their badges to prove their qualification in other web applications.
-badge#:#badge_obi_contact#:#Contact E-Mail
-badge#:#badge_obi_contact_info#:#This e-mail address is not displayed, but it is baked into the badge.
-badge#:#badge_obi_organisation#:#Organisation
-badge#:#badge_obi_organisation_info#:#This entry will be displayed as the issuer of the badge.
-badge#:#badge_obi_salt#:#Salt
-badge#:#badge_obi_salt_info#:#Enter a combination of characters and numbers to allow third parties to validate the authenticity of a badge. Please do not change the entry afterwards.
 badge#:#badge_object_badges#:#Object Badges
-badge#:#badge_personal_badges#:#My Badges
 badge#:#badge_profile_less#:#Show less
-badge#:#badge_profile_manage#:#Manage
 badge#:#badge_profile_more#:#Show all
-badge#:#badge_profile_view#:#View
 badge#:#badge_remove_badge#:#Revoke Badge
 badge#:#badge_remove_from_profile#:#Remove from Profile
 badge#:#badge_select_one#:#You have to select at least one badge
