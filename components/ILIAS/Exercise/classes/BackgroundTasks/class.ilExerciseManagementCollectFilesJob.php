@@ -41,6 +41,7 @@ class ilExerciseManagementCollectFilesJob extends AbstractJob
     public const SUBMISSION_DATE_COLUMN = 3;
     public const FIRST_DEFAULT_SUBMIT_COLUMN = 4;
     public const FIRST_DEFAULT_REVIEW_COLUMN = 5;
+    protected \ILIAS\Exercise\PeerReview\DomainService $peer_review;
     protected InternalDomainService $domain;
     protected \ILIAS\Exercise\Team\TeamManager $team;
 
@@ -79,7 +80,7 @@ class ilExerciseManagementCollectFilesJob extends AbstractJob
         /** @noinspection PhpUndefinedMethodInspection */
         $this->logger = $DIC->logger()->exc();
         $this->domain = $DIC->exercise()->internal()->domain();
-        $this->crit_file_manager = $this->domain->peerReview()->criteriaFile($this->assignment->getId());
+        $this->peer_review = $this->domain->peerReview();
         $this->team = $DIC->exercise()->internal()->domain()->team();
     }
 
@@ -161,6 +162,7 @@ class ilExerciseManagementCollectFilesJob extends AbstractJob
      */
     public function copyFileToSubDirectory(string $a_directory, \ILIAS\Exercise\PeerReview\Criteria\CriteriaFile $file): void
     {
+        $crit_file_manager = $this->peer_review->criteriaFile($this->assignment->getId());
         $dir = $this->target_directory . "/" . $a_directory;
 
         if (!is_dir($dir)) {
@@ -168,7 +170,7 @@ class ilExerciseManagementCollectFilesJob extends AbstractJob
         }
 
         $f = fopen($dir . "/" . basename($file->getTitle()), 'wb');
-        fwrite($f, $this->crit_file_manager->getStream($file->getRid())->getContents());
+        fwrite($f, $crit_file_manager->getStream($file->getRid())->getContents());
         fclose($f);
 
         /*global $DIC;
