@@ -634,7 +634,6 @@ class ilObjBadgeAdministrationGUI extends ilObjectGUI
     {
         $ilCtrl = $this->ctrl;
         $lng = $this->lng;
-        $tpl = $this->tpl;
 
         $parent_obj_id = $this->badge_request->getParentId();
         $parent_ref_ids = ilObject::_getAllReferences($parent_obj_id);
@@ -657,7 +656,7 @@ class ilObjBadgeAdministrationGUI extends ilObjectGUI
 
         $ilCtrl->saveParameter($this, 'pid');
 
-        $tbl = new ilBadgeUserTableGUI($parent_ref_id);
+        $tbl = new ilBadgeUserTableGUI($parent_ref_id, null, $this->badge_request->getBadgeId());
         $tbl->renderTable();
     }
 
