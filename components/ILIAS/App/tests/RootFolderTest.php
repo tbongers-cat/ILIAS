@@ -49,6 +49,7 @@ final class RootFolderTest extends TestCase
         'LICENSE',
         'package-lock.json',
         'package.json',
+        'package_new.json',
         'README.md',
         'unzip_test_file.zip',
         '.DS_Store',
