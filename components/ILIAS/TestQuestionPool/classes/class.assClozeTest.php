@@ -21,9 +21,7 @@ declare(strict_types=1);
 use ILIAS\TestQuestionPool\Questions\QuestionLMExportable;
 use ILIAS\TestQuestionPool\Questions\QuestionAutosaveable;
 use ILIAS\TestQuestionPool\Questions\QuestionPartiallySaveable;
-
 use ILIAS\Test\Logging\AdditionalInformationGenerator;
-
 use ILIAS\Refinery\Random\Group as RandomGroup;
 
 /**
@@ -1076,19 +1074,19 @@ class assClozeTest extends assQuestion implements ilObjQuestionScoringAdjustable
         $solutionSubmit = [];
 
         foreach ($submit as $key => $value) {
-            if (preg_match("/^gap_(\d+)/", $key, $matches)) {
-                if ($value !== null && $value !== '') {
-                    $gap = $this->getGap($matches[1]);
-                    if (is_object($gap)) {
-                        if (!(($gap->getType() == assClozeGap::TYPE_SELECT) && ($value == -1))) {
-                            if ($gap->getType() == assClozeGap::TYPE_NUMERIC) {
-                                $value = str_replace(",", ".", $value);
-                            }
-                            $solutionSubmit[trim($matches[1])] = $value;
-                        }
-                    }
-                }
+            if ($value === null || $value === ''
+                || !preg_match('/^gap_(\d+)/', $key, $matches)) {
+                continue;
             }
+            $gap = $this->getGap((int) $matches[1]);
+            if ($gap === null
+                || $gap->getType() === assClozeGap::TYPE_SELECT && $value === -1) {
+                continue;
+            }
+            if ($gap->getType() === assClozeGap::TYPE_NUMERIC) {
+                $value = str_replace(',', '.', $value);
+            }
+            $solutionSubmit[trim($matches[1])] = $value;
         }
 
         return $solutionSubmit;
