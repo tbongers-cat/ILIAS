@@ -1184,34 +1184,31 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
         return $this->test_sequence->isPostponedQuestion($question_id);
     }
 
-    protected function showQuestionViewable(assQuestionGUI $question_gui, $formAction, $isQuestionWorkedThrough, $instantResponse)
-    {
-        $questionNavigationGUI = $this->buildReadOnlyStateQuestionNavigationGUI($question_gui->getObject()->getId());
-        $questionNavigationGUI->setQuestionWorkedThrough($isQuestionWorkedThrough);
-        $question_gui->setNavigationGUI($questionNavigationGUI);
-
-        // fau: testNav - set answere status in question header
-        $question_gui->getQuestionHeaderBlockBuilder()->setQuestionAnswered($isQuestionWorkedThrough);
-        // fau.
-
-        $answerFeedbackEnabled = (
-            $instantResponse && $this->object->getSpecificAnswerFeedback()
-        );
+    protected function showQuestionViewable(
+        assQuestionGUI $question_gui,
+        string $form_action,
+        bool $is_question_worked_through,
+        bool $instant_response
+    ): void {
+        $question_navigation_gui = $this->buildReadOnlyStateQuestionNavigationGUI($question_gui->getObject()->getId());
+        $question_navigation_gui->setQuestionWorkedThrough($is_question_worked_through);
+        $question_gui->setNavigationGUI($question_navigation_gui);
+        $question_gui->getQuestionHeaderBlockBuilder()->setQuestionAnswered($is_question_worked_through);
 
         $solutionoutput = $question_gui->getSolutionOutput(
-            $this->test_session->getActiveId(), 	#active_id
-            $this->test_session->getPass(),		#pass
-            false, 								#graphical_output
-            false,								#result_output
-            true, 								#show_question_only
-            $answerFeedbackEnabled,				#show_feedback
-            false, 								#show_correct_solution
-            false, 								#show_manual_scoring
-            true								#show_question_text
+            $this->test_session->getActiveId(),
+            $this->test_session->getPass(),
+            false,
+            false,
+            true,
+            $instant_response && $this->object->getSpecificAnswerFeedback(),
+            false,
+            false,
+            true
         );
 
         $pageoutput = $question_gui->outQuestionPage(
-            "",
+            '',
             $this->isShowingPostponeStatusReguired($question_gui->getObject()->getId()),
             $this->test_session->getActiveId(),
             $solutionoutput
@@ -1220,84 +1217,73 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
         $this->tpl->setVariable(
             'LOCKSTATE_INFOBOX',
             $this->ui_renderer->render(
-                $this->ui_factory->messageBox()->info($this->lng->txt("tst_player_answer_saved_and_locked"))
+                $this->ui_factory->messageBox()->info($this->lng->txt('tst_player_answer_saved_and_locked'))
             )
         );
         $this->tpl->parseCurrentBlock();
 
         $this->tpl->setVariable('QUESTION_OUTPUT', $pageoutput);
-
-        $this->tpl->setVariable("FORMACTION", $formAction);
-        $this->tpl->setVariable("ENCTYPE", 'enctype="' . $question_gui->getFormEncodingType() . '"');
-        $this->tpl->setVariable("FORM_TIMESTAMP", time());
+        $this->tpl->setVariable('FORMACTION', $form_action);
+        $this->tpl->setVariable('ENCTYPE', 'enctype="' . $question_gui->getFormEncodingType() . '"');
+        $this->tpl->setVariable('FORM_TIMESTAMP', time());
         $this->populateQuestionEditControl($question_gui);
     }
 
-    protected function showQuestionEditable(assQuestionGUI $question_gui, $formAction, $isQuestionWorkedThrough, $instantResponse)
-    {
-        $questionNavigationGUI = $this->buildEditableStateQuestionNavigationGUI($question_gui->getObject()->getId());
-        if ($isQuestionWorkedThrough) {
-            $questionNavigationGUI->setDiscardSolutionButtonEnabled(true);
-            // fau: testNav - set answere status in question header
+    protected function showQuestionEditable(
+        assQuestionGUI $question_gui,
+        string $form_action,
+        bool $is_question_worked_through,
+        bool $instant_response
+    ): void {
+        $question_navigation_gui = $this->buildEditableStateQuestionNavigationGUI($question_gui->getObject()->getId());
+        $question_navigation_gui->setQuestionWorkedThrough($is_question_worked_through);
+        if ($is_question_worked_through) {
+            $question_navigation_gui->setDiscardSolutionButtonEnabled(true);
             $question_gui->getQuestionHeaderBlockBuilder()->setQuestionAnswered(true);
-            // fau.
         } elseif ($this->object->isPostponingEnabled()) {
-            $questionNavigationGUI->setSkipQuestionLinkTarget(
+            $question_navigation_gui->setSkipQuestionLinkTarget(
                 $this->ctrl->getLinkTarget($this, ilTestPlayerCommands::SKIP_QUESTION)
             );
         }
-        $question_gui->setNavigationGUI($questionNavigationGUI);
+        $question_gui->setNavigationGUI($question_navigation_gui);
 
-        $isPostponed = $this->isShowingPostponeStatusReguired($question_gui->getObject()->getId());
-
-        $answerFeedbackEnabled = (
-            $instantResponse && $this->object->getSpecificAnswerFeedback()
-        );
-
-        if ($this->testrequest->isset('save_error') && $this->testrequest->raw('save_error') == 1 && ilSession::get('previouspost') != null) {
-            $userPostSolution = ilSession::get('previouspost');
+        $user_post_solution = false;
+        if ($this->testrequest->isset('save_error')
+            && $this->testrequest->int('save_error') === 1
+            && ilSession::get('previouspost') !== null) {
+            $user_post_solution = ilSession::get('previouspost');
             ilSession::clear('previouspost');
-        } else {
-            $userPostSolution = false;
         }
 
-        // fau: testNav - add special checkbox for mc question
-        // moved to another patch block
-        // fau.
-
-        // hey: prevPassSolutions - determine solution pass index and configure gui accordingly
-        $qstConfig = $question_gui->getObject()->getTestPresentationConfig();
+        $question_config = $question_gui->getObject()->getTestPresentationConfig();
 
         if ($question_gui instanceof assMultipleChoiceGUI) {
-            $qstConfig->setWorkedThrough($isQuestionWorkedThrough);
+            $question_config->setWorkedThrough($is_question_worked_through);
         }
 
-        if ($qstConfig->isPreviousPassSolutionReuseAllowed()) {
-            $passIndex = $this->determineSolutionPassIndex($question_gui); // last pass having solution stored
-            if ($passIndex < $this->test_session->getPass()) { // it's the previous pass if current pass is higher
-                $qstConfig->setSolutionInitiallyPrefilled(true);
+        if ($question_config->isPreviousPassSolutionReuseAllowed()) {
+            $pass_index = $this->determineSolutionPassIndex($question_gui);
+            if ($pass_index < $this->test_session->getPass()) {
+                $question_config->setSolutionInitiallyPrefilled(true);
             }
         } else {
-            $passIndex = $this->test_session->getPass();
+            $pass_index = $this->test_session->getPass();
         }
-        // hey.
+
 
         // Answer specific feedback is rendered into the display of the test question with in the concrete question types outQuestionForTest-method.
         // Notation of the params prior to getting rid of this crap in favor of a class
         $question_gui->outQuestionForTest(
-            $formAction,
+            $form_action,
             $this->test_session->getActiveId(),
-            $passIndex,
-            $isPostponed,
-            $userPostSolution,
-            $answerFeedbackEnabled
+            $pass_index,
+            $this->isShowingPostponeStatusReguired($question_gui->getObject()->getId()),
+            $user_post_solution,
+            $instant_response && $this->object->getSpecificAnswerFeedback()
         );
 
         $this->populateModals();
-
-        // fau: testNav - pouplate the new question edit control instead of the deprecated intermediate solution saver
         $this->populateQuestionEditControl($question_gui);
-        // fau.
     }
 
     // hey: prevPassSolutions - determine solution pass index
@@ -1373,16 +1359,17 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
         );
 
         // fau: testNav - always use edit mode, except for fixed answer
+        $instant_response = false;
         if ($this->isParticipantsAnswerFixed($question_id)) {
             $presentationMode = ilTestPlayerAbstractGUI::PRESENTATION_MODE_VIEW;
-            $instantResponse = true;
+            $instant_response = true;
         } else {
             $presentationMode = ilTestPlayerAbstractGUI::PRESENTATION_MODE_EDIT;
             // #37025 don't show instant response if a request for it should fix the answer and answer is not yet fixed
             if ($this->object->isInstantFeedbackAnswerFixationEnabled()) {
-                $instantResponse = false;
+                $instant_response = false;
             } else {
-                $instantResponse = $this->getInstantResponseParameter();
+                $instant_response = $this->getInstantResponseParameter();
             }
         }
         // fau.
@@ -1430,7 +1417,7 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
                 // fau: testNav - enable navigation toolbar in edit mode
                 $navigationToolbarGUI->setDisabledStateEnabled(false);
                 // fau.
-                $this->showQuestionEditable($question_gui, $formAction, $isQuestionWorkedThrough, $instantResponse);
+                $this->showQuestionEditable($question_gui, $formAction, $isQuestionWorkedThrough, $instant_response);
 
                 if ($this->ctrl->getCmd() !== self::FINISH_TEST_CMD
                     && $this->logger->isLoggingEnabled()
@@ -1455,7 +1442,7 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
                     $this->populateQuestionOptionalMessage();
                 }
 
-                $this->showQuestionViewable($question_gui, $formAction, $isQuestionWorkedThrough, $instantResponse);
+                $this->showQuestionViewable($question_gui, $formAction, $isQuestionWorkedThrough, $instant_response);
 
                 break;
 
@@ -1470,7 +1457,7 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
         $this->populateQuestionNavigation($sequence_element, $isNextPrimary);
         // fau.
 
-        if ($instantResponse) {
+        if ($instant_response) {
             // fau: testNav - always use authorized solution for instant feedback
             $this->populateInstantResponseBlocks(
                 $question_gui,
@@ -2755,13 +2742,9 @@ JS;
         return null;
     }
 
-    protected function getInstantResponseParameter()
+    protected function getInstantResponseParameter(): bool
     {
-        if ($this->testrequest->isset('instresp')) {
-            return $this->testrequest->raw('instresp');
-        }
-
-        return null;
+        return $this->testrequest->bool('instresp') ?? false;
     }
 
     protected function getNextCommandParameter()
