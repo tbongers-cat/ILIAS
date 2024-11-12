@@ -448,7 +448,8 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             $geometry->setValue((string) $this->object->getThumbGeometry());
             $geometry->setRequired(true);
             $geometry->setMaxLength(6);
-            $geometry->setMinValue(20);
+            $geometry->setMinValue($this->object->getMinimumThumbSize());
+            $geometry->setMaxValue($this->object->getMaximumThumbSize());
             $geometry->setSize(6);
             $geometry->setInfo($this->lng->txt('thumb_size_info'));
             $form->addItem($geometry);

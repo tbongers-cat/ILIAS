@@ -135,7 +135,7 @@ class assOrderingQuestion extends assQuestion implements ilObjQuestionScoringAdj
             $this->setOwner($data["owner"]);
             $this->setQuestion(ilRTE::_replaceMediaObjectImageSrc((string) $data["question_text"], 1));
             $this->ordering_type = $data["ordering_type"] !== null ? (int) $data["ordering_type"] : self::OQ_TERMS;
-            if ($data['thumb_geometry'] !== null && $data['thumb_geometry'] >= self::MINIMUM_THUMB_SIZE) {
+            if ($data['thumb_geometry'] !== null && $data['thumb_geometry'] >= $this->getMinimumThumbSize()) {
                 $this->setThumbSize($data['thumb_geometry']);
             }
             $this->element_height = $data["element_height"] ? (int) $data['element_height'] : null;
