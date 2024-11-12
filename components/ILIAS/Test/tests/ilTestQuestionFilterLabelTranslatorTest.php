@@ -21,9 +21,9 @@ declare(strict_types=1);
 /**
  * @author Marvin Beym <mbeym@databay.de>
  */
-class ilTestQuestionFilterLabelTranslaterTest extends ilTestBaseTestCase
+class ilTestQuestionFilterLabelTranslatorTest extends ilTestBaseTestCase
 {
-    private ilTestQuestionFilterLabelTranslater $testObj;
+    private ilTestQuestionFilterLabelTranslator $testObj;
 
     protected function setUp(): void
     {
@@ -31,7 +31,7 @@ class ilTestQuestionFilterLabelTranslaterTest extends ilTestBaseTestCase
         parent::setUp();
         $this->addGlobal_ilSetting();
 
-        $this->testObj = new ilTestQuestionFilterLabelTranslater(
+        $this->testObj = new ilTestQuestionFilterLabelTranslator(
             $DIC['ilDB'],
             $DIC['lng']
         );
@@ -39,6 +39,6 @@ class ilTestQuestionFilterLabelTranslaterTest extends ilTestBaseTestCase
 
     public function test_instantiateObject_shouldReturnInstance(): void
     {
-        $this->assertInstanceOf(ilTestQuestionFilterLabelTranslater::class, $this->testObj);
+        $this->assertInstanceOf(ilTestQuestionFilterLabelTranslator::class, $this->testObj);
     }
 }

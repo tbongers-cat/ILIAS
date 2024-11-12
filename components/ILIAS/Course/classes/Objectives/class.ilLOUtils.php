@@ -140,7 +140,7 @@ class ilLOUtils
 
         $list->loadDefinitions();
 
-        $translator = new ilTestQuestionFilterLabelTranslater($DIC['ilDB'], $DIC['lng']);
+        $translator = new ilTestQuestionFilterLabelTranslator($DIC['ilDB'], $DIC['lng']);
         $translator->loadLabels($list);
 
         $title = '';
@@ -155,7 +155,7 @@ class ilLOUtils
 
     protected static function buildQplTitleByDefinition(
         ilTestRandomQuestionSetSourcePoolDefinition $def,
-        ilTestQuestionFilterLabelTranslater $trans
+        ilTestQuestionFilterLabelTranslator $trans
     ): string {
         $title = $def->getPoolTitle();
         $filterTitle = array();
