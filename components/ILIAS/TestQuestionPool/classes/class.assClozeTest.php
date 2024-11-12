@@ -1467,7 +1467,7 @@ class assClozeTest extends assQuestion implements ilObjQuestionScoringAdjustable
                                     break;
                                 case assClozeGap::TYPE_SELECT:
                                     $answer = $this->gaps[$gap_key]->getItem($gap_answers[$gap_key]);
-                                    $answertext = $answer->getAnswertext();
+                                    $answertext = $answer?->getAnswertext();
                                     if ($answertext != $combination_gap_answer['answer']) {
                                         $combination_fulfilled = false;
                                     }
