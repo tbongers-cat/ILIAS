@@ -68,14 +68,15 @@ export default class Modal {
           throw new Error('url did not return a dialog');
         }
         dialog.showModal();
+        il.UI.lightbox.maybeInitCarousel(component);
         this.#triggeredSignalsStorage[signalData.id] = false;
       });
     } else {
       component.showModal();
+      il.UI.lightbox.maybeInitCarousel(component);
       this.#triggeredSignalsStorage[signalData.id] = false;
     }
     this.#initializedModalboxes[signalData.id] = component.id;
 
-    il.UI.lightbox.maybeInitCarousel(component);
   }
 }
