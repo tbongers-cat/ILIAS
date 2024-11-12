@@ -24,7 +24,7 @@ declare(strict_types=1);
  *
  * @package components\ILIAS/Test
  */
-class ilTestQuestionFilterLabelTranslater
+class ilTestQuestionFilterLabelTranslator
 {
     private array $taxonomyTreeIds = [];
     private array $taxonomyNodeIds = [];

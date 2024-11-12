@@ -814,8 +814,8 @@ class ilCourseObjectivesGUI
         );
 
         $list->loadDefinitions();
-        $translater = new ilTestQuestionFilterLabelTranslater($this->db, $this->lng);
-        $translater->loadLabels($list);
+        $translator = new ilTestQuestionFilterLabelTranslator($this->db, $this->lng);
+        $translator->loadLabels($list);
 
         $options[0] = $this->lng->txt('select_one');
         foreach ($list as $definition) {
@@ -823,8 +823,8 @@ class ilCourseObjectivesGUI
             $title = $definition->getPoolTitle();
             // fau: taxFilter/typeFilter - get title for extended filter conditions
             $filterTitle = array();
-            $filterTitle[] = $translater->getTaxonomyFilterLabel($definition->getMappedTaxonomyFilter());
-            $filterTitle[] = $translater->getTypeFilterLabel($definition->getTypeFilter());
+            $filterTitle[] = $translator->getTaxonomyFilterLabel($definition->getMappedTaxonomyFilter());
+            $filterTitle[] = $translator->getTypeFilterLabel($definition->getTypeFilter());
             if (!empty($filterTitle)) {
                 $title .= ' -> ' . implode(' / ', $filterTitle);
             }

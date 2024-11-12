@@ -67,7 +67,7 @@ class ilTestRandomQuestionSetBuilderWithAmountPerPool extends ilTestRandomQuesti
                 // fau: fixRandomTestBuildable - log missing questions for a random test rule
                 if ($actualQuestionStage->isSmallerThan($requiredQuestionAmount)) {
                     if (!isset($translator)) {
-                        $translator = new ilTestQuestionFilterLabelTranslater($this->db, $this->lng);
+                        $translator = new ilTestQuestionFilterLabelTranslator($this->db, $this->lng);
                         $translator->loadLabels($this->sourcePoolDefinitionList);
                     }
                     $this->logger->info("RANDOM TEST: missing questions for: "

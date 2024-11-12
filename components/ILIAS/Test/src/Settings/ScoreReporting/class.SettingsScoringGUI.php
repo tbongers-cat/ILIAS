@@ -260,7 +260,7 @@ class SettingsScoringGUI extends TestSettingsGUI
     protected function getTaxonomyOptions(): array
     {
         $available_taxonomy_ids = \ilObjTaxonomy::getUsageOfObject($this->test_object->getId());
-        $taxononmy_translator = new \ilTestQuestionFilterLabelTranslater($this->db, $this->lng);
+        $taxononmy_translator = new \ilTestQuestionFilterLabelTranslator($this->db, $this->lng);
         $taxononmy_translator->loadLabelsFromTaxonomyIds($available_taxonomy_ids);
 
         $taxonomy_options = [];
