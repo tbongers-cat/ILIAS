@@ -129,6 +129,7 @@ class ilLTIPlatform extends Platform
         $this->profile = null;
         $this->toolProxy = null;
         $this->settings = array();
+        $this->setSettings(array());
         $this->protected = false;
         $this->enabled = false;
         $this->enableFrom = null;

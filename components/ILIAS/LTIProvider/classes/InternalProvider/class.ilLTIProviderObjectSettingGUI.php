@@ -311,7 +311,7 @@ class ilLTIProviderObjectSettingGUI
                     $consumer->saveLTI($connector);
                 }
             } else {
-                $consumer->ltiVersion = $form->getInput('version_' . $global_consumer->getExtConsumerId());
+                $consumer->ltiVersion = LtiVersion::from($form->getInput('version_' . $global_consumer->getExtConsumerId()));
                 $this->logger->info('Created new lti release for: ' . $this->ref_id);
                 $consumer->setExtConsumerId($global_consumer->getExtConsumerId());
                 $consumer->setKey((string) $form->getInput('key_' . $global_consumer->getExtConsumerId()));
