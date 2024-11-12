@@ -190,7 +190,7 @@ class assOrderingQuestionImport extends assQuestionImport
         $this->object->setOrderingType($type);
         $this->object->setObjId($questionpool_id);
         $this->object->setThumbSize(
-            $this->deduceThumbSizeFromImportValue((int) $item->getMetadataEntry('thumb_size'))
+            $this->deduceThumbSizeFromImportValue((int) $item->getMetadataEntry('thumb_geometry'))
         );
         $this->object->setElementHeight($item->getMetadataEntry('element_height')
             ? (int) $item->getMetadataEntry('element_height')
