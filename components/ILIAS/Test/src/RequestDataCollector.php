@@ -100,6 +100,21 @@ class RequestDataCollector
         return $this->int('pass_id');
     }
 
+    public function bool(string $key): ?bool
+    {
+        if (!$this->http->wrapper()->post()->has($key)) {
+            return null;
+        }
+
+        return $this->http->wrapper()->post()->retrieve(
+            $key,
+            $this->refinery->byTrying([
+                $this->refinery->kindlyTo()->bool(),
+                $this->refinery->always(null)
+            ])
+        );
+    }
+
     /**
      * @return mixed|null
      */

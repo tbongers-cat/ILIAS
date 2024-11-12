@@ -412,17 +412,18 @@ class ilTestQuestionNavigationGUI
             $this->getRevertChangesLinkTarget()
         )->withUnavailableAction(!$this->getRevertChangesLinkTarget());
 
-        $actions[] = $this->ui_factory->button()->shy(
-            $this->lng->txt('discard_answer'),
-            '#'
-        )
-        ->withUnavailableAction(!$this->isDiscardSolutionButtonEnabled())
-        ->withAdditionalOnLoadCode(
-            fn($id) => "document.getElementById('$id').addEventListener(
-                'click',
-                 ()=>$('#tst_discard_solution_modal').modal('show')
-            )"
-        );
+        if ($this->isQuestionWorkedThrough()) {
+            $actions[] = $this->ui_factory->button()->shy(
+                $this->lng->txt('discard_answer'),
+                '#'
+            )->withUnavailableAction(!$this->isDiscardSolutionButtonEnabled())
+            ->withAdditionalOnLoadCode(
+                fn($id) => "document.getElementById('$id').addEventListener(
+                    'click',
+                     ()=>$('#tst_discard_solution_modal').modal('show')
+                )"
+            );
+        }
 
         $list = $this->ui_factory->dropdown()->standard($actions)->withLabel($this->lng->txt("actions"));
         $tpl->setVariable('ACTION_MENU', $this->ui_renderer->render($list));
