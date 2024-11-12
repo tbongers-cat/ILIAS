@@ -112,7 +112,6 @@ class TestRailXMLWriter
         $xml_case->addChild('template', 'Test Case');
         $xml_case->addChild('type', 'Other');
         $xml_case->addChild('priority', '4 - Must Test');
-        $xml_case->addChild('references', 'Other');
         $xml_cust = $xml_case->addChild('custom');
         $xml_cust->addChild('preconds', "\n" . trim($preconditions) . "\n");
         $xml_cust->addChild('steps', "\n" . trim($steps) . "\n");
