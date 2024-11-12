@@ -23,7 +23,7 @@ declare(strict_types=1);
  *
  * @author Alex Killing <alex.killing@gmx.de>
  */
-class ilObjectImporter extends ilXmlImporter
+class ilILIASObjectImporter extends ilXmlImporter
 {
     protected ?ilObjectDataSet $ds = null;
 
