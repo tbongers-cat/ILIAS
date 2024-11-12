@@ -72,7 +72,7 @@ class DBUpdateSteps10 implements \ilDatabaseUpdateSteps
                 'created_ts'
             );
         }
-        if (!$this->db->indexExistsByFields(ChangeMailTokenDBRepository::TABLE_NAME, ['token'])) {
+        if (!$this->db->primaryExistsByFields(ChangeMailTokenDBRepository::TABLE_NAME, ['token'])) {
             $this->db->manipulate('DELETE token1 FROM ' . ChangeMailTokenDBRepository::TABLE_NAME . ' token1 '
                 . 'INNER JOIN ' . ChangeMailTokenDBRepository::TABLE_NAME . ' token2 '
                 . 'WHERE token1.token = token2.token AND token1.created_ts < token2.created_ts');
