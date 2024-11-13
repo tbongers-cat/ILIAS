@@ -78,7 +78,7 @@ class ilBuddySystemGUI
             $page->addOnLoadCode('il.BuddySystem.setConfig(' . json_encode($config, JSON_THROW_ON_ERROR) . ');');
 
             $btn_config = new stdClass();
-            $btn_config->bnt_class = 'ilBuddySystemLinkWidget';
+            $btn_config->bnt_class = ilBuddySystemLinkButtonType::ROOT_CSS_CLASS;
 
             $page->addOnLoadCode('il.BuddySystemButton.setConfig(' . json_encode($btn_config, JSON_THROW_ON_ERROR) . ');');
             $page->addOnLoadCode('il.BuddySystemButton.init();');
