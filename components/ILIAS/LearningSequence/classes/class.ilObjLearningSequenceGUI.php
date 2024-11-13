@@ -376,7 +376,7 @@ class ilObjLearningSequenceGUI extends ilContainerGUI implements ilCtrlBaseClass
                         // no break
                     case self::CMD_INFO:
                     case self::CMD_INFO_SCREEN:
-                        $this->ctrl->redirectByClass(ilInfoScreenGUI::class, $cmd);
+                        $this->ctrl->redirectByClass(ilInfoScreenGUI::class, 'showSummary');
                         // no break
                     case self::CMD_SETTINGS:
                         $this->ctrl->redirectByClass(ilObjLearningSequenceSettingsGUI::class, $cmd);
