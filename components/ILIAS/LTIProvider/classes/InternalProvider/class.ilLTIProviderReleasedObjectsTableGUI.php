@@ -56,6 +56,10 @@ class ilLTIProviderReleasedObjectsTableGUI extends ilObjectTableGUI
      */
     public function fillRow(array $a_set): void
     {
+        if (!isset($a_set['type'])) {
+            $a_set['type'] = '';
+        }
+
         parent::fillRow($a_set);
 
         $this->tpl->setVariable('CONSUMER_TITLE', $a_set['consumer']);
