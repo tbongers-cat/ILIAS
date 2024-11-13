@@ -1451,7 +1451,6 @@ class ilInitialisation
             $current_script = substr(strrchr($_SERVER["PHP_SELF"], "/"), 1);
             if (self::blockedAuthentication($current_script)) {
                 ilLoggerFactory::getLogger('init')->debug('Authentication is started in current script.');
-                self::initUserAccount();
                 // nothing todo: authentication is done in current script
                 return;
             }
