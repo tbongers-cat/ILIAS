@@ -92,6 +92,8 @@ class TestSetupAgent extends NullAgent
 
     public function getMigrations(): array
     {
-        return [];
+        return [
+            new CloneIntroductionAndClosingRemarksMigration()
+        ];
     }
 }
