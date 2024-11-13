@@ -33,6 +33,7 @@
     },
 
     init() {
+      const toggle =  '[data-toggle="dropdown"]';
       const btn = $scope.il.BuddySystemButton;
       const bs = $scope.il.BuddySystem;
       const trigger_selector = 'a[data-target-state], button[data-target-state]';
