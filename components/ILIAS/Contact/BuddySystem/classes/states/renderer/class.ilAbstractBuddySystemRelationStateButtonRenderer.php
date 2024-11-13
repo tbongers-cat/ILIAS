@@ -18,10 +18,6 @@
 
 declare(strict_types=1);
 
-/**
- * Class ilAbstractBuddySystemRelationStateButtonRenderer
- * @author Michael Jansen <mjansen@databay.de>
- */
 abstract class ilAbstractBuddySystemRelationStateButtonRenderer implements ilBuddySystemRelationStateButtonRenderer
 {
     protected ilTemplate $tpl;
@@ -38,7 +34,7 @@ abstract class ilAbstractBuddySystemRelationStateButtonRenderer implements ilBud
             'components/ILIAS/Contact/BuddySystem'
         );
 
-        $this->tpl->setVariable('MENU_ID', uniqid('buddy-system-menu'));
+        $this->tpl->setVariable('MENU_ID', uniqid('buddy-system-menu', true));
 
         $this->lng = $lng ?? $DIC['lng'];
     }
