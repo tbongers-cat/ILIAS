@@ -42,6 +42,10 @@ class Renderer extends AbstractComponentRenderer
         foreach ($component->getItems() as $crumb) {
             $tpl->setCurrentBlock("crumbs");
             $tpl->setVariable("CRUMB", $default_renderer->render($crumb));
+            if (!preg_match('/[a-zA-Z0-9\ ]$/', $crumb->getLabel())) {
+                $tpl->setCurrentBlock("lrmmark");
+                $tpl->setVariable("LRMMARK", htmlspecialchars_decode("&lrm;", ENT_HTML5));
+            }
             $tpl->parseCurrentBlock();
         }
         return $tpl->get();

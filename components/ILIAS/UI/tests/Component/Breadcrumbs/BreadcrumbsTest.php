@@ -97,4 +97,34 @@ class BreadcrumbsTest extends ILIAS_UI_TestBase
 
         $this->assertHTMLEquals($expected, $html);
     }
+
+    public function testRenderingWithSpecialCharacters(): void
+    {
+        $f = $this->getFactory();
+        $r = $this->getDefaultRenderer();
+
+        $label = "label without special characters";
+        $label2 = "label with special characters + –...+}*@ç%#&/($";
+
+        $crumbs = [
+            new I\Component\Link\Standard($label, '#'),
+            new I\Component\Link\Standard($label2, '#')
+        ];
+        $c = $f->Breadcrumbs($crumbs);
+
+        $html = $this->brutallyTrimHTML($r->render($c));
+        $expected = '<nav aria-label="breadcrumbs_aria_label" class="breadcrumb_wrapper">'
+            . '	<div class="breadcrumb">'
+            . '		    <span class="crumb">'
+            . '			    <a href="#">label without special characters</a>'
+            . '		    </span>'
+            . '		    <span class="crumb">'
+            . '			    <a href="#">label with special characters + –...+}*@ç%#&/($</a>'
+            . '&lrm;'
+            . '		    </span>'
+            . '	</div>'
+            . '</nav>';
+
+        $this->assertEquals($this->brutallyTrimHTML($expected), $html);
+    }
 }
