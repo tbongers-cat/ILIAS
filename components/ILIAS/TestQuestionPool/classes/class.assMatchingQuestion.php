@@ -20,9 +20,7 @@ declare(strict_types=1);
 
 use ILIAS\TestQuestionPool\Questions\QuestionLMExportable;
 use ILIAS\TestQuestionPool\Questions\QuestionAutosaveable;
-
 use ILIAS\Test\Logging\AdditionalInformationGenerator;
-
 use ILIAS\Refinery\Random\Group as RandomGroup;
 use ILIAS\Refinery\Random\Seed\RandomSeed;
 
@@ -1161,6 +1159,8 @@ class assMatchingQuestion extends assQuestion implements ilObjQuestionScoringAdj
             ];
         }
         $result['terms'] = $terms;
+
+        $this->setShuffler($this->randomGroup->shuffleArray(new RandomSeed()));
 
         $definitions = [];
         foreach ($this->getShuffler()->transform($this->getDefinitions()) as $def) {
