@@ -104,7 +104,7 @@ class ilUserProfile
         array $custom_fields = []
     ): void {
         $registration_settings = null;
-        if ($this->mode == self::MODE_REGISTRATION) {
+        if ($this->mode === self::MODE_REGISTRATION) {
             $registration_settings = new ilRegistrationSettings();
             $this->addRegistrationFieldsToFieldArray();
         }
@@ -306,12 +306,25 @@ class ilUserProfile
 
             case 'second_email':
             case 'email':
-                if (!$this->userSettingVisible($field_id)) {
+                $email_mandatory = (
+                    $this->mode === self::MODE_REGISTRATION &&
+                    $field_definition['input'] === 'email' &&
+                    $registration_settings !== null &&
+                    $registration_settings->passwordGenerationEnabled()
+                );
+
+                if (!$email_mandatory && !$this->userSettingVisible($field_id)) {
                     break;
                 }
 
                 $form->addItem(
-                    $this->getEmailInput($field_id, $method, $lang_var, $user)
+                    $this->getEmailInput(
+                        $field_id,
+                        $method,
+                        $lang_var,
+                        $email_mandatory,
+                        $user
+                    )
                 );
                 break;
 
@@ -582,17 +595,18 @@ class ilUserProfile
         string $field_id,
         string $method,
         string $lang_var,
+        bool $email_mandatory,
         ?ilObjUser $user
     ): ilFormPropertyGUI {
         $email_input = new ilEMailInputGUI($this->lng->txt($lang_var), 'usr_' . $field_id);
         if ($user) {
             $email_input->setValue($user->$method());
         }
-        $email_input->setRequired((bool) $this->settings->get('require_' . $field_id));
+        $email_input->setRequired($email_mandatory || $this->settings->get('require_' . $field_id));
         if (!$email_input->getRequired() || $email_input->getValue()) {
             $email_input->setDisabled((bool) $this->settings->get('usr_settings_disable_' . $field_id));
         }
-        if (self::MODE_REGISTRATION == $this->mode) {
+        if (self::MODE_REGISTRATION === $this->mode) {
             $email_input->setRetype(true);
         }
         return $email_input;
