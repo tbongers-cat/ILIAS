@@ -1803,7 +1803,7 @@ class ilObjUserGUI extends ilObjectGUI
             return '';
         }
 
-        $usr_lang = new Language($this->object->getLanguage());
+        $usr_lang = new ilLanguage($this->object->getLanguage());
         $usr_lang->loadLanguageModule('crs');
         $usr_lang->loadLanguageModule('registration');
 
