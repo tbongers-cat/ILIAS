@@ -19,7 +19,6 @@
 declare(strict_types=1);
 
 use ILIAS\User\Profile\DefaultFields;
-
 use ILIAS\Language\Language;
 
 /**
@@ -562,7 +561,7 @@ class ilUserProfile
             if (count($options) === 1) {
                 $roles_input = new ilHiddenInputGUI('usr_' . $field_id);
                 $keys = array_keys($options);
-                $roles_input->setValue(array_shift($keys));
+                $roles_input->setValue((string) array_shift($keys));
                 return $roles_input;
             }
 
