@@ -17020,6 +17020,8 @@ trac#:#create_date_min#:#Earliest Registration
 trac#:#info_valid_request#:#The maximum valid time between two requests of a user.
 trac#:#meta_typical_learning_time#:#Typical learning time
 trac#:#obj_types#:#Object Types
+trac#:#personal_learning_progress_view_description#:#Ongoing courses with membership
+trac#:#personal_learning_progress_view_title#:#Your Learning Progress
 trac#:#read_count_avg#:#Average page views
 trac#:#registration_filter#:#Date of Registration
 trac#:#search_area_info#:#Please choose one object.
@@ -17198,6 +17200,7 @@ trac#:#trac_paths#:#Paths
 trac#:#trac_percentage#:#Percentage
 trac#:#trac_periodic_system_load#:#Periodic
 trac#:#trac_progress#:#Personal Learning Progress
+trac#:#trac_progress_block_title#:#Your Learning Progress
 trac#:#trac_read_count#:#Access Number
 trac#:#trac_read_count_spent_seconds#:#Time Spent / Access
 trac#:#trac_reference#:#References
@@ -17229,6 +17232,7 @@ trac#:#trac_settings#:#Settings
 trac#:#trac_settings_saved#:#Settings saved
 trac#:#trac_short_system_load#:#Short term
 trac#:#trac_show_graph#:#Show Graph
+trac#:#trac_show_progress_block#:#Show Personal Progress Chart in ‘Content’-Tab
 trac#:#trac_show_repository_views#:#Show Tracking Information
 trac#:#trac_show_repository_views_info#:#Show tracking information for repository objects on info page.
 trac#:#trac_spent_seconds#:#Time Spent
@@ -17261,6 +17265,10 @@ trac#:#trac_visits#:#Required Number of Visits
 trac#:#trac_visits_info#:#A click counts as new visit only after %s seconds.
 trac#:#user_total#:#User Total
 trac#:#view_mode#:#View Mode
+trac#:#view_mode_all#:#All
+trac#:#view_mode_current#:#Current
+trac#:#view_mode_future#:#Future
+trac#:#view_mode_past#:#Past
 tstv#:#tstv_create#:#Create Test Certificate
 tstv#:#tstv_create_info#:#Select a completed test to generate a certificate for it.
 ui#:#1stars#:#one of five stars

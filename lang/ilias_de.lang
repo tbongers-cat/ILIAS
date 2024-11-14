@@ -17020,6 +17020,8 @@ trac#:#create_date_min#:#Früheste Registrierung
 trac#:#info_valid_request#:#Finden zwei Anfragen eines Benutzers innerhalb dieser Zeitspanne statt, so wird die entsprechende Zeitspanne als 'aktiv' gewertet.
 trac#:#meta_typical_learning_time#:#Typische Lernzeit
 trac#:#obj_types#:#Objekttypen
+trac#:#personal_learning_progress_view_description#:#Laufende Kurse mit Mitgliedschaften
+trac#:#personal_learning_progress_view_title#:#Ihr Lernfortschritt
 trac#:#read_count_avg#:#Durchschnitt Seitenaufrufe
 trac#:#registration_filter#:#Registrierungsdatum
 trac#:#search_area_info#:#Bitte wählen Sie ein Objekt aus.
@@ -17198,6 +17200,7 @@ trac#:#trac_paths#:#Pfade
 trac#:#trac_percentage#:#Prozent
 trac#:#trac_periodic_system_load#:#Periodische Lastdarstellung
 trac#:#trac_progress#:#Persönlicher Lernfortschritt
+trac#:#trac_progress_block_title#:#Ihr Lernfortschritt
 trac#:#trac_read_count#:#Zugriffe
 trac#:#trac_read_count_spent_seconds#:#Bearbeitungszeit / Zugriffe
 trac#:#trac_reference#:#Referenzen
@@ -17229,6 +17232,7 @@ trac#:#trac_settings#:#Einstellungen
 trac#:#trac_settings_saved#:#Die Einstellungen wurden gespeichert.
 trac#:#trac_short_system_load#:#Kurzzeithistorie
 trac#:#trac_show_graph#:#Als Diagrammansicht zeigen
+trac#:#trac_show_progress_block#:#Persönlichen Lernfortschritt im Reiter „Inhalt“ anzeigen
 trac#:#trac_show_repository_views#:#Anzahl Zugriffe anzeigen
 trac#:#trac_show_repository_views_info#:#Auf dem Reiter „Info“ werden die Anzahl der Zugriffe angezeigt.
 trac#:#trac_spent_seconds#:#Zeit
@@ -17261,6 +17265,10 @@ trac#:#trac_visits#:#Mindestanzahl Aufrufe
 trac#:#trac_visits_info#:#Ein Aufruf wird erst nach %s Sekunden als neuer Aufruf gezählt.
 trac#:#user_total#:#Anzahl Benutzer
 trac#:#view_mode#:#Anzeigemodus
+trac#:#view_mode_all#:#Alle
+trac#:#view_mode_current#:#Aktuelle
+trac#:#view_mode_future#:#Zukünftige
+trac#:#view_mode_past#:#Vergangene
 tstv#:#tstv_create#:#Testzertifikat erstellen
 tstv#:#tstv_create_info#:#Wählen Sie einen Test, für den Sie ein Zertifikat benötigen.
 ui#:#1stars#:#einer von fünf Sternen
