@@ -41,6 +41,7 @@ class ilLOEditorGUI
     private ilLogger $logger;
 
     private ilObject $parent_obj;
+    private ilObjCourseGUI $parent_gui;
     private ilLOSettings $settings;
     private ilLanguage $lng;
     private ilCtrlInterface $ctrl;
@@ -54,12 +55,13 @@ class ilLOEditorGUI
 
     private int $test_type = self::TEST_TYPE_UNDEFINED;
 
-    public function __construct(ilObject $a_parent_obj)
+    public function __construct(ilObjCourseGUI $parent_gui)
     {
         global $DIC;
 
         $this->main_tpl = $DIC->ui()->mainTemplate();
-        $this->parent_obj = $a_parent_obj;
+        $this->parent_obj = $parent_gui->getObject();
+        $this->parent_gui = $parent_gui;
         $this->settings = ilLOSettings::getInstanceByObjId($this->getParentObject()->getId());
 
         $cs = $DIC->contentStyle();
@@ -222,6 +224,11 @@ class ilLOEditorGUI
     public function getParentObject(): ilObject
     {
         return $this->parent_obj;
+    }
+
+    public function getParentGUI(): ilObjCourseGUI
+    {
+        return $this->parent_gui;
     }
 
     public function getSettings(): ilLOSettings
@@ -477,21 +484,7 @@ class ilLOEditorGUI
     {
         $this->tabs->activateSubTab('materials');
 
-        $parent_ref_id = $this->getParentObject()->getRefId();
-        $parent_type = $this->getParentObject()->getType();
-        $parent_gui_class = 'ilObj' . $parent_type . 'GUI';
-        $parent_gui = new $parent_gui_class('', $parent_ref_id, true, false);
-
-        $createble_object_types = $parent_gui->getCreatableObjectTypes(
-            ilObjectDefinition::MODE_REPOSITORY,
-        );
-
-        unset($createble_object_types['itgr']);
-
-        $gui = new ILIAS\ILIASObject\Creation\AddNewItemGUI(
-            $parent_gui->buildAddNewItemElements($createble_object_types)
-        );
-        $gui->render();
+        $this->parent_gui->renderAddNewItem('itgr');
 
         $this->tpl->setOnScreenMessage(
             'info',
