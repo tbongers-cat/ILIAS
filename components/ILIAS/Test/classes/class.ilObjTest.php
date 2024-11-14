@@ -7692,12 +7692,12 @@ class ilObjTest extends ilObject
 
         $res = $DIC['ilDB']->queryF($query, ['integer'], [$obj_id]);
 
-        $questionSetType = null;
+        $question_set_type = null;
 
         while ($row = $DIC['ilDB']->fetchAssoc($res)) {
-            $questionSetType = $row['question_set_type'];
+            $question_set_type = $row['question_set_type'];
         }
 
-        return $questionSetType === self::QUESTION_SET_TYPE_RANDOM;
+        return $question_set_type === self::QUESTION_SET_TYPE_RANDOM;
     }
 }
