@@ -1387,7 +1387,6 @@ class assMatchingQuestion extends assQuestion implements ilObjQuestionScoringAdj
         }
         $result['terms'] = $terms;
 
-        // #42176 init shuffler with a new seed, otherwise definitions will be shuffled like the terms
         $this->setShuffler($this->randomGroup->shuffleArray(new RandomSeed()));
 
         $definitions = [];
