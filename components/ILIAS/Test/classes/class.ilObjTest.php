@@ -7680,4 +7680,24 @@ class ilObjTest extends ilObject
             $newsItem->update();
         }
     }
+
+    /**
+     * @deprecated There is no reason for this to be interesting for other objects
+     */
+    public static function _lookupRandomTest(int $obj_id): bool
+    {
+        global $DIC;
+
+        $query = 'SELECT question_set_type FROM tst_tests WHERE obj_fi = %s';
+
+        $res = $DIC['ilDB']->queryF($query, ['integer'], [$obj_id]);
+
+        $questionSetType = null;
+
+        while ($row = $DIC['ilDB']->fetchAssoc($res)) {
+            $questionSetType = $row['question_set_type'];
+        }
+
+        return $questionSetType === self::QUESTION_SET_TYPE_RANDOM;
+    }
 }
