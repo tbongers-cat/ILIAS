@@ -306,12 +306,10 @@ class ilUserProfile
 
             case 'second_email':
             case 'email':
-                $email_mandatory = (
-                    $this->mode === self::MODE_REGISTRATION &&
-                    $field_definition['input'] === 'email' &&
-                    $registration_settings !== null &&
-                    $registration_settings->passwordGenerationEnabled()
-                );
+                $email_mandatory = $this->mode === self::MODE_REGISTRATION
+                    && $field_definition['input'] === 'email'
+                    && $registration_settings !== null
+                    && $registration_settings->passwordGenerationEnabled();
 
                 if (!$email_mandatory && !$this->userSettingVisible($field_id)) {
                     break;
