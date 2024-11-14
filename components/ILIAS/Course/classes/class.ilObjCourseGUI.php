@@ -1592,10 +1592,19 @@ class ilObjCourseGUI extends ilContainerGUI
             !$this->isActiveAdministrationPanel()) {
             return;
         }
+        $this->renderAddNewItem();
+    }
+
+    public function renderAddNewItem(string ...$disabled_object_types): void
+    {
+        $createble_object_types = $this->getCreatableObjectTypes();
+
+        foreach ($disabled_object_types as $type) {
+            unset($createble_object_types[$type]);
+        }
+
         $gui = new ILIAS\ILIASObject\Creation\AddNewItemGUI(
-            $this->buildAddNewItemElements(
-                $this->getCreatableObjectTypes()
-            )
+            $this->buildAddNewItemElements($createble_object_types)
         );
         $gui->render();
     }
@@ -2290,7 +2299,7 @@ class ilObjCourseGUI extends ilContainerGUI
                 #$this->tabs_gui->setBackTarget($this->lng->txt('back'),$this->ctrl->getLinkTarget($this,''));
                 $this->tabs_gui->activateTab('crs_objectives');
 
-                $editor = new ilLOEditorGUI($this->object);
+                $editor = new ilLOEditorGUI($this);
                 $this->ctrl->forwardCommand($editor);
                 if (strtolower($this->ctrl->getCmdClass()) === "illopagegui") {
                     $header_action = false;
