@@ -27,25 +27,27 @@ use ILIAS\UI\Renderer as RendererInterface;
 use ILIAS\UI\Component;
 use LogicException;
 
-class NoButtonsContextRenderer extends AbstractComponentRenderer
+class FormWithoutSubmitButtonsContextRenderer extends Renderer
 {
     /**
      * @inheritdoc
      */
     public function render(Component\Component $component, RendererInterface $default_renderer): string
     {
-        if (!$component instanceof Form\Form) {
-            $this->cannotHandleComponent($component);
+        if ($component instanceof Form\Standard) {
+            return $this->renderFormWithoutSubmitButtons($component, $default_renderer);
         }
-        return $this->renderNoSubmit($component, $default_renderer);
+
+        $this->cannotHandleComponent($component);
     }
 
-    protected function renderNoSubmit(
-        Form\Form $component,
+    protected function renderFormWithoutSubmitButtons(
+        Form\Standard $component,
         RendererInterface $default_renderer
     ): string {
-        $tpl = $this->getTemplate("tpl.no_submit.html", true, true);
+        $tpl = $this->getTemplate("tpl.without_submit_buttons.html", true, true);
 
+        $this->maybeAddDedicatedName($component, $tpl);
         $this->maybeAddRequired($component, $tpl);
         $this->addPostURL($component, $tpl);
         $this->maybeAddError($component, $tpl);
@@ -74,42 +76,5 @@ class NoButtonsContextRenderer extends AbstractComponentRenderer
         $tpl->setVariable("ID", $id);
 
         return $tpl->get();
-    }
-
-    protected function addPostURL(Component\Input\Container\Form\FormWithPostURL $component, Template $tpl): void
-    {
-        if ('' !== ($url = $component->getPostURL())) {
-            $tpl->setCurrentBlock("action");
-            $tpl->setVariable("URL", $url);
-            $tpl->parseCurrentBlock();
-        }
-    }
-
-    protected function maybeAddError(Form\Form $component, Template $tpl): void
-    {
-        if (null !== ($error = $component->getError())) {
-            $tpl->setCurrentBlock("error");
-            $tpl->setVariable("ERROR", $error);
-            $tpl->parseCurrentBlock();
-        }
-    }
-
-    protected function maybeAddRequired(Form\Form $component, Template $tpl): void
-    {
-        if ($component->hasRequiredInputs()) {
-            $tpl->setVariable("TXT_REQUIRED_TOP", $this->txt("required_field"));
-            $tpl->setVariable("TXT_REQUIRED", $this->txt("required_field"));
-        }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function getComponentInterfaceName(): array
-    {
-        return [
-            Component\Input\Container\Form\Standard::class,
-            FormWithoutSubmitButton::class,
-        ];
     }
 }
