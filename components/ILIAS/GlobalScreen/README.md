@@ -112,11 +112,16 @@ A Plugin-Class hat a new property `provider_collection` which accepts Instances 
         parent::__construct();
 
         global $DIC;
-        $this->provider_collection->setMainBarProvider(new MainBarProvider($DIC, $this));
-        $this->provider_collection->setMetaBarProvider(new MetaBarProvider($DIC, $this));
-        $this->provider_collection->setNotificationProvider(new NotificationProvider($DIC, $this));
-        $this->provider_collection->setModificationProvider(new ModificationProvider($DIC, $this));
-        $this->provider_collection->setToolProvider(new ToolProvider($DIC, $this));
+        if ($DIC->isDependencyAvailable('globalScreen')) { 
+        // there seem to be situations where plugins are loaded very early 
+        // when the GlobalScreen-Service is not yet available. Use the 
+        // isDependencyAvailable then.   
+            $this->provider_collection->setMainBarProvider(new MainBarProvider($DIC, $this));
+            $this->provider_collection->setMetaBarProvider(new MetaBarProvider($DIC, $this));
+            $this->provider_collection->setNotificationProvider(new NotificationProvider($DIC, $this));
+            $this->provider_collection->setModificationProvider(new ModificationProvider($DIC, $this));
+            $this->provider_collection->setToolProvider(new ToolProvider($DIC, $this));
+        }
     }
 ```
 
