@@ -1219,7 +1219,7 @@ assessment#:#save_on_navigation_locked_confirmation#:#Your changed answers will 
 assessment#:#saved_adjustment#:#Changes saved.
 assessment#:#score_partsol_enabled#:#Activate Half-Point Scoring
 assessment#:#score_partsol_enabled_info#:#Usually the participant has to answer the question fully correct to get the configured points. With this option the participant gets the half of the configured points with at least three correct decisions.
-assessment#:#scored_pass#:#Scored Pass
+assessment#:#scored_pass#:#Scored Test Attempt
 assessment#:#scoring#:#Scoring and Results
 assessment#:#scoringadjust#:#Corrections
 assessment#:#search_groups#:#Search Groups
@@ -1445,10 +1445,10 @@ assessment#:#tst_eval_results_by_pass_lo#:#List of Answers for Attempt %s
 assessment#:#tst_eval_results_lo#:#List of Answers
 assessment#:#tst_eval_show_answer#:#Show Answer
 assessment#:#tst_eval_total_finished#:#Total finished tests (Participants that used up all possible passes.)
-assessment#:#tst_eval_total_finished_average_time#:#Average test processing time
+assessment#:#tst_eval_total_finished_average_time#:#Average Time on Task
 assessment#:#tst_eval_total_passed#:#Total passed tests
 assessment#:#tst_eval_total_passed_average_points#:#Average points of passed tests
-assessment#:#tst_eval_total_passed_average_time#:#Average processing time of all passed tests
+assessment#:#tst_eval_total_passed_average_time#:#Average Time on Task of All Passed Tests
 assessment#:#tst_eval_total_persons#:#Total number of participants who started the test
 assessment#:#tst_exam_access_code#:#Access Code
 assessment#:#tst_exam_access_code_label#:#Enter access code to continue your already started test.
