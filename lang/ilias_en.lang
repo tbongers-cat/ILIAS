@@ -9901,7 +9901,6 @@ fold#:#fold_settings#:#Folder Settings
 form#:#email_not_match#:#Your entries for the e-mail address don't match! Please re-enter your e-mail address.
 form#:#form_alphabet_all#:#All
 form#:#form_chars_remaining#:#Characters remaining:
-form#:#form_date_aria_desc#:#The following input format is required:
 form#:#form_date_duration_end#:#End
 form#:#form_date_duration_start#:#Start
 form#:#form_days#:#Days
