@@ -50,19 +50,19 @@ final class ilFooterStandardGroupsProvider extends AbstractStaticFooterProvider
             $this->item_factory->group(
                 $this->getIdentificationFor(ilFooterStandardGroups::ACCESSIBILITY),
                 $this->translator->translate('accessibility')
-            ),
+            )->withPosition(10),
             $this->item_factory->group(
                 $this->getIdentificationFor(ilFooterStandardGroups::LEGAL_INFORMATION),
                 $this->translator->translate('legal_information')
-            ),
+            )->withPosition(20),
             $this->item_factory->group(
                 $this->getIdentificationFor(ilFooterStandardGroups::SUPPORT),
                 $this->translator->translate('support')
-            ),
+            )->withPosition(30),
             $this->item_factory->group(
                 $this->getIdentificationFor(ilFooterStandardGroups::SERVICES),
                 $this->translator->translate('services')
-            ),
+            )->withPosition(40),
         ];
     }
 
