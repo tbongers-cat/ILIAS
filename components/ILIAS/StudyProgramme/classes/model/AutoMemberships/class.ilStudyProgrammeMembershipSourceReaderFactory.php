@@ -52,7 +52,7 @@ class ilStudyProgrammeMembershipSourceReaderFactory
             case ilStudyProgrammeAutoMembershipSource::TYPE_ORGU:
                 return new ilStudyProgrammeMembershipSourceReaderOrgu(
                     ilObjOrgUnitTree::_getInstance(),
-                    new ilOrgUnitUserAssignment(),
+                    new ilOrgUnitUserAssignmentDBRepository($this->dic['ilDB'], $this->dic->event()),
                     $src_id,
                     $ams->isSearchRecursive(),
                     $exclude_id
