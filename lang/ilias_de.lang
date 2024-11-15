@@ -4966,6 +4966,8 @@ common#:#obj_grp_duplicate#:#Gruppe kopieren
 common#:#obj_grpr#:#Gruppenlink
 common#:#obj_grps#:#Gruppe
 common#:#obj_grps_desc#:#Allgemeine Einstellungen für Gruppen
+common#:#obj_gsfo#:#Fußzeile
+common#:#obj_gsfo_desc#:#Layout und Inhalt der Fußzeile verwalten
 common#:#obj_hlps#:#Online-Hilfe
 common#:#obj_hlps_desc#:#Einstellungen der Online-Hilfe
 common#:#obj_htlm#:#Lernmodul HTML
@@ -10465,8 +10467,6 @@ gsfo#:#group_translate#:#Übersetzen
 gsfo#:#info_not_deletable_core#:#Standardelemente können nicht gelöscht werden.
 gsfo#:#info_not_deletable_not_empty#:#Gruppen mit Einträgen können nicht gelöscht werden.
 gsfo#:#legal_information#:#Rechtliche Informationen
-gsfo#:#obj_gsfo#:#Fußzeile
-gsfo#:#obj_gsfo_desc#:#Layout und Inhalt der Fußzeile verwalten
 gsfo#:#order_saved#:#Reihenfolge gespeichert
 gsfo#:#permanent#:#permanent
 gsfo#:#reset_footer#:#Fußzeile zurücksetzen

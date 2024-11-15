@@ -4967,6 +4967,8 @@ common#:#obj_grp_duplicate#:#Copy Group
 common#:#obj_grpr#:#Group Link
 common#:#obj_grps#:#Group
 common#:#obj_grps_desc#:#General settings for Groups
+common#:#obj_gsfo#:#Footer
+common#:#obj_gsfo_desc#:#Administrate Footer Layout and Content
 common#:#obj_hlps#:#Help System
 common#:#obj_hlps_desc#:#Settings for the online help
 common#:#obj_htlm#:#Learning Module HTML
@@ -10466,8 +10468,6 @@ gsfo#:#group_translate#:#Translate
 gsfo#:#info_not_deletable_core#:#Default Items cannot be deleted.
 gsfo#:#info_not_deletable_not_empty#:#Groups with Entries cannot be deleted.
 gsfo#:#legal_information#:#Legal Information
-gsfo#:#obj_gsfo#:#Footer
-gsfo#:#obj_gsfo_desc#:#Administrate Footer Layout and Content
 gsfo#:#order_saved#:#Order saved
 gsfo#:#permanent#:#permanent
 gsfo#:#reset_footer#:#Reset Footer
