@@ -27,21 +27,6 @@ use ILIAS\ResourceStorage\Stakeholder\AbstractResourceStakeholder;
  */
 class ilObjectTileImageStakeholder extends AbstractResourceStakeholder
 {
-    private int $default_owner;
-
-    public function __construct()
-    {
-        global $DIC;
-        $this->default_owner = $DIC->isDependencyAvailable('user')
-            ? $DIC->user()->getId()
-            : (defined('SYSTEM_USER_ID') ? (int) SYSTEM_USER_ID : 6);
-    }
-
-    public function setOwner(int $user_id_of_owner): void
-    {
-        $this->default_owner = $user_id_of_owner;
-    }
-
     public function getId(): string
     {
         return 'object_tile_image';
