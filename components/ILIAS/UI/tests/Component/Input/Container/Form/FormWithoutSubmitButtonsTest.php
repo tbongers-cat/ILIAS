@@ -56,7 +56,7 @@ class InputNameSource implements NameSource
 /**
  * @author Thibeau Fuhrer <thibeau@sr.solutions>
  */
-class NoSubmitFormTest extends \ILIAS_UI_TestBase
+class FormWithoutSubmitButtonsTest extends \ILIAS_UI_TestBase
 {
     protected SignalGenerator $signal_generator;
     protected NameSource $namesource;
@@ -144,7 +144,8 @@ class NoSubmitFormTest extends \ILIAS_UI_TestBase
     public function testRenderWithError(): void
     {
         $post_url = 'http://ilias.localhost/some_url?param1=foo&param2=bar';
-        $error_lang_var = 'ui_error_in_group';
+        $error_lang_var = 'ui_error';
+        $error_lang_var_in_group = 'ui_error_in_group';
 
         $dummy_input = $this->buildInputFactory()->text('test_label')->withAdditionalTransformation(
             $this->refinery->custom()->constraint(
@@ -171,11 +172,12 @@ class NoSubmitFormTest extends \ILIAS_UI_TestBase
         $form = $form->withRequest($request);
         $data = $form->getData();
 
-        $expected_html =
-            "<form id=\"id_1\" role=\"form\" class=\"c-form c-form--horizontal\" enctype=\"multipart/form-data\" action=\"$post_url\" method=\"post\">" .
-            "<div id=\"\" class=\"c-form__error-msg alert alert-danger\">$error_lang_var</div>" .
-            $dummy_input->getCanonicalName() .
-            "</form>";
+        $expected_html = <<<EOT
+<form id="id_2" role="form" class="c-form c-form--horizontal" enctype="multipart/form-data" describedby="id_1" action="$post_url" method="post">
+    <div class="c-form__error-msg alert alert-danger" id="id_1"><span class="sr-only">$error_lang_var:</span>$error_lang_var_in_group
+    </div>{$dummy_input->getCanonicalName()}
+</form>
+EOT;
 
         $context = $this->createMock(\ILIAS\UI\Component\Modal\RoundTrip::class);
         $context->method('getCanonicalName')->willReturn('RoundTripModal');
