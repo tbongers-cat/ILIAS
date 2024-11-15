@@ -3881,7 +3881,7 @@ class ilObjSurvey extends ilObject
 
         $row = $this->db->fetchAssoc($result);
 
-        return $row['state'];
+        return $row['state'] ?? false;
     }
 
     /**
