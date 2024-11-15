@@ -186,7 +186,7 @@ class GroupsRepositoryDB implements GroupsRepository
             return;
         }
 
-        if ($group->getItems() !== []) {
+        if ($group->getItems() > 0) {
             return;
         }
 
