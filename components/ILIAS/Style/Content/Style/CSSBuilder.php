@@ -117,12 +117,12 @@ class CSSBuilder
 
                     if (in_array($cur_par, array("background-image", "list-style-image"))) {
                         if (is_int(strpos($cur_val, "/"))) {	// external
-                            $cur_val = "url(" . $cur_val . ")";
+                            $cur_val = "url('" . $cur_val . "')";
                         } else {		// internal
                             if ($this->image_dir == "") {
-                                $cur_val = "url(images/" . $cur_val . ")";
+                                $cur_val = "url('images/" . $cur_val . "')";
                             } else {
-                                $cur_val = "url(" . $this->image_dir . "/" . $cur_val . ")";
+                                $cur_val = "url('" . $this->image_dir . "/" . $cur_val . "')";
                             }
                         }
                     }
