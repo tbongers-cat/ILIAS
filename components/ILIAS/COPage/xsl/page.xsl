@@ -3324,12 +3324,6 @@
 					<xsl:otherwise><xsl:value-of select="@Behavior"/></xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
-			<xsl:variable name="aheadclass">
-				<xsl:choose>
-					<xsl:when test="@Template and //StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_iheada']/@Value">ilc_va_iheada_<xsl:value-of select = "//StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_iheada']/@Value"/></xsl:when>
-					<xsl:otherwise>ilc_va_iheada_AccordIHeadActive</xsl:otherwise>
-				</xsl:choose>
-			</xsl:variable>
 			<xsl:attribute name="class">ilc_va_cntr_AccordCntr</xsl:attribute>
 			<xsl:if test="@Template and //StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_cntr']/@Value">
 				<xsl:attribute name = "class">ilc_va_cntr_<xsl:value-of select = "//StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_cntr']/@Value"/></xsl:attribute>
@@ -3387,58 +3381,6 @@
 				</xsl:choose>
 			</xsl:variable>
 			<xsl:if test="(@Type = 'VerticalAccordion' or @Type = 'HorizonalAccordion') and $mode != 'print' and $compare_mode = 'n'">
-<<<<<<< HEAD:components/ILIAS/COPage/xsl/page.xsl
-				<xsl:variable name="aheadclass">
-					<xsl:choose>
-						<xsl:when test="@Template and //StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_iheada']/@Value">ilc_va_iheada_<xsl:value-of select = "//StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_iheada']/@Value"/></xsl:when>
-						<xsl:otherwise>ilc_va_iheada_AccordIHeadActive</xsl:otherwise>
-					</xsl:choose>
-				</xsl:variable>
-=======
-				<script type="text/javascript">
-					if (typeof ilAccordionsInits === 'undefined') {
-						var ilAccordionsInits = [];
-					}
-					ilAccordionsInits.push({
-							id: 'ilc_accordion_<xsl:value-of select = "$pg_id"/>_<xsl:number count="Tabs" level="any" />',
-							toggle_class: 'il_VAccordionToggleDef',
-							toggle_act_class: 'il_VAccordionToggleActiveDef',
-							content_class: 'il_VAccordionContentDef',
-							width: null,
-							height: null,
-							orientation: 'vertical',
-							behaviour: '<xsl:value-of select = "$beh"/>',
-							save_url: '<xsl:value-of select = "$acc_save_url"/>',
-							active_head_class: '<xsl:value-of select="$aheadclass"/>',
-							int_id: '',
-							multi: false
-							}
-					);
-				</script>
-			</xsl:if>
-			<xsl:if test="@Type = 'Carousel' and $mode != 'print' and $compare_mode = 'n'">
-				<script type="text/javascript">
-					if (typeof ilAccordionsInits === 'undefined') {
-						var ilAccordionsInits = [];
-					}
-					ilAccordionsInits.push({
-					id: 'ilc_accordion_<xsl:value-of select = "$pg_id"/>_<xsl:number count="Tabs" level="any" />',
-					toggle_class: '',
-					toggle_act_class: '',
-					content_class: '',
-					width: <xsl:value-of select="$cwidth" />,
-					height: null,
-					orientation: 'carousel',
-					behaviour: 'Carousel',
-					save_url: '',
-					active_head_class: '',
-					int_id: '',
-					multi: false,
-					auto_anim_wait: <xsl:value-of select="number(@AutoAnimWait)" />,
-					random_start: <xsl:value-of select="number(@RandomStart)" />
-					});
-				</script>
->>>>>>> 266efee2d1d (35382: Vertical Accordion Force All Opened has a wrong head class):Services/COPage/xsl/page.xsl
 			</xsl:if>
 		</xsl:if>
 	</div>
