@@ -43,7 +43,8 @@ class FormAdapterGUI
     protected \ILIAS\Refinery\Factory $refinery;
 
     protected string $title = "";
-
+    protected array $values = [];
+    protected array $disable = [];
 
     /**
      * @var mixed|null
@@ -175,6 +176,7 @@ class FormAdapterGUI
         string $description = "",
         ?string $value = null
     ): self {
+        $this->values[$key] = $value;
         $field = $this->ui->factory()->input()->field()->text($title, $description);
         if (!is_null($value)) {
             $field = $field->withValue($value);
@@ -189,6 +191,7 @@ class FormAdapterGUI
         string $description = "",
         ?bool $value = null
     ): self {
+        $this->values[$key] = $value;
         $field = $this->ui->factory()->input()->field()->checkbox($title, $description);
         if (!is_null($value)) {
             $field = $field->withValue($value);
@@ -201,6 +204,7 @@ class FormAdapterGUI
         string $key,
         string $value
     ): self {
+        $this->values[$key] = $value;
         $field = $this->ui->factory()->input()->field()->hidden();
         $field = $field->withValue($value);
         $this->addField($key, $field);
@@ -220,6 +224,7 @@ class FormAdapterGUI
     {
         if ($disabled && ($field = $this->getLastField())) {
             $field = $field->withDisabled(true);
+            $this->disable[$this->last_key] = true;
             $this->replaceLastField($field);
         }
         return $this;
@@ -231,6 +236,7 @@ class FormAdapterGUI
         string $description = "",
         ?string $value = null
     ): self {
+        $this->values[$key] = $value;
         $field = $this->ui->factory()->input()->field()->textarea($title, $description);
         if (!is_null($value)) {
             $field = $field->withValue($value);
@@ -247,6 +253,7 @@ class FormAdapterGUI
         ?int $min_value = null,
         ?int $max_value = null
     ): self {
+        $this->values[$key] = $value;
         $trans = [];
         if (!is_null($min_value)) {
             $trans[] = $this->refinery->int()->isGreaterThanOrEqual($min_value);
@@ -271,6 +278,7 @@ class FormAdapterGUI
         string $description = "",
         ?\ilDate $value = null
     ): self {
+        $this->values[$key] = $value;
         $field = $this->ui->factory()->input()->field()->dateTime($title, $description);
 
         $format = $this->user->getDateFormat();
@@ -292,6 +300,7 @@ class FormAdapterGUI
         string $description = "",
         ?\ilDateTime $value = null
     ): self {
+        $this->values[$key] = $value;
         $field = $this->ui->factory()->input()->field()->dateTime($title, $description)->withUseTime(true);
 
         if ((int) $this->user->getTimeFormat() === \ilCalendarSettings::TIME_FORMAT_12) {
@@ -320,6 +329,7 @@ class FormAdapterGUI
         string $label_from = "",
         string $label_to = ""
     ): self {
+        $this->values[$key] = [$from, $to];
         if ($label_from === "") {
             $label_from = $this->lng->txt("rep_activation_limited_start");
         }
@@ -371,6 +381,7 @@ class FormAdapterGUI
         string $description = "",
         ?string $value = null
     ): self {
+        $this->values[$key] = $value;
         $field = $this->ui->factory()->input()->field()->select($title, $options, $description);
         if (!is_null($value)) {
             $field = $field->withValue($value);
@@ -388,6 +399,7 @@ class FormAdapterGUI
         string $description = "",
         ?string $value = null
     ): self {
+        $this->values[$key] = $value;
         $field = $this->ui->factory()->input()->field()->radio($title, $description);
         if (!is_null($value)) {
             $field = $field->withOption($value, "");    // dummy to prevent exception, will be overwritten by radioOption
@@ -415,6 +427,7 @@ class FormAdapterGUI
         string $description = "",
         ?string $value = null
     ): self {
+        $this->values[$key] = $value;
         $this->current_switch = [
             "key" => $key,
             "title" => $title,
@@ -431,6 +444,7 @@ class FormAdapterGUI
         string $description = "",
         ?bool $value = null
     ): self {
+        $this->values[$key] = $value;
         $this->current_optional = [
             "key" => $key,
             "title" => $title,
@@ -458,12 +472,20 @@ class FormAdapterGUI
     {
         if (!is_null($this->current_group)) {
             if (!is_null($this->current_switch)) {
+                $fields = [];
+                foreach ($this->current_group["fields"] as $key) {
+                    $fields[$key] = $this->fields[$key];
+                }
                 $this->current_switch["groups"][$this->current_group["key"]] =
                     $this->ui->factory()->input()->field()->group(
-                        $this->current_group["fields"],
+                        $fields,
                         $this->current_group["title"]
-                    )->withByline($this->current_group["description"])
-                    ->withDisabled($this->current_group["disabled"]);
+                    )->withByline($this->current_group["description"]);
+                if ($this->current_group["disabled"]) {
+                    $this->current_switch["groups"][$this->current_group["key"]] =
+                        $this->current_switch["groups"][$this->current_group["key"]]
+                        ->withDisabled(true);
+                }
             }
         }
         $this->current_group = null;
@@ -572,7 +594,7 @@ class FormAdapterGUI
             $field_path[] = $this->current_section;
         }
         if (!is_null($this->current_group)) {
-            $this->current_group["fields"][$key] = $field;
+            $this->current_group["fields"][] = $key;
             if (!is_null($this->current_switch)) {
                 $field_path[] = $this->current_switch["key"];
                 $field_path[] = 1;  // the value of subitems in SwitchableGroup are in the 1 key of the raw data
@@ -691,6 +713,10 @@ class FormAdapterGUI
 
         if (!isset($this->fields[$key])) {
             return null;
+        }
+
+        if (isset($this->disable[$key])) {
+            return $this->values[$key];
         }
 
         $value = $this->raw_data;

@@ -95,13 +95,6 @@ class SettingsGUI
                 "",
                 (string) $settings->getScheduleType()
             );
-
-        // #14478
-        /*
-        if (count(ilBookingObject::getList($this->object->getId()))) {
-            $form->disable("stype");
-        }*/
-
         $form = $form
             ->group(
                 (string) \ilObjBookingPool::TYPE_FIX_SCHEDULE,
@@ -139,28 +132,51 @@ class SettingsGUI
                 "",
                 $settings->getOverallLimit()
             );
+
+        $pref_options_disabled = false;
+        if ($settings->getScheduleType() === \ilObjBookingPool::TYPE_NO_SCHEDULE_PREFERENCES) {
+            $pref_manager = $this->domain->preferences(
+                new \ilObjBookingPool($this->ref_id)
+            );
+            $pref_options_disabled = $pref_manager->hasRun();
+        }
+
         $form = $form
             ->group(
                 (string) \ilObjBookingPool::TYPE_NO_SCHEDULE_PREFERENCES,
                 $lng->txt("book_schedule_type_none_preference"),
                 $lng->txt("book_schedule_type_none_preference_info")
-            )
+            );
+        $form = $form
             ->number(
                 "preference_nr",
                 $lng->txt("book_nr_of_preferences"),
                 $lng->txt("book_nr_preferences") . " - " .
                 $lng->txt("book_nr_of_preferences_info"),
                 $settings->getPreferenceNr()
-            )
+            );
+        if ($pref_options_disabled) {
+            $form = $form->disabled();
+        }
+        $form = $form
             ->dateTime(
                 "pref_deadline",
                 $lng->txt("book_pref_deadline"),
                 $lng->txt("book_pref_deadline_info"),
                 $settings->getPrefDeadline()
                     ? new \ilDateTime($settings->getPrefDeadline(), IL_CAL_UNIX) : null
-            )
-            ->required()
-            ->end();
+            );
+        if ($pref_options_disabled) {
+            $form = $form->disabled();
+        } else {
+            $form = $form->required();
+        }
+        $form->end();
+
+        // #14478
+        if (count(\ilBookingObject::getList($this->obj_id))) {
+            $form = $form->disabled(true);
+        }
 
         $form = $form
             ->checkbox(
