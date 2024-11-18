@@ -76,10 +76,10 @@ class AuthPageLanguagesOverviewTable implements UI\Component\Table\DataRetrieval
                 ->column()
                 ->text($this->lng->txt($this->context->pageLanguageIdentifier()))
                 ->withIsSortable(false),
-            'status_icon' => $this->ui_factory
+            'status' => $this->ui_factory
                 ->table()
                 ->column()
-                ->text($this->lng->txt('active'))
+                ->statusIcon($this->lng->txt('active'))
                 ->withIsSortable(false)
         ];
     }
@@ -141,8 +141,7 @@ class AuthPageLanguagesOverviewTable implements UI\Component\Table\DataRetrieval
                     $langkey
                 );
 
-                $this->records[$i]['status_icon'] = $this->getStatusIcon($status);
-                $this->records[$i]['status'] = $status;
+                $this->records[$i]['status'] = $this->getStatusIcon($status);
                 $this->records[$i]['language'] = $this->lng->txt('meta_l_' . $langkey);
 
                 ++$i;
@@ -150,25 +149,19 @@ class AuthPageLanguagesOverviewTable implements UI\Component\Table\DataRetrieval
         }
     }
 
-    private function getStatusIcon(bool $status): string
+    private function getStatusIcon(bool $status): \ILIAS\UI\Component\Symbol\Icon\Icon
     {
         if ($status) {
-            $icon = $this->ui_renderer->render(
-                $this->ui_factory->symbol()->icon()->custom(
-                    \ilUtil::getImagePath('standard/icon_ok.svg'),
-                    $this->lng->txt('active')
-                )
-            );
-        } else {
-            $icon = $this->ui_renderer->render(
-                $this->ui_factory->symbol()->icon()->custom(
-                    \ilUtil::getImagePath('standard/icon_not_ok.svg'),
-                    $this->lng->txt('inactive')
-                )
+            return $this->ui_factory->symbol()->icon()->custom(
+                \ilUtil::getImagePath('standard/icon_ok.svg'),
+                $this->lng->txt('active')
             );
         }
 
-        return $icon;
+        return $this->ui_factory->symbol()->icon()->custom(
+            \ilUtil::getImagePath('standard/icon_not_ok.svg'),
+            $this->lng->txt('inactive')
+        );
     }
 
     public function getRows(
