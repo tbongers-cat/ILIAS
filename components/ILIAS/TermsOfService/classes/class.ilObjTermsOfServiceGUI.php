@@ -126,6 +126,11 @@ class ilObjTermsOfServiceGUI extends ilObject2GUI
     {
         $read_only = !$this->rbac_system->checkAccess('write', $this->object->getRefId());
 
+        $no_documents = $this->config->legalDocuments()->document()->repository()->countAll() === 0;
+        if ($no_documents) {
+            $this->tpl->setOnScreenMessage('info', $this->lng->txt('tos_no_documents_exist'));
+        }
+
         $enabled = $this->dic->ui()->factory()->input()->field()->optionalGroup(
             [
                 'reeval_on_login' => $this->dic->ui()->factory()->input()->field()->checkbox(
@@ -148,8 +153,7 @@ class ilObjTermsOfServiceGUI extends ilObject2GUI
             return $form;
         }
 
-        return $this->legal_documents->admin()->withFormData($form, function (array $data): void {
-            $no_documents = $this->config->legalDocuments()->document()->repository()->countAll() === 0;
+        return $this->legal_documents->admin()->withFormData($form, function (array $data) use ($no_documents): void {
             if ($no_documents && $data['enabled']) {
                 $this->tpl->setOnScreenMessage('failure', $this->lng->txt('tos_no_documents_exist_cant_save'), true);
                 $this->ctrl->redirect($this, 'settings');
