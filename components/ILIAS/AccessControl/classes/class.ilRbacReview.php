@@ -198,6 +198,7 @@ class ilRbacReview
     /**
      * Returns a list of assignable roles in a subtree of the repository
      * @todo move tree to construct. Currently this is not possible due to init sequence
+     * @return list<int>
      */
     public function getAssignableRolesInSubtree(int $ref_id): array
     {
@@ -313,8 +314,7 @@ class ilRbacReview
 
     /**
      * get all assigned users to a given role
-     * @param int $a_rol_id
-     * @return int[] all users (id) assigned to role
+     * @return list<int> all users (id) assigned to role
      */
     public function assignedUsers(int $a_rol_id): array
     {
@@ -376,8 +376,7 @@ class ilRbacReview
 
     /**
      * get all assigned roles to a given user
-     * @param int        usr_id
-     * @return    int[]    all roles (id) the user is assigned to
+     * @return list<int> all roles (id) the user is assigned to
      */
     public function assignedRoles(int $a_usr_id): array
     {
@@ -393,6 +392,7 @@ class ilRbacReview
 
     /**
      * Get assigned global roles for an user
+     * @return list<int>
      */
     public function assignedGlobalRoles(int $a_usr_id): array
     {
@@ -405,9 +405,10 @@ class ilRbacReview
         $res = $this->db->query($query);
         $role_arr = [];
         while ($row = $this->db->fetchObject($res)) {
-            $role_arr[] = $row->rol_id;
+            $role_arr[] = (int) $row->rol_id;
         }
-        return $role_arr !== [] ? $role_arr : [];
+
+        return $role_arr;
     }
 
     /**
@@ -445,7 +446,7 @@ class ilRbacReview
      * @access    public
      * @param int    role id
      * @param bool        get only rolefolders where role is assignable (true)
-     * @return    int[]        reference IDs of role folders
+     * @return list<int> reference IDs of role folders
      */
     public function getFoldersAssignedToRole(int $a_rol_id, bool $a_assignable = false): array
     {
@@ -467,6 +468,7 @@ class ilRbacReview
 
     /**
      * Get roles of object
+     * @return list<int>
      */
     public function getRolesOfObject(int $a_ref_id, bool $a_assignable_only = false): array
     {
@@ -490,10 +492,7 @@ class ilRbacReview
     /**
      * get all roles of a role folder including linked local roles that are created due to stopped inheritance
      * returns an array with role ids
-     * @access     public
-     * @param int        ref_id of object
-     * @param bool if false only get true local roles
-     * @return    int[] Array with rol_ids
+     * @return list<int> Array with rol_ids
      * @deprecated since version 4.5.0
      * @todo       refactor rolf => RENAME
      */
@@ -519,7 +518,7 @@ class ilRbacReview
 
     /**
      * get only 'global' roles
-     * @return    int[]        Array with rol_ids
+     * @return list<int> Array with rol_ids
      * @todo refactor rolf => DONE
      */
     public function getGlobalRoles(): array
@@ -529,6 +528,7 @@ class ilRbacReview
 
     /**
      * Get local roles of object
+     * @return list<int>
      */
     public function getLocalRoles(int $a_ref_id): array
     {
@@ -543,7 +543,7 @@ class ilRbacReview
 
     /**
      * Get all roles with local policies
-     * @return int[]
+     * @return list<int>
      */
     public function getLocalPolicies(int $a_ref_id): array
     {
@@ -556,6 +556,7 @@ class ilRbacReview
 
     /**
      * get only 'global' roles
+     * @return list<array{obj_id: int, role_type: string}>
      */
     public function getGlobalRolesArray(): array
     {
@@ -570,6 +571,7 @@ class ilRbacReview
 
     /**
      * get only 'global' roles (with flag 'assign_users')
+     * @return list<array{obj_id: int, role_type: string}>
      */
     public function getGlobalAssignableRoles(): array
     {
@@ -598,6 +600,7 @@ class ilRbacReview
 
     /**
      * get all possible operations
+     * @return list<array{ops_id: int, operation: ?string, description: ?string}>
      */
     public function getOperations(): array
     {
@@ -615,6 +618,7 @@ class ilRbacReview
 
     /**
      * get one operation by operation id
+     * @return array{}|array{ops_id: int, operation: ?string, description: ?string}
      */
     public function getOperation(int $ops_id): array
     {
@@ -633,6 +637,7 @@ class ilRbacReview
     /**
      * get all possible operations of a specific role
      * The ref_id of the role folder (parent object) is necessary to distinguish local roles
+     * @return array<string, list<int>>
      */
     public function getAllOperationsOfRole(int $a_rol_id, int $a_parent = 0): array
     {
@@ -652,7 +657,7 @@ class ilRbacReview
     }
 
     /**
-     * Get active operations for a role
+     * @return list<int|numeric-string>
      */
     public function getActiveOperationsOfRole(int $a_ref_id, int $a_role_id): array
     {
@@ -662,7 +667,7 @@ class ilRbacReview
 
         $res = $this->db->query($query);
         while ($row = $res->fetchRow(ilDBConstants::FETCHMODE_ASSOC)) {
-            return $row['ops_id'] === ':' ? [] : unserialize($row['ops_id']);
+            return $row['ops_id'] === ':' ? [] : unserialize($row['ops_id'], ['allowed_classes' => false]);
         }
         return [];
     }
@@ -670,6 +675,7 @@ class ilRbacReview
     /**
      * get all possible operations of a specific role
      * The ref_id of the role folder (parent object) is necessary to distinguish local roles
+     * @return list<int>
      */
     public function getOperationsOfRole(int $a_rol_id, string $a_type, int $a_parent = 0): array
     {
@@ -690,6 +696,9 @@ class ilRbacReview
         return $ops_arr;
     }
 
+    /**
+     * @return list<int|numeric-string>
+     */
     public function getRoleOperationsOnObject(int $a_role_id, int $a_ref_id): array
     {
         $query = "SELECT ops_id FROM rbac_pa " .
@@ -700,14 +709,16 @@ class ilRbacReview
         $ops = [];
         while ($row = $this->db->fetchObject($res)) {
             if ($row->ops_id !== ':') {
-                $ops = unserialize($row->ops_id);
+                $ops = unserialize($row->ops_id, ['allowed_classes' => false]);
             }
         }
+
         return $ops;
     }
 
     /**
      * all possible operations of a type
+     * @return list<int>
      */
     public function getOperationsOnType(int $a_typ_id): array
     {
@@ -725,6 +736,7 @@ class ilRbacReview
 
     /**
      * all possible operations of a type
+     * @return list<int>
      */
     public function getOperationsOnTypeString(string $a_type): array
     {
@@ -738,6 +750,7 @@ class ilRbacReview
 
     /**
      * Get operations by type and class
+     * @return list<int>
      */
     public function getOperationsByTypeAndClass(string $a_type, string $a_class): array
     {
@@ -766,6 +779,7 @@ class ilRbacReview
     /**
      * get all objects in which the inheritance of role with role_id was stopped
      * the function returns all reference ids of objects containing a role folder.
+     * @return list<int>
      */
     public function getObjectsWithStopedInheritance(int $a_rol_id, array $a_filter = []): array
     {
@@ -875,7 +889,7 @@ class ilRbacReview
         $res = $this->db->query($query);
         while ($row = $this->db->fetchAssoc($res)) {
             $row['title'] = $row['title'] ?? '';
-            $prefix = substr($row['title'], 0, 3) == "il_";
+            $prefix = str_starts_with($row['title'], "il_");
 
             // all (assignable) internal local roles only
             if ($a_filter == 4 && !$prefix) {
@@ -912,6 +926,8 @@ class ilRbacReview
     /**
      * get ops_id's by name.
      * Example usage: $rbacadmin->grantPermission($roles,ilRbacReview::_getOperationIdsByName(array('visible','read'),$ref_id));
+     * @param list<string> $operations
+     * @return list<int>
      */
     public static function _getOperationIdsByName(array $operations): array
     {
@@ -962,8 +978,8 @@ class ilRbacReview
 
     /**
      * Lookup operation ids
-     * @param array $a_type_arr e.g array('cat','crs','grp'). The operation name (e.g. 'create_cat') is generated automatically
-     * @return int[] Array with operation ids
+     * @param list<string> $a_type_arr e.g array('cat','crs','grp'). The operation name (e.g. 'create_cat') is generated automatically
+     * @return array<string, int> Array with operation ids
      */
     public static function lookupCreateOperationIds(array $a_type_arr): array
     {
@@ -1093,6 +1109,7 @@ class ilRbacReview
 
     /**
      * get operation list by object type
+     * @return list<array{obj_id: int, operation: ?string, desc: ?string, class: ?string, op_order: int}>
      */
     public static function _getOperationList(string $a_type = ''): array
     {
@@ -1127,6 +1144,9 @@ class ilRbacReview
         return $arr;
     }
 
+    /**
+     * @return array<string, list<array{ops_id: int, name: ?string}>>
+     */
     public static function _groupOperationsByClass(array $a_ops_arr): array
     {
         $arr = [];
@@ -1218,7 +1238,7 @@ class ilRbacReview
 
     /**
      * get operation assignments
-     * @return array array(array('typ_id' => $typ_id,'title' => $title,'ops_id => '$ops_is,'operation' => $operation),...
+     * @return list<array{typ_id: int, type: ?string, ops_id: int, operation: ?string}>
      */
     public function getOperationAssignment(): array
     {
@@ -1240,7 +1260,8 @@ class ilRbacReview
             $info[$counter]['operation'] = $row->operation;
             $counter++;
         }
-        return $info;
+
+        return array_values($info);
     }
 
     /**
@@ -1254,7 +1275,7 @@ class ilRbacReview
         if ($a_role_id == SYSTEM_ROLE_ID or $a_role_id == ANONYMOUS_ROLE_ID) {
             return false;
         }
-        if (substr(ilObject::_lookupTitle($a_role_id), 0, 3) == 'il_') {
+        if (str_starts_with(ilObject::_lookupTitle($a_role_id), 'il_')) {
             return false;
         }
         return true;
@@ -1316,6 +1337,7 @@ class ilRbacReview
 
     /**
      * Get all user permissions on an object
+     * @return list<string>
      */
     public function getUserPermissionsOnObject(int $a_user_id, int $a_ref_id): array
     {
@@ -1327,7 +1349,7 @@ class ilRbacReview
         $res = $this->db->query($query);
         $all_ops = [];
         while ($row = $this->db->fetchObject($res)) {
-            $ops = unserialize($row->ops_id);
+            $ops = unserialize($row->ops_id, ['allowed_classes' => false]);
             $all_ops = array_merge($all_ops, $ops);
         }
         $all_ops = array_unique($all_ops);
@@ -1338,7 +1360,8 @@ class ilRbacReview
         while ($rec = $this->db->fetchAssoc($set)) {
             $perms[] = $rec["operation"];
         }
-        return $perms;
+
+        return array_values(array_filter($perms));
     }
 
     /**
