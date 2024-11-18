@@ -133,18 +133,21 @@ class ilSoapAdministration
         return $this->message_code;
     }
 
-    protected function initAuth(string $sid, bool $mutate_super_global_cookies = false): void
+    protected function initAuth(string $sid): void
     {
         global $DIC;
 
         [$sid, $client] = $this->explodeSid($sid);
 
-        if ($mutate_super_global_cookies || !isset($DIC)) {
-            $_COOKIE['ilClientId'] = $client;
-            $_COOKIE[session_name()] = $sid;
-        } else {
-            ilUtil::setCookie(session_name(), $sid);
+        if (session_status() === PHP_SESSION_ACTIVE && $sid === session_id()) {
+            return;
         }
+
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_destroy();
+        }
+
+        session_id($sid);
     }
 
     protected function initIlias(): void
