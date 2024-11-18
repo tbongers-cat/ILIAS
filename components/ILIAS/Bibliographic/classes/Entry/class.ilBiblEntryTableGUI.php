@@ -1,14 +1,5 @@
 <?php
 
-use ILIAS\UI\Factory as UIFactory;
-use ILIAS\HTTP\Services as HttpServices;
-use ILIAS\UI\Renderer;
-use ILIAS\Refinery\Factory;
-use ILIAS\UI\Implementation\Component\Table\PresentationRow;
-use ILIAS\UI\Component\Input\Container\Filter\Standard AS StandardFilter;
-use ILIAS\DI\UIServices;
-use ILIAS\UI\Component\Table\Presentation AS PresentationTable;
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -25,6 +16,14 @@ use ILIAS\UI\Component\Table\Presentation AS PresentationTable;
  *
  *********************************************************************/
 
+use ILIAS\UI\Factory as UIFactory;
+use ILIAS\HTTP\Services as HttpServices;
+use ILIAS\UI\Renderer;
+use ILIAS\Refinery\Factory;
+use ILIAS\UI\Implementation\Component\Table\PresentationRow;
+use ILIAS\UI\Component\Input\Container\Filter\Standard as StandardFilter;
+use ILIAS\DI\UIServices;
+use ILIAS\UI\Component\Table\Presentation as PresentationTable;
 
 class ilBiblEntryTableGUI
 {
@@ -38,20 +37,20 @@ class ilBiblEntryTableGUI
     public const SORTATION_BY_YEAR_DESC = 6;
 
 
-    private HttpServices $http;
-    private ilLanguage $lng;
-    private UIFactory $ui_factory;
-    private Renderer $ui_renderer;
-    private ilCtrlInterface $ctrl;
-    private Factory $refinery;
+    private readonly HttpServices $http;
+    private readonly ilLanguage $lng;
+    private readonly UIFactory $ui_factory;
+    private readonly Renderer $ui_renderer;
+    private readonly ilCtrlInterface $ctrl;
+    private readonly Factory $refinery;
     private int $current_page = 0;
     private int $entries_per_page = 10;
-    private ilUIService $ui_service;
+    private readonly ilUIService $ui_service;
     private ?StandardFilter $filter;
     private PresentationTable $table;
 
     /**  @var ilBiblFieldFilterInterface[] */
-    protected array $filter_objects = array();
+    protected array $filter_objects = [];
 
     public function __construct(protected ilObjBibliographicGUI $a_parent_obj, protected ilBiblFactoryFacade $facade, protected UIServices $ui)
     {
@@ -86,9 +85,7 @@ class ilBiblEntryTableGUI
             return null;
         }
 
-        $available_field_ids_for_object = array_map(static function (ilBiblField $field) {
-            return $field->getId();
-        }, $this->facade->fieldFactory()->getAvailableFieldsForObjId($this->facade->iliasObjId()));
+        $available_field_ids_for_object = array_map(static fn(ilBiblField $field): ?int => $field->getId(), $this->facade->fieldFactory()->getAvailableFieldsForObjId($this->facade->iliasObjId()));
 
         $filter_inputs = [];
         $filter_active_states = [];
@@ -159,7 +156,7 @@ class ilBiblEntryTableGUI
                     ->withHeadline($title)
                     ->withSubheadline($author)
                     ->withImportantFields([$year])
-                    ->withContent( $ui_factory->listing()->descriptive($translated_record));
+                    ->withContent($ui_factory->listing()->descriptive($translated_record));
             }
         )->withData($records_current_page);
     }
@@ -171,7 +168,10 @@ class ilBiblEntryTableGUI
 
         $filter_data = ($this->filter !== null) ? ($this->ui_service->filter()->getData($this->filter) ?? []) : [];
         foreach ($filter_data as $field_name => $field_value) {
-            if (empty($field_value) || (is_array($field_value) && count($field_value) === 0)) {
+            if (empty($field_value)) {
+                continue;
+            }
+            if (is_array($field_value) && $field_value === []) {
                 continue;
             }
             $filter = $this->filter_objects[$field_name];
@@ -208,13 +208,13 @@ class ilBiblEntryTableGUI
             foreach ($sorted_attributes as $sorted_attribute) {
                 $entry_data[$sorted_attribute->getName()] = $sorted_attribute->getValue();
             }
-            if(!array_key_exists('author', $entry_data)) {
+            if (!array_key_exists('author', $entry_data)) {
                 $entry_data['author'] = '';
             }
-            if(!array_key_exists('title', $entry_data)) {
+            if (!array_key_exists('title', $entry_data)) {
                 $entry_data['title'] = '';
             }
-            if(!array_key_exists('year', $entry_data)) {
+            if (!array_key_exists('year', $entry_data)) {
                 $entry_data['year'] = '';
             }
             $bibl_data[] = $entry_data;
@@ -228,7 +228,7 @@ class ilBiblEntryTableGUI
         $sortation = $this->determineSortation();
         $sortation_mapping = $this->getSortationsMapping();
         $sortation_string = $sortation_mapping[$sortation];
-        $sortation_parts = explode(' ', $sortation_string);
+        $sortation_parts = explode(' ', (string) $sortation_string);
         $sortation_field = array_column($records, $sortation_parts[0]);
         $sortation_direction = ($sortation_parts[1] === 'ASC') ? SORT_ASC : SORT_DESC;
         array_multisort($sortation_field, $sortation_direction, $records);
@@ -250,7 +250,10 @@ class ilBiblEntryTableGUI
         foreach ($record as $key => $value) {
             /** @var ilBiblField $field */
             $field = ilBiblField::where(['identifier' => $key])->first();
-            $translated_key = $this->facade->translationFactory()->translate($field);
+            $translated_key = $key;
+            if ($field !== null) {
+                $translated_key = $this->facade->translationFactory()->translate($field);
+            }
             $translated_record[$translated_key] = $value;
         }
         return $translated_record;

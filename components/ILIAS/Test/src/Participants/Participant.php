@@ -183,11 +183,7 @@ class Participant
 
     public function hasAnsweredQuestionsForScoredAttempt(): bool
     {
-        if (!$this->hasAttemptOverviewInformation()) {
-            return false;
-        }
-
-        return $this->attempt_overview->hasAnsweredQuestions();
+        return $this->attempt_overview?->hasAnsweredQuestions() ?? false;
     }
 
     public function getRemainingDuration(

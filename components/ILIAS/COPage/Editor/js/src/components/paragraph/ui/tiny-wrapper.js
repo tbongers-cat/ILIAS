@@ -978,6 +978,7 @@ export default class TinyWrapper {
       t = 'mycode';
     }
     ed.execCommand('mceToggleFormat', false, t);
+    this.getTinyDomTransform().removeMultiClasses('ilc_text_inline_' + t);
     ed.focus();
     // ed.selection.collapse(false); // see #33963
     this.autoResize();

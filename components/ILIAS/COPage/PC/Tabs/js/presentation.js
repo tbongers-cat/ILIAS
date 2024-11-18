@@ -136,7 +136,7 @@ const presentation = (function () {
         const toggleActClass = tabContainer.dataset.copgTabsToggleActClass;
         const contentClass = tabContainer.dataset.copgTabsContentClass;
         const behaviour = tabContainer.dataset.copgTabsBehaviour;
-        const activeHeadClass = tabContainer.dataset.copgActiveHeadClass;
+        const activeHeadClass = tabContainer.dataset.copgTabsActiveHeadClass;
 
         // register click handler (if not all opened is forced)
         if (behaviour !== 'ForceAllOpen') {

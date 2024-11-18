@@ -736,6 +736,13 @@ abstract class ilAdvancedMDFieldDefinition
             return;
         }
 
+        /*
+         * This has to be set before update and creation here, the alternative
+         * would be to set this in all children of this class, everywhere
+         * where type-specific settings are set.
+         */
+        $this->generic_data->setFieldValues($this->getFieldDefinition());
+
         if ($a_keep_pos) {
             $field_id = $this->db_gateway->create($this->generic_data);
         } else {
@@ -754,6 +761,13 @@ abstract class ilAdvancedMDFieldDefinition
             $this->save();
             return;
         }
+
+        /*
+         * This has to be set before update and creation here, the alternative
+         * would be to set this in all children of this class, everywhere
+         * where type-specific settings are set.
+         */
+        $this->generic_data->setFieldValues($this->getFieldDefinition());
 
         $this->db_gateway->update($this->generic_data);
     }

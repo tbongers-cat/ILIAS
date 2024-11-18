@@ -102,7 +102,7 @@ final class ilFooterCustomGroupsProvider extends AbstractStaticFooterProvider
                 $this->dic->globalScreen()->identification()->fromSerializedIdentification($entry->getParent())
             )->withAction(
                 $action
-            )->withOpenInNewViewport(true);
+            )->withOpenInNewViewport($entry->isExternal());
         }
 
         return $entries;

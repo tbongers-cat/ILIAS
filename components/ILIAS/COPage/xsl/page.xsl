@@ -3281,6 +3281,12 @@
 		<xsl:when test="@HorizontalAlign = 'RightFloat'">float:right; <xsl:if test="$disable_auto_margins != 'y'">margin-right:0px;</xsl:if></xsl:when>
 		<xsl:otherwise></xsl:otherwise>
 	</xsl:choose></xsl:variable>
+	<xsl:variable name="aheadclass">
+		<xsl:choose>
+			<xsl:when test="@Template and //StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_iheada']/@Value">ilc_va_iheada_<xsl:value-of select = "//StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_iheada']/@Value"/></xsl:when>
+			<xsl:otherwise>ilc_va_iheada_AccordIHeadActive</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
 	<div>
 		<xsl:variable name="cwidth">
 			<xsl:choose>
@@ -3318,12 +3324,6 @@
 					<xsl:otherwise><xsl:value-of select="@Behavior"/></xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
-			<xsl:variable name="aheadclass">
-				<xsl:choose>
-					<xsl:when test="@Template and //StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_iheada']/@Value">ilc_va_iheada_<xsl:value-of select = "//StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_iheada']/@Value"/></xsl:when>
-					<xsl:otherwise>ilc_va_iheada_AccordIHeadActive</xsl:otherwise>
-				</xsl:choose>
-			</xsl:variable>
 			<xsl:attribute name="class">ilc_va_cntr_AccordCntr</xsl:attribute>
 			<xsl:if test="@Template and //StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_cntr']/@Value">
 				<xsl:attribute name = "class">ilc_va_cntr_<xsl:value-of select = "//StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_cntr']/@Value"/></xsl:attribute>
@@ -3348,6 +3348,7 @@
 				<xsl:with-param name="cwidth" select="$cwidth" />
 				<xsl:with-param name="cheight" select="$cheight" />
 				<xsl:with-param name="ttemp" select="$ttemp" />
+				<xsl:with-param name="aheadclass" select="$aheadclass" />
 			</xsl:apply-templates>
 			<xsl:if test="@Type != 'Carousel'">
 				<div style="clear:both;"><xsl:comment>Break</xsl:comment></div>
@@ -3380,12 +3381,6 @@
 				</xsl:choose>
 			</xsl:variable>
 			<xsl:if test="(@Type = 'VerticalAccordion' or @Type = 'HorizonalAccordion') and $mode != 'print' and $compare_mode = 'n'">
-				<xsl:variable name="aheadclass">
-					<xsl:choose>
-						<xsl:when test="@Template and //StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_iheada']/@Value">ilc_va_iheada_<xsl:value-of select = "//StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_iheada']/@Value"/></xsl:when>
-						<xsl:otherwise>ilc_va_iheada_AccordIHeadActive</xsl:otherwise>
-					</xsl:choose>
-				</xsl:variable>
 			</xsl:if>
 		</xsl:if>
 	</div>
@@ -3396,6 +3391,7 @@
 	<xsl:param name="cwidth"/>
 	<xsl:param name="cheight"/>
 	<xsl:param name="ttemp"/>
+	<xsl:param name="aheadclass"/>
 	<xsl:variable name="cstyle"><xsl:if test="$cheight != 'null' and $mode != 'edit' and $mode != 'print' and $compare_mode = 'n'">height: <xsl:value-of select="$cheight" />px;</xsl:if></xsl:variable>
 
 	<!-- TabContainer -->
@@ -3432,9 +3428,13 @@
 			<xsl:attribute name="class">ilc_va_ihead_AccordIHead ilc_va_iheada_AccordIHeadActive</xsl:attribute>
 		</xsl:when>
 		<xsl:when test="../@Type = 'VerticalAccordion' or ../@Type = 'HorizontalAccordion'">
-			<xsl:attribute name="class">ilc_va_ihead_AccordIHead</xsl:attribute>
+			<xsl:attribute name="class">ilc_va_ihead_AccordIHead
+				<xsl:if test="../@Behavior = 'ForceAllOpen'"><xsl:value-of select="$aheadclass"/></xsl:if>
+			</xsl:attribute>
 			<xsl:if test="../@Template and //StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_ihead']/@Value">
-				<xsl:attribute name = "class">ilc_va_ihead_<xsl:value-of select = "//StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_ihead']/@Value"/></xsl:attribute>
+				<xsl:attribute name = "class">ilc_va_ihead_<xsl:value-of select = "//StyleTemplates/StyleTemplate[@Name=$ttemp]/StyleClass[@Type='va_ihead']/@Value"/>
+					<xsl:if test="../@Behavior = 'ForceAllOpen'"><xsl:value-of select="$aheadclass"/></xsl:if>
+				</xsl:attribute>
 			</xsl:if>
 		</xsl:when>
 		<xsl:when test="../@Type = 'Carousel'">

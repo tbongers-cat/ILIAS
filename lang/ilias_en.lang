@@ -1217,7 +1217,7 @@ assessment#:#save_on_navigation_locked_confirmation#:#Your changed answers will 
 assessment#:#saved_adjustment#:#Changes saved.
 assessment#:#score_partsol_enabled#:#Activate Half-Point Scoring
 assessment#:#score_partsol_enabled_info#:#Usually the participant has to answer the question fully correct to get the configured points. With this option the participant gets the half of the configured points with at least three correct decisions.
-assessment#:#scored_pass#:#Scored Pass
+assessment#:#scored_pass#:#Scored Test Attempt
 assessment#:#scoring#:#Scoring and Results
 assessment#:#scoringadjust#:#Corrections
 assessment#:#search_groups#:#Search Groups
@@ -1443,10 +1443,10 @@ assessment#:#tst_eval_results_by_pass_lo#:#List of Answers for Attempt %s
 assessment#:#tst_eval_results_lo#:#List of Answers
 assessment#:#tst_eval_show_answer#:#Show Answer
 assessment#:#tst_eval_total_finished#:#Total finished tests (Participants that used up all possible passes.)
-assessment#:#tst_eval_total_finished_average_time#:#Average test processing time
+assessment#:#tst_eval_total_finished_average_time#:#Average Time on Task
 assessment#:#tst_eval_total_passed#:#Total passed tests
 assessment#:#tst_eval_total_passed_average_points#:#Average points of passed tests
-assessment#:#tst_eval_total_passed_average_time#:#Average processing time of all passed tests
+assessment#:#tst_eval_total_passed_average_time#:#Average Time on Task of All Passed Tests
 assessment#:#tst_eval_total_persons#:#Total number of participants who started the test
 assessment#:#tst_exam_access_code#:#Access Code
 assessment#:#tst_exam_access_code_label#:#Enter access code to continue your already started test.
@@ -4965,6 +4965,8 @@ common#:#obj_grp_duplicate#:#Copy Group
 common#:#obj_grpr#:#Group Link
 common#:#obj_grps#:#Group
 common#:#obj_grps_desc#:#General settings for Groups
+common#:#obj_gsfo#:#Footer
+common#:#obj_gsfo_desc#:#Administrate Footer Layout and Content
 common#:#obj_hlps#:#Help System
 common#:#obj_hlps_desc#:#Settings for the online help
 common#:#obj_htlm#:#Learning Module HTML
@@ -7398,6 +7400,7 @@ copg#:#copg_page_element_not_found#:#Page element not found.
 copg#:#copg_page_type_stys#:#Layout Page
 copg#:#copg_par_format_selection#:#Paragraph Format Selection
 copg#:#copg_pc_mob_does_not_exist#:#This media object does not exist.
+copg#:#copg_plugin_not_avail#:#Plugin %s not available.
 copg#:#copg_questions_not_supported_here#:#Questions are not supported in this context.
 copg#:#copg_reload_page#:#Reload Page
 copg#:#copg_remove_formats#:#Remove Formatting
@@ -9780,7 +9783,7 @@ export#:#export_resource#:#Resource
 export#:#export_save_selection#:#Start Export
 export#:#export_select_resources#:#Select Resources
 export#:#no_file#:#No file
-file#:#action_download#:#Download file
+file#:#action_download#:#Download file or view content
 file#:#action_show#:#Redirect user to the file’s ‘Info’ tab
 file#:#add_icon#:#Add Icon
 file#:#amount_of_downloads#:#Downloads
@@ -9899,7 +9902,6 @@ fold#:#fold_settings#:#Folder Settings
 form#:#email_not_match#:#Your entries for the e-mail address don't match! Please re-enter your e-mail address.
 form#:#form_alphabet_all#:#All
 form#:#form_chars_remaining#:#Characters remaining:
-form#:#form_date_aria_desc#:#The following input format is required:
 form#:#form_date_duration_end#:#End
 form#:#form_date_duration_start#:#Start
 form#:#form_days#:#Days
@@ -10465,8 +10467,6 @@ gsfo#:#group_translate#:#Translate
 gsfo#:#info_not_deletable_core#:#Default Items cannot be deleted.
 gsfo#:#info_not_deletable_not_empty#:#Groups with Entries cannot be deleted.
 gsfo#:#legal_information#:#Legal Information
-gsfo#:#obj_gsfo#:#Footer
-gsfo#:#obj_gsfo_desc#:#Administrate Footer Layout and Content
 gsfo#:#order_saved#:#Order saved
 gsfo#:#permanent#:#permanent
 gsfo#:#reset_footer#:#Reset Footer

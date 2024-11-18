@@ -20,7 +20,6 @@ declare(strict_types=1);
 
 namespace ILIAS\File\Capabilities\Check;
 
-use ILIAS\Data\URI;
 use ILIAS\File\Capabilities\Permissions;
 use ILIAS\components\WOPI\Discovery\ActionTarget;
 
@@ -31,6 +30,7 @@ abstract class BaseCheck implements Check
 {
     public function __construct()
     {
+
     }
 
     protected function hasPermission(
