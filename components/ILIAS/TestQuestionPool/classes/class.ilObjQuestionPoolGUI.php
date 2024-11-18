@@ -1241,6 +1241,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
 
     public function printObject(): void
     {
+        $this->tabs_gui->activateTab('print_view');
         $this->ctrl->setParameter($this, 'output', 'overview');
         $output_link = $this->ctrl->getLinkTarget($this, 'print');
         $this->ctrl->setParameter($this, 'output', 'detailed_output_solutions');
