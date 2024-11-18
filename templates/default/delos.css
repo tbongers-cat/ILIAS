@@ -4321,6 +4321,7 @@ hr.il-divider-with-label {
 }
 .il-filter-input-section .leftaddon {
   font-size: 0.75rem;
+  padding: 3px 9px;
 }
 .il-filter-input-section .il-input-multiselect {
   margin: 0.8em;
