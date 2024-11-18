@@ -5,8 +5,20 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Textarea;
 
 /**
- * Example show how to create and render a basic textarea field and attach it to a
- * form.
+ * ---
+ * description: >
+ *   The example shows how to create and render a basic textarea field and attach
+ *   it to a form.
+ *
+ * expected output: >
+ *   ILIAS shows an input field titled "Textarea Input". You can enter a text as long or short as ones likes. After saving
+ *   the text ILIAS will display the input in the following format:
+ *
+ *   Array
+ *   (
+ *       [0] => My Text
+ *   )
+ * ---
  */
 function base()
 {

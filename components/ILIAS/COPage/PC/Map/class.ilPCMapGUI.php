@@ -154,7 +154,7 @@ class ilPCMapGUI extends ilPageContentGUI
 
         // save/cancel buttons
         if ($a_mode == "create") {
-            $this->form->addCommandButton("create_map", $lng->txt("save"));
+            $this->form->addCommandButton("create", $lng->txt("save"));
             $this->form->addCommandButton("cancelCreate", $lng->txt("cancel"));
         } else {
             $this->form->addCommandButton("update_map", $lng->txt("save"));

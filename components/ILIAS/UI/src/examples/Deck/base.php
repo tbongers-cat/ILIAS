@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Deck;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a base deck.
+ *
+ * expected output: >
+ *   ILIAS shows nine "Cards" with a title and text each. According to the browser window/desktop size a different
+ *   number of cards will be displayed per line.
+ * ---
+ */
 function base()
 {
     //Init Factory and Renderer

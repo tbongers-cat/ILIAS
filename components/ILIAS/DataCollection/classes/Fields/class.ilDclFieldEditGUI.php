@@ -248,6 +248,7 @@ class ilDclFieldEditGUI
 
         // Description
         $text_prop = new ilTextAreaInputGUI($lng->txt("dcl_field_description"), "description");
+        $text_prop->setInfo($lng->txt('dcl_field_description_desc'));
         $this->form->addItem($text_prop);
 
         $edit_datatype = new ilRadioGroupInputGUI($lng->txt('dcl_datatype'), 'datatype');

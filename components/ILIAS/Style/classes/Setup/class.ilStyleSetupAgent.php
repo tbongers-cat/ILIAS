@@ -1,6 +1,20 @@
 <?php
 
-/* Copyright (c) 2019 Richard Klees <richard.klees@concepts-and-training.de> Extended GPL, see docs/LICENSE */
+/**
+ * This file is part of ILIAS, a powerful learning management system
+ * published by ILIAS open source e-Learning e.V.
+ *
+ * ILIAS is licensed with the GPL-3.0,
+ * see https://www.gnu.org/licenses/gpl-3.0.en.html
+ * You should have received a copy of said license along with the
+ * source code, too.
+ *
+ * If this is not the case or you just want to try ILIAS, you'll find
+ * us at:
+ * https://www.ilias.de
+ * https://github.com/ILIAS-eLearning
+ *
+ *********************************************************************/
 
 use ILIAS\Setup;
 use ILIAS\Refinery;
@@ -85,6 +99,23 @@ class ilStyleSetupAgent implements Setup\Agent
     {
         return [
             new ilStyleIRSSMigration()
+        ];
+    }
+
+    public function getNamedObjectives(?Setup\Config $config = null): array
+    {
+        return [
+            'buildUIFrameworkExampleTestCases.update' => new Setup\ObjectiveConstructor(
+                'builds an import file for testrail for all KNOWN ids.',
+                fn() => new ilUITestRailExampleTestCasesObjective(false)
+            ),
+
+            'buildUIFrameworkExampleTestCases.new' => new Setup\ObjectiveConstructor(
+                'builds an import file for testrail with ONLY NEW cases.',
+                fn() => new ilUITestRailExampleTestCasesObjective(true)
+            ),
+
+
         ];
     }
 }

@@ -4,9 +4,19 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Link\Bulky;
 
-//The Bulky Links in this example point to ilias.de
-//Note the exact look of the Bulky Links is mostly defined by the
-//surrounding container.
+/**
+ * ---
+ * description: >
+ *   The Bulky Links in this example point to ilias.de and includes tooltips
+ *   Note the exact look of the Bulky Links is mostly defined by the
+ *   surrounding container.
+ *
+ * expected output: >
+ *   ILIAS shows a bulky link: A glyph ("Comment") with the text "Link to ilias.de with Glyph".
+ *   - Hovering over the link will show tooltips
+ *   - Clicking the link will redirect you to ilias.de
+ * ---
+ */
 function with_tooltip()
 {
     global $DIC;

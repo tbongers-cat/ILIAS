@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\Examples\Symbol\Icon\Standard;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a disabled standard icon.
+ *
+ * expected output: >
+ *   ILIAS shows a standard icon in an alternative version. It's design hints to the icon being disabled.
+ * ---
+ */
 function disabled_icon()
 {
     global $DIC;

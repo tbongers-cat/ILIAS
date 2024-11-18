@@ -5,8 +5,21 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Textarea;
 
 /**
- * This example shows how to create and render a basic textarea field with minimum and maximum number of characters limit.
- * the input is attached to a form.
+ * ---
+ * description: >
+ *   This example shows how to create and render a basic textarea field with
+ *   minimum and maximum number of characters limit.
+ *
+ * expected output: >
+ *   ILIAS shows an input field titled "Textarea Input". You can enter a text with 20 letters max. Try entering the following
+ *   text: "Test text with more than 20 letters". You cannot enter more letters/words after "Test text with more" and
+ *   the counter "Characters remaining" is set to 0. After saving the input ILIAS will display your text in the following format:
+ *
+ *   Array
+ *   (
+ *       [0] => Test text with more
+ *   )
+ * ---
  */
 function with_limits()
 {

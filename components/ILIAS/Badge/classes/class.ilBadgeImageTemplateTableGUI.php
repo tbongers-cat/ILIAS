@@ -36,6 +36,7 @@ use Generator;
 use ILIAS\UI\Component\Table\DataRetrieval;
 use ILIAS\UI\URLBuilderToken;
 use ILIAS\DI\Container;
+use ILIAS\Filesystem\Stream\Streams;
 
 class ilBadgeImageTemplateTableGUI
 {
@@ -69,8 +70,7 @@ class ilBadgeImageTemplateTableGUI
             }
 
             /**
-             * TODO gvollbach: Please provide the exaxct shape of the list of arrays
-             * @return array<string,string>
+             * @return list<array{id: int, image_rid: string, title: string}>
              */
             private function getBadgeImageTemplates(Container $DIC): array
             {
@@ -137,7 +137,7 @@ class ilBadgeImageTemplateTableGUI
             }
 
             /**
-             * TODO gvollbach: Please provide the exaxct shape of the list of arrays
+             * @return list<array{id: int, image_rid: string, title: string}>
              */
             private function getRecords(Range $range = null, Order $order = null): array
             {
@@ -155,6 +155,7 @@ class ilBadgeImageTemplateTableGUI
                         $data = array_reverse($data);
                     }
                 }
+
                 if ($range) {
                     $data = \array_slice($data, $range->getStart(), $range->getLength());
                 }
@@ -216,15 +217,15 @@ class ilBadgeImageTemplateTableGUI
         $data_retrieval = $this->buildDataRetrievalObject($f, $r);
 
         $table = $f->table()
-                   ->data('', $columns, $data_retrieval)
+                   ->data($this->lng->txt('badge_image_templates'), $columns, $data_retrieval)
                    ->withActions($actions)
                    ->withRequest($request);
 
         $out = [$table];
         $query = $this->http->wrapper()->query();
-        if ($query->has('tid_id')) {
+        if ($query->has('tid')) {
             $query_values = $query->retrieve(
-                'tid_id',
+                'tid',
                 $this->refinery->kindlyTo()->listOf($this->refinery->kindlyTo()->string())
             );
 
@@ -241,9 +242,9 @@ class ilBadgeImageTemplateTableGUI
                 }
             } elseif (\is_array($query_values)) {
                 foreach ($query_values as $id) {
-                    $badge = new ilBadgeImageTemplate($id);
+                    $badge = new ilBadgeImageTemplate((int) $id);
                     $items[] = $f->modal()->interruptiveItem()->keyValue(
-                        $id,
+                        (string) $id,
                         (string) $badge->getId(),
                         $badge->getTitle()
                     );
@@ -256,20 +257,25 @@ class ilBadgeImageTemplateTableGUI
                     $badge->getTitle()
                 );
             }
-
-            $action = $query->retrieve($action_parameter_token->getName(), $this->refinery->to()->string());
-            if ($action === 'badge_image_template_delete') {
-                // TODO gvollbach: Please provide the HTTP service to to send a response and close the connection
-                echo($r->renderAsync([
-                    $f->modal()->interruptive(
-                        $this->lng->txt('badge_deletion'),
-                        $this->lng->txt('badge_deletion_confirmation'),
-                        '#'
-                    )->withAffectedItems($items)
-                        // TODO gvollbach: Why the console.log?
-                      ->withAdditionalOnLoadCode(static fn($id): string => "console.log('ASYNC JS');")
-                ]));
-                exit();
+            if ($query->has($action_parameter_token->getName())) {
+                $action = $query->retrieve($action_parameter_token->getName(), $this->refinery->kindlyTo()->string());
+                if ($action === 'badge_image_template_delete') {
+                    $this->http->saveResponse(
+                        $this->http
+                            ->response()
+                            ->withBody(
+                                Streams::ofString($r->renderAsync([
+                                    $f->modal()->interruptive(
+                                        $this->lng->txt('badge_deletion'),
+                                        $this->lng->txt('badge_deletion_confirmation'),
+                                        '#'
+                                    )->withAffectedItems($items)
+                                ]))
+                            )
+                    );
+                    $this->http->sendResponse();
+                    $this->http->close();
+                }
             }
         }
         $this->tpl->setContent($r->render($out));

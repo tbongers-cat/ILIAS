@@ -49,7 +49,7 @@ acc#:#acc_form_document#:#Dokument
 acc#:#acc_form_document_content_changed#:#Der Inhalt der hochgeladenen Datei wurde durch ILIAS bereinigt. Bitte prüfen Sie das Ergebnis und laden im Zweifel eine neue Datei hoch.
 acc#:#acc_form_document_info#:#Bitte wählen Sie eine entsprechende Datei von Ihrem lokalen Dateisystem. Sie können eine einfache Text-Datei oder eine HTML-Datei hochladen. Es wird nur ein Teil des HTML-Sprachumfangs unterstützt. Bitte beachten Sie, dass HTML-Dateien beim Hochladen bereinigt werden, und nur der Inhalt des body-Elements übernommen wird.
 acc#:#acc_form_document_new#:#Inhalt ändern
-acc#:#acc_form_document_new_info#:#Hier können Sie eine neue Datei von Ihrem lokalen Dateisystem wählen um das Dokument zu ändern. Sie können eine einfache Text-Datei oder eine HTML-Datei hochladen. Es wird nicht der komplette HTML-Sprachumfang unterstützt. Bitte beachten Sie, dass HTML-Dateien beim Hochladen bereinigt werden, und nur der Inhalt des body-Elements übernommen wird. Der bestehende Inhalt des Dokuments wird ausgetauscht.
+acc#:#acc_form_document_new_info#:#Wählen Sie eine neue Datei von Ihrem lokalen Dateisystem, um das Dokument zu ändern. Sie können eine einfache Text-Datei oder eine HTML-Datei hochladen. Es wird nicht der komplette HTML-Sprachumfang unterstützt. Bitte beachten Sie, dass HTML-Dateien beim Hochladen bereinigt werden, und nur der Inhalt des body-Elements übernommen wird. Der bestehende Inhalt des Dokuments wird ausgetauscht.
 acc#:#acc_form_document_title#:#Titel
 acc#:#acc_form_document_title_info#:#Geben Sie hier einen Titel für das Dokument ein.
 acc#:#acc_form_edit_criterion_head#:#Vorlagekriterium bearbeiten
@@ -275,6 +275,8 @@ administration#:#obj_blga_desc#:#Globale Blogeinstellungen
 administration#:#obj_chta_desc#:#Administration des Chat-Objekts und des Chat-Servers
 administration#:#obj_excs#:#Übung
 administration#:#obj_excs_desc#:#Globale Übungseinstellungen
+administration#:#obj_gsfo#:#Fußzeile
+administration#:#obj_gsfo_desc#:#Layout und Inhalt der Fußzeile verwalten
 administration#:#obj_impr#:#Impressum
 administration#:#obj_impr_desc#:#Bereitstellung des Impressums
 administration#:#obj_mds#:#Metadaten
@@ -552,6 +554,7 @@ assessment#:#backtocallingpage#:#Zurück zur Fragenseite
 assessment#:#backtocallingpool#:#Zurück zum Fragenpool
 assessment#:#backtocallingtest#:#Zurück zum Test
 assessment#:#baseunit#:#Basiseinheit
+assessment#:#broken_test#:#Kaputtes Test-Objekt
 assessment#:#bulkedit_author#:#Autor ändern
 assessment#:#bulkedit_lifecycle#:#Lebenszyklus ändern
 assessment#:#bulkedit_taxonomies#:#Taxonomien ändern
@@ -573,7 +576,7 @@ assessment#:#checkbox_unchecked#:#Nicht ausgewählt
 assessment#:#circle#:#Kreis
 assessment#:#circle_click_center#:#Bitte klicken Sie auf den Mittelpunkt der gewünschten Region
 assessment#:#circle_click_circle#:#Bitte klicken Sie auf einen Punkt auf dem Umkreis der gewünschten Region
-assessment#:#client_ip_range#:#Client IP Range
+assessment#:#client_ip_range#:#Client IP Bereich
 assessment#:#clientip#:#Client IP
 assessment#:#close_text_hint#:#Um eine Lücke in den Text einzufügen, setzen Sie den Cursor an die entsprechende Position und nutzen Sie die Schaltfläche "Textlücke". Anschließend stehen weiter unten entsprechende Bearbeitungsbereiche zur Verfügung. Ebenso können Sie die Lücken zur Bearbeitung im Lückentext direkt anklicken.
 assessment#:#cloze_answer_text_info#:#Vorangestellte oder nachfolgende Leerzeichen werden beim Speichern aus der Antwort gelöscht.
@@ -610,6 +613,8 @@ assessment#:#deleteSuggestedSolution#:#Inhalte zur Wiederholung entfernen
 assessment#:#delete_all_user_data_confirmation#:#Wollen Sie wirklich die Testergebnisse aller Teilnehmer löschen?
 assessment#:#delete_image_header#:#Bild entfernen
 assessment#:#delete_image_question#:#Möchten Sie das Bild wirklich entfernen?
+assessment#:#delete_participant_no_valid_participants_selected#:#Für die gewählten Teilnehmer liegen bereits Testergebnisse vor und können deshalb nicht entfernt werden.
+assessment#:#delete_result_no_valid_participants_selected#:#Für die gewählten Teilnehmer liegen keine Testergebnisse vor und können deshalb nicht entfernt werden.
 assessment#:#delete_selected_user_data_confirmation#:#Sind Sie sicher, dass Sie alle Testdaten der ausgewählten Teilnehmenden entfernen wollen?
 assessment#:#delete_user_data#:#Testergebnisse entfernen
 assessment#:#description_maxchars#:#Wenn nichts eingegeben wird, ist die maximale Anzahl von Zeichen für diese Textantwort unbegrenzt.
@@ -744,6 +749,7 @@ assessment#:#finish_pass_for_user_in_processing_time#:#WARNUNG: die Bearbeitungs
 assessment#:#finish_test#:#Test beenden
 assessment#:#finish_test_all#:#Sind Sie sicher, dass die den Testdurchlauf für alle Teilnehmer beenden möchten?
 assessment#:#finish_test_multiple#:#Sind Sie sicher, dass Sie den Testdurchlauf für folgende Teilnehmer beenden möchten?
+assessment#:#finish_test_no_valid_participants_selected#:#Für die gewählten Teilnehmer gibt es keine aktiven Testdurchläufe und können daher nicht beendet werden.
 assessment#:#finish_test_single#:#Sind Sie sicher, dass Sie den Testdurchlauf für den Teilnehmer "%s" beenden möchten?
 assessment#:#finish_unfinished_passes#:#Beendet noch offene Testdurchläufe
 assessment#:#finish_unfinished_passes_desc#:#Noch nicht beendete Testdurchläufe werden automatisch beendet – vorausgesetzt, es wurde für diese Tests ein Endzeitpunkt festgelegt oder Teilnehmende haben die maximale Bearbeitungsdauer überschritten.
@@ -788,10 +794,10 @@ assessment#:#internal_links#:#Interne Verweise
 assessment#:#intprecision#:#Teilbar durch
 assessment#:#intprecision_info#:#"Teilbar durch" hat nur Auswirkungen auf die Variablenerzeugung, wenn der Wert für die Präzision 0 beträgt. In diesem Fall legt "Teilbar durch" fest, durch welche ganze Zahl die erzeugte Variable teilbar sein muss. Ein Wert von 10 erzeugt also nur ganze Zahlen, die durch 10 teilbar sind, ein Wert von 5 erzeugt ganze Zahlen, die durch 5 teilbar sind usw. Bei einer Präzision von 0 ist "Teilbar durch" ein Pflichtfeld und muss eine positive, ganze Zahl enthalten. Voreingestellt ist der Wert 1 für beliebige ganze Zahlen.
 assessment#:#invalid_ip#:#Ungültige IP
-assessment#:#ip_range_byline#:#Nur IP Adressen die innerhalb der IP Range liegen, können den Test starten. Sie können entweder IPv4 ODER IPv6 verwenden.
-assessment#:#ip_range_for_all_participants#:#Sie bearbeiten die IP Range für alle Teilnehmer.
-assessment#:#ip_range_for_selected_participants#:#Sie bearbeiten die IP Range für die folgende Teilnehmer:
-assessment#:#ip_range_for_single_participant#:#Sie bearbeiten die IP Range für folgenden Teilnehmer:
+assessment#:#ip_range_byline#:#Nur IP Adressen die innerhalb der IP Bereich liegen, können den Test starten. Sie können entweder IPv4 ODER IPv6 verwenden.
+assessment#:#ip_range_for_all_participants#:#Sie bearbeiten die IP Bereich für alle Teilnehmer.
+assessment#:#ip_range_for_selected_participants#:#Sie bearbeiten die IP Bereich für die folgende Teilnehmer:
+assessment#:#ip_range_for_single_participant#:#Sie bearbeiten die IP Bereich für folgenden Teilnehmer:
 assessment#:#ip_range_info#:#Nur Geräte mit einer IP aus der festgelegten Spanne können den Test starten.
 assessment#:#ip_range_label#:#Beschränkung auf IPs
 assessment#:#ip_range_updated#:#Die IP-Rang wurde für die gewählten Teilnehmer aktualisiert.
@@ -1337,6 +1343,8 @@ assessment#:#tst_add_quest_cont_edit_mode_IPE#:#Unformatierter Text für Fragen 
 assessment#:#tst_add_quest_cont_edit_mode_IPE_info#:#Bietet keine Formatierung von Text in Fragen und Antworten, erlaubt aber Gestaltung der Rückmeldungen und Lösungshinweise mit ILIAS-Seiteneditor und Wiederverwendung bei Fragen in ILIAS-Lernmodulen.
 assessment#:#tst_add_quest_cont_edit_mode_RTE#:#Rich-Text-Editor (TinyMCE) für das Editieren der Fragen, Antworten, Rückmeldungen und Lösungshinweisen
 assessment#:#tst_add_quest_cont_edit_mode_RTE_info#:#Erlaubt formatierten Text für Fragen, Antworten, Rückmeldungen und Lösungshinweise. Rückmeldungen und Lösungshinweise werden aber beim Einbinden von Fragen in ILIAS-Lernmodule nicht übernommen.
+assessment#:#tst_add_quest_cont_edit_mode_plain#:#Unformatierter Text
+assessment#:#tst_add_quest_cont_edit_mode_plain_info#:#Bietet keine Formatierung von Text in Fragen, Antworten, Rückmeldungen und Lösungshinweisen.
 assessment#:#tst_addit_passes_blocked_after_passed_msg#:#Sie haben den Test bestanden. Der Test kann nicht noch einmal gestartet werden.
 assessment#:#tst_all_test_competences#:#Alle Test-Kompetenzen
 assessment#:#tst_all_user_data_deleted#:#Die Daten aller Testteilnehmer wurden gelöscht!
@@ -1548,6 +1556,7 @@ assessment#:#tst_input_dynamic_question_set_question_ordering_by_date#:#Ordne Fr
 assessment#:#tst_input_dynamic_question_set_question_ordering_by_tax#:#Ordne Fragen nach Taxonomieknoten
 assessment#:#tst_input_dynamic_question_set_source_questionpool#:#Fragenpool
 assessment#:#tst_input_dynamic_question_set_taxonomie_filter_enabled#:#Zeige Taxonomiefilter
+assessment#:#tst_insert_in_test#:#Insert in Test###28 10 2024 new variable
 assessment#:#tst_insert_missing_question#:#Bitte wählen Sie mindestens eine Frage aus, die Sie in dem Test hinzufügen wollen!
 assessment#:#tst_insert_questions#:#Sind Sie sicher, dass Sie die folgenden Fragen dem Test hinzufügen wollen?
 assessment#:#tst_instant_feedback#:#Direkte Rückmeldung
@@ -2248,16 +2257,10 @@ background_tasks#:#waiting#:#Warten
 badge#:#awarded_by#:#Vergeben durch
 badge#:#badge_activity_badges#:#Automatisch vergebenes Badge
 badge#:#badge_add_template#:#Vorlage hinzufügen
-badge#:#badge_add_to_backpack#:#Zum Backpack hinzufügen
-badge#:#badge_add_to_backpack_multi#:#Versuche %s zum Backpack hinzuzufügen
 badge#:#badge_add_to_profile#:#Zum Profil hinzufügen
 badge#:#badge_assignment_deletion_confirmation#:#Wollen Sie wirklich die folgenden Badge-Zuordnungen für „%s“ entziehen?
 badge#:#badge_award_badge#:#Badge verleihen
-badge#:#badge_backpack_connect_failed#:#Das Mozilla Backpack konnte nicht für %s angefragt werden.
-badge#:#badge_backpack_email#:#Mozilla-Backpack-Account (E-Mail)
-badge#:#badge_backpack_gallery_info#:#Dies sind die veröffentlichten Badge-Kollektionen Ihres Mozilla Backpacks.
-badge#:#badge_backpack_list#:#Mein Backpack
-badge#:#badge_backpack_no_groups#:#Das Mozilla Backpack ist leer bzw. nicht öffentlich.
+badge#:#badge_award_revoke#:#Badge vergeben/entziehen
 badge#:#badge_badge#:#Badge
 badge#:#badge_course_lp#:#Nach Leistung vergebenes Badge
 badge#:#badge_course_lp_invalid#:#Die folgenden Objekte verwenden einen nicht unterstützten Lernfortschrittsmodus: %s.
@@ -2267,7 +2270,6 @@ badge#:#badge_criteria#:#Kriterien
 badge#:#badge_crs_merit#:#Händisch vergebenes Badge
 badge#:#badge_deletion#:#Badge erfolgreich gelöscht.
 badge#:#badge_deletion_confirmation#:#Wollen Sie wirklich die folgenden Badges und alle ihre jeweiligen Zuweisungen löschen?
-badge#:#badge_edit_with_published#:#%s Benutzer haben dieses Badge bereits zu ihrem Backpack hinzugefügt. Badge-Attribute zu verändern führt deshalb zu Inkonsistenzen. Evtl. wäre ein neues Badge sinnvoller.
 badge#:#badge_image_from_template#:#Vorlage nutzen
 badge#:#badge_image_from_upload#:#Bild hochladen
 badge#:#badge_image_template_form#:#Bildvorlage
@@ -2286,20 +2288,9 @@ badge#:#badge_notification_osd#:#Sie haben gerade neue Badges erhalten: [BADGE_L
 badge#:#badge_notification_parent_goto#:#Zum Magazin
 badge#:#badge_notification_reason#:#Sie erhalten diese Nachricht, um die neuen Badges in Ihr Profil einbinden zu können.
 badge#:#badge_notification_subject#:#Badge erhalten
-badge#:#badge_obi_activate#:#Mozilla Open Badges Infrastructure aktivieren
-badge#:#badge_obi_activate_info#:#Benutzer Badges können aus ILIAS exportieren und im Internet als Nachweis ihrer Qualifikation nutzen.
-badge#:#badge_obi_contact#:#Kontakt-E-Mail
-badge#:#badge_obi_contact_info#:#Diese E-Mail-Adresse wird zwar nicht angezeigt, aber in das Badge eingebacken.
-badge#:#badge_obi_organisation#:#Organisation
-badge#:#badge_obi_organisation_info#:#Diese Angabe wird als Herausgeber des Badges angezeigt.
-badge#:#badge_obi_salt#:#Salt
-badge#:#badge_obi_salt_info#:#Geben Sie eine Kombination von Zahlen und Buchstaben ein, um Dritten später die Möglichkeit zu bieten, die Echtheit des Badges zu validieren. Bitte ändern Sie die Eingabe später nicht mehr.
 badge#:#badge_object_badges#:#Objekt-Badges
-badge#:#badge_personal_badges#:#Meine Badges
 badge#:#badge_profile_less#:#Weniger zeigen
-badge#:#badge_profile_manage#:#Verwalten
 badge#:#badge_profile_more#:#Alle zeigen
-badge#:#badge_profile_view#:#Anzeigen
 badge#:#badge_remove_badge#:#Badge entziehen
 badge#:#badge_remove_from_profile#:#Aus Profil entfernen
 badge#:#badge_select_one#:#Sie müssen mindestens einen Badge auswählen
@@ -2467,7 +2458,6 @@ blog#:#blog_approve#:#Beitrag freischalten
 blog#:#blog_author#:#Beiträge von
 blog#:#blog_authors#:#Beitragende Personen###Modified as part of gender mainstreaming activities for ILIAS 8
 blog#:#blog_back_to_blog_owner#:#Blog bearbeiten
-blog#:#blog_banner#:#Banner
 blog#:#blog_change_notification_body_approve#:#der folgende Beitrag muss noch freigeschaltet werden:
 blog#:#blog_change_notification_body_comment#:#der folgende Beitrag wurde kommentiert:
 blog#:#blog_change_notification_body_new#:#der folgende Beitrag wurde neu angelegt:
@@ -2547,10 +2537,6 @@ blog#:#blog_postings#:#Beiträge
 blog#:#blog_presentation_frame#:#Darstellung
 blog#:#blog_presentation_overview#:#Präsentation der Beiträge
 blog#:#blog_preview#:#Vorschau
-blog#:#blog_preview_banner#:#Personalisiertes Banner
-blog#:#blog_preview_banner_height#:#Höhe des Banners
-blog#:#blog_preview_banner_info#:#Standardgröße ist 1370x100 Pixel.
-blog#:#blog_preview_banner_width#:#Breite des Banners
 blog#:#blog_profile_picture#:#Profil-Bild anzeigen
 blog#:#blog_profile_picture_repository_info#:#Profilbilder werden nur für einzelne Beiträge angezeigt, nicht auf Übersichtsseiten.###Modified as part of gender mainstreaming activities for ILIAS 8
 blog#:#blog_properties#:#Blog-Eigenschaften
@@ -2798,11 +2784,6 @@ cert#:#cert_sortable_by_title_asc#:#Sortiert nach Titel (A→Z)
 cert#:#cert_sortable_by_title_desc#:#Sortiert nach Titel (Z→A)
 cert#:#certificate_achievement#:#%1$s erhalten.
 cert#:#certificate_achievement_sub_obj#:#Zertifikat für %1$s
-cert#:#certificate_migration_confirm_start#:#Ihre Zertifikate bleiben seit ILIAS 5.4 immer in Ihrer Hand. Auch wenn Kurse, Tests oder Lernmodule gelöscht werden, können Sie weiterhin auf alle erworbenen Zertifikate zugreifen. Um diese neue Funktion zu nutzen, müssen Sie Ihre alten Zertifikate einmalig migrieren.
-cert#:#certificate_migration_confirm_started#:#Die Migration wurde gestartet.
-cert#:#certificate_migration_go#:#Starte Migration
-cert#:#certificate_migration_lastrun_failed#:#Die Migration der Zertifikate ist fehlgeschlagen. Erneut versuchen?
-cert#:#certificate_no_object_desc#:#Keine Beschreibung vorhanden
 cert#:#certificate_no_object_title#:#Kein Titel vorhanden
 cert#:#certificate_same_not_saved#:#Es wurde keine neue Version der Zertifikatsvorlage gespeichert, da die entsprechenden Werte nicht verändert wurden.
 cert#:#error_creating_certificate_pdf#:#Das Zertifikat konnte nicht erstellt werden. Bitte kontaktieren Sie Ihre technische Betreuung und bitten um die Prüfung des Zertifikatsservers.
@@ -2860,12 +2841,7 @@ certificate#:#certificate_ph_mark#:#Erreichte Note
 certificate#:#certificate_ph_marklong#:#Erreichte Note (Offizielle Bezeichnung)
 certificate#:#certificate_ph_markshort#:#Erreichte Note (Kurzbezeichnung)
 certificate#:#certificate_ph_matriculation#:#Matrikelnummer
-certificate#:#certificate_ph_maxpoints#:#Maximal erreichbare Punktezahl
 certificate#:#certificate_ph_no_sco#:#Wenn Materialien zur Bestimmung des Lernfortschritts ausgewählt werden, können Titel und Punktestand auch im Zertifikat angezeigt werden.
-certificate#:#certificate_ph_passed#:#„bestanden“ oder „nicht bestanden“, abhängig vom Testergebnis
-certificate#:#certificate_ph_passed_exercise#:#„bestanden“ oder „nicht bestanden“
-certificate#:#certificate_ph_resultpercent#:#Erreichte Gesamtprozentzahl
-certificate#:#certificate_ph_resultpoints#:#Erreichte Punkte
 certificate#:#certificate_ph_salutation#:#Anrede
 certificate#:#certificate_ph_sco_points_max#:#Platzhalter<br/>für Punkte<br/>maximal
 certificate#:#certificate_ph_sco_points_raw#:#Platzhalter<br/>für Punkte
@@ -2889,12 +2865,12 @@ certificate#:#certificate_text#:#Text des Zertifikats
 certificate#:#certificate_text_info#:#Bitte geben Sie hier den Text des Zertifikats ein. Falls der WYSIWYG-Edtior in der ILIAS-Administration deaktiviert wurde, können Sie hier dennoch gültiges XHTML zur Formatierung nutzen.<br><br>
 certificate#:#certificate_unit_description#:#Geben Sie Maße immer in der Form WERT[cm|mm|in|pt|pc|px|em] an, d.h. 10mm oder 3in
 certificate#:#certificate_usage#:#Bitte beachten Sie, dass die Verwendung und Erstellung von Zertifikaten nur möglich ist, wenn Sie den Java-Server von ILIAS verwenden. Der Java-Server wird in der Hauptseite der Administration in der Kategorie Web-Services konfiguriert und ist unter anderem für die Generierung von PDF-Dateien erforderlich.
-certificate#:#certificate_var_max_points#:#46
-certificate#:#certificate_var_result_mark_long#:#Gut
-certificate#:#certificate_var_result_mark_short#:#2
-certificate#:#certificate_var_result_passed#:#bestanden
-certificate#:#certificate_var_result_percent#:#83%
-certificate#:#certificate_var_result_points#:#38
+certificate#:#certificate_var_max_points#:#Maximale Punktzahl im verwendeten Test
+certificate#:#certificate_var_result_mark_long#:#Erreichte Note in der Form 'Offizielle Bezeichnung'
+certificate#:#certificate_var_result_mark_short#:#Erreichte Note in der Form 'Kurzbezeichnung'
+certificate#:#certificate_var_result_passed#:#Angabe, ob der Test bestanden wurde oder nicht
+certificate#:#certificate_var_result_percent#:#Anzahl der erreichten Prozente im Test
+certificate#:#certificate_var_result_points#:#Anzahl der erreichten Punkte im Test
 certificate#:#certificate_var_user_birthday#:#08.05.1977
 certificate#:#certificate_var_user_city#:#Köln
 certificate#:#certificate_var_user_country#:#Deutschland
@@ -2909,12 +2885,6 @@ certificate#:#certificate_var_user_salutation#:#Frau
 certificate#:#certificate_var_user_street#:#Heidestraße 17
 certificate#:#certificate_var_user_title#:#Dr.
 certificate#:#certificate_var_user_zipcode#:#51147
-certificate#:#certificate_visibility#:#Sichtbarkeit###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_always#:#Immer sichtbar###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_introduction#:#Den Teilnehmern wird in der Ergebnisansicht des Tests das Zertifikat zum Herunterladen angeboten.###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_never#:#Nicht sichtbar###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_passed#:#Nur sichtbar, wenn der Teilnehmer oder die Teilnehmerin den Test bestanden hat###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_passed_exercise#:#Nur sichtbar, wenn der Teilnehmer oder die Teilnehmerin die Übung bestanden hat###Suspected obsolescence - should be removed with 10.
 certificate#:#cmix_cert_ph_object_description#:#Beschreibung
 certificate#:#cmix_cert_ph_object_title#:#Titel des xAPI/cmi5-Objekts
 certificate#:#cmix_cert_ph_reached_score#:#Erreichte Punktzahl in Prozent
@@ -3190,8 +3160,11 @@ cmix#:#completed_info#:#Die Aktivität wurde normal beendet oder abgeschlossen.
 cmix#:#completed_label#:#Statements mit dem Verb 'completed'
 cmix#:#conf_availability#:#Verwendbarkeit
 cmix#:#conf_availability_0#:#nicht verwendbar / deaktiviert
+cmix#:#conf_availability_0_info#:#Existing xAPI/cmi5 objects that use this LRS type can no longer be used.###28 10 2024 new variable
 cmix#:#conf_availability_1#:#ausschließlich in bestehenden Objekten
+cmix#:#conf_availability_1_info#:#This LRS type is not offered when creating new xAPI/cmi5 objects. Existing xAPI/cmi5 objects that use this type can continue to write or read data. Use this option to be able to delete data in the connected LRS at a later time.###28 10 2024 new variable
 cmix#:#conf_availability_2#:#in neuen und bestehenden Objekten
+cmix#:#conf_availability_2_info#:#This LRS type can be selected when creating xAPI/cmi5 objects.###28 10 2024 new variable
 cmix#:#conf_bypass_proxy#:#Erkennung des Lernfortschritts
 cmix#:#conf_bypass_proxy_disabled#:#xAPI-Proxy, um sofort Daten zu erhalten.
 cmix#:#conf_bypass_proxy_enabled#:#CronJob zur Abfrage des Learning Record Store
@@ -3774,7 +3747,6 @@ common#:#chta_write#:#Chatraum-Administration bearbeiten
 common#:#chtr_copy#:#Chatraum kopieren
 common#:#chtr_import#:#Chatraum importieren
 common#:#city#:#Ort
-common#:#cld_abandoned#:#Das Cloud-Objekt steht seit ILIAS 8 nicht mehr zur Verfügung. Es wurden keine Daten gelöscht. Bitte kontaktieren Sie Ihre technische Betreuung.
 common#:#cleaned_file#:#Datei wurde bereinigt.
 common#:#cleaning_failed#:#Der Virus konnte nicht aus der Datei entfernt werden.
 common#:#clear#:#Abbrechen
@@ -4041,8 +4013,6 @@ common#:#enable_export_scorm_desc#:#Anzeige persönlicher Daten in den Protokoll
 common#:#enable_fora_statistics#:#Forenstatistik aktivieren
 common#:#enable_fora_statistics_desc#:#Nur wenn diese aktiviert ist, kann auf die Forenstatistik zugegriffen werden.
 common#:#enable_hide_user_toggle#:#Mitglied darf Benachrichtigung nicht deaktivieren
-common#:#enable_hist_user_comments#:#Überarbeitungskommentare###Modified as part of gender mainstreaming activities for ILIAS 8
-common#:#enable_hist_user_comments_desc#:#Sie können Überarbeitungskommentare zu Seiten hinterlegen. Die Kommentare werden im Reiter „Inhalt“, Unterreiter „Verlauf“ des Lernmoduls angezeigt und unterstützen gemeinsames Editieren.###Modified as part of gender mainstreaming activities for ILIAS 8
 common#:#enable_multi_download#:#„Mehrere Objekte herunterladen“ aktivieren
 common#:#enable_multi_download_info#:#Wenn aktiviert, können mehrere Ordner bzw. Dateien gleichzeitig ausgewählt werden, um sie dann als Zip-Archiv herunterzuladen.
 common#:#enable_password_assistance#:#Passwort-Unterstützung aktivieren
@@ -4944,7 +4914,6 @@ common#:#obj_chap#:#Kapitel
 common#:#obj_chta#:#Chat
 common#:#obj_chtr#:#Chatraum
 common#:#obj_chtr_duplicate#:#Chatraum kopieren
-common#:#obj_cld#:#Cloud Object###29 07 2022 new variable
 common#:#obj_cmis#:#LRS
 common#:#obj_cmis_desc#:#Typen von Learning Record Stores konfigurieren
 common#:#obj_cmix#:#xAPI/cmi5
@@ -4997,6 +4966,8 @@ common#:#obj_grp_duplicate#:#Gruppe kopieren
 common#:#obj_grpr#:#Gruppenlink
 common#:#obj_grps#:#Gruppe
 common#:#obj_grps_desc#:#Allgemeine Einstellungen für Gruppen
+common#:#obj_gsfo#:#Fußzeile
+common#:#obj_gsfo_desc#:#Layout und Inhalt der Fußzeile verwalten
 common#:#obj_hlps#:#Online-Hilfe
 common#:#obj_hlps_desc#:#Einstellungen der Online-Hilfe
 common#:#obj_htlm#:#Lernmodul HTML
@@ -5193,7 +5164,6 @@ common#:#objs_book#:#Buchungspools
 common#:#objs_cat#:#Kategorien
 common#:#objs_catr#:#Kategorielinks
 common#:#objs_chtr#:#Chaträume
-common#:#objs_cld#:#Cloud Objects###29 07 2022 new variable
 common#:#objs_cmix#:#Objekte xAPI/cmi5
 common#:#objs_copa#:#Inhaltsseiten
 common#:#objs_crs#:#Kurse
@@ -6170,8 +6140,6 @@ contact#:#contact_awrn_req_contacts_info#:#Alle Kontaktanfragen werden aufgelist
 content#:#Pages#:#Seiten
 content#:#add_menu_entry#:#Menüeintrag hinzufügen →
 content#:#all_pages#:#für das gesamte Lernmodul
-content#:#choose_public_mode#:#Zugriffsrecht für nicht angemeldete Benutzer
-content#:#choose_public_pages#:#Öffentlich zugängliche Seiten auswählen
 content#:#citate#:#Zitieren
 content#:#citate_from#:#Zitieren von ...
 content#:#citate_page#:#Diese Seite zitieren
@@ -6301,7 +6269,7 @@ content#:#cont_change_object_reference#:#Ändere Objektreferenz
 content#:#cont_change_style#:#Style ändern
 content#:#cont_change_type#:#Typ ändern
 content#:#cont_change_width#:#Breite ändern
-content#:#cont_chap_and_pages#:#Kapitel und Seiten
+content#:#cont_chap_and_pages#:#Chapters and Pages###28 10 2024 new variable
 content#:#cont_chap_select_target_now#:#Wählen Sie jetzt die Checkbox, hinter die das Kapitel verschoben werden soll.
 content#:#cont_chapters#:#Kapitel
 content#:#cont_chapters_after_pages#:#Beachten Sie, dass innerhalb einer Ebene zunächst alle Seiten und dann erst die Unterkapitel aufgeführt werden.
@@ -7020,7 +6988,7 @@ content#:#cont_restrict_forw_nav_info#:#Eine nachfolgende Seite kann erst dann a
 content#:#cont_revision#:#Änderung
 content#:#cont_right#:#Rechts
 content#:#cont_right_float#:#Rechts, Text umfließt
-content#:#cont_rollback#:#Rollback
+content#:#cont_rollback#:#Wiederherstellen
 content#:#cont_rollback_confirmation#:#Wollen Sie wirklich diese alte Version der Seite wiederherstellen?
 content#:#cont_roman#:#Römisch I, II, ...
 content#:#cont_roman_s#:#Römisch i, ii, ...
@@ -7384,7 +7352,6 @@ content#:#scplayer_suspendall#:#Bearbeitung unterbrechen
 content#:#selectFooter#:#Als Fußzeile auswählen
 content#:#selectHeader#:#Als Kopfzeile auswählen
 content#:#select_a_file#:#Wählen Sie bitte eine Datei aus.
-content#:#selected_pages_only#:#nur für die unten ausgewählten Seiten
 content#:#seq_close#:#Bitte schließen Sie das Fenster des SCORM-Lernmoduls.
 content#:#seq_endsession#:#Die aktuelle Kurssitzung wurde beendet.
 content#:#seq_error#:#Es ist ein interner Ausnahmefehler im Sequencer aufgetreten.
@@ -7434,6 +7401,7 @@ copg#:#copg_page_element_not_found#:#Unbekanntes Seitenelement.
 copg#:#copg_page_type_stys#:#Seitenlayout
 copg#:#copg_par_format_selection#:#Absatzformatauswahl
 copg#:#copg_pc_mob_does_not_exist#:#Das Medienobjekt wurde nicht gefunden.
+copg#:#copg_plugin_not_avail#:#Plugin %s nicht verfügbar.
 copg#:#copg_questions_not_supported_here#:#In diesem Kontext werden keine Fragen unterstützt.
 copg#:#copg_reload_page#:#Seite neu laden
 copg#:#copg_remove_formats#:#Zeichenformate entfernen
@@ -8279,6 +8247,7 @@ dateplaner#:#cal_ch_booking_num_available#:#Freie Termine
 dateplaner#:#cal_ch_booking_num_free_short#:#%s frei
 dateplaner#:#cal_ch_booking_other_participants#:#Andere Teilnehmende:
 dateplaner#:#cal_ch_booking_owner#:#Sprechstunde bei###Modified as part of gender mainstreaming activities for ILIAS 8
+dateplaner#:#cal_ch_booking_participants#:#Teilnehmer
 dateplaner#:#cal_ch_booking_reminder_body#:#Ihr Termin mit „%s“ findet in wenigen Tagen statt.
 dateplaner#:#cal_ch_booking_reminder_subject#:#Terminerinnerung „%s“
 dateplaner#:#cal_ch_booking_start#:#Start
@@ -8665,6 +8634,7 @@ dcl#:#dcl_desc#:#Absteigend ↓
 dcl#:#dcl_description#:#Beschreibung
 dcl#:#dcl_detailed_view#:#Einzelansicht
 dcl#:#dcl_display_action_menu#:#Kopieren
+dcl#:#dcl_display_action_menu_desc#:#Das Objekt kann von dem Eintrag aus kopiert werden.
 dcl#:#dcl_display_record_alt#:#Diesen Eintrag anzeigen
 dcl#:#dcl_duplicate_non_unique_entries_exist#:#Es kann sich auch um bereits vorhandene Einträge handeln.###23 02 2024 new variable
 dcl#:#dcl_edit#:#Einstellungen der Datensammlung
@@ -8672,7 +8642,7 @@ dcl#:#dcl_edit_entry_rules#:#Eintragsbearbeitung
 dcl#:#dcl_edit_field#:#Feld bearbeiten
 dcl#:#dcl_edit_perm#:#Einträge bearbeiten
 dcl#:#dcl_edit_record#:#Eintrag bearbeiten
-dcl#:#dcl_edit_table#:#Einstellungen der Tabelle
+dcl#:#dcl_edit_table#:#Einstellungen der Tabelle "%s"
 dcl#:#dcl_editable_in_table_gui#:#Ein Eintrag kann nur über die Tabellenansicht bewertet werden.
 dcl#:#dcl_empty_detailed_view#:#Vorlage für Einzelansicht löschen
 dcl#:#dcl_empty_detailed_view_success#:#Die Vorlage wurde erfolgreich gelöscht.
@@ -8684,6 +8654,7 @@ dcl#:#dcl_export_finished#:#Export abgeschlossen
 dcl#:#dcl_export_started#:#Asynchroner Export gestartet
 dcl#:#dcl_field_datatype#:#Feldtyp
 dcl#:#dcl_field_description#:#Beschreibung
+dcl#:#dcl_field_description_desc#:#Wird ein Eintrag hinzugefügt, erscheint der Text unterhalb des Feldes.
 dcl#:#dcl_field_required#:#Verpflichtend
 dcl#:#dcl_field_title_change_warning#:#Sie haben den Titel des Feldes geändert. Dadurch funktioniert der entsprechende Platzhalter in der Vorlage zur Einzelansicht nicht mehr. Sie müssen diesen noch manuell angepassen.
 dcl#:#dcl_field_title_unique#:#Es existiert bereits ein Feld mit diesem Titel. Titel muss eindeutig sein.
@@ -8699,6 +8670,7 @@ dcl#:#dcl_formula#:#Formel
 dcl#:#dcl_formula_desc#:#Ähnlich wie bei der Tabellenkalkulation können per Formel Einträge verbunden oder berechnet werden.
 dcl#:#dcl_formula_detail_desc#:#Einträge in diesem Feld generieren sich automatisch. Sie können hier keinen Eintrag vornehmen.
 dcl#:#dcl_height#:#Höhe in Pixel
+dcl#:#dcl_height_desc#:#Die Datei wird beim Upload auf diese Größe verkleinert.
 dcl#:#dcl_hello#:#Hallo
 dcl#:#dcl_id#:#ID
 dcl#:#dcl_id_description#:#Die interne ID.
@@ -8718,6 +8690,7 @@ dcl#:#dcl_last_edited_by_description#:#Der Benutzer, der diesen Eintrag zuletzt 
 dcl#:#dcl_last_update#:#Letzte Änderung
 dcl#:#dcl_last_update_description#:#Das Datum, an dem dieser Eintrag zuletzt geändert wurde.
 dcl#:#dcl_learning_progress#:#Lernfortschritt
+dcl#:#dcl_learning_progress_desc#:#Der Lernfortschritt der betrachtenden Person wird angezeigt.
 dcl#:#dcl_legend_placeholders#:#Platzhalter
 dcl#:#dcl_length#:#Maximale Zeichenanzahl
 dcl#:#dcl_length_info#:#Anzahl von Zeichen, die ein Benutzer eingeben kann (Maximal 4000). Bei mehr als 200 Zeichen aktivieren Sie zusätzlich die Option „Mehrzeiliges Texteingabefeld“.
@@ -8726,6 +8699,7 @@ dcl#:#dcl_limit_start#:#Start
 dcl#:#dcl_limited#:#Zeitlich begrenzte Bearbeitung
 dcl#:#dcl_limited_desc#:#Einträge können nur im Zeitraum zwischen Start und Ende hinzugefügt, bearbeitet und gelöscht werden.
 dcl#:#dcl_link_detail_page#:#Link zur Einzelansicht
+dcl#:#dcl_link_detail_page_desc#:#Die Einzelansicht muss zusätzlich für die gewünschten Ansichten im Reiter „Einzelansicht“ aktiviert und konfiguriert werden.
 dcl#:#dcl_list_fields#:#Felder
 dcl#:#dcl_list_visibility_and_filter#:#Übersicht
 dcl#:#dcl_locked#:#Gesperrt
@@ -8758,6 +8732,7 @@ dcl#:#dcl_new_field#:#Neues Feld
 dcl#:#dcl_new_table#:#Neue Tabelle
 dcl#:#dcl_next_record#:#Nächster Eintrag
 dcl#:#dcl_no_content_warning#:#Achtung: die Datensammlung ist bereits online, hat aber noch keinen Felder
+dcl#:#dcl_no_entries#:#Keine Einträge
 dcl#:#dcl_no_entry#:#Kein Eintrag
 dcl#:#dcl_no_export_content_available#:#Keine Daten für den Export verfügbar.
 dcl#:#dcl_no_export_data_available#:#Keine Daten oder Felder für den Export verfügbar.
@@ -8806,7 +8781,8 @@ dcl#:#dcl_reference#:#Referenz
 dcl#:#dcl_reference_desc#:#Bereitstellen von Auswahloptionen, die in einem anderen Feld einer Tabelle gepflegt werden.
 dcl#:#dcl_reference_link#:#Referenzierten Eintrag verlinken
 dcl#:#dcl_reference_link_info#:#Achtung: Aktivieren Sie die Vorlage der Einzelansicht in der referenzierten Tabelle.
-dcl#:#dcl_reference_title#:#Feld auswahLen
+dcl#:#dcl_reference_title#:#Feld auswählen
+dcl#:#dcl_reference_title_desc#:#Antworten aus dem ausgewählten Feld werden Auswahloptionen für dieses Feld.
 dcl#:#dcl_regex#:#Texteingabe einschranken
 dcl#:#dcl_regex_info#:#Es kann ein regulärer Ausdruck ohne Delimiter eingegeben werden. Automatisch werden dann bestimmte Einträge zurückgewiesen.
 dcl#:#dcl_required#:#Verpflichtend
@@ -8819,7 +8795,7 @@ dcl#:#dcl_save_record#:#Eintrag speichern
 dcl#:#dcl_select#:#Auswahl der Tabelle
 dcl#:#dcl_selection_options#:#Optionen
 dcl#:#dcl_selection_type#:#Format
-dcl#:#dcl_selection_type_combobox#:#aus Auswahlmenü
+dcl#:#dcl_selection_type_combobox#:#Einfachauswahl aus Auswahlmenü
 dcl#:#dcl_selection_type_multi#:#Mehrfachauswahl aus Liste
 dcl#:#dcl_selection_type_single#:#Einfachauswahl aus Liste
 dcl#:#dcl_simulate_import#:#Import simulieren
@@ -8836,7 +8812,6 @@ dcl#:#dcl_table#:#Tabelle
 dcl#:#dcl_table_create#:#Erstelle Tabelle
 dcl#:#dcl_table_edit#:#Speichern
 dcl#:#dcl_table_id#:#Tabellen ID
-dcl#:#dcl_table_info#:#Nachfolgend legen Sie fest, was Personen in dieser Tabelle tun dürfen, die für die Datensammlung das Recht „Eintragen“ besitzen.
 dcl#:#dcl_table_list_fields#:#Felder der ausgewählten Tabelle
 dcl#:#dcl_table_list_tables#:#Verfügbare Tabellen
 dcl#:#dcl_table_settings_saved#:#Tabellen Einstellungen wurden gespeichert.
@@ -8881,11 +8856,13 @@ dcl#:#dcl_update_record#:#Eintrag aktualisieren
 dcl#:#dcl_url#:#URL oder E-Mail
 dcl#:#dcl_view_configuration#:#Ansichtskonfiguration
 dcl#:#dcl_view_own_records_perm#:#Nur eigene Einträge anzeigen
+dcl#:#dcl_view_own_records_perm_desc#:#Einträge von anderen Personen werden nicht angezeigt.
 dcl#:#dcl_view_settings#:#Ansichtseinstellungen
 dcl#:#dcl_view_viewdefinition#:#Vorlage für Einzelansicht
 dcl#:#dcl_visible#:#Für alle Benutzer sichtbar
 dcl#:#dcl_visible_desc#:#Benutzer haben Zugriff auf diese Tabelle.
 dcl#:#dcl_width#:#Breite in Pixel
+dcl#:#dcl_width_desc#:#Die Datei wird beim Upload auf diese Größe verkleinert.
 dcl#:#dcl_wrong_input_type#:#Der eingegebene Text passt nicht zum Typ dieses Feldes (falscher Typ).
 dcl#:#dcl_wrong_length#:#Der eingegebene Text ist zu lang.
 dcl#:#dcl_wrong_regex#:#Der eingegebene Text passt nicht zur Spezifikation dieses Feldes (regulärer Ausdruck).
@@ -9807,7 +9784,7 @@ export#:#export_resource#:#Ressource
 export#:#export_save_selection#:#Export starten
 export#:#export_select_resources#:#Objekte auswählen
 export#:#no_file#:#Keine Datei
-file#:#action_download#:#Datei direkt herunterladen
+file#:#action_download#:#Datei herunterladen oder Inhalt anzeigen
 file#:#action_show#:#Zunächst Reiter „Info“ anzeigen
 file#:#add_icon#:#Icon hinzufügen
 file#:#amount_of_downloads#:#Downloads
@@ -9926,7 +9903,6 @@ fold#:#fold_settings#:#Ordnereigenschaften
 form#:#email_not_match#:#Ihre Eingaben für die E-Mail-Adresse stimmen nicht überein! Bitte geben Sie die E-Mail-Adresse erneut ein.
 form#:#form_alphabet_all#:#Alle
 form#:#form_chars_remaining#:#Verbleibende Zeichen:
-form#:#form_date_aria_desc#:#Es ist folgendes Eingabeformat gefordert:
 form#:#form_date_duration_end#:#Ende
 form#:#form_date_duration_start#:#Start
 form#:#form_days#:#Tage
@@ -10492,8 +10468,6 @@ gsfo#:#group_translate#:#Übersetzen
 gsfo#:#info_not_deletable_core#:#Standardelemente können nicht gelöscht werden.
 gsfo#:#info_not_deletable_not_empty#:#Gruppen mit Einträgen können nicht gelöscht werden.
 gsfo#:#legal_information#:#Rechtliche Informationen
-gsfo#:#obj_gsfo#:#Fußzeile
-gsfo#:#obj_gsfo_desc#:#Layout und Inhalt der Fußzeile verwalten
 gsfo#:#order_saved#:#Reihenfolge gespeichert
 gsfo#:#permanent#:#permanent
 gsfo#:#reset_footer#:#Fußzeile zurücksetzen
@@ -10963,6 +10937,17 @@ lm#:#lm_edit_chapters#:#Kapitel bearbeiten
 lm#:#lm_edit_lm_settings#:#Lernmoduleinstellungen bearbeiten
 lm#:#lm_est_reading_time#:#Geschätzte Lesedauer
 lm#:#lm_est_reading_time_info#:#In Lernmodulen kann eine geschätzte Lesezeit ermittelt und angezeigt werden.
+lm#:#lm_insert_chapter#:#Kapitel einfügen
+lm#:#lm_insert_chapter_after#:#Kapitel danach einfügen
+lm#:#lm_insert_chapter_before#:#Kapitel davor einfügen
+lm#:#lm_insert_layout_after#:#Vorlage danach einfügen
+lm#:#lm_insert_layout_before#:#Vorlage davor einfügen
+lm#:#lm_insert_page#:#Seite einfügen
+lm#:#lm_insert_page_after#:#Seite danach einfügen
+lm#:#lm_insert_page_before#:#Seite davor einfügen
+lm#:#lm_insert_page_clip#:#Seiten aus Zwischenablage einfügen
+lm#:#lm_insert_page_clip_after#:#Seiten aus Zwischenablage danach einfügen
+lm#:#lm_insert_page_clip_before#:#Seiten aus Zwischenablage davor einfügen
 lm#:#lm_page_added#:#Eine Seite wurde hinzugefügt.
 lm#:#lm_page_type_lm#:#Lernmodulseite
 lm#:#lm_pages_added#:#Die Seiten wurden hinzugefügt.
@@ -11864,7 +11849,6 @@ mep#:#mep_content_snippet_used_in_older_versions#:#Achtung: Der Inhaltsbaustein 
 mep#:#mep_copy_to_mep#:#In Medienpool kopieren
 mep#:#mep_create_content_snippet#:#Inhaltsbaustein anlegen
 mep#:#mep_create_folder#:#Ordner anlegen
-mep#:#mep_create_from_upload_dir#:#Medienobjekte aus Upload-Verzeichnis hinzufügen
 mep#:#mep_create_media_files#:#Mediaobjekte anlegen
 mep#:#mep_create_mob#:#Medienobjekt anlegen
 mep#:#mep_default_height#:#Standardhöhe
@@ -11889,7 +11873,6 @@ mep#:#mep_new_content_snippet#:#Neuer Inhaltsbaustein
 mep#:#mep_new_folder#:#Neuer Ordner
 mep#:#mep_page_properties#:#Eigenschaften des Bausteins
 mep#:#mep_page_type_mep#:#Inhaltsbaustein
-mep#:#mep_sel_upload_dir_files#:#Wählen Sie Dateien / Verzeichnisse aus.
 mep#:#mep_thumbnail#:#Miniaturbild
 mep#:#mep_title_and_description#:#Titel und Beschreibung
 mep#:#mep_trans_import_info#:#Wenn Sie dieses Modul als "XML (Basissprache für Übersetzung - Master)" in eine andere Installation exportiert haben, können Sie hier die übersetzten Export-Dateien dieser Installation wieder importieren.
@@ -13071,6 +13054,7 @@ obj#:#obj_tool_setting_skills_info#:#Die Funktion ermöglicht es Kompetenzen aus
 obj#:#obj_tool_setting_tag_cloud#:#Tag Cloud
 obj#:#obj_tool_setting_tag_cloud_info#:#Es wird eine Tag Cloud im Block „Auswahl nach Themen“ im Reiter „Inhalt“ angezeigt.
 obj#:#obj_tool_setting_taxonomies#:#Taxonomien
+obj#:#obj_tool_setting_taxonomies_info#:#Taxonomien erlauben das Filtern von Objekten. Sie werden im Unterreiter „Taxonomie“ im Reiter "Einstellungen" angelegt.
 obj#:#obj_tool_setting_use_news#:#Neuigkeiten
 obj#:#obj_tool_setting_use_news_info#:#Nutzung des Blocks „Neuigkeiten“ oder der Timeline für Neuigkeiten. Benutzer können Benachrichtigungen für Neuigkeiten aktivieren, sobald der Block oder die Timeline aktiv sind.
 obj#:#obj_tool_setting_use_news_open_settings#:#Einstellungen für Block und Timeline öffnen
@@ -13663,10 +13647,6 @@ prg#:#will_not_set_top_progress_to_irrelevant#:#Oberste Zuordnung kann nicht irr
 prg#:#will_not_update_cert_for_unsuccessful_progress#:#kein Zertifikat erzeugt, da nicht abgeschlossen oder akkreditiert
 prtf#:#pdf_export#:#PDF Export
 prtf#:#prtf_add_assignment#:#Zuordnung hinzufügen
-prtf#:#prtf_add_blog#:#Blog hinzufügen
-prtf#:#prtf_add_existing_blog#:#Vorhandenes Blog nutzen
-prtf#:#prtf_add_new_blog#:#Neues Blog hinzufügen
-prtf#:#prtf_add_new_blog_info#:#Das neue Blog wird Ihren persönlichen Ressourcen hinzugefügt.
 prtf#:#prtf_add_page#:#Seite hinzufügen
 prtf#:#prtf_add_portfolio#:#Portfolio hinzufügen
 prtf#:#prtf_add_portfolio_from_template#:#Portfolio aus Vorlage hinzufügen
@@ -13677,7 +13657,6 @@ prtf#:#prtf_allow_my_courses#:#Seitenelement "Meine Kurse"
 prtf#:#prtf_allow_my_courses_info#:#Ermöglicht eine Liste der aktuellen Kursmitgliedschaften in ein Portfolio aufzunehmen.
 prtf#:#prtf_author#:#Erstellt von###Modified as part of gender mainstreaming activities for ILIAS 8
 prtf#:#prtf_back_to_portfolio_owner#:#Portfolio bearbeiten
-prtf#:#prtf_banner#:#Banner
 prtf#:#prtf_blog_page_created#:#Blog wurde hinzugefügt.
 prtf#:#prtf_copy_blog_pg#:#Blogseite kopieren
 prtf#:#prtf_copy_page#:#Portfolio-Seite(n) kopieren
@@ -13730,10 +13709,6 @@ prtf#:#prtf_portfolio_created_from_template#:#Dies ist die Vorschau Ihres neuen 
 prtf#:#prtf_portfolio_deleted#:#Portfolio wurde gelöscht
 prtf#:#prtf_portfolio_page_deleted#:#Portfolio- bzw. Blog-Seite wurde gelöscht.
 prtf#:#prtf_portfolios#:#Portfolios
-prtf#:#prtf_preview_banner#:#Personalisiertes Banner
-prtf#:#prtf_preview_banner_height#:#Banner Höhe
-prtf#:#prtf_preview_banner_info#:#Standardgröße ist 1370x100 Pixel.
-prtf#:#prtf_preview_banner_width#:#Banner Breite
 prtf#:#prtf_print_options#:#Auswahl zum PDF
 prtf#:#prtf_print_selection#:#Auswahl
 prtf#:#prtf_profile_picture#:#Profil-Bild anzeigen
@@ -13744,8 +13719,6 @@ prtf#:#prtf_role_title#:#Rolle
 prtf#:#prtf_save_status_and_titles#:#Status und Titel speichern
 prtf#:#prtf_sec_protected_info#:#Geschützte Blöcke können im Portfolio nicht bearbeitet werden.
 prtf#:#prtf_selected_pages#:#Ausgewählte Teile des Portfolios
-prtf#:#prtf_set_as_default#:#Als Mein Profil setzen
-prtf#:#prtf_set_default_publish_confirmation#:#Das Portfolio muss mindestens für alle registrierten Benutzer freigegeben werden. Soll es auch für das ganze Internet ohne Registrierung sichtbar sein?
 prtf#:#prtf_set_default_publish_global#:#Auch für unregistrierte Benutzer freigeben
 prtf#:#prtf_set_default_publish_registered#:#Nur für registrierte Nutzer freigeben
 prtf#:#prtf_set_offline#:#Offline setzen
@@ -14512,7 +14485,6 @@ rbac#:#rbac_create_book#:#Buchungspool anlegen
 rbac#:#rbac_create_cat#:#Kategorien anlegen
 rbac#:#rbac_create_catr#:#Kategorienlink anlegen
 rbac#:#rbac_create_chtr#:#Chatraum anlegen
-rbac#:#rbac_create_cld#:#Create Cloud Object###29 07 2022 new variable
 rbac#:#rbac_create_cmix#:#xAPI/cmi5-Objekt anlegen
 rbac#:#rbac_create_copa#:#Inhaltsseite anlegen
 rbac#:#rbac_create_crs#:#Kurs anlegen
@@ -15389,12 +15361,8 @@ search#:#lucene_or#:#ODER
 search#:#lucene_port#:#Port
 search#:#lucene_prefix_wildcard#:#Platzhalter am Wortbeginn
 search#:#lucene_prefix_wildcard_info#:#Erlaubt die Nutzung von Platzhaltern auch am Beginn eines Suchbegriffes: "*LIAS" findet "ILIAS"
-search#:#lucene_relevance#:#Relevanz der Suchergebnisse
 search#:#lucene_settings_tab#:#Lucene
 search#:#lucene_settings_title#:#Einstellungen zur Lucene-Suche
-search#:#lucene_show_relevance#:#Relevanz anzeigen
-search#:#lucene_show_relevance_info#:#Suchergebnisse werden nach ihrer Relevanz sortiert ausgegeben. Die Relevanz des jeweiligen Suchergebnisses wird als zusätzliche Information für alle Treffer angezeigt.
-search#:#lucene_show_sub_relevance#:#Relevanz von Unterobjekten anzeigen
 search#:#lucene_size_frag_info#:#Bitte bestimmen Sie die maximale Länge der Textabschnitte, die zur Hervorhebung der Suchtreffer ausgegeben werden. Geben Sie dazu die Anzahl der Zeichen einschließlich Leerzeichen ein.
 search#:#lucene_size_fragments#:#Länge der Textabschnitte
 search#:#lucene_tbl_create_ini#:#Java-Server Konfigurationsdatei erstellen
@@ -15480,6 +15448,7 @@ search#:#search_user_search_info_form#:#Anmeldekonten können in der globalen Su
 search#:#search_users#:#Benutzer suchen
 search#:#select_orgu#:#Organisationseinheiten auswählen
 search#:#until#:#bis
+search#:#user_search_settings_section#:#Suche im Reiter 'Mitglieder'
 sess#:#il_sess_participant#:#Teilnahme an Sitzung
 sess#:#il_sess_status_open#:#Offene Sitzung
 sess#:#mail_sess_roles#:#alle Personen mit folgenden lokalen Rollen###Modified as part of gender mainstreaming activities for ILIAS 8. Label is now generalised for all components that support ‘mail to members‘
@@ -17752,8 +17721,6 @@ wopi#:#msg_error_wopi_invalid_discorvery_url#:#Die eingegebene Discovery-URL ist
 wopi#:#msg_wopi_settings_modified#:#Einstellungen gespeichert
 wopi#:#open_external_editor#:#In externem Editor öffnen
 wopi#:#open_external_viewer#:#Inhalt anzeigen
-wopi#:#save_on_exit#:#Beim Beenden des Editors automatisch speichern
-wopi#:#save_on_exit_info#:#Bei aktiviertem Speicherintervall wird nach Möglichkeit nach der festgelegten Sekundenanzahl eine neue Verison veröffentlicht. Bitte beachten Sie, dass eine tiefer Wert zu sehr vielen Dateiversionen führen kann und damit ein Vielfaches des Festplattenspeichers beanspr
 wopi#:#saving_interval#:#Speicherintervall
 wopi#:#saving_interval_byline#:#Standardmässig fügt ILIAS alle durch einen Externen Editor erhaltenen Änderungen in einer Entwurfs-Version hinzu, bis diese Version manuell veröffentlicht wird. Durch das Aktivieren des Speicherintervall wird nach Möglichkeit nach der festgelegten Sekundenanzahl eine neue Verison veröffentlicht. Bitte beachten Sie, dass eine tiefer Wert zu sehr vielen Dateiversionen führen kann und damit ein Vielfaches des Festplattenspeichers beansprucht.
 wopi#:#wopi_crawler_cronjob_description#:#Aktualisiert die Informationen des angebundenen WOPI-Dienstes.
@@ -17828,4 +17795,4 @@ wsp#:#wsp_type_ltiv#:#Zertifikat: LTI-Konsument
 wsp#:#wsp_type_scov#:#Zertifikat: SCORM
 wsp#:#wsp_type_tstv#:#Zertifikat: Test
 wsp#:#wsp_type_webr#:#Weblink
-wsp#:#wsp_type_wfld#:#Ordnerdateplaner#:#cal_ch_booking_participants#:#Teilnehmer
+wsp#:#wsp_type_wfld#:#Ordner

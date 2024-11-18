@@ -5,7 +5,23 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Radio;
 
 /**
- * Base example showing how to plug a radio into a form
+ * ---
+ * description: >
+ *   Base example showing how to plug a radio into a form
+ *
+ * expected output: >
+ *   ILIAS shows a group titled "Radio" with three radio buttons:
+ *   - label1
+ *   - label2
+ *   - label3
+ *
+ *   You can only activate one radio button at a time. Save your selection. ILIAS will display your selection in the following format:
+ *
+ *   Array
+ *   (
+ *       [radio] => value3
+ *   )
+ * ---
  */
 function base()
 {

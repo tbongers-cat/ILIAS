@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Button\Tag;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering an engaged Tag Button
+ *
+ * expected output: >
+ *   ILIAS shows five buttons titled "simple tag". Those buttons look different from the base Tag Buttons.
+ * ---
+ */
 function engaged()
 {
     global $DIC;

@@ -101,6 +101,7 @@ class StatusManager
      * Can the current user see the own results
      * @return bool
      */
+    /*
     public function canViewUserResults(): bool
     {
         if ($this->cantStartAgain() &&
@@ -109,7 +110,7 @@ class StatusManager
             return true;
         }
         return false;
-    }
+    }*/
 
     /**
      * Can the current user mail the confirmation

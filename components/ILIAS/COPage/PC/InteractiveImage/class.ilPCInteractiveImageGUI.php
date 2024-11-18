@@ -70,33 +70,6 @@ class ilPCInteractiveImageGUI extends ilPageContentGUI
         }
 
         switch ($next_class) {
-            // trigger editor
-            case "ilpciimtriggereditorgui":
-                $ilTabs->setTabActive("triggers");
-                /** @var ilPCInteractiveImage $iim */
-                $iim = $this->content_obj;
-                $image_map_edit = new ilPCIIMTriggerEditorGUI(
-                    $iim,
-                    $this->pg_obj,
-                    $this->request
-                );
-                $ret = $this->ctrl->forwardCommand($image_map_edit);
-                if ($ret != "") {
-                    $tpl->setContent($ret);
-                }
-                break;
-
-                /*
-            case "ilpageeditorserveradaptergui":
-                $adapter = new ilPageEditorServerAdapterGUI(
-                    $this->page_gui,
-                    $this->ctrl,
-                    $this->ui,
-                    $this->http_request
-                );
-                $this->ctrl->forwardCommand($adapter);
-                break;*/
-
             case strtolower(ilRepoStandardUploadHandlerGUI::class):
                 $this->forwardFormToUploadHandler();
                 break;
@@ -109,7 +82,7 @@ class ilPCInteractiveImageGUI extends ilPageContentGUI
 
     protected function forwardFormToUploadHandler(): void
     {
-        switch($this->request->getString("mode")) {
+        switch ($this->request->getString("mode")) {
             case "overlayUpload":
                 $form = $this->getOverlayUploadFormAdapter();
                 $gui = $form->getRepoStandardUploadHandlerGUI("overlay_file");
@@ -152,7 +125,7 @@ class ilPCInteractiveImageGUI extends ilPageContentGUI
      */
     public function insert(
         string $a_post_cmd = "edpost",
-        string $a_submit_cmd = "create_mob",
+        string $a_submit_cmd = "",
         bool $a_input_error = false
     ): void {
         $tpl = $this->tpl;

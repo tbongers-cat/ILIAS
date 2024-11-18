@@ -5,7 +5,13 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Image\Standard;
 
 /**
- * Example for rendering an Image with a string as action
+ * ---
+ * description: >
+ *   Example for rendering an Image with a string as action
+ *
+ * expected output: >
+ *   ILIAS shows the rendered Component.
+ * ---
  */
 function with_string_action()
 {
@@ -16,7 +22,7 @@ function with_string_action()
 
     //Generating and rendering the image and modal
     $image = $f->image()->standard(
-        "assets/ui-examples/imagesImage/HeaderIconLarge.svg",
+        "assets/ui-examples/images/Image/HeaderIconLarge.svg",
         "Thumbnail Example"
     )->withAction("https://www.ilias.de");
 

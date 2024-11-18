@@ -5,7 +5,15 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Item\Standard;
 
 /**
- * With a standard link as title
+ * ---
+ * description: >
+ *   Example for rendering a standard item with a link title.
+ *
+ * expected output: >
+ *   ILIAS shows a box including the following informations: A title with a dummy text in small writings
+ *   ("Lorem ipsum...") below. Beneath those you can see a fine line and more informations about "Code Repo" and
+ *   "Location". The title is rendered as a link and redirects to ilias.de.
+ * ---
  */
 function with_link_title()
 {

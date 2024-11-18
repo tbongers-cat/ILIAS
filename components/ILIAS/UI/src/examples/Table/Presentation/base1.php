@@ -5,8 +5,21 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Table\Presentation;
 
 /**
- * You can also leave out "further fields" and use alignments instead,
- * add one or more Blocks and Layouts to the content of the row and add an leading image.
+ * ---
+ * description: >
+ *   Example for rendering a presentation table.
+ *   You can also leave out "further fields" and use alignments instead,
+ *   add one or more Blocks and Layouts to the content of the row and add an leading image.
+ *
+ * expected output: >
+ *   ILIAS shows a box titled "Presentation Table with Alignments" and a table.
+ *   The table includes two entries. Those have got a title each, a small subtitle and some informations.
+ *   Clicking onto ">" opens the entries with additional informations. Additionally ever entry has got a button "Zur Frage"
+ *   which opens a modal.
+ *   The table's header shows two buttons on the left: "expand all" and "collapse all". Clicking that button collapses/expands
+ *   all entries.
+ *   In the header on the right a filter is displayed. It filter the number of answers.
+ * ---
  */
 function base1()
 {

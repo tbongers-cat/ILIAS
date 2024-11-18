@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Symbol\Avatar\Letter;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering an avatar letter.
+ *
+ * expected output: >
+ *   ILIAS shows multiple round avatars in different colors including two letters in the middle of the avatar.
+ * ---
+ */
 function base()
 {
     $examples = array(

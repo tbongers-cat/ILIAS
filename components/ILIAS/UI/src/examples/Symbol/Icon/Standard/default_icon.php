@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Symbol\Icon\Standard;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a standard icon.
+ *
+ * expected output: >
+ *   ILIAS shows a standard icon in three different sizes.
+ * ---
+ */
 function default_icon()
 {
     global $DIC;

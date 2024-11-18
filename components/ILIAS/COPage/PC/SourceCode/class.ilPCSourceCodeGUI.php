@@ -122,7 +122,7 @@ class ilPCSourceCodeGUI extends ilPageContentGUI
     {
         $ilUser = $this->user;
 
-        $form = $this->initPropertyForm($this->lng->txt("cont_insert_src"), "create_src", "cancelCreate");
+        $form = $this->initPropertyForm($this->lng->txt("cont_insert_src"), "create", "cancelCreate");
 
         if ($this->pg_obj->getParentType() == "lm") {
             $this->tpl->setVariable(

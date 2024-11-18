@@ -109,7 +109,7 @@ class ilPdfGenerator
         $background_rid = $this->irss->manage()->find($certificate->getCurrentBackgroundImageUsed());
         $background_src = '';
         if ($background_rid instanceof ResourceIdentification) {
-            $background_src = $this->irss->consume()->src($background_rid)->getSrc();
+            $background_src = $this->irss->consume()->src($background_rid)->getSrc(true);
 
             $certificateContent = str_replace(
                 ['[BACKGROUND_IMAGE]'],
@@ -123,8 +123,6 @@ class ilPdfGenerator
                 $certificateContent
             );
         }
-
-
 
         $pdf_base64 = $this->rpcHelper->ilFO2PDF('RPCTransformationHandler', $certificateContent);
 

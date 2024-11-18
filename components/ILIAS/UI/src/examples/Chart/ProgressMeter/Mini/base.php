@@ -5,7 +5,13 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Chart\ProgressMeter\Mini;
 
 /**
- * Example for rendering a mini Progress Meter with minimum configuration
+ * ---
+ * description: >
+ *   Example for rendering a mini Progress Meter with minimum configuration.
+ *
+ * expected output: >
+ *   ILIAS shows a rounded progress meter with a red colored bar. The bar takes up three quarter of the display.
+ * ---
  */
 function base()
 {

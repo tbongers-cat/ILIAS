@@ -4,6 +4,17 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Popover\Standard;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a standard popover with vertical scrollbars.
+ *
+ * expected output: >
+ *   ILIAS shows a button titled "Show me some Series".
+ *   A click onto the button opens a popover with a longer list of TV-Series.
+ *   The list is too big for the popover, but you can scroll down.
+ * ---
+ */
 function show_popover_with_vertical_scrollbars()
 {
     global $DIC;

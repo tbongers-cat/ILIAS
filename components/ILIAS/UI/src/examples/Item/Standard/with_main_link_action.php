@@ -5,7 +5,15 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Item\Standard;
 
 /**
- * Base
+ * ---
+ * description: >
+ *   Example for rendering a standard item with a main action displayed as a link.
+ *
+ * expected output: >
+ *   ILIAS shows a box including the following informations: A heading with a dummy text in small writings
+ *   ("Lorem ipsum...") below. Beneath those you can see a fine line and more informations about "Origin", "Last Update"
+ *   and "Location". Additionally a link titled "Open ILIAS" is rendered on the right top side of the box.
+ * ---
  */
 function with_main_link_action()
 {

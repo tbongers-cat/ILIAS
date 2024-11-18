@@ -5,8 +5,15 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Section;
 
 /**
- * Example showing how disabled sections can be used to attach transformation and constraints on
- * multiple fields at once.
+ * ---
+ * description: >
+ *   Example showing how disabled sections can be used to attach transformation and constraints on
+ *   multiple fields at once.
+ *
+ * expected output: >
+ *   ILIAS shows a section with two input fields and a byline. The section is titled "Equals 10", the input fields are
+ *   labeled "Left" and "Right". The number 5 is already displayed in both input fields and cannot be changed.
+ * ---
  */
 function disabled()
 {

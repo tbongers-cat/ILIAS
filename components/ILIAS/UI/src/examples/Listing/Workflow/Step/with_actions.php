@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Listing\Workflow\Step;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a workflow with steps and actions.
+ *
+ * expected output: >
+ *   ILIAS shows a workflow whose available status (1, active 4) are displayed as links. Clicking the links will not
+ *   activate any actions.
+ * ---
+ */
 function with_actions()
 {
     //init Factory and Renderer

@@ -177,12 +177,12 @@ class ilObjCertificateSettingsGUI extends ilObjectGUI
                     }
                 }
             }
-        }#
+        }
 
         if ($this->object->hasBackgroundImage()) {
             $rid = $this->object->getBackgroundImageIdentification();
             if ($rid instanceof ResourceIdentification) {
-                $bgimage->setImage($this->irss->consume()->src($rid)->getSrc());
+                $bgimage->setImage($this->irss->consume()->src($rid)->getSrc(true));
             } elseif (is_string($rid)) {
                 $bgimage->setImage($rid);
             }

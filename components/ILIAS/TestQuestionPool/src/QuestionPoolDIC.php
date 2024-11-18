@@ -65,7 +65,7 @@ class QuestionPoolDIC extends PimpleContainer
         $dic['participant_repository'] = static fn($c): ParticipantRepository =>
             new ParticipantRepository($DIC['ilDB']);
         $dic['global_test_settings'] = static fn($c): GlobalTestSettings =>
-            (new GlobalTestSettingsRepository($DIC['ilSetting']))->getGlobalSettings();
+            (new GlobalTestSettingsRepository($DIC['ilSetting'], new \ilSetting('assessment')))->getGlobalSettings();
 
         return $dic;
     }

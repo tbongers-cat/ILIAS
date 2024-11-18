@@ -660,7 +660,6 @@ of ILIAS. The file contains the following fields:
 * **Forum**
     * Authority to Sign off on Conceptual Changes: [mjansen](https://docu.ilias.de/go/usr/8784)
     * Authority to Sign off on Code Changes: [mjansen](https://docu.ilias.de/go/usr/8784)
-        , [nadia](https://docu.ilias.de/go/usr/14206)
     * Authority to Curate Test Cases: FH Aachen
     * Authority to (De-)Assign Authorities: [mjansen (Databay AG)](https://docu.ilias.de/go/usr/8784)
 	* Tester:[anna.s.vogel](https://docu.ilias.de/go/usr/71954)
@@ -1010,7 +1009,6 @@ of ILIAS. The file contains the following fields:
 * **Mail**
     * Authority to Sign off on Conceptual Changes: [mjansen](https://docu.ilias.de/go/usr/8784)
     * Authority to Sign off on Code Changes: [mjansen](https://docu.ilias.de/go/usr/8784)
-        , [nadia](https://docu.ilias.de/go/usr/14206)
     * Authority to Curate Test Cases: [mjansen](https://docu.ilias.de/go/usr/8784)
     * Authority to (De-)Assign Authorities: [mjansen (Databay AG)](https://docu.ilias.de/go/usr/8784)
 	* Tester: Till Lennart Vogt/Test-Team OWL

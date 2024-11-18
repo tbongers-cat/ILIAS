@@ -29,7 +29,7 @@ class ilSessionMaxIdleIsSetObjective implements Setup\Objective
 
     public function getHash(): string
     {
-        return hash("sha256", self::class);
+        return hash('sha256', self::class);
     }
 
     public function getLabel(): string
@@ -39,12 +39,12 @@ class ilSessionMaxIdleIsSetObjective implements Setup\Objective
 
     public function isNotable(): bool
     {
-        return false;
+        return true;
     }
 
     public function getPreconditions(Setup\Environment $environment): array
     {
-        $http_config = $environment->getConfigFor("http");
+        $http_config = $environment->getConfigFor('http');
 
         return [
             new ilIniFilesPopulatedObjective(),
@@ -56,17 +56,21 @@ class ilSessionMaxIdleIsSetObjective implements Setup\Objective
 
     public function achieve(Setup\Environment $environment): Setup\Environment
     {
+        /** @var ilIniFile $client_ini */
         $client_ini = $environment->getResource(Setup\Environment::RESOURCE_CLIENT_INI);
+        /** @var ilIniFile $ini */
         $ini = $environment->getResource(Setup\Environment::RESOURCE_ILIAS_INI);
-        $admin_interaction = $environment->getResource(Setup\Environment::RESOURCE_ADMIN_INTERACTION);
+        /** @var Setup\CLI\IOWrapper $io */
+        $io = $environment->getResource(Setup\Environment::RESOURCE_ADMIN_INTERACTION);
         $factory = $environment->getResource(Setup\Environment::RESOURCE_SETTINGS_FACTORY);
-        $settings = $factory->settingsFor("common");
+        /** @var ilSetting $settings */
+        $settings = $factory->settingsFor('common');
 
         $session_max_idle = $this->config->getSessionMaxIdle();
 
-        $url = $ini->readVariable("server", "http_path");
-        $filename = uniqid((string) rand(), true) . '.php';
-        $url = $url . "/" . $filename;
+        $url = $ini->readVariable('server', 'http_path');
+        $filename = uniqid((string) mt_rand(), true) . '.php';
+        $url .= '/' . $filename;
         $key = bin2hex(random_bytes(32));
         $this->generateServerInfoFile($key, $filename);
 
@@ -76,31 +80,40 @@ class ilSessionMaxIdleIsSetObjective implements Setup\Objective
             } else {
                 $result = $this->getPHPIniValuesByFileGetContents($key, $url);
             }
-        } catch (\Exception $e) {
-            throw $e;
+        } catch (Throwable $e) {
+            $io->inform(
+                "An error occurred while trying to determine the values for 'session.cookie_lifetime' and" . PHP_EOL .
+                "'session.gc_maxlifetime' in your php.ini: {$e->getMessage()}" . PHP_EOL .
+                'You can IGNORE the the error if you are sure these settings comply with our expection to' . PHP_EOL .
+                'ensure a proper session handling.'
+            );
+
+            $client_ini->setVariable('session', 'expire', (string) $session_max_idle);
+
+            return $environment;
         } finally {
-            unlink("public/{$filename}");
+            unlink("public/$filename");
         }
 
-        if ($result === "") {
+        if ($result === '') {
             $message =
-                "ILIAS could not determine the value for 'session.cookie_lifetime' in your php.ini" . PHP_EOL .
-                "to check whether it complies with our expection to ensure a proper session handling." . PHP_EOL .
-                "Do you like to continue, anyway?";
+                "ILIAS could not determine the value for 'session.cookie_lifetime' and 'session.gc_maxlifetime'" . PHP_EOL .
+                'in your php.ini to check whether it complies with our expection to ensure a proper session handling.' . PHP_EOL .
+                'Do you like to continue, anyway?';
 
-            if (!$admin_interaction->confirmOrDeny($message)) {
+            if (!$io->confirmOrDeny($message)) {
                 throw new Setup\NoConfirmationException($message);
             }
         }
 
-        list($cookie_lifetime, $gc_maxlifetime) = explode("&", $result);
+        [$cookie_lifetime, $gc_maxlifetime] = explode('&', $result);
 
         if ($cookie_lifetime != 0) {
             $message =
                 "The value 'session.cookie_lifetime' in your php.ini does not correspond" . PHP_EOL .
                 "to the value '0' recommended by ILIAS. Do you want to continue anyway?";
 
-            if (!$admin_interaction->confirmOrDeny($message)) {
+            if (!$io->confirmOrDeny($message)) {
                 throw new Setup\NoConfirmationException($message);
             }
         }
@@ -109,14 +122,14 @@ class ilSessionMaxIdleIsSetObjective implements Setup\Objective
             $message =
                 "The value 'session.gc_maxlifetime' in your php.ini is smaller or equal than" . PHP_EOL .
                 "'session_max_idle' in your ILIAS-Config. ILIAS recommends a bigger value." . PHP_EOL .
-                "Do you want to continue anyway?";
+                'Do you want to continue anyway?';
 
-            if (!$admin_interaction->confirmOrDeny($message)) {
+            if (!$io->confirmOrDeny($message)) {
                 throw new Setup\NoConfirmationException($message);
             }
         }
 
-        $client_ini->setVariable("session", "expire", (string) $session_max_idle);
+        $client_ini->setVariable('session', 'expire', (string) $session_max_idle);
 
         return $environment;
     }
@@ -126,7 +139,7 @@ class ilSessionMaxIdleIsSetObjective implements Setup\Objective
         return true;
     }
 
-    protected function generateServerInfoFile(string $key, string $filename): void
+    private function generateServerInfoFile(string $key, string $filename): void
     {
         $content = <<<TEXT
 <?php
@@ -144,16 +157,16 @@ if (\$_GET['token'] !== "$key") {
 echo \$scl . "&" . \$smlt;
 TEXT;
 
-        file_put_contents("public/{$filename}", $content);
+        file_put_contents("public/$filename", $content);
     }
 
     /**
      * @throws ilCurlConnectionException
      */
-    protected function getPHPIniValuesByCurl(ilSetting $settings, string $key, string $url): string
+    private function getPHPIniValuesByCurl(ilSetting $settings, string $key, string $url): string
     {
         $curl = new ilCurlConnection(
-            "{$url}?token={$key}",
+            "$url?token=$key",
             new ilProxySettings($settings)
         );
         $curl->init();
@@ -170,8 +183,8 @@ TEXT;
         return $result;
     }
 
-    protected function getPHPIniValuesByFileGetContents(string $key, string $url): string
+    private function getPHPIniValuesByFileGetContents(string $key, string $url): string
     {
-        return file_get_contents("{$url}?token={$key}");
+        return file_get_contents("$url?token=$key");
     }
 }

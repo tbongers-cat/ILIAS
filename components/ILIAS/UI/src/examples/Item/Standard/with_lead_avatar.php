@@ -5,7 +5,16 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Item\Standard;
 
 /**
- * With Lead Avatar
+ * ---
+ * description: >
+ *   Example for rendering a standard item with an lead avatar.
+ *
+ * expected output: >
+ *   ILIAS shows two very similiar boxes including the following informations: A heading with a dummy text in small writings
+ *   ("Lorem ipsum...") below. Beneath those you can see a fine line and more informations about "Last Update"
+ *   and "Location". Additionally a action menu is displayed in the box on the right top. On the left side a avatar is
+ *   displayed.
+ * ---
  */
 function with_lead_avatar()
 {

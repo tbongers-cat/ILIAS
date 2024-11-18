@@ -450,7 +450,6 @@ class ilLMPresentationLinker implements \ILIAS\COPage\PageLinker
                         } else {
                             $href = ILIAS_HTTP_PATH . "/goto.php?target=" . $obj_type . "_" . $target_id . "&amp;client_id=" . CLIENT_ID;
                         }
-                        $ltarget = ilFrameTargetInfo::_getFrame("MainContent");
                         if ($this->embed_mode) {
                             $ltarget = "_blank";
                         }

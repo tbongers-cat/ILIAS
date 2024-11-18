@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 /**
  * Description of class class
@@ -47,7 +47,7 @@ class ilLTIProviderReleasedObjectsTableGUI extends ilObjectTableGUI
         $this->addColumn($this->lng->txt('lti_consumer'), 'consumer', '30%');
 
         $this->setOrderColumn('title');
-        $this->setRowTemplate('tpl.lti_object_table_row.html', 'components/ILIAS/LTI');
+        $this->setRowTemplate('tpl.lti_object_table_row.html', 'components/ILIAS/LTIProvider');
     }
 
     /**
@@ -56,6 +56,10 @@ class ilLTIProviderReleasedObjectsTableGUI extends ilObjectTableGUI
      */
     public function fillRow(array $a_set): void
     {
+        if (!isset($a_set['type'])) {
+            $a_set['type'] = '';
+        }
+
         parent::fillRow($a_set);
 
         $this->tpl->setVariable('CONSUMER_TITLE', $a_set['consumer']);

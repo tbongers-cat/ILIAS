@@ -25,14 +25,6 @@ use ILIAS\ResourceStorage\Stakeholder\AbstractResourceStakeholder;
 
 class Handler extends AbstractResourceStakeholder implements FileRepositoryStakeholderInterface
 {
-    protected int $owner_id;
-
-    public function __construct(
-        int $owner_id = 6
-    ) {
-        $this->owner_id = $owner_id;
-    }
-
     public function getId(): string
     {
         return "AdvancedMetaDataFiles";
@@ -40,7 +32,7 @@ class Handler extends AbstractResourceStakeholder implements FileRepositoryStake
 
     public function getOwnerOfNewResources(): int
     {
-        return $this->owner_id;
+        return $this->default_owner;
     }
 
     public function withOwnerId(

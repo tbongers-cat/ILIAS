@@ -84,6 +84,9 @@ class NoUIFactory implements Factory
     public function modal(): C\Modal\Factory
     {
     }
+    public function progress(): C\Progress\Factory
+    {
+    }
     public function dropzone(): C\Dropzone\Factory
     {
     }

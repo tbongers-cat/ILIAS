@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 use ILIAS\HTTP\GlobalHttpState;
 use ILIAS\Refinery\Factory;
@@ -135,14 +135,7 @@ class ilMainMenuSearchGUI
             );
             $this->tpl->setVariable('TXT_SEARCH_LINK', $this->lng->txt("last_search_result"));
         }
-        // #10555 - we need the overlay for the autocomplete which is always active
         $this->tpl->setVariable('TXT_SEARCH', $this->lng->txt("search"));
-        $ov = new ilOverlayGUI("mm_search_menu");
-        //$ov->setTrigger("main_menu_search", "none",
-        //	"main_menu_search", "tr", "br");
-        //$ov->setAnchor("main_menu_search", "tr", "br");
-        $ov->setAutoHide(false);
-        $ov->add();
 
         return $this->tpl->get();
     }

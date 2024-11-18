@@ -5,8 +5,23 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\File;
 
 /**
- * Example of how to process passwords.
- * Note that the value of Password is a Data\Password, not a string-primitive.
+ * ---
+ * description: >
+ *   Example of how to process passwords.
+ *   Note that the value of Password is a Data\Password, not a string-primitive.
+ *
+ * expected output: >
+ *   ILIAS shows a field titled "Upload File" next to a box surrounded by dashed lines. Choose a file by clicking "Select
+ *   files" or dragging a file to the box. Save your selection. ILIAS will confirm your action in the following format:
+ *
+ *   Array
+ *   (
+ *       [file] => Array
+ *       (
+ *           [0] => 06f7d8e94a28d102cf35483e346c121c
+ *       )
+ *   )
+ * ---
  */
 function in_form()
 {

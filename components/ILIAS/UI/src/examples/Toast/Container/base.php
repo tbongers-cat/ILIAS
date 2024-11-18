@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Toast\Container;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a toast container.
+ *
+ * expected output: >
+ *   ILIAS shows a blue button wich will not activate any actions.
+ * ---
+ */
 function base(): string
 {
     global $DIC;

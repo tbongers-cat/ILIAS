@@ -4,6 +4,17 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Deck;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a user card
+ *
+ * expected output: >
+ *   ILIAS shows seven "Cards" with a title ("Timon Amstutz") and Text (Address and E-Mail Adress) each. A button "Request
+ *   Contact" is displayed below each card. Clicking the button won't activate any actions. According to the size of the
+ *   browser window/desktop the number of cards displayed in each line will change.
+ * ---
+ */
 function user()
 {
     //Init Factory and Renderer

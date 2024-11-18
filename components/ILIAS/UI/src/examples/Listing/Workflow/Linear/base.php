@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Listing\Workflow\Linear;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a linear workflow.
+ *
+ * expected output: >
+ *   ILIAS shows a linear workflow in five steps: The first two steps are checked, the third step is "in progress" and the
+ *   last two steps are not available.
+ * ---
+ */
 function base()
 {
     //init Factory and Renderer

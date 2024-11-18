@@ -4,9 +4,20 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Link\Bulky;
 
-//The Bulky Links in this example point to ilias.de
-//Note the exact look of the Bulky Links is mostly defined by the
-//surrounding container.
+/**
+ * ---
+ * description: >
+ *   The Bulky Links in this example point to ilias.de
+ *   Note the exact look of the Bulky Links is mostly defined by the
+ *   surrounding container.
+ *
+ * expected output: >
+ *   ILIAS shows two bulky links:
+ *   1. An icon ("E") with the text "Link to ilias.de with Icon".
+ *   2. A glyph ("Briefcase") with the text "Link to ilias.de with Glyph".
+ *   Clicking the links will redirect you to ilias.de.
+ * ---
+ */
 function base()
 {
     global $DIC;

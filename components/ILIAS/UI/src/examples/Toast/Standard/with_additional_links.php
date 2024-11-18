@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Toast\Standard;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a standard toast with additional links.
+ *
+ * expected output: >
+ *   ILIAS shows a blue button "Show". Clicking onto the button opens a message "Example" on the right top edge including
+ *   two links which open a page each.
+ * ---
+ */
 function with_additional_links(): string
 {
     global $DIC;

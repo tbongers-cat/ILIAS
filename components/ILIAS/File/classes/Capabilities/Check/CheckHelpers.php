@@ -22,15 +22,19 @@
 
 namespace ILIAS\File\Capabilities\Check;
 
+use ILIAS\HTTP\Services;
 use ILIAS\components\WOPI\Discovery\ActionRepository;
 use ILIAS\Data\URI;
+use ILIAS\StaticURL\Builder\URIBuilder;
 
 class CheckHelpers
 {
     public function __construct(
         public \ilAccessHandler $access,
         public \ilCtrlInterface $ctrl,
-        public ActionRepository $action_repository
+        public ActionRepository $action_repository,
+        public Services $http,
+        public URIBuilder $static_url
     ) {
     }
 

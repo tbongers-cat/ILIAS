@@ -630,7 +630,8 @@ class ilTestSequence implements ilTestQuestionSequence, ilTestSequenceSummaryPro
                     'worked_through' => $worked_through,
                     'postponed' => $is_postponed,
                     'sequence' => $sequence,
-                    'isAnswered' => $question->isAnswered($this->active_id, $this->pass)
+                    'isAnswered' => $question->isAnswered($this->active_id, $this->pass),
+                    'has_authorized_answer' => $question->authorizedSolutionExists($this->active_id, $this->pass)
                 ];
 
                 $key++;

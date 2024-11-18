@@ -671,7 +671,7 @@ class assErrorText extends assQuestion implements ilObjQuestionScoringAdjustable
 
     public function setErrorText(?string $text): void
     {
-        $this->errortext = $this->getHtmlQuestionContentPurifier()->purify($text ?? '');
+        $this->errortext = $text ?? '';
     }
 
     public function getParsedErrorText(): array

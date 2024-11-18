@@ -5,7 +5,15 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Container\Form\Standard;
 
 /**
- * Example showing a Form with an optional dedicated name which is used as NAME attribute on the rendered form.
+ * ---
+ * description: >
+ *   Example showing a Form with an optional dedicated name which is used as NAME attribute on the rendered form.
+ *
+ * expected output: >
+ *   ILIAS shows an input field titled "Just Another Input".
+ *   A text "I'm just another input" is displayed below the field.
+ *   After clicking "Save" the input field should get reloaded.
+ * ---
  */
 function with_dedicated_name()
 {

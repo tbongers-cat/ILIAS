@@ -6,6 +6,17 @@ namespace ILIAS\UI\examples\Modal\RoundTrip;
 
 use ILIAS\UI\Implementation\Component\ReplaceSignal;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a round trip multi-step modal.
+ *
+ * expected output: >
+ *   ILIAS shows a button titled "Signin". A click onto the button will open a modal with two buttons "Login" and
+ *   "Registration". Depending on the button a click will switch betweeen the "Login Page" and "Registration Page"
+ *   within the modal. You can close the modal by hitting the ESC key or by clicking "Cancel" or the "X" glyph.
+ * ---
+ */
 function show_multi_step_modal()
 {
     global $DIC;

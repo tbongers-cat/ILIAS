@@ -4,6 +4,18 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Item\Notification;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a notificication item including aggregates.
+ *
+ * expected output: >
+ *   ILIAS shows a box titled "Item" on a white background and following text: "Notification Item with Aggregates".
+ *   Clicking the item's heading will collapse another field with the same content. On the right side an "X" for closing the
+ *   boxes is displayed. Additionally you can see two dropdown fields on the right side including two entries each.
+ *   On the top the heading "<Back" is displayed. Clicking "Back" will fold up the boxes.
+ * ---
+ */
 function include_aggregates()
 {
     global $DIC;

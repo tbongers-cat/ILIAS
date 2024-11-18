@@ -725,7 +725,6 @@ class ilObjSurvey extends ilObject
                 "mailaddresses" => array('text', $this->getMailAddresses()),
                 "mailparticipantdata" => array('text', $this->getMailParticipantData()),
                 "tstamp" => array("integer", time()),
-                "pool_usage" => array("integer", $this->getPoolUsage()),
                 // Mode type
                 "mode" => array("integer", $this->getMode()),
                 // 360°
@@ -772,7 +771,6 @@ class ilObjSurvey extends ilObject
                 "mailaddresses" => array('text', $this->getMailAddresses()),
                 "mailparticipantdata" => array('text', $this->getMailParticipantData()),
                 "tstamp" => array("integer", time()),
-                "pool_usage" => array("integer", $this->getPoolUsage()),
                 //MODE TYPE
                 "mode" => array("integer", $this->getMode()),
                 // 360°
@@ -1033,7 +1031,6 @@ class ilObjSurvey extends ilObject
             $this->setTutorResultsStatus((bool) $data["tutor_res_status"]);
             $this->setTutorResultsRecipients(explode(";", $data["tutor_res_reci"] ?? ""));
 
-            $this->setViewOwnResults((bool) $data["own_results_view"]);
             $this->setMailOwnResults((bool) $data["own_results_mail"]);
             $this->setMailConfirmation((bool) $data["confirmation_mail"]);
             $this->setCalculateSumScore((bool) $data["calculate_sum_score"]);
@@ -3018,7 +3015,6 @@ class ilObjSurvey extends ilObject
         $custom_properties["evaluation_access"] = $this->getEvaluationAccess();
         $custom_properties["status"] = !$this->getOfflineStatus();
         $custom_properties["display_question_titles"] = $this->getShowQuestionTitles();
-        $custom_properties["pool_usage"] = (int) $this->getPoolUsage();
 
         $custom_properties["own_results_view"] = (int) $this->hasViewOwnResults();
         $custom_properties["own_results_mail"] = (int) $this->hasMailOwnResults();
@@ -3267,8 +3263,6 @@ class ilObjSurvey extends ilObject
         $newObj->setEndDate($this->getEndDate());
         $newObj->setAnonymize($this->getAnonymize());
         $newObj->setShowQuestionTitles($this->getShowQuestionTitles());
-        $newObj->setPoolUsage($this->getPoolUsage());
-        $newObj->setViewOwnResults($this->hasViewOwnResults());
         $newObj->setMailOwnResults($this->hasMailOwnResults());
         $newObj->setMailConfirmation($this->hasMailConfirmation());
         $newObj->setAnonymousUserList($this->hasAnonymousUserList());
@@ -3697,9 +3691,9 @@ class ilObjSurvey extends ilObject
 
                 if ($row["externaldata"]) {
                     $ext = unserialize((string) $row["externaldata"], ['allowed_classes' => false]);
-                    $item['email'] = $ext['email'];
-                    $item['last_name'] = $ext['lastname'];
-                    $item['first_name'] = $ext['firstname'];
+                    $item['email'] = $ext['email'] ?? "";
+                    $item['last_name'] = $ext['lastname'] ?? "";
+                    $item['first_name'] = $ext['firstname'] ?? "";
                 }
 
                 $codes[] = $item;
@@ -3887,7 +3881,7 @@ class ilObjSurvey extends ilObject
 
         $row = $this->db->fetchAssoc($result);
 
-        return $row['state'];
+        return $row['state'] ?? false;
     }
 
     /**

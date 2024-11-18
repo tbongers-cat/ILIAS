@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Menu\Sub;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a submenu.
+ *
+ * expected output: >
+ *   The sub-menu is actually not meant to be rendered standalone.
+ * ---
+ */
 function sub()
 {
     $comment =

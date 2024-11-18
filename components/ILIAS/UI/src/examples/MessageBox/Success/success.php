@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\MessageBox\Success;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a success message box.
+ *
+ * expected output: >
+ *   ILIAS shows a green box with a dummy text ("Lorem ipsum...") and two buttons "Action" and "Cancel".
+ *   Clicking the buttons will not activate any actions.
+ * ---
+ */
 function success()
 {
     global $DIC;

@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Table\Presentation;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a presentation table.
+ *
+ * expected output: >
+ *   This example is very similiar to the example of the base1 example. But it includes three entries with different
+ *   content (different title, informations etc.).
+ * ---
+ */
 function base()
 {
     global $DIC;

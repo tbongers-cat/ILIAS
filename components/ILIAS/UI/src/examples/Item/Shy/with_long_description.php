@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Item\Shy;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a shy item with a long description.
+ *
+ * expected output: >
+ *   ILIAS shows a box highlighted white and including the text "Test shy Item". Additionally a multi-lined description
+ *   is displayed below the text.
+ * ---
+ */
 function with_long_description()
 {
     global $DIC;

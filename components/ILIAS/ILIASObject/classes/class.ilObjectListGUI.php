@@ -143,7 +143,6 @@ class ilObjectListGUI
     protected bool $search_fragments_enabled = false;
     protected string $search_fragment = '';
     protected bool $path_linked = false;
-    protected bool $enabled_relevance = false;
     protected int $relevance = 0;
     protected bool $expand_enabled = false;
     protected bool $is_expanded = true;
@@ -172,6 +171,7 @@ class ilObjectListGUI
     protected string $title_link = '';
     protected bool $title_link_disabled = false;
     protected bool $lp_cmd_enabled = false;
+    protected bool $lp_settings_cmd_enabled = true;
     protected array $current_actions = [];
     protected ?ilPathGUI $path_gui = null;
     protected array $default_command_params = [];
@@ -331,16 +331,6 @@ class ilObjectListGUI
         $this->path_linked = $status;
     }
 
-    public function enableRelevance(bool $status): void
-    {
-        $this->enabled_relevance = $status;
-    }
-
-    public function enabledRelevance(): bool
-    {
-        return $this->enabled_relevance;
-    }
-
     public function setRelevance(int $rel): void
     {
         $this->relevance = $rel;
@@ -487,6 +477,11 @@ class ilObjectListGUI
     protected function enableLearningProgress(bool $enabled): void
     {
         $this->lp_cmd_enabled = $enabled;
+    }
+
+    protected function enableLPSettingsCommand(bool $enabled): void
+    {
+        $this->lp_settings_cmd_enabled = $enabled;
     }
 
     /**
@@ -1193,20 +1188,6 @@ class ilObjectListGUI
             $this->tpl->setVariable('TXT_SEARCH_FRAGMENT', $this->getSearchFragment() . ' ...');
             $this->tpl->parseCurrentBlock();
         }
-    }
-
-    public function insertRelevance(): void
-    {
-        if (!$this->enabledRelevance() or !$this->getRelevance()) {
-            return;
-        }
-
-        $pbar = ilProgressBar::getInstance();
-        $pbar->setCurrent($this->getRelevance());
-
-        $this->tpl->setCurrentBlock('relevance');
-        $this->tpl->setVariable('REL_PBAR', $pbar->render());
-        $this->tpl->parseCurrentBlock();
     }
 
     /**
@@ -1986,9 +1967,14 @@ class ilObjectListGUI
     private function populateCommands(
         bool $for_header
     ): void {
-        if (!$this->getCommandsStatus() || $this->commandsNeedToBeHidden(
-            $for_header
-        )) {
+        $commands = $this->getCommands();
+        if (!$this->getCommandsStatus() || $this->commandsNeedToBeHidden($for_header)) {
+            foreach ($commands as $command) {
+                if ($command['default'] === true) {
+                    $this->default_command = $command['granted'] === true ? $this->createDefaultCommand($command) : [];
+                }
+                return;
+            }
             return;
         }
 
@@ -2001,7 +1987,6 @@ class ilObjectListGUI
         // we only allow the following commands inside the header actions
         $valid_header_commands = ['mount_webfolder'];
 
-        $commands = $this->getCommands();
         foreach ($commands as $command) {
             if ($for_header && !in_array($command['cmd'], $valid_header_commands)
                 || $command['granted'] === false) {
@@ -2812,9 +2797,6 @@ class ilObjectListGUI
         if ($this->getSearchFragmentStatus()) {
             $this->insertSearchFragment();
         }
-        if ($this->enabledRelevance()) {
-            $this->insertRelevance();
-        }
 
         // properties
         if ($this->getPropertiesStatus()) {
@@ -3349,7 +3331,8 @@ class ilObjectListGUI
      */
     private function insertLPSettingsCommand(): void
     {
-        if (!ilObjUserTracking::_enabledLearningProgress()
+        if (!$this->lp_settings_cmd_enabled
+            || !ilObjUserTracking::_enabledLearningProgress()
             || ilObjectLP::getTypeClass($this->type) === ''
             || ! $this->checkCommandAccess('edit_learning_progress', '', $this->ref_id, $this->type)
         ) {

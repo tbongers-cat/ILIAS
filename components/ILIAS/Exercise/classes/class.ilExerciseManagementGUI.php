@@ -700,7 +700,7 @@ class ilExerciseManagementGUI
         if ($this->exercise->hasTutorFeedbackFile()) {
             $actions[] = $this->ui_factory->button()->shy(
                 $this->lng->txt("exc_tbl_action_feedback_file"),
-                $this->ctrl->getLinkTargetByClass("ilFileSystemGUI", "listFiles")
+                $this->ctrl->getLinkTargetByClass(ilResourceCollectionGUI::class)
             );
         }
 

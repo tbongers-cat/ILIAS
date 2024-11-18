@@ -23,8 +23,7 @@ use ILIAS\BookingManager\StandardGUIRequest;
 use ILIAS\BookingManager\InternalService;
 
 /**
- * @author Jörg Lützenkirchen <luetzenkirchen@leifos.com>
- * @ilCtrl_Calls ilObjBookingPoolGUI: ilPermissionGUI, ilBookingObjectGUI, ilDidacticTemplateGUI
+ * @ilCtrl_Calls ilObjBookingPoolGUI: ilPermissionGUI, ilBookingObjectGUI
  * @ilCtrl_Calls ilObjBookingPoolGUI: ilBookingScheduleGUI, ilInfoScreenGUI, ilPublicUserProfileGUI
  * @ilCtrl_Calls ilObjBookingPoolGUI: ilCommonActionDispatcherGUI, ilObjectCopyGUI, ilObjectMetaDataGUI
  * @ilCtrl_Calls ilObjBookingPoolGUI: ilBookingParticipantGUI, ilBookingReservationsGUI, ilBookingPreferencesGUI
@@ -228,12 +227,6 @@ class ilObjBookingPoolGUI extends ilObjectGUI
                 $this->ctrl->forwardCommand($gui);
                 break;
 
-            case 'ildidactictemplategui':
-                $this->ctrl->setReturn($this, 'edit');
-                $did = new ilDidacticTemplateGUI($this);
-                $this->ctrl->forwardCommand($did);
-                break;
-
             case strtolower(SettingsGUI::class):
                 $this->checkPermission("write");
                 $this->showNoScheduleMessage();
@@ -241,7 +234,8 @@ class ilObjBookingPoolGUI extends ilObjectGUI
                 $gui = $this->gui->settings()->settingsGUI(
                     $this->object->getId(),
                     $this->requested_ref_id,
-                    $this->getCreationMode()
+                    $this->getCreationMode(),
+                    $this
                 );
                 $this->ctrl->forwardCommand($gui);
                 break;

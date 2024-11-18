@@ -5,9 +5,23 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Group;
 
 /**
- * Example showing how groups can be used to attach transformation and constraints on
- * multiple fields at once. Note that groups do not have a defined way of outputting
- * validations errors. This is context dependant.
+ * ---
+ * description: >
+ *   Example showing how groups can be used to attach transformation and constraints on
+ *   multiple fields at once. Note that groups do not have a defined way of outputting
+ *   validation errors. This is context dependent.
+ *
+ * expected output: >
+ *   ILIAS shows a group of two input fields titled "Left" and "Right". You can insert numbers. Clicking "Save" reloads
+ *   the page. If the addition of both the inserted numbers equals 10 ILIAS will display following:
+ *
+ *   Array
+ *   (
+ *      [custom_group] => 10
+ *   )
+ *
+ *   Else the error message "The sum must equal ten." will be displayed.
+ * ---
  */
 function base()
 {

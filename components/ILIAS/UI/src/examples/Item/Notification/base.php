@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Item\Notification;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a notification item.
+ *
+ * expected output: >
+ *   ILIAS shows a box titled "Inbox" on a white background and including following text: "You have 23 unread mails in
+ *   your inbox". A dashed line and a time indication (Time 3 days ago) are displayed below.
+ * ---
+ */
 function base()
 {
     global $DIC;

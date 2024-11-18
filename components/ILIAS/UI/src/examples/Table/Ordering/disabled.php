@@ -8,6 +8,16 @@ use ILIAS\UI\Implementation\Component\Table as T;
 use ILIAS\UI\Component\Table as I;
 use ILIAS\Data\URI;
 
+/**
+ * ---
+ * description: >
+ *   Example showing an Ordering Table.
+ *
+ * expected output: >
+ *   ILIAS shows the rendered Component.
+ *   You may NOT drag any row; there are no Number Inputs for row-positions.
+ * ---
+ */
 function disabled()
 {
     global $DIC;

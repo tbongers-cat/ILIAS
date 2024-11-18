@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Button\Tag;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering Tag Buttons with tooltips.
+ *
+ * expected output: >
+ *   ILIAS shows two buttons titled "simple tag." Hovering over those buttons will show a tooltip.
+ * ---
+ */
 function with_tooltip()
 {
     global $DIC;

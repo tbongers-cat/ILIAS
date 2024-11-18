@@ -26,7 +26,7 @@ require_once '../vendor/composer/vendor/autoload.php';
 
 ilInitialisation::initILIAS();
 
-ilStartUpGUI::setForcedCommand('jumpToRegistration');
+ilStartUpGUI::setForcedCommand('jumpToPasswordAssistance');
 $ilCtrl->callBaseClass(ilStartUpGUI::class);
 $ilBench->save();
 exit();

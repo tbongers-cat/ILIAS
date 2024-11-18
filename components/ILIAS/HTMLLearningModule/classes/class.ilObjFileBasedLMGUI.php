@@ -25,7 +25,7 @@ use ILIAS\components\ResourceStorage\Container\View\ActionBuilder;
 /**
  * User Interface class for file based learning modules (HTML)
  * @author       Alexander Killing <killing@leifos.de>
- * @ilCtrl_Calls ilObjFileBasedLMGUI: ilFileSystemGUI, ilObjectMetaDataGUI, ilPermissionGUI, ilLearningProgressGUI, ilInfoScreenGUI
+ * @ilCtrl_Calls ilObjFileBasedLMGUI: ilObjectMetaDataGUI, ilPermissionGUI, ilLearningProgressGUI, ilInfoScreenGUI
  * @ilCtrl_Calls ilObjFileBasedLMGUI: ilCommonActionDispatcherGUI
  * @ilCtrl_Calls ilObjFileBasedLMGUI: ilExportGUI
  * @ilCtrl_Calls ilObjFileBasedLMGUI: ilContainerResourceGUI
@@ -139,10 +139,6 @@ class ilObjFileBasedLMGUI extends ilObjectGUI
                 $this->tabs->activateTab('id_meta_data');
                 $md_gui = new ilObjectMetaDataGUI($this->object);
                 $this->ctrl->forwardCommand($md_gui);
-                break;
-
-            case "ilfilesystemgui":
-                throw new ilException("ilfilesystemgui is not supported anymore");
                 break;
 
             case "ilinfoscreengui":
@@ -295,8 +291,11 @@ class ilObjFileBasedLMGUI extends ilObjectGUI
     {
         // If we already have a RID, we can redirect to Container GUI
         // otherwise we display an message which informs the user that the resource is not yet available
-
-        // $ilCtrl->redirectByClass("ilfilesystemgui", "listFiles"); // FSX TODO
+        if ($this->object->getRID() != "") {
+            $this->ctrl->redirectByClass(ilContainerResourceGUI::class);
+        } else {
+            $this->ctrl->redirectByClass(static::class, "properties");
+        }
     }
 
     public function saveProperties(): void
@@ -372,7 +371,8 @@ class ilObjFileBasedLMGUI extends ilObjectGUI
         // try to determine start file from request
         $start_file = $this->http->wrapper()->query()->has('lm_path')
             ? $start_file = $this->http->wrapper()->query()->retrieve(
-                'lm_path', $this->refinery->kindlyTo()->listOf($this->refinery->kindlyTo()->string())
+                'lm_path',
+                $this->refinery->kindlyTo()->listOf($this->refinery->kindlyTo()->string())
             )[0] ?? ''
             : '';
         // the ContainerResourceGUI uses e bin2hex/hex2bin serialization of pathes. Due to the internals of
@@ -385,7 +385,7 @@ class ilObjFileBasedLMGUI extends ilObjectGUI
 
         if ($start_file === '') {
             $this->tpl->setOnScreenMessage('failure', $this->lng->txt('cont_no_start_file'), true);
-        }else {
+        } else {
             $this->object->setStartFile($start_file);
             $this->object->update();
             $this->tpl->setOnScreenMessage('success', $this->lng->txt('cont_start_file_set'), true);
@@ -579,10 +579,12 @@ class ilObjFileBasedLMGUI extends ilObjectGUI
             ilObjectGUI::_gotoRepositoryNode($a_target, "infoScreen");
         } elseif ($access->checkAccess("read", "", ROOT_FOLDER_ID)) {
             $main_tpl->setOnScreenMessage(
-                'failure', sprintf(
-                $lng->txt("msg_no_perm_read_item"),
-                ilObject::_lookupTitle(ilObject::_lookupObjId($a_target))
-            ), true
+                'failure',
+                sprintf(
+                    $lng->txt("msg_no_perm_read_item"),
+                    ilObject::_lookupTitle(ilObject::_lookupObjId($a_target))
+                ),
+                true
             );
             ilObjectGUI::_gotoRepositoryRoot();
         }

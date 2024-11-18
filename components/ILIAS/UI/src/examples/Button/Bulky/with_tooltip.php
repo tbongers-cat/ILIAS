@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Button\Bulky;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a bulky button with tooltips
+ *
+ * expected output: >
+ *   ILIAS shows an icon titled "Goto ILIAS". Hovering over the text will show you the following tooltips: "tooltip: ilias"
+ *   and "tooltip: learning management system".
+ * ---
+ */
 function with_tooltip()
 {
     global $DIC;

@@ -339,7 +339,7 @@ class ilOpenIdConnectSettings
 
     /**
      * @param list<string> $custom_scopes
-     * @return list<string>
+     * @return array{}|array{0: int, 1: list<string>}|array{0: int, 1: string}
      */
     public function validateScopes(string $discoveryURL, array $custom_scopes): array
     {
@@ -359,16 +359,23 @@ class ilOpenIdConnectSettings
                 $available_scopes = $decoded_response->scopes_supported;
                 array_unshift($custom_scopes, self::DEFAULT_SCOPE);
                 if (!empty(array_diff($custom_scopes, $available_scopes))) {
-                    $result = [self::VALIDATION_ISSUE_INVALID_SCOPE, array_diff($custom_scopes, $available_scopes)];
+                    $result = [
+                        self::VALIDATION_ISSUE_INVALID_SCOPE,
+                        array_diff($custom_scopes, $available_scopes)
+                    ];
                 }
             } else {
-                $result = [self::VALIDATION_ISSUE_DISCOVERY_ERROR, $response];
+                $result = [
+                    self::VALIDATION_ISSUE_DISCOVERY_ERROR,
+                    is_string($response) ? $response : var_export($response, true)
+                ];
             }
         } finally {
             if (isset($curl)) {
                 $curl->close();
             }
         }
+
         return $result;
     }
 

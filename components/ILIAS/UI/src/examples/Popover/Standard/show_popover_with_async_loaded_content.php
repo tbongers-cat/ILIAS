@@ -4,6 +4,20 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Popover\Standard;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a standard popover with asynchronous loaded content.
+ *
+ * expected output: >
+ *   ILIAS shows a button titled "Show Card".
+ *   A click onto the button opens a popover with...
+ *   - a popover title: Popover
+ *   - a popover text: This text is rendered async
+ *   After the first click the text shows up with a short delay.
+ *   You can close the popover b clicking onto the ILIAS background outside of the popover.
+ * ---
+ */
 function show_popover_with_async_loaded_content()
 {
     global $DIC;

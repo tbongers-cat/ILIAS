@@ -50,10 +50,10 @@ class ilBadgeImage
         $this->main_template = $main_template;
     }
 
-    public function getImageFromBadge(ilBadge $badge): string
+    public function getImageFromBadge(ilBadge $badge, int $size = self::IMAGE_SIZE_XS): string
     {
         $image_rid = $badge->getImageRid();
-        return $this->getImageFromResourceId($badge, (string) $image_rid);
+        return $this->getImageFromResourceId($badge, (string) $image_rid, $size);
     }
 
     public function getImageFromResourceId(
@@ -89,7 +89,7 @@ class ilBadgeImage
             $stakeholder = new ilBadgeFileStakeholder();
             $identification = $this->resource_storage->manage()->upload($array_result, $stakeholder);
             $this->resource_storage->flavours()->ensure($identification, new \ilBadgePictureDefinition());
-            $badge->setImageRid((string) $identification);
+            $badge->setImageRid($identification->serialize());
             $badge->update();
         } catch (IllegalStateException $e) {
             $this->main_template->setOnScreenMessage('failure', $e->getMessage(), true);

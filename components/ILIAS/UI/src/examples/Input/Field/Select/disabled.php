@@ -5,7 +5,13 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Select;
 
 /**
- * Example showing how to plug a disabled Select into a form
+ * ---
+ * description: >
+ *   Example showing how to plug a disabled Select into a form
+ *
+ * expected output: >
+ *   ILIAS shows a selection button but it's disabled. You cannot select any option.
+ * ---
  */
 function disabled()
 {

@@ -244,6 +244,13 @@ manage these settings. There is already a
 [viable approach](https://github.com/ILIAS-eLearning/ILIAS/pull/6534) which needs
 to be refined once more.
 
+### Revise Dropdown.js to ensure but one open Dropdown
+Dropdown.js exposes il.UI.dropdown.opened to store the currently active dropdown
+and close it when another one opens.
+This should be updated to e.g. an event listener attached to the document, 
+which either calls the dropdown's show method if the event target is the desired 
+dropdown, or the hide method if the target is something else.
+
 ## Long Term
 
 ### Mark Some Components as Internal

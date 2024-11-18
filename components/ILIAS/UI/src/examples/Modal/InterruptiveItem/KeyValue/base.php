@@ -4,6 +4,21 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Modal\InterruptiveItem\KeyValue;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a key value interruptive item modal.
+ *
+ * expected output: >
+ *   ILIAS shows a button titled "Show an interruptive Item".
+ *   A click onto the button will grey out ILIAS, open a modal titled "My Title" and asks for confirmation to delete all
+ *   contents.
+ *   Two buttons "Delete" and "Cancel" will also be displayed.
+ *   A click onto the button "Delete" will relaod the page.
+ *   A click onto the button "Cancel" will hide the modal.
+ *   You can also leave the modal by clicking onto the greyed out ILIAS in the background outside of the modal.
+ * ---
+ */
 function base()
 {
     global $DIC;

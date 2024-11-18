@@ -963,8 +963,7 @@ class ilPageObjectGUI
                     $this->tabs_gui->addNonTabbedLink(
                         "pres_view",
                         $this->getViewPageText(),
-                        $this->getViewPageLink(),
-                        $this->getViewPageTarget()
+                        $this->getViewPageLink()
                     );
                 }
                 $ret = $this->$cmd();
@@ -1058,12 +1057,17 @@ class ilPageObjectGUI
 
         // jquery and jquery ui are always provided for components
         iljQueryUtil::initjQuery();
-        iljQueryUtil::initjQueryUI();
 
         //		$this->initSelfAssessmentRendering();
         ilObjMediaObjectGUI::includePresentationJS($main_tpl);
 
-        $main_tpl->addJavaScript("components/ILIAS/COPage/js/ilCOPagePres.js");
+        $debug = false;
+        if ($debug) {
+            $main_tpl->addJavaScript("../components/ILIAS/COPage/js/ilCOPagePres.js");
+        } else {
+            $main_tpl->addJavaScript("components/ILIAS/COPage/js/ilCOPagePres.js");
+        }
+
 
         // init template
         if ($this->getOutputMode() == "edit") {

@@ -54,8 +54,9 @@ abstract class assQuestion implements Question
     public const ADDITIONAL_CONTENT_EDITING_MODE_RTE = 'default';
     public const ADDITIONAL_CONTENT_EDITING_MODE_IPE = 'pageobject';
 
-    protected const DEFAULT_THUMB_SIZE = 150;
-    protected const MINIMUM_THUMB_SIZE = 20;
+    private const DEFAULT_THUMB_SIZE = 150;
+    private const MINIMUM_THUMB_SIZE = 20;
+    private const MAXIMUM_THUMB_SIZE = 8192;
     public const TRIM_PATTERN = '/^[\p{C}\p{Z}]+|[\p{C}\p{Z}]+$/u';
 
     protected static $force_pass_results_update_enabled = false;
@@ -411,6 +412,11 @@ abstract class assQuestion implements Question
     public function getMinimumThumbSize(): int
     {
         return self::MINIMUM_THUMB_SIZE;
+    }
+
+    public function getMaximumThumbSize(): int
+    {
+        return self::MAXIMUM_THUMB_SIZE;
     }
 
     public function getAuthor(): string
@@ -1307,7 +1313,6 @@ abstract class assQuestion implements Question
         }
         // duplicate the question in database
         $clone = clone $this;
-        $original_id = $this->questionrepository->getForQuestionId($this->id)->getOriginalId();
         $clone->id = -1;
         $source_parent_id = $this->getObjId();
         $clone->setObjId($target_parent_id);
@@ -1315,11 +1320,11 @@ abstract class assQuestion implements Question
             $clone->setTitle($title);
         }
         $clone->saveToDb();
-        $clone->clonePageOfQuestion($original_id);
-        $clone->cloneXHTMLMediaObjectsOfQuestion($original_id);
+        $clone->clonePageOfQuestion($this->id);
+        $clone->cloneXHTMLMediaObjectsOfQuestion($this->id);
         $clone = $this->cloneQuestionTypeSpecificProperties($clone);
 
-        $clone->onCopy($source_parent_id, $original_id, $clone->getObjId(), $clone->getId());
+        $clone->onCopy($source_parent_id, $this->id, $clone->getObjId(), $clone->getId());
 
         return $clone->id;
     }

@@ -175,6 +175,9 @@ class ParticipantTable implements DataRetrieval
             'status_of_attempt' => fn(string $value, Participant $record) =>
                 ($value === StatusOfAttempt::NOT_YET_STARTED->value && $record->getAttemptOverviewInformation()?->getStatusOfAttempt() === null) ||
                 $value === $record->getAttemptOverviewInformation()?->getStatusOfAttempt()->value,
+            'test_passed' => fn(string $value, Participant $record) => $value === 'true'
+                ? $record->getAttemptOverviewInformation()?->hasPassingMark() === true
+                : $record->getAttemptOverviewInformation()?->hasPassingMark() !== true
         ];
     }
 
@@ -291,6 +294,11 @@ class ParticipantTable implements DataRetrieval
 
         $filters['status_of_attempt'] = [
             $field_factory->select($this->lng->txt('status_of_attempt'), $status_of_attempt_options),
+            true
+        ];
+
+        $filters['test_passed'] = [
+            $field_factory->select($this->lng->txt('tst_passed'), $yes_no_all_options),
             true
         ];
 

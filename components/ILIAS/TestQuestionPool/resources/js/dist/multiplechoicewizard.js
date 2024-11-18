@@ -87,7 +87,7 @@ var ilMultipleChoiceWizardInputTemplate = {
 	initEvents: function(rootel) {
 		var that = this;
 
-		if (typeof tinyMCE == 'undefined' || $(rootel).closest('table').find('textarea').size() == 0) {
+		if (typeof tinyMCE === 'undefined' || $(rootel).closest('table').find('textarea').length === 0) {
 			$(rootel).find('div.' + this.tag_button + '_add .glyph').click(function(e) {
 				that.addRow(e);
 			});

@@ -615,7 +615,7 @@ class ilAssQuestionPreviewGUI
     protected function populateCommentsPanel(ilTemplate $tpl, string $comments_panel_html): void
     {
         if ($comments_panel_html === '') {
-            $comments_panel_html = $this->question_gui->geCommentsPanelHTML();
+            $comments_panel_html = $this->question_gui->getCommentsPanelHTML();
         }
 
         $tpl->setCurrentBlock('notes_panel');

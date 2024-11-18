@@ -4,6 +4,19 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Button\Toggle;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a Toggle Button.
+ *
+ * expected output: >
+ *   ILIAS shows a switch. Clicking onto the switch will result in the switch moving to the right side and opening a
+ *   dialog: "Toggle Button has been turned on".
+ *   Closing the dialog via "delete" will move back the switch. The switch will stay on the right side if the dialog
+ *   is closed via "close".
+ *   Another click onto the switch will move the switch to the left side. ILIAS notifies: "Toggle Button has been turned off".
+ * ---
+ */
 function base()
 {
     global $DIC;

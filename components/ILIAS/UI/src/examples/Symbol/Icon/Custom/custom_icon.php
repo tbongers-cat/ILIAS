@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Symbol\Icon\Custom;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering custom icons.
+ *
+ * expected output: >
+ *   ILIAS shows a custom icon in three different sizes.
+ *   Below those icons another custom icon with an abbrevation (two letters) is displayed in three different sizes.
+ * ---
+ */
 function custom_icon()
 {
     global $DIC;

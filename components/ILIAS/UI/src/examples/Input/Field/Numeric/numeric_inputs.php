@@ -5,7 +5,25 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Numeric;
 
 /**
- * Base example showing how to plug a numeric input into a form
+ * ---
+ * description: >
+ *   Base example showing how to plug a numeric input into a form.
+ *
+ * expected output: >
+ *   ILIAS shows two input fields titled "Some Number". One input field already displays a number. The other input field
+ *   is required (*). You can enter numbers into the fields or choose a number by using the the arrows at the end of the fields.
+ *   Clicking "Save" reloads the page.
+ *   Afterwards ILIAS will show the inserted number in the following format:
+ *
+ *   Array
+ *   (
+ *       [n1] => 56
+ *       [n2] => 77
+ *   )
+ *
+ *   If you insert one or more non-numeric numbers into the field the input field will get highlighted in red. Saving
+ *   those inputs results in displaying an error message right above the required field.
+ * ---
  */
 function numeric_inputs()
 {

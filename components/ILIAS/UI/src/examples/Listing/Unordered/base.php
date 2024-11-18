@@ -4,6 +4,19 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Listing\Unordered;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering an unordered list.
+ *
+ * expected output: >
+ *   ILIAS shows a list in the following format:
+ *
+ *   - Point 1
+ *   - Point 2
+ *   - Point 3
+ * ---
+ */
 function base()
 {
     //Init Factory and Renderer

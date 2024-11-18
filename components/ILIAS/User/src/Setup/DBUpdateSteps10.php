@@ -72,7 +72,7 @@ class DBUpdateSteps10 implements \ilDatabaseUpdateSteps
                 'created_ts'
             );
         }
-        if (!$this->db->indexExistsByFields(ChangeMailTokenDBRepository::TABLE_NAME, ['token'])) {
+        if (!$this->db->primaryExistsByFields(ChangeMailTokenDBRepository::TABLE_NAME, ['token'])) {
             $this->db->manipulate('DELETE token1 FROM ' . ChangeMailTokenDBRepository::TABLE_NAME . ' token1 '
                 . 'INNER JOIN ' . ChangeMailTokenDBRepository::TABLE_NAME . ' token2 '
                 . 'WHERE token1.token = token2.token AND token1.created_ts < token2.created_ts');
@@ -115,6 +115,30 @@ class DBUpdateSteps10 implements \ilDatabaseUpdateSteps
             $query,
             [\ilDBConstants::T_TEXT],
             ['session_reminder_enabled']
+        );
+    }
+
+    public function step_4(): void
+    {
+        $query = 'SELECT value FROM settings WHERE module = %s AND keyword = %s';
+        $res = $this->db->queryF(
+            $query,
+            [\ilDBConstants::T_TEXT, \ilDBConstants::T_TEXT],
+            ['common', 'ps_login_max_attempts']
+        );
+
+        // We should adjust the usr_data values, even if the "Max. Login Attempts" are currently not set
+        $max_login_attempts = min(
+            (int) ($this->db->fetchAssoc($res)['value'] ?? \ilSecuritySettings::MAX_LOGIN_ATTEMPTS),
+            \ilSecuritySettings::MAX_LOGIN_ATTEMPTS
+        );
+
+        $max_login_attempts_exceeded = $max_login_attempts + 1;
+
+        $this->db->manipulateF(
+            'UPDATE usr_data SET login_attempts = %s WHERE login_attempts > %s',
+            [\ilDBConstants::T_INTEGER, \ilDBConstants::T_INTEGER],
+            [$max_login_attempts_exceeded, $max_login_attempts_exceeded]
         );
     }
 }

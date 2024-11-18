@@ -55,4 +55,29 @@ class LearningModuleDBUpdateSteps implements \ilDatabaseUpdateSteps
             ));
         }
     }
+
+    public function step_3(): void
+    {
+        $this->db->update(
+            "ut_lp_settings",
+            [
+            "u_mode" => ["integer", 0]
+        ],
+            [    // where
+                "obj_type" => ["text", "lm"],
+                "u_mode" => ["integer", 3],
+            ]
+        );
+        $this->db->update(
+            "ut_lp_settings",
+            [
+            "u_mode" => ["integer", 0]
+        ],
+            [    // where
+                "obj_type" => ["text", "lm"],
+                "u_mode" => ["integer", 16],
+            ]
+        );
+    }
+
 }

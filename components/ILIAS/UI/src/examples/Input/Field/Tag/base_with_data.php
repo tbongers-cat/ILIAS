@@ -5,8 +5,28 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Tag;
 
 /**
- * Example show how to create and render a basic tag input field and attach it to a
- * form. This example does not contain any data processing.
+ * ---
+ * description: >
+ *   The example shows how to create and render a basic tag input field and attach it to a
+ *   form. This example does not contain any data processing.
+ *
+ * expected output: >
+ *   ILIAS shows an input field titled "Basic TagInput". ILIAS will display a completion of the tags if an A, B, I or R
+ *   is typed in. It is also possible to insert tags of your own and confirm those through hitting the Enter button on your
+ *   keyboard. Afterwards the tags get highlighted with color. An "X" is positioned directly next to each tag. Removing
+ *   a tag is possible through clicking the "X".
+ *   Clicking "Save" reloads the page and displays your input in the following format above the input field:
+ *
+ *   Array
+ *   (
+ *      [0] => Array
+ *      (
+ *          [0] => Interesting
+ *          [1] => Animating
+ *          [2] => Whatever
+ *      )
+ *   )
+ * ---
  */
 function base_with_data()
 {

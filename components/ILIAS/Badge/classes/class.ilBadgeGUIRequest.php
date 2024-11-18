@@ -219,4 +219,9 @@ class ilBadgeGUIRequest
     {
         return $this->int("pid");
     }
+
+    public function getBadgeAssignableUsers(): array
+    {
+        return $this->strArray("tid_id");
+    }
 }

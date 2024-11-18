@@ -16,12 +16,12 @@ export default {
       document: 'document',
       ilias: 'il',
     },
-    plugins: [/*
+    plugins: [
       terser({
         format: {
           comments: preserveCopyright,
         },
       }),
-    */],
+    ],
   },
 };

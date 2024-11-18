@@ -395,8 +395,7 @@ class ilGlossaryTermGUI
                 ILIAS_HTTP_PATH .
                 "/goto.php?target=" .
                 "git" .
-                "_" . $term_id . "_" . $this->request->getRefId() . "&client_id=" . CLIENT_ID,
-                "_top"
+                "_" . $term_id . "_" . $this->request->getRefId() . "&client_id=" . CLIENT_ID
             );
         }
 

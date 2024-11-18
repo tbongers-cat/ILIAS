@@ -5,7 +5,14 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Image\Responsive;
 
 /**
- * Base Example for rendering an responsive Image
+ * ---
+ * description: >
+ *  Base example for rendering a responsive Image.
+ *
+ * expected output: >
+ *   ILIAS shows a rendered image. While changing the size of the browser window the image will
+ *   decrease in size bit by bit. If the element gets analyzed a text entry for "alt" is shown within the HTML.
+ * ---
  */
 function base()
 {

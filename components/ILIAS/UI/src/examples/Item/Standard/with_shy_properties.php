@@ -5,7 +5,15 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Item\Standard;
 
 /**
- * With shy buttons as property values
+ * ---
+ * description: >
+ *   Example for rendering a standard item with shy properties.
+ *
+ * expected output: >
+ *   ILIAS shows a box including the following informations: A heading with a dummy text in small writings
+ *   ("Lorem ipsum...") below. Beneath those you can see a fine line and more informations about "LMS", "Code Repo"
+ *   and "Location". "Code Repo" ("ILIAS") and "LMS" ("GitHub") are rendered as shy buttons and are functioning as links.
+ * ---
  */
 function with_shy_properties()
 {

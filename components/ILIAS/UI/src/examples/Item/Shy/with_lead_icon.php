@@ -6,6 +6,16 @@ namespace ILIAS\UI\examples\Item\Shy;
 
 use ILIAS\UI\Component\Symbol\Icon\Standard;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a shy item with an lead icon.
+ *
+ * expected output: >
+ *   ILIAS shows a box highlighted white and including the text "Test shy Item". Additionally a small icon is displayed
+ *   to the left of the text.
+ * ---
+ */
 function with_lead_icon()
 {
     global $DIC;

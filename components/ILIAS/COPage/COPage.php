@@ -53,6 +53,16 @@ class COPage implements Component\Component
         $contribute[Component\Resource\PublicAsset::class] = static fn() => new class () implements Component\Resource\PublicAsset {
             public function getSource(): string
             {
+                return "components/ILIAS/COPage/PC/Tabs/js";
+            }
+            public function getTarget(): string
+            {
+                return "components/ILIAS/COPage/PC/Tabs/js";
+            }
+        };
+        $contribute[Component\Resource\PublicAsset::class] = static fn() => new class () implements Component\Resource\PublicAsset {
+            public function getSource(): string
+            {
                 return "components/ILIAS/COPage/Editor/js";
             }
             public function getTarget(): string

@@ -37,6 +37,8 @@ use ILIAS\UI\URLBuilderToken;
 use ILIAS\DI\Container;
 use ilBadge;
 use ilBadgeAuto;
+use ILIAS\Filesystem\Stream\Streams;
+use ILIAS\UI\Component\Table\Column\Column;
 
 class ilBadgeTableGUI
 {
@@ -67,7 +69,7 @@ class ilBadgeTableGUI
     }
 
     /**
-     * TODO gvollbach: Please provide the exaxct shape of the list of arrays
+     * @return array<string, Column>
      */
     private function buildColumns(): array
     {
@@ -110,8 +112,15 @@ class ilBadgeTableGUI
             }
 
             /**
-             * TODO gvollbach: Please provide the exaxct shape of the list of arrays
-             * @return array<string,string>
+             * @return list<array{
+             *     id: int,
+             *     badge: ilBadge,
+             *     active: bool,
+             *     type: string,
+             *     manual: bool,
+             *     image_rid: string,
+             *     title: string,
+             *     renderer: string}>
              */
             private function getBadges(Container $DIC): array
             {
@@ -199,7 +208,15 @@ class ilBadgeTableGUI
             }
 
             /**
-             * TODO gvollbach: Please provide the exaxct shape of the list of arrays
+             * @return list<array{
+             *     id: int,
+             *     badge: ilBadge,
+             *     active: bool,
+             *     type: string,
+             *     manual: bool,
+             *     image_rid: string,
+             *     title: string,
+             *     renderer: string}>
              */
             private function getRecords(Range $range = null, Order $order = null): array
             {
@@ -216,6 +233,7 @@ class ilBadgeTableGUI
                         $data = array_reverse($data);
                     }
                 }
+
                 if ($range) {
                     $data = \array_slice($data, $range->getStart(), $range->getLength());
                 }
@@ -226,14 +244,15 @@ class ilBadgeTableGUI
     }
 
     /**
-     * @return array<string,\ILIAS\UI\Component\Table\Action\Action>
+     * @return array<string, \ILIAS\UI\Component\Table\Action\Action>
      */
     private function getActions(
         URLBuilder $url_builder,
         URLBuilderToken $action_parameter_token,
-        URLBuilderToken $row_id_token
+        URLBuilderToken $row_id_token,
     ): array {
         $f = $this->factory;
+
         return [
             'badge_table_activate' =>
                 $f->table()->action()->multi(
@@ -256,6 +275,12 @@ class ilBadgeTableGUI
                 $f->table()->action()->standard(
                     $this->lng->txt('delete'),
                     $url_builder->withParameter($action_parameter_token, 'badge_table_delete'),
+                    $row_id_token
+                ),
+            'award_revoke_badge' =>
+                $f->table()->action()->single(
+                    $this->lng->txt('badge_award_revoke'),
+                    $url_builder->withParameter($action_parameter_token, 'award_revoke_badge'),
                     $row_id_token
                 )
         ];
@@ -286,9 +311,9 @@ class ilBadgeTableGUI
                 'id'
             );
 
-        $actions = $this->getActions($url_builder, $action_parameter_token, $row_id_token);
         $data_retrieval = $this->buildDataRetrievalObject($f, $r, $this->parent_id, $this->parent_type);
-        $table = $f->table()->data('', $columns, $data_retrieval)
+        $actions = $this->getActions($url_builder, $action_parameter_token, $row_id_token);
+        $table = $f->table()->data($this->lng->txt('obj_bdga'), $columns, $data_retrieval)
                    ->withActions($actions)
                    ->withRequest($request);
         $out = [$table];
@@ -304,15 +329,22 @@ class ilBadgeTableGUI
                 foreach ($ids as $id) {
                     $items[] = $f->modal()->interruptiveItem()->keyValue($id, $row_id_token->getName(), $id);
                 }
-                echo($r->renderAsync([
-                    $f->modal()->interruptive(
-                        $this->lng->txt('badge_deletion'),
-                        $this->lng->txt('badge_deletion_confirmation'),
-                        '#'
-                    )->withAffectedItems($items)
-                      ->withAdditionalOnLoadCode(static fn($id): string => "console.log('ASYNC JS');")
-                ]));
-                exit();
+
+                $this->http->saveResponse(
+                    $this->http
+                        ->response()
+                        ->withBody(
+                            Streams::ofString($r->renderAsync([
+                                $f->modal()->interruptive(
+                                    $this->lng->txt('badge_deletion'),
+                                    $this->lng->txt('badge_deletion_confirmation'),
+                                    '#'
+                                )->withAffectedItems($items)
+                            ]))
+                        )
+                );
+                $this->http->sendResponse();
+                $this->http->close();
             }
         }
 

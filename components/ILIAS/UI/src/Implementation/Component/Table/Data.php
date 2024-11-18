@@ -125,8 +125,8 @@ class Data extends AbstractTable implements T\Data
         $view_controls = $this->getViewControls($total_count);
 
         if ($request = $this->getRequest()) {
-            $view_controls = $this->applyValuesToViewcontrols($view_controls, $request);
-            $data = $view_controls->getData();
+            # This retrieves container data from the request
+            $data = $this->applyValuesToViewcontrols($view_controls, $request)->getData();
             $range = $data[self::VIEWCONTROL_KEY_PAGINATION];
             $range = ($range instanceof Range) ? $range->croppedTo($total_count ?? PHP_INT_MAX) : null;
             $order = $data[self::VIEWCONTROL_KEY_ORDERING];
@@ -136,6 +136,8 @@ class Data extends AbstractTable implements T\Data
                 ->withRange($range)
                 ->withOrder($order)
                 ->withSelectedOptionalColumns($data[self::VIEWCONTROL_KEY_FIELDSELECTION] ?? null);
+            # This retrieves the view controls that should be displayed
+            $view_controls = $table->applyValuesToViewcontrols($table->getViewControls($total_count), $request);
         }
 
         return [

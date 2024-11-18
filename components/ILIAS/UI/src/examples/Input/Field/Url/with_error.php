@@ -5,8 +5,15 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Url;
 
 /**
- * This example shows how to create and render a basic URL input field with an error and
- * attach to it. It does not contain any data processing.
+ * ---
+ * description: >
+ *   This example shows how to create and render a basic URL input field with an error and
+ *   attach to it. It does not contain any data processing.
+ *
+ * expected output: >
+ *   ILIAS shows an input field titled "Basic Input". You can enter numbers and letters. The colored error message "Some
+ *   error" is displayed above the field. Clicking "Save" will relaod the page.
+ * ---
  */
 function with_error()
 {

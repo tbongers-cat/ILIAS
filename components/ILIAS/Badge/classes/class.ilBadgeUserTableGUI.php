@@ -39,6 +39,8 @@ use ilBadge;
 use ilBadgeAssignment;
 use ilUserQuery;
 use DateTimeImmutable;
+use ILIAS\UI\URLBuilderToken;
+use ilObjectDataDeletionLog;
 
 class ilBadgeUserTableGUI
 {
@@ -46,12 +48,14 @@ class ilBadgeUserTableGUI
     private readonly Renderer $renderer;
     private readonly ServerRequestInterface|RequestInterface $request;
     private readonly int $parent_ref_id;
-    private readonly ?ilBadge $award_badge;
     private readonly ilLanguage $lng;
     private readonly ilGlobalTemplateInterface $tpl;
 
-    public function __construct(int $parent_ref_id, ?ilBadge $award_badge = null)
-    {
+    public function __construct(
+        int $parent_ref_id,
+        private readonly ?ilBadge $award_badge = null,
+        private readonly int $restrict_badge_id = 0
+    ) {
         global $DIC;
 
         $this->lng = $DIC->language();
@@ -60,7 +64,6 @@ class ilBadgeUserTableGUI
         $this->renderer = $DIC->ui()->renderer();
         $this->request = $DIC->http()->request();
         $this->parent_ref_id = $parent_ref_id;
-        $this->award_badge = $award_badge;
     }
 
     private function buildDataRetrievalObject(
@@ -79,23 +82,27 @@ class ilBadgeUserTableGUI
             }
 
             /**
-             * TODO gvollbach: Please provide the exaxct shape of the list of arrays
-             * @return array<string,string>
+             * @return list<array{
+             *     user_id: string,
+             *     name: string,
+             *     login: string,
+             *     type: string,
+             *     title: string,
+             *     issued: int,
+             *     parent_id: string,
+             *     parent_meta: array}>
              */
             private function getBadgeImageTemplates(Container $DIC): array
             {
-                $a_parent_obj_id = null;
                 $assignments = null;
                 $user_ids = null;
                 $parent_ref_id = $this->parent_ref_id;
-                $a_restrict_badge_id = 0;
                 $data = [];
                 $badges = [];
                 $tree = $DIC->repositoryTree();
+                $restrict_badge_id = 0;
 
-                if (!$a_parent_obj_id) {// TODO gvollbach: $a_parent_obj_id is always null
-                    $a_parent_obj_id = ilObject::_lookupObjId($parent_ref_id);
-                }
+                $a_parent_obj_id = ilObject::_lookupObjId($parent_ref_id);
 
                 if ($parent_ref_id) {
                     $user_ids = ilBadgeHandler::getInstance()->getUserIds($parent_ref_id, $a_parent_obj_id);
@@ -111,29 +118,32 @@ class ilBadgeUserTableGUI
                     foreach (ilBadge::getInstancesByParentId($obj_id) as $badge) {
                         $badges[$badge->getId()] = $badge;
                     }
-
                     foreach (ilBadgeAssignment::getInstancesByParentId($obj_id) as $ass) {
-                        if ($a_restrict_badge_id !== $ass->getBadgeId()) {
+                        if ($restrict_badge_id &&
+                            $restrict_badge_id !== $ass->getBadgeId()) {
+                            continue;
+                        }
+                        if ($this->award_badge &&
+                            $ass->getBadgeId() !== $this->award_badge->getId()) {
                             continue;
                         }
 
                         $assignments[$ass->getUserId()][] = $ass;
                     }
                 }
-
                 if (!$user_ids && $assignments !== null) {
                     $user_ids = array_keys($assignments);
                 }
 
                 $tmp['set'] = [];
-                if (count($user_ids) > 0) {
+                if (\count($user_ids) > 0) {
                     $uquery = new ilUserQuery();
                     $uquery->setLimit(9999);
                     $uquery->setUserFilter($user_ids);
                     $tmp = $uquery->query();
                 }
                 foreach ($tmp['set'] as $user) {
-                    if (is_array($assignments) && array_key_exists($user['usr_id'], $assignments)) {
+                    if (\is_array($assignments) && \array_key_exists($user['usr_id'], $assignments)) {
                         foreach ($assignments[$user['usr_id']] as $user_ass) {
                             $idx = $user_ass->getBadgeId() . '-' . $user['usr_id'];
                             $badge = $badges[$user_ass->getBadgeId()];
@@ -146,8 +156,9 @@ class ilBadgeUserTableGUI
                             $type = ilBadge::getExtendedTypeCaption($badge->getTypeInstance());
                             $title = $badge->getTitle();
                             $issued = $immutable->setTimestamp($timestamp);
-                            $parent_id = $parent['id'] ?? 0; //TODO gvollbach: According to mit SCA the offset "id" always exists
+                            $parent_id = $parent['id'];
                             $data[$idx] = [
+                                'id' => $user_id,
                                 'user_id' => $user_id,
                                 'name' => $name,
                                 'login' => $login,
@@ -164,12 +175,12 @@ class ilBadgeUserTableGUI
                         $name = $user['lastname'] . ', ' . $user['firstname'];
                         $login = $user['login'];
                         $data[$idx] = [
+                            'id' => $user_id,
                             'user_id' => $user_id,
                             'name' => $name,
                             'login' => $login,
                             'type' => '',
                             'title' => '',
-                            'issued' => '',
                             'parent_id' => ''
                         ];
                     }
@@ -187,11 +198,14 @@ class ilBadgeUserTableGUI
                 ?array $additional_parameters
             ): Generator {
                 $records = $this->getRecords($range, $order);
-                foreach ($records as $idx => $record) {
-                    if (isset($idx)) {// TODO gvollbach: Why do we have to check the index agains NULL?
-                        $row_id = (string) $idx;
-                        yield $row_builder->buildDataRow($row_id, $record);
+                foreach ($records as $record) {
+
+                    $row_id = (string) $record['id'];
+                    if ($this->award_badge !== null) {
+                        $row_id = $record['id'] . '_' . $this->award_badge->getId();
                     }
+
+                    yield $row_builder->buildDataRow($row_id, $record);
                 }
             }
 
@@ -199,11 +213,19 @@ class ilBadgeUserTableGUI
                 ?array $filter_data,
                 ?array $additional_parameters
             ): ?int {
-                return count($this->getRecords());
+                return \count($this->getRecords());
             }
 
             /**
-             * TODO gvollbach: Please provide the exaxct shape of the list of arrays
+             * @return list<array{
+             *     user_id: string,
+             *     name: string,
+             *     login: string,
+             *     type: string,
+             *     title: string,
+             *     issued: int,
+             *     parent_id: string,
+             *     parent_meta: array}>
              */
             private function getRecords(Range $range = null, Order $order = null): array
             {
@@ -221,13 +243,44 @@ class ilBadgeUserTableGUI
                         $data = array_reverse($data);
                     }
                 }
+
                 if ($range) {
-                    $data = array_slice($data, $range->getStart(), $range->getLength());
+                    $data = \array_slice($data, $range->getStart(), $range->getLength());
                 }
 
                 return $data;
             }
         };
+    }
+
+    /**
+     * @return array<string, \ILIAS\UI\Component\Table\Action\Action>
+     */
+    private function getActions(
+        URLBuilder $url_builder,
+        URLBuilderToken $action_parameter_token,
+        URLBuilderToken $row_id_token,
+    ): array {
+        $f = $this->factory;
+        if ($this->award_badge) {
+
+            return [
+                'badge_award_badge' =>
+                    $f->table()->action()->multi(
+                        $this->lng->txt('badge_award_badge'),
+                        $url_builder->withParameter($action_parameter_token, 'assignBadge'),
+                        $row_id_token
+                    ),
+                'badge_revoke_badge' =>
+                    $f->table()->action()->multi(
+                        $this->lng->txt('badge_remove_badge'),
+                        $url_builder->withParameter($action_parameter_token, 'revokeBadge'),
+                        $row_id_token
+                    ),
+            ];
+        }
+
+        return [];
     }
 
     public function renderTable(): void
@@ -260,9 +313,34 @@ class ilBadgeUserTableGUI
             );
 
         $data_retrieval = $this->buildDataRetrievalObject($f, $r, $this->parent_ref_id, $this->award_badge);
+        $actions = $this->getActions($url_builder, $action_parameter_token, $row_id_token);
 
+        if ($this->award_badge) {
+            $title = $this->lng->txt('badge_award_badge') . ': ' . $this->award_badge->getTitle();
+        } else {
+            $parent = '';
+            $parent_obj_id = ilObject::_lookupObjId($this->parent_ref_id);
+            if ($parent_obj_id) {
+                $title = ilObject::_lookupTitle($parent_obj_id);
+                if (!$title) {
+                    $title = ilObjectDataDeletionLog::get($parent_obj_id);
+                    if ($title) {
+                        $title = $title['title'];
+                    }
+                }
+
+                if ($this->restrict_badge_id) {
+                    $badge = new ilBadge($this->restrict_badge_id);
+                    $title .= ' - ' . $badge->getTitle();
+                }
+
+                $parent = $title . ': ';
+            }
+            $title = $parent . $this->lng->txt('users');
+        }
         $table = $f->table()
-                   ->data('', $columns, $data_retrieval)
+                   ->data($title, $columns, $data_retrieval)
+                   ->withActions($actions)
                    ->withRequest($request);
 
         $out = [$table];

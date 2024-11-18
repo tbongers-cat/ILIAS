@@ -6,6 +6,16 @@ namespace ILIAS\UI\examples\Link\Standard;
 
 use ILIAS\UI\Component\Link\Relationship;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a standard link including relationships
+ *
+ * expected output: >
+ *   ILIAS shows a link with the title "Goto ILIAS". Clicking the link opens the website www.ilias.de in the same
+ *   browser window.
+ * ---
+ */
 function with_relationships()
 {
     global $DIC;

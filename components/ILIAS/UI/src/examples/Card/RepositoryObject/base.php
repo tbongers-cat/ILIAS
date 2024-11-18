@@ -4,6 +4,17 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Card\RepositoryObject;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a repository card. Note that those cards are used if more visual information about the
+ *   repository object type is needed.
+ *
+ * expected output: >
+ *   ILIAS shows a ILIAS-Logo. The logo's size will change accordingly to the size of the browser/desktop. A title
+ *   "RepositoryObject Card Title" is displayed below the logo.
+ * ---
+ */
 function base()
 {
     //Init Factory and Renderer

@@ -4,6 +4,17 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\MessageBox\Info;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a info message box.
+ *
+ * expected output: >
+ *   ILIAS shows a blue box with a dummy text ("Lorem ipsum...") and two buttons "Action" and "Cancel".
+ *   Clicking the buttons will not activate any actions.
+ *   Below you can see a white box with two links which also do not have got any actions.
+ * ---
+ */
 function info()
 {
     global $DIC;

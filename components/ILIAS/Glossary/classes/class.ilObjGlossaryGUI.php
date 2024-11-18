@@ -286,7 +286,10 @@ class ilObjGlossaryGUI extends ilObjectGUI implements \ILIAS\Taxonomy\Settings\M
                 $this->checkPermission("write");
                 $gui = $this->gui->settings()->settingsGUI(
                     $this->object->getId(),
-                    $this->requested_ref_id
+                    $this->requested_ref_id,
+                    $this->getCreationMode(),
+                    $this,
+                    $this->object
                 );
                 $this->ctrl->forwardCommand($gui);
                 break;
@@ -298,7 +301,7 @@ class ilObjGlossaryGUI extends ilObjectGUI implements \ILIAS\Taxonomy\Settings\M
                     $this->ctrl->redirectByClass(ilGlossaryTermGUI::class, "create");
                 } else {
                     if ($this->in_administration ||
-                        $this->getCreationMode() == true) {
+                        $this->getCreationMode()) {
                         $this->prepareOutput();
                         $cmd .= "Object";
                     } else {
@@ -497,7 +500,7 @@ class ilObjGlossaryGUI extends ilObjectGUI implements \ILIAS\Taxonomy\Settings\M
         $this->ctrl->redirectByClass(SettingsGUI::class);
     }
 
-    public function initSettingsForm(
+    public function initSettingsForm(// todo: remove this and all related methods
         string $a_mode = "edit"
     ): void {
         $obj_service = $this->getObjectService();
@@ -1098,7 +1101,7 @@ class ilObjGlossaryGUI extends ilObjectGUI implements \ILIAS\Taxonomy\Settings\M
         if ($this->rbacsystem->checkAccess('write', $this->object->getRefId())) {
             $this->tabs_gui->addTab(
                 "settings",
-                $this->lng->txt("settings") . " new",
+                $this->lng->txt("settings"),
                 $this->ctrl->getLinkTargetByClass(SettingsGUI::class)
             );
 
@@ -1133,8 +1136,7 @@ class ilObjGlossaryGUI extends ilObjectGUI implements \ILIAS\Taxonomy\Settings\M
         $this->tabs_gui->addNonTabbedLink(
             "presentation_view",
             $this->lng->txt("glo_presentation_view"),
-            "ilias.php?baseClass=ilGlossaryPresentationGUI&amp;ref_id=" . $this->object->getRefId(),
-            "_top"
+            "ilias.php?baseClass=ilGlossaryPresentationGUI&amp;ref_id=" . $this->object->getRefId()
         );
     }
 

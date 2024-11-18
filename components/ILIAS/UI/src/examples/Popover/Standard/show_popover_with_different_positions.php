@@ -4,6 +4,22 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Popover\Standard;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a standard popover with different positions.
+ *
+ * expected output: >
+ *   In this example ILIAS shows depending on the screen size and scroll position the popover's text accordingly.
+ *   ILIAS shows three different buttons:
+ *   - Auto Popover
+ *   - Vertical Popover
+ *   - Horizontal Popover
+ *   Click onto the button and check if the popover's behaviour aligns with the description in the first sentence of this example's
+ *   expected output.
+ *   Please do some tests with different size and scroll positions on your browser window to see if the functions still work.
+ * ---
+ */
 function show_popover_with_different_positions()
 {
     global $DIC;

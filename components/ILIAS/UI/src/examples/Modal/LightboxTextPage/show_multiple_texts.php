@@ -4,6 +4,22 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Modal\LightboxTextPage;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a lightbox text page modal with multiple texts.
+ *
+ * expected output: >
+ *   ILIAS shows a button titled "Show texts".
+ *   A click onto the button greys out ILIAS and opens a modal with multiple contents which can be viewed each after another
+ *   by clicking the arrow glyphs.
+ *   All contents consist of a title each.
+ *   In the lower part of the modal a circle glyph is centered about which you can see that you can look at two contents
+ *   within the modal.
+ *   You can leave the modal by hitting the ESC key or by clicking the greyed out ILIAS in the background outside of the
+ *   modal or by clicking the "X".
+ * ---
+ */
 function show_multiple_texts()
 {
     global $DIC;

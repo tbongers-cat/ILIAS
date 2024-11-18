@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Button\Shy;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a shy button with tooltips
+ *
+ * expected output: >
+ *   ILIAS shows a small button titled "Goto ILIAS". Hovering over the button will show a tooltip with the following contents:
+ *   "tooltip: ilias" and "tooltip: learning management system".
+ * ---
+ */
 function with_tooltip()
 {
     global $DIC;

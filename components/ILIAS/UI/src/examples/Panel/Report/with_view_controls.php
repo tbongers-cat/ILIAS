@@ -4,6 +4,19 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Panel\Report;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a report panel.
+ *
+ * expected output: >
+ *   ILIAS shows a panel titled "Report Title" and two sub panels as content.
+ *   The first sub panel is titled "Sub Panel Title 1", displays the text "Some Content" and a card titled  "Card Heading"
+ *   including it's content "Card Content".
+ *   The second sub panel is titled "Sub Panel Title 2" and displays the content text "Some Content".
+ *   There's a Mode View Control on the Panel as well a Dropdown with Actions.
+ * ---
+ */
 function with_view_controls(): string
 {
     global $DIC;

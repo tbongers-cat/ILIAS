@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Panel\Secondary\Legacy;
 
+/**
+ * ---
+ * description: >
+ *  Example for rendering a secondary legacy panel listing.
+ *
+ * expected output: >
+ *   ILIAS shows a panel titled "Legacy Panel Title" and including an action menu. The panel's content is set to "Legacy Content".
+ * ---
+ */
 function base()
 {
     global $DIC;

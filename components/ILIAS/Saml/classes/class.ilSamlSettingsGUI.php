@@ -37,6 +37,7 @@ final class ilSamlSettingsGUI
     private const PERMISSION_WRITE = 'write';
 
     private const REQUEST_PARAM_SAML_IDP_ID = 'saml_idp_id';
+    private const REQUEST_PARAM_SAML_IDP_IDS = 'saml_idp_ids';
 
     private const MESSAGE_TYPE_FAILURE = 'failure';
     private const MESSAGE_TYPE_SUCCESS = 'success';
@@ -185,6 +186,16 @@ final class ilSamlSettingsGUI
                 if (count($idpIds) === 1) {
                     $idpId = current($idpIds);
                 }
+            }
+        }
+
+        if ($this->httpState->wrapper()->post()->has(self::REQUEST_PARAM_SAML_IDP_IDS)) {
+            $idpIds = $this->httpState->wrapper()->post()->retrieve(
+                self::REQUEST_PARAM_SAML_IDP_IDS,
+                $this->refinery->kindlyTo()->listOf($this->refinery->kindlyTo()->int())
+            );
+            if (count($idpIds) === 1) {
+                $idpId = current($idpIds);
             }
         }
 
@@ -741,7 +752,7 @@ final class ilSamlSettingsGUI
         $confirmation->setConfirm($this->lng->txt('confirm'), 'deleteIdp');
         $confirmation->setCancel($this->lng->txt(self::LNG_CANCEL), self::DEFAULT_CMD);
         $confirmation->setHeaderText($this->lng->txt('auth_saml_sure_delete_idp'));
-        $confirmation->addItem('saml_idp_ids', (string) $this->idp->getIdpId(), $this->idp->getEntityId());
+        $confirmation->addItem(self::REQUEST_PARAM_SAML_IDP_IDS, (string) $this->idp->getIdpId(), $this->idp->getEntityId());
 
         $this->tpl->setContent($confirmation->getHTML());
     }

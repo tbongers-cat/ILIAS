@@ -275,6 +275,8 @@ administration#:#obj_blga_desc#:#Global Blog Settings
 administration#:#obj_chta_desc#:#Chat Administration
 administration#:#obj_excs#:#Exercise
 administration#:#obj_excs_desc#:#Global Exercise Settings
+administration#:#obj_gsfo#:#Footer
+administration#:#obj_gsfo_desc#:#Administrate Footer Layout and Content
 administration#:#obj_impr#:#Legal Notice
 administration#:#obj_impr_desc#:#Deployment of Legal Notice
 administration#:#obj_mds#:#Metadata
@@ -552,6 +554,7 @@ assessment#:#backtocallingpage#:#Back to the question page
 assessment#:#backtocallingpool#:#Back to the question pool
 assessment#:#backtocallingtest#:#Back to the test
 assessment#:#baseunit#:#Base Unit
+assessment#:#broken_test#:#Broken Test
 assessment#:#bulkedit_author#:#Set Author
 assessment#:#bulkedit_lifecycle#:#Set Lifecycle
 assessment#:#bulkedit_taxonomies#:#Set Taxonomies
@@ -610,6 +613,8 @@ assessment#:#deleteSuggestedSolution#:#Remove this content for recapitulation
 assessment#:#delete_all_user_data_confirmation#:#Are you sure you want to delete the test results of all of the participants of this test?
 assessment#:#delete_image_header#:#Remove image
 assessment#:#delete_image_question#:#Do you really want to remove the image?
+assessment#:#delete_participant_no_valid_participants_selected#:#Test results already exist for the selected participants, so they cannot be removed.
+assessment#:#delete_result_no_valid_participants_selected#:#There are no test results for the selected participants, so they cannot be removed.
 assessment#:#delete_selected_user_data_confirmation#:#Are you sure you want to remove the test data of the selected users?
 assessment#:#delete_user_data#:#Remove Result(s)
 assessment#:#description_maxchars#:#If nothing entered the maximum number of characters for this text answer is unlimited.
@@ -744,6 +749,7 @@ assessment#:#finish_pass_for_user_in_processing_time#:#WARNING: the processing t
 assessment#:#finish_test#:#Finish Test
 assessment#:#finish_test_all#:#Are you sure you want to finish the test attempts for all users?
 assessment#:#finish_test_multiple#:#Are you sure you want to finish the test attempts for the following participants?
+assessment#:#finish_test_no_valid_participants_selected#:#There are no active test runs for the selected participants, so they cannot be completed.
 assessment#:#finish_test_single#:#Are you sure you want to finish the test attempt for the participant "%s"?
 assessment#:#finish_unfinished_passes#:#Finish Uncompleted Attempts
 assessment#:#finish_unfinished_passes_desc#:#Test attempts which have a set finishing time or a time limit will be closed by this cron job.
@@ -1213,7 +1219,7 @@ assessment#:#save_on_navigation_locked_confirmation#:#Your changed answers will 
 assessment#:#saved_adjustment#:#Changes saved.
 assessment#:#score_partsol_enabled#:#Activate Half-Point Scoring
 assessment#:#score_partsol_enabled_info#:#Usually the participant has to answer the question fully correct to get the configured points. With this option the participant gets the half of the configured points with at least three correct decisions.
-assessment#:#scored_pass#:#Scored Pass
+assessment#:#scored_pass#:#Scored Test Attempt
 assessment#:#scoring#:#Scoring and Results
 assessment#:#scoringadjust#:#Corrections
 assessment#:#search_groups#:#Search Groups
@@ -1337,6 +1343,8 @@ assessment#:#tst_add_quest_cont_edit_mode_IPE#:#Use plain text for questions and
 assessment#:#tst_add_quest_cont_edit_mode_IPE_info#:#No formatting of text in question and answers. No use of LaTex either. But feedback and hints can be reused when question is embedded in ILIAS learning module.
 assessment#:#tst_add_quest_cont_edit_mode_RTE#:#Use Rich-Text-Editor (TinyMCE) for editing questions and answers, feedbacks and hints
 assessment#:#tst_add_quest_cont_edit_mode_RTE_info#:#Allows text formatting of questions, answers, feedbacks and hints. But feedback and hints cannot be reused when question is embedded in ILIAS learning module.
+assessment#:#tst_add_quest_cont_edit_mode_plain#:#Use plain text
+assessment#:#tst_add_quest_cont_edit_mode_plain_info#:#No formatting of text in question, answers, feedback, and hints.
 assessment#:#tst_addit_passes_blocked_after_passed_msg#:#You have passed the test. The test cannot be started again.
 assessment#:#tst_all_test_competences#:#All Test Competence
 assessment#:#tst_all_user_data_deleted#:#All user data for this test has been removed!
@@ -1437,10 +1445,10 @@ assessment#:#tst_eval_results_by_pass_lo#:#List of Answers for Attempt %s
 assessment#:#tst_eval_results_lo#:#List of Answers
 assessment#:#tst_eval_show_answer#:#Show Answer
 assessment#:#tst_eval_total_finished#:#Total finished tests (Participants that used up all possible passes.)
-assessment#:#tst_eval_total_finished_average_time#:#Average test processing time
+assessment#:#tst_eval_total_finished_average_time#:#Average Time on Task
 assessment#:#tst_eval_total_passed#:#Total passed tests
 assessment#:#tst_eval_total_passed_average_points#:#Average points of passed tests
-assessment#:#tst_eval_total_passed_average_time#:#Average processing time of all passed tests
+assessment#:#tst_eval_total_passed_average_time#:#Average Time on Task of All Passed Tests
 assessment#:#tst_eval_total_persons#:#Total number of participants who started the test
 assessment#:#tst_exam_access_code#:#Access Code
 assessment#:#tst_exam_access_code_label#:#Enter access code to continue your already started test.
@@ -2250,16 +2258,10 @@ badge#:##:#Are you sure you want to delete the following badges and all their re
 badge#:#awarded_by#:#Awarded by
 badge#:#badge_activity_badges#:#Activity Badges
 badge#:#badge_add_template#:#Add Template
-badge#:#badge_add_to_backpack#:#Add to Backpack
-badge#:#badge_add_to_backpack_multi#:#Trying to add %s to Backpack
 badge#:#badge_add_to_profile#:#Add to Profile
 badge#:#badge_assignment_deletion_confirmation#:#Are you sure you want to revoke the following badge assignments for "%s"?
 badge#:#badge_award_badge#:#Award Badge
-badge#:#badge_backpack_connect_failed#:#The Mozilla Backpack could not be requested for %s.
-badge#:#badge_backpack_email#:#Mozilla Backpack Account (E-Mail)
-badge#:#badge_backpack_gallery_info#:#These are your published badge collections in your Mozilla Backpack.
-badge#:#badge_backpack_list#:#My Backpack
-badge#:#badge_backpack_no_groups#:#The Mozilla Backpack is empty or non-public.
+badge#:#badge_award_revoke#:#Award/Revoke Badge
 badge#:#badge_badge#:#Badge
 badge#:#badge_course_lp#:#Course LP
 badge#:#badge_course_lp_invalid#:#The following objects have a LP mode which is not supported: %s.
@@ -2269,7 +2271,6 @@ badge#:#badge_criteria#:#Criteria
 badge#:#badge_crs_merit#:#Merit
 badge#:#badge_deletion#:#Badge successfully deleted.
 badge#:#badge_deletion_confirmation#:#Are you sure you want to delete the following badges and all their respective assignments?
-badge#:#badge_edit_with_published#:#%s users have already added this badge to their backpack. Because of this changing badge attributes will lead to inconsistencies. Creating a new badge might be a better solution.
 badge#:#badge_image_from_template#:#Use Template
 badge#:#badge_image_from_upload#:#Upload Image
 badge#:#badge_image_template_form#:#Image Template
@@ -2288,20 +2289,9 @@ badge#:#badge_notification_osd#:#You just received new badges: [BADGE_LIST]
 badge#:#badge_notification_parent_goto#:#To repository
 badge#:#badge_notification_reason#:#You are receiving this message to be able to add the badges to your profile.
 badge#:#badge_notification_subject#:#Badges received
-badge#:#badge_obi_activate#:#Activate Mozilla Open Badges Infrastructure
-badge#:#badge_obi_activate_info#:#Users can export badges from ILIAS. They can use their badges to prove their qualification in other web applications.
-badge#:#badge_obi_contact#:#Contact E-Mail
-badge#:#badge_obi_contact_info#:#This e-mail address is not displayed, but it is baked into the badge.
-badge#:#badge_obi_organisation#:#Organisation
-badge#:#badge_obi_organisation_info#:#This entry will be displayed as the issuer of the badge.
-badge#:#badge_obi_salt#:#Salt
-badge#:#badge_obi_salt_info#:#Enter a combination of characters and numbers to allow third parties to validate the authenticity of a badge. Please do not change the entry afterwards.
 badge#:#badge_object_badges#:#Object Badges
-badge#:#badge_personal_badges#:#My Badges
 badge#:#badge_profile_less#:#Show less
-badge#:#badge_profile_manage#:#Manage
 badge#:#badge_profile_more#:#Show all
-badge#:#badge_profile_view#:#View
 badge#:#badge_remove_badge#:#Revoke Badge
 badge#:#badge_remove_from_profile#:#Remove from Profile
 badge#:#badge_select_one#:#You have to select at least one badge
@@ -2795,11 +2785,6 @@ cert#:#cert_sortable_by_title_asc#:#Title Ascending
 cert#:#cert_sortable_by_title_desc#:#Title Descending
 cert#:#certificate_achievement#:#%1$s achieved.
 cert#:#certificate_achievement_sub_obj#:#Certificate for %1$s
-cert#:#certificate_migration_confirm_start#:#Since ILIAS 5.4, certificates in ILIAS are persistent. Even if courses, tests or learning modules are deleted, you are still able to access any certificate you might have earned by them. In order to use this new functionality, you need to migrate your old certificates once.
-cert#:#certificate_migration_confirm_started#:#The migration was started.
-cert#:#certificate_migration_go#:#Start Migration
-cert#:#certificate_migration_lastrun_failed#:#The migration of the certificates failed. Try again?
-cert#:#certificate_no_object_desc#:#No object description available
 cert#:#certificate_no_object_title#:#No object title available
 cert#:#certificate_same_not_saved#:#No new version of certificate template was saved, because the values didn't change.
 cert#:#error_creating_certificate_pdf#:#The certificate could not be created. Please contact the administrator to check the certificate server.
@@ -2857,12 +2842,7 @@ certificate#:#certificate_ph_mark#:#Users mark
 certificate#:#certificate_ph_marklong#:#Users mark (official version)
 certificate#:#certificate_ph_markshort#:#Users mark (short version)
 certificate#:#certificate_ph_matriculation#:#Matriculation number of the user
-certificate#:#certificate_ph_maxpoints#:#Maximum available points
 certificate#:#certificate_ph_no_sco#:#If items are selected to determine the overall learning progress status, titles and points for these items could be displayed in certificate.
-certificate#:#certificate_ph_passed#:#‘passed’ or ‘failed’, depending on the test results
-certificate#:#certificate_ph_passed_exercise#:#‘Passed’ or ‘Failed’
-certificate#:#certificate_ph_resultpercent#:#Reached percentage of the user
-certificate#:#certificate_ph_resultpoints#:#Score of user
 certificate#:#certificate_ph_salutation#:#Salutation
 certificate#:#certificate_ph_sco_points_max#:#placeholder<br/>for points<br/>max
 certificate#:#certificate_ph_sco_points_raw#:#placeholder<br/>for points
@@ -2886,12 +2866,12 @@ certificate#:#certificate_text#:#Certificate Text
 certificate#:#certificate_text_info#:#Please enter the certificate text. If the WYSIWYG editor is disabled in the ILIAS administration, you can still use valid XHTML to format the text.<br><br>
 certificate#:#certificate_unit_description#:#Enter units of measure as VALUE[cm|mm|in|pt|pc|px|em], e.g. 10mm or 3in
 certificate#:#certificate_usage#:#Please note that the usage of certificates is only available if the ILIAS Java-Server is running. The configuration for Java-Server is available in Administration » General Settings » Server, sub-tab Java-Server.
-certificate#:#certificate_var_max_points#:#46
-certificate#:#certificate_var_result_mark_long#:#Good
-certificate#:#certificate_var_result_mark_short#:#B
-certificate#:#certificate_var_result_passed#:#passed
-certificate#:#certificate_var_result_percent#:#83%
-certificate#:#certificate_var_result_points#:#38
+certificate#:#certificate_var_max_points#:#Maximum number of points in the test used
+certificate#:#certificate_var_result_mark_long#:#Achieved mark presented in 'official form'
+certificate#:#certificate_var_result_mark_short#:#Achieved mark presented in 'short form'
+certificate#:#certificate_var_result_passed#:#Information on whether the test was passed or not
+certificate#:#certificate_var_result_percent#:#Percentage achieved in the test
+certificate#:#certificate_var_result_points#:#Number of points achieved in the test
 certificate#:#certificate_var_user_birthday#:#1977-05-08
 certificate#:#certificate_var_user_city#:#Anytown, NY
 certificate#:#certificate_var_user_country#:#USA
@@ -2906,12 +2886,6 @@ certificate#:#certificate_var_user_salutation#:#Mrs.
 certificate#:#certificate_var_user_street#:#100 Main Street
 certificate#:#certificate_var_user_title#:#Dr.
 certificate#:#certificate_var_user_zipcode#:#12345
-certificate#:#certificate_visibility#:#Visibility###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_always#:#Always Visible###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_introduction#:#Participants will be offered to download the certificate from the test results screen.###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_never#:#Not Visible###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_passed#:#Only Visible if a User Passed the Test###Suspected obsolescence - should be removed with 10.
-certificate#:#certificate_visibility_passed_exercise#:#Only Visible if a User Passed the Exercise###Suspected obsolescence - should be removed with 10.
 certificate#:#cmix_cert_ph_object_description#:#Description
 certificate#:#cmix_cert_ph_object_title#:#Title of the xAPI/cmi5 Object
 certificate#:#cmix_cert_ph_reached_score#:#Reached score as percentage
@@ -3774,7 +3748,6 @@ common#:#chta_write#:#Edit Chat Room Administration
 common#:#chtr_copy#:#Copy Chat Room
 common#:#chtr_import#:#Import Chat Room
 common#:#city#:#City, State
-common#:#cld_abandoned#:#The Cloud Object has been abandoned as of ILIAS 8. No data has been lost. Contact your System Administration for more information.
 common#:#cleaned_file#:#File has been cleaned.
 common#:#cleaning_failed#:#Cleaning failed.
 common#:#clear#:#Clear
@@ -4942,7 +4915,6 @@ common#:#obj_chap#:#Chapter
 common#:#obj_chta#:#Chat Room
 common#:#obj_chtr#:#Chat Room
 common#:#obj_chtr_duplicate#:#Copy Chat Room
-common#:#obj_cld#:#Cloud Object
 common#:#obj_cmis#:#LRS
 common#:#obj_cmis_desc#:#Configure the Types of Learning Record Stores
 common#:#obj_cmix#:#xAPI/cmi5
@@ -4995,6 +4967,8 @@ common#:#obj_grp_duplicate#:#Copy Group
 common#:#obj_grpr#:#Group Link
 common#:#obj_grps#:#Group
 common#:#obj_grps_desc#:#General settings for Groups
+common#:#obj_gsfo#:#Footer
+common#:#obj_gsfo_desc#:#Administrate Footer Layout and Content
 common#:#obj_hlps#:#Help System
 common#:#obj_hlps_desc#:#Settings for the online help
 common#:#obj_htlm#:#Learning Module HTML
@@ -5191,7 +5165,6 @@ common#:#objs_book#:#Booking Pools
 common#:#objs_cat#:#Categories
 common#:#objs_catr#:#Category Link
 common#:#objs_chtr#:#Chat Room
-common#:#objs_cld#:#Cloud Objects
 common#:#objs_cmix#:#Objects xAPI/cmi5
 common#:#objs_copa#:#Content Pages
 common#:#objs_crs#:#Courses
@@ -7429,6 +7402,7 @@ copg#:#copg_page_element_not_found#:#Page element not found.
 copg#:#copg_page_type_stys#:#Layout Page
 copg#:#copg_par_format_selection#:#Paragraph Format Selection
 copg#:#copg_pc_mob_does_not_exist#:#This media object does not exist.
+copg#:#copg_plugin_not_avail#:#Plugin %s not available.
 copg#:#copg_questions_not_supported_here#:#Questions are not supported in this context.
 copg#:#copg_reload_page#:#Reload Page
 copg#:#copg_remove_formats#:#Remove Formatting
@@ -8333,6 +8307,7 @@ dateplaner#:#cal_ch_unknown_user#:#The given login does not match any user.
 dateplaner#:#cal_ch_user_assignment_failed_info#:#The following users could not be assigned to appointments, since the maximum number of bookings is exceeded.
 dateplaner#:#cal_ch_vm_period_all#:#All
 dateplaner#:#cal_ch_vm_period_past#:#Past
+dateplaner#:#cal_ch_vm_period_upcoming#:#Upcoming
 dateplaner#:#cal_ch_vm_status_all#:#All
 dateplaner#:#cal_ch_vm_status_booked#:#Booked Slots
 dateplaner#:#cal_ch_vm_status_open#:#Open Slots
@@ -8659,7 +8634,8 @@ dcl#:#dcl_deleted_records#:#Successfully deleted %s Entries
 dcl#:#dcl_desc#:#Descending Order (DESC)
 dcl#:#dcl_description#:#Field Description
 dcl#:#dcl_detailed_view#:#Single
-dcl#:#dcl_display_action_menu#:#Enable possibility to copy or link the referenced module
+dcl#:#dcl_display_action_menu#:#Copy
+dcl#:#dcl_display_action_menu_desc#:#Enable possibility to copy or link the referenced module
 dcl#:#dcl_display_record_alt#:#Display this entry
 dcl#:#dcl_duplicate_non_unique_entries_exist#:#This may also concern existing records.###23 02 2024 new variable
 dcl#:#dcl_edit#:#Edit Data Collection
@@ -8667,7 +8643,7 @@ dcl#:#dcl_edit_entry_rules#:#Entry Editing
 dcl#:#dcl_edit_field#:#Edit Field
 dcl#:#dcl_edit_perm#:#User can edit entries
 dcl#:#dcl_edit_record#:#Edit Entry
-dcl#:#dcl_edit_table#:#Edit Table Settings
+dcl#:#dcl_edit_table#:#Edit Settings of Table "%s"
 dcl#:#dcl_editable_in_table_gui#:#Please vote in the table view.
 dcl#:#dcl_empty_detailed_view#:#Delete this detailed view
 dcl#:#dcl_empty_detailed_view_success#:#The detailed view definition has been deleted successfully.
@@ -8679,6 +8655,7 @@ dcl#:#dcl_export_finished#:#Export finished
 dcl#:#dcl_export_started#:#Asynchronous Export started
 dcl#:#dcl_field_datatype#:#Field Data Type
 dcl#:#dcl_field_description#:#Description
+dcl#:#dcl_field_description_desc#:#The description will be shown below the field inside the entry form.
 dcl#:#dcl_field_required#:#Required
 dcl#:#dcl_field_title_change_warning#:#You changed the title of the field hence some placeholders in the view definition might be broken. Those have to be fixed manually should the occasion arise.
 dcl#:#dcl_field_title_unique#:#There exists already a field with this title. Title must be unique.
@@ -8694,6 +8671,7 @@ dcl#:#dcl_formula#:#Formula
 dcl#:#dcl_formula_desc#:#You can aggregate several entries in a record with a formula.
 dcl#:#dcl_formula_detail_desc#:#Entries are generated automatically, you are not able to edit the entry.
 dcl#:#dcl_height#:#Height
+dcl#:#dcl_height_desc#:#The file will be resized to the given height
 dcl#:#dcl_hello#:#Dear
 dcl#:#dcl_id#:#ID
 dcl#:#dcl_id_description#:#The internal ID.
@@ -8712,7 +8690,8 @@ dcl#:#dcl_last_edited_by#:#Last edited by
 dcl#:#dcl_last_edited_by_description#:#The user that edited this entry last.
 dcl#:#dcl_last_update#:#Last Edited
 dcl#:#dcl_last_update_description#:#The date the entry was last edited.
-dcl#:#dcl_learning_progress#:#Show the learning progress of the linked module of the viewer
+dcl#:#dcl_learning_progress#:#Learning Progress
+dcl#:#dcl_learning_progress_desc#:#Show the learning progress of the linked module of the viewer
 dcl#:#dcl_legend_placeholders#:#Placeholders
 dcl#:#dcl_length#:#Length
 dcl#:#dcl_length_info#:#Number of characters a user can enter (maximum 4000). For more than 200 characters, use the additional option Text Area.
@@ -8721,6 +8700,7 @@ dcl#:#dcl_limit_start#:#Start
 dcl#:#dcl_limited#:#Limited Add / Edit / Delete Period
 dcl#:#dcl_limited_desc#:#Users can only edit entries in the given time span.
 dcl#:#dcl_link_detail_page#:#Link to detailed view
+dcl#:#dcl_link_detail_page_desc#:#Additionaly, the detailed view must be activated and configured within the tab "Single".
 dcl#:#dcl_list_fields#:#Fields
 dcl#:#dcl_list_visibility_and_filter#:#Overview
 dcl#:#dcl_locked#:#Locked
@@ -8753,6 +8733,7 @@ dcl#:#dcl_new_field#:#New Field
 dcl#:#dcl_new_table#:#New Table
 dcl#:#dcl_next_record#:#Next Entry
 dcl#:#dcl_no_content_warning#:#Attention, the Data Collection is online but does not have content yet!
+dcl#:#dcl_no_entries#:#No entries
 dcl#:#dcl_no_entry#:#No entry
 dcl#:#dcl_no_export_content_available#:#No data available for export.
 dcl#:#dcl_no_export_data_available#:#No data or fields available for export.
@@ -8802,6 +8783,7 @@ dcl#:#dcl_reference_desc#:#Field to reference options stored in a different fiel
 dcl#:#dcl_reference_link#:#Show as link to referenced entry
 dcl#:#dcl_reference_link_info#:#Detailed View must be active in referenced table
 dcl#:#dcl_reference_title#:#Reference to table and field
+dcl#:#dcl_reference_title_desc#:#Entries of the selected field are options of the target field.
 dcl#:#dcl_regex#:#Regular Expression
 dcl#:#dcl_regex_info#:#(without delimiter)
 dcl#:#dcl_required#:#Required Field
@@ -8814,9 +8796,9 @@ dcl#:#dcl_save_record#:#Save Entry
 dcl#:#dcl_select#:#Select for Presentation
 dcl#:#dcl_selection_options#:#Options
 dcl#:#dcl_selection_type#:#Type
-dcl#:#dcl_selection_type_combobox#:#Combobox (Dropdown)
-dcl#:#dcl_selection_type_multi#:#Multiple Selection
-dcl#:#dcl_selection_type_single#:#Single Selection
+dcl#:#dcl_selection_type_combobox#:#Single Combobox Selection (Dropdown)
+dcl#:#dcl_selection_type_multi#:#Multiple List Selection
+dcl#:#dcl_selection_type_single#:#Single List Selection
 dcl#:#dcl_simulate_import#:#Simulate Import
 dcl#:#dcl_simulate_info#:#Simulating the import will not add any fields into the Data Collection but may give you feedback on problems with the import file, thus helping you to prevent corrupted entries.
 dcl#:#dcl_skipped_delete_records#:#%s Entries were not deleted due to permission settings
@@ -8831,7 +8813,6 @@ dcl#:#dcl_table#:#Table
 dcl#:#dcl_table_create#:#Create Table
 dcl#:#dcl_table_edit#:#Update Table
 dcl#:#dcl_table_id#:#Table ID
-dcl#:#dcl_table_info#:#Users with the permission ‘edit settings’ (see tab ‘Permission’) always have permission to add/edit/delete entries. Users with permission ‘edit entry’ (see tab ‘Permissions’) only have permissions according to the settings specified in the form below.
 dcl#:#dcl_table_list_fields#:#Fields Of Selected Table
 dcl#:#dcl_table_list_tables#:#Available Tables
 dcl#:#dcl_table_settings_saved#:#Table Settings have been saved.
@@ -8876,11 +8857,13 @@ dcl#:#dcl_update_record#:#Update Entry
 dcl#:#dcl_url#:#URL or E-Mail
 dcl#:#dcl_view_configuration#:#View Configuration
 dcl#:#dcl_view_own_records_perm#:#View only own entries
+dcl#:#dcl_view_own_records_perm_desc#:#Dont show entries of other users.
 dcl#:#dcl_view_settings#:#View Settings
 dcl#:#dcl_view_viewdefinition#:#Detailed View
 dcl#:#dcl_visible#:#Visible for all users
 dcl#:#dcl_visible_desc#:#Users can access this table.
 dcl#:#dcl_width#:#Width
+dcl#:#dcl_width_desc#:#The file will be resized to the given width.
 dcl#:#dcl_wrong_input_type#:#The value you entered does not match the specification (Wrong Type).
 dcl#:#dcl_wrong_length#:#The text you entered is to long.
 dcl#:#dcl_wrong_regex#:#The text you entered does not match the specification for this field (Regular Expression).
@@ -9802,7 +9785,7 @@ export#:#export_resource#:#Resource
 export#:#export_save_selection#:#Start Export
 export#:#export_select_resources#:#Select Resources
 export#:#no_file#:#No file
-file#:#action_download#:#Download file
+file#:#action_download#:#Download file or view content
 file#:#action_show#:#Redirect user to the file’s ‘Info’ tab
 file#:#add_icon#:#Add Icon
 file#:#amount_of_downloads#:#Downloads
@@ -9921,7 +9904,6 @@ fold#:#fold_settings#:#Folder Settings
 form#:#email_not_match#:#Your entries for the e-mail address don't match! Please re-enter your e-mail address.
 form#:#form_alphabet_all#:#All
 form#:#form_chars_remaining#:#Characters remaining:
-form#:#form_date_aria_desc#:#The following input format is required:
 form#:#form_date_duration_end#:#End
 form#:#form_date_duration_start#:#Start
 form#:#form_days#:#Days
@@ -10487,8 +10469,6 @@ gsfo#:#group_translate#:#Translate
 gsfo#:#info_not_deletable_core#:#Default Items cannot be deleted.
 gsfo#:#info_not_deletable_not_empty#:#Groups with Entries cannot be deleted.
 gsfo#:#legal_information#:#Legal Information
-gsfo#:#obj_gsfo#:#Footer
-gsfo#:#obj_gsfo_desc#:#Administrate Footer Layout and Content
 gsfo#:#order_saved#:#Order saved
 gsfo#:#permanent#:#permanent
 gsfo#:#reset_footer#:#Reset Footer
@@ -10958,6 +10938,17 @@ lm#:#lm_edit_chapters#:#Edit Chapters
 lm#:#lm_edit_lm_settings#:#Edit Learning Module Settings
 lm#:#lm_est_reading_time#:#Estimated Reading Time
 lm#:#lm_est_reading_time_info#:#In Learning Modules in the repository the estimated reading time can be determined and displayed.
+lm#:#lm_insert_chapter#:#Insert chapter
+lm#:#lm_insert_chapter_after#:#Insert chapter after
+lm#:#lm_insert_chapter_before#:#Insert chapter before
+lm#:#lm_insert_layout_after#:#Insert template after
+lm#:#lm_insert_layout_before#:#Insert template before
+lm#:#lm_insert_page#:#Insert page
+lm#:#lm_insert_page_after#:#Insert page after
+lm#:#lm_insert_page_before#:#Insert page before
+lm#:#lm_insert_page_clip#:#Insert page from clipboard
+lm#:#lm_insert_page_clip_after#:#Insert page from clipboard after
+lm#:#lm_insert_page_clip_before#:#Insert page from clipboard before
 lm#:#lm_page_added#:#Page has been added.
 lm#:#lm_page_type_lm#:#LM Page
 lm#:#lm_pages_added#:#Pages have been added.
@@ -13064,6 +13055,7 @@ obj#:#obj_tool_setting_skills_info#:#Activates competence management and compete
 obj#:#obj_tool_setting_tag_cloud#:#Tag Cloud
 obj#:#obj_tool_setting_tag_cloud_info#:#The ‘Tag Cloud’ block will be displayed inside the ‘Content’ tab.
 obj#:#obj_tool_setting_taxonomies#:#Taxonomies
+obj#:#obj_tool_setting_taxonomies_info#:#Taxonomies allow the filtering of objects. They are created in the "Taxonomy" sub-tab in the "Settings" tab.
 obj#:#obj_tool_setting_use_news#:#News
 obj#:#obj_tool_setting_use_news_info#:#Use of the news block and/or timeline view. Users can subscribe for notifications if the news block or the timeline are activated.
 obj#:#obj_tool_setting_use_news_open_settings#:#Open Settings of News Block and Timeline
@@ -14494,7 +14486,6 @@ rbac#:#rbac_create_book#:#Create Booking Pool
 rbac#:#rbac_create_cat#:#Create Categories
 rbac#:#rbac_create_catr#:#Create Category Link
 rbac#:#rbac_create_chtr#:#Create Chat Room
-rbac#:#rbac_create_cld#:#Create Cloud Object
 rbac#:#rbac_create_cmix#:#Create xAPI/cmi5 Object
 rbac#:#rbac_create_copa#:#Create Content Page
 rbac#:#rbac_create_crs#:#Create Course
@@ -15371,12 +15362,8 @@ search#:#lucene_or#:#OR
 search#:#lucene_port#:#Port
 search#:#lucene_prefix_wildcard#:#Prefix Wildcard Queries
 search#:#lucene_prefix_wildcard_info#:#Supports prefix wildcard queries: ‘*LIAS’ finds ‘ILIAS’
-search#:#lucene_relevance#:#Relevance of Search Results
 search#:#lucene_settings_tab#:#Lucene
 search#:#lucene_settings_title#:#Lucene Settings
-search#:#lucene_show_relevance#:#Show Relevance
-search#:#lucene_show_relevance_info#:#Search results are sorted by their relevance. If activated, the relevance is shown as additional information for each search result.
-search#:#lucene_show_sub_relevance#:#Show Sub-Item Relevance
 search#:#lucene_size_frag_info#:#Please choose the maximum size of highlighted text fragments. To do this, enter the number of characters including spaces.
 search#:#lucene_size_fragments#:#Size of Text Fragments
 search#:#lucene_tbl_create_ini#:#Create Java-Server Ini-File
@@ -15462,6 +15449,7 @@ search#:#search_user_search_info_form#:#Users can be found in the global search.
 search#:#search_users#:#Search Users
 search#:#select_orgu#:#Select Organisational Units
 search#:#until#:#up to
+search#:#user_search_settings_section#:#User Search in 'Member'-tabs
 sess#:#il_sess_participant#:#Session Participants
 sess#:#il_sess_status_open#:#Open Session
 sess#:#mail_sess_roles#:#Send Mail to Session Roles
@@ -17808,4 +17796,4 @@ wsp#:#wsp_type_ltiv#:#Certificate: LTI Consumer
 wsp#:#wsp_type_scov#:#Certificate: SCORM
 wsp#:#wsp_type_tstv#:#Certificate: Test
 wsp#:#wsp_type_webr#:#Weblink
-wsp#:#wsp_type_wfld#:#Folderdateplaner#:#cal_ch_vm_period_upcoming#:#Upcoming
+wsp#:#wsp_type_wfld#:#Folder

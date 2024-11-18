@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Panel\Standard;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a standard panel with actions.
+ *
+ * expected output: >
+ *   ILIAS shows a panel with a large title "Panel Title" and a text "Some Content". It also includes a menu displayed by
+ *   an triangle symbol pointing down. You can open the menu which includes links to ilias.de and GitHub.
+ * ---
+ */
 function with_actions()
 {
     global $DIC;

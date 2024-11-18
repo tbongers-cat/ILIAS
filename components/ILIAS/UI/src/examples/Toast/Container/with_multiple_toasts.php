@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Toast\Container;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendring a toast container with multiple toasts.
+ *
+ * expected output: >
+ *   ILIAS shows a blue button. Clicking that button opens three different messages in the right top edge which
+ *   disappear after a few seconds.
+ * ---
+ */
 function with_multiple_toasts(): string
 {
     global $DIC;

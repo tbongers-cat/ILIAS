@@ -150,3 +150,20 @@ button.copg-add.dropdown-toggle.btn:focus-visible {
 		max-width: 100%;
 	}
 }
+
+.ilc_ca_cntr_CarouselCntr {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+.ilc_ca_cntr_CarouselCntr > div {
+	width: 100%;
+	box-sizing: border-box;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	display: none;
+}
+.ilc_ca_cntr_CarouselCntr > div.active {
+	display: block;
+	opacity: 1;
+}

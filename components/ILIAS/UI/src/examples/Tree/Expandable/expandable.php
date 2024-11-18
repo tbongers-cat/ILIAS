@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Tree\Expandable;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering an expandable tree.
+ *
+ * expected output: >
+ *   ILIAS shows a navigation tree with different numbered sub-points. The sub-point can be collapsed by clicking the ">".
+ *   The last entries in a branch are clickable and open a modal window with an image.
+ * ---
+ */
 function expandable()
 {
     global $DIC;

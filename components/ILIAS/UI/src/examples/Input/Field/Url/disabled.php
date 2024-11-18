@@ -5,8 +5,15 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Url;
 
 /**
- * This example shows how to create and render a disabled URL input field and attach it to a form.
- * It does not contain any data processing.
+ * ---
+ * description: >
+ *   This example shows how to create and render a disabled URL input field and attach it to a form.
+ *   It does not contain any data processing.
+ *
+ * expected output: >
+ *   ILIAS shows an input field titled "Disabled Input". You cannot activate the field and therefore you can also not
+ *   enter any text. Clicking "Save" will relaod the page.
+ * ---
  */
 function disabled()
 {

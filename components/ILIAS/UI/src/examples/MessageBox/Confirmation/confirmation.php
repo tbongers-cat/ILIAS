@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\MessageBox\Confirmation;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a confirmation message box.
+ *
+ * expected output: >
+ *   ILIAS shows a yellow box with a dummy text ("Lorem ipsum...") and two buttons "Confirm" and "Cancel".
+ *   Clicking the buttons does not do anything.
+ * ---
+ */
 function confirmation()
 {
     global $DIC;

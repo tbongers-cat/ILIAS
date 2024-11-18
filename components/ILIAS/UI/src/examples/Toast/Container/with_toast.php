@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Toast\Container;
 
+/**
+ * ---
+ * expected output: >
+ *   ILIAS shows a blue button. If you click said button a message "Example" appears in the right top edge which
+ *   disappears after a few seconds.
+ * ---
+ */
 function with_toast(): string
 {
     global $DIC;

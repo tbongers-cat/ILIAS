@@ -5,7 +5,15 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Panel\Listing\Standard;
 
 /**
- * With lead text and marker
+ * ---
+ * description: >
+ *   Example for rendering a panel standard listing with a lead text.
+ *
+ * expected output: >
+ *   ILIAS shows a panel titled "Content" including two item groups titled "Courses" and "Groups". The first item group
+ *   includes two items, each displaying an action menu and a lead text with periods of time. The second item group includes an
+ *   action menu and a lead text with periods of time. Additionally each item is highlighted with colored bar.
+ * ---
  */
 function with_lead_text()
 {

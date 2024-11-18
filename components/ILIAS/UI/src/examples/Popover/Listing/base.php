@@ -4,6 +4,20 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Popover\Listing;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a listing popover.
+ *
+ * expected output: >
+ *   ILIAS shows a button titled "Show Listing".
+ *   A click onto the button opens the popover including...
+ *   - a popover title: Listing
+ *   - two subtitles
+ *   - three items with titles and dummy text / more informations (Origin, Last Update, Location)
+ *   You can close the popover by clicking onto the ILIAS background outside of the popover.
+ * ---
+ */
 function base()
 {
     global $DIC;

@@ -5,7 +5,31 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\OptionalGroup;
 
 /**
- * Example showing how a dependant group (aka sub form) might be attached to a checkbox.
+ * ---
+ * description: >
+ *   Example showing how a dependent group (aka sub form) might be attached to a checkbox.
+ *
+ * expected output: >
+ *   Next to the title "Optional Group" ILIAS displays a checkbox with a byline. If the checkbox is activated two input
+ *   fields "Item 1" and "Item 2" are displayed including a byline each. If the ckeckbox is deactivated those two input
+ *   fields are not visible.
+ *   If you activate the checkbox, fill out the text field and the date field and click "Save" the following output will
+ *   be displayed above the box:
+ *
+ *   Array
+ *   (
+ *      [0] => Array
+ *      (
+ *          [dependant_text] => MEINE EINGABE
+ *          [dependant_date] => DateTimeImmutable Object
+ *          (
+ *              [date] => EINGEGEBENES-DATUM-ALS-YYYY-MM-DD 00:00:00.000000
+ *              [timezone_type] => 3
+ *              [timezone] => Europe/Berlin
+ *          )
+ *       )
+ *   )
+ * ---
  */
 function base()
 {

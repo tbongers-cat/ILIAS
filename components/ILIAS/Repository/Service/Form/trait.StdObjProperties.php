@@ -253,7 +253,6 @@ trait StdObjProperties
             $ref_id,
             $additional_template_options
         );
-
         if (sizeof($options) < 2) {
             return $this;
         }
@@ -355,13 +354,28 @@ trait StdObjProperties
         $current_tpl_id = \ilDidacticTemplateObjSettings::lookupTemplateId(
             $ref_id
         );
-        $new_tpl_id = $this->getData('didactic_type');
+        $new_tpl_id = (int) substr($this->getData('didactic_type'), 5);
 
         if ($new_tpl_id !== $current_tpl_id) {
             // redirect to didactic template confirmation
-            $this->ctrl->redirect([$gui_class, \ilDidacticTemplateGUI::class], "confirmTemplateSwitch");
+            $this->ctrl->setParameterByClass(\ilDidacticTemplateGUI::class, "didactic_template_id", $new_tpl_id);
+            $this->ctrl->redirectByClass([$gui_class, \ilDidacticTemplateGUI::class], "confirmTemplateSwitch");
             return;
         }
     }
+
+    public function getDidacticTemplateIdFromRequest(): ?int
+    {
+        $new_tpl_id = null;
+        if ($this->http->wrapper()->query()->has('didactic_template_id')) {
+            $new_tpl_id = $this->http->wrapper()->query()->retrieve(
+                'didactic_template_id',
+                $this->refinery->kindlyTo()->int()
+            );
+            $this->ctrl->saveParameterByClass(\ilDidacticTemplateGUI::class, "didactic_template_id", $new_tpl_id);
+        }
+        return $new_tpl_id;
+    }
+
 
 }

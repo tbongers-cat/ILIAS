@@ -1,15 +1,19 @@
 <?php
+
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
+ *
  * ILIAS is licensed with the GPL-3.0,
  * see https://www.gnu.org/licenses/gpl-3.0.en.html
  * You should have received a copy of said license along with the
  * source code, too.
+ *
  * If this is not the case or you just want to try ILIAS, you'll find
  * us at:
  * https://www.ilias.de
  * https://github.com/ILIAS-eLearning
+ *
  *********************************************************************/
 
 declare(strict_types=1);
@@ -44,7 +48,7 @@ class ilBadgePersonalTableGUI
     private readonly ServerRequestInterface|RequestInterface $request;
     private readonly ilLanguage $lng;
     private readonly ilGlobalTemplateInterface $tpl;
-    private readonly ILIAS\Container $dic;
+    private readonly ILIAS\DI\Container $dic;
 
     public function __construct()
     {
@@ -105,7 +109,7 @@ class ilBadgePersonalTableGUI
                 return count($this->getRecords());
             }
 
-            protected function getRecords(Range $range = null, Order $order = null): array
+            private function getRecords(Range $range = null, Order $order = null): array
             {
                 $data = [];
                 $a_user_id = $this->user->getId();
@@ -178,6 +182,7 @@ class ilBadgePersonalTableGUI
                         'active' => (bool) $ass->getPosition()
                     ];
                 }
+
                 return $data;
             }
         };
@@ -245,7 +250,7 @@ class ilBadgePersonalTableGUI
         $actions = $this->getActions($url_builder, $action_parameter_token, $row_id_token);
 
         $table = $f->table()
-                   ->data('', $columns, $data_retrieval)
+                   ->data($this->lng->txt('badge_personal_badges'), $columns, $data_retrieval)
                    ->withActions($actions)
                    ->withRequest($request);
 

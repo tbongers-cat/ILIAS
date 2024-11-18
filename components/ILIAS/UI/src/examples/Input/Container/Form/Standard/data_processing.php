@@ -5,7 +5,17 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Container\Form\Standard;
 
 /**
- * Example showing how constraints and transformation can be attached to a form.
+ * ---
+ * description: >
+ *   Example showing how constraints and transformation can be attached to a form.
+ *
+ * expected output: >
+ *   ILIAS shows a section with two input fields titled "Left" and "Right".
+ *   Please enter an advertised number in English between 1 and 10 (e.g. "two" and "four").
+ *   ILIAS will add those numbers after the input was saved. The output will be displayed in the following format:
+ *   2 + 4 = 6
+ *   Entering invalid inputs will result in an error message below the input fields.
+ * ---
  */
 function data_processing()
 {

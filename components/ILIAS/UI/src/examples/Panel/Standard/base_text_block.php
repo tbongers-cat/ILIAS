@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Panel\Standard;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a standard panel.
+ *
+ * expected output: >
+ *   ILIAS shows a panel with a large title "Panel Title" and a text "Some Content".
+ * ---
+ */
 function base_text_block()
 {
     global $DIC;

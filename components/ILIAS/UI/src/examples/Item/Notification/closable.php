@@ -4,6 +4,17 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Item\Notification;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a closable notification item.
+ *
+ * expected output: >
+ *   ILIAS shows a box titled "Inbox" on a white background and including following text: "You have 23 unread mails in
+ *   your inbox". A dashed line and a time indication (Time 3 days ago) are displayed below. Additionally a "X" is rendered
+ *   on the right side of the box. Clicking the "X" will close the box.
+ * ---
+ */
 function closable()
 {
     global $DIC;

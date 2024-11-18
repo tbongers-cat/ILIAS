@@ -4,6 +4,20 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Tree\Node\Bylined;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a bylined tree node.
+ *
+ * expected output: >
+ *   ILIAS shows a collapsed tree.
+ *   The first entry is titled "label" and extends to the byline "byline". Below you can see an intended "label" which
+ *   functions as a link. Beneath that link a dummy text is displayed.
+ *   The second entry ist also titled "label", but includes a prefixed symbol. There is also a byline and a intended label
+ *   with a symbol. The label functions as link. Below the link another byline is displayed.
+ *   Both entries can be collapsed/expanded. By collapsing the intended test it will disappear.
+ * ---
+ */
 function bylined()
 {
     global $DIC;

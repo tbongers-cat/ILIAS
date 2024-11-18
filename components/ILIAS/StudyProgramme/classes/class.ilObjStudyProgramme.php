@@ -429,7 +429,7 @@ class ilObjStudyProgramme extends ilContainer
     {
         $global_settings = new ilSetting('certificate');
         $global_active = (bool) $global_settings->get('active', '0');
-        if(!$global_active) {
+        if (!$global_active) {
             return false;
         }
         $certificate_template_repository = new ilCertificateTemplateDatabaseRepository($this->db);
@@ -1430,9 +1430,9 @@ class ilObjStudyProgramme extends ilContainer
      * @return int[]
      * @throws InvalidArgumentException if $src_type is not in AutoMembershipSource-types
      */
-    protected function getMembersOfMembershipSource(ilStudyProgrammeAutoMembershipSource $ams): array
+    protected function getMembersOfMembershipSource(ilStudyProgrammeAutoMembershipSource $ams, ?int $exclude_id): array
     {
-        $source_reader = $this->membersourcereader_factory->getReaderFor($ams);
+        $source_reader = $this->membersourcereader_factory->getReaderFor($ams, $exclude_id);
         return $source_reader->getMemberIds();
     }
 
@@ -1502,7 +1502,7 @@ class ilObjStudyProgramme extends ilContainer
     ): ?ilStudyProgrammeAutoMembershipSource {
         foreach ($this->getAutomaticMembershipSources() as $ams) {
             if ($ams->isEnabled()) {
-                $source_members = $this->getMembersOfMembershipSource($ams);
+                $source_members = $this->getMembersOfMembershipSource($ams, $exclude_id);
                 if (in_array($usr_id, $source_members)) {
                     return $ams;
                 }
@@ -1840,7 +1840,7 @@ class ilObjStudyProgramme extends ilContainer
     ): void {
         $acting_usr_id = $this->getLoggedInUserId();
         $assignment = $this->assignment_repository->get($assignment_id);
-        foreach($nodes as $nodeinfo) {
+        foreach ($nodes as $nodeinfo) {
             [$node_obj_id, $courseref_obj_id] = $nodeinfo;
             $assignment = $assignment->succeed(
                 $this->settings_repository,

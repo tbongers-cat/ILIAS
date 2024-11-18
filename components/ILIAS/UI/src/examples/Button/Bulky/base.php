@@ -4,8 +4,21 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Button\Bulky;
 
-//Note the exact look of the Bulky Buttons is mostly defined by the
-//surrounding container.
+/**
+ * ---
+ * description: >
+ *   Example for rendering a bulky button.
+ *
+ * note: >
+ *   The exact look of the Bulky Buttons is mostly defined by the surrounding container.
+ *
+ * expected output: >
+ *   ILIAS shows a button with an icon and titled "Icon". The button's size is almost as wide as the width of the box
+ *   in the background. Clicking the button won't activate any actions.
+ *   Additionally ILIAS shows a button with a glyph and the title "Glyph". The button's size is also almost as wide as
+ *   the width of the box in the background. Clicking the button won't activate any actions.
+ * ---
+ */
 function base()
 {
     global $DIC;

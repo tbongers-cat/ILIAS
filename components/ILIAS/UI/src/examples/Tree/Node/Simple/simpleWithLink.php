@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Tree\Node\Simple;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a simple tree node with a link.
+ *
+ * expected output: >
+ *   ILIAS shows a list with two entries. The first entry consists of one single word. The second entry includes an icon
+ *   and a link which redirects to ilias.de.
+ * ---
+ */
 function simpleWithLink()
 {
     global $DIC;

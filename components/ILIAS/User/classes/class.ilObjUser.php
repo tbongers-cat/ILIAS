@@ -3890,7 +3890,7 @@ class ilObjUser extends ilObject
 
         $date = date('Y-m-d H:i:s', (time() - ($period * 24 * 60 * 60)));
 
-        $query = 'SELECT usr_id FROM usr_data WHERE $field < %s AND active = %s';
+        $query = "SELECT usr_id FROM usr_data WHERE $field < %s AND active = %s";
 
         $res = $ilDB->queryF($query, ['timestamp', 'integer'], [$date, 0]);
 

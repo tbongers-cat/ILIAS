@@ -5,7 +5,15 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Item\Standard;
 
 /**
- * With progress meter chart
+ * ---
+ * description: >
+ *   Example for rendering a standard item with an image and displaying the progress.
+ *
+ * expected output: >
+ *   ILIAS shows a box including the following informations: A heading "Item Title" with a dummy text in small writings
+ *   ("Lorem ipsum...") below. On the left side a ILIAS icon is displayed, on the right side you can see a pictorial representation
+ *   and also a text (75%) about the progress.
+ * ---
  */
 function with_image_and_progress()
 {

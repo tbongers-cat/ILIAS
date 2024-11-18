@@ -5,7 +5,17 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Chart\ProgressMeter\FixedSize;
 
 /**
- * Example for rendering a fixed size Progress Meter with maximum configuration
+ * ---
+ * description: >
+ *   Example for rendering a fixed size Progress Meter with maximum configuration
+ *
+ * expected output: >
+ *   ILIAS shows a rounded progress meter with two bars. The outer bar is colored red and takes up three quarter of the
+ *   display. The inner bar is colored grey and takes up the half of the display. A triangle marks the needed value at
+ *   80%. The information "Your Score 75%" and "80% Required Score" are positioned within the progress meter.
+ *
+ *   Changing the browser window's size will not change the size of the progress meter: the display stays the same!
+ * ---
  */
 function maximum_configuration()
 {

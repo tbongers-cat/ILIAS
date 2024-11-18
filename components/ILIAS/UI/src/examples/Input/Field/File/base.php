@@ -5,7 +5,14 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\File;
 
 /**
- * Example of how to create and render a file input field and attach it to a form.
+ * ---
+ * description: >
+ *   Example of how to create and render a file input field and attach it to a form.
+ *
+ * expected output: >
+ *   ILIAS shows a field titled "Upload File" next to a box surrounded by dashed lines. You can choose a file by dragging
+ *   the file to the box or by clicking "Select files". If you save your selection ILIAS will reset the field.
+ * ---
  */
 function base()
 {

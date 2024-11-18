@@ -142,7 +142,7 @@ class ilObjBadgeAdministrationGUI extends ilObjectGUI
                     $this->listObjectBadgeUsers();
                     $render_default = false;
                 } elseif ($table_action === 'badge_image_template_delete') {
-                    $this->deleteImageTemplates();
+                    $this->confirmDeleteImageTemplates();
                     $render_default = false;
                 }
 
@@ -396,11 +396,12 @@ class ilObjBadgeAdministrationGUI extends ilObjectGUI
         $form->setTitle($lng->txt('badge_image_template_form'));
 
         $title = new ilTextInputGUI($lng->txt('title'), 'title');
+        $title->setMaxLength(255);
         $title->setRequired(true);
         $form->addItem($title);
 
         $img = new ilImageFileInputGUI($lng->txt('image'), 'img');
-        $img->setSuffixes(array('png', 'svg'));
+        $img->setSuffixes(['png', 'svg']);
         if ($a_mode === 'create') {
             $img->setRequired(true);
         }
@@ -558,7 +559,14 @@ class ilObjBadgeAdministrationGUI extends ilObjectGUI
 
         $this->checkPermission('write');
 
-        $tmpl_ids = $this->badge_request->getIds();
+        $tmpl_ids = $this->badge_request->getBadgeAssignableUsers();
+        if ($tmpl_ids === ['ALL_OBJECTS']) {
+            $tmpl_ids = [];
+            foreach (ilBadgeImageTemplate::getInstances() as $template) {
+                $tmpl_ids[] = $template->getId();
+            }
+        }
+
         if (!$tmpl_ids) {
             $ilCtrl->redirect($this, 'listImageTemplates');
         }
@@ -586,7 +594,7 @@ class ilObjBadgeAdministrationGUI extends ilObjectGUI
     protected function deleteImageTemplates(): void
     {
         $lng = $this->lng;
-        $tmpl_ids = $this->getTemplateIdsFromUrl();
+        $tmpl_ids = $this->badge_request->getIds();
 
         if ($this->checkPermissionBool('write') && count($tmpl_ids) > 0) {
             if (current($tmpl_ids) === self::TABLE_ALL_OBJECTS_ACTION) {
@@ -626,7 +634,6 @@ class ilObjBadgeAdministrationGUI extends ilObjectGUI
     {
         $ilCtrl = $this->ctrl;
         $lng = $this->lng;
-        $tpl = $this->tpl;
 
         $parent_obj_id = $this->badge_request->getParentId();
         $parent_ref_ids = ilObject::_getAllReferences($parent_obj_id);
@@ -649,7 +656,7 @@ class ilObjBadgeAdministrationGUI extends ilObjectGUI
 
         $ilCtrl->saveParameter($this, 'pid');
 
-        $tbl = new ilBadgeUserTableGUI($parent_ref_id);
+        $tbl = new ilBadgeUserTableGUI($parent_ref_id, null, $this->badge_request->getBadgeId());
         $tbl->renderTable();
     }
 

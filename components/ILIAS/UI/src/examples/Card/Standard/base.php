@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Card\Standard;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a base card.
+ *
+ * expected output: >
+ *   ILIAS shows a ILIAS-Logo. The size of the logo depends on the browser/desktop size and will change accordingly.
+ *   A title will be displayed below the logo.
+ * ---
+ */
 function base()
 {
     //Init Factory and Renderer

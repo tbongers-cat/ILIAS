@@ -20,9 +20,7 @@ declare(strict_types=1);
 
 final class ilSamlIdpTableGUI implements \ILIAS\UI\Component\Table\DataRetrieval
 {
-    /**
-     * @var ilSamlIdp[]
-     */
+    /** @var list<ilSamlIdp> */
     private array $idps;
     private readonly ILIAS\UI\URLBuilder $url_builder;
     private readonly ILIAS\UI\URLBuilderToken $action_parameter_token;

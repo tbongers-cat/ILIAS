@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Tree\Node\Simple;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a simple tree node.
+ *
+ * expected output: >
+ *   ILIAS shows a list with two entries. The first entry contents of the single word "label". The second entry shows an
+ *   icon and a word.
+ * ---
+ */
 function simple()
 {
     global $DIC;

@@ -53,16 +53,16 @@ il.repository.ui = (function(il, $) {
     document.querySelectorAll("form[data-rep-modal-form='async']:not([data-rep-form-initialised='1'])").forEach(f => {
       f.addEventListener("submit", (event) => {
         event.preventDefault();
-        const modal = f.closest(".modal");
+        const modal = f.closest(".c-modal");
         sendAsync(f, modal);
       });
-      f.querySelectorAll(".il-standard-form-cmd").forEach(b => {
+      f.querySelectorAll(".c-form__actions").forEach(b => {
         b.style.display='none';
       });
       f.dataset.repFormInitialised = '1';
     });
     document.querySelectorAll("form[data-rep-modal-form='sync']:not([data-rep-form-initialised='1'])").forEach(f => {
-      f.querySelectorAll(".il-standard-form-cmd").forEach(b => {
+      f.querySelectorAll(".c-form__actions").forEach(b => {
         b.style.display='none';
       });
       f.dataset.repFormInitialised = '1';
@@ -75,9 +75,9 @@ il.repository.ui = (function(il, $) {
 
   const submitModalForm = function(event, sentAsync) {
     console.log("one");
-    const f = event.target.closest(".modal").querySelector("form");
+    const f = event.target.closest(".c-modal").querySelector(".modal-body").querySelector("form");
     console.log(f);
-    const modal = f.closest(".modal");
+    const modal = f.closest(".c-modal");
     if (sentAsync) {
       sendAsync(f, modal);
     } else {

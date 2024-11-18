@@ -4,6 +4,29 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Listing\Workflow\Step;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a workflow list with steps.
+ *
+ * expected output: >
+ *   ILIAS shows all possible status in the workflow:
+ *
+ *   - available, successfully completed (with Check-Glyph)
+ *   - available, unsuccessfully completed (with X-Glyph)
+ *   - available, not started (empty circle)
+ *   - available, in progress (filled circle)
+ *   - available, in progress, active (by workflow) (filled circle, big)
+ *   - not available, not started (Key-Glyph, greyed out)
+ *   - not available, in progress (Key-Glyph, highlighted blue, medium grey)
+ *   - not available, successfully completed (Check-Glyph, greyed out)
+ *   - not available, unsuccessfully completed (X-Glyph, greyed out)
+ *   - not available anymore, not started (Clock-Glyph, greyed out)
+ *   - not available anymore, in progress (Clock-Glyph highlighted blue, medium grey)
+ *   - not available anymore, successfully completed (Check-Glyph, greyed out)
+ *   - not available anymore, unsuccessfully completed (X-Glyph, greyed out)
+ * ---
+ */
 function base()
 {
     //init Factory and Renderer

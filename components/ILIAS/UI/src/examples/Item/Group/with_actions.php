@@ -5,7 +5,14 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Item\Group;
 
 /**
- * Base
+ * ---
+ * description: >
+ *   Example for rendering a group item with actions.
+ *
+ * expected output: >
+ *   ILIAS shows a group with two items: "Item Title" and "Item Title 2". The group's heading is "Subtitle 1". Both items
+ *   have got an action menu. Additionally the group itself has got an action menu too.
+ * ---
  */
 function with_actions()
 {

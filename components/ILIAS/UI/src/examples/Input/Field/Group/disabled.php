@@ -5,7 +5,20 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Group;
 
 /**
- * Example showing how disabled groups can be used.
+ * ---
+ * description: >
+ *   Example showing how disabled groups can be used.
+ *
+ * expected output: >
+ *   ILIAS shows a group of two input fields titled "Left" and "Right". The number "5" is already displayed in both fields
+ *   and cannot get changed, because the fields are deactivated. Clicking "Save" will reload the page and ILIAS displays
+ *   following above the box:
+ *
+ *   Array
+ *   (
+ *     [custom_group] => 10
+ *   )
+ * ---
  */
 function disabled()
 {

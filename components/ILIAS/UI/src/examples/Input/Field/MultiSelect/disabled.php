@@ -8,6 +8,10 @@ namespace ILIAS\UI\examples\Input\Field\MultiSelect;
  * ---
  * description: >
  *   This example shows an disabled Multi Select Input.
+ *
+ * expected output: >
+ *   ILIAS shows four disabled checkboxes, two of them checked.
+ *   You cannot operate any of the checkboxes.
  * ---
  */
 function disabled()

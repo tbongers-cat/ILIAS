@@ -5,8 +5,15 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Text;
 
 /**
- * Example show how to create and render a basic text input field with an error
- * attached to it. This example does not contain any data processing.
+ * ---
+ * description: >
+ *   Example shows how to create and render a basic text input field with an value
+ *   attached to it. This example does not contain any data processing.
+ *
+ * expected output: >
+ *   ILIAS shows a text field titled "Basic Input". The field is already filled with the text "Default Value". You can
+ *   enter numbers and letter into the field. Clicking "Save" will relaod the page.
+ * ---
  */
 function with_value()
 {

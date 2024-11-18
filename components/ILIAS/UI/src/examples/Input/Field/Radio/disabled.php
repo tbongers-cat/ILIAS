@@ -5,7 +5,18 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Radio;
 
 /**
- * Example showing how to plug a disabled radio into a form
+ * ---
+ * description: >
+ *   Example showing how to plug a disabled radio into a form
+ *
+ * expected output: >
+ *   ILIAS shows a group titled "Radio" with three radio buttons:
+ *    - label1
+ *    - label2
+ *    - label3
+ *
+ *   You cannot select any options as the radio buttons are disabled.
+ * ---
  */
 function disabled()
 {

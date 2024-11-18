@@ -5,7 +5,16 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Chart\ProgressMeter\FixedSize;
 
 /**
- * Example for rendering a fixed size Progress Meter when a specific score was reached
+ * ---
+ * description: >
+ *   Example for rendering a fixed size Progress Meter when a specific score was reached
+ *
+ * expected output: >
+ *   ILIAS shows a rounded progress meter with a green colored bar. The bar takes up 80% of the display. A triangle
+ *   marks the needed value at 75%. The information "80%" and "75%" are positioned within the progress meter.
+ *
+ *   Changing the browser window's size will not change the size of the progress meter: the display stays the same!
+ * ---
  */
 function user_reached_required()
 {

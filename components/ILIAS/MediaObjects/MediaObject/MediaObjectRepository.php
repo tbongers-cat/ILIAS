@@ -26,6 +26,7 @@ use ILIAS\FileUpload\DTO\UploadResult;
 use ILIAS\Filesystem\Stream\ZIPStream;
 use ILIAS\Filesystem\Stream\FileStream;
 use _PHPStan_9815bbba4\Nette\Neon\Exception;
+use ILIAS\ResourceStorage\Resource\StorableResource;
 
 class MediaObjectRepository
 {
@@ -144,6 +145,12 @@ class MediaObjectRepository
             $stream,
             $location
         );
+    }
+
+    public function getContainerResource(
+        int $mob_id
+    ): ?StorableResource {
+        return $this->irss->getResource($this->getRidForMobId($mob_id));
     }
 
 }

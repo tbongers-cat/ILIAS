@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Modal\Interruptive;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering an interruptive modal.
+ *
+ * expected output: >
+ *   ILIAS shows no example because the modal is not called. This behaviour is expected.
+ * ---
+ */
 function base()
 {
     global $DIC;

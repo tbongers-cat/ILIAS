@@ -5,9 +5,16 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Button\Standard;
 
 /**
- * This example provides the given button with an unavailable action. Note
- * that the disabled attribute is set in the DOM. No action must be fired, even
- * if done by keyboard
+ * ---
+ * description: >
+ *   This example provides the given button with an unavailable action. Note
+ *   that the disabled attribute is set in the DOM. No action must be fired,
+ *   even if done by keyboard.
+ *
+ * expected output: >
+ *   ILIAS shows a inactive button titled "Unavailable". The button is more prominent as compared to the base standard button.
+ *   Clicking the button won't activate any actions.
+ * ---
  */
 function unavailable_action()
 {

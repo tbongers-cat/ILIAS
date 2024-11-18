@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Legacy;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a legacy box.
+ *
+ * expected output: >
+ *   ILIAS shows a box including the text "Legacy Content".
+ * ---
+ */
 function inside_panel()
 {
     //Init Factory and Renderer

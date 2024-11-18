@@ -5,7 +5,18 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\MultiSelect;
 
 /**
- * Multi-Select without options
+ * ---
+ * description: >
+ *   Multi-Select without options
+ *
+ * expected output: >
+ *   ILIAS shows an empty field with the following text: "No options". Clicking "Save" will result into following output:
+ *
+ *   Array
+ *   (
+ *       [empty] =>
+ *   )
+ * ---
  */
 function empty_options()
 {

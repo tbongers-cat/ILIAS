@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 use ILIAS\InfoScreen\StandardGUIRequest;
 use ILIAS\MetaData\Services\ServicesInterface as Metadata;
@@ -363,11 +363,10 @@ class ilInfoScreenGUI
         // output
 
         // description
-        /* see https://mantis.ilias.de/view.php?id=39079
         if ($description != "") {
             $this->addSection($lng->txt("description"));
             $this->addProperty("", nl2br($description));
-        }*/
+        }
 
         // general section
         $this->addSection($lng->txt("meta_general"));
@@ -806,17 +805,11 @@ class ilInfoScreenGUI
             $tpl->parseCurrentBlock();
         }
 
-        // tagging
         if (
             isset($this->gui_object) &&
             method_exists($this->gui_object, "getObject") &&
             is_object($this->gui_object->getObject())
         ) {
-            $tags_set = new ilSetting("tags");
-            if ($tags_set->get("enable") && $ilUser->getId() != ANONYMOUS_USER_ID) {
-                $this->addTagging();
-            }
-
             $this->addObjectSections();
         }
 
@@ -1070,46 +1063,6 @@ class ilInfoScreenGUI
     }
 
 
-    public function addTagging(): void
-    {
-        $lng = $this->lng;
-
-        $lng->loadLanguageModule("tagging");
-        $tags_set = new ilSetting("tags");
-
-        $tagging_gui = new ilTaggingGUI();
-        $tagging_gui->setObject(
-            $this->gui_object->getObject()->getId(),
-            $this->gui_object->getObject()->getType()
-        );
-
-        $this->addSection($lng->txt("tagging_tags"));
-
-        if ($tags_set->get("enable_all_users")) {
-            $this->addProperty(
-                $lng->txt("tagging_all_users"),
-                $tagging_gui->getAllUserTagsForObjectHTML()
-            );
-        }
-
-        $this->addProperty(
-            $lng->txt("tagging_my_tags"),
-            $tagging_gui->getTaggingInputHTML()
-        );
-    }
-
-    public function saveTags(): void
-    {
-        $tagging_gui = new ilTaggingGUI();
-        $tagging_gui->setObject(
-            $this->gui_object->getObject()->getId(),
-            $this->gui_object->getObject()->getType()
-        );
-        $tagging_gui->saveInput();
-
-        $this->tpl->setOnScreenMessage('success', $this->lng->txt('msg_obj_modified'), true);
-        $this->ctrl->redirect($this, ""); // #14993
-    }
 
     public function hideFurtherSections(bool $a_add_toggle = true): void
     {

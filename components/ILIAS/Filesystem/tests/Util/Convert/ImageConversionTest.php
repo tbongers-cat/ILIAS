@@ -72,7 +72,7 @@ class ImageConversionTest extends TestCase
         $this->assertNull($thumbnail_converter->getThrowableIfAny());
         $converted_stream = $thumbnail_converter->getStream();
 
-        $getimagesizefromstring = getimagesizefromstring((string)$converted_stream);
+        $getimagesizefromstring = getimagesizefromstring((string) $converted_stream);
 
         $this->assertEquals(75, $getimagesizefromstring[0]); // width
         $this->assertEquals(100, $getimagesizefromstring[1]); // height
@@ -444,7 +444,7 @@ class ImageConversionTest extends TestCase
         $converter = new ImageConverter($converter_options, $output_options, $png);
         $this->assertTrue($converter->isOK());
         $converted_stream = $converter->getStream();
-        $gd_image = imagecreatefromstring((string)$converted_stream);
+        $gd_image = imagecreatefromstring((string) $converted_stream);
         $colors = imagecolorsforindex($gd_image, imagecolorat($gd_image, 1, 1));
 
         $color_in_converted_picture = sprintf("#%02x%02x%02x", $colors['red'], $colors['green'], $colors['blue']);
@@ -478,6 +478,34 @@ class ImageConversionTest extends TestCase
         unlink($output_path);
     }
 
+    public function testHighDensityPixel(): void
+    {
+        $file = 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Jan_Vermeer_-_The_Art_of_Painting_-_Google_Art_Project.jpg';
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $file);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_USERAGENT, 'PHPUnit/1.0');
+        $string = curl_exec($curl);
+        curl_close($curl);
+
+        $img = Streams::ofString($string);
+        $this->assertInstanceOf(FileStream::class, $img);
+
+        $converter_options = (new ImageConversionOptions())
+            ->withWidth(80)
+            ->withHeight(80)
+            ->withKeepAspectRatio(true)
+            ->withCrop(true)
+            ->withThrowOnError(true);
+
+        $output_options = (new ImageOutputOptions())
+            ->withQuality(60)
+            ->withFormat(ImageOutputOptions::FORMAT_PNG);
+
+        $converter = new ImageConverter($converter_options, $output_options, $img);
+        $this->assertTrue($converter->isOK());
+    }
+
 
     protected function checkImagick(): void
     {
@@ -488,10 +516,10 @@ class ImageConversionTest extends TestCase
 
     protected function getImageSizeFromStream(FileStream $stream): array
     {
-        $getimagesizefromstring = getimagesizefromstring((string)$stream);
+        $getimagesizefromstring = getimagesizefromstring((string) $stream);
         return [
-            self::W => (int)round($getimagesizefromstring[0]),
-            self::H => (int)round($getimagesizefromstring[1])
+            self::W => (int) round($getimagesizefromstring[0]),
+            self::H => (int) round($getimagesizefromstring[1])
         ];
     }
 
@@ -504,7 +532,7 @@ class ImageConversionTest extends TestCase
     {
         $stream->rewind();
         $img = new \Imagick();
-        $img->readImageBlob((string)$stream);
+        $img->readImageBlob((string) $stream);
 
         return $img->getImageCompressionQuality();
     }

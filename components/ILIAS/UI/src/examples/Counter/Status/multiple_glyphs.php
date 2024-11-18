@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Counter\Status;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering multiple glyphs with status counters
+ *
+ * expected output: >
+ *   ILIAS shows three rendered glyphs with two counters each in a row.
+ *   The counters consist of a white number each and are highlighted red resp. grey
+ * ---
+ */
 function multiple_glyphs()
 {
     global $DIC;

@@ -426,6 +426,8 @@ adve#:#adve_use_physical#:#Ersätt #str|emp|imp med <u>B|I|U</u>
 adve#:#adve_use_physical_info#:#Inställningen ersätter knapparna i de semantiska stilklasserna för stark, eftertrycklig och viktig med de fast definierade distinktionerna <b>B</b> (fet), <i>I</i> (kursiv) och <u>U</u> (understruken). Uppmärksamhet
 adve#:#adve_use_tiny_mce#:#Aktivera TinyMCE för WYSIWYG-redigering
 assessment#:#activate_logging#:#Aktivera loggning av test och bedömning
+assessment#:#activate_manual_scoring#:#Enable Manual Scoring###28 10 2024 new variable
+assessment#:#activate_manual_scoring_desc#:#Enables manual Scoring for all question types.###28 10 2024 new variable
 assessment#:#addSuggestedSolution#:#Innehåll för repetition
 assessment#:#add_answers#:#Lägg till svar
 assessment#:#add_circle#:#Lägg till cirkel
@@ -433,6 +435,7 @@ assessment#:#add_gap#:#Lägg till cloze
 assessment#:#add_imagemap#:#Importera imagemap
 assessment#:#add_poly#:#Lägg till Polygon
 assessment#:#add_rect#:#Lägg till rektangel
+assessment#:#add_users#:#Add Users###28 10 2024 new variable
 assessment#:#additional_rating_info#:#Observera att de värden som anges här är i procent och måste summeras till 100.
 assessment#:#advanced_rating#:#Avancerad utvärdering
 assessment#:#advanced_rating_info#:#Den utökade utvärderingen är endast möjlig om du har angett en enhet för resultatet. Ytterligare utvärderingsinställningar visas efter att de angivna enheterna har sparats.
@@ -441,6 +444,7 @@ assessment#:#all_participants#:#Alla deltagare
 assessment#:#allow_images#:#Grafiskt stöd för svar
 assessment#:#allowedextensions#:#Tillåtna filtillägg
 assessment#:#allowedextensions_info#:#Ange en kommaseparerad lista över tillåtna filändelser om du vill begränsa uppladdningen till vissa filtyper (t.ex. doc, pdf, odt).
+assessment#:#already_added_extra_time#:#already added: %s min###28 10 2024 new variable
 assessment#:#analyze_errortext#:#Analysera text
 assessment#:#answer#:#Svar
 assessment#:#answer_characters#:# tillåtna tecken, antal tecken som anges
@@ -548,6 +552,9 @@ assessment#:#backtocallingpage#:#Tillbaka till frågesidan
 assessment#:#backtocallingpool#:#Tillbaka till frågepoolen
 assessment#:#backtocallingtest#:#Tillbaka till testet
 assessment#:#baseunit#:#Basenhet
+assessment#:#bulkedit_author#:#Set Author###28 10 2024 new variable
+assessment#:#bulkedit_lifecycle#:#Set Lifecycle###28 10 2024 new variable
+assessment#:#bulkedit_taxonomies#:#Set Taxonomies###28 10 2024 new variable
 assessment#:#button_request_next_question_hint#:#Förfrågan om nästa lösning
 assessment#:#button_request_question_hint#:#Förfrågan om lösning
 assessment#:#cancel_test#:#Test av avbrott
@@ -566,6 +573,7 @@ assessment#:#checkbox_unchecked#:#Inte vald
 assessment#:#circle#:#Cirkel
 assessment#:#circle_click_center#:#Klicka på mitten av den önskade regionen
 assessment#:#circle_click_circle#:#Klicka på en punkt på omkretsen av den önskade regionen
+assessment#:#client_ip_range#:#Client IP Range###28 10 2024 new variable
 assessment#:#clientip#:#Klient IP
 assessment#:#close_text_hint#:#För att infoga ett mellanrum i texten, placera markören på motsvarande position och använd knappen "Textmellanrum". Därefter finns motsvarande redigeringsområden tillgängliga längre ner. Du kan också klicka direkt på luckorna för att redigera i lucktexte
 assessment#:#cloze_answer_text_info#:#Spaces preceding or following the answer text will be deleted when the form is saved.###21 11 2023 new variable
@@ -590,6 +598,7 @@ assessment#:#correct_answers#:#Rätt svar
 assessment#:#counter#:#Counter
 assessment#:#create_gaps#:#Skapa och uppdatera luckor
 assessment#:#create_new#:#Skapa ny
+assessment#:#created#:#Created###28 10 2024 new variable
 assessment#:#customstyle#:#Egen formatmall
 assessment#:#dashboard_tab#:#Deltagare
 assessment#:#date_time#:#Datum/Tid
@@ -617,6 +626,7 @@ assessment#:#direct_feedback#:#Kontrollera din lösning
 assessment#:#discard_answer#:#Radera svar
 assessment#:#discard_answer_confirmation#:#Ditt svar kommer att raderas fullständigt och permanent. Du kan dock svara på frågan igen vid ett senare tillfälle.<br /><br />Ska ditt svar raderas permanent?
 assessment#:#dont_use_questionpool#:#Lägg inte in frågor i en frågepool, utan använd dem endast i detta test.
+assessment#:#download_all_files#:#Download All Files###28 10 2024 new variable
 assessment#:#duplicate#:#Kopia
 assessment#:#duplicate_matching_values_selected#:#Du har valt minst ett värde för dubbel tilldelning!
 assessment#:#duplicate_order_values_entered#:#Du har gett minst en dubbelbeställning!
@@ -672,6 +682,7 @@ assessment#:#eval_legend_link#:#För innebörden av kolumnrubrikerna, se teckenf
 assessment#:#evaluated_users#:#Rated användare
 assessment#:#exam_id#:#ILIAS examensnummer
 assessment#:#exam_id_label#:#ILIAS examensnummer
+assessment#:#exam_id_of_attempt#:#ID of Attempt###28 10 2024 new variable
 assessment#:#examid_in_test_pass#:#Visa ILIAS provnummer
 assessment#:#examid_in_test_pass_desc#:#Ett ILIAS-examensnummer visas i testet. Ett separat nummer genereras för varje testkörning.
 assessment#:#examid_in_test_res#:#Visa ILIAS provnummer
@@ -693,7 +704,13 @@ assessment#:#export_cert_no_users#:#A certificate archive cannot be created due 
 assessment#:#export_essay_qst_with_html#:#Exportera fritextfrågor med HTML-kod
 assessment#:#export_essay_qst_with_html_desc#:#Om aktiverat har du möjlighet att exportera fritextfrågor med den angivna HTML-koden till Excel.
 assessment#:#export_legacy_logs#:#Legacy Log-Daten exportieren###26 08 2024 new variable
+assessment#:#extra_time_byline#:#Put in extra time in minutes. Already entered extra time is added up.###28 10 2024 new variable
+assessment#:#extra_time_for_all_participants#:#You are adding some extra time to all participants.###28 10 2024 new variable
+assessment#:#extra_time_for_selected_participants#:#You are adding extra time to the selected participants.###28 10 2024 new variable
+assessment#:#extra_time_for_selected_participants_different#:#You have selected participants with different additional times.###28 10 2024 new variable
+assessment#:#extra_time_for_single_participant#:#Your are adding extra time to the following participant:###28 10 2024 new variable
 assessment#:#extratime#:#Tidsförlängning
+assessment#:#extratime_added#:#The extra time has been added to the selected participants.###28 10 2024 new variable
 assessment#:#factor#:#Faktor
 assessment#:#failed_official#:#Misslyckad
 assessment#:#failed_short#:#Misslyckad
@@ -725,8 +742,16 @@ assessment#:#finish_pass_for_all_users_in_processing_time#:#Du kan inte avsluta 
 assessment#:#finish_pass_for_user_confirmation#:#Vill du verkligen avsluta testkörningen för deltagaren "%s"?
 assessment#:#finish_pass_for_user_in_processing_time#:#VARNING
 assessment#:#finish_test#:#Avsluta test
+assessment#:#finish_test_all#:#Are you sure you want to finish the test attempts for all users?###28 10 2024 new variable
+assessment#:#finish_test_multiple#:#Are you sure you want to finish the test attempts for the following participants?###28 10 2024 new variable
+assessment#:#finish_test_single#:#Are you sure you want to finish the test attempt for the participant "%s"?###28 10 2024 new variable
 assessment#:#finish_unfinished_passes#:#Avslutar testkörningar som fortfarande är öppna
 assessment#:#finish_unfinished_passes_desc#:#Test som ännu inte har slutförts avslutas automatiskt - förutsatt att en sluttid har fastställts för dessa test eller att deltagarna har överskridit den maximala sluttiden.
+assessment#:#finished_by_administrator#:#Finished by Administrator###28 10 2024 new variable
+assessment#:#finished_by_cronjob#:#Finished by Cronjob###28 10 2024 new variable
+assessment#:#finished_by_duration#:#Finished by time limit###28 10 2024 new variable
+assessment#:#finished_by_participant#:#Finished by Participant###28 10 2024 new variable
+assessment#:#finished_by_unknown#:#Finished by Unknown###28 10 2024 new variable
 assessment#:#fixed_participants_hint#:#Detta test är endast tillgängligt för denna fasta grupp av deltagare. Om du vill göra testet tillgängligt för alla deltagare måste du ändra markeringen i kryssrutan för fasta deltagare i testinställningarna.
 assessment#:#fixedparticipants_subtab#:#Utvalda deltagare
 assessment#:#flashfile#:#Flash-fil
@@ -744,6 +769,7 @@ assessment#:#glossary_term#:#Glossarisk term
 assessment#:#grading_mark_msg#:#Du har uppnått märket &quot;[märke]&quot;.
 assessment#:#grading_status_failed_msg#:#Synd, tyvärr <b>klarade</b> du inte testet.
 assessment#:#grading_status_passed_msg#:#Grattis! Du har <b>klarat</b> provet.
+assessment#:#hide_best_solution#:#Hide best solution###28 10 2024 new variable
 assessment#:#hints#:#Hints###21 11 2023 new variable
 assessment#:#identical_scoring#:#Identisk utvärdering
 assessment#:#identical_scoring_desc#:#Om den är markerad kommer luckor med identiska lösningar att poängsättas enligt specifikationerna, även om samma lösning har använts flera gånger. Om kryssrutan inte är markerad kommer endast den första identiska lösningen som används att poängsättas.
@@ -762,8 +788,13 @@ assessment#:#internal_links#:#Interna referenser
 assessment#:#intprecision#:#Kan delas av
 assessment#:#intprecision_info#:#Divisible by" påverkar endast skapandet av variabler om värdet för precision är 0. I detta fall bestämmer "Delbar med" med vilket heltal den skapade variabeln måste vara delbar. Ett värde på 10 genererar därför bara heltal som är delbara med 10, ett värd
 assessment#:#invalid_ip#:#Invalid IP###26 08 2024 new variable
+assessment#:#ip_range_byline#:#Only IP addresses within the defined range can start the test. You can either use IPv4 OR IPv6 addresses.###28 10 2024 new variable
+assessment#:#ip_range_for_all_participants#:#You are changing the IP Range of all participants###28 10 2024 new variable
+assessment#:#ip_range_for_selected_participants#:#You are changing the IP Range of the following participant.###28 10 2024 new variable
+assessment#:#ip_range_for_single_participant#:#You are changing the IP Range of the selected participants.###28 10 2024 new variable
 assessment#:#ip_range_info#:#Only clients with an IP in the provided range will be able to access the test.###26 08 2024 new variable
 assessment#:#ip_range_label#:#IP Range###26 08 2024 new variable
+assessment#:#ip_range_updated#:#The IP-Range has been update for the selected participants.###28 10 2024 new variable
 assessment#:#javaapplet#:#Java-applet
 assessment#:#kiosk#:#Examensvy
 assessment#:#kiosk_description#:#Provvyn visar testet i kioskläge. Alla skärmelement som inte hör till testet är dolda. För att effektivt förhindra att deltagarna öppnar andra webbplatser under provet bör du dessutom använda en webbläsare som är specialiserad på e-prov (t.ex. "Safe Exam
@@ -812,6 +843,7 @@ assessment#:#lacex_assSingleChoice_NumberOfResultExpression_e#:#R = +2+
 assessment#:#lacex_assTextSubset_StringResultExpression_d#:#För det andra svarsalternativet angavs texten "Natriumklorid".
 assessment#:#lacex_assTextSubset_StringResultExpression_e#:#R[2] = ~natriumklorid~
 assessment#:#lacex_example_header#:#Exempel
+assessment#:#list_of_participants#:#Participants###28 10 2024 new variable
 assessment#:#locked#:#låst
 assessment#:#log_deletion_not_allowed#:#You don't have the necessary permissions to delete log entries.###26 08 2024 new variable
 assessment#:#log_entry_type#:#Log Entry Type###26 08 2024 new variable
@@ -875,6 +907,7 @@ assessment#:#manscoring_not_allowed#:#Manuell poängsättning har inte aktiverat
 assessment#:#manscoring_questions_not_found#:#Den här testkörningen inkluderar inte frågetyper som kan poängsättas manuellt.
 assessment#:#manscoring_results_pass#:#Manuellt poängsatta frågor för testkörning %s
 assessment#:#manual_editing#:#Manuell redigering
+assessment#:#manual_entry#:#Manual Entry###28 10 2024 new variable
 assessment#:#mark_schema#:#Notschema
 assessment#:#mark_schema_invalid#:#Bedömningsschemat kunde inte valideras framgångsrikt. Vänligen skapa ett giltigt schema.
 assessment#:#matches#:#fits
@@ -917,7 +950,9 @@ assessment#:#no_selection#:#--- Inget urval ---
 assessment#:#no_selection_for_move#:#Ingen fråga om att flytta markerad
 assessment#:#no_target_selected_for_move#:#Du måste välja en målposition!
 assessment#:#no_user_or_group_selected#:#Välj en målgrupp där sökningen ska utföras (användare och/eller grupper)!
+assessment#:#no_valid_participant_selection#:#No valid Participants selected.###28 10 2024 new variable
 assessment#:#not_evaluated_users#:#Not yet rated users
+assessment#:#not_started#:#Not started yet###28 10 2024 new variable
 assessment#:#not_yet_accessed#:#Ingen åtkomst ännu
 assessment#:#nr_of_correct_answers#:#Antal önskade svar
 assessment#:#number_of_answers#:#Antal svar
@@ -968,6 +1003,7 @@ assessment#:#passed_short#:#bekräftad
 assessment#:#passed_status#:#Bekräftad status
 assessment#:#passes_finished#:#%s passerar
 assessment#:#percentage#:#Procent
+assessment#:#percentage_points_achieved#:#Reached Points###28 10 2024 new variable
 assessment#:#percentile#:#Percentil
 assessment#:#picture#:#Image
 assessment#:#point#:#Punkt
@@ -988,9 +1024,13 @@ assessment#:#postponed#:#återställning
 assessment#:#precision#:#Precision
 assessment#:#previous_question#:#Tillbaka
 assessment#:#previous_question_rows#:#? Frågor %d - %d från %d
+assessment#:#print_answers#:#Print Answers###28 10 2024 new variable
 assessment#:#qpl_assessment_no_assessment_of_questions#:#Ingen statistisk utvärdering finns tillgänglig för den valda frågan. Frågan har aldrig använts i ett test hittills.
 assessment#:#qpl_assessment_total_of_answers#:#Totalt antal svar
 assessment#:#qpl_assessment_total_of_right_answers#:#Total procentandel korrekta svar
+assessment#:#qpl_bulk_save_add#:#Add###28 10 2024 new variable
+assessment#:#qpl_bulk_save_overwrite#:#Overwrite###28 10 2024 new variable
+assessment#:#qpl_bulkedit_success#:#Modifications saved.###28 10 2024 new variable
 assessment#:#qpl_cancel_skill_assigns_update#:#Avbryt
 assessment#:#qpl_confirm_delete_questions#:#Är du säker på att du vill ta bort följande frågor?
 assessment#:#qpl_copy_insert_clipboard#:#De valda frågorna har kopierats till Urklipp
@@ -1131,9 +1171,11 @@ assessment#:#redirect_always#:# alltid till den definierade målsidan
 assessment#:#redirect_in_kiosk_mode#:#Nur när granskningsvyn är aktiverad
 assessment#:#redirection_url#:#URL målsida
 assessment#:#region#:#Region
+assessment#:#remaining_duration#:#Remaining Duration###28 10 2024 new variable
 assessment#:#remove_gap#:#Ta bort gap
 assessment#:#remove_participants#:#Avlägsna som fast deltagare
 assessment#:#remove_question#:#Remove
+assessment#:#remove_selected_participants_confirmation#:#Are you sure you want to remove the selected participants from the test?###28 10 2024 new variable
 assessment#:#remove_solution#:#Ta bort hänvisning till innehåll för upprepning
 assessment#:#res_contains_undef_res#:#I formeln används resultat som inte finns med i frågetexten.
 assessment#:#res_contains_undef_var#:#Formeln använder variabler som inte finns med i frågetexten.
@@ -1160,6 +1202,7 @@ assessment#:#resulttable_incorrect#:#Incorrect/Incomplete###21 11 2023 new varia
 assessment#:#resulttable_vc_sort_iooa#:#in order of appearance###21 11 2023 new variable
 assessment#:#resulttable_vc_sort_posscore#:#highest possible score first###21 11 2023 new variable
 assessment#:#review_view#:#Förhandsgranskning
+assessment#:#running#:#Running###28 10 2024 new variable
 assessment#:#saveOrder#:#Spara sortering
 assessment#:#saveOrderAndObligations#:#Sortera och spara obligationer
 assessment#:#save_and_next#:#Spara och gå vidare
@@ -1181,6 +1224,7 @@ assessment#:#select_at_least_one_feedback_type_and_trigger#:#Please Select at le
 assessment#:#select_gap#:#Selektionsgap
 assessment#:#select_max_one_item#:#Välj endast ett objekt!
 assessment#:#select_one_user#:#Välj minst en användare!
+assessment#:#select_question#:#Select a Question###28 10 2024 new variable
 assessment#:#select_target_position_for_move_question#:#Välj en målposition för att flytta frågorna och klicka på en av insättningsknapparna!
 assessment#:#select_unit#:#--- Välj enhet ---
 assessment#:#selected_category#:#Vald kategori
@@ -1194,21 +1238,27 @@ assessment#:#showSuggestedSolution#:#Konst
 assessment#:#show_all_test_properties_on_info_page#:#Show all Test Properties###21 11 2023 new variable
 assessment#:#show_all_test_properties_on_info_page_byline#:#Users will be presented with a complete list of test properties in the ‘Info’ tab, i.e. information on scoring and reporting.###21 11 2023 new variable
 assessment#:#show_answer_overview#:#Visa översikt över svar
+assessment#:#show_best_solution#:#Show best solution###28 10 2024 new variable
 assessment#:#show_detailed_results#:#Detaljerade testresultat (poängsatt testkörning)
 assessment#:#show_examview_html#:#På skärmen
+assessment#:#show_hide_best_solution#:#Show or hide best solution###28 10 2024 new variable
 assessment#:#show_old_concluding_remarks#:#Show old conlcuding remarks###21 11 2023 new variable
 assessment#:#show_old_introduction#:#Show old introduction###21 11 2023 new variable
 assessment#:#show_pass_overview#:#Resultatöversikt (poängsatt provkörning)
 assessment#:#show_requested_question_hints#:#Visa begärda lösningsanteckningar
+assessment#:#show_results#:#Show Results###28 10 2024 new variable
 assessment#:#show_user_answers#:#Answers (poängsatt testkörning)
 assessment#:#shuffle_answers#:#Svar från Shuffle
 assessment#:#skip_question#:#Svara inte och fortsätt
+assessment#:#solution#:#Solution###28 10 2024 new variable
 assessment#:#solutionText#:#Text
 assessment#:#solution_contain_keywords#:#Poäng tilldelas baserat på förekomsten av följande villkor
 assessment#:#solution_hint#:#Tilldelat innehåll för repetition
+assessment#:#solutions#:#Solutions###28 10 2024 new variable
 assessment#:#start_tag#:#Starta varumärke
 assessment#:#statistical_data#:#Statistiska uppgifter
 assessment#:#statistics#:#Statistik
+assessment#:#status_of_attempt#:#Status of Attempt###28 10 2024 new variable
 assessment#:#submit_and_check#:#Spara svar och begär feedback
 assessment#:#submit_answer#:#Spara och gå vidare
 assessment#:#suggest_range#:#Föreslå område
@@ -1220,10 +1270,13 @@ assessment#:#ta_resulttable_vc_mode_aria#:#switch question mode###21 11 2023 new
 assessment#:#tab_nest_answers#:#indentation
 assessment#:#tax_filter#:#Taxonomy###21 11 2023 new variable
 assessment#:#tax_filter_notax#:#Questions without assigned Taxonomy###21 11 2023 new variable
+assessment#:#taxonomy_node_title#:#Taxonomy Node Title###28 10 2024 new variable
+assessment#:#taxonomy_title#:#Taxonomy Title###28 10 2024 new variable
 assessment#:#term#:#Term
 assessment#:#term_image#:#Image
 assessment#:#term_text#:#Text
 assessment#:#terms#:#Termer
+assessment#:#test_attempts_finished#:#The test pass has been finished for the selected participants.###28 10 2024 new variable
 assessment#:#test_confirm_template_reset#:#Är du säker på att du inte vill använda mallen igen?
 assessment#:#test_delete_page#:#Ta bort frågan
 assessment#:#test_edit_settings#:#Redigera inställningar
@@ -1243,6 +1296,7 @@ assessment#:#test_question_set_type_random_info#:#Varje deltagare får svara på
 assessment#:#test_results#:#Meddelande av testresultatet
 assessment#:#test_scoring#:#Utvärdering av testet
 assessment#:#test_template_reset#:#Mallen har tagits bort.
+assessment#:#test_title#:#Test Title###28 10 2024 new variable
 assessment#:#test_using_template#:#Detta test använder mallen %s. Om du inte vill använda en mall och alla inställningar, klicka här
 assessment#:#test_using_template_link#:#Använd inte mallen längre
 assessment#:#text_correct#:#Korrigera text
@@ -1270,6 +1324,8 @@ assessment#:#toplist_col_percentage#:#Procent
 assessment#:#toplist_col_rank#:#Plats
 assessment#:#toplist_col_score#:#Score
 assessment#:#toplist_col_wtime#:#Bearbetningstid
+assessment#:#total_attempts#:#Total Attempts###28 10 2024 new variable
+assessment#:#total_duration#:#Total Duration###28 10 2024 new variable
 assessment#:#true#:#Sant
 assessment#:#tst_access_code_created#:#För att du ska ha permanent tillgång till dina testresultat och kunna återuppta ett avbrutet test har en personlig åtkomstnyckel genererats för dig. Vänligen notera koden nedan för att kunna fortsätta testet senare.
 assessment#:#tst_activate_skill_service#:#Kompetens
@@ -1492,6 +1548,7 @@ assessment#:#tst_input_dynamic_question_set_question_ordering_by_date#:#Ordna fr
 assessment#:#tst_input_dynamic_question_set_question_ordering_by_tax#:#Ordne-frågor efter taxonomiska noder
 assessment#:#tst_input_dynamic_question_set_source_questionpool#:#Frågepool
 assessment#:#tst_input_dynamic_question_set_taxonomie_filter_enabled#:#Visa taxonomifilter
+assessment#:#tst_insert_in_test#:#Insert in Test###28 10 2024 new variable
 assessment#:#tst_insert_missing_question#:#Välj minst en fråga att lägga till i testet!
 assessment#:#tst_insert_questions#:#Är du säker på att du vill lägga till följande frågor i testet?
 assessment#:#tst_instant_feedback#:#Direkt feedback
@@ -1908,6 +1965,7 @@ assessment#:#tst_stat_result_resultsmarks#:#Testresultat som klass
 assessment#:#tst_stat_result_resultspoints#:#Testresultat i punkter
 assessment#:#tst_stat_result_timeontask#:#Bearbetningstid
 assessment#:#tst_stat_result_total_participants#:#Totalt antal deltagare
+assessment#:#tst_stat_result_total_timeontask#:#Total Time On Task (All Test Attempts)###28 10 2024 new variable
 assessment#:#tst_submit_results#:#YES, jag bekräftar härmed att mina svar har skickats
 assessment#:#tst_tab_competences#:#Kompetens
 assessment#:#tst_tab_results_objective_oriented#:#Testresultat i enlighet med inlärningsmål
@@ -1985,6 +2043,7 @@ assessment#:#unit_placeholder#:#** Ny enhet **
 assessment#:#units#:#Antal enheter
 assessment#:#unlimited#:#obegränsad
 assessment#:#unlock#:#Lås upp
+assessment#:#updated#:#Updated###28 10 2024 new variable
 assessment#:#uploaded_material#:#Uppladdade material
 assessment#:#use_previous_solution#:#Använd tidigare lösning
 assessment#:#use_previous_solution_advice#:#Lösningen som visas har tidigare lämnats in av dig. Du måste bekräfta antagandet av denna lösning under frågan om du vill anta lösningen utan ändringar.
@@ -1999,11 +2058,14 @@ assessment#:#variables#:#Variabler
 assessment#:#wait_for_next_pass_hint_msg#:#Förnyelse möjlig från följande tidpunkt
 assessment#:#warning_question_not_complete#:#Frågan är ofullständig!
 assessment#:#width#:#Bredd
+assessment#:#with_solution#:#Participants with solution###28 10 2024 new variable
 assessment#:#with_solutions_participants#:#Deltagare med svar
+assessment#:#without_solution#:#Participants without solution###28 10 2024 new variable
 assessment#:#without_solutions_participants#:#Deltagare utan svar
 assessment#:#worked_through#:#Editerad
 assessment#:#working_time#:#Bearbetningstid
 assessment#:#you_received_a_of_b_points#:#Du har uppnått %s av %s möjliga poäng.
+assessment#:#your_results#:#Your Results###28 10 2024 new variable
 auth#:#auth_account_code#:#Kod
 auth#:#auth_account_code_info#:#För att återaktivera ditt ILIAS-konto kan du använda en ILIAS-inloggningskontokod.
 auth#:#auth_account_code_title#:#Registrering kontokod
@@ -2027,23 +2089,33 @@ auth#:#auth_info_add#:#Välj den här inställningen om du aldrig har registrera
 auth#:#auth_info_migrate#:#Om du redan har ett ILIAS-konto anger du inloggningsnamn och lösenord för att överföra dina personuppgifter (e-postmeddelanden, testresultat ...).
 auth#:#auth_ldap_server_ds#:#LDAP-server
 auth#:#auth_login_editor#:#Design inloggningssida
+auth#:#auth_odic_scope_info#:#In this mask, the standard claims are displayed as a suggestion for a profile data assignment based on the OpenID Connect scopes configured %s. You can adopt this suggestion as an effective profile data assignment by clicking on "%s" or make your own adjustments by changing the text fields.###28 10 2024 new variable
+auth#:#auth_odic_scope_tab_info#:#In this mask you can assign OpenID Connect claims to ILIAS profile data. To do this, enter the scope from which the information should be taken over upon successful authentication in the corresponding text fields for the respective profile date. Activate the corresponding checkbox if the data should also be transferred to an existing ILIAS user account. You can view a list of standard claims %s.###28 10 2024 new variable
 auth#:#auth_oidc#:#OpenId Connect
+auth#:#auth_oidc_configured_scopes#:#Pre-fill Scope-based Mapping###28 10 2024 new variable
+auth#:#auth_oidc_discover_scopes#:#Perform Scope Auto Discovery###28 10 2024 new variable
+auth#:#auth_oidc_discover_scopes_info#:#The automatic scope discovery was performed. Scopes are added to the field "Additional Scopes" in the form below. Please define your relevant scopes and save the form afterwards.###28 10 2024 new variable
 auth#:#auth_oidc_failed#:#Login via OpenID Connect misslyckades
+auth#:#auth_oidc_here#:#here###28 10 2024 new variable
 auth#:#auth_oidc_login_element_info#:#Logga in på ILIAS via OpenID Connect
 auth#:#auth_oidc_mapping_table#:#Mappning av datafält för ILIAS-konton till OpenID Connect-attribut
 auth#:#auth_oidc_profile#:#Tilldelning av profiluppgifter
 auth#:#auth_oidc_role_info#:#OpenID Anslut attribut
 auth#:#auth_oidc_role_mapping_table#:#Association av ILIAS-roller till OpenId Connect-attribut
 auth#:#auth_oidc_roles#:#Rolltilldelning
+auth#:#auth_oidc_saved_values#:#Effective Attribute Mapping###28 10 2024 new variable
+auth#:#auth_oidc_scopes#:#Scopes###28 10 2024 new variable
 auth#:#auth_oidc_settings#:#Inställningar för server
 auth#:#auth_oidc_settings_activation#:#Aktivera OpenID Connect
 auth#:#auth_oidc_settings_additional_scopes#:#Ytterligare omfattningar
+auth#:#auth_oidc_settings_additional_scopes_info#:#Standard scopes: address, email, phone, profile###28 10 2024 new variable
 auth#:#auth_oidc_settings_client_id#:#Klient-ID
 auth#:#auth_oidc_settings_custom_session_duration#:#Sessionens varaktighet
 auth#:#auth_oidc_settings_custom_session_duration_option#:#Own sessionens varaktighet
 auth#:#auth_oidc_settings_custom_session_duration_type#:#Inställningar för sessionens längd
 auth#:#auth_oidc_settings_default_role#:#Rolltilldelning
 auth#:#auth_oidc_settings_default_role_info#:#Please select a global role för nya ILIAS-användare som ska skapas!
+auth#:#auth_oidc_settings_default_scopes#:#Default Scope###28 10 2024 new variable
 auth#:#auth_oidc_settings_discovery_error#:#URL:en för upptäckten kunde inte hämtas. Fel
 auth#:#auth_oidc_settings_discovery_url#:#URL för identifiering av leverantören
 auth#:#auth_oidc_settings_img#:#Image
@@ -2111,12 +2183,26 @@ auth#:#auth_saml_username_claim_info#:#Definiera attributet här som ILIAS ska a
 auth#:#auth_sync#:#Synkronisering av användare
 auth#:#auth_sync_cas#:#Automatisk generering av ILIAS-inloggningskonton
 auth#:#auth_sync_cas_info#:#Användare som har autentiserat sig mot CAS men inte har ett ILIAS-konto skapas automatiskt.
+auth#:#destination_after_logout#:#Destination After Logout###28 10 2024 new variable
+auth#:#destination_external_ressource#:#Show External Ressource###28 10 2024 new variable
+auth#:#destination_external_ressource_url#:#External URL###28 10 2024 new variable
+auth#:#destination_internal_ressource#:#Show Internal Ressource###28 10 2024 new variable
+auth#:#destination_internal_ressource_ref_id#:#Internal Reference Id###28 10 2024 new variable
+auth#:#destination_login_screen#:#Show Login Screen###28 10 2024 new variable
+auth#:#destination_login_screen_info#:#Make sure that, for example, an SSO is not addressed that leads to immediate login.###28 10 2024 new variable
+auth#:#destination_logout_screen#:#Show Logout Screen###28 10 2024 new variable
 auth#:#err_auth_ldap_failed#:#Autentiseringen har misslyckats. Kontakta din ILIAS-administratör.
 auth#:#err_auth_saml_failed#:#Autentiseringen har misslyckats. Vänligen kontakta din administratör.
 auth#:#err_auth_saml_no_ilias_user#:#Autentiseringen har misslyckats. Vänligen kontakta din administratör.
 auth#:#language_does_not_exist#:#The selected language does not exist.###26 08 2024 new variable
 auth#:#login_page#:#Language of Login-Page###26 08 2024 new variable
 auth#:#login_pages#:#Login-Pages###26 08 2024 new variable
+auth#:#logout_behaviour#:#Logout Behaviour###28 10 2024 new variable
+auth#:#logout_behaviour_invalid_ref_id#:#Please make sure the internal resource id exists and is not in trash###28 10 2024 new variable
+auth#:#logout_behaviour_invalid_url#:#The external ressource given is not a valid URL.###28 10 2024 new variable
+auth#:#logout_behaviour_ref_id_no_access#:#Please make sure the "Anonymous" user has access to the defined ressource.###28 10 2024 new variable
+auth#:#logout_behaviour_ref_id_valid_status_changed#:#The configured internal resource is no longer valid. If the resource has been deleted or access for the "Anonymous" user has been restricted, please configure a new valid internal resource. Without a valid configuration, the user will be redirected to the logout screen by default.###28 10 2024 new variable
+auth#:#logout_behaviour_settings#:#Logout Behaviour Settings###28 10 2024 new variable
 auth#:#logout_editor#:#Design Logout-Page###26 08 2024 new variable
 auth#:#logout_page#:#Language of Logout-Page###26 08 2024 new variable
 auth#:#logout_pages#:#Logout-Pages###26 08 2024 new variable
@@ -2180,6 +2266,7 @@ badge#:#badge_create#:#Create Badge###21 11 2023 new variable
 badge#:#badge_create_image_processing_failed#:#The badge could not be created, an error occurred while processing the image.###26 08 2024 new variable
 badge#:#badge_criteria#:#Kriterier
 badge#:#badge_crs_merit#:#Manuellt tilldelat märke
+badge#:#badge_deletion#:#Badge successfully deleted.###28 10 2024 new variable
 badge#:#badge_deletion_confirmation#:#Vill du verkligen ta bort följande märken och alla deras respektive uppdrag?
 badge#:#badge_edit_with_published#:#%s användare har redan lagt till detta märke i sin ryggsäck. Att ändra badge-attribut leder därför till inkonsekvenser. Kanske skulle ett nytt märke vara mer meningsfullt.
 badge#:#badge_image_from_template#:#Använd mall
@@ -2216,6 +2303,7 @@ badge#:#badge_profile_more#:#Visa alla
 badge#:#badge_profile_view#:#Display
 badge#:#badge_remove_badge#:#Ta bort märke
 badge#:#badge_remove_from_profile#:#Ta bort från profil
+badge#:#badge_select_one#:#You have to select at least one badge###28 10 2024 new variable
 badge#:#badge_service_activate#:# Aktivera tjänst
 badge#:#badge_service_activate_info#:#Aktivera tjänsten för att göra badges tillgängliga
 badge#:#badge_settings#:#Badge inställningar
@@ -2306,6 +2394,7 @@ bibl#:#bibtex#:#Bibtex
 bibl#:#changes_saved#:#Ändringarna har sparats.
 bibl#:#custom#:#Användare definierad
 bibl#:#detail_view#:#Detaljerad vy
+bibl#:#detailed_information#:#Detailed Information###28 10 2024 new variable
 bibl#:#download_original_file#:#Ladda ner originalfilen
 bibl#:#field#:#Fält
 bibl#:#fields#:#Fält
@@ -2353,6 +2442,12 @@ bibl#:#ris_default_u2#:#Användare definierad
 bibl#:#ris_default_ur#:#URL
 bibl#:#ris_default_vl#:#Volym
 bibl#:#ris_default_y1#:#År
+bibl#:#sorting_1#:#By Title (Ascending)###28 10 2024 new variable
+bibl#:#sorting_2#:#By Title (Descending)###28 10 2024 new variable
+bibl#:#sorting_3#:#By Author (Ascending)###28 10 2024 new variable
+bibl#:#sorting_4#:#By Author (Descending)###28 10 2024 new variable
+bibl#:#sorting_5#:#By Year (Ascending)###28 10 2024 new variable
+bibl#:#sorting_6#:#By Year (Descending)###28 10 2024 new variable
 bibl#:#standard#:#Standard
 bibl#:#translate#:#Översättning
 bkm#:#bkm_fold_created#:#Bookmark-mappen har skapats.
@@ -2373,7 +2468,6 @@ blog#:#blog_approve#:#Lås upp post
 blog#:#blog_author#:#Bidrag från
 blog#:#blog_authors#:#Contributors###Modifierad som en del av arbetet med att integrera ett jämställdhetsperspektiv i ILIAS 8
 blog#:#blog_back_to_blog_owner#:#Redigera blogg
-blog#:#blog_banner#:#Banner
 blog#:#blog_change_notification_body_approve#:#Följande bidrag måste fortfarande aktiveras
 blog#:#blog_change_notification_body_comment#:# följande inlägg har kommenterats
 blog#:#blog_change_notification_body_new#:# följande inlägg har nyligen skapats
@@ -2453,10 +2547,6 @@ blog#:#blog_postings#:#Bidrag
 blog#:#blog_presentation_frame#:#Presentation
 blog#:#blog_presentation_overview#:#Presentation av bidragen
 blog#:#blog_preview#:#Förhandsgranskning
-blog#:#blog_preview_banner#:#Personlig banner
-blog#:#blog_preview_banner_height#:#Höjd på bannern
-blog#:#blog_preview_banner_info#:#Förvald storlek är 1370x100 pixlar.
-blog#:#blog_preview_banner_width#:#Bannerns bredd
 blog#:#blog_profile_picture#:#Visa profilbild
 blog#:#blog_profile_picture_repository_info#:#Profilbilder visas endast för enskilda inlägg, inte på översiktssidor.###Modifierad som en del av jämställdhetsintegreringsaktiviteterna för ILIAS 8
 blog#:#blog_properties#:#Bloggegenskaper
@@ -2466,6 +2556,7 @@ blog#:#blog_settings#:#bloggadministration
 blog#:#blog_settings_navigation#:#Navigation
 blog#:#blog_show_latest#:#Visa senaste inlägg/utkast
 blog#:#blog_show_print_view#:# Skriv ut vy
+blog#:#blog_side_blocks#:#Side Blocks###28 10 2024 new variable
 blog#:#blog_starting_page#:#Starting Page###21 11 2023 new variable
 blog#:#blog_task_publishing_draft_title#:#Publicera utkast "%s"
 blog#:#blog_toggle_draft#:#Återkalla publicering
@@ -2884,7 +2975,6 @@ chatroom#:#chat_mainroom#:#huvudrum
 chatroom#:#chat_message#:#Meddelande
 chatroom#:#chat_message_display#:#Display
 chatroom#:#chat_message_options#:#Alternativ
-chatroom#:#chat_message_to_all#:#Till alla
 chatroom#:#chat_no_use_typing_broadcast#:#Typning visas inte för andra i chatten
 chatroom#:#chat_not_use_osc#:#Använder inte chatt på skärmen
 chatroom#:#chat_osc_accept_msg#:#Tillåt chatt
@@ -2997,9 +3087,10 @@ chatroom#:#server_further_information#:# Mer information om hur du konfigurerar 
 chatroom#:#session#:#Session
 chatroom#:#settings_general#:#Allmänt
 chatroom#:#settings_title#:#Chat-inställningar
-chatroom#:#speak_to#:#Adress <b>##användare</b>
+chatroom#:#start_private_chat#:#Start Private Chat###28 10 2024 new variable
 chatroom#:#unable_to_connect#:#Anslutningen till chattservern kunde inte upprättas.
 chatroom#:#unban#:#Lås upp
+chatroom#:#user_banned#:#The user #user# has been banned.###28 10 2024 new variable
 chatroom#:#user_in_ilias#:#Sök och bjud in användare i ILIAS
 chatroom#:#user_in_room#:#Bjud in #Users i det aktuella chattrummet
 chatroom#:#user_invited#:#Användaren har blivit inbjuden.
@@ -3007,7 +3098,6 @@ chatroom#:#user_invited_self#:#Du har blivit inbjuden till <b>#room#</b> av <b>#
 chatroom#:#user_kicked#:#Användaren <b>#user#</b> har sparkats ut från chattrummet.
 chatroom#:#users#:#Användare
 chatroom#:#welcome_to_chat#:#Välkommen till chattrummet
-chatroom#:#whisper_to#:#<b>##användare#</b> viskning
 chatroom#:#write_message#:#New Message###21 11 2023 new variable
 chatroom_adm#:#chat_cannot_connect_to_server#:#ILIAS kan inte upprätta en socket-anslutning till chatt-servern.
 chatroom_adm#:#chat_enabled#:#Aktivera chatt
@@ -3096,14 +3186,24 @@ cmix#:#completed_info#:#Aktiviteten har avslutats eller slutförts på ett norma
 cmix#:#completed_label#:#Uttalanden med verbet "avslutad
 cmix#:#conf_availability#:#Tillgänglighet
 cmix#:#conf_availability_0#:#inte tillgänglig
+cmix#:#conf_availability_0_info#:#Existing xAPI/cmi5 objects that use this LRS type can no longer be used.###28 10 2024 new variable
 cmix#:#conf_availability_1#:#för befintliga objekt
+cmix#:#conf_availability_1_info#:#This LRS type is not offered when creating new xAPI/cmi5 objects. Existing xAPI/cmi5 objects that use this type can continue to write or read data. Use this option to be able to delete data in the connected LRS at a later time.###28 10 2024 new variable
 cmix#:#conf_availability_2#:#för nya och befintliga objekt
+cmix#:#conf_availability_2_info#:#This LRS type can be selected when creating xAPI/cmi5 objects.###28 10 2024 new variable
 cmix#:#conf_bypass_proxy#:#Erkännande av framsteg i inlärningen
 cmix#:#conf_bypass_proxy_disabled#:#xAPI proxy för att hämta data omedelbart.
 cmix#:#conf_bypass_proxy_enabled#:#CronJob för att söka i Learning Record Store
 cmix#:#conf_bypass_proxy_info#:#I de flesta fall rekommenderas att xAPI-proxyn används. Använd CronJob om det finns resurs- eller serverbegränsningar.
 cmix#:#conf_cronjob_neccessary#:#CronJob nödvändigt för lärande framsteg
 cmix#:#conf_cronjob_neccessary_info#:#Genom att aktivera detta alternativ kan de xAPI-objekt som använder denna LRS-typ inte använda xAPI-proxyn, som ger omedelbara data för att upptäcka inlärningsförloppet. Använd endast CronJob om det finns resurs- eller serverbegränsningar.
+cmix#:#conf_delete_data#:#Delete Data in LRS###28 10 2024 new variable
+cmix#:#conf_delete_data_info#:#Deletion is currently only possible with the Learning Record Store (LRS) LearningLocker. Only use the options for deleting the user identification if the data has been pseudonymized in the LRS.###28 10 2024 new variable
+cmix#:#conf_delete_data_opt0#:#Never###28 10 2024 new variable
+cmix#:#conf_delete_data_opt1#:#Never - but if users are deleted and if xAPI/cmi objects are moved to the trash or deleted, data will no longer be assignable for ILIAS by deleting the - user identification###28 10 2024 new variable
+cmix#:#conf_delete_data_opt11#:#When users are deleted and when xAPI/cmi objects are moved to the trash or deleted###28 10 2024 new variable
+cmix#:#conf_delete_data_opt12#:#Additionally when users are removed from courses or groups###28 10 2024 new variable
+cmix#:#conf_delete_data_opt2#:#Never - but additionally when users are removed from courses or groups, data will no longer be assignable for ILIAS by deleting the user identification###28 10 2024 new variable
 cmix#:#conf_description#:#Beskrivning
 cmix#:#conf_external_lrs#:#Extern dyslexi
 cmix#:#conf_keep_lp#:#Undvik försämring av inlärningsförmågan
@@ -3124,14 +3224,16 @@ cmix#:#conf_own_window#:#Samma fönster
 cmix#:#conf_own_window_info#:#Innehållet öppnas i samma fönster och ersätter ILIAS-skärmen. När användaren lämnar innehållet återgår han/hon till ILIAS.
 cmix#:#conf_privacy_comment_default#:#Visa till användaren
 cmix#:#conf_privacy_ident#:#Identifiering av användare
-cmix#:#conf_privacy_ident_il_uuid_SHA256#:#Hash combined with a unique ILIAS platform id formatted as an E-Mail address###21 11 2023 new variable
-cmix#:#conf_privacy_ident_il_uuid_SHA256_info#:#This is identical to each call, but does not permit any direct conclusions about the ILIAS user.###21 11 2023 new variable
 cmix#:#conf_privacy_ident_il_uuid_ext_account#:#Externt användar-ID kombinerat med ett unikt ILIAS-plattforms-ID formaterat som en e-postadress.
 cmix#:#conf_privacy_ident_il_uuid_ext_account_info#:#Detta är identiskt med varje samtal, men kan göra det möjligt att dra en direkt slutsats om användaren.
 cmix#:#conf_privacy_ident_il_uuid_login#:#ILIAS-inloggning kombinerat med ett unikt ILIAS-plattforms-ID formaterat som en e-postadress.
 cmix#:#conf_privacy_ident_il_uuid_login_info#:#Sänder inloggningsnamnet. Detta är identiskt med varje anrop, men kan göra det möjligt att dra direkta slutsatser om ILIAS-användaren.
 cmix#:#conf_privacy_ident_il_uuid_random#:#Random ID kombinerat med ett unikt ILIAS-plattforms-ID formaterat som en e-postadress.
 cmix#:#conf_privacy_ident_il_uuid_random_info#:#Ett slumpmässigt ID genereras för varje ILIAS-objekt och ILIAS-användare, som förblir identiskt för varje anrop. Slutsatser om en användare är mycket begränsade, eftersom användarprofiler för flera objekt i praktiken inte kan skapas.
+cmix#:#conf_privacy_ident_il_uuid_sha256#:#Hash combined with a unique ILIAS platform id formatted as an E-Mail address###28 10 2024 new variable
+cmix#:#conf_privacy_ident_il_uuid_sha256_info#:#This is identical to each call, but does not permit any direct conclusions about the ILIAS user.###28 10 2024 new variable
+cmix#:#conf_privacy_ident_il_uuid_sha256url#:#Hash combined with the ILIAS Domain formatted as an E-Mail address###28 10 2024 new variable
+cmix#:#conf_privacy_ident_il_uuid_sha256url_info#:#This is identical to each call, with with a maximum of 80 characters significantly shorter than the variant with the ILIAS platform ID and allows only very limited conclusions about the ILIAS user.###28 10 2024 new variable
 cmix#:#conf_privacy_ident_il_uuid_user_id#:#ILIAS användar-ID kombinerat med ett unikt ILIAS plattforms-ID formaterat som en e-postadress.
 cmix#:#conf_privacy_ident_il_uuid_user_id_info#:#Sänder det interna numeriska användar-ID:t. Detta är identiskt för varje anrop, men gör det möjligt att dra slutsatser om ILIAS-användaren.
 cmix#:#conf_privacy_ident_info#:#Standard är ofta e-postadressen. Det unika ILIAS-plattforms-ID:t är
@@ -3153,6 +3255,10 @@ cmix#:#conf_privacy_setting_force#:#Inställningarna kan inte ändras för objek
 cmix#:#conf_privacy_setting_info#:#Konfigurationsalternativ för sekretessinställningarna
 cmix#:#conf_remarks#:#Interna kommentarer
 cmix#:#conf_title#:#Titel
+cmix#:#conf_use_proxy#:#xAPI-Proxy###28 10 2024 new variable
+cmix#:#conf_use_proxy_info#:#The xAPI proxy provides real-time data to determine learning progress in ILIAS. The proxy reduces personal data in accordance with the selected data protection options. If the xAPI proxy is deactivated, the learning content writes the learning progress directly to the LRS. This data must then also be retrieved directly from the LRS. The cron job "xAPI/cmi5 get results" is required to determine the learning progress. The xAPI proxy is mandatory for cmi5 objects and is activated automatically.###28 10 2024 new variable
+cmix#:#conf_use_proxy_info_cmi5#:#The xAPI proxy provides real-time data to determine learning progress in ILIAS. The proxy reduces personal data in accordance with the selected data protection options. The xAPI proxy is mandatory for cmi5 objects.###28 10 2024 new variable
+cmix#:#conf_use_proxy_info_xapi#:#The xAPI proxy provides real-time data to determine learning progress in ILIAS. The proxy reduces personal data in accordance with the selected data protection options. If the xAPI proxy is deactivated, the learning content writes the learning progress directly to the LRS. This data must then also be retrieved directly from the LRS. The cron job "xAPI/cmi5 get results" is required to determine the learning progress.###28 10 2024 new variable
 cmix#:#conf_user_ident#:#Identifiering av användare
 cmix#:#conf_user_ident_il_uuid_ext_account#:#Externt användar-ID kombinerat med ett unikt ILIAS-plattforms-ID formaterat som en e-postadress.
 cmix#:#conf_user_ident_il_uuid_ext_account_info#:#Detta är identiskt med varje samtal, men kan göra det möjligt att dra en direkt slutsats om användaren.
@@ -3667,7 +3773,6 @@ common#:#chta_write#:#Redigera chatroom administration
 common#:#chtr_copy#:#Kopiera chattrum
 common#:#chtr_import#:#Chattrum för import
 common#:#city#:#Plats
-common#:#cld_abandoned#:#Tyvärr är molnobjektet inte längre tillgängligt i kärnan med ILIAS 8. Kontakta din systemadministratör. Inga data har raderats.
 common#:#cleaned_file#:#Filen har rengjorts.
 common#:#cleaning_failed#:#Viruset kunde inte tas bort från filen.
 common#:#clear#:#Avbryt
@@ -3690,6 +3795,7 @@ common#:#collapse#:#Fold i
 common#:#collapse_all#:#Vik ihop dem alla
 common#:#collapse_content#:#Kollapsa innehåll
 common#:#collapsed#:#Stängd
+common#:#column_selection#:#Column Selection###28 10 2024 new variable
 common#:#columns#:#Kolumner
 common#:#comma_separated#:# Kommatecken separerade
 common#:#comment#:#Kommentar
@@ -3753,7 +3859,6 @@ common#:#create_stylesheet#:#Skapa Stil
 common#:#created#:#Skapad på
 common#:#cron_forum_notification#:#Skicka Forums-aviseringar
 common#:#cron_forum_notification_crob_desc#:#Om aktiverat skickar ILIAS dagliga meddelanden till användare som vill bli meddelade om nya och ändrade inlägg i utvalda forum eller forumämnen. Vänligen observera
-common#:#cron_forum_notification_desc#:#Om aktiverat skickar ILIAS e-postmeddelanden till de användare som vill bli meddelade om nya inlägg i utvalda forumämnen.
 common#:#cron_forum_notification_disabled#:#Can't be disabled when the Cron Job is active.###21 11 2023 new variable
 common#:#cron_jobs#:#Cron jobb
 common#:#cron_lucene_index#:#Uppdatera Lucene sökindex
@@ -3807,6 +3912,7 @@ common#:#current_ip_alert#:#Varning
 common#:#current_password#:#Aktuellt lösenord
 common#:#current_user_avatar#:#Din profilbild
 common#:#currently_used_disk_space#:#Aktuell minnesförbrukning
+common#:#customize_page#:#Customize Page###28 10 2024 new variable
 common#:#cut#:#Cutting out
 common#:#cutPage#:#Cutting out
 common#:#daily#:#Dagligen
@@ -3933,8 +4039,6 @@ common#:#enable_export_scorm_desc#:#Visning av personuppgifter i loggdata (SCORM
 common#:#enable_fora_statistics#:#Aktivera forumstatistik
 common#:#enable_fora_statistics_desc#:#Endast när detta är aktiverat kan du få tillgång till forumstatistiken.
 common#:#enable_hide_user_toggle#:#Medlem får inte avaktivera anmälan
-common#:#enable_hist_user_comments#:#Revision comments###Modifierad som en del av arbetet med att integrera ett jämställdhetsperspektiv i ILIAS 8
-common#:#enable_hist_user_comments_desc#:#Du kan lägga till revisionskommentarer till sidor. Kommentarerna visas på fliken "Innehåll" och underfliken "Historik" i utbildningsmodulen och stöder gemensam redigering.###Modifierad som en del av jämställdhetsintegreringen för ILIAS 8
 common#:#enable_multi_download#:#Activate "Ladda ner flera objekt
 common#:#enable_multi_download_info#:#Om det är aktiverat kan flera mappar eller filer väljas samtidigt för att ladda ner dem som ett zip-arkiv.
 common#:#enable_password_assistance#:#Aktivera stöd för lösenord
@@ -3950,6 +4054,7 @@ common#:#enable_trash_info#:#Raderade objekt flyttas till papperskorgen och kan 
 common#:#enable_webdav#:#Aktivera åtkomst till WebDAV
 common#:#enable_webdav_info#:# Tillåter WebDAV-klienter att komma åt tidningen via en webbmapp. Användare kan öppna webbmappar genom att utföra åtgärden "Öppna som webbmapp" i tidningen eller genom att ange följande adress i en WebDAV-klient
 common#:#enabled#:#Kopplad på
+common#:#enlarge#:#Enlarge###28 10 2024 new variable
 common#:#enter_in_mb_desc#:# Ange en storlek i MB.
 common#:#enter_new_name#:#Var god ange ett namn
 common#:#entered_notification#:#"%s" har gått med i sessionen "%s".
@@ -3963,6 +4068,7 @@ common#:#err_auth_mode_inactive#:#Tyvärr är registrering inte möjlig för til
 common#:#err_auth_soap_no_ilias_user#:#Logon misslyckades! SOAP-autentiseringen lyckades, men det finns ingen motsvarande ILIAS-användare. Kontakta din systemadministratör.
 common#:#err_check_input#:#Inställningarna kunde inte sparas. Vänligen kontrollera dina poster.
 common#:#err_count_param#:#Anledning
+common#:#err_disabled#:#Account creation via Shibboleth has been disabled. Please contact the system administrator for further information.###28 10 2024 new variable
 common#:#err_double_entries#:#Reason: Duplicate Entries###21 11 2023 new variable
 common#:#err_in_line#:#Fel i raden
 common#:#err_inactive#:#Detta ILIAS-konto är inte aktivt eller har inte aktiverats ännu. Kontakta teknisk support (se länk nedan) för ytterligare hjälp.
@@ -4251,7 +4357,6 @@ common#:#hist_webr_add#:#Ny webblänk skapad med titel
 common#:#hist_webr_delete#:#Webblänk har tagits bort. Titel
 common#:#hist_webr_update#:#Webblänken har uppdaterats. Titel
 common#:#history#:#Framsteg
-common#:#hits_per_page#:#hit/sida
 common#:#hobby#:#Intressen/Hobbies
 common#:#home#:#Till det offentliga området
 common#:#host#:#Host
@@ -4458,6 +4563,7 @@ common#:#links_user_name#:#ILIAS inloggningsnamn
 common#:#links_value#:#Parametervärde
 common#:#list#:#Lista
 common#:#list_of_questions#:#Frågelista
+common#:#list_view#:#List View###28 10 2024 new variable
 common#:#listaction_learning_progress_settings#:#Learning Progress Settings###21 11 2023 new variable
 common#:#lm#:#inlärningsmodul ILIAS
 common#:#lm_add#:#Skapa utbildningsmodul för ILIAS
@@ -4834,7 +4940,6 @@ common#:#obj_chap#:#Kapitel
 common#:#obj_chta#:#Chatt
 common#:#obj_chtr#:#chatroom
 common#:#obj_chtr_duplicate#:#Kopiera chattrum
-common#:#obj_cld#:#Cloud Object###29 07 2022 ny variabel
 common#:#obj_cmis#:#LRS
 common#:#obj_cmis_desc#:#Konfigurera olika typer av Learning Record Stores
 common#:#obj_cmix#:#xAPI/cmi5
@@ -4916,6 +5021,8 @@ common#:#obj_ltis#:#LTI
 common#:#obj_ltis_desc#:#Inlärningsverktyg Interoperabilitet
 common#:#obj_mail#:#E-post
 common#:#obj_mail_desc#:#Globala inställningar för e-post
+common#:#obj_mailr#:#Read Mail###28 10 2024 new variable
+common#:#obj_mailu#:#Unread Mail###28 10 2024 new variable
 common#:#obj_mcst#:#Mediacast
 common#:#obj_mcst_duplicate#:#Kopiera Mediacast
 common#:#obj_mcts#:#Mediacast
@@ -5081,7 +5188,6 @@ common#:#objs_book#:#Bokning av pooler
 common#:#objs_cat#:#Kategorier
 common#:#objs_catr#:#Kategorilänkar
 common#:#objs_chtr#:#chatrooms
-common#:#objs_cld#:#Cloud Objects###29 07 2022 ny variabel
 common#:#objs_cmix#:#Objekt xAPI/cmi5
 common#:#objs_copa#:#Innehållssidor
 common#:#objs_crs#:#Kurser
@@ -5120,6 +5226,7 @@ common#:#objs_rglo#:#ECS ordlistor
 common#:#objs_rgrp#:#ECS-grupper
 common#:#objs_rlm#:#ECS utbildningsmoduler
 common#:#objs_role#:#Rolls
+common#:#objs_rolf#:#Role Folders###28 10 2024 new variable
 common#:#objs_rtst#:#ECS-tester
 common#:#objs_rwik#:#ECS wikis
 common#:#objs_sahs#:#SCORM utbildningsmoduler
@@ -5443,6 +5550,7 @@ common#:#save_settings#:#Spara inställningar
 common#:#save_user_related_data#:#Spara användarspecifika åtkomstdata
 common#:#saved_successfully#:#Dina ändringar har sparats
 common#:#saving#:#Säker...
+common#:#scope#:#Scope###28 10 2024 new variable
 common#:#scorm_create_export_file_html#:#Skapa HTML exportfil
 common#:#scorm_create_export_file_pdf#:#Skapa PDF-exportfil
 common#:#scorm_create_export_file_scrom12#:#Skapa exportfil för SCORM 1.2
@@ -5509,6 +5617,7 @@ common#:#session_mail_subject_registered#:#Registrering av användaren "%s" för
 common#:#session_reminder#:#Session-Påminnelse
 common#:#session_reminder_alert#:#Din session kommer att löpa ut i %1$s av %2$s!  Klicka på OK för att förlänga sessionen! Om du däremot inte längre vill bli påmind i den aktuella webbläsarsessionen väljer du Avbryt.  Berörd installation
 common#:#session_reminder_info#:#Om aktiverat kommer du att få en påminnelse innan din session löper ut.
+common#:#session_reminder_input#:#Session Reminder (in Minutes)###28 10 2024 new variable
 common#:#session_reminder_lead_time#:#Tid för ledning
 common#:#session_reminder_lead_time_info#:#Här kan du definiera när ILIAS ska varna dig innan din session löper ut. Du kommer då att få ett meddelande och kan enkelt förlänga sessionen med ett musklick. Ange ett värde i minuter. Rekommenderat är 5 minuter.<br />Det aktuella värdet för hur länge e
 common#:#session_reminder_session_duration#:#(Aktuell sessions varaktighet
@@ -5589,6 +5698,7 @@ common#:#soap_user_administration#:#Administration via SOAP
 common#:#soap_user_administration_desc#:#Om den är påslagen kan ILIAS hanteras via SOAP-gränssnittet.
 common#:#soap_wsdl_path#:#WSDL-väg
 common#:#soap_wsdl_path_info#:#Här kan du ange sökvägen till den WSDL-fil som ska användas av ILIAS för webbtjänsten. Om du lämnar fältet tomt kommer följande sökväg att användas som standard
+common#:#sort#:#Sort###28 10 2024 new variable
 common#:#sort_ascending#:#Sortera stigande
 common#:#sort_ascending_long#:#Ändra sortering till stigande
 common#:#sort_by_this_column#:#Sortera efter denna kolumn
@@ -5670,6 +5780,7 @@ common#:#tests#:#Test
 common#:#textbox#:#Textruta
 common#:#thread#:#Topic
 common#:#thumbnail#:#Miniatyrbild
+common#:#tile_view#:#Tile View###28 10 2024 new variable
 common#:#time#:#Tid
 common#:#time_limit#:#Tillgång
 common#:#time_limit_add_time_limit_for_selected#:#Var god ange en tidsperiod för de valda användarna.
@@ -6045,6 +6156,7 @@ cont#:#cont_tile_size_3#:#mycket stor (upp till två plattor på en rad)
 cont#:#cont_tile_size_4#:# full bredd (en kakelplatta på en rad)
 cont#:#cont_tile_view#:#Kakelplattor
 cont#:#cont_tile_view_info#:#Visa underordnade objekt som brickor. Bilder för dessa plattor kan laddas upp i inställningarna för varje enskilt objekt.
+cont#:#cont_trash_general_usage#:#If you want to remove a huge amount of old, deleted objects from the system it is highly advisable to start with non-container objects (i.e. Files, Glossaries, Tests,..) and thus removing all objects from the containers (Categories, Courses, Groups, Learning Sequences,...) . Using the filters "Type" and "Deleted on" helps this process. Then finally remove the containers.###28 10 2024 new variable
 contact#:#contact_awrn_ap_contacts#:#Bekräftade kontakter
 contact#:#contact_awrn_ap_contacts_info#:#Alla bekräftade kontakter för en användare listas.
 contact#:#contact_awrn_req_contacts#:#Kontaktförfrågningar
@@ -6052,8 +6164,6 @@ contact#:#contact_awrn_req_contacts_info#:#Alla kontaktförfrågningar är lista
 content#:#Pages#:#Sidor
 content#:#add_menu_entry#:#Lägg till menyalternativ &gt;&gt;
 content#:#all_pages#:# för hela utbildningsmodulen
-content#:#choose_public_mode#:#Tillträdesrätt för icke inloggade användare
-content#:#choose_public_pages#:#Välj offentligt tillgängliga sidor
 content#:#citate#:#Cite
 content#:#citate_from#:#Citing ...
 content#:#citate_page#:#Hänvisa till denna sida
@@ -7266,7 +7376,6 @@ content#:#scplayer_suspendall#:#Avbryt redigering
 content#:#selectFooter#:#Välj som sidfot
 content#:#selectHeader#:#Välj som rubrik
 content#:#select_a_file#:#Välj en fil.
-content#:#selected_pages_only#:#Endast för de sidor som valts nedan
 content#:#seq_close#:#Stäng fönstret för SCORM-inlärningsmodulen.
 content#:#seq_endsession#:#Den aktuella kurssessionen har avslutats.
 content#:#seq_error#:#Ett internt undantagsfel har uppstått i sekvenseraren.
@@ -8012,6 +8121,12 @@ crs#:#timings_usr_edit#:#Personlig planering av lärande
 crs#:#tutor_email#:#E-post
 crs#:#tutor_name#:#Namn
 crs#:#tutor_phone#:#Telefon
+crs#:#tutorial_support_block_byline#:#The 'Tutorial Support' block is displayed in the 'Contents' tab. The user selected as "Contact Person" in the "Members" Tab is shown.###28 10 2024 new variable
+crs#:#tutorial_support_block_contact#:#Contact###28 10 2024 new variable
+crs#:#tutorial_support_block_send_mail#:#send email###28 10 2024 new variable
+crs#:#tutorial_support_block_setting_desc#:#The 'Tutorial Support' block is displayed in the 'Contents' tab.###28 10 2024 new variable
+crs#:#tutorial_support_block_setting_title#:#Tutorial Support Block###28 10 2024 new variable
+crs#:#tutorial_support_block_title#:#Contact Person###28 10 2024 new variable
 crs#:#user_fields#:#Personliga profiluppgifter
 crsv#:#crsv_create#:#Skapa kursintyg
 crsv#:#crsv_create_info#:#Välj en kurs för vilken du behöver ett intyg
@@ -8020,6 +8135,9 @@ dash#:#dash_added_to_favs#:#Posten har lagts till i personliga favoriter.
 dash#:#dash_avail_presentation#:#Tillgängliga presentationer
 dash#:#dash_avail_sortation#:#Tillgängliga sorter
 dash#:#dash_click_here#:#Klicka här
+dash#:#dash_co_delete#:#Delete Dashboard style###28 10 2024 new variable
+dash#:#dash_co_lang#:#Dashboard style by languages###28 10 2024 new variable
+dash#:#dash_customization#:#Customize Dashboard Content###28 10 2024 new variable
 dash#:#dash_dashboard#:#Dashboard
 dash#:#dash_default_presentation#:#Standardiserad presentation
 dash#:#dash_default_sortation#:#Standard sortering
@@ -8041,6 +8159,7 @@ dash#:#dash_main_panel#:#Huvudområde
 dash#:#dash_make_favourite#:#Lägg till i favoriter
 dash#:#dash_member_main_alt#:#En vy över medlemskapen kan också inkluderas direkt i huvudmenyn.
 dash#:#dash_memberships#:#Mina kurser och grupper
+dash#:#dash_page_edit_info#:#The content of this page is displayed to all users on their dashboard. The contents of the various blocks of the dashboard are presented below.###28 10 2024 new variable
 dash#:#dash_presentation#:#Presentation
 dash#:#dash_recommended_content#:#Recommended Content###21 11 2023 new variable
 dash#:#dash_remove_from_list#:#Ta bort från listan
@@ -8143,10 +8262,19 @@ dateplaner#:#cal_ch_assign_participants#:#Tilldela deltagare
 dateplaner#:#cal_ch_assigned_apps#:#Antal datum
 dateplaner#:#cal_ch_book#:#Boka en konsultation
 dateplaner#:#cal_ch_booking#:#Bokning av resurser
+dateplaner#:#cal_ch_booking_col_comments#:#Comments###28 10 2024 new variable
+dateplaner#:#cal_ch_booking_comment#:#Comment:###28 10 2024 new variable
+dateplaner#:#cal_ch_booking_link#:#Link to Consultation Hours:###28 10 2024 new variable
 dateplaner#:#cal_ch_booking_message_tbl#:#Kommentar till ansökan
+dateplaner#:#cal_ch_booking_num_available#:#Available Slots###28 10 2024 new variable
+dateplaner#:#cal_ch_booking_num_free_short#:#%s free###28 10 2024 new variable
+dateplaner#:#cal_ch_booking_other_participants#:#Other Participants:###28 10 2024 new variable
 dateplaner#:#cal_ch_booking_owner#:#Speaking at###Modifierad som en del av arbetet med att integrera ett jämställdhetsperspektiv i ILIAS 8
+dateplaner#:#cal_ch_booking_participants#:#Participants###28 10 2024 new variable
 dateplaner#:#cal_ch_booking_reminder_body#:#Ditt möte med "%s" kommer att äga rum om några dagar.
 dateplaner#:#cal_ch_booking_reminder_subject#:#Datum påminnelse "%s"
+dateplaner#:#cal_ch_booking_start#:#Start###28 10 2024 new variable
+dateplaner#:#cal_ch_booking_your_comment#:#Your comment:###28 10 2024 new variable
 dateplaner#:#cal_ch_bookings#:#Deltagare
 dateplaner#:#cal_ch_bookings_tbl#:#Bokade datum
 dateplaner#:#cal_ch_cancel_booking#:#Avboka bokning
@@ -8157,6 +8285,7 @@ dateplaner#:#cal_ch_ch#:#Talking hour möten
 dateplaner#:#cal_ch_cron_reminder#:#Skicka meddelanden om samråd
 dateplaner#:#cal_ch_cron_reminder_days#:#Antal dagar
 dateplaner#:#cal_ch_cron_reminder_info#:#Om aktiverat kommer användare som har bokat en konsultationstid att få ett påminnelsemeddelande om kommande möten. Ange hur många dagar i förväg påminnelserna ska skickas.
+dateplaner#:#cal_ch_current_booking_comment#:#Comment###28 10 2024 new variable
 dateplaner#:#cal_ch_current_bookings#:#Aktuella deltagare
 dateplaner#:#cal_ch_deadline#:#Senaste registrering
 dateplaner#:#cal_ch_deadline_info#:#Vänligen ange upp till hur många timmar före konsultationstiden som registrering ska vara möjlig.
@@ -8171,6 +8300,7 @@ dateplaner#:#cal_ch_field_ch#:#Talking hour möten
 dateplaner#:#cal_ch_form#:#Aktivera hantering av konsultationstimmar
 dateplaner#:#cal_ch_form_header#:#Hantering av kontorstid
 dateplaner#:#cal_ch_form_info#:#Detta alternativ aktiverar hanteringen av kontorstider i kalendern.
+dateplaner#:#cal_ch_free_of_available#:#%s of %s###28 10 2024 new variable
 dateplaner#:#cal_ch_grp_add_tbl#:#Skapa ny konsultgrupp
 dateplaner#:#cal_ch_grp_delete_sure#:#Är du säker på att du vill ta bort följande samrådsgrupper?
 dateplaner#:#cal_ch_grp_header#:#Talande grupp
@@ -8183,6 +8313,7 @@ dateplaner#:#cal_ch_grps#:#Talande grupper
 dateplaner#:#cal_ch_manager#:#Talande timme chef
 dateplaner#:#cal_ch_manager_info#:#Om du vill att dina kontorstider ska hanteras av en annan person måste du ange dennes inloggningsnamn här.
 dateplaner#:#cal_ch_max_books#:#Antal bokningar per deltagare
+dateplaner#:#cal_ch_minutes#:#Duration (min)###28 10 2024 new variable
 dateplaner#:#cal_ch_multi_edit_sequence#:#Redigera möten
 dateplaner#:#cal_ch_num_appointments#:#Antal möten per konsultationstimme
 dateplaner#:#cal_ch_num_appointments_info#:#Bestäm hur många på varandra följande möten som ska genereras.
@@ -8190,11 +8321,18 @@ dateplaner#:#cal_ch_num_bookings#:#Registreringar per möte
 dateplaner#:#cal_ch_personal_book#:#Personliga bokningar
 dateplaner#:#cal_ch_personal_ch#:#Personliga konsultationsmöten
 dateplaner#:#cal_ch_reject_booking#:#Avboka tidsbokning
+dateplaner#:#cal_ch_send_mail#:#Send Mail###28 10 2024 new variable
 dateplaner#:#cal_ch_target_object#:#Objekt i tidningen
 dateplaner#:#cal_ch_target_object_info#:#Talartimmar visas i kurser och grupper i ett litet block till höger. För att begränsa detta till vissa kurser eller grupper, ange Ref ID för objektet i fråga. Du hittar detta i URL:en för motsvarande objekt. Ange flera Ref-ID kommaseparerade. Oavsett det
 dateplaner#:#cal_ch_unknown_repository_object#:#Den angivna identifieraren för objektet är inte giltig.
 dateplaner#:#cal_ch_unknown_user#:#Det angivna inloggningsnamnet existerar inte.
 dateplaner#:#cal_ch_user_assignment_failed_info#:#Följande användare kunde inte tilldelas ett möte eftersom det maximala antalet bokningar överskreds.
+dateplaner#:#cal_ch_vm_period_all#:#All###28 10 2024 new variable
+dateplaner#:#cal_ch_vm_period_past#:#Past###28 10 2024 new variable
+dateplaner#:#cal_ch_vm_period_upcoming#:#Upcoming###28 10 2024 new variable
+dateplaner#:#cal_ch_vm_status_all#:#All###28 10 2024 new variable
+dateplaner#:#cal_ch_vm_status_booked#:#Booked Slots###28 10 2024 new variable
+dateplaner#:#cal_ch_vm_status_open#:#Open Slots###28 10 2024 new variable
 dateplaner#:#cal_change_calendar_view#:#Ändra kalendervy
 dateplaner#:#cal_change_responsible_users#:#Byt ut ansvariga medlemmar
 dateplaner#:#cal_changed_events_header#:#Nya och ändrade datum
@@ -8246,6 +8384,7 @@ dateplaner#:#cal_default_settings#:#standardvärden
 dateplaner#:#cal_del_app_sure#:#Är du säker på att du vill ta bort följande möten?
 dateplaner#:#cal_del_cal_sure#:#Vill du verkligen radera de valda kalendrarna?
 dateplaner#:#cal_delete_app_sure#:#Är du säker på att du vill ta bort följande möten?
+dateplaner#:#cal_delete_booking_info#:#Please confirm the deletion of this booking###28 10 2024 new variable
 dateplaner#:#cal_delete_cal#:#Radera kalender
 dateplaner#:#cal_delete_recurrence_rule#:#Ta bort avtalsserier
 dateplaner#:#cal_delete_recurrences#:#Ta bort alla upprepningar
@@ -8690,7 +8829,6 @@ dcl#:#dcl_table_create#:#Skapa tabell
 dcl#:#dcl_table_edit#:#Spara
 dcl#:#dcl_table_id#:#Tabeller ID
 dcl#:#dcl_table_info#:#I det följande definierar du vad användare som har "Enter"-rättigheten för datainsamlingen får göra i den här tabellen.
-dcl#:#dcl_table_info_title#:#Info
 dcl#:#dcl_table_list_fields#:#Fält i den valda tabellen
 dcl#:#dcl_table_list_tables#:#Tillgängliga tabeller
 dcl#:#dcl_table_settings_saved#:#Bordsinställningarna har sparats.
@@ -9034,6 +9172,7 @@ ecs#:#ecs_protocol#:#Protokoll
 ecs#:#ecs_publish_as#:#Publicera under
 ecs#:#ecs_publish_for#:#Släpp för
 ecs#:#ecs_published_for#:#Släppt för
+ecs#:#ecs_rcat_created_body_a#:#A new ECS Category has been created:###28 10 2024 new variable
 ecs#:#ecs_rcrs_created_body_a#:#En ny ECS-kurs skapades
 ecs#:#ecs_read_remote_links#:#Uppdatera kursinformation
 ecs#:#ecs_refresh_participants#:#Uppdatera ECS deltagare
@@ -9627,6 +9766,7 @@ exp#:#exp_error_disabled#:#Exporten av containerobjekt är avaktiverad. Om du ha
 exp#:#exp_error_too_many_objects#:#Exporten överskrider det maximalt tillåtna antalet objekt (%1). Välj ett mindre antal objekt.
 exp#:#exp_export_files#:#Exportera filer
 exp#:#exp_file_created#:#En exportfil har skapats.
+exp#:#exp_html#:#HTML###28 10 2024 new variable
 exp#:#exp_import_validation_err_no_matching_xsd#:#No valid schema file for version %s exists.###26 08 2024 new variable
 exp#:#exp_print_pdf#:#Print/PDF
 exp#:#exp_print_pdf_info#:#För att skapa en PDF, välj "Spara som PDF" som destination i utskriftsvyn.
@@ -9635,10 +9775,21 @@ exp#:#exp_show_print_view#:#Visa utskriftsvy
 exp#:#exp_xml#:#XML
 exp#:#export_created#:#En ny exportfil har skapats.
 exp#:#export_files_deleted#:#The selected export files have been deleted.###26 08 2024 new variable
+exp#:#export_options#:#Export Options###28 10 2024 new variable
+exp#:#export_type#:#Export Type###28 10 2024 new variable
+export#:#exp_export_dropdown#:#Export###28 10 2024 new variable
+export#:#exp_file#:#File Name###28 10 2024 new variable
+export#:#exp_public_access#:#Public Access###28 10 2024 new variable
+export#:#exp_size#:#File Size (MB)###28 10 2024 new variable
+export#:#exp_timestamp#:#Creation Date###28 10 2024 new variable
+export#:#exp_toggle_public_access#:#Toggle Public Access###28 10 2024 new variable
+export#:#exp_type#:#Type###28 10 2024 new variable
 export#:#export_create#:#Skapa ny
 export#:#export_create_new_file#:#Skapa ny exportfil
 export#:#export_existing#:#Återanvändning
 export#:#export_export_date#:#Exportdatum
+export#:#export_info_public_access#:#Public Access Export###28 10 2024 new variable
+export#:#export_info_public_access_download#:#Download###28 10 2024 new variable
 export#:#export_last_export#:#Senaste export
 export#:#export_last_export_file#:#Använd den senaste exportfilen
 export#:#export_last_file#:#Sista filen
@@ -9871,6 +10022,8 @@ forum#:#forums_download_attachment#:#Ladda ner fil
 forum#:#forums_edit_draft#:#Redigera utkast
 forum#:#forums_edit_post#:#Redigera inlägg
 forum#:#forums_enable_notification#:#Starta anmälan för detta ämne
+forum#:#forums_forum_notification#:#Send Forum Notifications###28 10 2024 new variable
+forum#:#forums_forum_notification_desc#:#If enabled, all users, who want to be informed about new posts in specified forum threads, will get notifications by mail.###28 10 2024 new variable
 forum#:#forums_forum_notification_disabled#:#Du kommer inte längre att meddelas om nya inlägg i detta forum.
 forum#:#forums_info_censor2_post#:#Är du säker på att censuren bör hävas för det här inlägget?
 forum#:#forums_info_censor_post#:#Giv en anledning till censuren.
@@ -10121,6 +10274,7 @@ grp#:#crs_grp_no_courses_assigned#:#Det finns inga grupper tilldelade.
 grp#:#events#:#Sessioner
 grp#:#grouping_change_assignment#:#Ändra uppdrag
 grp#:#grp_activate_notification#:# Aktivera avisering
+grp#:#grp_activation_online_info#:#Set the group online to make it visible and available for group members. If not, only group administrators and roles with permission "Edit Settings" have access to it.###28 10 2024 new variable
 grp#:#grp_add_to_group#:#Lägg till i grupp
 grp#:#grp_add_user#:#Lägg till användare
 grp#:#grp_add_user_to_group#:#Lägg till användare i grupp
@@ -10292,6 +10446,52 @@ grp#:#grp_wrong_reg_time_limit#:#Kontrollera dina poster för registreringsperio
 grp#:#reg_grp_max_members#:#Maximalt antal
 grp#:#reg_grp_max_members_short#:#Begränsat antal medlemmar
 grp#:#reg_grp_min_members#:#Minsta antal
+gsfo#:#accessibility#:#Accessibility###28 10 2024 new variable
+gsfo#:#confirm_delete#:#Do you really want to delete the following Item(s)?###28 10 2024 new variable
+gsfo#:#confirm_reset#:#Resetting the footer will restore all entries to their original state. All customizations and manual entries will be deleted. Do you want to continue?###28 10 2024 new variable
+gsfo#:#entries_add#:#Add Entry###28 10 2024 new variable
+gsfo#:#entries_edit#:#entries_edit###28 10 2024 new variable
+gsfo#:#entries_parent#:#Select Group###28 10 2024 new variable
+gsfo#:#entries_select_parent#:#Move Entry to Group###28 10 2024 new variable
+gsfo#:#entry_action#:#Link###28 10 2024 new variable
+gsfo#:#entry_action_info#:#Provide the full URL including the protocol (e.g. https://www.ilias.de)###28 10 2024 new variable
+gsfo#:#entry_activation_toggled#:#Activation has been toggled###28 10 2024 new variable
+gsfo#:#entry_active#:#Active###28 10 2024 new variable
+gsfo#:#entry_active_info#:#Activate this Entry###28 10 2024 new variable
+gsfo#:#entry_add#:#Add Entry###28 10 2024 new variable
+gsfo#:#entry_delete#:#Delete###28 10 2024 new variable
+gsfo#:#entry_deleted#:#Deleted###28 10 2024 new variable
+gsfo#:#entry_edit#:#Edit###28 10 2024 new variable
+gsfo#:#entry_external#:#Open in new Tab###28 10 2024 new variable
+gsfo#:#entry_move#:#Move###28 10 2024 new variable
+gsfo#:#entry_moved#:#Entry has been moved###28 10 2024 new variable
+gsfo#:#entry_title#:#Title (Default Language)###28 10 2024 new variable
+gsfo#:#entry_toggle_activation#:#(De-)Activate###28 10 2024 new variable
+gsfo#:#group_activation_toggled#:#Activation has been toggled###28 10 2024 new variable
+gsfo#:#group_active#:#Active###28 10 2024 new variable
+gsfo#:#group_active_info#:#Activate this Group###28 10 2024 new variable
+gsfo#:#group_add#:#Add Group###28 10 2024 new variable
+gsfo#:#group_delete#:#Delete###28 10 2024 new variable
+gsfo#:#group_deleted#:#Deleted###28 10 2024 new variable
+gsfo#:#group_edit#:#Edit Group###28 10 2024 new variable
+gsfo#:#group_edit_entries#:#Edit Entries###28 10 2024 new variable
+gsfo#:#group_items#:#Items###28 10 2024 new variable
+gsfo#:#group_not_empty#:#This Group contains Entries. Please move or delete them first.###28 10 2024 new variable
+gsfo#:#group_title#:#Title (Default Language)###28 10 2024 new variable
+gsfo#:#group_title_info#:#Additional Translations can be added with the Action "Add Translation" after saving the Group.###28 10 2024 new variable
+gsfo#:#group_toggle_activation#:#(De-)Activate###28 10 2024 new variable
+gsfo#:#group_translate#:#Translate###28 10 2024 new variable
+gsfo#:#info_not_deletable_core#:#Default Items cannot be deleted.###28 10 2024 new variable
+gsfo#:#info_not_deletable_not_empty#:#Groups with Entries cannot be deleted.###28 10 2024 new variable
+gsfo#:#legal_information#:#Legal Information###28 10 2024 new variable
+gsfo#:#obj_gsfo#:#Footer###28 10 2024 new variable
+gsfo#:#obj_gsfo_desc#:#Administrate Footer Layout and Content###28 10 2024 new variable
+gsfo#:#order_saved#:#Order saved###28 10 2024 new variable
+gsfo#:#permanent#:#permanent###28 10 2024 new variable
+gsfo#:#reset_footer#:#Reset Footer###28 10 2024 new variable
+gsfo#:#reset_success#:#Footer has been reset successfully###28 10 2024 new variable
+gsfo#:#services#:#Services###28 10 2024 new variable
+gsfo#:#support#:#Support###28 10 2024 new variable
 help#:#help_all#:#Alla
 help#:#help_component#:#Komponent
 help#:#help_filter#:#Filter
@@ -10755,6 +10955,17 @@ lm#:#lm_edit_chapters#:#Redigera kapitel
 lm#:#lm_edit_lm_settings#:#Redigera inställningar för lärmodulen
 lm#:#lm_est_reading_time#:#Uppskattad lästid
 lm#:#lm_est_reading_time_info#:#I lärmoduler kan en uppskattad lästid bestämmas och visas.
+lm#:#lm_insert_chapter#:#Insert chapter###28 10 2024 new variable
+lm#:#lm_insert_chapter_after#:#Insert chapter after###28 10 2024 new variable
+lm#:#lm_insert_chapter_before#:#Insert chapter before###28 10 2024 new variable
+lm#:#lm_insert_layout_after#:#Insert template after###28 10 2024 new variable
+lm#:#lm_insert_layout_before#:#Insert template before###28 10 2024 new variable
+lm#:#lm_insert_page#:#Insert page###28 10 2024 new variable
+lm#:#lm_insert_page_after#:#Insert page after###28 10 2024 new variable
+lm#:#lm_insert_page_before#:#Insert page before###28 10 2024 new variable
+lm#:#lm_insert_page_clip#:#Insert page from clipboard###28 10 2024 new variable
+lm#:#lm_insert_page_clip_after#:#Insert page from clipboard after###28 10 2024 new variable
+lm#:#lm_insert_page_clip_before#:#Insert page from clipboard before###28 10 2024 new variable
 lm#:#lm_page_added#:#Page has been added.###21 11 2023 new variable
 lm#:#lm_page_type_lm#:#sida för utbildningsmodul
 lm#:#lm_pages_added#:#Pages have been added.###21 11 2023 new variable
@@ -11214,6 +11425,7 @@ mail#:#link_check_affected_links#:#Påverkade länkar
 mail#:#link_check_introduction#:#Följande externa länkar är ogiltiga
 mail#:#link_check_perma_link#:#Permanent länk
 mail#:#link_check_reason#:#Du får detta meddelande eftersom du har aktiverat meddelandet om ogiltiga externa länkar.
+mail#:#mail_1#:#1 Mail###28 10 2024 new variable
 mail#:#mail_absence_auto_responder_body#:#Message###21 11 2023 new variable
 mail#:#mail_absence_auto_responder_body_hint#:#This is an automatically created message. You will not receive this kind of message until [NEXT_AUTO_RESPONDER_DATETIME].###21 11 2023 new variable
 mail#:#mail_absence_auto_responder_body_info#:#This message will be sent automatically during your absence when users send you an ILIAS internal message.<br>Users will be notified of your absence every %1$s days if they send further messages.###21 11 2023 new variable
@@ -11229,6 +11441,7 @@ mail#:#mail_add_folder#:#Skapa ny mapp
 mail#:#mail_add_recipient#:#Ange vem som ska få mailet. Ange inloggningsnamn för ILIAS eller giltiga e-postadresser.###Modifierad som en del av jämställdhetsintegreringen för ILIAS 8
 mail#:#mail_add_subfolder#:#Lägg till undermapp
 mail#:#mail_add_subject#:#Vänligen ange ett ämne
+mail#:#mail_all_in_trash#:#All in Trash###28 10 2024 new variable
 mail#:#mail_allow_external#:#Externa e-postmeddelanden
 mail#:#mail_allow_external_info#:#Om den inte är aktiverad undertrycks sändningen av externa e-postmeddelanden (via SMTP) globalt.
 mail#:#mail_assign_entry_to_mailing_list#:#Att tilldela en kontakt till distributionslistan "%s
@@ -11252,6 +11465,7 @@ mail#:#mail_crs_list_members_not_available_for_at_least_one_crs#:#Medlemmarna i 
 mail#:#mail_crs_roles#:#Alla personer med följande lokala roller###Modifierad som en del av jämställdhetsarbetet för ILIAS 8. Etiketten är nu generaliserad för alla komponenter som stöder "mail till medlemmar".
 mail#:#mail_deleted#:#Mailen har tagits bort
 mail#:#mail_deleted_entry#:#Posterna har tagits bort
+mail#:#mail_download_attachment#:#Download Attachment###28 10 2024 new variable
 mail#:#mail_download_zip_no_attachments#:#Inga bilagor hittades.
 mail#:#mail_edit_tpl#:#Redigera textmall
 mail#:#mail_email_sys_body#:#Detta är ett testmejl för att testa sändningen av ett e-postmeddelande som automatiskt initieras av systemet till externa e-postadresser.
@@ -11283,15 +11497,17 @@ mail#:#mail_files_deleted#:#Filen/filerna har raderats
 mail#:#mail_filter#:#Filter
 mail#:#mail_filter_attach#:#Attachments
 mail#:#mail_filter_body#:#Meddelande
+mail#:#mail_filter_display#:#Display###28 10 2024 new variable
 mail#:#mail_filter_field_placeholder#:#Sök efter nyheter ...
-mail#:#mail_filter_only_unread#:#Oläst
-mail#:#mail_filter_only_user_mails#:#Dölja systemmeddelanden
-mail#:#mail_filter_only_with_attachments#:#Attachments
 mail#:#mail_filter_period#:#Tidsperiod
-mail#:#mail_filter_period_from#:#Från
-mail#:#mail_filter_period_until#:#Till
 mail#:#mail_filter_recipients#:#An###Modifierad som en del av arbetet med att integrera ett jämställdhetsperspektiv i ILIAS 8
 mail#:#mail_filter_sender#:#From##Modifierad som en del av arbetet med att integrera ett jämställdhetsperspektiv i ILIAS 8
+mail#:#mail_filter_show_read#:#Show Read###28 10 2024 new variable
+mail#:#mail_filter_show_system_mails#:#Show System Notifications###28 10 2024 new variable
+mail#:#mail_filter_show_unread#:#Show Unread###28 10 2024 new variable
+mail#:#mail_filter_show_user_mails#:#Show User Mails###28 10 2024 new variable
+mail#:#mail_filter_show_with_attachments#:#Show With Attachments###28 10 2024 new variable
+mail#:#mail_filter_show_without_attachment#:#Show Without Attachment###28 10 2024 new variable
 mail#:#mail_filter_subject#:#Ämne
 mail#:#mail_filter_txt#:#Sökning i
 mail#:#mail_first_email#:#Första e-postadress
@@ -11421,10 +11637,12 @@ mail#:#mail_smtp_user#:#Användare
 mail#:#mail_subject_prefix#:#Ämne för e-post
 mail#:#mail_subject_prefix_info#:#Du kan ange en text här som kommer att prefixas till ämnesraden i utgående, automatiskt genererade e-postmeddelanden. Det rekommenderas att ange ett prefix för att göra det lättare för användarna att filtrera meddelandena.
 mail#:#mail_subject_too_long#:#Ämnet är för långt.
+mail#:#mail_success_removed_user#:#User(s) successfully removed from mailing list.###28 10 2024 new variable
 mail#:#mail_sure_delete#:#Är du säker på att du vill radera de markerade e-postmeddelandena?
 mail#:#mail_sure_delete_entry#:#Är du säker på att du vill ta bort de markerade posterna?
 mail#:#mail_sure_delete_file#:#Är du säker på att du vill radera de markerade filerna?
 mail#:#mail_sure_delete_folder#:#Mappen och dess innehåll är oåterkalleligen raderade!
+mail#:#mail_sure_remove_user#:#Are you sure you want to remove the following user(s) from the members list?###28 10 2024 new variable
 mail#:#mail_system_sys_env_from_addr#:#Technical Sender Address ("SENDER")###Modifierad som en del av arbetet med att integrera ett jämställdhetsperspektiv i ILIAS 8
 mail#:#mail_system_sys_env_from_addr_info#:# Ange den tekniska sändningsadressen ("SENDER"-rubriken) här. Om du lämnar fältet tomt kommer avsändarens e-postadress ("FROM" header) att användas för extern sändning. I annat fall är det serveradministrationens uppgift att konfigurera rubriken.###Modif
 mail#:#mail_system_sys_from_addr#:#FROM" adress för automatiskt skickade e-postmeddelanden
@@ -11649,7 +11867,6 @@ mep#:#mep_content_snippet_used_in_older_versions#:#Attention
 mep#:#mep_copy_to_mep#:#Kopiera till mediapool
 mep#:#mep_create_content_snippet#:#Skapa innehållsmodul
 mep#:#mep_create_folder#:# Skapa mapp
-mep#:#mep_create_from_upload_dir#:#Lägg till mediaobjekt från uppladdningskatalogen
 mep#:#mep_create_media_files#:#Skapa mediaobjekt
 mep#:#mep_create_mob#:#Skapa mediaobjekt
 mep#:#mep_default_height#:#Standardhöjd
@@ -11674,7 +11891,6 @@ mep#:#mep_new_content_snippet#:#Ny innehållsmodul
 mep#:#mep_new_folder#:#Ny mapp
 mep#:#mep_page_properties#:#Egenskaper hos byggstenen
 mep#:#mep_page_type_mep#:#Innehållsmodul
-mep#:#mep_sel_upload_dir_files#:#Välj filer/kataloger.
 mep#:#mep_thumbnail#:#Miniatyrbild
 mep#:#mep_title_and_description#:#Titel och beskrivning
 mep#:#mep_trans_import_info#:#Om du har exporterat denna modul som "XML (basic language for translation - master)" till en annan installation, kan du återimportera de översatta exportfilerna från denna installation här.
@@ -11757,6 +11973,7 @@ meta#:#md_advanced#:#Användardefinierade metadata
 meta#:#md_aria_language_selection#:#Val av språk
 meta#:#md_copyright#:#Upphovsrätt
 meta#:#md_copyright_add#:#Ny standard
+meta#:#md_copyright_admin_tab#:#Copyright & OER###28 10 2024 new variable
 meta#:#md_copyright_alt_text#:#Alternativ text
 meta#:#md_copyright_alt_text_info#:#Används för 'alt'-attributet för bilden
 meta#:#md_copyright_default#:#Default###26 08 2024 new variable
@@ -11780,14 +11997,55 @@ meta#:#md_days#:#dagar
 meta#:#md_delete_cp_sure#:#Vill du verkligen ta bort de valda standardvärdena?
 meta#:#md_delimiter#:#Separator
 meta#:#md_delimiter_info#:#Separatorn används vid snabb redigering av metadata för att separera flera poster. Standardtecknet är ','.###Modifierad som en del av jämställdhetsintegreringsaktiviteter för ILIAS 8
+meta#:#md_editor_custom_input#:#Custom###28 10 2024 new variable
+meta#:#md_editor_from_vocab_input#:#From Vocabulary###28 10 2024 new variable
+meta#:#md_editor_value#:#Value###28 10 2024 new variable
 meta#:#md_fields#:#Fält
+meta#:#md_import_file_vocab#:#Import File###28 10 2024 new variable
+meta#:#md_import_vocab#:#Import###28 10 2024 new variable
+meta#:#md_import_vocab_modal#:#Import From File###28 10 2024 new variable
 meta#:#md_months#:#Månader
+meta#:#md_oai_contact_mail#:#Contact E-Mail###28 10 2024 new variable
+meta#:#md_oai_identifier_prefix#:#OAI Prefix###28 10 2024 new variable
+meta#:#md_oai_identifier_prefix_info#:#This prefix is used as a namespace in the identifiers of returned OER records.###28 10 2024 new variable
+meta#:#md_oai_pmh_enabled#:#Allow Querying via OAI-PMH Interface###28 10 2024 new variable
+meta#:#md_oai_pmh_enabled_info#:#If enabled, harvested OER can be queried by external interested parties, e.g. OER referatories.###28 10 2024 new variable
+meta#:#md_oai_repository_name#:#Repository Name###28 10 2024 new variable
+meta#:#md_oai_repository_name_info#:#This is returned as the name of this ILIAS installation when queried.###28 10 2024 new variable
 meta#:#md_obj_types#:# Tilldelade objekt
 meta#:#md_record_export_table#:#Exportera filer
 meta#:#md_record_list_table#:#Användardefinierade metadataposter
 meta#:#md_separated_by#:#Separerad med %s
 meta#:#md_time#:#Tid
+meta#:#md_unknown_vocabulary_flag#:#(unknown vocabulary)###28 10 2024 new variable
 meta#:#md_used#:#Användning (antal)
+meta#:#md_vocab_activate_action#:#Activate###28 10 2024 new variable
+meta#:#md_vocab_active_column#:#Active###28 10 2024 new variable
+meta#:#md_vocab_all_values_title#:#Values for %s (%s)###28 10 2024 new variable
+meta#:#md_vocab_allow_custom_input_action#:#Allow Custom Input###28 10 2024 new variable
+meta#:#md_vocab_custom_input_column#:#Custom Input Allowed###28 10 2024 new variable
+meta#:#md_vocab_deactivate_action#:#Deactivate###28 10 2024 new variable
+meta#:#md_vocab_delete_action#:#Delete###28 10 2024 new variable
+meta#:#md_vocab_delete_confirmation_text#:#Are you sure you want to delete the vocabulary for %s (%s) with the following values?###28 10 2024 new variable
+meta#:#md_vocab_delete_confirmation_title#:#Delete Vocabulary###28 10 2024 new variable
+meta#:#md_vocab_deletion_successful#:#Vocabulary successfully deleted.###28 10 2024 new variable
+meta#:#md_vocab_disallow_custom_input_action#:#Disallow Custom Input###28 10 2024 new variable
+meta#:#md_vocab_element_column#:#Element###28 10 2024 new variable
+meta#:#md_vocab_element_with_condition#:#%s where %s is %s###28 10 2024 new variable
+meta#:#md_vocab_import_invalid#:#The import file is invalid:<br/>%s###28 10 2024 new variable
+meta#:#md_vocab_import_successful#:#Vocabulary successfully imported.###28 10 2024 new variable
+meta#:#md_vocab_import_upload_failed#:#Upload of the import file failed.###28 10 2024 new variable
+meta#:#md_vocab_preview_column#:#Preview###28 10 2024 new variable
+meta#:#md_vocab_show_all_action#:#Show All Values###28 10 2024 new variable
+meta#:#md_vocab_source_column#:#Source###28 10 2024 new variable
+meta#:#md_vocab_table_title#:#Vocabularies###28 10 2024 new variable
+meta#:#md_vocab_type_column#:#Type###28 10 2024 new variable
+meta#:#md_vocab_type_controlled_string#:#Controlled Text###28 10 2024 new variable
+meta#:#md_vocab_type_controlled_vocab_value#:#Controlled Selection###28 10 2024 new variable
+meta#:#md_vocab_type_copyright#:#Copyright###28 10 2024 new variable
+meta#:#md_vocab_type_standard#:#Standard###28 10 2024 new variable
+meta#:#md_vocab_update_successful#:#Vocabulary successfully updated.###28 10 2024 new variable
+meta#:#md_vocabularies_config#:#LOM Vocabularies###28 10 2024 new variable
 meta#:#meta_1#:#1###21 11 2023 new variable
 meta#:#meta_2#:#2###21 11 2023 new variable
 meta#:#meta_3#:#3###21 11 2023 new variable
@@ -12076,6 +12334,7 @@ meta#:#meta_contribute_plural#:#Contribute###21 11 2023 new variable
 meta#:#meta_copyright#:#Upphovsrätt
 meta#:#meta_copyright_and_other_restrictions#:#Upphovsrätt och andra begränsningar
 meta#:#meta_copyright_change_info#:#Var noga med att respektera upphovsrätten när du ändrar licensen för detta objekt. Fortsätt endast om du är behörig att besluta om rättigheterna att använda objektet.###Modifierad som en del av jämställdhetsintegreringsaktiviteterna för ILIAS 8
+meta#:#meta_copyright_change_oer_info#:#The copyright licence you have selected makes this object eligible to be harvested as an Open Educational Resource. If you continue, it might be listed as such along with an export file, and it might get published beyond this platform.###28 10 2024 new variable
 meta#:#meta_copyright_change_warning_title#:#Ändra licens###Modifierad som en del av arbetet med att integrera ett jämställdhetsperspektiv i ILIAS 8
 meta#:#meta_copyright_in_use#:#Aktuell
 meta#:#meta_copyright_outdated#:#Veraltet
@@ -12144,6 +12403,7 @@ meta#:#meta_idea#:#Idé
 meta#:#meta_identifier#:#Identifiering
 meta#:#meta_identifier_plural#:#Identifiers###21 11 2023 new variable
 meta#:#meta_index#:#Index
+meta#:#meta_info_licence_section#:#Licence and Use###28 10 2024 new variable
 meta#:#meta_info_only_repository_objects#:#Endast tidskriftsobjekt visas nedan, inte mediaobjekt eller sidor i lärmoduler.
 meta#:#meta_initiator#:#Initiator
 meta#:#meta_installation_remarks#:#Installationsanvisningar
@@ -12343,8 +12603,10 @@ meta#:#meta_oer_blocked#:#Det ignoreras av OER-skördaren
 meta#:#meta_oer_blocked_info#:# Kommer inte automatiskt att listas som öppen utbildningsresurs (OER)
 meta#:#meta_oer_copyright_selection#:#Val av licens
 meta#:#meta_oer_copyright_selection_info#:#Endast objekt som publicerats under den/de valda licensen/licenserna kommer att länkas till OER-kategorin.
+meta#:#meta_oer_exposed_source#:#Category for Published OER Content###28 10 2024 new variable
 meta#:#meta_oer_harvester#:#OER Skördare
 meta#:#meta_oer_harvester_desc#:#Scannar alla filobjekt i magasinet efter deras licens. OER harvester lägger till alla resurser under valda CC-licenser till den kategori som definierats i inställningarna för cron-jobbet. För att detta cron-jobb ska ge resultat måste val av upphovsrätt v
+meta#:#meta_oer_object_type_selection#:#Harvested Object Types###28 10 2024 new variable
 meta#:#meta_oer_target#:#Kategori för OER-utgåvor
 meta#:#meta_opera#:#Opera###21 11 2023 new variable
 meta#:#meta_operating_system#:#Operativt system
@@ -12998,6 +13260,7 @@ poll#:#poll_block_message_already_voted#:#Du har redan röstat.
 poll#:#poll_block_message_no_answers#:#Denna omröstning är inte slutförd.
 poll#:#poll_block_results_available_on#:#Resultaten kommer att publiceras på %s.
 poll#:#poll_cannot_set_online_no_answers#:#The status cannot be changed to &quot;online&quot; because this poll has no question!###21 11 2023 new variable
+poll#:#poll_chart_votes#:#Votes###28 10 2024 new variable
 poll#:#poll_comments#:#Kommentarer
 poll#:#poll_copy#:#Kopiera omröstning
 poll#:#poll_delete_votes#:#Radera alla röster
@@ -13022,7 +13285,6 @@ poll#:#poll_notification_deactivated#:#Notification Deactivated###21 11 2023 new
 poll#:#poll_notification_subscribe#:# Aktivera avisering
 poll#:#poll_notification_unsubscribe#:#Avaktivera avisering
 poll#:#poll_percentage#:#Aktuell andel
-poll#:#poll_piechart#:#Pie diagram
 poll#:#poll_population#:#%s deltagare
 poll#:#poll_population_singular#:#1 Participant###21 11 2023 new variable
 poll#:#poll_question#:#Fråga
@@ -13034,6 +13296,7 @@ poll#:#poll_result_sorting_votes#:#Efter antal röster (fallande)
 poll#:#poll_result_users#:#Deltagare
 poll#:#poll_show_results_as#:#Visa resultat som
 poll#:#poll_sortorder#:#Sortering
+poll#:#poll_stacked_chart#:#Stacked Chart###28 10 2024 new variable
 poll#:#poll_view_results#:#Visa resultat
 poll#:#poll_view_results_after_period#:#Efter omröstningsperiod
 poll#:#poll_view_results_after_period_impossible#:#Omröstningsperioden är inte tidsbegränsad.
@@ -13165,6 +13428,7 @@ prg#:#prg_auto_member_select_crs#:#Kurser
 prg#:#prg_auto_member_select_grp#:#Grupper
 prg#:#prg_auto_member_select_role#:#Rolls
 prg#:#prg_autoassignment#:#(automatisk)
+prg#:#prg_availability_action_not_allowed#:#Cannot set Availability Period on Study Programmes.###28 10 2024 new variable
 prg#:#prg_belongs_to#:#Höra till
 prg#:#prg_can_not_manage_in_repo#:#Du får inte administrera detta studieprogram eftersom medlemmar redan är tilldelade det.
 prg#:#prg_cancel#:#Avbryt
@@ -13181,6 +13445,7 @@ prg#:#prg_create_new_leaf#:#Lägg till ny kurslänk.
 prg#:#prg_create_new_node#:#Lägg till nytt studieprogram
 prg#:#prg_cron_job_configuration#:#Automatiska e-postmeddelanden
 prg#:#prg_custom_plan#:#Individuell plan
+prg#:#prg_cut_action_not_allowed#:#Cannot move Study Programmes###28 10 2024 new variable
 prg#:#prg_dash_label_finish_until#:#Att göras av
 prg#:#prg_dash_label_gain#:#Aktuell status
 prg#:#prg_dash_label_minimum#:#Minsta mål
@@ -13207,6 +13472,7 @@ prg#:#prg_description#:#Beskrivning
 prg#:#prg_edit#:#Redigera studieprogram
 prg#:#prg_expiry_date#:#Kvalificering av förfaranden
 prg#:#prg_formatted_period#:#%d dagar
+prg#:#prg_import_action_not_allowed#:#Cannot import into Study Programmes.###28 10 2024 new variable
 prg#:#prg_invalidate_expired_progresses_desc#:#Sätter 'Validity' till 'Invalid' när utgångsdatum har uppnåtts.
 prg#:#prg_invalidate_expired_progresses_title#:#Tidsbegränsad giltighet för studieprogram
 prg#:#prg_link#:#Länk
@@ -13398,10 +13664,6 @@ prg#:#will_not_set_top_progress_to_irrelevant#:#Superior tilldelning kan inte va
 prg#:#will_not_update_cert_for_unsuccessful_progress#:#No certificate for unsuccessful programme###26 08 2024 new variable
 prtf#:#pdf_export#:#PDF-export
 prtf#:#prtf_add_assignment#:#Lägg till uppdrag
-prtf#:#prtf_add_blog#:#Lägg till blogg
-prtf#:#prtf_add_existing_blog#:#Använd befintlig blogg
-prtf#:#prtf_add_new_blog#:#Lägg till ny blogg
-prtf#:#prtf_add_new_blog_info#:#Den nya bloggen kommer att läggas till i dina personliga resurser.
 prtf#:#prtf_add_page#:#Lägg till sida
 prtf#:#prtf_add_portfolio#:#Lägg till portfölj
 prtf#:#prtf_add_portfolio_from_template#:#Add Portfolio From Template###21 11 2023 new variable
@@ -13412,7 +13674,6 @@ prtf#:#prtf_allow_my_courses#:#Page element "Mina kurser
 prtf#:#prtf_allow_my_courses_info#:#Tillåter att en lista över nuvarande kursmedlemskap inkluderas i en portfolio.
 prtf#:#prtf_author#:#Created by###Modifierad som en del av arbetet med att integrera ett jämställdhetsperspektiv i ILIAS 8
 prtf#:#prtf_back_to_portfolio_owner#:#Redigera portfölj
-prtf#:#prtf_banner#:#Banner
 prtf#:#prtf_blog_page_created#:#Blog lades till.
 prtf#:#prtf_copy_blog_pg#:#Kopiera bloggsida
 prtf#:#prtf_copy_page#:#Kopia Portfoliosida(r)
@@ -13465,10 +13726,6 @@ prtf#:#prtf_portfolio_created_from_template#:#Detta är en förhandsvisning av d
 prtf#:#prtf_portfolio_deleted#:#Portföljen raderades
 prtf#:#prtf_portfolio_page_deleted#:#Sidan Portfolio eller blogg har tagits bort.
 prtf#:#prtf_portfolios#:#Portföljer
-prtf#:#prtf_preview_banner#:#Personlig banner
-prtf#:#prtf_preview_banner_height#:#Bannerns höjd
-prtf#:#prtf_preview_banner_info#:#Förvald storlek är 1370x100 pixlar.
-prtf#:#prtf_preview_banner_width#:#Banner bredd
 prtf#:#prtf_print_options#:#Välj till PDF
 prtf#:#prtf_print_selection#:#Urval
 prtf#:#prtf_profile_picture#:#Visa profilbild
@@ -13479,8 +13736,6 @@ prtf#:#prtf_role_title#:#Roll
 prtf#:#prtf_save_status_and_titles#:#Spara status och titel
 prtf#:#prtf_sec_protected_info#:#Skyddade block kan inte redigeras i portföljen.
 prtf#:#prtf_selected_pages#:#Utvalda delar av portföljen
-prtf#:#prtf_set_as_default#:#Sätt som min profil
-prtf#:#prtf_set_default_publish_confirmation#:#Portföljen måste åtminstone vara tillgänglig för alla registrerade användare. Ska den också vara synlig för hela internet utan registrering?
 prtf#:#prtf_set_default_publish_global#:#Dela även för oregistrerade användare
 prtf#:#prtf_set_default_publish_registered#:#Dela endast för registrerade användare
 prtf#:#prtf_set_offline#:#Ställ in Offline
@@ -13738,6 +13993,8 @@ rbac#:#blog_write#:#Redigera blogg
 rbac#:#book_copy#:#Kopiera bokningspool
 rbac#:#book_delete#:#Radera eller flytta bokningspool
 rbac#:#book_edit_permission#:#Ändra rättighetsinställningar för bokning av pool
+rbac#:#book_manage_all_reservations#:#User can manage all reservations###28 10 2024 new variable
+rbac#:#book_manage_own_reservations#:#User can manage own reservations###28 10 2024 new variable
 rbac#:#book_read#:#Genomföra bokningar i bokningspoolen
 rbac#:#book_visible#:#Bokningspoolen är synlig
 rbac#:#book_write#:#Skapa bokningsobjekt och redigera inställningar för bokningspoolen
@@ -13806,6 +14063,7 @@ rbac#:#coms_visible#:#Administrationen för kommentarer är synlig.
 rbac#:#coms_write#:#Ändra inställningar i administrationen för kommentarer
 rbac#:#condition_failed#:#Misslyckad
 rbac#:#condition_learning_progress#:# Enligt framsteg i inlärningen
+rbac#:#condition_result_range_percentage#:#Result Range###28 10 2024 new variable
 rbac#:#contribute#:#Skapa inlägg
 rbac#:#copa_copy#:#Kopiera innehållssida
 rbac#:#copa_delete#:#Ta bort innehållssida
@@ -14074,9 +14332,11 @@ rbac#:#mail_smtp_mail#:#Användaren kan skicka e-post via SMTP till externa adre
 rbac#:#mail_to_global_roles#:#Globala e-postmeddelanden
 rbac#:#mail_visible#:#Mailadministrationen är synlig
 rbac#:#mail_write#:#Redigera inställningar i Mail Administration
+rbac#:#manage_all_reservations#:#Manage All Reservations###28 10 2024 new variable
 rbac#:#manage_comp#:#Redigera kompetenser
 rbac#:#manage_comp_temp#:#Redigera kompetensmallar
 rbac#:#manage_materials#:#Hantera material
+rbac#:#manage_own_reservations#:#Manage Own Reservations###28 10 2024 new variable
 rbac#:#manage_profiles#:#Redigera kompetensprofiler
 rbac#:#mcst_copy#:#Kopiera Mediacast
 rbac#:#mcst_delete#:#Radera eller flytta mediacast
@@ -14170,6 +14430,9 @@ rbac#:#precondition_obligatory#:#Åtagande
 rbac#:#precondition_obligatory_alt#:#Förutsättningen måste vara uppfylld
 rbac#:#precondition_obligatory_info#:#Obligatoriska villkor måste uppfyllas för att få tillträde.
 rbac#:#precondition_obligatory_settings#:#Inställningar för förhandsvillkor
+rbac#:#precondition_operator_range_err_min_max#:#The minimum value must be less than the maximum value.###28 10 2024 new variable
+rbac#:#precondition_operator_range_max#:#Maximum Percentage###28 10 2024 new variable
+rbac#:#precondition_operator_range_min#:#Minimum Percentage###28 10 2024 new variable
 rbac#:#prfa_edit_permission#:#Ändra rättighetsinställningar i portföljadministration
 rbac#:#prfa_read#:#Läs åtkomst till portföljadministration
 rbac#:#prfa_visible#:#Portföljadministrationen är synlig
@@ -14239,7 +14502,6 @@ rbac#:#rbac_create_book#:#Skapa bokningspool
 rbac#:#rbac_create_cat#:#Skapa kategorier
 rbac#:#rbac_create_catr#:#Skapa kategorilänk
 rbac#:#rbac_create_chtr#:#Chatroom skapa
-rbac#:#rbac_create_cld#:#Create Cloud Object###29 07 2022 ny variabel
 rbac#:#rbac_create_cmix#:#Skapa xAPI/cmi5-objekt
 rbac#:#rbac_create_copa#:#Skapa innehållssida
 rbac#:#rbac_create_crs#:#Skapa kurs
@@ -15117,7 +15379,6 @@ search#:#lucene_port#:#Port
 search#:#lucene_prefix_wildcard#:#Placeholder i början av ordet
 search#:#lucene_prefix_wildcard_info#:#Tillåter användning av platshållare även i början av en sökterm
 search#:#lucene_relevance#:#Relevans av sökresultaten
-search#:#lucene_relevance_short#:#Relevans
 search#:#lucene_settings_tab#:#Lucene
 search#:#lucene_settings_title#:#Inställningar för Lucene-sökning
 search#:#lucene_show_relevance#:#Visa relevans
@@ -15189,6 +15450,14 @@ search#:#search_show_inactive_user#:#Visa inaktiva användare
 search#:#search_show_inactive_user_info#:#Användarsökningen visar även användare vars konto inte är aktivt.
 search#:#search_show_limited_user#:#Visa tidsbegränsade användare
 search#:#search_show_limited_user_info#:#Användarsökningen visar även användare med tidsbegränsad åtkomst som antingen ännu inte har åtkomst till ILIAS eller inte längre har åtkomst.
+search#:#search_sort_by#:#Sortation: %s###28 10 2024 new variable
+search#:#search_sort_creation_date_asc#:#Oldest###28 10 2024 new variable
+search#:#search_sort_creation_date_desc#:#Latest###28 10 2024 new variable
+search#:#search_sort_generic_asc#:#%s, asc.###28 10 2024 new variable
+search#:#search_sort_generic_desc#:#%s, desc.###28 10 2024 new variable
+search#:#search_sort_relevance#:#By Relevance###28 10 2024 new variable
+search#:#search_sort_title_asc#:#Alphabetically: A-Z###28 10 2024 new variable
+search#:#search_sort_title_desc#:#Alphabetically: Z-A###28 10 2024 new variable
 search#:#search_term_combination#:#Kombination
 search#:#search_title_description#:#Titel / Beskrivning
 search#:#search_tst_svy#:#Tester/undersökningar
@@ -15293,8 +15562,14 @@ sess#:#sess_users_added#:#Användare har registrerats för sessionen.
 sess#:#sess_users_already_assigned#:#Användarna är redan registrerade för sessionen.
 sess#:#sess_users_removed_from_list#:#De valda användarna har tagits bort från väntelistan.
 sess#:#sess_warn_sess_type_changed#:#Är du säker på att du vill ändra sessionstyp? Rättighetsinställningarna för den här sessionen kommer att skrivas över och anpassas till den nya sessionstypen.
-shib#:#shib_activate_new#:#Nya inloggningskonton med aktivering
-shib#:#shib_activate_new_info#:#Om aktiverat skapas nya ILIAS-konton som är inaktiva och måste aktiveras av administrationen.
+shib#:#shib_account_creation#:#Account Creation###28 10 2024 new variable
+shib#:#shib_account_creation_disabled#:#Disabled###28 10 2024 new variable
+shib#:#shib_account_creation_disabled_info#:#No new account is created.###28 10 2024 new variable
+shib#:#shib_account_creation_enabled#:#Enabled###28 10 2024 new variable
+shib#:#shib_account_creation_enabled_info#:#An active new account is created.###28 10 2024 new variable
+shib#:#shib_account_creation_info#:#Account creation is triggered, when a user without a pre-existing ILIAS Account tries to log in via Shibboleth.###28 10 2024 new variable
+shib#:#shib_account_creation_with_approval#:#With approval###28 10 2024 new variable
+shib#:#shib_account_creation_with_approval_info#:#An inactive new account is created. The account remains inactive until activated by an administrator.###28 10 2024 new variable
 shib#:#shib_add_missing#:#Tilldela roller som saknas
 shib#:#shib_add_remove#:#Lägg till/ta bort roller
 shib#:#shib_assignment_type#:#Typ av uppdrag
@@ -16287,6 +16562,7 @@ survey#:#survey_360_mode#:#360° återkoppling
 survey#:#survey_360_mode_info#:#Flera personer utvärderar varandra, feedback om en feedbackmottagare utvärderas aggregerat vid en tidpunkt.
 survey#:#survey_360_no_appraisees#:#Du kan inte ge feedback för tillfället.
 survey#:#survey_360_no_closed_appraisees#:#Inga omröstningar har avslutats ännu.
+survey#:#survey_360_rate_other_appraisee#:#Rate Appraisee###28 10 2024 new variable
 survey#:#survey_360_rate_other_appraisees#:#Ge feedback
 survey#:#survey_360_rater_finished#:#Undersökningen slutförd
 survey#:#survey_360_rater_mail_sent#:#Mail skickat
@@ -16577,12 +16853,16 @@ survey#:#warning_question_not_complete#:#Frågan är ofullständig!
 survey#:#workingtime#:#Bearbetningstid
 svy#:#survey_360_appraisees_remind_info#:#Om självutvärdering är aktiverat kommer feedbackmottagare som ännu inte har slutfört undersökningen att få ett påminnelsemeddelande.
 svy#:#survey_360_raters_remind_info#:#Feedback-donatorer som ännu inte har slutfört undersökningen kommer att få ett påminnelsemeddelande.
+svy#:#svy_0_open_appraisees#:#You cannot perform the survey for any appraisee anymore.###28 10 2024 new variable
 svy#:#svy_all_pages#:#Alla sidor
 svy#:#svy_all_participants#:#Alla deltagare
 svy#:#svy_all_questions#:#Alla frågor
+svy#:#svy_code#:#Access Code###28 10 2024 new variable
 svy#:#svy_codes#:#Nyckel för åtkomst
 svy#:#svy_current_page#:#Aktuell sida
 svy#:#svy_finish_survey#:#Redigera undersökning "%1
+svy#:#svy_finished_x_appraisees#:#You have finished the survey for %s appraisee(s).###28 10 2024 new variable
+svy#:#svy_information#:#Information###28 10 2024 new variable
 svy#:#svy_invite_participants#:#Bjud in deltagare
 svy#:#svy_link_to_svy#:#Länk till undersökningen
 svy#:#svy_part_overview#:#Översikt
@@ -16605,6 +16885,11 @@ svy#:#svy_user_added_rater_mail#:#Du har lagts till som en feedbackgivare.
 svy#:#svy_user_added_rater_reminder_mail#:#Bedöm fortfarande följande feedbackmottagare
 svy#:#svy_user_not_found#:#Ingen motsvarande användare hittades.
 svy#:#svy_users_invited#:#Användarna har bjudits in.
+svy#:#svy_x_appraisees_closed_for_raters#:#%s appraisee(s) has/have closed the survey for raters.###28 10 2024 new variable
+svy#:#svy_x_open_appraisees#:#%s appraisee(s) are open for you to rate.###28 10 2024 new variable
+svy#:#svy_your_appraisees#:#Your Appraisees###28 10 2024 new variable
+svy#:#svy_your_raters#:#Your Raters###28 10 2024 new variable
+svy#:#svy_your_raters_finished#:#%s of your raters have finished the survey.###28 10 2024 new variable
 sysc#:#sysc_action_list_tree#:#Skapa en dump av trädstrukturen
 sysc#:#sysc_action_repair#:#Repair
 sysc#:#sysc_action_show_tree#:#Visa trädstruktur
@@ -16666,6 +16951,7 @@ tagging#:#tagging_enable_all_users_info#:# Lägger till ett "Alla användare"-om
 tagging#:#tagging_enable_tagging#:#Aktivera taggning
 tagging#:#tagging_forbidden_tags#:#Förbjudna taggar
 tagging#:#tagging_no_obj_for_tag#:#Det finns inget innehåll taggat med '%s'.
+tagging#:#tagging_no_perm_write#:#You have no permission to change this data.###28 10 2024 new variable
 tagging#:#tagging_other_users#:#Tags från andra användare
 tagging#:#tagging_resources_for_tag#:#Innehåll taggat med %s
 tagging#:#tagging_search_users#:#Sök användare
@@ -17005,6 +17291,11 @@ ui#:#duration_default_label_end#:#Slut
 ui#:#duration_default_label_start#:#Begin
 ui#:#duration_end_must_not_be_earlier_than_start#:#Starten måste vara före slutet.
 ui#:#filter_nodes_in#:#Filter Nodes in %s###26 08 2024 new variable
+ui#:#footer_icons#:#Footer Icons###28 10 2024 new variable
+ui#:#footer_link_groups#:#Footer Link-Groups###28 10 2024 new variable
+ui#:#footer_links#:#Footer Links###28 10 2024 new variable
+ui#:#footer_permanent_link#:#Footer Permanent Link###28 10 2024 new variable
+ui#:#footer_texts#:#Footer Texts###28 10 2024 new variable
 ui#:#label_fieldselection#:#Field Selection###21 11 2023 new variable
 ui#:#label_fieldselection_refresh#:#Apply###21 11 2023 new variable
 ui#:#label_pagination_limit#:#Pagination Number of Rows###21 11 2023 new variable
@@ -17027,6 +17318,7 @@ ui#:#table_posinput_col_title#:#Position###26 08 2024 new variable
 ui#:#ui_chars_max#:#Maximum
 ui#:#ui_chars_min#:#Minimum
 ui#:#ui_chars_remaining#:#Resterande bokstäver
+ui#:#ui_error#:#Error###28 10 2024 new variable
 ui#:#ui_error_in_group#:#Det har uppstått ett fel i det här området.
 ui#:#ui_error_switchable_group_required#:#Vänligen gör ett urval.
 ui#:#ui_file_input_general_error#:#Ett fel har uppstått. Du kan kontrollera JavaScript-konsolen i din webbläsare för att se om det finns mer information om detta fel och/eller informera administrationen av din ILIAS-installation om händelsen.
@@ -17045,6 +17337,12 @@ ui#:#ui_table_no_records#:#No records###21 11 2023 new variable
 ui#:#ui_transcription#:#Transkript
 user#:#all_roles_has_starting_point#:#Alla roller med definierad startsida
 user#:#back_to_starting_points_list#:#Tillbaka till startsidorna
+user#:#change_email_email_confirmation_body#:#The email address for the account %s was changed. To confirm this change, please click on this link %s. The link is valid for %s minutes.###28 10 2024 new variable
+user#:#change_email_email_confirmation_subject#:#Confirm Email Address###28 10 2024 new variable
+user#:#change_email_email_information_body#:#The process to change the email address for the account %s to %s was started. An email with a link to confirm the change was sent to the new address. The link is valid for %s minutes.###28 10 2024 new variable
+user#:#change_email_email_information_subject#:#Information about Change of Email Address###28 10 2024 new variable
+user#:#change_email_email_sent#:#An email with a link to confirm your change has been sent. Please check your inbox and make sure to also look in the spam-folder if the email doesn't arrive within the next minutes.###28 10 2024 new variable
+user#:#change_email_info_message#:#There is a pending request to change the email address for this account.###28 10 2024 new variable
 user#:#clipboard_add_btn#:#Lägg till i Urklipp
 user#:#clipboard_add_from_btn#:#Add från urklipp
 user#:#clipboard_empty_btn#:#Klart klippbord
@@ -17053,6 +17351,7 @@ user#:#clipboard_table_title#:#Clipboard (inloggningskonton)
 user#:#clipboard_user_added#:#De valda användarna har lagts till i Urklipp.
 user#:#confirm_delete_starting_point#:#Är du säker på att du vill ta bort den här regeln?
 user#:#confirm_logout_for_email_change#:#Du har ändrat din e-postadress. För att slutföra denna ändring är det nödvändigt att ange ditt lösenord. Du kommer därför att loggas ut och sedan ha 5 minuter på dig att logga in igen för att slutföra ändringarna. Alla andra ändringar sparas innan du log
+user#:#confirm_logout_for_email_change_with_confirmation#:#Additionally, a confirmation that you control the new email address will be required. After you have logged in again, an email will be sent to you. Please click on the link in the email to confirm that you contoll the address. The change of the email address will only take effect once this second step is also finalized.###28 10 2024 new variable
 user#:#create_starting_point#:#Skapa regel
 user#:#criteria#:#Kriterium
 user#:#del_mail_body#:#Hello %1$s, %2$s Du har inte loggat in på %3$s på länge. Därför förväntas ditt ILIAS-konto raderas den %4$s. Om du vill behålla ditt ILIAS-konto måste du logga in igen före det ovannämnda datumet.
@@ -17154,6 +17453,7 @@ user#:#user_profile_info_text_info#:#Denna text visas ovanför formuläret för 
 user#:#user_profile_portfolio#:#Om du vill använda en portfölj som din profil, ange attributet "Min profil" i portföljområdet.
 user#:#user_profile_portfolio_selected#:#Du använder för närvarande en portfölj som din profil. Aktivering sker där via fliken "Frigör".
 user#:#user_profile_preview#:#Förhandsgranskning av profilen
+user#:#user_profile_prompt_text#:#Prompt Text###28 10 2024 new variable
 user#:#user_profile_prompt_text_info#:#Den här texten ersätter informationstexten ovan om du använder profilpublikationens prompt.###Modifierad som en del av jämställdhetsintegreringsaktiviteter för ILIAS 8
 user#:#user_prompt_incomplete#:#Nie
 user#:#user_prompt_incomplete_info#:#Användaren ombeds aldrig att publicera sin profil.
@@ -17430,6 +17730,9 @@ wiki#:#wiki_whole_wiki#:#Övergripande Wiki
 wiki#:#wiki_wiki_page#:#Wiki-sida
 wiki#:#wiki_wiki_search#:#Sök i wikin
 wiki#:#wiki_wpg#:#Wiki-sida
+wopi#:#action_edit#:#Edit###28 10 2024 new variable
+wopi#:#action_view#:#View###28 10 2024 new variable
+wopi#:#activate_saving_interval#:#Activate Saving Interval###28 10 2024 new variable
 wopi#:#activate_wopi#:#Activate WOPI###21 11 2023 new variable
 wopi#:#close_wopi_editor#:#Close Editor###26 08 2024 new variable
 wopi#:#close_wopi_editor_info#:#It can take up to several minutes for the external editor to transfer the changes to ILIAS. Visit this page again at a later time if the changes you have made are not yet visible.###26 08 2024 new variable
@@ -17437,6 +17740,9 @@ wopi#:#currently_supported#:#Currently supported Suffixes: %s###26 08 2024 new v
 wopi#:#msg_error_wopi_invalid_discorvery_url#:#The Discovery URL entered is invalid or cannot be accessed.###21 11 2023 new variable
 wopi#:#msg_wopi_settings_modified#:#Settings stored###21 11 2023 new variable
 wopi#:#open_external_editor#:#Open in external Editor###21 11 2023 new variable
+wopi#:#open_external_viewer#:#Show Content###28 10 2024 new variable
+wopi#:#saving_interval#:#Interval###28 10 2024 new variable
+wopi#:#saving_interval_byline#:#By default, ILIAS adds all changes made by an external editor to a draft version until this version is published manually. Activating the save interval causes a new version to be published after the specified number of seconds, if possible. Please note that a low value can lead to a large number of file versions, which in turn takes up a multiple of the hard disk space.###28 10 2024 new variable
 wopi#:#wopi_crawler_cronjob_description#:#Updates the information of the connected WOPI service.###21 11 2023 new variable
 wopi#:#wopi_crawler_cronjob_no_apps#:#No WOPI apps were found in the discovery.###21 11 2023 new variable
 wopi#:#wopi_crawler_cronjob_not_activated#:#WOPI is not activated.###21 11 2023 new variable

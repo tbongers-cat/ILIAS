@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Modal\RoundTrip;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a round trip modal.
+ *
+ * expected output: >
+ *   ILIAS shows a button titled "open modal". A click onto the button opens the modal including a formular "some text"
+ *   and "some number". The entered content will be displayed above the button after hitting "Save".
+ * ---
+ */
 function show_form_in_modal()
 {
     global $DIC;

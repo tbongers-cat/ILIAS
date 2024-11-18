@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Button\Primary;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a primary button.
+ *
+ * expected output: >
+ *   ILIAS shows an active, very colorful button titled "Goto ILIAS". Clicking the button will open the website
+ *   www.ilias.de in the same browser window.
+ * ---
+ */
 function base()
 {
     global $DIC;

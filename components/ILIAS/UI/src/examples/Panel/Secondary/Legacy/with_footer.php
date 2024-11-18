@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Panel\Secondary\Legacy;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a secondary legacy listing panel with a footer.
+ *
+ * expected output: >
+ *   ILIAS shows a panel titled "Panel Title". It includes five tag buttons and a link "Edit Keywords". Clicking the link
+ *   will not activate any actions.
+ * ---
+ */
 function with_footer()
 {
     global $DIC;

@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Tree\Expandable;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering an expandable tree.
+ *
+ * expected output: >
+ *   ILIAS shows an example very simliar to the "expandable" example but with less sub-points. Also the sub-points have
+ *   got no functions, therefore clicking them will do nothing.
+ * ---
+ */
 function expandable2(): string
 {
     global $DIC;
@@ -13,7 +23,7 @@ function expandable2(): string
     $getDataNode = function (string $label, array $children = []) {
         return new class ($label, $children) {
             protected string $label = '';
-            protected array$children = [];
+            protected array $children = [];
 
             public function __construct(string $label, array $children = [])
             {

@@ -4,6 +4,23 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Modal\Lightbox;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a lightbox modal.
+ *
+ * expected output: >
+ *   ILIAS shows a button titled "Show some fancy images and texts".
+ *   A click onto the button will grey out ILIAS and opens a modal including multiple contents which can be displayed by
+ *   clicking the arrow glyphs.
+ *   All contents have got their own title.
+ *   The contents consist of images and texts.
+ *   In the lower part of the modal a circle glyph is displayed centered about which you can see that you can look at
+ *   five contents within the modal.
+ *   You can close the modal by hitting the ESC key, clicking outside of the modal onto the greyed out ILIAS in the background
+ *   or clicking the "X" glyph. *
+ * ---
+ */
 function show_different_page_types()
 {
     global $DIC;

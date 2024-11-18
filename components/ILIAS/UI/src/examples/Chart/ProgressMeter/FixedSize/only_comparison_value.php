@@ -5,7 +5,17 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Chart\ProgressMeter\FixedSize;
 
 /**
- * Example for rendering a fixed size Progress Meter with an diagnostic score only
+ * ---
+ * description: >
+ *   Example for rendering a fixed size Progress Meter with a diagnostic score only
+ *
+ * expected output: >
+ *   ILIAS shows a rounded progress meter with two bars. The outer bar is colored red and is displayed as a dot (equals 0%).
+ *   The inner bar is colored grey and takes up half of the display. A triangle marks the needed value at 75%. The
+ *   information "0%" and "75%" are displayed within the progress meter.
+ *
+ *   Changing the browser window's size will not change the size of the progress meter: the display stays the same!
+ * ---
  */
 function only_comparison_value()
 {

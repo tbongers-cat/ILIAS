@@ -33,6 +33,7 @@ use ILIAS\Filesystem\Stream\Stream;
 use ILIAS\Filesystem\Util\Archive\Archives;
 use ILIAS\Filesystem\Util\Archive\Unzip;
 use ILIAS\Filesystem\Stream\ZIPStream;
+use ILIAS\ResourceStorage\Resource\StorableResource;
 
 class IRSSWrapper
 {
@@ -165,7 +166,7 @@ class IRSSWrapper
         $this->irss->collection()->store($collection);
     }
 
-    protected function getResourceIdForIdString(string $rid): ?ResourceIdentification
+    public function getResourceIdForIdString(string $rid): ?ResourceIdentification
     {
         return $this->irss->manage()->find($rid);
     }
@@ -286,6 +287,15 @@ class IRSSWrapper
             return $stream->getMetadata('uri') ?? '';
         }
         return "";
+    }
+
+    public function getResource(string $rid): ?StorableResource
+    {
+        $id = $this->getResourceIdForIdString($rid);
+        if ($id) {
+            return $this->irss->manage()->getResource($id);
+        }
+        return null;
     }
 
     public function getCollectionResourcesInfo(
@@ -457,10 +467,6 @@ class IRSSWrapper
         foreach ($iterator as $file) {
             if (!$file->isDir()) {
                 $file->getRealPath();
-                var_dump($rid);
-                var_dump($file->getRealPath());
-                var_dump(substr($file->getRealPath(), strlen($real_dir_path) + 1));
-                exit;
                 $this->addLocalFileToContainer(
                     $rid,
                     $file->getRealPath(),

@@ -225,7 +225,7 @@ class ilPCParagraphGUI extends ilPageContentGUI
                 }
             }
         } else {
-            if ($cmd == "create_par") {
+            if ($cmd == "create") {
                 $s_char = $this->request->getString("par_characteristic");
             } else {
                 $s_char = "Standard";

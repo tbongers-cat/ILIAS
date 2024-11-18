@@ -5,7 +5,20 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Container\Form\Standard;
 
 /**
- * Example showing how keys can be used when attaching input fields to a form.
+ * ---
+ * description: >
+ *   Example showing how keys can be used when attaching input fields to a form.
+ *
+ * expected output: >
+ *   ILIAS shows a section with two input fields titled "Input 1" and "Input 2". You can enter anything you want.
+ *   Your input will be displayed in the following format after being saved:
+ *
+ *   Array
+ *   (
+ *      [Input1] => Some input 1
+ *      [Innput2] => Some input 2
+ *   )
+ * ---
  */
 function with_keys()
 {

@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Counter\Status;
 
+/**
+ * ---
+ * description: >
+ *   Base example for rendering a status counter with novelty
+ *
+ * expected output: >
+ *   ILIAS shows a glyph with two counters. The counter's numbers are white and highlighted red resp. grey.
+ * ---
+ */
 function with_novelty()
 {
     global $DIC;

@@ -4,6 +4,22 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Listing\Descriptive;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a descriptive list.
+ *
+ * expected output: >
+ *   ILIAS shows a list in the following format:
+ *
+ *   Title 1
+ *   Description 1
+ *   Title 2
+ *   Description 2
+ *   Title 3
+ *   Description 3
+ * ---
+ */
 function base()
 {
     //Init Factory and Renderer

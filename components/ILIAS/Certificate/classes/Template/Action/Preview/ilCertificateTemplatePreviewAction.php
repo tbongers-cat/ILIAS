@@ -128,7 +128,7 @@ class ilCertificateTemplatePreviewAction
 
         $identification = $this->irss->manage()->find($template->getBackgroundImageIdentification());
         if ($identification instanceof ResourceIdentification) {
-            $backgroundImagePath = $this->irss->consume()->src($identification)->getSrc();
+            $backgroundImagePath = $this->irss->consume()->src($identification)->getSrc(true);
         }
 
         return str_replace(

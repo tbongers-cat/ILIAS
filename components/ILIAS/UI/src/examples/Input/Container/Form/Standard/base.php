@@ -5,8 +5,16 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Container\Form\Standard;
 
 /**
- * Example show how to create and render a basic form with one input. This example does
- * not contain any data processing.
+ * ---
+ * description: >
+ *   Examples showing how to create and render a basic form with one input. This example does
+ *   not contain any data processing.
+ *
+ * expected output: >
+ *  ILIAS shows a section titled "Section 1" including an input field titled "Basic Input".
+ *  You can enter numbers and letters.
+ *  Clicking "Save" reloads the page.
+ * ---
  */
 function base()
 {

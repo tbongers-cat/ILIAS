@@ -5,7 +5,16 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Item\Standard;
 
 /**
- * Base
+ * ---
+ * description: >
+ *   Example for rendering a standard item with main actions.
+ *
+ * expected output: >
+ *   ILIAS shows a box including the following informations: A heading with a dummy text in small writings
+ *   ("Lorem ipsum...") below. Beneath those you can see a fine line and more informations about "Origin", "Last Update"
+ *   and "Location". Additionally a action menu is displayed in the box on the right top. On the left next to the action
+ *   menu a "Edit" button ist rendered.
+ * ---
  */
 function with_main_action()
 {

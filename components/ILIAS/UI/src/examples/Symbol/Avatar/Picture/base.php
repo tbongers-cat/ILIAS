@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Symbol\Avatar\Picture;
 
+/**
+ * ---
+ * desription: >
+ *   Example for rendering an avatar picture.
+ *
+ * expected output: >
+ *   ILIAS shows a round avatar including a profile picture.
+ * ---
+ */
 function base()
 {
     global $DIC;

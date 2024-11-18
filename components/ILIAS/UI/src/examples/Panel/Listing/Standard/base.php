@@ -5,7 +5,15 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Panel\Listing\Standard;
 
 /**
- * Base
+ * ---
+ * description: >
+ *   Example for rendering a panel standard listing.
+ *
+ * expected output: >
+ *   ILIAS shows a panel title "List Title" including two item groups (see the specific test cases) titled "Subtitle 1"
+ *   and "Subtitle 2". The first item group includes tow items with an action menue each. The second item group includes
+ *   one item with an action menu.
+ * ---
  */
 function base()
 {

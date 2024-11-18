@@ -16,6 +16,10 @@
  *
  *********************************************************************/
 
+use ILIAS\HTTP\Wrapper\WrapperFactory;
+use ILIAS\UI\Renderer;
+use Psr\Http\Message\ServerRequestInterface;
+use ILIAS\Filesystem\Exception\FileNotFoundException;
 use ILIAS\DI\UIServices;
 use ILIAS\UI\Component\Input\Field\UploadHandler;
 use ILIAS\ResourceStorage\Services;
@@ -30,15 +34,10 @@ use ILIAS\Data\Factory;
 use ILIAS\components\WOPI\Discovery\ActionDBRepository;
 use ILIAS\components\WOPI\Embed\EmbeddedApplication;
 use ILIAS\Data\URI;
-use ILIAS\components\WOPI\Discovery\ActionTarget;
 use ILIAS\MetaData\Services\ServicesInterface as LOMServices;
 use ILIAS\File\Capabilities\Capabilities;
-use ILIAS\File\Capabilities\ViewContentCapability;
-use ILIAS\File\Capabilities\EditContentCapability;
 use ILIAS\File\Capabilities\CapabilityBuilder;
 use ILIAS\File\Capabilities\CapabilityCollection;
-use ILIAS\File\Capabilities\Capability;
-use ILIAS\File\Capabilities\Permissions;
 
 /**
  * GUI class for file objects.
@@ -71,7 +70,7 @@ class ilObjFileGUI extends ilObject2GUI
     public const CMD_UPLOAD_FILES = "uploadFiles";
 
     public const CMD_SEND_FILE = Capabilities::DOWNLOAD->value;
-    private \ILIAS\File\Capabilities\CapabilityCollection $capabilities;
+    private CapabilityCollection $capabilities;
 
     /**
      * @var \ilObjFile|null $object
@@ -85,15 +84,15 @@ class ilObjFileGUI extends ilObject2GUI
     protected ?ilLogger $log = null;
     protected ilObjectService $obj_service;
     protected \ILIAS\Refinery\Factory $refinery;
-    protected \ILIAS\HTTP\Wrapper\WrapperFactory $http;
+    protected WrapperFactory $http;
     protected General $general_settings;
     protected ilFileServicesSettings $file_service_settings;
     protected IconDatabaseRepository $icon_repo;
     private UploadLimitResolver $upload_limit;
     protected \ILIAS\UI\Component\Input\Factory $inputs;
-    protected \ILIAS\UI\Renderer $renderer;
-    protected \Psr\Http\Message\ServerRequestInterface $request;
-    protected \ILIAS\Data\Factory $data_factory;
+    protected Renderer $renderer;
+    protected ServerRequestInterface $request;
+    protected Factory $data_factory;
     private ActionDBRepository $action_repo;
     protected LOMServices $lom_services;
 
@@ -131,7 +130,9 @@ class ilObjFileGUI extends ilObject2GUI
             new ilObjFileInfoRepository(),
             $this->access,
             $this->ctrl,
-            $this->action_repo
+            $this->action_repo,
+            $DIC->http(),
+            $DIC['static_url.uri_builder']
         );
         $this->capabilities = $capability_builder->get($a_id);
     }
@@ -210,7 +211,7 @@ class ilObjFileGUI extends ilObject2GUI
             case "ilexportgui":
                 $ilTabs->activateTab("export");
                 $exp_gui = new ilExportGUI($this);
-                $exp_gui->addFormat("xml");
+                $exp_gui->addFormat();
                 $this->ctrl->forwardCommand($exp_gui);
                 break;
 
@@ -539,7 +540,7 @@ class ilObjFileGUI extends ilObject2GUI
         $title = $title_and_description->getTitle();
         // bugfix mantis 26045:
         $filename = $this->object->getFileName();
-        if (trim($title) === '') {
+        if (trim((string) $title) === '') {
             $title = $filename;
         }
         $title = $this->object->appendSuffixToTitle($title, $filename);
@@ -599,7 +600,7 @@ class ilObjFileGUI extends ilObject2GUI
         $this->tpl->setContent($this->renderer->render($form));
     }
 
-    protected function initPropertiesForm(): \ILIAS\UI\Component\Input\Container\Form\Standard
+    protected function initPropertiesForm(): Standard
     {
         $title_and_description = $this->object->getObjectProperties()->getPropertyTitleAndDescription()->toForm(
             $this->lng,
@@ -631,7 +632,7 @@ class ilObjFileGUI extends ilObject2GUI
             "title_and_description" => $title_and_description,
             "important_info" => $important_info,
             "on_click_action" => $on_click_action
-        ], static fn($input) => null !== $input);
+        ], static fn($input): bool => null !== $input);
 
         $file_info_section = $this->inputs->field()->section(
             $input_groups,
@@ -682,7 +683,7 @@ class ilObjFileGUI extends ilObject2GUI
             "availability" => $availability_section,
             "presentation" => $presentation_section,
             "obj_features" => $additional_features_section
-        ], static fn($input) => null !== $input);
+        ], static fn($input): bool => null !== $input);
 
         return $this->inputs->container()->form()->standard(
             $this->ctrl->getLinkTargetByClass(self::class, 'update'),
@@ -722,7 +723,7 @@ class ilObjFileGUI extends ilObject2GUI
             } else {
                 $this->error->raiseError($this->lng->txt("permission_denied"), $this->error->MESSAGE);
             }
-        } catch (\ILIAS\Filesystem\Exception\FileNotFoundException $e) {
+        } catch (FileNotFoundException $e) {
             $this->error->raiseError($e->getMessage(), $this->error->MESSAGE);
         }
 
@@ -736,6 +737,12 @@ class ilObjFileGUI extends ilObject2GUI
     {
         $this->ctrl->redirectToURL(
             (string) $this->capabilities->get(Capabilities::INFO_PAGE)->getUri()
+        );
+    }
+    public function showSummaryForced(): void
+    {
+        $this->ctrl->redirectToURL(
+            (string) $this->capabilities->get(Capabilities::FORCED_INFO_PAGE)->getUri()
         );
     }
 
@@ -904,31 +911,30 @@ class ilObjFileGUI extends ilObject2GUI
         // standard meta data
         $info->addMetaDataSections($this->object->getId(), 0, $this->object->getType());
 
-        if (!$kiosk_mode) { // in kiosk mode we don't want to show the following sections
-            // links to resource
-            if ($this->access->checkAccess("write", "", $this->ref_id) ||
-                $this->access->checkAccess("edit_permissions", "", $this->ref_id)) {
-                $rs = ilObject::_getAllReferences($this->obj_id);
-                $refs = [];
-                foreach ($rs as $r) {
-                    if ($this->tree->isInTree($r)) {
-                        $refs[] = $r;
-                    }
+        // in kiosk mode we don't want to show the following sections
+        // links to resource
+        if (!$kiosk_mode && ($this->access->checkAccess("write", "", $this->ref_id) ||
+            $this->access->checkAccess("edit_permissions", "", $this->ref_id))) {
+            $rs = ilObject::_getAllReferences($this->obj_id);
+            $refs = [];
+            foreach ($rs as $r) {
+                if ($this->tree->isInTree($r)) {
+                    $refs[] = $r;
                 }
-                if (count($refs) > 1) {
-                    $links = $sep = "";
-                    foreach ($refs as $r) {
-                        $cont_loc = new ilLocatorGUI();
-                        $cont_loc->addContextItems($r, true);
-                        $links .= $sep . $cont_loc->getHTML();
-                        $sep = "<br />";
-                    }
+            }
+            if (count($refs) > 1) {
+                $links = $sep = "";
+                foreach ($refs as $r) {
+                    $cont_loc = new ilLocatorGUI();
+                    $cont_loc->addContextItems($r, true);
+                    $links .= $sep . $cont_loc->getHTML();
+                    $sep = "<br />";
+                }
 
-                    $info->addProperty(
-                        $this->lng->txt("res_links"),
-                        '<div class="small">' . $links . '</div>'
-                    );
-                }
+                $info->addProperty(
+                    $this->lng->txt("res_links"),
+                    '<div class="small">' . $links . '</div>'
+                );
             }
         }
 
@@ -1060,12 +1066,12 @@ class ilObjFileGUI extends ilObject2GUI
         $lng = $DIC['lng'];
         $ilAccess = $DIC['ilAccess'];
 
-        if ($a_additional && str_ends_with($a_additional, "wsp")) {
+        if ($a_additional && str_ends_with((string) $a_additional, "wsp")) {
             ilObjectGUI::_gotoSharedWorkspaceNode((int) $a_target);
         }
 
         // added support for direct download goto links
-        if ($a_additional && str_ends_with($a_additional, "download")) {
+        if ($a_additional && str_ends_with((string) $a_additional, "download")) {
             ilObjectGUI::_gotoRepositoryNode($a_target, "sendfile");
         }
 

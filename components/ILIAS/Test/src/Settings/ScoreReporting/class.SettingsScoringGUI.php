@@ -238,7 +238,7 @@ class SettingsScoringGUI extends TestSettingsGUI
 
         if ($this->test_object->getScoreReporting() === SettingsResultSummary::SCORE_REPORTING_DATE) {
             $reporting_date = $this->test_object->getScoreSettings()->getResultSummarySettings()->getReportingDate();
-            return $reporting_date <= new DateTimeImmutable('now', new DateTimeZone('UTC'));
+            return $reporting_date <= new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
         }
 
         return true;
@@ -260,7 +260,7 @@ class SettingsScoringGUI extends TestSettingsGUI
     protected function getTaxonomyOptions(): array
     {
         $available_taxonomy_ids = \ilObjTaxonomy::getUsageOfObject($this->test_object->getId());
-        $taxononmy_translator = new \ilTestQuestionFilterLabelTranslater($this->db, $this->lng);
+        $taxononmy_translator = new \ilTestQuestionFilterLabelTranslator($this->db, $this->lng);
         $taxononmy_translator->loadLabelsFromTaxonomyIds($available_taxonomy_ids);
 
         $taxonomy_options = [];

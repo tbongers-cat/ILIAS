@@ -5,7 +5,16 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Item\Standard;
 
 /**
- * With Lead Icon
+ * ---
+ * description: >
+ *   Example for rendering a standard item with an lead icon.
+ *
+ * expected output: >
+ *   ILIAS shows a box including the following informations: A heading with a dummy text in small writings
+ *   ("Lorem ipsum...") below. Beneath those you can see a fine line and more informations about "Origin", "Last Update"
+ *   and "Location". Additionally a action menu is displayed in the box on the right top. On the left side a "Course" icon
+ *   is displayed.
+ * ---
  */
 function with_lead_icon()
 {

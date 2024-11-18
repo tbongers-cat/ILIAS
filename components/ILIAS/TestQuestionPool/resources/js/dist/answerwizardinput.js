@@ -77,7 +77,7 @@ var AnswerWizardInput = {
     const tbody = this.getContainerFromEvent(e);
 
     // do not remove last row
-    if ($(tbody).find(this.tag_row).size() > 1) {
+    if ($(tbody).find(this.tag_row).length > 1) {
       $(source).remove();
     }
     // reset last remaining row

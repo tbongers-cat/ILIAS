@@ -453,7 +453,7 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
                 $user_solution = htmlentities($user_solution);
             }
 
-            $user_solution = str_replace(['{', '}', '\\'], ['&#123', '&#125', '&#92'], $user_solution);
+            $user_solution = str_replace(['{', '}', '\\'], ['&#123;', '&#125;', '&#92;'], $user_solution);
         }
 
         $template = new ilTemplate("tpl.il_as_qpl_text_question_output.html", true, true, "components/ILIAS/TestQuestionPool");
@@ -486,7 +486,6 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         $questionoutput .= $this->getJsCode();
 
         $pageoutput = $this->outQuestionPage("", $is_question_postponed, $active_id, $questionoutput);
-        ilYuiUtil::initDomEvent();
         return $pageoutput;
     }
 
@@ -520,8 +519,9 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
 
     public function addSuggestedSolution(): void
     {
-        ilSession::set("subquestion_index", 0);
-        if ($_POST["cmd"]["addSuggestedSolution"]) {
+        $this->setAdditionalContentEditingModeFromPost();
+        ilSession::set('subquestion_index', 0);
+        if ($_POST['cmd']['addSuggestedSolution']) {
             if ($this->writePostData()) {
                 $this->tpl->setOnScreenMessage('info', $this->getErrorMessage());
                 $this->editQuestion();
@@ -678,6 +678,7 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         //$allKeyword->setQuestionObject($this->object);
         //$allKeyword->setSingleline(TRUE);
         $allKeyword->setValues(self::buildAnswerTextOnlyArray($this->object->getAnswers()));
+        $allKeyword->setMaxLength($anyKeyword->getMaxLength());
         $scoringOptionAllKeyword->addSubItem($allKeyword);
         $allKeywordPoints = new ilNumberInputGUI($this->lng->txt("points"), "all_keyword_points");
         $allKeywordPoints->allowDecimals(true);
@@ -694,6 +695,7 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         //$oneKeyword->setQuestionObject($this->object);
         //$oneKeyword->setSingleline(TRUE);
         $oneKeyword->setValues(self::buildAnswerTextOnlyArray($this->object->getAnswers()));
+        $oneKeyword->setMaxLength($anyKeyword->getMaxLength());
         $scoringOptionOneKeyword->addSubItem($oneKeyword);
         $oneKeywordPoints = new ilNumberInputGUI($this->lng->txt("points"), "one_keyword_points");
         $oneKeywordPoints->allowDecimals(true);

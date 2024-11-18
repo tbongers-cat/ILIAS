@@ -139,4 +139,11 @@ class ilMediaObjectsDBUpdateSteps implements \ilDatabaseUpdateSteps
         $db->addPrimaryKey("mob_data", ["id"]);
     }
 
+    public function step_7(): void
+    {
+        if (!$this->db->indexExistsByFields('media_item', ['mob_id'])) {
+            $this->db->addIndex('media_item', ['mob_id'], 'i1');
+        }
+    }
+
 }

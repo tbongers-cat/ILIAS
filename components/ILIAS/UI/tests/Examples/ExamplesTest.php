@@ -31,8 +31,18 @@ use ILIAS\FileUpload\FileUpload;
  */
 class ExamplesTest extends ILIAS_UI_TestBase
 {
+    /**
+     * @var string[] please only add components to this list, if there is a good reason
+     *               for not having any examples.
+     */
+    protected const MAY_NOT_HAVE_EXAMPLES = [
+        \ILIAS\UI\Help\Topic::class,
+        \ILIAS\UI\Component\Progress\State\Bar\State::class,
+    ];
+
     protected static string $path_to_base_factory = "components/ILIAS/UI/src/Factory.php";
     protected Container $dic;
+    protected Crawler\ExamplesYamlParser $example_parser;
 
     public function setUp(): void
     {
@@ -47,6 +57,7 @@ class ExamplesTest extends ILIAS_UI_TestBase
         //This avoids Undefined index: ilfilehash for the moment
         $_POST["ilfilehash"] = "";
         $this->setUpMockDependencies();
+        $this->example_parser = new Crawler\ExamplesYamlParser();
     }
 
     /**
@@ -104,7 +115,7 @@ class ExamplesTest extends ILIAS_UI_TestBase
         $DIC = $this->dic;
 
         foreach ($this->getEntriesFromCrawler() as $entry) {
-            if ($entry->getNamespace() === "\ILIAS\UI\Help\Topic[]") {
+            if (in_array(trim($entry->getNamespace(), '\\'), self::MAY_NOT_HAVE_EXAMPLES, true)) {
                 continue;
             }
             if (!$entry->isAbstract()) {
@@ -132,6 +143,15 @@ class ExamplesTest extends ILIAS_UI_TestBase
         } catch (NotImplementedException $e) {
             $this->assertTrue(true);
         }
+    }
+
+    /**
+     * @dataProvider getFullFunctionNamesAndPathExample
+     */
+    public function testAllExamplesHaveExpectedOutcomeInDocs(string $example_function_name, string $example_path)
+    {
+        $docs = $this->example_parser->parseYamlStringArrayFromFile($example_path);
+        $this->assertArrayHasKey('expected output', $docs);
     }
 
     /**

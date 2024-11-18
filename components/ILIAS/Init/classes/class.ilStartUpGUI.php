@@ -197,35 +197,51 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
 
     private function jumpToPasswordAssistance(): void
     {
+        $this->ctrl->saveParameterByClass(ilPasswordAssistanceGUI::class, 'key');
         $this->ctrl->redirectByClass(ilPasswordAssistanceGUI::class);
     }
 
     private function showLoginPageOrStartupPage(): void
     {
-        $auth_session = $this->authSession;
-        $ilAppEventHandler = $this->eventHandler;
+        /**
+         * According to a (core) code base analysis (ILIAS 8.x until 10.x, 2024-11-05),
+         * there is curently no code that redirects to this command/action with "cmd=force_login" as query parameter
+         * in a case where the user is still considered as "logged-in".
+         * To address https://mantis.ilias.de/view.php?id=29991 we assume that we can ignore such requests
+         * to prevent "Logout without CSRF / Denial of Service for Users" and redirect the user to the start page instead.
+         */
 
-        $force_login = false;
-        $request_cmd = $this->http->wrapper()->query()->retrieve(
+        if ($this->authSession->isValid() && $this->authSession->getUserId() > 0 && !$this->user->isAnonymous()) {
+            ilInitialisation::redirectToStartingPage();
+        }
+
+        $is_forced_login = $this->http->wrapper()->query()->retrieve(
             'cmd',
             $this->refinery->byTrying([
                 $this->refinery->kindlyTo()->string(),
-                $this->refinery->always('')
+                $this->refinery->always(
+                    $this->http->wrapper()->post()->retrieve(
+                        'cmd',
+                        $this->refinery->byTrying([
+                            $this->refinery->kindlyTo()->string(),
+                            $this->refinery->always('')
+                        ])
+                    )
+                )
             ])
-        );
-        if ($request_cmd === 'force_login') {
-            $force_login = true;
-        }
+        ) === 'force_login';
 
-        if ($force_login) {
+        if ($is_forced_login) {
+            // Only allow this for anonymous user, see: showLoginPageOrStartupPage
             $this->logger->debug('Force login');
-            if ($auth_session->isValid()) {
+            $messages = [];
+            if ($this->authSession->isValid()) {
                 $messages = $this->retrieveMessagesFromSession();
                 $this->logger->debug('Valid session -> logout current user');
                 ilSession::setClosingContext(ilSession::SESSION_CLOSE_USER);
-                $auth_session->logout();
+                $this->authSession->logout();
 
-                $ilAppEventHandler->raise(
+                $this->eventHandler->raise(
                     'components/ILIAS/Authentication',
                     'afterLogout',
                     [
@@ -233,20 +249,21 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
                         'is_explicit_logout' => false,
                     ]
                 );
+
+                $this->dic->user()->setId($this->authSession->getUserId());
+                $this->dic->user()->read();
             }
 
             $this->logger->debug('Show login page');
-            if (isset($messages) && count($messages) > 0) {
-                foreach ($messages as $type => $content) {
-                    $this->mainTemplate->setOnScreenMessage($type, $content);
-                }
+            foreach ($messages as $type => $content) {
+                $this->mainTemplate->setOnScreenMessage($type, $content);
             }
 
             $this->showLoginPage();
             return;
         }
 
-        if ($auth_session->isValid()) {
+        if ($this->authSession->isValid()) {
             $this->logger->debug('Valid session -> redirect to starting page');
             ilInitialisation::redirectToStartingPage();
             return;
@@ -321,6 +338,13 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
 
         if ($page_editor_html !== '') {
             $tpl->setVariable('LPE', $page_editor_html);
+        }
+
+        if ($this->authSession->isExpired()) {
+            // The usr_id is is still the one of the former logged-in user, so we have to unset it
+            $this->authSession->setAuthenticated(false, ANONYMOUS_USER_ID);
+            $this->dic->user()->setId($this->authSession->getUserId());
+            $this->dic->user()->read();
         }
 
         $this->mainTemplate->setPermanentLink('auth', null, 'login');
@@ -1275,6 +1299,12 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
 
     private function showLogout(): void
     {
+        if (!$this->authSession->isExpired() &&
+            $this->authSession->isAuthenticated() &&
+            !ilObjUser::_isAnonymous($this->authSession->getUserId())) {
+            $this->ctrl->redirectToURL(ilUserUtil::getStartingPointAsUrl());
+        }
+
         $this->help->setSubScreenId('logout');
 
         $tpl = self::initStartUpTemplate('tpl.logout.html');

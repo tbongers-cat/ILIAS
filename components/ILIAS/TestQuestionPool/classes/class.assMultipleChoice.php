@@ -21,7 +21,6 @@ declare(strict_types=1);
 use ILIAS\TestQuestionPool\Questions\QuestionLMExportable;
 use ILIAS\TestQuestionPool\Questions\QuestionAutosaveable;
 use ILIAS\TestQuestionPool\ManipulateImagesInChoiceQuestionsTrait;
-
 use ILIAS\Test\Logging\AdditionalInformationGenerator;
 
 /**
@@ -47,18 +46,13 @@ class assMultipleChoice extends assQuestion implements ilObjQuestionScoringAdjus
     public const OUTPUT_RANDOM = 1;
 
     public array $answers = [];
-    public bool $is_singleline = false;
+    public bool $is_singleline = true;
     public int $feedback_setting = 0;
     protected ?int $selection_limit = null;
 
     public function setIsSingleline(bool $is_singleline): void
     {
         $this->is_singleline = $is_singleline;
-    }
-
-    public function getIsSingleline(): bool
-    {
-        return $this->is_singleline;
     }
 
     /**
@@ -136,10 +130,10 @@ class assMultipleChoice extends assQuestion implements ilObjQuestionScoringAdjus
             $this->setQuestion(ilRTE::_replaceMediaObjectImageSrc($data["question_text"] ?? '', 1));
             $shuffle = (is_null($data['shuffle'])) ? true : $data['shuffle'];
             $this->setShuffle((bool) $shuffle);
-            if ($data['thumb_size'] !== null && $data['thumb_size'] >= self::MINIMUM_THUMB_SIZE) {
+            if ($data['thumb_size'] !== null && $data['thumb_size'] >= $this->getMinimumThumbSize()) {
                 $this->setThumbSize($data['thumb_size']);
             }
-            $this->is_singleline = $data['allow_images'] === '0';
+            $this->is_singleline = $data['allow_images'] === null || $data['allow_images'] === '0';
             $this->lastChange = $data['tstamp'];
             $this->setSelectionLimit((int) $data['selection_limit'] > 0 ? (int) $data['selection_limit'] : null);
             if (isset($data['feedback_setting'])) {
@@ -885,9 +879,9 @@ class assMultipleChoice extends assQuestion implements ilObjQuestionScoringAdjus
         return $config;
     }
 
-    public function isSingleline()
+    public function isSingleline(): bool
     {
-        return (bool) $this->is_singleline;
+        return $this->is_singleline;
     }
 
     public function toLog(AdditionalInformationGenerator $additional_info): array

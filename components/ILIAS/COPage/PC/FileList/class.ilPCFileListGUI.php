@@ -374,7 +374,7 @@ class ilPCFileListGUI extends ilPageContentGUI
                     $s_lang = $ilUser->getLanguage();
                 }
                 $si->setValue($s_lang);
-                $form->addCommandButton("create_flst", $lng->txt("save"));
+                $form->addCommandButton("create", $lng->txt("save"));
                 $form->addCommandButton("cancelCreate", $lng->txt("cancel"));
                 $form->setTitle($lng->txt("cont_insert_file_list"));
                 break;

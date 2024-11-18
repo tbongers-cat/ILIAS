@@ -209,7 +209,8 @@ export default class TinyWrapper {
         statusbar: false,
         language: 'en',
         height: '100%',
-        plugins: 'save,paste,lists',
+        plugins: 'save,lists',
+        license_key: 'gpl',
         smart_paste: false,
         save_onsavecallback: 'saveParagraph',
         mode: 'exact',
@@ -269,7 +270,10 @@ export default class TinyWrapper {
       o.content = html.removeLineFeeds(o.content);
     }
     o.content = html.removeAttributesFromTag('p', o.content);
-    o.content = html.removeTag('div', o.content);
+    o.content = html.removeTagsExceptParagraphs(o.content);
+    o.content = html.removeHtmlComments(o.content);
+    o.content = html.removeNbsp(o.content);
+    // o.content = html.removeTag('div', o.content);
   }
 
   getTinyDomTransform() {
@@ -974,6 +978,7 @@ export default class TinyWrapper {
       t = 'mycode';
     }
     ed.execCommand('mceToggleFormat', false, t);
+    this.getTinyDomTransform().removeMultiClasses('ilc_text_inline_' + t);
     ed.focus();
     // ed.selection.collapse(false); // see #33963
     this.autoResize();

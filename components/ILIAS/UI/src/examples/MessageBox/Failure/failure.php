@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\MessageBox\Failure;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a failure message box.
+ *
+ * expected output: >
+ *   ILIAS shows a red box with a dummy text ("Lorem ipsum...").
+ * ---
+ */
 function failure()
 {
     global $DIC;

@@ -5,11 +5,22 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Button\Standard;
 
 /**
- * In this example we create a button that ships with the on load animation on click.
- * Note that if the button will trigger a page-reload as soon as the work is done,
- * No additional magic is needed. However, in Async scenario, one can make use of the
- * il.UI.button interface containing the functions activateLoadingAnimation and
- * deactivateLoadingAnimation as shown bellow.
+ * ---
+ * description: >
+ *   In this example we create a button that ships with the on load animation on click.
+ *
+ * note: >
+ *   Note that the button will trigger a page-reload as soon as the work is done,
+ *   no additional magic is needed.
+ *   However, in Async scenario, one can make use of the il.UI.button interface
+ *   containing the functions activateLoadingAnimation and deactivateLoadingAnimation
+ *   as shown below.
+ *
+ * expected output: >
+ *   ILIAS shows an active button titled "Do Something". The color of the button will change after clicking the button
+ *   and the word "Working" will appear, which is referencing to the loading status. After a while the button's content
+ *   will change to "Done".
+ * ---
  */
 function with_load_anim()
 {

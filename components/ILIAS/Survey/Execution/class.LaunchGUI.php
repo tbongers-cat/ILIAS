@@ -106,12 +106,13 @@ class LaunchGUI
         }
 
         // view results link
+        /*
         if ($this->status_manager->canViewUserResults()) {
             $this->launch_message_links[] = $f->link()->standard(
                 $lng->txt("svy_view_own_results"),
                 $ctrl->getLinkTargetByClass(\ilObjSurveyGUI::class, "viewUserResults")
             );
-        }
+        }*/
 
         // confirmation mail button / input (omitted, since abandoned)
 

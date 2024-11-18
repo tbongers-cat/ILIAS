@@ -1847,7 +1847,7 @@ class ilObjectGUI implements ImplementsCreationCallback
             return [];
         }
         if ($redirect_target_ref_id !== null) {
-            $this->ctrl->setParameterByClass(self::class, 'crtcb', (string) $redirect_target_ref_id);
+            $this->ctrl->setParameterByClass($create_target_class, 'crtcb', (string) $redirect_target_ref_id);
         }
 
         $elements = $this->initAddNewItemElementsFromNewItemGroups(

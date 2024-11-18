@@ -392,7 +392,7 @@ class ilPCTableGUI extends ilPageContentGUI
         $this->form->addItem($language);
 
         if ($a_mode == "create") {
-            $this->form->addCommandButton("create_tab", $lng->txt("save"));
+            $this->form->addCommandButton("create", $lng->txt("save"));
             $this->form->addCommandButton("cancelCreate", $lng->txt("cancel"));
         } else {
             $this->form->addCommandButton("saveProperties", $lng->txt("save"));

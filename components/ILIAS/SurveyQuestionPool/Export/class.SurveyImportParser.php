@@ -625,9 +625,6 @@ class SurveyImportParser extends ilSaxParser
                             case "pool_usage":
                                 $this->survey->setPoolUsage($value["entry"]);
                                 break;
-                            case "own_results_view":
-                                $this->survey->setViewOwnResults($value["entry"]);
-                                break;
                             case "own_results_mail":
                                 $this->survey->setMailOwnResults($value["entry"]);
                                 break;
@@ -792,7 +789,9 @@ class SurveyImportParser extends ilSaxParser
     {
         $ret = [];
         foreach ($attribs as $k => $v) {
-            $ret[$k] = $this->trimAndStrip((string) $v);
+            $ret[$k] = ((string) $v !== "<>")
+                ? $this->trimAndStrip((string) $v)
+                : "<>";
         }
         return $ret;
     }

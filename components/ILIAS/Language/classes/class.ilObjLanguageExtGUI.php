@@ -408,6 +408,7 @@ class ilObjLanguageExtGUI extends ilObjectGUI
         $remarks_array = array();
         $post = (array) ($this->http->request()->getParsedBody() ?? []);
         foreach ($post as $key => $value) {
+            $orginal_key = $key;
             // mantis #25237
             // @see https://php.net/manual/en/language.variables.external.php
             $key = str_replace(["_POSTDOT_", "_POSTSPACE_"], [".", " "], $key);
@@ -424,7 +425,7 @@ class ilObjLanguageExtGUI extends ilObjectGUI
                 $save_array[$key] = $value;
 
                 // the comment has the key of the language with the suffix
-                $remarks_array[$key] = $post[$key . $this->lng->separator . "comment"];
+                $remarks_array[$key] = $post[$orginal_key . $this->lng->separator . "comment"];
             }
         }
 

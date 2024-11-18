@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Toast\Standard;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a standard toast including a description.
+ *
+ * expected output: >
+ *   ILIAS shows a blue button "Show". Clicking onto the button opens a message "Example" including a description on the
+ *   right top edge and which disappears after a few seconds.
+ * ---
+ */
 function with_description(): string
 {
     global $DIC;

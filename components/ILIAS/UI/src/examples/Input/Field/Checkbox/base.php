@@ -5,7 +5,14 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Checkbox;
 
 /**
- * Base example showing how to plug a checkbox into a form
+ * ---
+ * description: >
+ *   Base example showing how to plug a checkbox into a form.
+ *
+ * expected output: >
+ *   ILIAS shows a section with an active checkbox. The checkbox can get deactivated. After saving the status of the
+ *   checkbox it will be displayed above (active = 1).
+ * ---
  */
 function base()
 {

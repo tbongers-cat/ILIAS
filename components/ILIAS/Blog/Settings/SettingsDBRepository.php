@@ -33,6 +33,10 @@ class SettingsDBRepository
 
     protected function getSettingsFromRecord(array $rec): Settings
     {
+        $order = explode(';', $rec['nav_order'] ?? "");
+        if (count($order) === 1 && current($order) === "") {
+            $order = [];
+        }
         return $this->data->settings(
             (int) $rec['id'],
             (bool) $rec['ppic'],
@@ -51,7 +55,7 @@ class SettingsDBRepository
             (int) $rec['nav_list_mon_with_post'],
             (int) $rec['nav_list_mon'],
             (int) $rec['ov_post'],
-            explode(';', $rec['nav_order'] ?? "")
+            $order
         );
     }
 

@@ -6,6 +6,20 @@ namespace ILIAS\UI\Examples\Popover\Standard;
 
 use ILIAS\UI\Implementation\Component\ReplaceContentSignal;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a standard popover with dynamic changing content.
+ *
+ * expected output: >
+ *   ILIAS shows a button titled "Show Popover".
+ *   A click onto the button opens the popover including...
+ *   - a popover title: Pages
+ *   - popover content: a list with three buttons which open a new page within the popover by clicking them.
+ *   - you can navigate to the overview by clicking the "Back" button.
+ *   You can close the popover by clicking onto the ILIAS background outside of the popover.
+ * ---
+ */
 function show_popover_with_dynamic_changing_content()
 {
     global $DIC;

@@ -41,9 +41,14 @@ The Scope Tool has a lot to do with the Scope MainBar, since the elements can be
 
 For more information see [Scope/Tools/README.md](Scope/Tool/README.md).
 
-# Scope Notifications
+## Scope Notifications
 
 For more information, see [Scope/Notification/README.md](Scope/Notification/README.md).
+
+## Scope Footer
+This scope allows components and plug-ins to add elements to the footer of ILIAS.
+
+For more information, see [Scope/Footer/README.md](Scope/Layout/README.md).
 
 ## Scope Layout
 
@@ -107,11 +112,16 @@ A Plugin-Class hat a new property `provider_collection` which accepts Instances 
         parent::__construct();
 
         global $DIC;
-        $this->provider_collection->setMainBarProvider(new MainBarProvider($DIC, $this));
-        $this->provider_collection->setMetaBarProvider(new MetaBarProvider($DIC, $this));
-        $this->provider_collection->setNotificationProvider(new NotificationProvider($DIC, $this));
-        $this->provider_collection->setModificationProvider(new ModificationProvider($DIC, $this));
-        $this->provider_collection->setToolProvider(new ToolProvider($DIC, $this));
+        if ($DIC->isDependencyAvailable('globalScreen')) { 
+        // there seem to be situations where plugins are loaded very early 
+        // when the GlobalScreen-Service is not yet available. Use the 
+        // isDependencyAvailable then.   
+            $this->provider_collection->setMainBarProvider(new MainBarProvider($DIC, $this));
+            $this->provider_collection->setMetaBarProvider(new MetaBarProvider($DIC, $this));
+            $this->provider_collection->setNotificationProvider(new NotificationProvider($DIC, $this));
+            $this->provider_collection->setModificationProvider(new ModificationProvider($DIC, $this));
+            $this->provider_collection->setToolProvider(new ToolProvider($DIC, $this));
+        }
     }
 ```
 

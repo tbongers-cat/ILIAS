@@ -216,7 +216,7 @@ class ilCertificateSettingsFormRepository implements ilCertificateFormRepository
                 $this->card_thumbnail_definition
             );
             $flavour_urls = $this->irss->consume()->flavourUrls($background_flavour);
-            foreach ($flavour_urls->getURLs() as $url) {
+            foreach ($flavour_urls->getURLs(true) as $url) {
                 /** @var string $url */
                 $bgimage->setImage($url);
             }
@@ -245,7 +245,7 @@ class ilCertificateSettingsFormRepository implements ilCertificateFormRepository
         if ('' !== $thumbnail_image_identification) {
             $identification = $this->irss->manage()->find($thumbnail_image_identification);
             if ($identification instanceof ResourceIdentification) {
-                $thumbnailImage->setImage($this->irss->consume()->src($identification)->getSrc());
+                $thumbnailImage->setImage($this->irss->consume()->src($identification)->getSrc(true));
                 $allowThumbnailDeletion = true;
             }
         } elseif ($old_thumbnail_image_path !== '' && $this->filesystem->has($old_thumbnail_image_path)) {

@@ -82,6 +82,10 @@ class assSingleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringA
      */
     protected function getEditAnswersSingleLine($checkonly = false): bool
     {
+        if ($this->object->getSelfAssessmentEditingMode()) {
+            return $this->object->isSingleline();
+        }
+
         if ($checkonly) {
             return $this->request->int('types') === 0;
         }
@@ -118,7 +122,6 @@ class assSingleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         $this->addBasicQuestionFormProperties($form);
         $this->populateQuestionSpecificFormPart($form, $is_singleline);
         $this->populateAnswerSpecificFormPart($form, $is_singleline);
-
 
         $this->populateTaxonomyFormSection($form);
 
@@ -169,20 +172,35 @@ class assSingleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         return $errors;
     }
 
-    /**
-    * Upload an image
-    */
     public function uploadchoice(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $this->editQuestion();
     }
 
     public function removeimagechoice(): void
     {
+        $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
         $position = key($this->request->raw('cmd')['removeimagechoice']);
         $this->object->removeAnswerImage($position);
+        $this->editQuestion();
+    }
+
+    public function addchoice(): void
+    {
+        $this->writePostData(true);
+        $position = key($this->request->raw('cmd')['addchoice']);
+        $this->object->addAnswer("", 0, $position + 1);
+        $this->editQuestion();
+    }
+
+    public function removechoice(): void
+    {
+        $this->writePostData(true);
+        $position = key($this->request->raw('cmd')['removechoice']);
+        $this->object->deleteAnswer($position);
         $this->editQuestion();
     }
 
@@ -555,6 +573,7 @@ class assSingleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringA
             $thumb_size = new ilNumberInputGUI($this->lng->txt("thumb_size"), "thumb_size");
             $thumb_size->setSuffix($this->lng->txt("thumb_size_unit_pixel"));
             $thumb_size->setMinValue($this->object->getMinimumThumbSize());
+            $thumb_size->setMaxValue($this->object->getMaximumThumbSize());
             $thumb_size->setDecimals(0);
             $thumb_size->setSize(6);
             $thumb_size->setInfo($this->lng->txt('thumb_size_info'));
@@ -662,7 +681,6 @@ class assSingleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         if ($this->object->getSelfAssessmentEditingMode()) {
             $choices->setSize(40);
         }
-        $choices->setMaxLength(800);
         if ($this->object->getAnswerCount() == 0) {
             $this->object->addAnswer("", 0, 0);
         }

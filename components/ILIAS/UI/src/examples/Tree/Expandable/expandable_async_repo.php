@@ -14,6 +14,15 @@ if ($request_wrapper->has('async_ref') && $request_wrapper->retrieve('async_ref'
     exit();
 }
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering an expandable tree with asynchronous repositories.
+ *
+ * expected output: >
+ *   This example can be ignored for the time being.
+ * ---
+ */
 function expandable_async_repo($ref = null)
 {
     global $DIC;

@@ -5,9 +5,21 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\OptionalGroup;
 
 /**
- * Example showing how an optional group (of inputs) which shows, that
- * the optional input will not be required even though it's sub inputs
- * are.
+ * ---
+ * description: >
+ *   Example showing how an optional group (of inputs) which shows, that
+ *   the optional input will not be required even though it's sub inputs are.
+ *
+ * expected output: >
+ *   ILIAS shows an optional group titled "this input is not required" and a checkbox with a byline.
+ *
+ *   Save the checkbox and click "Save":
+ *   1. Did you leave the text field empty a red error message is displayed accordingly to the system language.
+ *   2. Did you fill out the text field the output looks like the base optional group example.
+ *
+ *   Deactivate the checkbox and click "Save":
+ *   1. No error message is displayed.
+ * ---
  */
 function with_required_sub_inputs()
 {

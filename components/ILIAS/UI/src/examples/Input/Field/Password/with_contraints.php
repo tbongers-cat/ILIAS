@@ -5,8 +5,30 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Password;
 
 /**
- * Passwords (when setting) usually have some constraints.
-  */
+ * ---
+ * description: >
+ *   Passwords (when setting) usually have some constraints.
+ *
+ * expected output: >
+ *   ILIAS shows an input field titled "Password". An inserted text won't be displayed but exchanged with dots.
+ *   ILIAS will apply your password if the following requirements are fullfilled:
+ *   - At least eight letters
+ *   - At least one number
+ *   - At least one capital letter
+ *   - At least one lowercase letter
+ *   - At least one special character
+ *   Else ILIAS will display an error message above the input field.
+ *   Clicking "Save" will reload the page and show your input in the following format in the box above:
+ *
+ *   Array
+ *   (
+ *      [pwd] => ILIAS\Data\Password Object
+ *      (
+ *          [pass:ILIAS\Data\Password:private] => Passwort-1
+ *      )
+ *   )
+ * ---
+ */
 function with_contraints()
 {
     //Step 0: Declare dependencies

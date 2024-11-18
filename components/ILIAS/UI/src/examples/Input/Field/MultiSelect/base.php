@@ -5,7 +5,25 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\MultiSelect;
 
 /**
- * Base example showing how to plug a Multi-Select into a form
+ * ---
+ * description: >
+ *   Base example showing how to plug a Multi-Select into a form.
+ *
+ * expected output: >
+ *   ILIAS shows a grouped titled "Take your picks" with checkboxes. You can activate one or more checkboxes. After saving
+ *   your selection ILIAS will display your selection in the following format:
+ *
+ *   Array
+ *   (
+ *      [multi] => Array
+ *      (
+ *          [0] => 2
+ *          [1] => 3
+ *      )
+ *   )
+ *
+ *   If you click "Save" without selecting a checkbox ILIAS will display a error message below the group.
+ * ---
  */
 function base()
 {

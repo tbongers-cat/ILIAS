@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace ILIAS\UI\examples\Deck;
 
+/**
+ * ---
+ * description: >
+ *   Example for rendering a XL card
+ *
+ * expected output: >
+ *   ILIAS shows three "Cards" with a title and text each. The number of cards displayed in each line will change according
+ *   the size of the browser window/desktop.
+ * ---
+ */
 function xl_card()
 {
     //Init Factory and Renderer

@@ -121,7 +121,7 @@ class TestDIC extends PimpleContainer
             new ResponseHandler($DIC['http'], );
 
         $dic['settings.global.repository'] = static fn($c): GlobalSettingsRepository =>
-                new GlobalSettingsRepository(new \ilSetting('assessment'));
+                new GlobalSettingsRepository($DIC['ilSetting'], new \ilSetting('assessment'));
 
         $dic['logging.settings'] = static fn($c): TestLoggingSettings =>
             $c['settings.global.repository']->getLoggingSettings();

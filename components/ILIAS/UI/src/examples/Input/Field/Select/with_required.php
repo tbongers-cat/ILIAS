@@ -5,7 +5,20 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Select;
 
 /**
- * Base example showing how to plug a Select into a form
+ * ---
+ * description: >
+ *   Base example showing how to plug a Select into a form
+ *
+ * expected output: >
+ *   ILIAS shows a selection button titled "Choose an Option" including a red asterisk. No option is selected. If you
+ *   choose an option and click save ILIAS will display your selection in the following format:
+ *
+ *   Array (
+ *       [0] => 1
+ *   )
+ *
+ *   Do not choose an option (saving without having chosen an option): ILIAS will display an error message.
+ * ---
  */
 function with_required()
 {

@@ -5,8 +5,20 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Input\Field\Textarea;
 
 /**
- * Example show how to create and render a disabled textarea field and attach it to a
- * form.
+ * ---
+ * description: >
+ *   Example shows how to create and render a disabled textarea field and attach
+ *   it to a form.
+ *
+ * expected output: >
+ *   ILIAS shows an input field titled "Disabled Textarea Input". You cannot enter a text. ILIAS will show you an oupput
+ *   in the following format after clicking "Save":
+ *
+ *   Array
+ *   (
+ *       [0] =>
+ *   )
+ * ---
  */
 function disabled()
 {

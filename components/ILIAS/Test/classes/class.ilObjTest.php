@@ -701,14 +701,40 @@ class ilObjTest extends ilObject
         return $this->getMainSettings()->getIntroductionSettings()->getIntroductionText();
     }
 
+    private function cloneIntroduction(): ?int
+    {
+        $page_id = $this->getMainSettings()->getIntroductionSettings()->getIntroductionPageId();
+        if ($page_id === null) {
+            return null;
+        }
+        return $this->clonePage($page_id);
+    }
+
     public function getFinalStatement(): string
     {
         $page_id = $this->getMainSettings()->getFinishingSettings()->getConcludingRemarksPageId();
         if ($page_id !== null) {
             return (new ilTestPageGUI('tst', $page_id))->showPage();
         }
-
         return $this->getMainSettings()->getFinishingSettings()->getConcludingRemarksText();
+    }
+
+    private function cloneConcludingRemarks(): ?int
+    {
+        $page_id = $this->getMainSettings()->getFinishingSettings()->getConcludingRemarksPageId();
+        if ($page_id === null) {
+            return null;
+        }
+        return $this->clonePage($page_id);
+    }
+
+    private function clonePage(int $source_page_id): int
+    {
+        $page_object = new ilTestPage();
+        $page_object->setParentId($this->getId());
+        $new_page_id = $page_object->createPageWithNextId();
+        (new ilTestPage($source_page_id))->copy($new_page_id);
+        return $new_page_id;
     }
 
     /**
@@ -3962,9 +3988,6 @@ class ilObjTest extends ilObject
     {
         $this->mob_ids = [];
 
-        // MetaData
-        $this->exportXMLMetaData($a_xml_writer);
-
         // PageObjects
         $expLog->write(date("[y-m-d H:i:s] ") . "Start Export Page Objects");
         $this->bench->start("ContentObjectExport", "exportPageObjects");
@@ -3985,20 +4008,6 @@ class ilObjTest extends ilObject
         $this->exportFileItems($a_target_dir, $expLog);
         $this->bench->stop("ContentObjectExport", "exportFileItems");
         $expLog->write(date("[y-m-d H:i:s] ") . "Finished Export File Items");
-    }
-
-    /**
-    * export content objects meta data to xml (see ilias_co.dtd)
-    *
-    * @param	object		$a_xml_writer	ilXmlWriter object that receives the
-    *										xml data
-    */
-    public function exportXMLMetaData(&$a_xml_writer)
-    {
-        $md2xml = new ilMD2XML($this->getId(), 0, $this->getType());
-        $md2xml->setExportMode(true);
-        $md2xml->startExport();
-        $a_xml_writer->appendXML($md2xml->getXML());
     }
 
     /**
@@ -4270,6 +4279,15 @@ class ilObjTest extends ilObject
         $new_obj->addToNewsOnOnline(false, $new_obj->getObjectProperties()->getPropertyIsOnline()->getIsOnline());
         $this->getMainSettingsRepository()->store(
             $this->getMainSettings()->withTestId($new_obj->getTestId())
+                ->withIntroductionSettings(
+                    $this->getMainSettings()->getIntroductionSettings()->withIntroductionPageId(
+                        $this->cloneIntroduction()
+                    )->withTestId($new_obj->getTestId())
+                )->withFinishingSettings(
+                    $this->getMainSettings()->getFinishingSettings()->withConcludingRemarksPageId(
+                        $this->cloneConcludingRemarks()
+                    )->withTestId($new_obj->getTestId())
+                )
         );
         $this->getScoreSettingsRepository()->store(
             $this->getScoreSettings()->withTestId($new_obj->getTestId())
@@ -7661,5 +7679,25 @@ class ilObjTest extends ilObject
             $newsItem->setContent('');
             $newsItem->update();
         }
+    }
+
+    /**
+     * @deprecated There is no reason for this to be interesting for other objects
+     */
+    public static function _lookupRandomTest(int $obj_id): bool
+    {
+        global $DIC;
+
+        $query = 'SELECT question_set_type FROM tst_tests WHERE obj_fi = %s';
+
+        $res = $DIC['ilDB']->queryF($query, ['integer'], [$obj_id]);
+
+        $question_set_type = null;
+
+        while ($row = $DIC['ilDB']->fetchAssoc($res)) {
+            $question_set_type = $row['question_set_type'];
+        }
+
+        return $question_set_type === self::QUESTION_SET_TYPE_RANDOM;
     }
 }

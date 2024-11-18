@@ -5,7 +5,14 @@ declare(strict_types=1);
 namespace ILIAS\UI\examples\Item\Standard;
 
 /**
- * With progress meter chart
+ * ---
+ * description: >
+ *   Example for rendering a standard item with a progress meter.
+ *
+ * expected output: >
+ *   ILIAS shows a box including the following informations: A heading with a dummy text in small writings
+ *   ("Lorem ipsum...") below. Additionally a progress meter (75%) is rendered on the right top side of the box.
+ * ---
  */
 function with_progress()
 {
