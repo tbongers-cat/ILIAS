@@ -46,6 +46,7 @@ class MarkSchemaGUITest extends ilTestBaseTestCase
             $this->createMock(\ILIAS\Test\Logging\TestLogger::class),
             $this->createMock(ILIAS\HTTP\Wrapper\RequestWrapper::class),
             $this->createMock(ILIAS\HTTP\Wrapper\RequestWrapper::class),
+            $this->createMock(ILIAS\Test\ResponseHandler::class),
             $this->createMock(\GuzzleHttp\Psr7\Request::class),
             $this->createMock(ILIAS\Refinery\Factory::class),
             $this->createMock(ILIAS\UI\Factory::class),
