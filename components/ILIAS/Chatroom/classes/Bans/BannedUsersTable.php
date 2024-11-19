@@ -63,7 +63,7 @@ class BannedUsersTable implements UI\Component\Table\DataRetrieval
             ->table()
             ->data($this->lng->txt('ban_table_title'), $columns, $this)
             ->withId(self::class . '_' . $this->room_id)
-            ->withOrder(new \ILIAS\Data\Order('timestamp', \ILIAS\Data\Order::DESC))
+            ->withOrder(new \ILIAS\Data\Order('datetime', \ILIAS\Data\Order::DESC))
             ->withActions($actions)
             ->withRequest($this->request);
     }
@@ -89,7 +89,7 @@ class BannedUsersTable implements UI\Component\Table\DataRetrieval
             'lastname' => $this->ui_factory
                 ->table()->column()->text($this->lng->txt('lastname'))
                 ->withIsSortable(true),
-            'timestamp' => $this->ui_factory
+            'datetime' => $this->ui_factory
                 ->table()->column()->date($this->lng->txt('chtr_ban_ts_tbl_head'), $date_format)
                 ->withIsSortable(true),
             'actor' => $this->ui_factory
@@ -141,7 +141,8 @@ class BannedUsersTable implements UI\Component\Table\DataRetrieval
                 $this->records[$i]['login'] = $entry['login'];
                 $this->records[$i]['firstname'] = $entry['firstname'];
                 $this->records[$i]['lastname'] = $entry['lastname'];
-                $this->records[$i]['timestamp'] = (new \DateTimeImmutable('@' . $entry['timestamp']))->setTimezone(
+                $this->records[$i]['timestamp'] = $entry['timestamp'];
+                $this->records[$i]['datetime'] = (new \DateTimeImmutable('@' . $entry['timestamp']))->setTimezone(
                     new \DateTimeZone($this->actor->getTimeZone())
                 );
 
@@ -173,7 +174,7 @@ class BannedUsersTable implements UI\Component\Table\DataRetrieval
     ): ?int {
         $this->initRecords();
 
-        return count($this->records);
+        return \count($this->records);
     }
 
     /**
@@ -183,7 +184,16 @@ class BannedUsersTable implements UI\Component\Table\DataRetrieval
     {
         [$order_field, $order_direction] = $order->join([], fn($ret, $key, $value) => [$key, $value]);
 
-        return ilArrayUtil::stableSortArray($this->records, $order_field, strtolower($order_direction));
+        if ($order_field === 'datetime') {
+            $order_field = 'timestamp';
+        }
+
+        return ilArrayUtil::stableSortArray(
+            $this->records,
+            $order_field,
+            strtolower($order_direction),
+            $order_field === 'timestamp'
+        );
     }
 
     /**
@@ -204,6 +214,6 @@ class BannedUsersTable implements UI\Component\Table\DataRetrieval
      */
     private function limitRecords(array $records, Data\Range $range): array
     {
-        return array_slice($records, $range->getStart(), $range->getLength());
+        return \array_slice($records, $range->getStart(), $range->getLength());
     }
 }
