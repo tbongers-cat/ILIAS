@@ -598,7 +598,7 @@ assessment#:#circle_click_center#:#希望範囲の中心をクリックしてく
 assessment#:#circle_click_circle#:#希望範囲の円の部分をクリックしてください。
 assessment#:#clientip#:#クライアントのIP
 assessment#:#close_text_hint#:#新しくギャップを追加するには選択の位置にカーソルをセットして"ギャップを挿入"ボタンをクリックします。対応する編集セクションが下に表示されます。ギャップはギャップテキスト内のギャップをクリックして編集することもできます。
-assessment#:#cloze_answer_text_info#:#Spaces preceding or following the answer text will be deleted when the form is saved.###28 11 2023 new variable
+assessment#:#cloze_answer_text_info#:#先行スペースまたは回答に続くテキストはフォームが保存される時に削除されます。
 assessment#:#cloze_fixed_textlength#:#テキスト欄の長さ
 assessment#:#cloze_fixed_textlength_description#:#0以上の値を入力すると全てのテキストと数値穴埋めテキストフィールドがこの値の固定長で作成されます。
 assessment#:#cloze_gap_size_info#:#0以上を入力するとこのギャップテキストフィールドはこの値の固定長で作成されます。値を入力しない場合はギャップテキストフィールドはグローバル固定長で作成されます。
@@ -872,7 +872,7 @@ assessment#:#log_user_not_entered_values#:#ユーザは値を未入力です
 assessment#:#log_user_solution_willingly_deleted#:#ユーザは回答を削除しました。
 assessment#:#log_wrong_test_password_entered#:#受講者は間違ったテストパスワードを入力しました。入力: '%s'
 assessment#:#longmenu#:#Longmenu
-assessment#:#longmenu_answeroptions_differ#:#This question does not work correctly, as there are not the same amount of gaps in the text as in the correction options.###28 07 2023 new variable
+assessment#:#longmenu_answeroptions_differ#:#訂正オプションのテキスト内ギャップ数と同じではないのでこの問題は正しく動作しません。
 assessment#:#longmenu_text#:#長いメニューテキスト
 assessment#:#mailnottype#:#ユーザがテスト終了しても通知を送る
 assessment#:#mailnottype_desc#:#<strong>たとえ</strong> テスト試行回数が上限をこえていなくてもテストオーナーへ通知する。
@@ -2169,7 +2169,7 @@ badge#:#badge_backpack_no_groups#:#Mozilla Backpackは空か未公開です。
 badge#:#badge_badge#:#バッジ
 badge#:#badge_course_lp#:#コースLP
 badge#:#badge_course_lp_invalid#:#次のオブジェクトにはサポートされていないLPモードがあります: %s
-badge#:#badge_create_image_processing_failed#:#The badge could not be created, an error occurred while processing the image.###14 05 2024 new variable
+badge#:#badge_create_image_processing_failed#:#イメージ処理中にエラーが発生したのでバッジを作成できませんでした。
 badge#:#badge_criteria#:#判定基準
 badge#:#badge_crs_merit#:#メリット
 badge#:#badge_deletion_confirmation#:#次のバッジとそれぞれの割当てすべてを本当に削除しますか?
@@ -2197,7 +2197,7 @@ badge#:#badge_obi_activate_info#:#ユーザはiliasからバッジをエクス�
 badge#:#badge_obi_contact#:#連絡先メールアドレス
 badge#:#badge_obi_contact_info#:#このE-mailアドレスはバッジの背面以外は表示されません。
 badge#:#badge_obi_organisation#:#組織
-badge#:#badge_obi_organisation_info#:#このエントリーはバッジの発行者として表示されます。
+badge#:#badge_obi_organisation_info#:#このエントリーはバッジの発行者として表示されｒます。
 badge#:#badge_obi_salt#:#塩
 badge#:#badge_obi_salt_info#:#バッジの認証を有効にするためにサードパーティを許可する文字と数字の組合せを入力します。これ以降のエントリー変更はしないでください。
 badge#:#badge_object_badges#:#目標のバッジ
@@ -2218,8 +2218,8 @@ badge#:#badge_template_types#:#有効なタイプ
 badge#:#badge_template_types_all#:#All
 badge#:#badge_template_types_specific#:#特定の
 badge#:#badge_types#:#タイプ
-badge#:#badge_update_image_processing_failed#:#The badge could not be updated, an error occurred while processing the image.###14 05 2024 new variable
-badge#:#badge_uploaded_image_file_not_found#:#No uploaded image for the badge could be found.###14 05 2024 new variable
+badge#:#badge_update_image_processing_failed#:#イメージ処理中にエラーが発生したためバッジを更新できませんでした。
+badge#:#badge_uploaded_image_file_not_found#:#バッジ用のアップロードされたイメージが見つかりませんでした。
 badge#:#badge_user_profile#:#ユーザプロファイル
 badge#:#badge_valid#:#有効期限
 bgtask#:#bgtask_blocked#:#平行ダウンロード
@@ -3163,7 +3163,7 @@ cmix#:#conf_user_ident_il_uuid_user_id#:#E-Mailアドレスで書式化された
 cmix#:#conf_user_ident_il_uuid_user_id_info#:#これはコール毎にユニークですが、ユーザに関して直接結論つけされる事を許容願います。
 cmix#:#conf_user_ident_info#:#標準はemailアドレスに準じます。ユニークなILIASプラットフォームIDは:
 cmix#:#conf_user_ident_real_email#:#E-Mail Address
-cmix#:#conf_user_ident_real_email_info#:#IDとしてユーザのメールアドレスを送信 (Warning: E-Mailアドレスは複数のユーザで使用されている可能性があります) 
+cmix#:#conf_user_ident_real_email_info#:#IDとしてユーザのメールアドレスを送信 (Warning: E-Mailアドレスは複数のユーザで使用されている可能性があります)
 cmix#:#conf_user_name#:#ユーザ名
 cmix#:#conf_user_name_firstname#:#氏名
 cmix#:#conf_user_name_firstname_info#:#ILIASからユーザ名の氏名を送信
@@ -4113,7 +4113,7 @@ common#:#fold_wizard_page#:#フォルダをコピー(Step 2/2)
 common#:#folder#:#フォルダ
 common#:#folders#:#フォルダ
 common#:#follow_link_to_read_mails#:#メールを読むには次のリンクをクリック:
-common#:#force_accept_usr_agreement#:#利用条件を承諾する必要があります!
+common#:#force_accept_usr_agreement#:#利用規約を承諾する必要があります!
 common#:#forgot_password#:#パスワードを忘れた場合は?
 common#:#forgot_username#:#ユーザIDを忘れた場合は?
 common#:#form_input_not_valid#:#データの一部が未入力もしくは間違っています。フォーム入力を訂正してください。
@@ -5127,7 +5127,7 @@ common#:#objs_rtst#:#ECSテスト
 common#:#objs_rwik#:#ECS Wiki
 common#:#objs_sahs#:#SCORM/AICCラーニングモジュール
 common#:#objs_sess#:#セッション
-common#:#objs_skee#:#Competence Trees###28 11 2023 new variable
+common#:#objs_skee#:#Competenceツリー
 common#:#objs_spl#:#サーベイ質問集
 common#:#objs_st#:#章
 common#:#objs_svy#:#サーベイ
@@ -5776,10 +5776,10 @@ common#:#upload_files#:#ファイルをアップロード
 common#:#upload_files_title#:#ファイルをアップロード
 common#:#upload_pending#:#保留
 common#:#upload_settings#:#アップロード設定
-common#:#upload_svg_rejection_message#:#An uploaded SVG file contains possibily malicious code and cannot be processed.###14 05 2024 new variable
-common#:#upload_svg_rejection_message_base64#:#The file contains base64 encoded content.###14 05 2024 new variable
-common#:#upload_svg_rejection_message_elements#:#The file contains elements or attributes which are not allowed or known.###14 05 2024 new variable
-common#:#upload_svg_rejection_message_script#:#The file contains script-Elements.###14 05 2024 new variable
+common#:#upload_svg_rejection_message#:#アップロードされたSVGファイルには悪意の可能性のあるコードが含まれていて処理できません。
+common#:#upload_svg_rejection_message_base64#:#ファイルにはbase64でコード化されたコンテンツが含まれます。
+common#:#upload_svg_rejection_message_elements#:#ファイルには許可されないまたは未知の要素または属性が含まれます。
+common#:#upload_svg_rejection_message_script#:#Tファイルにはスクリプト要素が含まれます。
 common#:#uploaded_and_checked#:#ファイルはアップロードされてチェックされましたので、これからインポートを開始できます。
 common#:#uploading#:#アップロード中…
 common#:#uri#:#URI
@@ -5947,12 +5947,12 @@ common#:#wiki_add#:#Wikiに追加
 common#:#wiki_new#:#新規Wiki
 common#:#with#:#with
 common#:#withdraw_consent#:#承諾を取り消す
-common#:#withdraw_consent_description#:#ここで利用規約承諾を取り消します。
+common#:#withdraw_consent_description#:#ここで利用規約を取り消す
 common#:#withdraw_consent_description_external#:#ソースインストールの戻り解約プロセスを完了するためにもう一度ログインして下さい。
 common#:#withdraw_consent_description_internal#:#解約プロセス完了するためにもう一度ログインしてください。
-common#:#withdraw_consent_header#:#利用規約承諾の取り消し
-common#:#withdraw_consent_info#:#利用規約承諾を取消します。
-common#:#withdraw_consent_info_external#:#認証システムの管理者へ通知して利用規約承諾の取消する意向を連絡してください。
+common#:#withdraw_consent_header#:#サービス許諾を解約する。
+common#:#withdraw_consent_info#:#利用規約を解約する。
+common#:#withdraw_consent_info_external#:#認証システムの管理者へ通知して利用規約を解約するための意向について連絡してください。
 common#:#withdraw_consent_info_internal#:#ここで確認するとアカウントは削除されます。
 common#:#withdraw_usr_agreement#:#取り消し
 common#:#withdrawal_complete#:#完全に承諾を取り下げます。
@@ -6203,7 +6203,7 @@ content#:#cont_char_style_code#:#コード
 content#:#cont_char_style_com#:#コメント
 content#:#cont_char_style_quot#:#引用
 content#:#cont_characteristic#:#スタイルクラス
-content#:#cont_characteristic_table#:#Style Class###14 05 2024 new variable
+content#:#cont_characteristic_table#:#Style Class
 content#:#cont_check_values#:#SCOの送った値をチェック
 content#:#cont_check_values_info#:#テストツールはSCOからSCORMスタンダードへ準拠する値を送るかどうかをチェックします。SCORMスタンダードは値の保存に関して非常に多くの要求があります。すべての学習モジュールがスタンダード要件を満たしているものではありません。このオプションはモジュールがスタンダードに準拠するか否かをチェックさせます。ILIASがこのモジュールで動作するかどうかの単なるチェックにこのオプションは使用してはいけません。
 content#:#cont_choose_characteristic#:#特徴を選択
@@ -6302,7 +6302,7 @@ content#:#cont_dir_file#:#ディレクトリ/ファイル
 content#:#cont_dir_renamed#:#ディレクトリは名前変更されました。
 content#:#cont_disable_def_feedback#:#質問フィードバックを無効
 content#:#cont_disable_def_feedback_info#:#無効にすると回答済み問題は学習者へ何もフィードバック表示されなくなります。問題用にカスタムフィードバップを提供する必要があります。
-content#:#cont_double_click_to_delete#:#Double-click on content elements to select them for (de-)activation or deletion.###14 05 2024 new variable
+content#:#cont_double_click_to_delete#:#解除または削除を選択するにはコンテンツ要素をダブルクリック
 content#:#cont_download#:#ダウンロード
 content#:#cont_download_no_download#:#ダウンロード機能がオンになっていないのでユーザはダウンロードできません。
 content#:#cont_download_no_menu#:#ラーニングモジュールメニューがオンになっていないので、ユーザはダウンロードできません。
@@ -7260,7 +7260,7 @@ copg#:#copg_est_reading_time#:#予測読込み時間
 copg#:#copg_history_cleanup_cron#:#ページエディター履歴のクリーンアップ
 copg#:#copg_history_cleanup_cron_info#:#ページ履歴から過去のエントリーを削除
 copg#:#copg_more_character_formats#:#文字用の他のスタイル
-copg#:#copg_obj_types#:#Object Types###14 05 2024 new variable
+copg#:#copg_obj_types#:#オブジェクトタイプ
 copg#:#copg_page_element_not_found#:#ページ要素が見つかりません。
 copg#:#copg_page_type_stys#:#ページをレイアウト
 copg#:#copg_par_format_selection#:#図書式選択
@@ -7361,8 +7361,8 @@ crs#:#crs_admission_link_failure_offline#:#登録できません: コースは�
 crs#:#crs_admission_link_failure_registration_period#:#登録不可:コースは登録期限を過ぎています。
 crs#:#crs_admission_link_success_registration#:#正しくコース"%s"へ登録されました。
 crs#:#crs_agree#:#承諾
-crs#:#crs_agreement_header#:#利用条件
-crs#:#crs_agreement_required#:#このコースへの登録には利用条件への承諾が必要です。
+crs#:#crs_agreement_header#:#利用規約
+crs#:#crs_agreement_required#:#このコースへの登録には利用規約への承諾が必要です。
 crs#:#crs_at_least_one_admin#:#最低一人のコース管理者が必要です。
 crs#:#crs_auto_notification#:#新メンバ用の通知
 crs#:#crs_auto_notification_info#:#新メンバはコースへ追加されるとメール通知されます。
@@ -7400,8 +7400,8 @@ crs#:#crs_course_period_not_valid#:#コース期間設定が有効ではあり�
 crs#:#crs_course_status_of_users#:#ユーザの合格状況
 crs#:#crs_create_date#:#作成日
 crs#:#crs_custom_user_fields#:#関連ユーザデータのコース
-crs#:#crs_custom_user_fields_infobox#:#Create additional data fields for course members to fill in when joining. You can show this information as an additional column in the "Members" tab.###08 04 2024 new variable
-crs#:#crs_custom_user_fields_table_title#:#Relevant User Data of This Course###25 06 2024 new variable
+crs#:#crs_custom_user_fields_infobox#:#参加する際の記入のためにコースメンバー用の追加データフィールドを作成
+crs#:#crs_custom_user_fields_table_title#:#このコースの関連ユーザデータ
 crs#:#crs_dates#:#日付
 crs#:#crs_deactivate_notification#:#通知をオフ
 crs#:#crs_delete_objectve_sure#:#本当に選択した学習目標を削除しますか?
@@ -8829,8 +8829,8 @@ ecs#:#ecs_cms_tree_synchronized#:#ツリーが同期が完了しました。
 ecs#:#ecs_communities#:#受講者
 ecs#:#ecs_confirm_delete_tree#:#このキャンパス管理ツリーへの全ての割り当てを本当に削除しますか?
 ecs#:#ecs_connection_settings#:#コネクション設定
-ecs#:#ecs_consent_modal_title#:#Consent for data transfer###08 04 2024 new variable
-ecs#:#ecs_consent_reset_confirm_title#:#Reset user consent for this participant###08 04 2024 new variable
+ecs#:#ecs_consent_modal_title#:#データ送信の同意
+ecs#:#ecs_consent_reset_confirm_title#:#この参加ユーザ同意をリセット
 ecs#:#ecs_cron_task_scheduler#:#ECSタスクスケジューラ
 ecs#:#ecs_cron_task_scheduler_info#:#ECSタスクはスケジューラー設定に沿って実行されます。ECSサーバ構成時に限り必要です。
 ecs#:#ecs_crs_alloc#:#コース割当て
@@ -8859,16 +8859,16 @@ ecs#:#ecs_err_missing_value#:#入力:属性値をチェックしてください�
 ecs#:#ecs_error_extract_serial#:#証明書のシリアル番号を読み込む事ができません。クライアント証明書のpathをチェックしてください。
 ecs#:#ecs_event_appointment#:#イベントログ
 ecs#:#ecs_export#:#コースリリース
-ecs#:#ecs_export_auth_type#:#Authentication method for users with external user attribute###08 04 2024 new variable
-ecs#:#ecs_export_auth_type_ilias#:#User authentication via LDAP###08 04 2024 new variable
-ecs#:#ecs_export_auth_type_info#:#Please choose the authentication method for users to authenticate via ECS, for whom an external user attribute was transferred via ECS.###08 04 2024 new variable
-ecs#:#ecs_export_auth_type_none#:#Do not allow users with external user attribute###08 04 2024 new variable
-ecs#:#ecs_export_auth_type_shib#:#User authentication via Shibboleth###08 04 2024 new variable
+ecs#:#ecs_export_auth_type#:#外部ユーザ属性を持つユーザ用認証方法
+ecs#:#ecs_export_auth_type_ilias#:#LDAP経由のユーザ認証
+ecs#:#ecs_export_auth_type_info#:#外部ユーザ属性がECS経由で転送されるECS経由のユーザ認証用に認証モードを選択してください。
+ecs#:#ecs_export_auth_type_none#:#外部ユーザ属性をユーザへ許可しない。
+ecs#:#ecs_export_auth_type_shib#:#Shibboleth経由ユーザ認証
 ecs#:#ecs_export_created_body_a#:#新コースがリリースされました
 ecs#:#ecs_export_disabled#:#このコースをリリースしてはいけません
 ecs#:#ecs_export_enabled#:#このコースをリリース
-ecs#:#ecs_export_local_account#:#Local ILIAS accounts###08 04 2024 new variable
-ecs#:#ecs_export_local_account_info#:#If enabled, will allow the creation of local accounts via ECS. ECS users without external user attribute will receive a local user account on your installation.###08 04 2024 new variable
+ecs#:#ecs_export_local_account#:#ローカルILIASアカウント
+ecs#:#ecs_export_local_account_info#:#有効にすると、ECS経由のローカルアカウント作成が許可されます。外部ユーザ属性なしのECSユーザはシステムのローカルユーザアカウントを受領します。
 ecs#:#ecs_export_obj_settings#:#コースリリース設定
 ecs#:#ecs_export_types#:#エクスポート可のオブジェクトタイプ
 ecs#:#ecs_field_begin#:#始める
@@ -8891,10 +8891,10 @@ ecs#:#ecs_file_export#:#ファイルをリリース
 ecs#:#ecs_file_export_disabled#:#このファイルをリリースしない
 ecs#:#ecs_file_export_enabled#:#このファイルをリリース
 ecs#:#ecs_file_export_obj_settings#:#ファイルリリース設定
-ecs#:#ecs_firstname#:#First name###08 04 2024 new variable
-ecs#:#ecs_form_consent#:#Consent###08 04 2024 new variable
-ecs#:#ecs_form_consent_option_title#:#I hereby consent to the transfer of the following data to the above-mentioned target system:###08 04 2024 new variable
-ecs#:#ecs_form_target_platform#:#Target system###08 04 2024 new variable
+ecs#:#ecs_firstname#:#First name
+ecs#:#ecs_form_consent#:#同意する
+ecs#:#ecs_form_consent_option_title#:#私は、上記のターゲットシステムに対する以下のデータの転送をここに同意します:
+ecs#:#ecs_form_target_platform#:#ターゲットシステム
 ecs#:#ecs_general_info#:#全般情報
 ecs#:#ecs_glo_export#:#索引リリース
 ecs#:#ecs_glo_export_disabled#:#この索引をリリースしない
@@ -8907,27 +8907,27 @@ ecs#:#ecs_grp_export_enabled#:#このグループをリリース
 ecs#:#ecs_grp_export_obj_settings#:#グループリリース設定
 ecs#:#ecs_ignore_field#:#この欄の　エクスポート/更新 を無効
 ecs#:#ecs_import#:#インポート
-ecs#:#ecs_import_auth_mode#:#Allow accounts of authentication method %s for transmission via ECS###08 04 2024 new variable
-ecs#:#ecs_import_auth_type_default#:#Allow accounts authentication method "Default" for transmission via ECS###08 04 2024 new variable
+ecs#:#ecs_import_auth_mode#:#ECS経由の転送用にアカウト認証方式 %s を許可
+ecs#:#ecs_import_auth_type_default#:#ECS経由の転送用にアカウト認証方式"デフォルト"を許可
 ecs#:#ecs_import_cms#:#キャンパス管理
 ecs#:#ecs_import_id#:#インポート ID
 ecs#:#ecs_import_id_info#:#新コースリンクが作成される場所のカテゴリIDを入力してください
 ecs#:#ecs_import_types#:#インポート可のオブジェクトタイプ
-ecs#:#ecs_import_user_credentials_by_auth_mode#:#Configuration of authentication methods for transmission via ECS###08 04 2024 new variable
-ecs#:#ecs_import_user_credentials_by_auth_mode_info#:#Enable this option to allow accounts of authentication method "Default" to access participant's resources via ECS.###08 04 2024 new variable
+ecs#:#ecs_import_user_credentials_by_auth_mode#:#ECS経由の転送用認証方式の構成
+ecs#:#ecs_import_user_credentials_by_auth_mode_info#:#ECS経由の受験者リソースへアクセスさせるためのアカウント認証方式"デフォルト"を許可するにはこのオプションを有効にします。
 ecs#:#ecs_imported_content#:#インポートされたE-コンテンツ
 ecs#:#ecs_imported_from#:#インポート先
-ecs#:#ecs_institution#:#Institution###08 04 2024 new variable
+ecs#:#ecs_institution#:#機関
 ecs#:#ecs_invalid_import_type_cms#:#キャンパス管理インポートタイプは一度しか選択できません。
 ecs#:#ecs_key_password#:#キーパスワード
-ecs#:#ecs_lastname#:#Last name###08 04 2024 new variable
+ecs#:#ecs_lastname#:#Last name
 ecs#:#ecs_lm_export#:#ラーニングモジュールリリース
 ecs#:#ecs_lm_export_disabled#:#このラーニングモジュールをリリースしない
 ecs#:#ecs_lm_export_enabled#:#このラーニングモジュールをリリース
 ecs#:#ecs_lm_export_obj_settings#:#ラーニングモジュールリリース設定
 ecs#:#ecs_local_information#:#今後の情報
 ecs#:#ecs_local_settings#:#ローカル設定
-ecs#:#ecs_login#:#Username or External user account###08 04 2024 new variable
+ecs#:#ecs_login#:#ユーザ名または外部ユーザアカウント
 ecs#:#ecs_mapping_crs#:#コースのマッピング
 ecs#:#ecs_mapping_exp_tbl#:#ILIAS拡張メタデータをECSデータへマッピング
 ecs#:#ecs_mapping_rcrs#:#リモートコースのマッピング
@@ -8953,8 +8953,8 @@ ecs#:#ecs_node_mapping_status_3#:#マッピングしない
 ecs#:#ecs_not_configured#:#未構成
 ecs#:#ecs_not_published#:#認定が選択されていません。
 ecs#:#ecs_notifications#:#通知
-ecs#:#ecs_outgoing_user_credentials#:#User attribute###08 04 2024 new variable
-ecs#:#ecs_outgoing_user_credentials_info#:#Please specify which user attribute should be used for transmission. Possible values [Login], [EXTERNAL_ACCOUNT]. You can modify the specified attribute by prepending or appending any strings. Example: [LOGIN]@example.com###08 04 2024 new variable
+ecs#:#ecs_outgoing_user_credentials#:#ユーザ属性
+ecs#:#ecs_outgoing_user_credentials_info#:#転送用に使用するユーザ属性を指定してください。利用可能な値は [Login], [EXTERNAL_ACCOUNT]。ストリングへの前追加あるいは後付加により指定属性の変更ができます。例: [LOGIN]@example.com
 ecs#:#ecs_part_settings#:#受験者設定:
 ecs#:#ecs_participants#:#受講者
 ecs#:#ecs_participants_infos#:#今後の情報
@@ -9510,7 +9510,7 @@ exp#:#exp_scorm#:#SCORM
 exp#:#exp_show_print_view#:#印刷View表示
 exp#:#exp_xml#:#XML
 exp#:#export_created#:#新しいエクスポートファイルが作成されました。
-exp#:#export_files_deleted#:#The selected export files have been deleted.###28 05 2024 new variable
+exp#:#export_files_deleted#:#選択のエクスポートファイルが削除されました。
 export#:#export_create#:#作成
 export#:#export_create_new_file#:#新規エクスポート ファイルを作成
 export#:#export_existing#:#再利用
@@ -9872,7 +9872,7 @@ grp#:#grp_admission_link_failure_registration_period#:#登録不可: グルー�
 grp#:#grp_admission_link_success_registration#:#グループ"%s"へ新しい予定が作成されました。正しく登録されました。
 grp#:#grp_agree#:#承諾
 grp#:#grp_agreement_header#:#使用許諾書
-grp#:#grp_agreement_required#:#グループコンテンツにアクセスしたい場合は利用条件への承諾が必要です。
+grp#:#grp_agreement_required#:#グループコンテンツにアクセスしたい場合は利用規約への承諾が必要です。
 grp#:#grp_already_assigned#:#既に、このグループのメンバーシップリクエストをしています。
 grp#:#grp_at_least_one_admin#:#少なくともグループ管理者が一人は必要です。
 grp#:#grp_auto_notification#:#新しいメンバー用のWelcome-Mail
@@ -9892,8 +9892,8 @@ grp#:#grp_create_new_grp_in#:#%1'内に新区グループを作成
 grp#:#grp_create_or_use_existing#:#既存のグループへユーザを追加するか新規グループを追加希望しますか?
 grp#:#grp_created_and_user_been_added#:#グループの作成とユーザーを追加しました。
 grp#:#grp_custom_user_fields#:#関連ユーザデータのグループ
-grp#:#grp_custom_user_fields_infobox#:#Create additional data fields for group members to fill in when they join. You can show this information as an additional column in the "Members" tab.###08 04 2024 new variable
-grp#:#grp_custom_user_fields_table_title#:#Relevant User Data of This Group###25 06 2024 new variable
+grp#:#grp_custom_user_fields_infobox#:#参加する際の記入用にグループメンバーへ記入する追加データフィールドを作成します。この情報は"メンバー”タブ内の追加列に表示できます。
+grp#:#grp_custom_user_fields_table_title#:#このグループの関連ユーザデータ
 grp#:#grp_deactivate_notification#:#通知をオフ
 grp#:#grp_edit_members#:#受講者を編集
 grp#:#grp_enable_map#:#グループmapを有効
@@ -10560,7 +10560,7 @@ lti#:#conf_user_ident_il_uuid_ext_account#:#メールアドレスでフォーマ
 lti#:#conf_user_ident_il_uuid_ext_account_info#:#これはコール毎に識別されますが、ユーザに関して直接結論される事を許容される事があります。
 lti#:#conf_user_ident_il_uuid_login#:#メールアドレスでフォーマットされたユニークなILIASプラットフォームIDで結合されたILIAS Login
 lti#:#conf_user_ident_il_uuid_login_info#:#これはコール毎に識別されますが、ILIASユーザに関して直接結論される事を許容される事があります。
-lti#:#conf_user_ident_il_uuid_user_id#:#メールアドレスでフォーマットされたユニークなILIASプラットフォームIDで結合されたILIASユーザID 
+lti#:#conf_user_ident_il_uuid_user_id#:#メールアドレスでフォーマットされたユニークなILIASプラットフォームIDで結合されたILIASユーザID
 lti#:#conf_user_ident_il_uuid_user_id_info#:#これはコール毎に識別されますが、ユーザに関して直接結論される事はありません。
 lti#:#conf_user_ident_info#:#標準は通常メールアドレスです。ユニークなILIASプラットフォームIDは:
 lti#:#conf_user_ident_real_email#:#E-Mail Address
@@ -10582,18 +10582,18 @@ lti#:#field_provider_xml_info#:#https://www.imsglobal.org/specs/lti/xml　準拠
 lti#:#form_import_provider#:#Global Providerをインポート
 lti#:#gbl_roles_to_users#:#LTIユーザへ割当るグローバル役割
 lti#:#global_provider_subtab#:#全ユーザのGlobal Providers
-lti#:#grade_activity_progress_all#:#All Information on Activity Progress###08 04 2024 new variable
-lti#:#grade_activity_progress_completed#:#Completed###08 04 2024 new variable
-lti#:#grade_activity_progress_initialized#:#Initialized###08 04 2024 new variable
-lti#:#grade_activity_progress_inprogress#:#In Progress###08 04 2024 new variable
-lti#:#grade_activity_progress_started#:#Started###08 04 2024 new variable
-lti#:#grade_activity_progress_submitted#:#Submitted###08 04 2024 new variable
-lti#:#grade_grading_progress_all#:#All Information on Grading Progress###08 04 2024 new variable
-lti#:#grade_grading_progress_failed#:#The Grading could not complete (Failed)###08 04 2024 new variable
-lti#:#grade_grading_progress_fullygraded#:#The Grading Process is completed###08 04 2024 new variable
-lti#:#grade_grading_progress_notready#:#No Grading Process is occurring (NotReady)###08 04 2024 new variable
-lti#:#grade_grading_progress_pending#:#Final Grade is pending###08 04 2024 new variable
-lti#:#grade_grading_progress_pendingmanual#:#Final Grade is pending; requires Human Intervention###08 04 2024 new variable
+lti#:#grade_activity_progress_all#:#アクティビティ進捗全情報
+lti#:#grade_activity_progress_completed#:#完了
+lti#:#grade_activity_progress_initialized#:#初期化
+lti#:#grade_activity_progress_inprogress#:#進行中
+lti#:#grade_activity_progress_started#:#開始済
+lti#:#grade_activity_progress_submitted#:#提出済
+lti#:#grade_grading_progress_all#:#評価進行中の全情報
+lti#:#grade_grading_progress_failed#:#評価を完了できませんでした。 (Failed)
+lti#:#grade_grading_progress_fullygraded#:#評価を完了しました。
+lti#:#grade_grading_progress_notready#:#評価進行中のものはありません。(NotReady)
+lti#:#grade_grading_progress_pending#:#最終評価は保留中です。
+lti#:#grade_grading_progress_pendingmanual#:#最終評価保留中; 人的介在必要
 lti#:#highscore_achieved_ts#:#Date
 lti#:#highscore_achieved_ts_description#:#日付の入った列はランキングに含まれます。
 lti#:#highscore_all_tables#:#受講者指針のランクとトップランク
@@ -10804,13 +10804,13 @@ lti#:#tab_info#:#Info
 lti#:#tab_scoring#:#ランキング
 lti#:#tab_settings#:#設定
 lti#:#tab_statements#:#学習履歴
-lti#:#tbl_grade_activity_progress#:#Activity Progress###08 04 2024 new variable
+lti#:#tbl_grade_activity_progress#:#アクティビティ進捗
 lti#:#tbl_grade_actor#:#User
 lti#:#tbl_grade_date#:#Date
-lti#:#tbl_grade_grading_progress#:#Grading Progress###08 04 2024 new variable
+lti#:#tbl_grade_grading_progress#:#評価進捗
 lti#:#tbl_grade_period#:#期間
 lti#:#tbl_grade_score#:#点数
-lti#:#tbl_grade_stored#:#Transmitted to ILIAS###08 04 2024 new variable
+lti#:#tbl_grade_stored#:#ILIASへ転送済
 lti#:#tbl_lti_prov_all_categories#:#全カテゴリー
 lti#:#tbl_lti_prov_availability#:#利用期間
 lti#:#tbl_lti_prov_category#:#カテゴリー
@@ -11126,8 +11126,8 @@ mathjax#:#mathjax_limiter#:#インライン区切り文字
 mathjax#:#mathjax_limiter_info#:#MathJaxを有効にする構成するインライン区切り文字を選択します。
 mathjax#:#mathjax_mathjax#:#MathJax
 mathjax#:#mathjax_polyfill_url#:#多角形のURL
-mathjax#:#mathjax_polyfill_url_desc_line1#:#For MathJax 2 and MathJax 3 with current browsers not needed.
-mathjax#:#mathjax_polyfill_url_desc_line2#:#Please remove any reference to polyfill.io! See https://sansec.io/research/polyfill-supply-chain-attack
+mathjax#:#mathjax_polyfill_url_desc_line1#:#MathJax 2 には不要
+mathjax#:#mathjax_polyfill_url_desc_line2#:#MathJax 3の例  https://polyfill.io/v3/polyfill.min.js?features=es6
 mathjax#:#mathjax_script_url#:#MathJax ScriptのURL
 mathjax#:#mathjax_script_url_desc_line1#:#MathJax 2 の例 %s
 mathjax#:#mathjax_script_url_desc_line2#:#javascriptのMathJaxコードでXSS攻撃を回避するためのセーフモード有効にして下さい。MathJax 2用はCDN urlへ'セーフ'パラメータを追加する事で有効化できます。MathJax 3用はMathjaxを読込む前に構成するスクリプトをincludeする必要があります。例の使用 %s
@@ -11159,7 +11159,7 @@ mcst#:#mcst_automatic_detection#:#自動検出
 mcst#:#mcst_autoplay#:#Autoplay
 mcst#:#mcst_autoplay_active#:#Autoplay (Default on)
 mcst#:#mcst_autoplay_inactive#:#Autoplay (Default off)
-mcst#:#mcst_autoplay_info#:#Starts automatically the next video when reaching the end of the previous one. This feature is not supported by youtube videos.###14 05 2024 new variable
+mcst#:#mcst_autoplay_info#:#前のものが終了に近づくと次のビデオを自動的に開始します。この機能はYouTubeビデオではサポートされません。
 mcst#:#mcst_clear_purpose_title#:#削除
 mcst#:#mcst_converted_file#:#ファイルは変換されました。
 mcst#:#mcst_copy#:#メディアキャストをコピー
@@ -11401,14 +11401,14 @@ meta#:#md_used#:#利用
 meta#:#meta_accessibility_restrictions#:#アクセシビリティー規制
 meta#:#meta_active#:#アクティブ
 meta#:#meta_add#:#追加
-meta#:#meta_advmd_select_delete_option#:#Delete This Entry###08 04 2024 new variable
-meta#:#meta_advmd_select_first_position_identifier#:#First###08 04 2024 new variable
-meta#:#meta_advmd_select_new_option#:#Add New Entry###08 04 2024 new variable
-meta#:#meta_advmd_select_option_position#:#Position###08 04 2024 new variable
-meta#:#meta_advmd_select_option_value#:#Value###08 04 2024 new variable
+meta#:#meta_advmd_select_delete_option#:#このエントリーを削除
+meta#:#meta_advmd_select_first_position_identifier#:#First
+meta#:#meta_advmd_select_new_option#:#新しいエントリーを追加
+meta#:#meta_advmd_select_option_position#:#Position
+meta#:#meta_advmd_select_option_value#:#Value
 meta#:#meta_advmd_select_options#:#エントリー
-meta#:#meta_advmd_select_options_edit#:#Edit Entries###08 04 2024 new variable
-meta#:#meta_advmd_select_position_identifier#:#After %s###08 04 2024 new variable
+meta#:#meta_advmd_select_options_edit#:#エントリを編集
+meta#:#meta_advmd_select_position_identifier#:#After %s
 meta#:#meta_annotation#:#注釈
 meta#:#meta_atomic#:#原子
 meta#:#meta_author#:#著者
@@ -12083,7 +12083,7 @@ mme#:#type_separator#:#セパレータ
 mme#:#type_separator_info#:#このアイテムのタイトルはグレイバナーに表示されます。タイトルを未入力の場合は単線が表示されます。
 mme#:#type_top_link_item#:#Link
 mme#:#type_top_parent_item#:#コンテナ
-mme#:#unable_to_render#:#Unable to show '%s' in '%s'.###28 05 2024 new variable
+mme#:#unable_to_render#:# '%s' in '%s'　表示不可
 mob#:#mob_choose_from_pool#:#メディア集から選択
 mob#:#mob_external_url#:#外部URL
 mob#:#mob_file#:#ファイル
@@ -12733,7 +12733,7 @@ prg#:#prg_autoassignment#:#(auto)
 prg#:#prg_belongs_to#:#所有者
 prg#:#prg_can_not_manage_in_repo#:#ユーザ割り当ての理由によりこの学習プログラムを管理することは許可されていません。
 prg#:#prg_cancel#:#キャンセル
-prg#:#prg_cancel_acknowledge_completed_courses#:#Don't acknowledge any Courses###14 05 2024 new variable
+prg#:#prg_cancel_acknowledge_completed_courses#:#どのコースへの承認も認めません。
 prg#:#prg_cancel_tree_order#:#ツリー順を解除
 prg#:#prg_change_deadline#:#締切を変更
 prg#:#prg_change_expire_date#:#期限を変更　
@@ -13076,7 +13076,7 @@ ps#:#crs_ps_cdf_info#:#今後のコース別データ
 ps#:#crs_ps_required_info#:#今後のコース別フィールドはコースコンテンツへのアスセスに必要です。
 ps#:#grp_ps_cdf_info#:#今後のグループ別データ
 ps#:#grp_ps_required_info#:#今後のグループ別フィールドはグループコンテンツへのアスセスに必要です。
-ps#:#ps_agreement_accepted#:#利用条件を許諾しました
+ps#:#ps_agreement_accepted#:#利用規約を許諾しました
 ps#:#ps_auto_https#:#HTTPSを自動検知
 ps#:#ps_auto_https_description#:#有効にすると、ILIASは下記に示すヘッダー値を分析してHTTPsステータスを検知しようとします。
 ps#:#ps_auto_https_header_name#:#ヘッダー名
@@ -13096,7 +13096,7 @@ ps#:#ps_cdf_required#:#必須項目です
 ps#:#ps_cdf_select_one#:#一つ選択。
 ps#:#ps_cdf_type#:#タイプ
 ps#:#ps_cdf_value#:#値
-ps#:#ps_cdf_warning_modify#:#注意：ユーザの少なくとも一人は利用条件を承諾する必要があります。コース特定の欄を修正すると、全ての利用条件の承諾はリセットされます。
+ps#:#ps_cdf_warning_modify#:#注意：ユーザの少なくとも一人は利用規約を承諾する必要があります。コース特定の欄を修正すると、全ての利用規約の承諾はリセットされます。
 ps#:#ps_crs_user_fields#:#コース-別ユーザフィールド
 ps#:#ps_error_message_https_header_missing#:#https の自動検出を有効にする場合は、ヘッダー名とヘッダーの値を提供しなければなりません。
 ps#:#ps_error_message_invalid_login_max_attempts#:#最大ログイン回数が0未満のことがあります。
@@ -13159,7 +13159,7 @@ ps#:#ps_type_select_long#:#選択ボックス(固定値)
 ps#:#ps_type_text#:#テキストフィールド
 ps#:#ps_type_txt_long#:#テキストフィールド(オプション値)
 ps#:#ps_user_selection#:#参加者の選択
-ps#:#ps_warning_modify#:#注意。少なくとも一人が利用条件を許諾する必要があります。設定を変更すると全ての利用条件の許諾をリセットする事になります。
+ps#:#ps_warning_modify#:#注意。少なくとも一人が利用規約を許諾する必要があります。設定を変更すると全ての利用規約の許諾をリセットする事になります。
 ps#:#rbac_log#:#アクセス権限ログ
 ps#:#rbac_log_age#:#ログエントリーを保持
 ps#:#rbac_log_age_info#:#月間ログエントリー最高年齢
@@ -14156,8 +14156,8 @@ registration#:#reg_direct#:#直接登録
 registration#:#reg_direct_info#:#有効にすると、すべての新規ユーザ登録リクエストは自動承認となります。
 registration#:#reg_disabled#:#登録不可
 registration#:#reg_domain#:#ドメイン
-registration#:#reg_domain_already_assigned_p#:#ドメイン '%s' は他の役割へすでに入力済です。
-registration#:#reg_domain_already_assigned_s#:#ドメイン '%s' は他の役割へすでに入力済です。
+registration#:#reg_domain_already_assigned_p#:#ドメイン '%s' はすでに別の役割で入力されました。
+registration#:#reg_domain_already_assigned_s#:#ドメイン '%s' はすでに別の役割で入力されました。
 registration#:#reg_email#:#自動割当て
 registration#:#reg_email_domains#:#次のemailアドレスドメインは有効です:%s
 registration#:#reg_email_domains_code#:#登録コード付きのメールアドレスは有効
@@ -14691,7 +14691,7 @@ search#:#search_choose_object_type#:#オブジェクトタイプを一つ選ん�
 search#:#search_content#:#ページコンテンツ
 search#:#search_created_after#:#後に作成されたオブジェクト
 search#:#search_created_before#:#. . .以前に作成されたオブジェクト
-search#:#search_created_on#:#. . .に作成されたオブジェクト. . . 
+search#:#search_created_on#:#. . .に作成されたオブジェクト. . .
 search#:#search_crs_title#:#コース名
 search#:#search_details_info#:#詳細検索。1つまたは複数のリソースの種類を選択してください。
 search#:#search_direct#:#ダイレクト検索
@@ -15162,7 +15162,7 @@ style#:#sty_add_color#:#カラーを追加
 style#:#sty_add_content_style#:#コンテンツスタイルを追加
 style#:#sty_add_image#:#イメージを追加
 style#:#sty_add_media_query#:#メディアクエリーを追加
-style#:#sty_add_media_query_info#:#例:ブラウザーウインドウが600px以下または印刷機器の"印刷"が "スクリーンのみで(max-width: 600px)" 
+style#:#sty_add_media_query_info#:#例:ブラウザーウインドウが600px以下または印刷機器の"印刷"が "スクリーンのみで(max-width: 600px)"
 style#:#sty_add_pgl#:#ページレイアウトを追加
 style#:#sty_add_template#:#テンプレートを追加
 style#:#sty_added_characteristic#:#スタイルクラスを追加しました。
@@ -16343,8 +16343,8 @@ tbl#:#tbl_template_deleted#:#保全した表示を削除しました。
 tbl#:#tbl_templates#:#表示
 tos#:#deleteDocument#:#削除
 tos#:#detachCriterionAssignment#:#削除
-tos#:#tos_accept_usr_agreement_anonymous#:#Terms of Service###25 06 2024 new variable
-tos#:#tos_accept_usr_agreement_anonymous_intro#:#Before you proceed to ILIAS you accept the following Terms of Service.###25 06 2024 new variable
+tos#:#tos_accept_usr_agreement_anonymous#:#利用規約
+tos#:#tos_accept_usr_agreement_anonymous_intro#:#ILIAS利用前に次の利用規約を承諾します。
 tos#:#tos_acceptance_history#:#承諾履歴
 tos#:#tos_account_reg_not_possible#:#ユーザ許諾が無いので自己登録はできません。詳細に関しては<a href="%1$s">システム管理者</a>へコンタクトしてください。
 tos#:#tos_add_document_btn_label#:#ドキュメントを追加
@@ -16686,22 +16686,22 @@ ui#:#datetime_required#:#Time/Dateは必須
 ui#:#duration_default_label_end#:#終了
 ui#:#duration_default_label_start#:#開始
 ui#:#duration_end_must_not_be_earlier_than_start#:#開始は終了よりも遅くできません。
-ui#:#label_fieldselection#:#Field Selection###14 05 2024 new variable
-ui#:#label_fieldselection_refresh#:#Apply###14 05 2024 new variable
-ui#:#label_pagination_limit#:#Pagination Number of Rows###14 05 2024 new variable
-ui#:#label_pagination_offset#:#Pagination Offset###14 05 2024 new variable
-ui#:#label_sortation#:#Sortation###14 05 2024 new variable
-ui#:#order_option_alphabetical_ascending#:#A to Z###14 05 2024 new variable
-ui#:#order_option_alphabetical_descending#:#Z to A###14 05 2024 new variable
-ui#:#order_option_chronological_ascending#:#Earliest first###14 05 2024 new variable
-ui#:#order_option_chronological_descending#:#Most Recent first###14 05 2024 new variable
-ui#:#order_option_first#:#first###14 05 2024 new variable
-ui#:#order_option_generic_ascending#:#ascending###14 05 2024 new variable
-ui#:#order_option_generic_descending#:#descending###14 05 2024 new variable
-ui#:#order_option_numerical_ascending#:#0 to 9###14 05 2024 new variable
-ui#:#order_option_numerical_descending#:#9 to 0###14 05 2024 new variable
-ui#:#presentation_table_collapse#:#collapse all###14 05 2024 new variable
-ui#:#presentation_table_expand#:#expand all###14 05 2024 new variable
+ui#:#label_fieldselection#:#フィールド選択
+ui#:#label_fieldselection_refresh#:#適用
+ui#:#label_pagination_limit#:#列のページ数
+ui#:#label_pagination_offset#:#ページ付けオフセット
+ui#:#label_sortation#:#ソート
+ui#:#order_option_alphabetical_ascending#:#A to Z
+ui#:#order_option_alphabetical_descending#:#Z to A
+ui#:#order_option_chronological_ascending#:#若い順
+ui#:#order_option_chronological_descending#:#最新順
+ui#:#order_option_first#:#最初
+ui#:#order_option_generic_ascending#:#昇順
+ui#:#order_option_generic_descending#:#降順
+ui#:#order_option_numerical_ascending#:#0 to 9
+ui#:#order_option_numerical_descending#:#9 to 0
+ui#:#presentation_table_collapse#:#全崩壊
+ui#:#presentation_table_expand#:#全展開
 ui#:#ui_chars_max#:#Maximum:
 ui#:#ui_chars_min#:#Minimum:
 ui#:#ui_chars_remaining#:#残り文字数:
@@ -16739,14 +16739,14 @@ user#:#enable_local_user_administration#:#ローカルユーザ管理を使用
 user#:#enable_local_user_administration_info#:#有効にするとローカルユーザアカウントはカテゴリ内で管理できます。
 user#:#feedhash#:#ニュースフィードハッシュ
 user#:#has_role#:#役割
-user#:#info_accessFree_sure#:#本当に次のアカウントから有効となっている日までを削除しますか?
+user#:#info_accessFree_sure#:#次のアカウントから有効日付までを本当に削除しますか?
 user#:#inform_user_mail_info#:#有効にするとユーザへメール送信されます。その内容は管理>ユーザ管理> 設定 > 新規アカウントメールの中で定義できます。
 user#:#interests#:#興味
 user#:#interests_general#:#一般的な興味
 user#:#interests_help_looking#:#ヘルプを探す
 user#:#interests_help_offered#:#ヘルプを提案
 user#:#msg_spoint_not_modified#:#開始点未修整
-user#:#no_deactivate_yourself#:#You cannot deactivate your own user account.###28 07 2023 new variable
+user#:#no_deactivate_yourself#:#自身のユーザアカウントはアクティブ解除できません。
 user#:#obj_ref_id_not_exist#:#入力のReference-IDが存在しません
 user#:#restrict_user_access#:#ユーザアカウントへの限定アクセス
 user#:#restrict_user_access_info#:#有効にするとユーザアカウントへのアクセスが制限されます。アクセス権は"ユーザアカウント"と"カテゴリ"の"ローカルユーザアカウントの読み込み”に依存します。
