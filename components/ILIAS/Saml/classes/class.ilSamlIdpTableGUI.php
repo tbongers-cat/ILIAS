@@ -65,6 +65,7 @@ final class ilSamlIdpTableGUI implements \ILIAS\UI\Component\Table\DataRetrieval
                 $this
             )
             ->withId(self::class)
+            ->withOrder(new \ILIAS\Data\Order('title', \ILIAS\Data\Order::ASC))
             ->withActions($this->getActions())
             ->withRequest($this->http_request);
     }
