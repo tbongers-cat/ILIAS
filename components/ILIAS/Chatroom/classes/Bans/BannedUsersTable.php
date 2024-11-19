@@ -42,6 +42,7 @@ class BannedUsersTable implements UI\Component\Table\DataRetrieval
      * @param list<array<string, scalar|null>> $banned_users
      */
     public function __construct(
+        private readonly \ilObjUser $actor,
         private readonly int $room_id,
         private readonly array $banned_users,
         private readonly ilCtrlInterface $ctrl,
@@ -62,6 +63,7 @@ class BannedUsersTable implements UI\Component\Table\DataRetrieval
             ->table()
             ->data($this->lng->txt('ban_table_title'), $columns, $this)
             ->withId(self::class . '_' . $this->room_id)
+            ->withOrder(new \ILIAS\Data\Order('timestamp', \ILIAS\Data\Order::DESC))
             ->withActions($actions)
             ->withRequest($this->request);
     }
@@ -71,6 +73,12 @@ class BannedUsersTable implements UI\Component\Table\DataRetrieval
      */
     private function getColumns(): array
     {
+        if ((int) $this->actor->getTimeFormat() === \ilCalendarSettings::TIME_FORMAT_12) {
+            $date_format = $this->data_factory->dateFormat()->withTime12($this->actor->getDateFormat());
+        } else {
+            $date_format = $this->data_factory->dateFormat()->withTime24($this->actor->getDateFormat());
+        }
+
         return [
             'login' => $this->ui_factory
                 ->table()->column()->text($this->lng->txt('login'))
@@ -82,7 +90,7 @@ class BannedUsersTable implements UI\Component\Table\DataRetrieval
                 ->table()->column()->text($this->lng->txt('lastname'))
                 ->withIsSortable(true),
             'timestamp' => $this->ui_factory
-                ->table()->column()->text($this->lng->txt('chtr_ban_ts_tbl_head'))
+                ->table()->column()->date($this->lng->txt('chtr_ban_ts_tbl_head'), $date_format)
                 ->withIsSortable(true),
             'actor' => $this->ui_factory
                 ->table()->column()->text($this->lng->txt('chtr_ban_actor_tbl_head'))
@@ -133,11 +141,9 @@ class BannedUsersTable implements UI\Component\Table\DataRetrieval
                 $this->records[$i]['login'] = $entry['login'];
                 $this->records[$i]['firstname'] = $entry['firstname'];
                 $this->records[$i]['lastname'] = $entry['lastname'];
-                if (is_numeric($entry['timestamp']) && $entry['timestamp'] > 0) {
-                    $this->records[$i]['timestamp'] = ilDatePresentation::formatDate(
-                        new ilDateTime($entry['timestamp'], IL_CAL_UNIX)
-                    );
-                }
+                $this->records[$i]['timestamp'] = (new \DateTimeImmutable('@' . $entry['timestamp']))->setTimezone(
+                    new \DateTimeZone($this->actor->getTimeZone())
+                );
 
                 $this->records[$i]['actor'] = $entry['actor'];
                 ++$i;
