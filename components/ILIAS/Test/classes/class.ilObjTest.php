@@ -2470,179 +2470,8 @@ class ilObjTest extends ilObject
 
     public function getUnfilteredEvaluationData(): ilTestEvaluationData
     {
-        $data = new ilTestEvaluationData($this->db, $this);
-
-        $query = "
-			SELECT		tst_test_result.*,
-						qpl_questions.original_id,
-						qpl_questions.title questiontitle,
-						qpl_questions.points maxpoints
-
-			FROM		tst_test_result, qpl_questions, tst_active
-
-			WHERE		tst_active.active_id = tst_test_result.active_fi
-			AND			qpl_questions.question_id = tst_test_result.question_fi
-			AND			tst_active.test_fi = %s
-
-			ORDER BY	tst_active.active_id ASC, tst_test_result.pass ASC, tst_test_result.tstamp DESC
-		";
-
-        $result = $this->db->queryF(
-            $query,
-            ['integer'],
-            [$this->getTestId()]
-        );
-
-        while ($row = $this->db->fetchAssoc($result)) {
-            if (!$data->participantExists($row["active_fi"])) {
-                continue;
-            }
-
-            $participant_object = $data->getParticipant($row["active_fi"]);
-            $pass_object = $participant_object->getPass($row["pass"]);
-
-            if (!($pass_object instanceof ilTestEvaluationPassData)) {
-                continue;
-            }
-
-            $pass_object->addAnsweredQuestion(
-                $row['question_fi'],
-                $row['maxpoints'],
-                $row['points'],
-                (bool) $row['answered'],
-                null,
-                $row['manual']
-            );
-        }
-
-        foreach (array_keys($data->getParticipants()) as $active_id) {
-            if ($this->isRandomTest()) {
-                for ($testpass = 0; $testpass <= $data->getParticipant($active_id)->getLastPass(); $testpass++) {
-                    $this->db->setLimit($this->getQuestionCount(), 0);
-
-                    $query = "
-						SELECT tst_test_rnd_qst.sequence, tst_test_rnd_qst.question_fi, qpl_questions.original_id,
-						tst_test_rnd_qst.pass, qpl_questions.points, qpl_questions.title
-						FROM tst_test_rnd_qst, qpl_questions
-						WHERE tst_test_rnd_qst.question_fi = qpl_questions.question_id
-						AND tst_test_rnd_qst.pass = %s
-						AND tst_test_rnd_qst.active_fi = %s ORDER BY tst_test_rnd_qst.sequence
-					";
-
-                    $result = $this->db->queryF(
-                        $query,
-                        ['integer','integer'],
-                        [$testpass, $active_id]
-                    );
-
-                    if ($result->numRows()) {
-                        while ($row = $this->db->fetchAssoc($result)) {
-                            $tpass = array_key_exists("pass", $row) ? $row["pass"] : 0;
-
-                            if (
-                                !isset($row["question_fi"], $row["points"], $row["sequence"]) ||
-                                !is_numeric($row["question_fi"]) || !is_numeric($row["points"]) || !is_numeric($row["sequence"])
-                            ) {
-                                continue;
-                            }
-
-                            $data->getParticipant($active_id)->addQuestion(
-                                (int) $row["original_id"],
-                                (int) $row["question_fi"],
-                                (float) $row["points"],
-                                (int) $row["sequence"],
-                                $tpass
-                            );
-
-                            $data->addQuestionTitle($row["question_fi"], $row["title"]);
-                        }
-                    }
-                }
-            } else {
-                $query = "
-					SELECT tst_test_question.sequence, tst_test_question.question_fi,
-					qpl_questions.points, qpl_questions.title, qpl_questions.original_id
-					FROM tst_test_question, tst_active, qpl_questions
-					WHERE tst_test_question.question_fi = qpl_questions.question_id
-					AND tst_active.active_id = %s
-					AND tst_active.test_fi = tst_test_question.test_fi
-					ORDER BY tst_test_question.sequence
-				";
-
-                $result = $this->db->queryF(
-                    $query,
-                    ['integer'],
-                    [$active_id]
-                );
-
-                if ($result->numRows()) {
-                    $questionsbysequence = [];
-
-                    while ($row = $this->db->fetchAssoc($result)) {
-                        $questionsbysequence[$row['sequence']] = $row;
-                    }
-
-                    $seqresult = $this->db->queryF(
-                        "SELECT * FROM tst_sequence WHERE active_fi = %s",
-                        ['integer'],
-                        [$active_id]
-                    );
-
-                    while ($seqrow = $this->db->fetchAssoc($seqresult)) {
-                        $questionsequence = unserialize($seqrow['sequence']);
-
-                        foreach ($questionsequence as $sidx => $seq) {
-                            if (!isset($questionsbysequence[$seq])) {
-                                continue;
-                            }
-                            $data->getParticipant($active_id)->addQuestion(
-                                $questionsbysequence[$seq]['original_id'] ?? 0,
-                                $questionsbysequence[$seq]['question_fi'],
-                                $questionsbysequence[$seq]['points'],
-                                $sidx + 1,
-                                $seqrow['pass']
-                            );
-
-                            $data->addQuestionTitle(
-                                $questionsbysequence[$seq]['question_fi'],
-                                $questionsbysequence[$seq]['title']
-                            );
-                        }
-                    }
-                }
-            }
-        }
-
-        foreach (array_keys($data->getParticipants()) as $active_id) {
-            $user_data = $data->getParticipant($active_id);
-            $mark = $this->getMarkSchema()->getMatchingMark(
-                $user_data->getReachedPointsInPercent()
-            );
-
-            if ($mark !== null) {
-                $user_data->setMark($mark);
-            }
-
-            for ($i = 0;$i < $user_data->getPassCount();$i++) {
-                $attempt_data = $user_data->getPass($i);
-                if ($attempt_data === null) {
-                    continue;
-                }
-                $mark = $this->getMarkSchema()->getMatchingMark(
-                    $attempt_data->getReachedPointsInPercent()
-                );
-                if ($mark !== null) {
-                    $attempt_data->setMark($mark);
-                }
-            }
-
-            $visiting_time = $this->participant_repository->getFirstAndLastVisitForActiveId($active_id);
-
-            $user_data->setFirstVisit($visiting_time['first_access']);
-            $user_data->setLastVisit($visiting_time['last_access']);
-        }
-
-        return $data;
+        return (new ilTestEvaluationFactory($this->db, $this))
+            ->getEvaluationData();
     }
 
     public function getQuestionCountAndPointsForPassOfParticipant(int $active_id, int $pass): array
@@ -7703,5 +7532,10 @@ class ilObjTest extends ilObject
         }
 
         return $question_set_type === self::QUESTION_SET_TYPE_RANDOM;
+    }
+
+    public function getVisitingTimeOfParticipant(int $active_id): array
+    {
+        return $this->participant_repository->getFirstAndLastVisitForActiveId($active_id);
     }
 }

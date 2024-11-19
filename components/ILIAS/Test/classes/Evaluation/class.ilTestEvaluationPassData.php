@@ -22,18 +22,8 @@ use ILIAS\Test\Results\Data\StatusOfAttempt;
 use ILIAS\Test\Scoring\Marks\Mark;
 
 /**
-* Class ilTestEvaluationPassData
-*
-* @author		Helmut Schottmüller <helmut.schottmueller@mac.com>
-* @author		Björn Heyser <bheyser@databay.de>
-* @version		$Id$
-*
-* @throws		ilTestEvaluationException
-*
-* @defgroup ModulesTest Modules/Test
-* @extends ilObject
-*/
-
+ * @deprecated 11; Result/EvaluationData will be refined.
+ */
 class ilTestEvaluationPassData
 {
     /**

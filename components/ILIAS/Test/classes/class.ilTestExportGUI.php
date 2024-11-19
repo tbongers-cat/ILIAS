@@ -78,8 +78,7 @@ class ilTestExportGUI extends ilExportGUI
     {
         if ($this->access->checkAccess('write', '', $this->obj->getRefId())) {
             // prepare generation before contents are processed (for mathjax)
-
-            $evaluation = new ilTestEvaluation($this->db, $this->obj->getTestId());
+            $evaluation = new ilTestEvaluationFactory($this->db, $this->obj);
             $allActivesPasses = $evaluation->getAllActivesPasses();
             $participantData = new ilTestParticipantData($this->db, $this->lng);
             $participantData->setActiveIdsFilter(array_keys($allActivesPasses));
