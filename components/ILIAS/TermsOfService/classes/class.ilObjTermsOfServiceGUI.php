@@ -94,6 +94,9 @@ class ilObjTermsOfServiceGUI extends ilObject2GUI
                 return;
             default:
                 switch ($cmd) {
+                    case 'documents':
+                        $this->ctrl->redirectByClass([self::class, ilLegalDocumentsAdministrationGUI::class], 'documents');
+                        return;
                     case 'confirmReset': $this->confirmReset();
                         return;
                     case 'resetNow': $this->resetNow();
