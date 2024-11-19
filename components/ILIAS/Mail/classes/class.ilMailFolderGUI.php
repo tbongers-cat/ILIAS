@@ -485,6 +485,7 @@ class ilMailFolderGUI
             $this->data_factory,
             $this->refinery,
             $this->user->getDateFormat(),
+            $this->user->getTimeFormat(),
             new DateTimeZone($this->user->getTimeZone())
         );
 
