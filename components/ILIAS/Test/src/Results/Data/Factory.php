@@ -324,10 +324,6 @@ class Factory
     private function retrieveResultData(\ilObjTest $test_obj): \ilTestEvaluationData
     {
         if (!isset($this->test_data[$test_obj->getId()])) {
-            $test_obj->setAccessFilteredParticipantList(
-                $test_obj->buildStatisticsAccessFilteredParticipantList()
-            );
-
             $this->test_data[$test_obj->getId()] = $test_obj->getCompleteEvaluationData();
         }
 
