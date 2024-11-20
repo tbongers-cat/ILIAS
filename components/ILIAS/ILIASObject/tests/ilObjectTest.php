@@ -43,6 +43,10 @@ class ilObjectTest extends TestCase
         $DIC['tree'] = $this->createMock(ilTree::class);
         $DIC['ilAppEventHandler'] = $this->createMock(ilAppEventHandler::class);
         $DIC['ilUser'] = $this->createMock(ilObjUser::class);
+
+        if (!defined('ILIAS_LOG_ENABLED')) {
+            define('ILIAS_LOG_ENABLED', true);
+        }
     }
 
     protected function tearDown(): void
