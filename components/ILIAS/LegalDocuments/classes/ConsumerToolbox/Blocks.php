@@ -151,7 +151,7 @@ class Blocks
             $this->container->language()->loadLanguageModule('ldoc');
             $user = $build_user($user);
 
-            $value = $user->acceptedVersion()->map(function (DocumentContent $content) use ($lang_key, $user): ilNonEditableValueGUI {
+            $value = $user->acceptedVersion()->map(function (DocumentContent $content) use ($lang_key, $user): array {
                 $input = new ilNonEditableValueGUI($this->ui()->txt($lang_key), $lang_key);
                 $input->setValue($this->formatDate($user->agreeDate()->value()));
                 $modal = $this->ui()->create()->modal()->lightbox([
@@ -160,10 +160,10 @@ class Blocks
 
                 $titleLink = $this->ui()->create()->button()->shy($content->title(), '#')->withOnClick($modal->getShowSignal());
                 $sub = new ilNonEditableValueGUI($this->ui()->txt('agreement_document'), '', true);
-                $sub->setValue($this->container->ui()->renderer()->render([$titleLink, $modal]));
+                $sub->setValue($this->container->ui()->renderer()->render($titleLink));
                 $input->addSubItem($sub);
 
-                return $input;
+                return [$input, $modal];
             })->except(fn() => new Ok($this->ui()->txt('never')))->value();
 
             return [$lang_key => $value];
