@@ -55,7 +55,7 @@ class ilObjectGUI implements ImplementsCreationCallback
     public const CFORM_NEW = 1;
     public const CFORM_IMPORT = 2;
     public const CFORM_CLONE = 3;
-    public const SUPPORTED_IMPORT_MIME_TYPES = [MimeType::APPLICATION__ZIP];
+    public const SUPPORTED_IMPORT_MIME_TYPES = [MimeType::APPLICATION__ZIP, MimeType::APPLICATION__X_ZIP_COMPRESSED];
     protected \ILIAS\Notes\Service $notes_service;
 
     protected ServerRequestInterface $request;
