@@ -65,20 +65,20 @@ il.TestPlayerQuestionEditControl = new function() {
      * @var object config               initial configuration
      */
     var config = {
-        isAnswered: false, // question is already answered
-        isAnswerChanged: false, // question is already changed, e.g. after marking
-        saveOnTimeReachedUrl: '', // url for save at nd of working time
-        autosaveUrl: '', // url for saving of intermediate solutions
-        autosaveInterval: 0, // interval for saving of intermediate solutions
-        withFormChangeDetection: true, // form changes should be detected
-        withBackgroundChangeDetection: false, // background changes should be polled from ILIAS
-        backgroundDetectorUrl: '', // url called by the background detector
-        forcedInstantFeedback: false, // forced feedback will change the submit command
+        isAnswered: false,
+        isAnswerChanged: false,
+        saveOnTimeReachedUrl: '',
+        autosaveUrl: '',
+        autosaveInterval: 0,
+        withFormChangeDetection: true,
+        withBackgroundChangeDetection: false,
+        backgroundDetectorUrl: '',
+        forcedInstantFeedback: false,
         nextQuestionLocks: false,
         questionLocked: false,
         autosaveFailureMessage: '',
-        modalSignals: [], // signals to open modals
-        preventConfirmationParam: '', // name of the input/parameter to prevent locking-confirmation
+        modalSignals: [],
+        preventConfirmationParam: '',
     };
 
     /**
