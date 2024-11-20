@@ -15494,6 +15494,7 @@ sess#:#sess_members_gallery#:#Session Gallery
 sess#:#sess_members_print_title#:#Session Participants
 sess#:#sess_msg_applicants_assigned#:#Applicant(s) registered for session.
 sess#:#sess_msg_applicants_removed#:#Applicant(s) removed from list.
+sess#:#sess_new#:#Create Session
 sess#:#sess_new_registrations#:#Join Request
 sess#:#sess_notification_option#:#Option
 sess#:#sess_notification_option_inherit#:#Inherit from Parent

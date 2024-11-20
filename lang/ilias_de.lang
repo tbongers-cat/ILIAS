@@ -15493,6 +15493,7 @@ sess#:#sess_members_gallery#:#Galerie
 sess#:#sess_members_print_title#:#Teilnahmeliste
 sess#:#sess_msg_applicants_assigned#:#Person wurde für den Sitzungstermin angemeldet.
 sess#:#sess_msg_applicants_removed#:#Antrag abgelehnt und aus der Liste entfernt.
+sess#:#sess_new#:#Neue Sitzung anlegen
 sess#:#sess_new_registrations#:#Teilnahmeanträge
 sess#:#sess_notification_option#:#Option
 sess#:#sess_notification_option_inherit#:#Vom übergeordneten Objekt erben
