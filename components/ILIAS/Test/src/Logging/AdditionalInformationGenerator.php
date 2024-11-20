@@ -35,7 +35,7 @@ class AdditionalInformationGenerator
     public const KEY_QUESTIONS = 'questions';
     public const KEY_ANON_IDS = 'anonymous';
 
-    public const KEY_EVAL_FINALIZED = 'evaluation_finalized';
+    public const KEY_EVAL_FINALIZED = 'finalized_evaluation';
     public const KEY_FEEDBACK = 'tst_feedback';
     public const KEY_QUESTION_TITLE = 'question_title';
     public const KEY_QUESTION_TEXT = 'tst_question';
