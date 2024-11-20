@@ -1284,8 +1284,6 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
         $this->modal_signals = $this->populateModals();
         $question_navigation_gui->setShowDiscardModalSignal($this->modal_signals[self::DISCARD_MODAL]);
 
-        // Answer specific feedback is rendered into the display of the test question with in the concrete question types outQuestionForTest-method.
-        // Notation of the params prior to getting rid of this crap in favor of a class
         $question_gui->outQuestionForTest(
             $form_action,
             $this->test_session->getActiveId(),
@@ -1295,11 +1293,9 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
             $instant_response && $this->object->getSpecificAnswerFeedback()
         );
 
-        // fau: testNav - pouplate the new question edit control instead of the deprecated intermediate solution saver
         $this->populateQuestionEditControl($question_gui);
     }
 
-    // hey: prevPassSolutions - determine solution pass index
     protected function determineSolutionPassIndex(assQuestionGUI $question_gui): int
     {
         if ($this->object->isPreviousSolutionReuseEnabled($this->test_session->getActiveId())) {
@@ -1327,7 +1323,6 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
 
         return $this->test_session->getPass();
     }
-    // hey.
 
     protected function showQuestionCmd(): void
     {
@@ -2346,12 +2341,8 @@ JS;
     protected function isParticipantsAnswerFixed($question_id): bool
     {
         if ($this->object->isInstantFeedbackAnswerFixationEnabled()) {
-            // Checking for 'Lock Answers After Feedback or Moving to Next Question' or 'Lock Answers After Feedback'
             return $this->test_sequence->isQuestionChecked($question_id);
         } elseif ($this->object->isFollowupQuestionAnswerFixationEnabled()) {
-            // Checking for 'Lock Answers After Moving to Next Question': ForcedFeedbackNavUrl is registered when an
-            // instant response is shown. This already locks the answer when the feedback modal is displayed and not
-            // only when the next page is displayed
             return $this->isForcedFeedbackNavUrlRegistered() || $this->test_sequence->isNextQuestionPresented($question_id);
         }
 
@@ -3048,7 +3039,7 @@ JS;
 
     protected function getRegisteredForcedFeedbackNavUrl(): ?string
     {
-        if (ilSession::get('forced_feedback_navigation_url') == null) {
+        if (ilSession::get('forced_feedback_navigation_url') === null) {
             return null;
         }
         $forced_feedback_navigation_url = ilSession::get('forced_feedback_navigation_url');
