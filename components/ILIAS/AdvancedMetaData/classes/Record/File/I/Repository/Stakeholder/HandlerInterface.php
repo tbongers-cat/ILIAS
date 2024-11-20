@@ -25,6 +25,4 @@ use ILIAS\ResourceStorage\Stakeholder\ResourceStakeholder;
 interface HandlerInterface extends ResourceStakeholder
 {
     public function withOwnerId(int $owner_id): HandlerInterface;
-
-    public function getOwnerId(): int;
 }
