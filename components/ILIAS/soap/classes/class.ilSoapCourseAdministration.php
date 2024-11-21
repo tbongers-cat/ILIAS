@@ -73,6 +73,7 @@ class ilSoapCourseAdministration extends ilSoapAdministration
         $newObj->setPermissions($target_id);
 
         $xml_parser = new ilCourseXMLParser($newObj);
+        $xml_parser->setMode(ilCourseXMLParser::MODE_SOAP);
         $xml_parser->setXMLContent($crs_xml);
         $xml_parser->startParsing();
         return $newObj->getRefId() ?: "0";
@@ -380,6 +381,7 @@ class ilSoapCourseAdministration extends ilSoapAdministration
 
 
         $xml_parser = new ilCourseXMLParser($tmp_course);
+        $xml_parser->setMode(ilCourseXMLParser::MODE_SOAP);
         $xml_parser->setXMLContent($xml);
         $xml_parser->startParsing();
         $tmp_course->MDUpdateListener('General');
