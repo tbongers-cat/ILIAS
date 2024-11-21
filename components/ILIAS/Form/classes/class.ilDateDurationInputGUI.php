@@ -416,14 +416,14 @@ class ilDateDurationInputGUI extends ilSubEnabledFormPropertyGUI implements ilTa
         // values
 
         $out_format = $this->getDatetimeFormatForInput();
-        $date_value = htmlspecialchars($this->invalid_input_start);
+        $date_value = $this->prepareInvalidInputAsValue($this->invalid_input_start);
         if (!$date_value &&
             $this->getStart()) {
             $date_value = $this->getStart()->get(IL_CAL_FKT_DATE, $out_format, $ilUser->getTimeZone());
         }
         $tpl->setVariable('DATEPICKER_START_VALUE', $date_value);
 
-        $date_value = htmlspecialchars($this->invalid_input_end);
+        $date_value = $this->prepareInvalidInputAsValue($this->invalid_input_end);
         if (!$date_value &&
             $this->getEnd()) {
             $date_value = $this->getEnd()->get(IL_CAL_FKT_DATE, $out_format, $ilUser->getTimeZone());
@@ -436,6 +436,15 @@ class ilDateDurationInputGUI extends ilSubEnabledFormPropertyGUI implements ilTa
         }
 
         return $tpl->get();
+    }
+
+    protected function prepareInvalidInputAsValue(string $invalid_input): string
+    {
+        $timestamp = strtotime(htmlspecialchars($invalid_input));
+        if ($timestamp === false) {
+            return '';
+        }
+        return date($this->getDatetimeFormatForInput(), $timestamp);
     }
 
 
