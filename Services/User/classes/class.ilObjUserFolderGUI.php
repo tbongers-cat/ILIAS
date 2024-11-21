@@ -2765,10 +2765,10 @@ class ilObjUserFolderGUI extends ilObjectGUI
             }
         }
 
-        if ($selected["default_hits_per_page"]) {
+        if (isset($selected['default_hits_per_page']) && $selected['default_hits_per_page']) {
             $ilias->setSetting(
-                "hits_per_page",
-                $selected["default_hits_per_page"]
+                'hits_per_page',
+                $selected['default_hits_per_page']
             );
         }
 
