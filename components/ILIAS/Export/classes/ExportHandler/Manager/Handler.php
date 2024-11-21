@@ -113,23 +113,15 @@ class Handler implements ilExportHandlerManagerInterface
         $repository = $this->export_handler->repository();
         foreach ($container_export_info->getExportInfos() as $export_info) {
             $stream = null;
-            # Test, TestQuestionPool special case (Test does not return a xml export)
-            $special_case = in_array($export_info->getTarget()->getType(), ["tst", "qpl"]);
-            if ($special_case) {
-                $this->createExport($user_id, $export_info, "");
-                $stream = Streams::ofResource(fopen($export_info->getLegacyExportRunDir() . ".zip", 'r'));
-            }
-            if (!$special_case) {
-                $keys = $repository->key()->collection()
-                    ->withElement($repository->key()->handler()->withObjectId($export_info->getTargetObjectId()));
-                $element = $export_info->getReuseExport()
-                    ? $this->export_handler->repository()->handler()->getElements($keys)->newest()
-                    : $this->createExport($user_id, $export_info, "");
-                $element = $element->getIRSS()->isContainerExport()
-                    ? $this->createExport($user_id, $export_info, "")
-                    : $element;
-                $stream = $element->getIRSSInfo()->getStream();
-            }
+            $keys = $repository->key()->collection()
+                ->withElement($repository->key()->handler()->withObjectId($export_info->getTargetObjectId()));
+            $element = $export_info->getReuseExport()
+                ? $this->export_handler->repository()->handler()->getElements($keys)->newest()
+                : $this->createExport($user_id, $export_info, "");
+            $element = $element->getIRSS()->isContainerExport()
+                ? $this->createExport($user_id, $export_info, "")
+                : $element;
+            $stream = $element->getIRSSInfo()->getStream();
             $zip_reader = new ZipReader($stream);
             $zip_structure = $zip_reader->getStructure();
             foreach ($zip_structure as $path_inside_zip => $item) {
@@ -176,17 +168,6 @@ class Handler implements ilExportHandlerManagerInterface
         # delete legacy export run dir
         # tmp solution, remove if no longer needed
         ilFileUtils::delDir($export_info->getLegacyExportRunDir());
-
-        # Test special case
-        # Remove export if the component is Test, TestQuestionPool
-        if (in_array($export_info->getTarget()->getType(), ["tst", "qpl"])) {
-            $keys = $this->export_handler->repository()->key()->collection()
-                ->withElement($element->getKey());
-            $this->export_handler->repository()->handler()->deleteElements(
-                $keys,
-                $stakeholder
-            );
-        }
         return $element;
     }
 
