@@ -294,7 +294,10 @@ class RequestDataCollector
 
         return $p->retrieve(
             $key,
-            $r->kindlyTo()->float()
+            $r->byTrying([
+                $r->kindlyTo()->float(),
+                $r->always(null)
+            ])
         );
     }
 }

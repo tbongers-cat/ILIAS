@@ -39,12 +39,7 @@ class Handler extends AbstractResourceStakeholder implements FileRepositoryStake
         int $owner_id
     ): FileRepositoryStakeholderInterface {
         $clone = clone $this;
-        $clone->owner_id = $owner_id;
+        $clone->setOwner($owner_id);
         return $clone;
-    }
-
-    public function getOwnerId(): int
-    {
-        return $this->owner_id;
     }
 }

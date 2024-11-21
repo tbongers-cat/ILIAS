@@ -724,6 +724,7 @@ class ilBlogPostingGUI extends ilPageObjectGUI
                 }
             }
 
+            $this->ctrl->setParameterByClass(ilObjBlogGUI::class, "blpg", "");
             $this->ctrl->redirectByClass("ilObjBlogGUI", "");
         }
     }

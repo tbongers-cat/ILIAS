@@ -277,6 +277,7 @@ class ilMailAttachmentGUI extends AbstractCtrlAwareUploadHandler
 
         $table = new MailAttachmentTableGUI(
             $this,
+            $this->user,
             $records,
             $this->ui_factory,
             $this->ui_renderer,

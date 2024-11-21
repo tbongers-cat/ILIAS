@@ -20,7 +20,6 @@ declare(strict_types=1);
 
 use ILIAS\TestQuestionPool\Questions\QuestionLMExportable;
 use ILIAS\TestQuestionPool\Questions\QuestionAutosaveable;
-
 use ILIAS\Test\Logging\AdditionalInformationGenerator;
 
 /**
@@ -975,7 +974,7 @@ class assErrorText extends assQuestion implements ilObjQuestionScoringAdjustable
     ): string {
         return $this->createErrorTextExport(
             array_map(
-                static fn(string $v): string => $v['value1'],
+                static fn(array $v): string => $v['value1'],
                 $solution_values
             )
         );
@@ -985,7 +984,7 @@ class assErrorText extends assQuestion implements ilObjQuestionScoringAdjustable
     {
         return $this->createErrorTextExport(
             array_map(
-                static fn(string $v): string => $v['value1'],
+                static fn(array $v): string => $v['value1'],
                 $solution_values
             )
         );

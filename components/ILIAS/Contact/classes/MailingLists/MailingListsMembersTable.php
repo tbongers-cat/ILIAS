@@ -56,7 +56,7 @@ class MailingListsMembersTable implements UI\Component\Table\DataRetrieval
         return $this->ui_factory
             ->table()
             ->data(
-                sprintf(
+                \sprintf(
                     $this->lng->txt('mail_members_of_mailing_list'),
                     $this->mailing_list->getTitle()
                 ),
@@ -64,6 +64,7 @@ class MailingListsMembersTable implements UI\Component\Table\DataRetrieval
                 $this
             )
             ->withId(self::class . '_' . $this->mailing_list->getId())
+            ->withOrder(new \ILIAS\Data\Order('login', \ILIAS\Data\Order::ASC))
             ->withActions($actions)
             ->withRequest($this->request);
     }
@@ -158,7 +159,7 @@ class MailingListsMembersTable implements UI\Component\Table\DataRetrieval
     ): ?int {
         $this->initRecords();
 
-        return count($this->records);
+        return \count($this->records);
     }
 
     /**
@@ -190,6 +191,6 @@ class MailingListsMembersTable implements UI\Component\Table\DataRetrieval
      */
     private function limitRecords(array $records, Data\Range $range): array
     {
-        return array_slice($records, $range->getStart(), $range->getLength());
+        return \array_slice($records, $range->getStart(), $range->getLength());
     }
 }

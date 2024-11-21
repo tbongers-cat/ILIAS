@@ -23,7 +23,7 @@ namespace ILIAS\Test\Scoring\Marks;
 use ILIAS\Test\Presentation\TabsManager;
 use ILIAS\Test\Logging\TestLogger;
 use ILIAS\Test\Logging\TestAdministrationInteractionTypes;
-
+use ILIAS\Test\ResponseHandler;
 use ILIAS\HTTP\Wrapper\RequestWrapper;
 use GuzzleHttp\Psr7\Request;
 use ILIAS\Refinery\Factory as Refinery;
@@ -59,6 +59,7 @@ class MarkSchemaGUI
         private TestLogger $logger,
         private RequestWrapper $post_wrapper,
         private RequestWrapper $request_wrapper,
+        private ResponseHandler $response_handler,
         private Request $request,
         private Refinery $refinery,
         private UIFactory $ui_factory,
@@ -95,6 +96,12 @@ class MarkSchemaGUI
             $this->tpl->setOnScreenMessage('info', $this->lng->txt('cannot_edit_marks'));
         }
 
+        $this->runTableCommand();
+
+        if ($add_mark_modal === null) {
+            $add_mark_modal = $this->buildMarkModal();
+        }
+
         $mark_schema_table = new MarkSchemaTable(
             $this->mark_schema,
             $this->editable,
@@ -106,10 +113,6 @@ class MarkSchemaGUI
         );
 
         $confirmation_modal = $this->buildConfirmationModal();
-
-        if ($add_mark_modal === null) {
-            $add_mark_modal = $this->buildAddMarkModal();
-        }
 
         $this->populateToolbar($confirmation_modal, $add_mark_modal);
 
@@ -126,7 +129,7 @@ class MarkSchemaGUI
     {
         $this->redirectOnMarkSchemaNotEditable();
 
-        $modal = $this->buildAddMarkModal()->withRequest($this->request);
+        $modal = $this->buildMarkModal()->withRequest($this->request);
         $data = $modal->getData();
         if ($data === null) {
             $this->showMarkSchema($modal->withOnLoad($modal->getShowSignal()));
@@ -232,14 +235,16 @@ class MarkSchemaGUI
         )->withActionButtonLabel($this->lng->txt('tst_mark_reset_to_simple_mark_schema'));
     }
 
-    private function buildAddMarkModal(Mark $mark = null, int $mark_index = -1): RoundTripModal
+    private function buildMarkModal(Mark $mark = null, int $mark_index = -1): RoundTripModal
     {
+        $title_lng_var = 'edit';
         if ($mark === null) {
+            $title_lng_var = 'create';
             $mark = new Mark();
         }
         return $this->ui_factory->modal()->roundtrip(
-            $this->lng->txt('edit'),
-            null,
+            $this->lng->txt($title_lng_var),
+            [],
             [
                 'mark' => $mark->toForm(
                     $this->lng,
@@ -260,9 +265,11 @@ class MarkSchemaGUI
 
         $affected_mark = current($affected_marks);
         $mark_steps = $this->mark_schema->getMarkSteps();
-        $edit_modal = $this->buildAddMarkModal($mark_steps[$affected_mark], $affected_mark);
-        echo $this->ui_renderer->renderAsync($edit_modal);
-        exit;
+        $this->response_handler->sendAsync(
+            $this->ui_renderer->renderAsync(
+                $this->buildMarkModal($mark_steps[$affected_mark], $affected_mark)
+            )
+        );
     }
 
     private function populateToolbar(InterruptiveModal $confirmation_modal, RoundTripModal $add_mark_modal): void
@@ -290,13 +297,14 @@ class MarkSchemaGUI
         $affected_marks = $this->getTableAffectedItemsFromQuery();
 
         if ($affected_marks === null) {
-            echo $this->ui_renderer->render(
-                $this->ui_factory->modal()->roundtrip(
-                    $this->lng->txt('error'),
-                    $this->ui_factory->messageBox()->failure($this->lng->txt('tst_delete_missing_mark'))
+            $this->response_handler->sendAsync(
+                $this->ui_renderer->renderAsync(
+                    $this->ui_factory->modal()->roundtrip(
+                        $this->lng->txt('error'),
+                        $this->ui_factory->messageBox()->failure($this->lng->txt('tst_delete_missing_mark'))
+                    )
                 )
             );
-            exit;
         }
 
         switch ($action) {
@@ -322,8 +330,9 @@ class MarkSchemaGUI
         )->withActionButtonLabel($this->lng->txt('delete'))
         ->withAffectedItems($this->buildInteruptiveItems($affected_marks));
 
-        echo $this->ui_renderer->renderAsync($confirm_delete_modal);
-        exit;
+        $this->response_handler->sendAsync(
+            $this->ui_renderer->renderAsync($confirm_delete_modal)
+        );
     }
 
     private function buildInteruptiveItems(array $affected_marks): array
@@ -388,10 +397,12 @@ class MarkSchemaGUI
             return;
         }
 
-        echo $this->ui_renderer->renderAsync(
-            $this->ui_factory->modal()->roundtrip(
-                $this->lng->txt('error'),
-                $this->ui_factory->messageBox()->failure($this->lng->txt('permission_denied'))
+        $this->response_handler->sendAsync(
+            $this->ui_renderer->renderAsync(
+                $this->ui_factory->modal()->roundtrip(
+                    $this->lng->txt('error'),
+                    $this->ui_factory->messageBox()->failure($this->lng->txt('permission_denied'))
+                )
             )
         );
         exit;
@@ -417,19 +428,20 @@ class MarkSchemaGUI
             return;
         }
 
-        echo $this->ui_renderer->render(
-            $this->ui_factory->modal()->roundtrip(
-                $this->lng->txt('error'),
-                $this->ui_factory->messageBox()->failure($message)
+        $this->response_handler->sendAsync(
+            $this->ui_renderer->render(
+                $this->ui_factory->modal()->roundtrip(
+                    $this->lng->txt('error'),
+                    $this->ui_factory->messageBox()->failure($message)
+                )
             )
         );
-        exit;
     }
 
     private function checkSchemaForErrors(array $affected_marks): MarkSchema|string
     {
         $new_marks = $this->mark_schema->getMarkSteps();
-        foreach($affected_marks as $mark) {
+        foreach ($affected_marks as $mark) {
             unset($new_marks[$mark]);
         }
         $local_schema = $this->mark_schema->withMarkSteps(array_values($new_marks));

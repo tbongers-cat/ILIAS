@@ -1444,16 +1444,16 @@ class ilObjLinkResourceGUI extends ilObject2GUI
     }
 
     /**
-     * this one is called from the info button in the repository
-     * not very nice to set cmdClass/Cmd manually, if everything
-     * works through ilCtrl in the future this may be changed
+     * instead of redirecting here, links to the info screen should
+     * directly lead to the right place, but it looks like this needs
+     * some restructuring.
      */
     public function infoScreen(): void
     {
-        // @todo: removed deprecated ilCtrl methods, this needs inspection by a maintainer.
-        // $this->ctrl->setCmd("showSummary");
-        // $this->ctrl->setCmdClass("ilinfoscreengui");
-        $this->infoScreenForward();
+        $this->ctrl->redirectByClass(
+            [self::class, ilInfoScreenGUI::class],
+            'showSummary'
+        );
     }
 
     /**

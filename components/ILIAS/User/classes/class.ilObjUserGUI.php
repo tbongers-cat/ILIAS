@@ -360,7 +360,7 @@ class ilObjUserGUI extends ilObjectGUI
 
         $this->initCreate();
         $this->initForm('create');
-        $this->tpl->setContent($this->form_gui->getHTML());
+        $this->renderForm();
     }
 
     /**
@@ -384,7 +384,7 @@ class ilObjUserGUI extends ilObjectGUI
 
         if (!$this->form_gui->checkInput()) {
             $this->form_gui->setValuesByPost();
-            $this->tpl->setContent($this->form_gui->getHTML());
+            $this->renderForm();
             return;
         }
 
@@ -522,7 +522,7 @@ class ilObjUserGUI extends ilObjectGUI
         // get form
         $this->initForm('edit');
         $this->getValues();
-        $this->tpl->setContent($this->form_gui->getHTML());
+        $this->renderForm();
     }
 
     protected function loadValuesFromForm(string $a_mode = 'create'): ilObjUser
@@ -718,7 +718,7 @@ class ilObjUserGUI extends ilObjectGUI
             } catch (ilUserException $e) {
                 $this->tpl->setOnScreenMessage('failure', $e->getMessage());
                 $this->form_gui->setValuesByPost();
-                $this->tpl->setContent($this->form_gui->getHTML());
+                $this->renderForm();
                 return;
             }
 
@@ -1974,5 +1974,10 @@ class ilObjUserGUI extends ilObjectGUI
             && !$this->rbac_system->checkAccess('cat_administrate_users', $this->object->getTimeLimitOwner())) {
             $this->ilias->raiseError($this->lng->txt('msg_no_perm_modify_user'), $this->ilias->error_obj->MESSAGE);
         }
+    }
+
+    private function renderForm(): void
+    {
+        $this->tpl->setContent($this->legal_documents->userManagementModals() . $this->form_gui->getHTML());
     }
 }

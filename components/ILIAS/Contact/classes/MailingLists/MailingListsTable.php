@@ -71,6 +71,7 @@ class MailingListsTable implements UI\Component\Table\DataRetrieval
                 $columns,
                 $this
             )
+            ->withOrder(new \ILIAS\Data\Order('title', \ILIAS\Data\Order::ASC))
             ->withId(self::class)
             ->withActions($actions)
             ->withRequest($this->request);
@@ -95,7 +96,7 @@ class MailingListsTable implements UI\Component\Table\DataRetrieval
             'members' => $this->ui_factory
                 ->table()
                 ->column()
-                ->text($this->lng->txt('members'))
+                ->number($this->lng->txt('members'))
                 ->withIsSortable(true),
         ];
     }
@@ -169,7 +170,7 @@ class MailingListsTable implements UI\Component\Table\DataRetrieval
                 $this->records[$counter]['ml_id'] = $entry->getId();
                 $this->records[$counter]['title'] = $entry->getTitle() . ' [#il_ml_' . $entry->getId() . ']';
                 $this->records[$counter]['description'] = $entry->getDescription() ?? '';
-                $this->records[$counter]['members'] = count($entry->getAssignedEntries());
+                $this->records[$counter]['members'] = \count($entry->getAssignedEntries());
 
                 ++$counter;
             }
@@ -198,7 +199,7 @@ class MailingListsTable implements UI\Component\Table\DataRetrieval
     ): ?int {
         $this->initRecords();
 
-        return count($this->records);
+        return \count($this->records);
     }
 
     /**
@@ -209,7 +210,12 @@ class MailingListsTable implements UI\Component\Table\DataRetrieval
         $records = $this->records;
         [$order_field, $order_direction] = $order->join([], fn($ret, $key, $value) => [$key, $value]);
 
-        return ilArrayUtil::stableSortArray($records, $order_field, strtolower($order_direction));
+        return ilArrayUtil::stableSortArray(
+            $records,
+            $order_field,
+            strtolower($order_direction),
+            $order_field === 'members'
+        );
     }
 
     /**
@@ -229,6 +235,6 @@ class MailingListsTable implements UI\Component\Table\DataRetrieval
      */
     private function limitRecords(array $records, Data\Range $range): array
     {
-        return array_slice($records, $range->getStart(), $range->getLength());
+        return \array_slice($records, $range->getStart(), $range->getLength());
     }
 }

@@ -61,6 +61,8 @@ class AuthPageLanguagesOverviewTable implements UI\Component\Table\DataRetrieval
         return $this->ui_factory
             ->table()
             ->data($this->lng->txt($this->context->pageLanguageIdentifier(true)), $columns, $this)
+            ->withId(self::class . '_' . $this->context->value)
+            ->withOrder(new \ILIAS\Data\Order('language', \ILIAS\Data\Order::ASC))
             ->withActions($actions)
             ->withRequest($this->request);
     }
@@ -75,12 +77,12 @@ class AuthPageLanguagesOverviewTable implements UI\Component\Table\DataRetrieval
                 ->table()
                 ->column()
                 ->text($this->lng->txt($this->context->pageLanguageIdentifier()))
-                ->withIsSortable(false),
+                ->withIsSortable(true),
             'status_icon' => $this->ui_factory
                 ->table()
                 ->column()
-                ->text($this->lng->txt('active'))
-                ->withIsSortable(false)
+                ->statusIcon($this->lng->txt('active'))
+                ->withIsSortable(true)
         ];
     }
 
@@ -141,8 +143,8 @@ class AuthPageLanguagesOverviewTable implements UI\Component\Table\DataRetrieval
                     $langkey
                 );
 
-                $this->records[$i]['status_icon'] = $this->getStatusIcon($status);
                 $this->records[$i]['status'] = $status;
+                $this->records[$i]['status_icon'] = $this->getStatusIcon($status);
                 $this->records[$i]['language'] = $this->lng->txt('meta_l_' . $langkey);
 
                 ++$i;
@@ -150,25 +152,19 @@ class AuthPageLanguagesOverviewTable implements UI\Component\Table\DataRetrieval
         }
     }
 
-    private function getStatusIcon(bool $status): string
+    private function getStatusIcon(bool $status): \ILIAS\UI\Component\Symbol\Icon\Icon
     {
         if ($status) {
-            $icon = $this->ui_renderer->render(
-                $this->ui_factory->symbol()->icon()->custom(
-                    \ilUtil::getImagePath('standard/icon_ok.svg'),
-                    $this->lng->txt('active')
-                )
-            );
-        } else {
-            $icon = $this->ui_renderer->render(
-                $this->ui_factory->symbol()->icon()->custom(
-                    \ilUtil::getImagePath('standard/icon_not_ok.svg'),
-                    $this->lng->txt('inactive')
-                )
+            return $this->ui_factory->symbol()->icon()->custom(
+                \ilUtil::getImagePath('standard/icon_ok.svg'),
+                $this->lng->txt('active')
             );
         }
 
-        return $icon;
+        return $this->ui_factory->symbol()->icon()->custom(
+            \ilUtil::getImagePath('standard/icon_not_ok.svg'),
+            $this->lng->txt('inactive')
+        );
     }
 
     public function getRows(
@@ -194,7 +190,7 @@ class AuthPageLanguagesOverviewTable implements UI\Component\Table\DataRetrieval
     ): ?int {
         $this->initRecords();
 
-        return count($this->records);
+        return \count($this->records);
     }
 
     /**
@@ -204,6 +200,10 @@ class AuthPageLanguagesOverviewTable implements UI\Component\Table\DataRetrieval
     {
         $records = $this->records;
         [$order_field, $order_direction] = $order->join([], fn($ret, $key, $value) => [$key, $value]);
+
+        if ($order_field === 'status_icon') {
+            $order_field = 'status';
+        }
 
         return ilArrayUtil::stableSortArray($records, $order_field, strtolower($order_direction));
     }
@@ -226,6 +226,6 @@ class AuthPageLanguagesOverviewTable implements UI\Component\Table\DataRetrieval
      */
     private function limitRecords(array $records, Data\Range $range): array
     {
-        return array_slice($records, $range->getStart(), $range->getLength());
+        return \array_slice($records, $range->getStart(), $range->getLength());
     }
 }

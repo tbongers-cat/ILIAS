@@ -24,7 +24,7 @@ class ilStudyProgrammeMembershipSourceReaderOrgu implements ilStudyProgrammeMemb
 {
     public function __construct(
         protected ilObjOrgUnitTree $orgu_tree,
-        protected ilOrgUnitUserAssignment $orgu_assignment,
+        protected OrgUnitUserAssignmentRepository $orgu_assignment_repo,
         protected int $src_id,
         protected bool $search_recursive,
         protected int $exclude_id
@@ -40,14 +40,6 @@ class ilStudyProgrammeMembershipSourceReaderOrgu implements ilStudyProgrammeMemb
         if ($this->search_recursive) {
             $children = array_unique(array_merge($children, $this->orgu_tree->getChildren($this->src_id)));
         }
-
-        $assignees = $this->orgu_assignment::where(
-            ['orgu_id' => $children]
-        )->getArray('id', 'user_id');
-
-        return array_map(
-            'intval',
-            array_values($assignees)
-        );
+        return $this->orgu_assignment_repo->getUsersByOrgUnits($children);
     }
 }

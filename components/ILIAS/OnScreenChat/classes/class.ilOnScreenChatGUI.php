@@ -312,13 +312,10 @@ class ilOnScreenChatGUI implements ilCtrlBaseClassInterface
             $page->addJavaScript('assets/js/modal.js');
             $page->addJavaScript('assets/js/socket.io.min.js');
             $page->addJavaScript('assets/js/Chatroom.min.js');
-            $page->addJavaScript('assets/js/jquery.ui.touch-punch.js');
-            $page->addJavascript('assets/js/LegacyModal.js');
             $page->addJavascript('assets/js/moment-with-locales.min.js');
             $page->addJavascript('assets/js/browser_notifications.js');
             $page->addJavascript('assets/js/onscreenchat-notifications.js');
             $page->addJavascript('assets/js/moment.js');
-            $page->addJavascript('assets/js/socket.io-client/dist/socket.io.js');
             $page->addJavascript('assets/js/chat.js');
             $page->addJavascript('assets/js/onscreenchat.js');
             $page->addOnLoadCode("il.Chat.setConfig(" . json_encode($chatConfig, JSON_THROW_ON_ERROR) . ");");
@@ -338,7 +335,7 @@ class ilOnScreenChatGUI implements ilCtrlBaseClassInterface
 
     private function renderAsyncModal(string $bus_name, $modal)
     {
-        return $this->getResponseWithText($this->dic->ui()->renderer()->renderAsync($modal->withAdditionalOnLoadCode(fn ($id) => (
+        return $this->getResponseWithText($this->dic->ui()->renderer()->renderAsync($modal->withAdditionalOnLoadCode(fn($id) => (
             'il.OnScreenChat.bus.send(' . json_encode($bus_name, JSON_THROW_ON_ERROR) . ', ' . json_encode([(string) $modal->getShowSignal(), (string) $modal->getCloseSignal()], JSON_THROW_ON_ERROR) . ');'
         ))));
     }

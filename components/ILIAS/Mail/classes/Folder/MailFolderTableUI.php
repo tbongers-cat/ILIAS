@@ -81,6 +81,7 @@ class MailFolderTableUI implements \ILIAS\UI\Component\Table\DataRetrieval
         private readonly DataFactory $data_factory,
         private readonly Refinery $refinery,
         private readonly DateFormat $date_format,
+        private readonly string $time_format,
         private readonly DateTimeZone $user_time_zone
     ) {
     }
@@ -95,6 +96,7 @@ class MailFolderTableUI implements \ILIAS\UI\Component\Table\DataRetrieval
                 $this
             )
             ->withId(self::class)
+            ->withOrder(new Order('date', Order::DESC))
             ->withActions($this->getActions())
             ->withRequest($this->http_request);
     }
@@ -104,6 +106,12 @@ class MailFolderTableUI implements \ILIAS\UI\Component\Table\DataRetrieval
      */
     private function getColumnDefinition(): array
     {
+        if ((int) $this->time_format === \ilCalendarSettings::TIME_FORMAT_12) {
+            $date_format = $this->data_factory->dateFormat()->withTime12($this->date_format);
+        } else {
+            $date_format = $this->data_factory->dateFormat()->withTime24($this->date_format);
+        }
+
         $columns = [
             'status' => $this->ui_factory
                 ->table()
@@ -146,7 +154,7 @@ class MailFolderTableUI implements \ILIAS\UI\Component\Table\DataRetrieval
                 ->column()
                 ->date(
                     $this->lng->txt('date'),
-                    $this->data_factory->dateFormat()->withTime24($this->date_format)
+                    $date_format
                 )
                 ->withIsSortable(true),
         ];

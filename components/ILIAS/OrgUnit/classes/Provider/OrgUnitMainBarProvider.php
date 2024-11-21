@@ -100,7 +100,7 @@ class OrgUnitMainBarProvider extends AbstractStaticMainMenuProvider
                                                             return $this->dic->access()->checkAccess(
                                                                 'read',
                                                                 '',
-                                                                ilObjOrgUnit::getRootOrgRefId()
+                                                                ilObjTalkTemplateAdministration::getRootRefId()
                                                             );
                                                         })
                                                     );

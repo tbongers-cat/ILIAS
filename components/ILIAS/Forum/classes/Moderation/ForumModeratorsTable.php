@@ -60,6 +60,7 @@ class ForumModeratorsTable implements UI\Component\Table\DataRetrieval
             ->table()
             ->data($this->lng->txt('frm_moderators'), $columns, $this)
             ->withId(self::class . '_' . $this->forum_moderators->getRefId())
+            ->withOrder(new \ILIAS\Data\Order('login', \ILIAS\Data\Order::ASC))
             ->withActions($actions)
             ->withRequest($this->request);
     }

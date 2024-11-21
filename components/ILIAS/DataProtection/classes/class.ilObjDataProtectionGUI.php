@@ -175,6 +175,11 @@ final class ilObjDataProtectionGUI extends ilObject2GUI
 
     private function form(): Component
     {
+        $no_documents = $this->config->legalDocuments()->document()->repository()->countAll() === 0;
+        if ($no_documents) {
+            $this->tpl->setOnScreenMessage('info', $this->ui->txt('no_documents_exist'), true);
+        }
+
         $enabled = $this->optionalGroup('status_enable', 'status_enable_desc', [
             'type' => $this->radio('mode', [
                 'once' => 'once',
@@ -200,8 +205,7 @@ final class ilObjDataProtectionGUI extends ilObject2GUI
             ['enabled' => $enabled]
         );
 
-        return $this->legal_documents->admin()->withFormData($form, function (array $data): void {
-            $no_documents = $this->config->legalDocuments()->document()->repository()->countAll() === 0;
+        return $this->legal_documents->admin()->withFormData($form, function (array $data) use ($no_documents): void {
             if ($no_documents && isset($data['enabled'])) {
                 $this->tpl->setOnScreenMessage('failure', $this->ui->txt('no_documents_exist_cant_save'), true);
                 $this->ctrl->redirect($this, 'settings');

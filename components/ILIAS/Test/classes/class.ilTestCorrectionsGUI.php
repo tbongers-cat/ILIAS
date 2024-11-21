@@ -337,6 +337,7 @@ class ilTestCorrectionsGUI
         $this->help->setScreenId('scoringadjust');
         $this->help->setSubScreenId($active_tab_id);
 
+        $this->ctrl->setParameterByClass(self::class, 'q_id', $question_gui->getObject()->getId());
         $this->tabs->addTab(
             'question',
             $this->language->txt('tst_corrections_tab_question'),

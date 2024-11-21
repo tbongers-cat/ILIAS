@@ -361,15 +361,16 @@ class ilAssQuestionSkillAssignmentsGUI
 
         $this->keepAssignmentParameters();
 
+        $question_id = $this->request->int('question_id');
         if ($question_gui === null) {
-            $question_gui = assQuestionGUI::_getQuestionGUI('', (int) $this->request->raw('question_id'));
+            $question_gui = assQuestionGUI::_getQuestionGUI('', $question_id);
         }
 
         if ($assignment === null) {
             $assignment = $this->buildQuestionSkillAssignment(
-                (int) $this->request->raw('question_id'),
-                (int) $this->request->raw('skill_base_id'),
-                (int) $this->request->raw('skill_tref_id')
+                $question_id,
+                $this->request->int('skill_base_id'),
+                $this->request->int('skill_tref_id')
             );
         }
 
@@ -382,20 +383,20 @@ class ilAssQuestionSkillAssignmentsGUI
 
     private function saveSkillQuestionAssignmentPropertiesFormCmd(): void
     {
-        $questionId = (int) $this->request->raw('question_id');
-
-        if ($this->isTestQuestion($questionId)) {
-            $question_gui = assQuestionGUI::_getQuestionGUI('', $questionId);
+        $question_id = $this->request->int('question_id');
+        if ($this->isTestQuestion($question_id)) {
+            $question_gui = assQuestionGUI::_getQuestionGUI('', $question_id);
 
             $assignment = $this->buildQuestionSkillAssignment(
-                (int) $this->request->raw('question_id'),
+                $question_id,
                 (int) $this->request->raw('skill_base_id'),
                 (int) $this->request->raw('skill_tref_id')
             );
 
             $this->keepAssignmentParameters();
             $form = $this->buildSkillQuestionAssignmentPropertiesForm($question_gui->getObject(), $assignment);
-            if (!$form->checkInput()) {
+            if (!$form->checkInput()
+                || !$this->checkPointsAreInt($form)) {
                 $form->setValuesByPost();
                 $this->showSkillQuestionAssignmentPropertiesFormCmd($question_gui, $assignment, $form);
                 return;
@@ -438,7 +439,7 @@ class ilAssQuestionSkillAssignmentsGUI
 
             $this->tpl->setOnScreenMessage('success', $this->lng->txt('qpl_qst_skl_assign_properties_modified'), true);
 
-            if ($this->isSyncOriginalPossibleAndAllowed($questionId)) {
+            if ($this->isSyncOriginalPossibleAndAllowed($question_id)) {
                 $this->ctrl->redirect($this, self::CMD_SHOW_SYNC_ORIGINAL_CONFIRMATION);
             }
         }
@@ -659,6 +660,15 @@ class ilAssQuestionSkillAssignmentsGUI
         }
 
         return true;
+    }
+
+    private function checkPointsAreInt(ilPropertyFormGUI $form): bool
+    {
+        if (is_int($form->getInput('q_res_skill_points'))) {
+            return true;
+        }
+        $this->tpl->setOnScreenMessage('failure', $this->lng->txt('numeric_only'));
+        return false;
     }
 
     private function validateSolutionCompareExpression(ilAssQuestionSolutionComparisonExpression $expression, $question): bool

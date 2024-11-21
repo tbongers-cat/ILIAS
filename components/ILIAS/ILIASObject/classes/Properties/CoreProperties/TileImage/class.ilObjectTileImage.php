@@ -94,14 +94,14 @@ class ilObjectTileImage
     ): ?Image {
         $flavour = $this->storage_services->flavours()->get($resource, $this->flavour_definition);
         $urls = $this->storage_services->consume()->flavourUrls($flavour)->getURLsAsArray();
-        if($urls === []) {
+        if ($urls === []) {
             return null;
         }
 
         $available_widths = $this->flavour_definition->getWidths();
         array_pop($available_widths);
 
-        if(!isset($urls[count($available_widths)])) {
+        if (!isset($urls[count($available_widths)])) {
             return null;
         }
 
@@ -159,8 +159,9 @@ class ilObjectTileImage
         $clone = clone $this;
         $clone->object_id = $new_object_id;
 
-        if ($this->rid !== null) {
-            $i = $this->storage_services->manage()->clone($this->rid);
+        if ($this->rid !== null
+            && ($rid = $this->storage_services->manage()->find($this->rid)) !== null) {
+            $i = $this->storage_services->manage()->clone($rid);
             $clone->rid = $i->serialize();
         }
 
