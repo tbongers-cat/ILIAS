@@ -71,7 +71,10 @@ class ilLinkResourceHandlerGUI implements ilCtrlBaseClassInterface
         }
         if ($next_class == "") {
             $this->ctrl->saveParameter($this, 'ref_id');
-            $this->ctrl->redirectByClass(ilObjLinkResourceGUI::class);
+            $this->ctrl->redirectByClass(
+                ilObjLinkResourceGUI::class,
+                $this->ctrl->getCmd()
+            );
         }
         switch ($next_class) {
             case strtolower(ilObjLinkResourceGUI::class):
