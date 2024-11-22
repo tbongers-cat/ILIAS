@@ -833,14 +833,9 @@ class ilMailFolderGUI
 
         if ($sender && $sender->getId() && !$sender->isAnonymous()) {
             $linked_fullname = $sender->getPublicName();
-            $picture = ilUtil::img(
+            $avatar = $this->ui_factory->symbol()->avatar()->picture(
                 $sender->getPersonalPicturePath('xsmall'),
-                $sender->getPublicName(),
-                '',
-                '',
-                0,
-                '',
-                'ilMailAvatar'
+                $sender->getPublicName()
             );
 
             if (in_array(ilObjUser::_lookupPref($sender->getId(), 'public_profile'), ['y', 'g'])) {
@@ -855,23 +850,19 @@ class ilMailFolderGUI
             }
 
             $from = new ilCustomInputGUI($this->lng->txt('from') . ':');
-            $from->setHtml($picture . ' ' . $linked_fullname);
+            $from->setHtml($this->ui_renderer->render($avatar) . ' ' . $linked_fullname);
         } elseif (!$sender || !$sender->getId()) {
             $from = new ilCustomInputGUI($this->lng->txt('from') . ':');
             $from->setHtml(trim(($mailData['import_name'] ?? '') . ' (' . $this->lng->txt('user_deleted') . ')'));
         } else {
             $from = new ilCustomInputGUI($this->lng->txt('from') . ':');
             $from->setHtml(
-                ilUtil::img(
-                    ilUtil::getImagePath('logo/HeaderIconAvatar.svg'),
-                    ilMail::_getIliasMailerName(),
-                    '',
-                    '',
-                    0,
-                    '',
-                    'ilMailAvatar'
-                ) .
-                '<br />' . ilMail::_getIliasMailerName()
+                $this->ui_renderer->render(
+                    $this->ui_factory
+                        ->symbol()
+                        ->avatar()
+                        ->picture(ilUtil::getImagePath('logo/HeaderIconAvatar.svg'), ilMail::_getIliasMailerName())
+                ) . '<br />' . ilMail::_getIliasMailerName()
             );
         }
         $form->addItem($from);
