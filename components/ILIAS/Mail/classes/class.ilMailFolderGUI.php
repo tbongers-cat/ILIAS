@@ -981,7 +981,7 @@ class ilMailFolderGUI
         }
 
         if ($this->folder->isTrash()) {
-            $ui_components[] = $modal = $this->ui_factory->modal()->interruptive(
+            $modal = $this->ui_factory->modal()->interruptive(
                 $this->lng->txt('delete'),
                 $this->lng->txt('mail_sure_delete'),
                 $this->ctrl->getLinkTarget($this, self::CMD_EMPTY_TRASH)
@@ -990,7 +990,7 @@ class ilMailFolderGUI
                     (string) $mailId,
                     ilDatePresentation::formatDate(
                         new ilDateTime($mailData['send_time'], IL_CAL_DATETIME)
-                    ) . " " . $mailData['m_subject']
+                    ) . ' ' . $mailData['m_subject']
                 )
             ]);
             $this->toolbar->addComponent(
@@ -999,6 +999,8 @@ class ilMailFolderGUI
                     '#'
                 )->withOnClick($modal->getShowSignal())
             );
+
+            $ui_components[] = $modal;
         }
 
         if ($move_links !== []) {
