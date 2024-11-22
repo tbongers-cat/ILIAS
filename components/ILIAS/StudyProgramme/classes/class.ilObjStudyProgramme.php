@@ -1552,7 +1552,7 @@ class ilObjStudyProgramme extends ilContainer
     /**
      * @throws ilException
      */
-    protected static function setProgressesCompletedIfParentIsProgrammeInLPCompletedMode(
+    public static function setProgressesCompletedIfParentIsProgrammeInLPCompletedMode(
         int $ref_id,
         int $obj_id,
         int $user_id
