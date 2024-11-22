@@ -1408,7 +1408,7 @@ assessment#:#tst_edit_competence_assign#:#Összerendelési tulajdonságok módos
 assessment#:#tst_edit_scoring#:#Pontozás módosítása
 assessment#:#tst_ending_time#:#Záró időpont
 assessment#:#tst_ending_time_before_starting_time#:#A tesztet lezáró, a kezdődátumnál későbbi dátum.
-assessment#:#tst_ending_time_desc#:#Az az időpont, ami utána résztvevők már nem tudnak választ adni. <b>Fontos</b>: <b>Ne</b> használja ezt a lehetőséget vizsgánál, helyett inkább korlátozza a kitöltési időt. Csak ez utóbbi esetben fejeződik be a teszt a szerveroldalon, illetve ekkor mentjük automatikusan az utolsó beírt választ.
+assessment#:#tst_ending_time_desc#:#Az az időpont, ami utána résztvevők már nem tudnak választ adni. <strong>Fontos</strong>: <strong>Ne</strong> használja ezt a lehetőséget vizsgánál, helyett inkább korlátozza a kitöltési időt. Csak ez utóbbi esetben fejeződik be a teszt a szerveroldalon, illetve ekkor mentjük automatikusan az utolsó beírt választ.
 assessment#:#tst_enter_questionpool#:#Adja meg annak a kérdéssornak a nevét, amelybe menteni szeretné az új kérdést.
 assessment#:#tst_eval_question_points#:#Eredményes teljesítéshez kérdéseredmények %s
 assessment#:#tst_eval_results_by_pass#:#%s. tesztkitöltés kérdésre adott válaszai
