@@ -996,12 +996,6 @@ class ilObjMediaObjectGUI extends ilObjectGUI
                 if ($_FILES['standard_file']['name'] != "") {
                     //$file_name = ilObjMediaObject::fixFilename($_FILES['standard_file']['name']);
                     $file_name = $_FILES['standard_file']['name'];
-                    /*$file = $mob_dir . "/" . $file_name;
-                    ilFileUtils::moveUploadedFile(
-                        $_FILES['standard_file']['tmp_name'],
-                        $file_name,
-                        $file
-                    );*/
                     $this->media_manager->addFileFromLegacyUpload(
                         $this->object->getId(),
                         $_FILES['standard_file']['tmp_name']
@@ -1099,12 +1093,11 @@ class ilObjMediaObjectGUI extends ilObjectGUI
                 if ($form->getInput("full_type") == "File") {
                     $resize = false;
                     if ($_FILES['full_file']['name'] != "") {
-                        $full_file_name = ilObjMediaObject::fixFilename($_FILES['full_file']['name']);
-                        $file = $mob_dir . "/" . $full_file_name;
-                        ilFileUtils::moveUploadedFile(
-                            $_FILES['full_file']['tmp_name'],
-                            $full_file_name,
-                            $file
+                        //$full_file_name = ilObjMediaObject::fixFilename($_FILES['full_file']['name']);
+                        $full_file_name = $_FILES['full_file']['name'];
+                        $this->media_manager->addFileFromLegacyUpload(
+                            $this->object->getId(),
+                            $_FILES['full_file']['tmp_name']
                         );
 
                         $format = ilObjMediaObject::getMimeType($file);
@@ -1200,7 +1193,7 @@ class ilObjMediaObjectGUI extends ilObjectGUI
             /*
             ilObjMediaObject::renameExecutables(ilObjMediaObject::_getDirectory($this->object->getId()));
             ilMediaSvgSanitizer::sanitizeDir(ilObjMediaObject::_getDirectory($this->object->getId()));
-            */	// see #20339
+            */    // see #20339
 
             $this->object->update();
             $this->tpl->setOnScreenMessage('success', $lng->txt("msg_obj_modified"), true);
