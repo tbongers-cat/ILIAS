@@ -186,32 +186,60 @@ class assMultipleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScorin
         bool $show_question_text = true,
         bool $show_inline_feedback = true
     ): string {
-        // shuffle output
-        $keys = $this->getChoiceKeys();
-
-
-        // get the solution of the user for the active pass or from the last pass if allowed
-        $user_solution = [];
-        if (($active_id > 0) && (!$show_correct_solution)) {
-            $solutions = $this->object->getSolutionValues($active_id, $pass);
-            foreach ($solutions as $idx => $solution_value) {
-                array_push($user_solution, $solution_value["value1"]);
-            }
+        if ($active_id > 0 && !$show_correct_solution) {
+            $user_solution = $this->object->getSolutionValues($active_id, $pass);
         } else {
-            // take the correct solution instead of the user solution
+            $user_solution = [];
             foreach ($this->object->answers as $index => $answer) {
                 $points_checked = $answer->getPointsChecked();
                 $points_unchecked = $answer->getPointsUnchecked();
                 if ($points_checked > $points_unchecked) {
                     if ($points_checked > 0) {
-                        array_push($user_solution, $index);
+                        $user_solution[] = ['value1' => $index];
                     }
                 }
             }
         }
 
+        return $this->renderSolutionOutput(
+            $user_solution,
+            $active_id,
+            $pass,
+            $graphical_output,
+            $result_output,
+            $show_question_only,
+            $show_feedback,
+            $show_correct_solution,
+            $show_manual_scoring,
+            $show_question_text,
+            false,
+            $show_inline_feedback,
+        );
+    }
+
+    public function renderSolutionOutput(
+        mixed $user_solutions,
+        int $active_id,
+        int $pass,
+        bool $graphical_output = false,
+        bool $result_output = false,
+        bool $show_question_only = true,
+        bool $show_feedback = false,
+        bool $show_correct_solution = false,
+        bool $show_manual_scoring = false,
+        bool $show_question_text = true,
+        bool $show_autosave_title = false,
+        bool $show_inline_feedback = false,
+    ): ?string {
+        $user_solution = [];
+
+        foreach ($user_solutions as $idx => $solution_value) {
+            array_push($user_solution, $solution_value["value1"]);
+        }
+
         $template = new ilTemplate("tpl.il_as_qpl_mc_mr_output_solution.html", true, true, "components/ILIAS/TestQuestionPool");
         $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "components/ILIAS/TestQuestionPool");
+        $keys = $this->getChoiceKeys();
         foreach ($keys as $answer_id) {
             $answer = $this->object->answers[$answer_id];
             if (($active_id > 0) && (!$show_correct_solution)) {

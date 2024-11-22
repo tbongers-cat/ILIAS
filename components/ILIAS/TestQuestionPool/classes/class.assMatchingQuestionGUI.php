@@ -456,9 +456,6 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         bool $show_question_text = true,
         bool $show_inline_feedback = true
     ): string {
-        $template = new ilTemplate('tpl.il_as_qpl_matching_output_solution.html', true, true, 'components/ILIAS/TestQuestionPool');
-        $solutiontemplate = new ilTemplate('tpl.il_as_tst_solution_output.html', true, true, 'components/ILIAS/TestQuestionPool');
-
         $solutions = [];
         if (($active_id > 0) && (!$show_correct_solution)) {
             $solutions = $this->object->getSolutionValues($active_id, $pass);
@@ -472,9 +469,41 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             }
         }
 
+        return $this->renderSolutionOutput(
+            $solutions,
+            $active_id,
+            $pass,
+            $graphical_output,
+            $result_output,
+            $show_question_only,
+            $show_feedback,
+            $show_correct_solution,
+            $show_manual_scoring,
+            $show_question_text,
+            false,
+            $show_inline_feedback,
+        );
+    }
+
+    public function renderSolutionOutput(
+        mixed $user_solutions,
+        int $active_id,
+        int $pass,
+        bool $graphical_output = false,
+        bool $result_output = false,
+        bool $show_question_only = true,
+        bool $show_feedback = false,
+        bool $show_correct_solution = false,
+        bool $show_manual_scoring = false,
+        bool $show_question_text = true,
+        bool $show_autosave_title = false,
+        bool $show_inline_feedback = false,
+    ): ?string {
+        $template = new ilTemplate('tpl.il_as_qpl_matching_output_solution.html', true, true, 'components/ILIAS/TestQuestionPool');
+        $solutiontemplate = new ilTemplate('tpl.il_as_tst_solution_output.html', true, true, 'components/ILIAS/TestQuestionPool');
         $i = 0;
 
-        foreach ($solutions as $solution) {
+        foreach ($user_solutions as $solution) {
             $definition = $this->object->getDefinitionWithIdentifier($solution['value2']);
             $term = $this->object->getTermWithIdentifier($solution['value1']);
             $points = $solution['points'];

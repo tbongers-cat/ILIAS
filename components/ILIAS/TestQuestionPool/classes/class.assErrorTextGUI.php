@@ -236,12 +236,43 @@ class assErrorTextGUI extends assQuestionGUI implements ilGuiQuestionScoringAdju
         bool $show_question_text = true,
         bool $show_inline_feedback = true
     ): string {
-        // get the solution of the user for the active pass or from the last pass if allowed
+        $user_solutions = $this->getUsersSolutionFromPreviewOrDatabase($active_id, $pass);
+        return $this->renderSolutionOutput(
+            $user_solutions,
+            $active_id,
+            $pass,
+            $graphical_output,
+            $result_output,
+            $show_question_only,
+            $show_feedback,
+            $show_correct_solution,
+            $show_manual_scoring,
+            $show_question_text,
+            false,
+            $show_inline_feedback,
+        );
+    }
+
+    public function renderSolutionOutput(
+        mixed $user_solutions,
+        int $active_id,
+        int $pass,
+        bool $graphical_output = false,
+        bool $result_output = false,
+        bool $show_question_only = true,
+        bool $show_feedback = false,
+        bool $show_correct_solution = false,
+        bool $show_manual_scoring = false,
+        bool $show_question_text = true,
+        bool $show_autosave_title = false,
+        bool $show_inline_feedback = false,
+    ): ?string {
         $template = new ilTemplate("tpl.il_as_qpl_errortext_output_solution.html", true, true, "components/ILIAS/TestQuestionPool");
 
-
         $selections = [
-            'user' => $this->getUsersSolutionFromPreviewOrDatabase((int) $active_id, $pass)
+            'user' => $user_solutions ?
+                $user_solutions :
+                $this->getUsersSolutionFromPreviewOrDatabase($active_id, $pass)
         ];
         $selections['best'] = $this->object->getBestSelection();
 
@@ -277,7 +308,7 @@ class assErrorTextGUI extends assQuestionGUI implements ilGuiQuestionScoringAdju
         $feedback = '';
         if ($show_feedback) {
             if (!$this->isTestPresentationContext()) {
-                $fb = $this->getGenericFeedbackOutput((int) $active_id, $pass);
+                $fb = $this->getGenericFeedbackOutput($active_id, $pass);
                 $feedback .= mb_strlen($fb) ? $fb : '';
             }
 
