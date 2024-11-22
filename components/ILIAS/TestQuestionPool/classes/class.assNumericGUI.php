@@ -163,13 +163,48 @@ class assNumericGUI extends assQuestionGUI implements ilGuiQuestionScoringAdjust
         if (($active_id > 0) && (!$show_correct_solution)) {
             $solutions = $this->object->getSolutionValues($active_id, $pass);
         } else {
-            array_push($solutions, ["value1" => sprintf($this->lng->txt("value_between_x_and_y"), $this->object->getLowerLimit(), $this->object->getUpperLimit())]);
+            array_push($solutions, [
+                'value1' => sprintf(
+                    $this->lng->txt("value_between_x_and_y"),
+                    $this->object->getLowerLimit(),
+                    $this->object->getUpperLimit()
+                )
+            ]);
         }
 
-        // generate the question output
+        return $this->renderSolutionOutput(
+            $solutions,
+            $active_id,
+            $pass,
+            $graphical_output,
+            $result_output,
+            $show_question_only,
+            $show_feedback,
+            $show_correct_solution,
+            $show_manual_scoring,
+            $show_question_text,
+            false,
+            $show_inline_feedback
+        );
+    }
+
+    public function renderSolutionOutput(
+        mixed $user_solutions,
+        int $active_id,
+        int $pass,
+        bool $graphical_output = false,
+        bool $result_output = false,
+        bool $show_question_only = true,
+        bool $show_feedback = false,
+        bool $show_correct_solution = false,
+        bool $show_manual_scoring = false,
+        bool $show_question_text = true,
+        bool $show_autosave_title = false,
+        bool $show_inline_feedback = false,
+    ): ?string {
         $template = new ilTemplate("tpl.il_as_qpl_numeric_output_solution.html", true, true, "components/ILIAS/TestQuestionPool");
         $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "components/ILIAS/TestQuestionPool");
-        if (is_array($solutions)) {
+        if (is_array($user_solutions)) {
             if (($active_id > 0) && (!$show_correct_solution)) {
                 if ($graphical_output) {
                     if ($this->object->getStep() === null) {
@@ -187,10 +222,10 @@ class assNumericGUI extends assQuestionGUI implements ilGuiQuestionScoringAdjust
                     $template->parseCurrentBlock();
                 }
             }
-            foreach ($solutions as $solution) {
-                $template->setVariable("NUMERIC_VALUE", $solution["value1"]);
+            foreach ($user_solutions as $solution) {
+                $template->setVariable("NUMERIC_VALUE", $solution['value1']);
             }
-            if (count($solutions) == 0) {
+            if (count($user_solutions) == 0) {
                 $template->setVariable("NUMERIC_VALUE", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
             }
         }
@@ -262,7 +297,7 @@ class assNumericGUI extends assQuestionGUI implements ilGuiQuestionScoringAdjust
         $template = new ilTemplate("tpl.il_as_qpl_numeric_output.html", true, true, "components/ILIAS/TestQuestionPool");
         if (is_array($solutions)) {
             foreach ($solutions as $solution) {
-                $template->setVariable("NUMERIC_VALUE", " value=\"" . $solution["value1"] . "\"");
+                $template->setVariable("NUMERIC_VALUE", " value=\"" . $solution['value1'] . "\"");
             }
         }
         $template->setVariable("NUMERIC_SIZE", $this->object->getMaxChars());

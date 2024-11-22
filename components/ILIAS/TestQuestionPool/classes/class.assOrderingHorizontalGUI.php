@@ -122,35 +122,57 @@ class assOrderingHorizontalGUI extends assQuestionGUI implements ilGuiQuestionSc
         bool $show_question_text = true,
         bool $show_inline_feedback = true
     ): string {
-        // get the solution of the user for the active pass or from the last pass if allowed
+        $user_solutions = [];
+        if (($active_id > 0) && (!$show_correct_solution)) {
+            $user_solutions = $this->object->getSolutionValues($active_id, $pass);
+        }
+
+        return $this->renderSolutionOutput(
+            $user_solutions,
+            $active_id,
+            $pass,
+            $graphical_output,
+            $result_output,
+            $show_question_only,
+            $show_feedback,
+            $show_correct_solution,
+            $show_manual_scoring,
+            $show_question_text,
+            false,
+            $show_inline_feedback,
+        );
+    }
+
+    public function renderSolutionOutput(
+        mixed $user_solutions,
+        int $active_id,
+        int $pass,
+        bool $graphical_output = false,
+        bool $result_output = false,
+        bool $show_question_only = true,
+        bool $show_feedback = false,
+        bool $show_correct_solution = false,
+        bool $show_manual_scoring = false,
+        bool $show_question_text = true,
+        bool $show_autosave_title = false,
+        bool $show_inline_feedback = false,
+    ): ?string {
         $template = new ilTemplate("tpl.il_as_qpl_orderinghorizontal_output_solution.html", true, true, "components/ILIAS/TestQuestionPool");
 
-        if (($active_id > 0) && (!$show_correct_solution)) {
-            $elements = [];
-            $solutions = $this->object->getSolutionValues($active_id, $pass);
+        $elements = [];
+        if (count($user_solutions) && strlen($user_solutions[0]["value1"])) {
+            $elements = explode("{::}", $user_solutions[0]["value1"]);
+        }
 
-            if (count($solutions) && strlen($solutions[0]["value1"])) {
-                $elements = explode("{::}", $solutions[0]["value1"]);
-            }
+        if (!count($elements)) {
+            $elements = $show_correct_solution ? $this->object->getOrderingElements() : $this->object->getRandomOrderingElements();
+        }
 
-            if (!count($elements)) {
-                $elements = $this->object->getRandomOrderingElements();
-            }
-
-            foreach ($elements as $id => $element) {
-                $template->setCurrentBlock("element");
-                $template->setVariable("ELEMENT_ID", "sol_e_" . $this->object->getId() . "_$id");
-                $template->setVariable("ELEMENT_VALUE", ilLegacyFormElementsUtil::prepareFormOutput($element));
-                $template->parseCurrentBlock();
-            }
-        } else {
-            $elements = $this->object->getOrderingElements();
-            foreach ($elements as $id => $element) {
-                $template->setCurrentBlock("element");
-                $template->setVariable("ELEMENT_ID", "sol_e_" . $this->object->getId() . "_$id");
-                $template->setVariable("ELEMENT_VALUE", ilLegacyFormElementsUtil::prepareFormOutput($element));
-                $template->parseCurrentBlock();
-            }
+        foreach ($elements as $id => $element) {
+            $template->setCurrentBlock("element");
+            $template->setVariable("ELEMENT_ID", "sol_e_" . $this->object->getId() . "_$id");
+            $template->setVariable("ELEMENT_VALUE", ilLegacyFormElementsUtil::prepareFormOutput($element));
+            $template->parseCurrentBlock();
         }
 
         if (($active_id > 0) && (!$show_correct_solution)) {

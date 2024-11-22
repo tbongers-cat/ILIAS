@@ -398,7 +398,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
     public function getSolutionOutput(
         int $active_id,
         ?int $pass = null,
-        bool $graphicalOutput = false,
+        bool $graphical_output = false,
         bool $result_output = false,
         bool $show_question_only = true,
         bool $show_feedback = false,
@@ -407,10 +407,9 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         bool $show_question_text = true,
         bool $show_inline_feedback = true
     ): string {
-        $imagepath = $this->object->getImagePathWeb() . $this->object->getImageFilename();
-        $solutions = [];
+        $user_solutions = [];
         if (($active_id > 0) && (!$show_correct_solution)) {
-            $solutions = $this->object->getSolutionValues($active_id, $pass);
+            $user_solutions = $this->object->getSolutionValues($active_id, $pass);
         } else {
             if (!$this->object->getIsMultipleChoice()) {
                 $found_index = -1;
@@ -421,7 +420,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
                         $found_index = $index;
                     }
                 }
-                array_push($solutions, ["value1" => $found_index]);
+                array_push($user_solutions, ["value1" => $found_index]);
             } else {
                 // take the correct solution instead of the user solution
                 foreach ($this->object->answers as $index => $answer) {
@@ -429,16 +428,48 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
                     $points_unchecked = $answer->getPointsUnchecked();
                     if ($points_checked > $points_unchecked) {
                         if ($points_checked > 0) {
-                            array_push($solutions, ["value1" => $index]);
+                            array_push($user_solutions, ["value1" => $index]);
                         }
                     }
                 }
             }
         }
+
+        return $this->renderSolutionOutput(
+            $user_solutions,
+            $active_id,
+            $pass,
+            $graphical_output,
+            $result_output,
+            $show_question_only,
+            $show_feedback,
+            $show_correct_solution,
+            $show_manual_scoring,
+            $show_question_text,
+            false,
+            $show_inline_feedback,
+        );
+    }
+
+    public function renderSolutionOutput(
+        mixed $user_solutions,
+        int $active_id,
+        int $pass,
+        bool $graphical_output = false,
+        bool $result_output = false,
+        bool $show_question_only = true,
+        bool $show_feedback = false,
+        bool $show_correct_solution = false,
+        bool $show_manual_scoring = false,
+        bool $show_question_text = true,
+        bool $show_autosave_title = false,
+        bool $show_inline_feedback = false,
+    ): ?string {
+        $imagepath = $this->object->getImagePathWeb() . $this->object->getImageFilename();
         $solution_id = -1;
-        if (is_array($solutions)) {
+        if (is_array($user_solutions)) {
             $preview = new ilImagemapPreview($this->object->getImagePath() . $this->object->getImageFilename());
-            foreach ($solutions as $idx => $solution_value) {
+            foreach ($user_solutions as $idx => $solution_value) {
                 $value1 = $solution_value["value1"];
                 if (
                     $value1 === '' ||
@@ -487,7 +518,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $template->setVariable("IMG_ALT", $this->lng->txt("imagemap"));
         $template->setVariable("IMG_TITLE", $this->lng->txt("imagemap"));
         if (($active_id > 0) && (!$show_correct_solution)) {
-            if ($graphicalOutput) {
+            if ($graphical_output) {
                 $correctness_icon = $this->generateCorrectnessIconsForCorrectness(self::CORRECTNESS_NOT_OK);
                 $reached_points = $this->object->getReachedPoints($active_id, $pass);
                 if ($reached_points == $this->object->getMaximumPoints()) {
