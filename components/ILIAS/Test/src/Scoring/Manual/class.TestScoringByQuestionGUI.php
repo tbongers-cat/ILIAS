@@ -296,8 +296,10 @@ class TestScoringByQuestionGUI extends TestScoringByParticipantGUI
             $this->buildSolutionPanel($question_gui, $question_id, $attempt)
         ];
 
-        if ($question_gui instanceof \assTextQuestionGUI && $this->object->getAutosave()) {
-            $content[] = $this->buildAutosavedSolutionPanel($question_gui, $question_id, $attempt);
+        if ($this->object->getAutosave()
+            && $autosave_content = $this->buildAutosavedSolutionPanel($question_gui, $question_id, $attempt)
+        ) {
+            $content[] = $autosave_content;
         }
 
         $reached_points = $question_gui->getObject()->getReachedPoints($active_id, $attempt);
@@ -358,22 +360,25 @@ class TestScoringByQuestionGUI extends TestScoringByParticipantGUI
     }
 
     private function buildAutosavedSolutionPanel(
-        assQuestionGUI $question_gui,
+        \assQuestionGUI $question_gui,
         int $active_id,
         int $attempt
-    ): StandardPanel {
+    ): ?StandardPanel {
+        $autosave_content = $question_gui->getAutoSavedSolutionOutput(
+            $active_id,
+            $attempt,
+            false,
+            false,
+            false,
+            $this->object->getShowSolutionFeedback(),
+        );
+        if ($autosave_content === null) {
+            return null;
+        }
+
         return $this->ui_factory->panel()->standard(
             $this->lng->txt('autosavecontent'),
-            $this->ui_factory->legacy(
-                $question_gui->getAutoSavedSolutionOutput(
-                    $active_id,
-                    $attempt,
-                    false,
-                    false,
-                    false,
-                    $this->object->getShowSolutionFeedback(),
-                )
-            )
+            $this->ui_factory->legacy($autosave_content)
         );
     }
 
