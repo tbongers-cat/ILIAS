@@ -144,18 +144,18 @@ class ilPDMailBlockGUI extends ilBlockGUI
 
         $user = ilMailUserCache::getUserObjectById($data['sender_id']);
 
+        $avatar = null;
         if ($user && $user->getId() !== ANONYMOUS_USER_ID) {
-            $img_sender = $user->getPersonalPicturePath('xxsmall');
-            $alt_sender = htmlspecialchars($user->getPublicName());
+            $avatar = $user->getAvatar();
             $public_name_long = $user->getPublicName();
-        } elseif (!$user instanceof ilObjUser) {
-            $img_sender = '';
-            $alt_sender = '';
-            $public_name_long = trim(($data['import_name'] ?? '') . ' (' . $this->lng->txt('user_deleted') . ')');
-        } else {
-            $img_sender = ilUtil::getImagePath('logo/HeaderIconAvatar.svg');
-            $alt_sender = htmlspecialchars(ilMail::_getIliasMailerName());
+        } elseif ($user) {
+            $avatar = $this->ui->factory()
+                ->symbol()
+                ->avatar()
+                ->picture(ilUtil::getImagePath('logo/HeaderIconAvatar.svg'), ilMail::_getIliasMailerName());
             $public_name_long = ilMail::_getIliasMailerName();
+        } else {
+            $public_name_long = trim(($data['import_name'] ?? '') . ' (' . $this->lng->txt('user_deleted') . ')');
         }
 
         $new_mail_subj = htmlentities($data['m_subject'], ENT_NOQUOTES, 'UTF-8');
@@ -167,8 +167,8 @@ class ilPDMailBlockGUI extends ilBlockGUI
         $button = $f->link()->standard($new_mail_subj, $new_mail_link);
 
         $item = $f->item()->standard($button);
-        if ($img_sender !== '') {
-            $item = $item->withLeadImage($f->image()->standard($img_sender, $alt_sender));
+        if ($avatar !== null) {
+            $item = $item->withLeadAvatar($avatar);
         }
 
         $item = $item->withProperties([
