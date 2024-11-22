@@ -236,7 +236,7 @@ abstract class ilAdvancedMDFieldDefinition
 
         $defs = [];
         foreach ($data as $datum) {
-            $defs[] = self::getInstanceWithData($datum);
+            $defs[$datum->id()] = self::getInstanceWithData($datum);
         }
 
         return $defs;
