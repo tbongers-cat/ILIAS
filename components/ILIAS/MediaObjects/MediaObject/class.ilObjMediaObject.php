@@ -562,7 +562,6 @@ class ilObjMediaObject extends ilObject
                     $item = $media_items[$i];
 
                     $xml .= "<MediaItem Purpose=\"" . $item->getPurpose() . "\">";
-
                     if ($a_sign_locals && $item->getLocationType() == "LocalFile") {
                         // pre irss file
                         if (is_file($this->getDataDirectory() . "/" . $item->getLocation())) {
@@ -576,6 +575,14 @@ class ilObjMediaObject extends ilObject
                         }
                     } else {
                         $location = $item->getLocation();
+                        // irss
+                        if ($item->getLocationType() === "LocalFile" &&
+                        !is_file($this->getDataDirectory() . "/" . $item->getLocation())) {
+                            $location = $this->manager->getLocationSrc(
+                                $this->getId(),
+                                $item->getLocation()
+                            );
+                        }
                         if ($item->getLocationType() != "LocalFile") {  //#25941
                             $location = ilUtil::secureUrl($location); //#23518
                         }

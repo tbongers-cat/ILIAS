@@ -994,16 +994,21 @@ class ilObjMediaObjectGUI extends ilObjectGUI
             if ($form->getInput("standard_type") == "File") {
                 $resize = false;
                 if ($_FILES['standard_file']['name'] != "") {
-                    $file_name = ilObjMediaObject::fixFilename($_FILES['standard_file']['name']);
-                    $file = $mob_dir . "/" . $file_name;
+                    //$file_name = ilObjMediaObject::fixFilename($_FILES['standard_file']['name']);
+                    $file_name = $_FILES['standard_file']['name'];
+                    /*$file = $mob_dir . "/" . $file_name;
                     ilFileUtils::moveUploadedFile(
                         $_FILES['standard_file']['tmp_name'],
                         $file_name,
                         $file
+                    );*/
+                    $this->media_manager->addFileFromLegacyUpload(
+                        $this->object->getId(),
+                        $_FILES['standard_file']['tmp_name']
                     );
 
                     // get mime type
-                    $format = ilObjMediaObject::getMimeType($file);
+                    $format = ilObjMediaObject::getMimeType($file_name, true);
                     $location = $file_name;
 
                     $resize = true;
@@ -1192,8 +1197,10 @@ class ilObjMediaObjectGUI extends ilObjectGUI
                 }
             }
 
+            /*
             ilObjMediaObject::renameExecutables(ilObjMediaObject::_getDirectory($this->object->getId()));
-            ilMediaSvgSanitizer::sanitizeDir(ilObjMediaObject::_getDirectory($this->object->getId()));	// see #20339
+            ilMediaSvgSanitizer::sanitizeDir(ilObjMediaObject::_getDirectory($this->object->getId()));
+            */	// see #20339
 
             $this->object->update();
             $this->tpl->setOnScreenMessage('success', $lng->txt("msg_obj_modified"), true);

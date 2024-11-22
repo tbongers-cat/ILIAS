@@ -694,7 +694,6 @@ class ilObjMediaPoolGUI extends ilObject2GUI
         $xml .= $media_obj->getXML(IL_MODE_OUTPUT);
         $xml .= $link_xml;
         $xml .= "</dummy>";
-
         $wb_path = ilFileUtils::getWebspaceDir("output") . "/";
 
         $mode = ($this->ctrl->getCmd() !== "showPreview")
@@ -1402,8 +1401,14 @@ class ilObjMediaPoolGUI extends ilObject2GUI
             $lng->txt("preview"),
             $internal_gui->ui()->factory()->legacy("<iframe id='ilMepPreviewContent'></iframe>")
         );
+        $html = $internal_gui->ui()->renderer()->render($modal);
+        $html = str_replace(
+            "<iframe id='ilMepPreviewContent'",
+            "<iframe data-signal='".$modal->getShowSignal()->getId()."' id='ilMepPreviewContent'",
+            $html
+        );
 
-        return $internal_gui->ui()->renderer()->render($modal);
+        return $html;
     }
 
     public function export(): void
