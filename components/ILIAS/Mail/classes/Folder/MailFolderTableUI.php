@@ -333,32 +333,41 @@ class MailFolderTableUI implements \ILIAS\UI\Component\Table\DataRetrieval
     private function getTableTitle(): string
     {
         if ($this->current_folder->hasIncomingMails() && $this->search->getUnread() > 0) {
-            return sprintf(
+            return \sprintf(
                 '%s: %s (%s %s)',
                 $this->current_folder->getTitle(),
                 $this->search->getCount() === 1
                     ? $this->lng->txt('mail_1')
-                    : sprintf($this->lng->txt('mail_s'), $this->search->getCount()),
+                    : \sprintf($this->lng->txt('mail_s'), $this->search->getCount()),
                 $this->search->getUnread(),
                 $this->lng->txt('unread')
             );
         }
 
-        return sprintf(
+        return \sprintf(
             '%s: %s',
             $this->current_folder->getTitle(),
             $this->search->getCount() === 1
                 ? $this->lng->txt('mail_1')
-                : sprintf($this->lng->txt('mail_s'), $this->search->getCount()),
+                : \sprintf($this->lng->txt('mail_s'), $this->search->getCount()),
         );
     }
 
     private function getAvatar(MailRecordData $record): string
     {
-        if (!array_key_exists($record->getSenderId(), $this->avatars)) {
-            $user = ilMailUserCache::getUserObjectById($record->getSenderId());
-            $this->avatars[$record->getSenderId()] = isset($user)
-                ? $this->ui_renderer->render($user->getAvatar())
+        if (!\array_key_exists($record->getSenderId(), $this->avatars)) {
+            if ($record->getSenderId() === ANONYMOUS_USER_ID) {
+                $avatar = $this->ui_factory->symbol()->avatar()->picture(
+                    \ilUtil::getImagePath('logo/HeaderIconAvatar.svg'),
+                    $this->getSender($record)
+                );
+            } else {
+                $user = ilMailUserCache::getUserObjectById($record->getSenderId());
+                $avatar = $user?->getAvatar();
+            }
+
+            $this->avatars[$record->getSenderId()] = $avatar
+                ? $this->ui_renderer->render($avatar)
                 : '';
         }
 
@@ -378,7 +387,8 @@ class MailFolderTableUI implements \ILIAS\UI\Component\Table\DataRetrieval
             return ilMail::_getIliasMailerName();
         }
 
-        if (!empty($user = ilMailUserCache::getUserObjectById($record->getSenderId()))) {
+        $user = ilMailUserCache::getUserObjectById($record->getSenderId());
+        if ($user !== null) {
             if ($user->hasPublicProfile()) {
                 return $this->ui_renderer->render(
                     $this->ui_factory->link()->standard(
