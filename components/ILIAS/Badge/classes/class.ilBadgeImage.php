@@ -74,7 +74,7 @@ class ilBadgeImage
             }
         } elseif (is_array($badge) && isset($badge['image'])) {
             $image_src = $badge['image'];
-        } else {
+        } elseif ($badge instanceof ilBadge) {
             $image_src = $badge->getImage();
         }
 
