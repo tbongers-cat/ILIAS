@@ -670,31 +670,29 @@ class ilAssQuestionList implements ilTaxAssignedItemInfo
         return iterator_count($questionHintList) > 0;
     }
 
-    private function loadTaxonomyAssignmentData($parentObjId, $questionId): array
-    {
-        $taxAssignmentData = [];
+    private function loadTaxonomyAssignmentData(
+        int $parent_obj_id,
+        int $question_id
+    ): array {
+        $tax_assignment_data = [];
+        foreach ($this->getAvailableTaxonomyIds() as $tax_id) {
+            $tax_tree = new ilTaxonomyTree($tax_id);
 
-        foreach ($this->getAvailableTaxonomyIds() as $taxId) {
-            $taxTree = new ilTaxonomyTree($taxId);
+            $tax_assignment = new ilTaxNodeAssignment('qpl', $parent_obj_id, 'quest', $tax_id);
+            $assignments = $tax_assignment->getAssignmentsOfItem($question_id);
 
-            $taxAssignment = new ilTaxNodeAssignment('qpl', $parentObjId, 'quest', $taxId);
-
-            $assignments = $taxAssignment->getAssignmentsOfItem($questionId);
-
-            foreach ($assignments as $assData) {
-                if (!isset($taxAssignmentData[ $assData['tax_id'] ])) {
-                    $taxAssignmentData[ $assData['tax_id'] ] = [];
+            foreach ($assignments as $ass_data) {
+                if (!isset($tax_assignment_data[$ass_data['tax_id']])) {
+                    $tax_assignment_data[$ass_data['tax_id']] = [];
                 }
 
-                $nodeData = $taxTree->getNodeData($assData['node_id']);
+                $ass_data['node_lft'] = $tax_tree->getNodeData($ass_data['node_id']);
 
-                $assData['node_lft'] = $nodeData['lft'];
-
-                $taxAssignmentData[ $assData['tax_id'] ][ $assData['node_id'] ] = $assData;
+                $tax_assignment_data[$ass_data['tax_id']][$ass_data['node_id']] = $ass_data;
             }
         }
 
-        return $taxAssignmentData;
+        return $tax_assignment_data;
     }
 
     private function isActiveQuestionType(array $questionData): bool
