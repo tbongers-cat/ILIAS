@@ -156,9 +156,12 @@ class ilDateDurationInputGUI extends ilSubEnabledFormPropertyGUI implements ilTa
         $this->minute_step_size = $a_step_size;
     }
 
+    /**
+     * Fixed to one minute increments, see https://mantis.ilias.de/view.php?id=42740
+     */
     public function getMinuteStepSize(): int
     {
-        return $this->minute_step_size;
+        return 1;
     }
 
     public function setValueByArray(array $a_values): void
@@ -397,7 +400,7 @@ class ilDateDurationInputGUI extends ilSubEnabledFormPropertyGUI implements ilTa
          * For date input, step is in days, for datetime-local
          * it is in seconds.
          */
-        $step_size = $this->getMinuteStepSize() * 60;
+        $step_size = 60;
         if (!$this->getShowTime()) {
             $step_size = 1;
         }

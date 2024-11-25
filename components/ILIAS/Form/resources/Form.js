@@ -325,6 +325,7 @@ il.Form = {
 
   addTimeToDatetimeInput(input) {
     // read out relevant values before changing type
+    // toggleable duration inputs always start with time, so dataset should be filled
     const date_value = input.value + input.dataset.valuetime;
     const min_value = input.min + input.dataset.mintime;
 
@@ -332,8 +333,7 @@ il.Form = {
     input.type = 'datetime-local';
 
     // restore relevant attributes
-    // toggleable duration inputs always start with time, so dataset should be filled
-    input.step = input.dataset.timestep;
+    input.step = 60;
     input.value = date_value;
     input.min = min_value;
   },
@@ -344,7 +344,6 @@ il.Form = {
     const min_value = input.min.slice(0, 10);
 
     // store relevant attributes so they can be restored on retoggle
-    input.dataset.timestep = input.step;
     input.dataset.valuetime = input.value.slice(-6);
     input.dataset.mintime = input.min.slice(-6);
 
