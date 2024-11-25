@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -284,14 +285,14 @@ class assNumericGUI extends assQuestionGUI implements ilGuiQuestionScoringAdjust
 
     public function writeQuestionSpecificPostData(ilPropertyFormGUI $form): void
     {
-        $this->object->setMaxChars($_POST["maxchars"]);
+        $this->object->setMaxChars($this->request_data_collector->int('maxchars') ?? 6);
     }
 
     public function writeAnswerSpecificPostData(ilPropertyFormGUI $form): void
     {
-        $this->object->setLowerLimit($_POST['lowerlimit']);
-        $this->object->setUpperLimit($_POST['upperlimit']);
-        $this->object->setPoints((float) str_replace(',', '.', $_POST['points']));
+        $this->object->setLowerLimit($this->request_data_collector->float('lowerlimit'));
+        $this->object->setUpperLimit($this->request_data_collector->float('upperlimit'));
+        $this->object->setPoints($this->request_data_collector->float('points'));
     }
 
     public function populateQuestionSpecificFormPart(\ilPropertyFormGUI $form): ilPropertyFormGUI

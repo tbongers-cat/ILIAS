@@ -87,7 +87,6 @@ class assClozeTest extends assQuestion implements ilObjQuestionScoringAdjustable
         string $question = ""
     ) {
         global $DIC;
-
         parent::__construct($title, $comment, $author, $owner, $question);
         $this->setQuestion($question); // @TODO: Should this be $question?? See setter for why this is not trivial.
         $this->randomGroup = $DIC->refinery()->random();
@@ -1051,7 +1050,7 @@ class assClozeTest extends assQuestion implements ilObjQuestionScoringAdjustable
                 continue;
             }
 
-            if ($gap->getType() === assClozeGap::TYPE_SELECT && $value === -1) {
+            if ($gap->getType() === assClozeGap::TYPE_SELECT && $value === '-1') {
                 continue;
             }
 
@@ -1070,31 +1069,30 @@ class assClozeTest extends assQuestion implements ilObjQuestionScoringAdjustable
 
     public function getSolutionSubmitValidation(): array
     {
-        $submit = $_POST;
-        $solutionSubmit = [];
+        $solution_submit = [];
 
-        foreach ($submit as $key => $value) {
-            if ($value === null || $value === ''
-                || !preg_match('/^gap_(\d+)/', $key, $matches)) {
+        foreach ($this->questionpool_request->getPostKeys() as $post_key) {
+            $value = $this->questionpool_request->string($post_key);
+            if ($value === '' || !preg_match('/^gap_(\d+)/', $post_key, $matches)) {
                 continue;
             }
             $gap = $this->getGap((int) $matches[1]);
             if ($gap === null
-                || $gap->getType() === assClozeGap::TYPE_SELECT && $value === -1) {
+                || $gap->getType() === assClozeGap::TYPE_SELECT && $value === '-1') {
                 continue;
             }
             if ($gap->getType() === assClozeGap::TYPE_NUMERIC) {
-                $value = str_replace(',', '.', $value);
+                $value = $this->questionpool_request->float($post_key);
             }
-            $solutionSubmit[trim($matches[1])] = $value;
+            $solution_submit[trim($matches[1])] = $value;
         }
 
-        return $solutionSubmit;
+        return $solution_submit;
     }
 
     protected function getSolutionSubmit(): array
     {
-        return $this->fetchSolutionSubmit($_POST);
+        return $this->fetchSolutionSubmit();
     }
 
     public function saveWorkingData(
@@ -1110,7 +1108,7 @@ class assClozeTest extends assQuestion implements ilObjQuestionScoringAdjustable
             function () use ($active_id, $pass, $authorized) {
                 $this->removeCurrentSolution($active_id, $pass, $authorized);
 
-                foreach ($this->getSolutionSubmit() as $key => $value) {
+                foreach ($this->fetchSolutionSubmit() as $key => $value) {
                     if ($value === null || $value === '') {
                         continue;
                     }

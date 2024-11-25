@@ -73,7 +73,7 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $this->object->setContentType($this->object::OQ_CT_PICTURES);
         $this->object->saveToDb();
 
-        $values = $this->request->getParsedBody();
+        $values = $this->request_data_collector->getParsedBody();
         $values['thumb_geometry'] = $this->object->getThumbSize();
         $this->buildEditFormAfterTypeChange($values);
     }
@@ -88,7 +88,7 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $this->object->setContentType($this->object::OQ_CT_TERMS);
         $this->object->saveToDb();
 
-        $this->buildEditFormAfterTypeChange($this->request->getParsedBody());
+        $this->buildEditFormAfterTypeChange($this->request_data_collector->getParsedBody());
     }
 
     private function buildEditFormAfterTypeChange(array $values): void
@@ -110,7 +110,7 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $form = $this->buildNestingForm();
         $form->setValuesByPost();
         if ($form->checkInput()) {
-            $post = $this->request->raw(self::F_NESTED_ORDER);
+            $post = $this->request_data_collector->raw(self::F_NESTED_ORDER);
             $list = $this->object->getOrderingElementList();
 
             $ordered = [];
@@ -180,16 +180,16 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
     public function writeQuestionSpecificPostData(ilPropertyFormGUI $form): void
     {
-        $thumb_size = $this->request->int('thumb_geometry');
+        $thumb_size = $this->request_data_collector->int('thumb_geometry');
         if ($thumb_size !== 0
             && $thumb_size !== $this->object->getThumbSize()) {
             $this->object->setThumbSize($thumb_size);
             $this->updateImageFiles();
         }
 
-        $this->object->setPoints($this->request->float('points'));
+        $this->object->setPoints($this->request_data_collector->float('points'));
 
-        $use_nested = $this->request->int(self::F_USE_NESTED) === 1;
+        $use_nested = $this->request_data_collector->int(self::F_USE_NESTED) === 1;
         $this->object->setNestingType($use_nested);
     }
 
@@ -199,7 +199,7 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $list = $form->getItemByPostVar(assOrderingQuestion::ORDERING_ELEMENT_FORM_FIELD_POSTVAR)
             ->getElementList($this->object->getId());
 
-        $use_nested = $this->request->int(self::F_USE_NESTED) === 1;
+        $use_nested = $this->request_data_collector->int(self::F_USE_NESTED) === 1;
 
         if ($use_nested) {
             $existing_list = $this->object->getOrderingElementList();

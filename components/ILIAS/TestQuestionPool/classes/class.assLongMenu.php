@@ -20,7 +20,6 @@ declare(strict_types=1);
 
 use ILIAS\TestQuestionPool\Questions\QuestionLMExportable;
 use ILIAS\TestQuestionPool\Questions\QuestionAutosaveable;
-
 use ILIAS\Test\Logging\AdditionalInformationGenerator;
 
 class assLongMenu extends assQuestion implements ilObjQuestionScoringAdjustable, QuestionLMExportable, QuestionAutosaveable
@@ -598,28 +597,17 @@ class assLongMenu extends assQuestion implements ilObjQuestionScoringAdjustable,
 
     protected function getSolutionSubmit(): array
     {
-        $answer = $this->questionpool_request->retrieveArrayOfStringsFromPost('answer');
-
-        if ($answer === null) {
-            return [];
+        $solution_submit = [];
+        foreach ($this->questionpool_request->strArray('answer') as $key => $value) {
+            $solution_submit[$key] = $value;
         }
-
-        foreach ($answer as $key => $value) {
-            $solutionSubmit[$key] = $value;
-        }
-
-        return $solutionSubmit;
+        return $solution_submit;
     }
 
-    protected function savePreviewData(ilAssQuestionPreviewSession $previewSession): void
+    protected function savePreviewData(ilAssQuestionPreviewSession $preview_session): void
     {
-        $answer = $_POST['answer'] ?? null;
-        if (is_array($answer)) {
-            $answer = array_map(function ($value) {
-                return trim($value);
-            }, $answer);
-        }
-        $previewSession->setParticipantsSolution($answer);
+        $answer = $this->questionpool_request->strArray('answer');
+        $preview_session->setParticipantsSolution(array_map(static fn($value) => trim($value), $answer));
     }
 
     /**

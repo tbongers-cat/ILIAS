@@ -72,9 +72,7 @@ class assKprimChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringAd
     protected function uploadImage(): void
     {
         $this->setAdditionalContentEditingModeFromPost();
-        $result = $this->writePostData(true);
-
-        if ($result == 0) {
+        if ($this->writePostData(true) === 0) {
             $this->object->saveToDb();
             $this->editQuestion();
         }
@@ -82,17 +80,16 @@ class assKprimChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringAd
 
     public function removeImage(): void
     {
-        $position = key($_POST['cmd']['removeImage']);
-        $this->object->removeAnswerImage($position);
-
+        $this->object->removeAnswerImage($this->request_data_collector->getCmdIndex('removeImage'));
         $this->object->saveToDb();
         $this->editQuestion();
     }
 
     public function downkprimanswers(): void
     {
-        if (isset($_POST['cmd'][__FUNCTION__]) && count($_POST['cmd'][__FUNCTION__])) {
-            $this->object->moveAnswerDown(key($_POST['cmd'][__FUNCTION__]));
+        $index = $this->request_data_collector->getCmdIndex(__FUNCTION__);
+        if (!empty($index)) {
+            $this->object->moveAnswerDown($index);
             $this->object->saveToDb();
         }
 
@@ -101,8 +98,9 @@ class assKprimChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringAd
 
     public function upkprimanswers(): void
     {
-        if (isset($_POST['cmd'][__FUNCTION__]) && count($_POST['cmd'][__FUNCTION__])) {
-            $this->object->moveAnswerUp(key($_POST['cmd'][__FUNCTION__]));
+        $index = $this->request_data_collector->getCmdIndex(__FUNCTION__);
+        if (!empty($index)) {
+            $this->object->moveAnswerUp($index);
             $this->object->saveToDb();
         }
 
@@ -116,19 +114,20 @@ class assKprimChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringAd
     {
         $form = $this->buildEditForm();
         $form->setValuesByPost();
+        $answers_input = $form->getItemByPostVar('kprimanswers');
 
-        if ($always) {
-            $answersInput = $form->getItemByPostVar('kprimanswers');
-            $answersInput->setIgnoreMissingUploadsEnabled(true);
+        if ($always && $answers_input instanceof ilFormPropertyGUI) {
+            $answers_input->setIgnoreMissingUploadsEnabled(true);
+            $answer_input_postvar = $this->request_data_collector->strArray($answers_input->getPostVar(), 2);
 
-            if (!$answersInput->checkUploads($_POST[$answersInput->getPostVar()])) {
-                $this->tpl->setOnScreenMessage('failure', $this->lng->txt("form_input_not_valid"));
+            if (!$answers_input->checkUploads($answer_input_postvar)) {
+                $this->tpl->setOnScreenMessage('failure', $this->lng->txt('form_input_not_valid'));
                 $this->edit_form = $form;
                 $this->editQuestion();
                 return 1;
             }
 
-            $answersInput->collectValidFiles();
+            $answers_input->collectValidFiles();
         } elseif (!$form->checkInput()) {
             $this->edit_form = $form;
             $this->editQuestion();

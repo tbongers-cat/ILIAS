@@ -519,17 +519,17 @@ class ilAssQuestionHintsGUI extends ilAssQuestionHintAbstractGUI
 
     private function fetchHintIdsParameter(): array
     {
-        $hint_ids = [$this->request->int('hint_id')];
+        $hint_ids = [$this->request_data_collector->int('hint_id')];
         if ($hint_ids[0] !== 0) {
             return $hint_ids;
         }
 
-        return $this->request->retrieveArrayOfIntsFromPost('hint_ids') ?? [];
+        return $this->request_data_collector->intArray('hint_ids');
     }
 
     private function fetchHintIndexesParameter(): array
     {
-        $hint_indexes = $this->request->retrieveArrayOfIntsFromPost('hint_indexes') ?? [];
+        $hint_indexes = $this->request_data_collector->intArray('hint_indexes');
         asort($hint_indexes);
         return $hint_indexes;
     }
@@ -561,7 +561,7 @@ class ilAssQuestionHintsGUI extends ilAssQuestionHintAbstractGUI
 
     private function showHintCmd(): void
     {
-        if (!$this->request->isset('hintId') || !(int) $this->request->raw('hintId')) {
+        if (!$this->request_data_collector->isset('hintId') || !(int) $this->request_data_collector->raw('hintId')) {
             throw new ilTestException('no hint id given');
         }
 
@@ -573,7 +573,7 @@ class ilAssQuestionHintsGUI extends ilAssQuestionHintAbstractGUI
             $this->ctrl->getLinkTargetByClass(self::class, self::CMD_SHOW_LIST)
         );
 
-        $questionHint = ilAssQuestionHint::getInstanceById((int) $this->request->raw('hintId'));
+        $questionHint = ilAssQuestionHint::getInstanceById((int) $this->request_data_collector->raw('hintId'));
 
         // build form
 

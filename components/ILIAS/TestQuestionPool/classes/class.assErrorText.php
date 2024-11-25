@@ -301,11 +301,10 @@ class assErrorText extends assQuestion implements ilObjQuestionScoringAdjustable
 
     private function getAnswersFromRequest(): array
     {
-        if (mb_strlen($_POST["qst_" . $this->getId()])) {
-            return explode(',', $_POST["qst_{$this->getId()}"]);
-        }
-
-        return [];
+        return explode(
+            ',',
+            $this->questionpool_request->string('qst_' . $this->getId())
+        );
     }
 
     public function getQuestionType(): string

@@ -20,9 +20,7 @@ declare(strict_types=1);
 
 use ILIAS\TestQuestionPool\QuestionPoolDIC;
 use ILIAS\Test\Participants\ParticipantRepository;
-
 use ILIAS\Test\Logging\AdditionalInformationGenerator;
-
 use ILIAS\FileDelivery\Delivery\Disposition;
 use ILIAS\FileUpload\Exception\IllegalStateException;
 
@@ -70,11 +68,11 @@ class assFileUpload extends assQuestion implements ilObjQuestionScoringAdjustabl
      * @see assQuestion:__construct()
      */
     public function __construct(
-        $title = '',
-        $comment = '',
-        $author = '',
-        $owner = -1,
-        $question = ''
+        string $title = '',
+        string $comment = '',
+        string $author = '',
+        int $owner = -1,
+        string $question = ''
     ) {
         parent::__construct($title, $comment, $author, $owner, $question);
         global $DIC;
@@ -370,7 +368,7 @@ class assFileUpload extends assQuestion implements ilObjQuestionScoringAdjustabl
 
                 if ($data['value2'] === 'rid') {
                     $rid = $this->irss->manage()->find($data['value1']);
-                    if($rid === null) {
+                    if ($rid === null) {
                         continue;
                     }
                     $revision = $this->irss->manage()->getCurrentRevision($rid);
@@ -568,7 +566,9 @@ class assFileUpload extends assQuestion implements ilObjQuestionScoringAdjustabl
 
                 if ($this->isFileDeletionAction()) {
                     if ($this->isFileDeletionSubmitAvailable()) {
-                        foreach ($_POST[self::DELETE_FILES_TBL_POSTVAR] as $solution_id) {
+                        $delete_files = $this->questionpool_request->intArray(self::DELETE_FILES_TBL_POSTVAR);
+
+                        foreach ($delete_files as $solution_id) {
                             $this->removeSolutionRecordById($solution_id);
                         }
                     } else {
@@ -576,7 +576,9 @@ class assFileUpload extends assQuestion implements ilObjQuestionScoringAdjustabl
                     }
                 } else {
                     if ($this->isFileReuseHandlingRequired()) {
-                        foreach ($_POST[self::REUSE_FILES_TBL_POSTVAR] as $solutionId) {
+                        $reuse_files = $this->questionpool_request->intArray(self::REUSE_FILES_TBL_POSTVAR);
+
+                        foreach ($reuse_files as $solutionId) {
                             $solution = $this->getSolutionRecordById($solutionId);
 
                             $this->saveCurrentSolution(
@@ -629,10 +631,12 @@ class assFileUpload extends assQuestion implements ilObjQuestionScoringAdjustabl
     {
         $rids_to_delete = [];
         if ($this->isFileDeletionAction() && $this->isFileDeletionSubmitAvailable()) {
+            $delete_files = $this->questionpool_request->intArray(self::DELETE_FILES_TBL_POSTVAR);
+
             $res = $this->db->query(
                 "SELECT value1 FROM tst_solutions WHERE value2 = 'rid' AND " . $this->db->in(
                     'solution_id',
-                    $_POST[self::DELETE_FILES_TBL_POSTVAR],
+                    $delete_files,
                     false,
                     'integer'
                 )
@@ -696,7 +700,9 @@ class assFileUpload extends assQuestion implements ilObjQuestionScoringAdjustabl
             // hey: prevPassSolutions - readability spree - get a chance to understand the code
             if ($this->isFileDeletionSubmitAvailable()) {
                 // hey.
-                $userSolution = $this->deletePreviewFileUploads($previewSession->getUserId(), $userSolution, $_POST['deletefiles']);
+                $delete_files = $this->questionpool_request->intArray(self::DELETE_FILES_TBL_POSTVAR);
+
+                $userSolution = $this->deletePreviewFileUploads($previewSession->getUserId(), $userSolution, $delete_files);
             } else {
                 $this->tpl->setOnScreenMessage('info', $this->lng->txt('no_checkbox'), true);
             }
@@ -932,7 +938,7 @@ class assFileUpload extends assQuestion implements ilObjQuestionScoringAdjustabl
         );
     }
 
-    public function getCorrectSolutionForTextOutput(int $active_id, int $pass): array
+    public function getCorrectSolutionForTextOutput(int $active_id, int $pass): string
     {
         return '';
     }

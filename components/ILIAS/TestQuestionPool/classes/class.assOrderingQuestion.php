@@ -1025,14 +1025,6 @@ class assOrderingQuestion extends assQuestion implements ilObjQuestionScoringAdj
     }
 
     /**
-     * @return array
-     */
-    public function getSolutionPostSubmit(): array
-    {
-        return $this->fetchSolutionSubmit($_POST);
-    }
-
-    /**
      * @param $user_order
      * @param $nested_solution
      * @return int
@@ -1189,7 +1181,7 @@ class assOrderingQuestion extends assQuestion implements ilObjQuestionScoringAdj
                     }
                 }
             }
-        } elseif ($this->getOrderingType() == OQ_NESTED_TERMS || $this->getOrderingType() == OQ_NESTED_PICTURES) {
+        } elseif ($this->getOrderingType() == self::OQ_NESTED_TERMS || $this->getOrderingType() == self::OQ_NESTED_PICTURES) {
             $index = 0;
             foreach ($form_submission_data_structure['content'] as $randomId => $content) {
                 $indentation = $form_submission_data_structure['indentation'];

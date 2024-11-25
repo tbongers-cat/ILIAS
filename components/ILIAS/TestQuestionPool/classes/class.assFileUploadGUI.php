@@ -46,12 +46,12 @@ class assFileUploadGUI extends assQuestionGUI implements ilGuiQuestionScoringAdj
      * @param integer $id The database id of a single choice question object
      *
      */
-    public function __construct($id = -1)
+    public function __construct(int $id = -1)
     {
         parent::__construct();
 
         $this->object = new assFileUpload();
-        $this->setErrorMessage($this->lng->txt("msg_form_save_error"));
+        $this->setErrorMessage($this->lng->txt('msg_form_save_error'));
         if ($id >= 0) {
             $this->object->loadFromDb($id);
         }
@@ -62,22 +62,24 @@ class assFileUploadGUI extends assQuestionGUI implements ilGuiQuestionScoringAdj
      */
     protected function writePostData(bool $always = false): int
     {
-        $hasErrors = (!$always) ? $this->editQuestion(true) : false;
-        if (!$hasErrors) {
-            $this->writeQuestionGenericPostData();
-            $this->writeQuestionSpecificPostData(new ilPropertyFormGUI());
-            $this->saveTaxonomyAssignments();
-            return 0;
+        if (!$always && $this->editQuestion(true)) {
+            return 1;
         }
-        return 1;
+
+        $this->writeQuestionGenericPostData();
+        $this->writeQuestionSpecificPostData(new ilPropertyFormGUI());
+        $this->saveTaxonomyAssignments();
+        return 0;
     }
 
     public function writeQuestionSpecificPostData(ilPropertyFormGUI $form): void
     {
-        $this->object->setPoints((float) str_replace(',', '.', $_POST["points"]));
-        $this->object->setMaxSize($this->request->int('maxsize') !== 0 ? $this->request->int('maxsize') : null);
-        $this->object->setAllowedExtensions($_POST["allowedextensions"] ?? '');
-        $this->object->setCompletionBySubmission(isset($_POST['completion_by_submission']) && $_POST['completion_by_submission'] == 1);
+        $this->object->setPoints($this->request_data_collector->float('points'));
+        $this->object->setMaxSize($this->request_data_collector->int('maxsize') ?? null);
+
+        $this->object->setAllowedExtensions($this->request_data_collector->string('allowedextensions'));
+        $completion_by_submission = $this->request_data_collector->int('completion_by_submission');
+        $this->object->setCompletionBySubmission($completion_by_submission === 1);
     }
 
     public function editQuestion(

@@ -601,7 +601,7 @@ class assKprimChoice extends assQuestion implements ilObjQuestionScoringAdjustab
         return 0;
     }
 
-    private function removeAnswerImage($position): void
+    public function removeAnswerImage($position): void
     {
         $answer = $this->getAnswer($position);
 

@@ -20,7 +20,6 @@ declare(strict_types=1);
 
 use ILIAS\TestQuestionPool\Questions\QuestionLMExportable;
 use ILIAS\TestQuestionPool\Questions\QuestionAutosaveable;
-
 use ILIAS\Test\Logging\AdditionalInformationGenerator;
 
 /**
@@ -409,17 +408,13 @@ class assTextQuestion extends assQuestion implements ilObjQuestionScoringAdjusta
 
     protected function getSolutionSubmit(): string
     {
-        if (ilObjAdvancedEditing::_getRichTextEditor() === 'tinymce') {
-            $text = ilUtil::stripSlashes($_POST["TEXT"], false);
-        } else {
-            $text = htmlentities($_POST["TEXT"]);
-        }
+        $text = $this->questionpool_request->string('TEXT', '');
 
-        if (ilUtil::isHTML($text)) {
-            $text = $this->getHtmlUserSolutionPurifier()->purify($text);
-        }
+        $text = ilObjAdvancedEditing::_getRichTextEditor() === 'tinymce'
+            ? ilUtil::stripSlashes($text, false)
+            : htmlentities($text);
 
-        return $text;
+        return ilUtil::isHTML($text) ? $this->getHtmlUserSolutionPurifier()->purify($text) : $text;
     }
 
     public function saveAdditionalQuestionDataToDb()
@@ -735,7 +730,7 @@ class assTextQuestion extends assQuestion implements ilObjQuestionScoringAdjusta
 
     public function countWords($text): int
     {
-        if($text === '') {
+        if ($text === '') {
             return 0;
         }
         $text = str_replace('&nbsp;', ' ', $text);
@@ -809,7 +804,7 @@ class assTextQuestion extends assQuestion implements ilObjQuestionScoringAdjusta
 
     private function getScoringModeLangVar(string $scoring_mode): string
     {
-        switch($scoring_mode) {
+        switch ($scoring_mode) {
             case assTextQuestion::SCORING_MODE_KEYWORD_RELATION_NONE:
                 return 'essay_scoring_mode_without_keywords';
             case assTextQuestion::SCORING_MODE_KEYWORD_RELATION_ANY:
@@ -845,7 +840,7 @@ class assTextQuestion extends assQuestion implements ilObjQuestionScoringAdjusta
         return $solution_values[0]['value1'];
     }
 
-    public function getCorrectSolutionForTextOutput(int $active_id, int $pass): array
+    public function getCorrectSolutionForTextOutput(int $active_id, int $pass): array|string
     {
         switch ($this->getKeywordRelation()) {
             case self::SCORING_MODE_KEYWORD_RELATION_NONE:

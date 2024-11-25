@@ -186,7 +186,7 @@ class assOrderingHorizontal extends assQuestion implements ilObjQuestionScoringA
 
     protected function getSolutionSubmit(): string
     {
-        return $this->questionpool_request->retrieveStringValueFromPost('orderresult');
+        return $this->questionpool_request->string('orderresult');
     }
 
     public function saveWorkingData(

@@ -221,32 +221,12 @@ abstract class assQuestion implements Question
 
     protected function getQuestionAction(): string
     {
-        if (!isset($_POST['cmd']) || !isset($_POST['cmd'][$this->questionActionCmd])) {
-            return '';
-        }
-
-        if (!is_array($_POST['cmd'][$this->questionActionCmd]) || $_POST['cmd'][$this->questionActionCmd] === []) {
-            return '';
-        }
-
-        return key($_POST['cmd'][$this->questionActionCmd]);
+        return $this->questionpool_request->getCmdIndex($this->questionActionCmd);
     }
 
-    protected function isNonEmptyItemListPostSubmission(string $postSubmissionFieldname): bool
+    protected function isNonEmptyItemListPostSubmission(string $post_submission_field_name): bool
     {
-        if (!isset($_POST[$postSubmissionFieldname])) {
-            return false;
-        }
-
-        if (!is_array($_POST[$postSubmissionFieldname])) {
-            return false;
-        }
-
-        if (!count($_POST[$postSubmissionFieldname])) {
-            return false;
-        }
-
-        return true;
+        return !empty($this->questionpool_request->strArray($post_submission_field_name));
     }
 
     public function getCurrentUser(): ilObjUser
@@ -700,9 +680,9 @@ abstract class assQuestion implements Question
     }
 
     /**
-    * Returns the image path for web accessable images of a question.
-    * The image path is under the CLIENT_WEB_DIR in assessment/REFERENCE_ID_OF_QUESTION_POOL/ID_OF_QUESTION/images
-    */
+     * Returns the image path for web accessable images of a question.
+     * The image path is under the CLIENT_WEB_DIR in assessment/REFERENCE_ID_OF_QUESTION_POOL/ID_OF_QUESTION/images
+     */
     public function getImagePath($question_id = null, $object_id = null): string
     {
         if ($question_id === null) {
@@ -1160,11 +1140,11 @@ abstract class assQuestion implements Question
     }
 
     /**
-    * Creates a new question without an owner when a new question is created
-    * This assures that an ID is given to the question if a file upload or something else occurs
-    *
-    * @return integer ID of the new question
-    */
+     * Creates a new question without an owner when a new question is created
+     * This assures that an ID is given to the question if a file upload or something else occurs
+     *
+     * @return integer ID of the new question
+     */
     public function createNewQuestion(bool $a_create_page = true): int
     {
         $complete = '0';
@@ -1256,7 +1236,7 @@ abstract class assQuestion implements Question
             'complete' => ['integer', $this->isComplete()],
             "external_id" => ["text", $this->getExternalId()]
         ], [
-        "question_id" => ["integer", $this->getId()]
+            "question_id" => ["integer", $this->getId()]
         ]);
     }
 
@@ -1560,8 +1540,8 @@ abstract class assQuestion implements Question
     }
 
     /**
-    * Duplicates the files of a suggested solution if the question is duplicated
-    */
+     * Duplicates the files of a suggested solution if the question is duplicated
+     */
     protected function duplicateSuggestedSolutionFiles(int $parent_id, int $question_id): void
     {
         foreach ($this->suggested_solutions as $solution) {
@@ -1804,8 +1784,8 @@ abstract class assQuestion implements Question
     }
 
     /**
-    * Returns the maximum pass a users question solution
-    */
+     * Returns the maximum pass a users question solution
+     */
     public static function _getSolutionMaxPass(int $question_id, int $active_id): ?int
     {
         // the following code was the old solution which added the non answered
@@ -1904,15 +1884,15 @@ abstract class assQuestion implements Question
     }
 
     /**
-    * Sets the points, a learner has reached answering the question
-    * Additionally objective results are updated
-    *
-    * @param integer $user_id The database ID of the learner
-    * @param integer $test_id The database Id of the test containing the question
-    * @param integer $points The points the user has reached answering the question
-    * @return boolean true on success, otherwise false
-    * @access public
-    */
+     * Sets the points, a learner has reached answering the question
+     * Additionally objective results are updated
+     *
+     * @param integer $user_id The database ID of the learner
+     * @param integer $test_id The database Id of the test containing the question
+     * @param integer $points The points the user has reached answering the question
+     * @return boolean true on success, otherwise false
+     * @access public
+     */
     public static function _setReachedPoints(
         int $active_id,
         int $question_id,
@@ -2119,11 +2099,11 @@ abstract class assQuestion implements Question
     }
 
     /**
-    * Returns the user id and the test id for a given active id
-    *
-    * @param integer $active_id Active id for a test/user
-    * @return array Result array containing the user_id and test_id
-    */
+     * Returns the user id and the test id for a given active id
+     *
+     * @param integer $active_id Active id for a test/user
+     * @return array Result array containing the user_id and test_id
+     */
     public function getActiveUserData(int $active_id): array
     {
         $result = $this->db->queryF(
