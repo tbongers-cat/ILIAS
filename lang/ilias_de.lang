@@ -8210,6 +8210,8 @@ dateplaner#:#cal_booking_confirmation_subject#:#Termin „%s“ wurde gebucht
 dateplaner#:#cal_booking_confirmation_user#:#Dies ist eine Kopie der Mail an Benutzer:
 dateplaner#:#cal_booking_confirmed#:#Der Termin wurde erfolgreich gebucht.
 dateplaner#:#cal_booking_failed_info#:#Die Buchung konnte nicht vorgenommen werden, da der Termin ausgebucht ist.
+dateplaner#:#cal_booking_manager_confirmation_body#:#%s hat bei %s eine Sprechstunde gebucht.
+dateplaner#:#cal_booking_owner_confirmation_body#:#%s hat bei Ihnen eine Sprechstunde gebucht.
 dateplaner#:#cal_cache#:#Kalender-Cache
 dateplaner#:#cal_cache_disabled#:#Ausgeschaltet
 dateplaner#:#cal_cache_enabled#:#Eingeschaltet

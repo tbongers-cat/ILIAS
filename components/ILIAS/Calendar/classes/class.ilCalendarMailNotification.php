@@ -303,6 +303,7 @@ class ilCalendarMailNotification extends ilMailNotification
 
                 $comment = ilBookingEntry::lookupBookingMessage($entry->getEntryId(), $user_id);
                 if ($comment !== '') {
+                    $this->appendBody("\n\n");
                     $this->appendBody(
                         $this->getLanguageText('cal_ch_booking_your_comment') . ' "' .
                         $comment
@@ -329,17 +330,25 @@ class ilCalendarMailNotification extends ilMailNotification
                 );
                 $this->setBody(ilMail::getSalutation($user_id, $this->getLanguage()));
                 $this->appendBody("\n\n");
-                $this->appendBody(
-                    sprintf(
-                        $this->getLanguageText('cal_booking_confirmation_body'),
+                if ($user_id == $booking->getObjId()) {
+                    $message = sprintf(
+                        $this->getLanguageText('cal_booking_owner_confirmation_body'),
+                        ilObjUser::_lookupFullname($this->getBookerID())
+                    );
+                } else {
+                    $message = sprintf(
+                        $this->getLanguageText('cal_booking_manager_confirmation_body'),
+                        ilObjUser::_lookupFullname($this->getBookerID()),
                         ilObjUser::_lookupFullname($booking->getObjId())
-                    )
-                );
+                    );
+                }
+                $this->appendBody($message);
                 $this->appendBody("\n\n");
                 $this->appendAppointmentDetails();
 
                 $comment = ilBookingEntry::lookupBookingMessage($entry->getEntryId(), $this->getBookerID());
                 if ($comment !== '') {
+                    $this->appendBody("\n\n");
                     $this->appendBody(
                         $this->getLanguageText('cal_ch_booking_comment') . ' "' .
                         $comment
