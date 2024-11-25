@@ -92,11 +92,11 @@ class assMultipleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScorin
         }
 
         if ($checkonly) {
-            return $this->request->int('types') === 0;
+            return $this->request_data_collector->int('types') === 0;
         }
 
         if (empty($this->object->getLastChange())
-            && !$this->request->isset('types')) {
+            && !$this->request_data_collector->isset('types')) {
             // a new question is edited
             return $this->object->getMultilineAnswerSetting() === 0;
         }
@@ -123,7 +123,7 @@ class assMultipleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScorin
         $errors = false;
 
         if ($save) {
-            $form->getItemByPostVar('selection_limit')->setMaxValue(count($this->request->raw('choice')['answer'] ?? []));
+            $form->getItemByPostVar('selection_limit')->setMaxValue(count($this->request_data_collector->raw('choice')['answer'] ?? []));
 
             $form->setValuesByPost();
             $errors = !$form->checkInput();
@@ -155,15 +155,14 @@ class assMultipleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScorin
     {
         $this->setAdditionalContentEditingModeFromPost();
         $this->writePostData(true);
-        $position = key($this->request->raw('cmd')['removeimagechoice']);
-        $this->object->removeAnswerImage($position);
+        $this->object->removeAnswerImage($this->request_data_collector->getCmdIndex('removeimagechoice'));
         $this->editQuestion();
     }
 
     public function addchoice(): void
     {
         $this->writePostData(true);
-        $position = key($this->request->raw('cmd')['addchoice']);
+        $position = $this->request_data_collector->getCmdIndex('addchoice');
         $this->object->addAnswer("", 0, $position + 1);
         $this->editQuestion();
     }
@@ -171,8 +170,7 @@ class assMultipleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScorin
     public function removechoice(): void
     {
         $this->writePostData(true);
-        $position = key($this->request->raw('cmd')['removechoice']);
-        $this->object->deleteAnswer($position);
+        $this->object->deleteAnswer($this->request_data_collector->getCmdIndex('removechoice'));
         $this->editQuestion();
     }
 
@@ -633,26 +631,30 @@ class assMultipleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScorin
 
     public function writeQuestionSpecificPostData(ilPropertyFormGUI $form): void
     {
-        $this->object->setShuffle($_POST["shuffle"] ?? '0');
+        $this->object->setShuffle($this->request_data_collector->bool('shuffle'));
 
-        $selectionLimit = (int) $form->getItemByPostVar('selection_limit')->getValue();
+        $selectionLimit = (int) $form->getItemByPostVar('selection_limit')?->getValue();
         $this->object->setSelectionLimit($selectionLimit > 0 ? $selectionLimit : null);
 
-        if (isset($_POST['feedback_setting'])) {
-            $this->object->setSpecificFeedbackSetting($_POST['feedback_setting']);
+        $feedback_setting = $this->request_data_collector->int('feedback_setting');
+        if ($feedback_setting !== 0) {
+            $this->object->setSpecificFeedbackSetting($feedback_setting);
         }
 
-        $types = (int) ($_POST['types'] ?? '0');
+        $types = $this->request_data_collector->int('types');
         $this->object->setMultilineAnswerSetting($types);
-        if (isset($_POST['choice']['imagename']) && is_array($_POST['choice']['imagename']) && $types === 1) {
+
+        $choice = $this->request_data_collector->rawArray('choice');
+        if (isset($choice['imagename']) && is_array($choice['imagename']) && $types === 1) {
             $this->object->setIsSingleline(true);
             $this->tpl->setOnScreenMessage('info', $this->lng->txt('info_answer_type_change'), true);
         } else {
-            $this->object->setIsSingleline(($types === 0) ? true : false);
+            $this->object->setIsSingleline($types === 0);
         }
-        if (isset($_POST["thumb_size"])
-            && (int) $_POST["thumb_size"] !== $this->object->getThumbSize()) {
-            $this->object->setThumbSize((int) $_POST["thumb_size"]);
+
+        $thumb_size = $this->request_data_collector->int('thumb_size') ?? $this->object->getThumbSize();
+        if ($thumb_size !== $this->object->getThumbSize()) {
+            $this->object->setThumbSize($thumb_size);
             $this->rebuild_thumbnails = true;
         }
     }
@@ -661,7 +663,12 @@ class assMultipleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScorin
     {
         // Delete all existing answers and create new answers from the form data
         $this->object->flushAnswers();
-        $choice = $this->cleanupAnswerText($_POST['choice'], $this->object->isSingleline() === false);
+
+        $choice = $this->cleanupAnswerText(
+            $this->request_data_collector->rawArray('choice'),
+            !$this->object->isSingleline()
+        );
+
         if (!$this->object->isSingleline()) {
             foreach ($choice['answer'] as $index => $answer) {
                 $answertext = $answer;
@@ -685,12 +692,12 @@ class assMultipleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScorin
 
             if ($file_temp_name !== '') {
                 // check suffix
-                $parts = explode(".", $file_org_name);
+                $parts = explode('.', $file_org_name);
                 $suffix = strtolower(array_pop($parts));
-                if (in_array($suffix, ["jpg", "jpeg", "png", "gif"])) {
+                if (in_array($suffix, ['jpg', 'jpeg', 'png', 'gif'])) {
                     // upload image
                     $filename = $this->object->buildHashedImageFilename($file_org_name);
-                    if ($this->object->setImageFile($filename, $file_temp_name) == 0) {
+                    if ($this->object->setImageFile($filename, $file_temp_name) === 0) {
                         $picturefile = $filename;
                     }
                 }

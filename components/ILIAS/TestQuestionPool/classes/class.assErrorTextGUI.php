@@ -67,8 +67,8 @@ class assErrorTextGUI extends assQuestionGUI implements ilGuiQuestionScoringAdju
 
     public function writeAnswerSpecificPostData(ilPropertyFormGUI $form): void
     {
-        $errordata = $this->restructurePostDataForSaving($this->request->raw('errordata') ?? []);
-        $this->object->setErrorData($errordata);
+        $data = $this->restructurePostDataForSaving($this->request_data_collector->raw('errordata') ?? []);
+        $this->object->setErrorData($data);
         $this->object->removeErrorDataWithoutPosition();
     }
 
@@ -89,22 +89,22 @@ class assErrorTextGUI extends assQuestionGUI implements ilGuiQuestionScoringAdju
     public function writeQuestionSpecificPostData(ilPropertyFormGUI $form): void
     {
         $this->object->setQuestion(
-            $this->request->raw('question')
+            $this->request_data_collector->string('question')
         );
 
         $this->object->setErrorText(
-            $this->request->raw('errortext')
+            $this->request_data_collector->raw('errortext')
         );
 
         $this->object->parseErrorText();
 
         $this->object->setPointsWrong(
-            $this->request->float('points_wrong') ?? self::DEFAULT_POINTS_WRONG
+            $this->request_data_collector->float('points_wrong') ?? self::DEFAULT_POINTS_WRONG
         );
 
         if (!$this->object->getSelfAssessmentEditingMode()) {
             $this->object->setTextSize(
-                $this->request->float('textsize')
+                $this->request_data_collector->float('textsize')
             );
         }
     }
@@ -514,7 +514,7 @@ class assErrorTextGUI extends assQuestionGUI implements ilGuiQuestionScoringAdju
     {
         $existing_errordata = $this->object->getErrorData();
         $this->object->flushErrorData();
-        $new_errordata = $this->request->raw('errordata');
+        $new_errordata = $this->request_data_collector->raw('errordata');
         $errordata = [];
         foreach ($new_errordata['points'] as $index => $points) {
             $errordata[$index] = $existing_errordata[$index]->withPoints(

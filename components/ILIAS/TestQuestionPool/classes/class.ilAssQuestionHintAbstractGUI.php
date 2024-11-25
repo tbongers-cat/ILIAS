@@ -32,7 +32,7 @@ use ILIAS\TestQuestionPool\RequestDataCollector;
  */
 abstract class ilAssQuestionHintAbstractGUI
 {
-    protected RequestDataCollector $request;
+    protected RequestDataCollector $request_data_collector;
     protected ?assQuestionGUI $question_gui = null;
     protected ?assQuestion $question_obj = null;
     protected ilTabsGUI $tabs;
@@ -53,7 +53,7 @@ abstract class ilAssQuestionHintAbstractGUI
         $this->ctrl = $DIC['ilCtrl'];
 
         $local_dic = QuestionPoolDIC::dic();
-        $this->request = $local_dic['request_data_collector'];
+        $this->request_data_collector = $local_dic['request_data_collector'];
 
         $this->question_gui = $question_gui;
         $this->question_obj = $question_gui->getObject();

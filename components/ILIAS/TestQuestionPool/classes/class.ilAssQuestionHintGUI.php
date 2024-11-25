@@ -78,13 +78,13 @@ class ilAssQuestionHintGUI extends ilAssQuestionHintAbstractGUI
     {
         if ($form instanceof ilPropertyFormGUI) {
             $form->setValuesByPost();
-        } elseif ($this->request->isset('hint_id') && (int) $this->request->raw('hint_id')) {
+        } elseif ($this->request_data_collector->isset('hint_id') && (int) $this->request_data_collector->raw('hint_id')) {
             $questionHint = new ilAssQuestionHint();
 
-            if (!$questionHint->load((int) $this->request->raw('hint_id'))) {
+            if (!$questionHint->load((int) $this->request_data_collector->raw('hint_id'))) {
                 $this->main_tpl->setOnScreenMessage(
                     'failure',
-                    'invalid hint id given: ' . $this->request->string('hint_id'),
+                    'invalid hint id given: ' . $this->request_data_collector->string('hint_id'),
                     true
                 );
                 $this->ctrl->redirectByClass(ilAssQuestionHintsGUI::class, ilAssQuestionHintsGUI::CMD_SHOW_LIST);
@@ -101,8 +101,8 @@ class ilAssQuestionHintGUI extends ilAssQuestionHintAbstractGUI
     private function saveFormCmd(): void
     {
         $questionHint = new ilAssQuestionHint();
-        if ($this->request->isset('hint_id')) {
-            $questionHint->load((int) $this->request->int('hint_id'));
+        if ($this->request_data_collector->isset('hint_id')) {
+            $questionHint->load((int) $this->request_data_collector->int('hint_id'));
 
             $hintJustCreated = false;
             $form = $this->buildForm($questionHint);

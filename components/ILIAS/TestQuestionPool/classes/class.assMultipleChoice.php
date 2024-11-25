@@ -22,6 +22,7 @@ use ILIAS\TestQuestionPool\Questions\QuestionLMExportable;
 use ILIAS\TestQuestionPool\Questions\QuestionAutosaveable;
 use ILIAS\TestQuestionPool\ManipulateImagesInChoiceQuestionsTrait;
 use ILIAS\Test\Logging\AdditionalInformationGenerator;
+use ILIAS\TestQuestionPool\RequestDataCollector;
 
 /**
  * Class for multiple choice tests.
@@ -385,13 +386,10 @@ class assMultipleChoice extends assQuestion implements ilObjQuestionScoringAdjus
         return true;
     }
 
-    protected function isForcedEmptySolution($solutionSubmit): bool
+    protected function isForcedEmptySolution(array $solutionSubmit): bool
     {
-        if (!count($solutionSubmit) && !empty($_POST['tst_force_form_diff_input'])) {
-            return true;
-        }
-
-        return false;
+        $tst_force_form_diff_input = $this->questionpool_request->strArray('tst_force_form_diff_input');
+        return !count($solutionSubmit) && !empty($tst_force_form_diff_input);
     }
 
     public function saveWorkingData(
@@ -399,9 +397,7 @@ class assMultipleChoice extends assQuestion implements ilObjQuestionScoringAdjus
         ?int $pass = null,
         bool $authorized = true
     ): bool {
-        if ($pass === null) {
-            $pass = ilObjTest::_getPass($active_id);
-        }
+        $pass = $pass ?? ilObjTest::_getPass($active_id);
 
         $answer = $this->getSolutionSubmit();
         $this->getProcessLocker()->executeUserSolutionUpdateLockOperation(

@@ -18,6 +18,10 @@
 
 namespace ILIAS\TestQuestionPool;
 
+use Closure;
+use GuzzleHttp\Psr7\UploadedFile;
+use ILIAS\FileUpload\DTO\UploadResult;
+use ILIAS\Refinery\Transformation;
 use ILIAS\Repository\BaseGUIRequest;
 use ILIAS\Refinery\ConstraintViolationException;
 use ILIAS\HTTP\Services;
@@ -28,27 +32,21 @@ class RequestDataCollector
 {
     use BaseGUIRequest;
 
-    protected Services $http;
-    protected FileUpload $upload;
-
     public function __construct(
         Services $http,
         Factory $refinery,
-        FileUpload $upload
+        protected readonly FileUpload $upload
     ) {
-        $this->initRequest(
-            $http,
-            $refinery
-        );
-        $this->upload = $upload;
+        $this->initRequest($http, $refinery);
     }
 
     /**
-     * @return \ILIAS\FileUpload\DTO\UploadResult[]
+     * @return array<UploadResult>
      */
     public function getProcessedUploads(): array
     {
         $uploads = [];
+
         if ($this->upload->hasUploads()) {
             if (!$this->upload->hasBeenProcessed()) {
                 $this->upload->process();
@@ -60,7 +58,7 @@ class RequestDataCollector
     }
 
     /**
-     * @param string[] $http_names An array of keys used as structure for the HTTP name (e.g. ['terms', 'image'] for $_FILES['terms']['image'])
+     * @param array<string> $http_names An array of keys used as structure for the HTTP name (e.g. ['terms', 'image'] for $_FILES['terms']['image'])
      * @param int $index
      * @return string|null
      */
@@ -76,9 +74,9 @@ class RequestDataCollector
             $uploaded_files = $uploaded_files[$current_key];
 
             if (isset($uploaded_files[$index]) && $http_names === []) {
-                /** @var \GuzzleHttp\Psr7\UploadedFile $file */
+                /** @var UploadedFile $file */
                 $file = $uploaded_files[$index];
-                $c = \Closure::bind(static function (\GuzzleHttp\Psr7\UploadedFile $file): ?string {
+                $c = Closure::bind(static function (UploadedFile $file): ?string {
                     return $file->file ?? null;
                 }, null, $file);
 
@@ -89,7 +87,7 @@ class RequestDataCollector
         return null;
     }
 
-    public function upload(): \ILIAS\FileUpload\FileUpload
+    public function upload(): FileUpload
     {
         return $this->upload;
     }
@@ -98,6 +96,7 @@ class RequestDataCollector
     {
         return $this->raw($key) !== null;
     }
+
     public function hasRefId(): int
     {
         return $this->raw('ref_id') !== null;
@@ -105,7 +104,7 @@ class RequestDataCollector
 
     public function getRefId(): int
     {
-        return $this->int("ref_id");
+        return $this->int('ref_id');
     }
 
     public function hasQuestionId(): bool
@@ -118,26 +117,26 @@ class RequestDataCollector
         return $this->int('q_id');
     }
 
-    /** @return string[] */
+    /**
+     * @return array<string>
+     */
     public function getIds(): array
     {
-        return $this->strArray("id");
+        return $this->strArray('id');
     }
 
     /**
      * @return mixed|null
      */
-    public function raw(string $key)
+    public function raw(string $key): mixed
     {
-        $no_transform = $this->refinery->identity();
-        return $this->get($key, $no_transform);
+        return $this->get($key, $this->refinery->identity());
     }
 
     public function float(string $key): float
     {
-        $t = $this->refinery->kindlyTo()->float();
         try {
-            return $this->get($key, $t) ?? 0.0;
+            return $this->get($key, $this->refinery->kindlyTo()->float()) ?? 0.0;
         } catch (ConstraintViolationException $e) {
             return 0.0;
         }
@@ -145,11 +144,15 @@ class RequestDataCollector
 
     public function string(string $key): string
     {
-        $t = $this->refinery->kindlyTo()->string();
-        return $this->get($key, $t) ?? '';
+        return $this->get($key, $this->refinery->kindlyTo()->string()) ?? '';
     }
 
-    public function getParsedBody()
+    public function bool(string $key): bool
+    {
+        return $this->get($key, $this->refinery->kindlyTo()->bool());
+    }
+
+    public function getParsedBody(): object|array|null
     {
         return $this->http->request()->getParsedBody();
     }
@@ -159,7 +162,7 @@ class RequestDataCollector
      */
     public function getUnitIds(): array
     {
-        return $this->intArray("unit_ids");
+        return $this->intArray('unit_ids');
     }
 
     /**
@@ -167,7 +170,7 @@ class RequestDataCollector
      */
     public function getUnitCategoryIds(): array
     {
-        return $this->intArray("category_ids");
+        return $this->intArray('category_ids');
     }
 
     public function getMatchingPairs(): array
@@ -189,114 +192,63 @@ class RequestDataCollector
                 $this->refinery->always([])
             ])
         );
-        return array_map(
-            fn(string $v): array => json_decode($v),
-            $this->questionpool_request->retrieveArrayOfStringsFromPost('matching')
-        );
     }
 
-    /*"
-     * @return array<int, string>
+    public function getPostKeys(): array
+    {
+        return $this->http->wrapper()->post()->keys();
+    }
+
+    public function getCmdIndex(string $key): int|string|null
+    {
+        $cmd = $this->rawArray('cmd');
+        return key($cmd[$key] ?? []);
+    }
+
+    /**
+     * @return array<string|array>
      */
-    public function retrieveArrayOfStringsFromPost(string $key): ?array
+    public function strArray(string $key, int $depth = 1): array
     {
-        $p = $this->http->wrapper()->post();
-        $r = $this->refinery;
-        if (!$p->has($key)) {
-            return null;
-        }
-
-        return $p->retrieve(
-            $key,
-            $r->byTrying([
-                $r->container()->mapValues(
-                    $r->in()->series(
-                        [
-                            $r->kindlyTo()->string(),
-                            $r->custom()->transformation(
-                                fn($v) => trim($v)
-                            )
-                        ]
-                    )
-                ),
-                $r->always(null)
-            ])
-        );
+        return $this->retrieveArray($key, $depth, $this->refinery->kindlyTo()->string());
     }
 
-    /*"
-     * @return array<int, string>
+    /**
+     * @return array<float|array>
      */
-    public function retrieveArrayOfIntsFromPost(string $key): ?array
+    public function floatArray(string $key, int $depth = 1): array
     {
-        $p = $this->http->wrapper()->post();
-        $r = $this->refinery;
-        if (!$p->has($key)) {
-            return null;
-        }
-
-        return $p->retrieve(
-            $key,
-            $r->byTrying([
-                $r->container()->mapValues(
-                    $r->kindlyTo()->int()
-                ),
-                $r->always(null)
-            ])
-        );
+        return $this->retrieveArray($key, $depth, $this->refinery->kindlyTo()->float());
     }
 
-    public function retrieveStringValueFromPost(string $key): ?string
+    /**
+     * @return array<int|array>
+     */
+    public function intArray(string $key, int $depth = 1): array
     {
-        $p = $this->http->wrapper()->post();
-        $r = $this->refinery;
-        if (!$p->has($key)) {
-            return null;
-        }
-
-        return $p->retrieve(
-            $key,
-            $r->in()->series(
-                [
-                    $r->kindlyTo()->string(),
-                    $r->custom()->transformation(
-                        fn($v) => trim($v)
-                    )
-                ]
-            )
-        );
+        return $this->retrieveArray($key, $depth, $this->refinery->kindlyTo()->int());
     }
 
-    public function retrieveIntValueFromPost(string $key): ?int
+    /**
+     * @return array<mixed|array>
+     */
+    public function rawArray(string $key): array
     {
-        $p = $this->http->wrapper()->post();
-        $r = $this->refinery;
-        if (!$p->has($key)) {
-            return null;
-        }
-
-        return $p->retrieve(
-            $key,
-            $r->byTrying([
-                $r->kindlyTo()->int(),
-                $r->always(null)
-            ])
-        );
+        return $this->retrieveArray($key, 1, $this->refinery->identity());
     }
 
-    public function retrieveFloatValueFromPost(string $key): ?float
+    private function retrieveArray(string $key, int $depth, Transformation $transformation): array
     {
-        $p = $this->http->wrapper()->post();
-        $r = $this->refinery;
-        if (!$p->has($key)) {
-            return null;
+        $chain = $this->refinery->kindlyTo()->listOf($transformation);
+        for ($i = 1; $i < $depth; $i++) {
+            $chain = $this->refinery->kindlyTo()->listOf($chain);
         }
 
-        return $p->retrieve(
+        return $this->http->wrapper()->post()->retrieve(
             $key,
-            $r->byTrying([
-                $r->kindlyTo()->float(),
-                $r->always(null)
+            $this->refinery->byTrying([
+                $chain,
+                $this->refinery->always([])
             ])
         );
     }

@@ -521,16 +521,16 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
     {
         $this->setAdditionalContentEditingModeFromPost();
         ilSession::set('subquestion_index', 0);
-        if ($_POST['cmd']['addSuggestedSolution']) {
-            if ($this->writePostData()) {
-                $this->tpl->setOnScreenMessage('info', $this->getErrorMessage());
-                $this->editQuestion();
-                return;
-            }
+        $cmd = $this->request_data_collector->rawArray('cmd');
+
+        if ($cmd['addSuggestedSolution'] && $this->writePostData()) {
+            $this->tpl->setOnScreenMessage('info', $this->getErrorMessage());
+            $this->editQuestion();
+            return;
         }
         $this->object->saveToDb();
-        $this->ctrl->setParameter($this, "q_id", $this->object->getId());
-        $this->tpl->setVariable("HEADER", $this->object->getTitle());
+        $this->ctrl->setParameter($this, 'q_id', $this->object->getId());
+        $this->tpl->setVariable('HEADER', $this->object->getTitle());
         $this->getQuestionTemplate();
     }
 
@@ -541,10 +541,10 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
 
     public function writeQuestionSpecificPostData(ilPropertyFormGUI $form): void
     {
-        $this->object->setWordCounterEnabled(isset($_POST['wordcounter']) && $_POST['wordcounter']);
-        $this->object->setMaxNumOfChars((int) ($_POST["maxchars"] ?? 0));
-        $this->object->setTextRating($_POST["text_rating"]);
-        $this->object->setKeywordRelation($_POST['scoring_mode']);
+        $this->object->setWordCounterEnabled($this->request_data_collector->bool('wordcounter') ?? false);
+        $this->object->setMaxNumOfChars($this->request_data_collector->int('maxchars'));
+        $this->object->setTextRating($this->request_data_collector->string('text_rating'));
+        $this->object->setKeywordRelation($this->request_data_collector->string('scoring_mode'));
     }
 
     public function writeAnswerSpecificPostData(ilPropertyFormGUI $form): void
@@ -553,19 +553,19 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         switch ($this->object->getKeywordRelation()) {
             case assTextQuestion::SCORING_MODE_KEYWORD_RELATION_NONE:
                 $this->object->setAnswers([]);
-                $points = str_replace(',', '.', $this->request->raw('non_keyword_points') ?? '');
+                $points = str_replace(',', '.', $this->request_data_collector->string('non_keyword_points'));
                 break;
             case assTextQuestion::SCORING_MODE_KEYWORD_RELATION_ANY:
-                $this->object->setAnswers($this->request->raw('any_keyword'));
+                $this->object->setAnswers($this->request_data_collector->raw('any_keyword'));
                 $points = $this->object->getMaximumPoints();
                 break;
             case assTextQuestion::SCORING_MODE_KEYWORD_RELATION_ALL:
-                $this->object->setAnswers($this->request->raw('all_keyword'));
-                $points = str_replace(',', '.', $this->request->raw('all_keyword_points') ?? '');
+                $this->object->setAnswers($this->request_data_collector->raw('all_keyword'));
+                $points = str_replace(',', '.', $this->request_data_collector->string('all_keyword_points'));
                 break;
             case assTextQuestion::SCORING_MODE_KEYWORD_RELATION_ONE:
-                $this->object->setAnswers($this->request->raw('one_keyword'));
-                $points = (float) str_replace(',', '.', $this->request->raw('one_keyword_points') ?? '');
+                $this->object->setAnswers($this->request_data_collector->raw('one_keyword'));
+                $points = (float) str_replace(',', '.', $this->request_data_collector->string('one_keyword_points'));
                 break;
         }
         $this->object->setPoints((float) $points);

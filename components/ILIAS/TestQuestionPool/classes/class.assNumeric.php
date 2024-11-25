@@ -19,7 +19,6 @@
 declare(strict_types=1);
 
 use ILIAS\TestQuestionPool\Questions\QuestionAutosaveable;
-
 use ILIAS\Test\Logging\AdditionalInformationGenerator;
 
 /**
@@ -212,7 +211,7 @@ class assNumeric extends assQuestion implements ilObjQuestionScoringAdjustable, 
 
     protected function getSolutionSubmit(): ?float
     {
-        return $this->questionpool_request->retrieveFloatValueFromPost('numeric_result');
+        return $this->questionpool_request->float('numeric_result') ?? null;
     }
 
     public function isValidSolutionSubmit($numeric_solution): bool

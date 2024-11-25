@@ -19,6 +19,7 @@
 declare(strict_types=1);
 
 use ILIAS\HTTP\Services as HTTPServices;
+use ILIAS\TestQuestionPool\QuestionPoolDIC;
 use ILIAS\UI\Factory as UIFactory;
 use ILIAS\Refinery\Factory as Refinery;
 use ILIAS\Refinery\Random\Group as RandomGroup;
@@ -26,6 +27,7 @@ use ILIAS\Refinery\Random\Seed\RandomSeed;
 use ILIAS\Refinery\Random\Seed\GivenSeed;
 use ILIAS\Refinery\Transformation;
 use ILIAS\GlobalScreen\Services as GlobalScreen;
+use ILIAS\TestQuestionPool\RequestDataCollector;
 
 /**
  * @author		Björn Heyser <bheyser@databay.de>
@@ -53,6 +55,8 @@ class ilAssQuestionPreviewGUI
     public const TAB_ID_QUESTION = 'question';
 
     public const FEEDBACK_FOCUS_ANCHOR = 'focus';
+
+    protected readonly RequestDataCollector $request_data_collector;
 
     private ?assQuestionGUI $question_gui = null;
     private ?assQuestion $question_obj = null;
@@ -89,6 +93,9 @@ class ilAssQuestionPreviewGUI
     ) {
         $this->tpl->addCss(ilObjStyleSheet::getContentStylePath(0));
         $this->tpl->addCss(ilObjStyleSheet::getSyntaxStylePath());
+
+        $local_dic = QuestionPoolDIC::dic();
+        $this->request_data_collector = $local_dic['request_data_collector'];
     }
 
     public function setInfoMessage(string $message): void
@@ -227,15 +234,8 @@ class ilAssQuestionPreviewGUI
 
     protected function isCommentingRequired(): bool
     {
-        $ref_id = $this->http->wrapper()->query()->retrieve(
-            'ref_id',
-            $this->refinery->byTrying([
-                $this->refinery->kindlyTo()->int(),
-                $this->refinery->always(0)
-            ])
-        );
-
-        return !$this->preview_settings->isTestRefId() && $this->rbac_system->checkAccess('read', (int) $ref_id);
+        return !$this->preview_settings->isTestRefId() &&
+            $this->rbac_system->checkAccess('read', $this->request_data_collector->getRefId());
     }
 
     public function showCmd(string $commands_panel_html = ''): void

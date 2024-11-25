@@ -99,17 +99,17 @@ class ilAssQuestionHintRequestGUI extends ilAssQuestionHintAbstractGUI
 
     private function showHintCmd(): void
     {
-        if (!$this->request->isset('hintId') || $this->request->int('hintId') === 0) {
+        if (!$this->request_data_collector->isset('hintId') || $this->request_data_collector->int('hintId') === 0) {
             throw new ilTestException('no hint id given');
         }
 
-        $is_requested = $this->question_hint_tracking->isRequested($this->request->int('hintId'));
+        $is_requested = $this->question_hint_tracking->isRequested($this->request_data_collector->int('hintId'));
 
         if (!$is_requested) {
             throw new ilTestException('hint with given id is not yet requested for given testactive and testpass');
         }
 
-        $question_hint = ilAssQuestionHint::getInstanceById((int) $this->request->raw('hintId'));
+        $question_hint = ilAssQuestionHint::getInstanceById((int) $this->request_data_collector->raw('hintId'));
 
         if ($this->global_screen->tool()->context()->current()->getAdditionalData()
             ->exists(ilTestPlayerLayoutProvider::TEST_PLAYER_VIEW_TITLE)) {
@@ -118,7 +118,7 @@ class ilAssQuestionHintRequestGUI extends ilAssQuestionHintAbstractGUI
                 $this->parent_gui->getObject()->getTitle() . ' - ' . sprintf(
                     $this->lng->txt('tst_question_hints_form_header_edit'),
                     $question_hint->getIndex(),
-                    $this->request->int('sequence') ?? 0
+                    $this->request_data_collector->int('sequence') ?? 0
                 )
             );
         }
@@ -197,7 +197,7 @@ class ilAssQuestionHintRequestGUI extends ilAssQuestionHintAbstractGUI
 
     private function performRequestCmd(): void
     {
-        if (!$this->request->isset('hintId') || !(int) $this->request->raw('hintId')) {
+        if (!$this->request_data_collector->isset('hintId') || !(int) $this->request_data_collector->raw('hintId')) {
             throw new ilTestException('no hint id given');
         }
 
@@ -207,7 +207,7 @@ class ilAssQuestionHintRequestGUI extends ilAssQuestionHintAbstractGUI
             $this->ctrl->redirect($this, self::CMD_BACK_TO_QUESTION);
         }
 
-        if ($next_requestable_hint->getId() != (int) $this->request->raw('hintId')) {
+        if ($next_requestable_hint->getId() != (int) $this->request_data_collector->raw('hintId')) {
             throw new ilTestException('given hint id does not relate to the next requestable hint');
         }
 

@@ -16,6 +16,9 @@
  *
  *********************************************************************/
 
+use ILIAS\TestQuestionPool\QuestionPoolDIC;
+use ILIAS\TestQuestionPool\RequestDataCollector;
+
 /**
  * @author		Björn Heyser <bheyser@databay.de>
  * @version		$Id$
@@ -24,55 +27,47 @@
  */
 class ilAssQuestionSkillAssignmentsTableGUI extends ilTable2GUI
 {
-    /**
-     * @var ilAssQuestionSkillAssignmentList
-     */
-    private $skillQuestionAssignmentList;
+    private ilAssQuestionSkillAssignmentList $skillQuestionAssignmentList;
+    private RequestDataCollector $request_data_collector;
 
-    /**
-     * @var bool
-     */
-    private $loadSkillPointsFromRequest = false;
-
-    /**
-     * @var bool
-     */
-    private $manipulationsEnabled;
+    private bool $loadSkillPointsFromRequest = false;
+    private bool $manipulationsEnabled;
 
     public function setSkillQuestionAssignmentList(ilAssQuestionSkillAssignmentList $assignmentList): void
     {
         $this->skillQuestionAssignmentList = $assignmentList;
     }
 
-    /**
-     * @return boolean
-     */
     public function areManipulationsEnabled(): bool
     {
         return $this->manipulationsEnabled;
     }
 
-    /**
-     * @param boolean $manipulationsEnabled
-     */
-    public function setManipulationsEnabled($manipulationsEnabled): void
+    public function setManipulationsEnabled(bool $manipulationsEnabled): void
     {
         $this->manipulationsEnabled = $manipulationsEnabled;
     }
 
-    public function __construct($parentOBJ, $parentCmd, ilCtrl $ctrl, ilLanguage $lng)
-    {
+    public function __construct(
+        $parent_obj,
+        $parent_cmd,
+        ilCtrl $ctrl,
+        ilLanguage $lng
+    ) {
         $this->lng = $lng;
         $this->ctrl = $ctrl;
+
+        $local_dic = QuestionPoolDIC::dic();
+        $this->request_data_collector = $local_dic['request_data_collector'];
 
         $this->setId('assQstSkl');
         $this->setPrefix('assQstSkl');
 
-        parent::__construct($parentOBJ, $parentCmd);
+        parent::__construct($parent_obj, $parent_cmd);
 
         $this->setStyle('table', 'fullwidth');
 
-        $this->setRowTemplate("tpl.tst_skl_qst_assignment_row.html", "components/ILIAS/Test");
+        $this->setRowTemplate('tpl.tst_skl_qst_assignment_row.html', 'components/ILIAS/Test');
 
         $this->enable('header');
         $this->disable('sort');
@@ -93,10 +88,7 @@ class ilAssQuestionSkillAssignmentsTableGUI extends ilTable2GUI
         }
     }
 
-    /**
-     * @param bool $loadSkillPointsFromRequest
-     */
-    public function loadSkillPointsFromRequest($loadSkillPointsFromRequest): void
+    public function loadSkillPointsFromRequest(bool $loadSkillPointsFromRequest): void
     {
         $this->loadSkillPointsFromRequest = $loadSkillPointsFromRequest;
     }
@@ -124,10 +116,9 @@ class ilAssQuestionSkillAssignmentsTableGUI extends ilTable2GUI
 
         $this->tpl->setCurrentBlock('tbl_content');
 
-        for ($i = 0, $numAssigns = count($assignments); $i < $numAssigns; $i++) {
-            /* @var ilAssQuestionSkillAssignment $assignment */
-            $assignment = $assignments[$i];
-
+        $num_assigns = count($assignments);
+        /* @var ilAssQuestionSkillAssignment $assignment */
+        foreach ($assignments as $key => $assignment) {
             $this->tpl->setCurrentBlock('actions_col');
             $this->tpl->setVariable('ACTION', $this->getCompetenceAssignPropertiesFormLink($assignment));
             $this->tpl->parseCurrentBlock();
@@ -144,11 +135,11 @@ class ilAssQuestionSkillAssignmentsTableGUI extends ilTable2GUI
                 $this->tpl->setVariable('SKILL_POINTS', $assignment->getMaxSkillPoints());
             }
 
-            if ($this->areManipulationsEnabled() || ($i + 1) < $numAssigns) {
+            if (($key + 1) < $num_assigns || $this->areManipulationsEnabled()) {
                 $this->tpl->parseCurrentBlock();
 
                 $this->tpl->setCurrentBlock('tbl_content');
-                $this->tpl->setVariable("CSS_ROW", $this->css_row);
+                $this->tpl->setVariable('CSS_ROW', $this->css_row);
             }
         }
 
@@ -158,7 +149,10 @@ class ilAssQuestionSkillAssignmentsTableGUI extends ilTable2GUI
             $this->tpl->parseCurrentBlock();
 
             $this->tpl->setCurrentBlock('tbl_content');
-        } elseif (!$numAssigns) {
+            return;
+        }
+
+        if (!$num_assigns) {
             $this->tpl->setCurrentBlock('actions_col');
             $this->tpl->setVariable('ACTION', '&nbsp;');
             $this->tpl->parseCurrentBlock();
@@ -167,19 +161,15 @@ class ilAssQuestionSkillAssignmentsTableGUI extends ilTable2GUI
         }
     }
 
-    private function getRowspan($assignments): int
+    private function getRowspan(array $assignments): int
     {
         $cnt = count($assignments);
 
-        if ($cnt == 0) {
+        if ($cnt === 0) {
             return 1;
         }
 
-        if ($this->areManipulationsEnabled()) {
-            $cnt++;
-        }
-
-        return $cnt;
+        return $this->areManipulationsEnabled() ? $cnt + 1 : $cnt;
     }
 
     private function getManageCompetenceAssignsActionLink(): string
@@ -189,9 +179,7 @@ class ilAssQuestionSkillAssignmentsTableGUI extends ilTable2GUI
             ilAssQuestionSkillAssignmentsGUI::CMD_SHOW_SKILL_SELECT
         );
 
-        $label = $this->lng->txt('tst_manage_competence_assigns');
-
-        return $this->buildActionLink($href, $label);
+        return $this->buildActionLink($href, $this->lng->txt('tst_manage_competence_assigns'));
     }
 
     private function getCompetenceAssignPropertiesFormLink(ilAssQuestionSkillAssignment $assignment): string
@@ -204,19 +192,17 @@ class ilAssQuestionSkillAssignmentsTableGUI extends ilTable2GUI
             ilAssQuestionSkillAssignmentsGUI::CMD_SHOW_SKILL_QUEST_ASSIGN_PROPERTIES_FORM
         );
 
-        if ($this->areManipulationsEnabled()) {
-            $label = $this->lng->txt('tst_edit_competence_assign');
-        } else {
-            $label = $this->lng->txt('tst_view_competence_assign');
-        }
-
         $this->ctrl->setParameter($this->parent_obj, 'skill_base_id', null);
         $this->ctrl->setParameter($this->parent_obj, 'skill_tref_id', null);
 
-        return $this->buildActionLink($href, $label);
+        return $this->buildActionLink($href, $this->lng->txt(
+            $this->areManipulationsEnabled()
+                ? 'tst_edit_competence_assign'
+                : 'tst_view_competence_assign'
+        ));
     }
 
-    private function buildActionLink($href, $label): string
+    private function buildActionLink(string $href, string $label): string
     {
         return "<a href=\"{$href}\" title=\"{$label}\">{$label}</a>";
     }
@@ -248,29 +234,31 @@ class ilAssQuestionSkillAssignmentsTableGUI extends ilTable2GUI
             ilAssQuestionSkillAssignmentsGUI::CMD_SHOW_SKILL_SELECT
         );
 
-        $label = $this->lng->txt('tst_assign_competence');
-        $actions[] = $this->buildActionLink($href, $label);
+        $actions[] = $this->buildActionLink($href, $this->lng->txt('tst_assign_competence'));
 
         return implode('<br />', $actions);
     }
 
     private function getEvalModeLabel(ilAssQuestionSkillAssignment $assignment): string
     {
-        if ($assignment->hasEvalModeBySolution()) {
-            return $this->lng->txt('qpl_skill_point_eval_mode_solution_compare');
-        }
-
-        return $this->lng->txt('qpl_skill_point_eval_mode_quest_result');
+        return $this->lng->txt(
+            $assignment->hasEvalModeBySolution()
+                ? 'qpl_skill_point_eval_mode_solution_compare'
+                : 'qpl_skill_point_eval_mode_quest_result'
+        );
     }
 
     private function buildSkillPointsInput(ilAssQuestionSkillAssignment $assignment): string
     {
         $assignmentKey = implode(':', [
-            $assignment->getSkillBaseId(), $assignment->getSkillTrefId(), $assignment->getQuestionId()
+            $assignment->getSkillBaseId(),
+            $assignment->getSkillTrefId(),
+            $assignment->getQuestionId()
         ]);
 
         if ($this->loadSkillPointsFromRequest) {
-            $points = isset($_POST['skill_points'][$assignmentKey]) ? ilUtil::stripSlashes($_POST['skill_points'][$assignmentKey]) : '';
+            $skill_points = $this->request_data_collector->strArray('skill_points', 2);
+            $points = ilUtil::stripSlashes($skill_points[$assignmentKey] ?? '');
         } else {
             $points = $assignment->getSkillPoints();
         }

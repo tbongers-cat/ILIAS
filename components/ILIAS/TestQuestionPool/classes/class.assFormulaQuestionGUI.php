@@ -63,7 +63,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
     public function suggestRange(): void
     {
         $this->setAdditionalContentEditingModeFromPost();
-        $suggest_range_for_result = $this->request->string('suggest_range_for');
+        $suggest_range_for_result = $this->request_data_collector->string('suggest_range_for');
         if ($this->writePostData()) {
             $this->tpl->setOnScreenMessage('info', $this->getErrorMessage());
         }
@@ -79,16 +79,16 @@ class assFormulaQuestionGUI extends assQuestionGUI
         $hasErrors = (!$always) ? $this->editQuestion(true) : false;
         $checked = true;
         if (!$hasErrors) {
-            $this->object->setTitle($this->request->string('title'));
-            $this->object->setAuthor($this->request->string('author'));
-            $this->object->setComment($this->request->string('comment'));
-            $this->object->setQuestion($this->request->string('question'));
+            $this->object->setTitle($this->request_data_collector->string('title'));
+            $this->object->setAuthor($this->request_data_collector->string('author'));
+            $this->object->setComment($this->request_data_collector->string('comment'));
+            $this->object->setQuestion($this->request_data_collector->string('question'));
 
             $this->object->parseQuestionText();
             $found_vars = [];
             $found_results = [];
 
-            foreach ($this->request->getParsedBody() as $key => $value) {
+            foreach ($this->request_data_collector->getParsedBody() as $key => $value) {
                 if (preg_match("/^unit_(\\\$v\d+)$/", $key, $matches)) {
                     array_push($found_vars, $matches[1]);
                 }
@@ -98,7 +98,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
             }
 
             try {
-                $lifecycle = ilAssQuestionLifecycle::getInstance($_POST['lifecycle']);
+                $lifecycle = ilAssQuestionLifecycle::getInstance($this->request_data_collector->string('lifecycle'));
                 $this->object->setLifecycle($lifecycle);
             } catch (ilTestQuestionPoolInvalidArgumentException $e) {
             }
@@ -110,16 +110,16 @@ class assFormulaQuestionGUI extends assQuestionGUI
 
             foreach ($found_vars as $variable) {
                 if ($this->object->getVariable($variable) != null) {
-                    $unit = $this->request->int("unit_{$variable}");
+                    $unit = $this->request_data_collector->int("unit_{$variable}");
                     $varObj = new assFormulaQuestionVariable(
                         $variable,
-                        $this->request->float("range_min_{$variable}") ?? 0.0,
-                        $this->request->float("range_max_{$variable}") ?? 0.0,
+                        $this->request_data_collector->float("range_min_{$variable}") ?? 0.0,
+                        $this->request_data_collector->float("range_max_{$variable}") ?? 0.0,
                         $unit !== null ? $this->object->getUnitrepository()->getUnit(
                             $unit
                         ) : null,
-                        $this->request->float("precision_{$variable}"),
-                        $this->request->float("intprecision_{$variable}")
+                        $this->request_data_collector->float("precision_{$variable}"),
+                        $this->request_data_collector->float("intprecision_{$variable}")
                     );
                     $this->object->addVariable($varObj);
                 }
@@ -130,14 +130,14 @@ class assFormulaQuestionGUI extends assQuestionGUI
             foreach ($found_results as $result) {
                 $tmp_res_match = preg_match_all(
                     '/([$][v][0-9]*)/',
-                    $this->request->string("formula_{$result}"),
+                    $this->request_data_collector->string("formula_{$result}"),
                     $form_vars
                 );
                 $tmp_form_vars = array_merge($tmp_form_vars, $form_vars[0]);
 
                 $tmp_que_match = preg_match_all(
                     '/([$][v][0-9]*)/',
-                    $this->request->string('question'),
+                    $this->request_data_collector->string('question'),
                     $quest_vars
                 );
                 $tmp_quest_vars = array_merge($tmp_quest_vars, $quest_vars[0]);
@@ -160,27 +160,27 @@ class assFormulaQuestionGUI extends assQuestionGUI
             }
             foreach ($found_results as $result) {
                 if ($this->object->getResult($result) != null) {
-                    $unit = $this->request->int("unit_{$result}");
+                    $unit = $this->request_data_collector->int("unit_{$result}");
                     $resObj = new assFormulaQuestionResult(
                         $result,
-                        $this->request->float("range_min_{$result}") ?? 0.0,
-                        $this->request->float("range_max_{$result}") ?? 0.0,
-                        $this->request->float("tolerance_{$result}") ?? 0.0,
+                        $this->request_data_collector->float("range_min_{$result}") ?? 0.0,
+                        $this->request_data_collector->float("range_max_{$result}") ?? 0.0,
+                        $this->request_data_collector->float("tolerance_{$result}") ?? 0.0,
                         $unit !== null ? $this->object->getUnitrepository()->getUnit(
                             $unit
                         ) : null,
-                        $this->request->string("formula_{$result}"),
-                        $this->request->float("points_{$result}"),
-                        $this->request->float("precision_{$result}"),
-                        $this->request->int("rating_advanced_{$result}") !== 1,
-                        $this->request->int("rating_advanced_{$result}") === 1 ? $this->request->float("rating_sign_{$result}") : null,
-                        $this->request->int("rating_advanced_{$result}") === 1 ? $this->request->float("rating_value_{$result}") : null,
-                        $this->request->int("rating_advanced_{$result}") === 1 ? $this->request->float("rating_unit_{$result}") : null,
-                        $this->request->int("result_type_{$result}")
+                        $this->request_data_collector->string("formula_{$result}"),
+                        $this->request_data_collector->float("points_{$result}"),
+                        $this->request_data_collector->float("precision_{$result}"),
+                        $this->request_data_collector->int("rating_advanced_{$result}") !== 1,
+                        $this->request_data_collector->int("rating_advanced_{$result}") === 1 ? $this->request_data_collector->float("rating_sign_{$result}") : null,
+                        $this->request_data_collector->int("rating_advanced_{$result}") === 1 ? $this->request_data_collector->float("rating_value_{$result}") : null,
+                        $this->request_data_collector->int("rating_advanced_{$result}") === 1 ? $this->request_data_collector->float("rating_unit_{$result}") : null,
+                        $this->request_data_collector->int("result_type_{$result}")
                     );
                     $this->object->addResult($resObj);
-                    $available_units = $this->request->retrieveArrayOfIntsFromPost("units_{$result}");
-                    if ($available_units !== null) {
+                    $available_units = $this->request_data_collector->intArray("units_{$result}");
+                    if (!empty($available_units)) {
                         $this->object->addResultUnits($resObj, $available_units);
                     }
                 }
@@ -565,7 +565,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
         if ($save) {
             $found_vars = [];
             $found_results = [];
-            foreach ($this->request->getParsedBody() as $key => $value) {
+            foreach ($this->request_data_collector->getParsedBody() as $key => $value) {
                 if (preg_match("/^unit_(\\\$v\d+)$/", $key, $matches)) {
                     array_push($found_vars, $matches[1]);
                 }
@@ -575,7 +575,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
             }
 
 
-            foreach ($this->request->getParsedBody() as $key => $value) {
+            foreach ($this->request_data_collector->getParsedBody() as $key => $value) {
                 $item = $form->getItemByPostVar($key);
                 if ($item !== null) {
                     switch (get_class($item)) {
@@ -655,7 +655,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
                     $result_unit = $form->getItemByPostVar('unit_' . $result->getResult());
                     $rating_advanced = $form->getItemByPostVar('rating_advanced_' . $result->getResult());
                     if (((int) $result_unit->getValue() <= 0) && $rating_advanced->getChecked()) {
-                        unset($_POST['rating_advanced_' . $result->getResult()]);
+                        unset($_POST['rating_advanced_' . $result->getResult()]); // TODO
                         $rating_advanced->setDisabled(true);
                         $rating_advanced->setChecked(false);
                         $rating_advanced->setAlert($this->lng->txt('err_rating_advanced_not_allowed'));
@@ -685,7 +685,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
                 $errors = true;
                 $this->tpl->setOnScreenMessage('failure', $this->lng->txt('form_input_not_valid'));
             }
-            foreach ($this->request->getParsedBody() as $key => $value) {
+            foreach ($this->request_data_collector->getParsedBody() as $key => $value) {
                 $item = $form->getItemByPostVar($key);
                 if ($item !== null) {
                     switch (get_class($item)) {
@@ -774,11 +774,14 @@ class assFormulaQuestionGUI extends assQuestionGUI
      */
     public function checkInput(): bool
     {
-        if ((!$_POST["title"]) or (!$_POST["author"]) or (!$_POST["question"])) {
-            $this->addErrorMessage($this->lng->txt("fill_out_all_required_fields"));
+        $title = $this->request_data_collector->string('title');
+        $author = $this->request_data_collector->string('author');
+        $question = $this->request_data_collector->string('question');
+
+        if (empty($title) || empty($author) || empty($question)) {
+            $this->addErrorMessage($this->lng->txt('fill_out_all_required_fields'));
             return false;
         }
-
 
         return true;
     }
