@@ -11633,7 +11633,7 @@ mail#:#mail_sure_delete_entry#:#Sind Sie sicher, dass die markierten Einträge g
 mail#:#mail_sure_delete_file#:#Sind Sie sicher, dass die ausgewählten Dateien gelöscht werden sollen?
 mail#:#mail_sure_delete_folder#:#Der Ordner und sein Inhalt werden unwiderruflich gelöscht!
 mail#:#mail_sure_delete_p#:#Sind Sie sicher, dass die folgenden Mails gelöscht werden sollen?
-mail#:#mail_sure_delete_s#:#Sind Sie sicher, dass die folgende Mail gelöscht werden sollen?
+mail#:#mail_sure_delete_s#:#Sind Sie sicher, dass die folgende Mail gelöscht werden soll?
 mail#:#mail_sure_remove_user#:#Möchten Sie die folgenden Benutzer/innen aus der Liste entfernen?
 mail#:#mail_system_sys_env_from_addr#:#Technische Absendeadresse („SENDER“)###Modified as part of gender mainstreaming activities for ILIAS 8
 mail#:#mail_system_sys_env_from_addr_info#:#Tragen Sie hier die technische Absendeadresse („SENDER”-Header) ein. Lassen Sie das Feld leer, wird bei externem Versand die E-Mail-Adresse der absendenden Person („FROM“-Header) genutzt. Andernfalls ist es die Aufgabe der Server-Administration, den Header zu konfigurieren.###Modified as part of gender mainstreaming activities for ILIAS 8
