@@ -48,7 +48,6 @@ class ilTutorialSupportBlockGUI extends ilBlockGUI
     {
         global $DIC;
         parent::__construct();
-        $this->new_rendering = true;
         $this->http = $DIC->http();
         $this->refinery = $DIC->refinery();
         $this->ilias_settings = $DIC['ilSetting'];
