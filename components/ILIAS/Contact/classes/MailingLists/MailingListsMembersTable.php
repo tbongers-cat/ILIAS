@@ -39,7 +39,7 @@ class MailingListsMembersTable implements UI\Component\Table\DataRetrieval
 
     public function __construct(
         private readonly ilMailingList $mailing_list,
-        private readonly ilCtrl $ctrl,
+        private readonly \ilCtrlInterface $ctrl,
         private readonly ilLanguage $lng,
         private readonly \ILIAS\UI\Factory $ui_factory,
         \ILIAS\HTTP\GlobalHttpState $http

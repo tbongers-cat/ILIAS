@@ -40,7 +40,7 @@ class MailingListsTable implements UI\Component\Table\DataRetrieval
 
     public function __construct(
         private readonly ilMailingLists $mailing_lists,
-        private readonly ilCtrl $ctrl,
+        private readonly \ilCtrlInterface $ctrl,
         private readonly ilLanguage $lng,
         private readonly \ILIAS\UI\Factory $ui_factory,
         \ILIAS\HTTP\GlobalHttpState $http
@@ -127,7 +127,7 @@ class MailingListsTable implements UI\Component\Table\DataRetrieval
         );
 
         $actions = [
-            'confirmDelete' => $this->ui_factory->table()->action()->multi(
+            'confirmDelete' => $this->ui_factory->table()->action()->standard(
                 $this->lng->txt('delete'),
                 $url_builder->withParameter($action_parameter_token_copy, 'confirmDelete'),
                 $row_id_token
