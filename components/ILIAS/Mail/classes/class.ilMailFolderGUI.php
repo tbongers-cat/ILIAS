@@ -742,7 +742,7 @@ class ilMailFolderGUI
 
         $modal = $this->ui_factory->modal()->interruptive(
             $this->lng->txt('delete'),
-            $this->lng->txt('mail_sure_delete'),
+            $this->lng->txt('mail_sure_delete_' . (count($items) === 1 ? 's' : 'p')),
             $this->ctrl->getFormAction($this, self::CMD_DELETE_MAILS)
         )->withAffectedItems($items);
 
@@ -983,7 +983,7 @@ class ilMailFolderGUI
         if ($this->folder->isTrash()) {
             $modal = $this->ui_factory->modal()->interruptive(
                 $this->lng->txt('delete'),
-                $this->lng->txt('mail_sure_delete'),
+                $this->lng->txt('mail_sure_delete_s'),
                 $this->ctrl->getLinkTarget($this, self::CMD_EMPTY_TRASH)
             )->withAffectedItems([
                 $this->ui_factory->modal()->interruptiveItem()->standard(
