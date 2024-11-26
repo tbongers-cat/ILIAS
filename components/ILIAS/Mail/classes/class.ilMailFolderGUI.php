@@ -981,10 +981,12 @@ class ilMailFolderGUI
         }
 
         if ($this->folder->isTrash()) {
+            $this->ctrl->setParameter($this, self::PARAM_MAIL_ID, $mailId);
+            $this->ctrl->setParameter($this, self::PARAM_FOLDER_ID, $mailData['folder_id']);
             $modal = $this->ui_factory->modal()->interruptive(
                 $this->lng->txt('delete'),
                 $this->lng->txt('mail_sure_delete_s'),
-                $this->ctrl->getLinkTarget($this, self::CMD_EMPTY_TRASH)
+                $this->ctrl->getLinkTarget($this, self::CMD_DELETE_MAILS)
             )->withAffectedItems([
                 $this->ui_factory->modal()->interruptiveItem()->standard(
                     (string) $mailId,
@@ -999,6 +1001,7 @@ class ilMailFolderGUI
                     '#'
                 )->withOnClick($modal->getShowSignal())
             );
+            $this->ctrl->clearParameters($this);
 
             $ui_components[] = $modal;
         }
