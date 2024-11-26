@@ -64,12 +64,12 @@
       }
     };
 
-    if ($('#ilsaving').size() === 0) {
+    if ($('#ilsaving').length === 0) {
       $(`<div id="ilsaving" class="ilHighlighted ilNoDisplay">${il.Language.txt('saving')}</div>`).appendTo($('body'));
     }
     $('#ilsaving').css('zIndex', 10000);
     var $draft_id = $form.find('#draft_id');
-    if ($draft_id.size() === 0) {
+    if ($draft_id.length === 0) {
       $draft_id = $('<input type="hidden" name="draft_id" id="draft_id" value="" />');
       $form.append($draft_id);
     }
