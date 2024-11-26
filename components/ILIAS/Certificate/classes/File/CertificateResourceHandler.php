@@ -45,8 +45,12 @@ class CertificateResourceHandler
             !$this->certificate_template_repo->isResourceUsed($background_image->serialize()) &&
             (
                 $this->global_certificate_settings->getBackgroundImageIdentification() === null ||
-                $this->global_certificate_settings->getBackgroundImageIdentification()->serialize(
-                ) !== $background_image->serialize()
+                (
+                    $this->global_certificate_settings
+                        ->getBackgroundImageIdentification() instanceof ResourceIdentification &&
+                    $this->global_certificate_settings
+                        ->getBackgroundImageIdentification()->serialize() !== $background_image->serialize()
+                )
             )
         ) {
             $this->irss->manage()->remove($background_image, $this->stakeholder);

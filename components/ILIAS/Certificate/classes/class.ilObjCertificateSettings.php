@@ -68,7 +68,7 @@ class ilObjCertificateSettings extends ilObject
         if ($id !== '') {
             $id = $this->getBackgroundImageDefaultFolder() . $id;
         }
-        if ($this->filesystem->has($id)) {
+        if ($id !== '' && $this->filesystem->has($id)) {
             return ilWACSignedPath::signFile(ILIAS_HTTP_PATH . '/' . ILIAS_WEB_DIR . '/' . CLIENT_ID . $id);
         }
         return null;
