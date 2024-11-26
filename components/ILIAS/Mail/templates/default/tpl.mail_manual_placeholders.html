@@ -16,49 +16,63 @@
 <!-- END placeholder_box -->
 <!-- BEGIN js_block -->
 <script>
-document.addEventListener("DOMContentLoaded", (event) => {
-	(function ($) {
-		var $triggerElm = $('[name="{RERENDER_TRIGGER_ELM_NAME}"]');
+document.addEventListener('DOMContentLoaded', () => {
+  function getValue(elements, name) {
+    if (!elements || elements.length === 0) {
+      return '';
+    }
 
-		$triggerElm["serializeObject"] = function () {
-			var obj = {};
-			$.each(this.serializeArray(), function (i, o) {
-				var n = o.name,
-						v = o.value;
-				obj[n] = obj[n] === undefined ? v : $.isArray(obj[n]) ? obj[n].concat(v) : [obj[n], v];
-			});
-			return obj;
-		};
+    const firstElement = elements[0];
 
-		$triggerElm["getValue"] = function () {
-			var obj = $triggerElm.serializeObject()[$(this).attr('name')];
-			if (obj === undefined) {
-				return "";
-			} else {
-				return obj;
-			}
-		};
+    if (firstElement.tagName.toLowerCase() === 'select') {
+      return firstElement.value;
+    }
 
-		if ($triggerElm.length > 0) {
-			var onCtxChange = function () {
-				var value = $triggerElm.getValue();
+    for (const element of elements) {
+      if (element.checked) {
+        return element.value;
+      }
+    }
 
-				if (value) {
-					$.ajax({
-						url: "{RERENDER_URL}" + "&triggerValue=" + value,
-						type: 'GET'
-					}).done(function (placeholders) {
-						$('#placeholders_box').html(placeholders);
-						il.Mail.initMailPlaceholderSelection(document.querySelectorAll('#placeholders_box a'), '{RERENDER_DEPENDENCY_ELM_ID_OUTER}');
-					});
-				}
-			};
+    return '';
+  }
 
-			$triggerElm.off('change').on('change', onCtxChange);
+  const triggerElements = document.querySelectorAll('[name="{RERENDER_TRIGGER_ELM_NAME}"]');
 
-			$(document).ready(onCtxChange);
-		}
-	})(jQuery);
+  if (triggerElements.length > 0) {
+    const onMailTemplateContextChanged = () => {
+      const value = getValue(Array.from(triggerElements));
+
+      if (value) {
+        fetch(`{RERENDER_URL}&triggerValue=${encodeURIComponent(value)}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then((placeholders) => {
+            const placeholdersBox = document.getElementById('placeholders_box');
+            if (placeholdersBox) {
+              placeholdersBox.innerHTML = placeholders;
+              il.Mail.initMailPlaceholderSelection(
+                placeholdersBox.querySelectorAll('a'),
+                '{RERENDER_DEPENDENCY_ELM_ID_OUTER}',
+              );
+            }
+          })
+          .catch((error) => {
+            console.error('Error during fetch:', error);
+          });
+      }
+    };
+
+    triggerElements.forEach((element) => {
+      element.addEventListener('change', onMailTemplateContextChanged);
+    });
+
+    onMailTemplateContextChanged();
+  }
 });
 </script>
 <!-- END js_block -->
