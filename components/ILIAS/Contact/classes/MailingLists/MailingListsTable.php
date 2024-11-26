@@ -27,7 +27,6 @@ use ilArrayUtil;
 use ilMailingList;
 use ilMailingListsGUI;
 use ilLanguage;
-use ilCtrl;
 use ilMailingLists;
 
 class MailingListsTable implements UI\Component\Table\DataRetrieval
