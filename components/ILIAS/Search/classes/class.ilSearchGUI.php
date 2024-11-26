@@ -360,8 +360,8 @@ class ilSearchGUI extends ilSearchBaseGUI
             ilSession::clear('max_page');
             $this->search_cache->deleteCachedEntries();
         }
-
-        if ($this->getType() == self::SEARCH_DETAILS and !$this->getDetails()) {
+        $this->search_cache->setResultPageNumber($page_number);
+        if ($this->getType() == ilSearchBaseGUI::SEARCH_DETAILS and !$this->getDetails()) {
             $this->tpl->setOnScreenMessage('info', $this->lng->txt('search_choose_object_type'));
             $this->showSearch();
             return;
