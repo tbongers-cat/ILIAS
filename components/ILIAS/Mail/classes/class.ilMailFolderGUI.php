@@ -757,6 +757,8 @@ class ilMailFolderGUI
 
     protected function showMail(): void
     {
+        $ui_components = [];
+
         $mailId = $this->getMailIdsFromRequest()[0] ?? 0;
         if ($mailId <= 0) {
             $this->error->raiseError($this->lng->txt('permission_denied'), $this->error->MESSAGE);
@@ -978,26 +980,25 @@ class ilMailFolderGUI
             }
         }
 
-        if ($current_folder->isTrash()) {
-            $deleteBtn = $this->ui_factory->button()
-                                          ->standard($this->lng->txt('delete'), '#')
-                                          ->withOnLoadCode(static fn($id): string => "
-                    document.getElementById('$id').addEventListener('click', function() {
-                        const frm = this.closest('form'),
-                            action = new URL(frm.action),
-                            action_params = new URLSearchParams(action.search);
-    
-                        action_params.delete('cmd');
-                        action_params.append('cmd', '" . self::CMD_DELETE_MAILS . "');
-    
-                        action.search = action_params.toString();
-    
-                        frm.action = action.href;
-                        frm.submit();
-                        return false;
-                    });
-                ");
-            $this->toolbar->addComponent($deleteBtn);
+        if ($this->folder->isTrash()) {
+            $ui_components[] = $modal = $this->ui_factory->modal()->interruptive(
+                $this->lng->txt('delete'),
+                $this->lng->txt('mail_sure_delete'),
+                $this->ctrl->getLinkTarget($this, self::CMD_EMPTY_TRASH)
+            )->withAffectedItems([
+                $this->ui_factory->modal()->interruptiveItem()->standard(
+                    (string) $mailId,
+                    ilDatePresentation::formatDate(
+                        new ilDateTime($mailData['send_time'], IL_CAL_DATETIME)
+                    ) . " " . $mailData['m_subject']
+                )
+            ]);
+            $this->toolbar->addComponent(
+                $this->ui_factory->button()->standard(
+                    $this->lng->txt('delete'),
+                    '#'
+                )->withOnClick($modal->getShowSignal())
+            );
         }
 
         if ($move_links !== []) {
@@ -1062,7 +1063,7 @@ class ilMailFolderGUI
             }
         }
 
-        $this->tpl->setContent($form->getHTML());
+        $this->tpl->setContent($form->getHTML() . $this->ui_renderer->render($ui_components));
         $this->tpl->printToStdout();
     }
 
