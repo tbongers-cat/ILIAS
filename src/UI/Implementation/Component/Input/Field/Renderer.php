@@ -930,8 +930,9 @@ class Renderer extends AbstractComponentRenderer
 
     /**
      * Counts all inputs and nested inputs of groups, without counting groups themselves.
+     * @param FormInput|Input $input
      */
-    protected function countInputsWithoutGroupsRecursively(FormInput|Input $input): int
+    protected function countInputsWithoutGroupsRecursively($input): int
     {
         if (!($input instanceof Component\Input\Group)) {
             return 1;
