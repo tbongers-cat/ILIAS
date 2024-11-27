@@ -1827,7 +1827,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
                         }
                         break;
                     case 'commented':
-                        $table->setCommentFilter($value);
+                        $table->setCommentFilter((int) $value);
                         break;
                     default:
                         $table->addFieldFilter($item, $value);
