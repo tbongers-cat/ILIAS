@@ -369,6 +369,7 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
         if (!$saved
             || ($question_obj instanceof QuestionPartiallySaveable
                 && !$question_obj->validateSolutionSubmit())) {
+
             $this->ctrl->setParameter($this, 'save_error', '1');
             ilSession::set('previouspost', $this->testrequest->getParsedBody());
         }
@@ -676,10 +677,10 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
      *
      * Sets a session variable with the test access code for an anonymous test user
      */
-    public function setAnonymousIdCmd()
+    public function setAnonymousIdCmd(): void
     {
         if ($this->test_session->isAnonymousUser()) {
-            $this->test_session->setAccessCodeToSession($_POST['anonymous_id']);
+            $this->test_session->setAccessCodeToSession($this->testrequest->strVal('anonymous_id'));
         }
 
         $this->ctrl->redirectByClass([ilRepositoryGUI::class, ilObjTestGUI::class, ilInfoScreenGUI::class]);
@@ -862,7 +863,7 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
      */
     public function autosaveCmd(): void
     {
-        if (!is_countable($_POST) || count($_POST) === 0) {
+        if (count($this->testrequest->getPostKeys()) > 0) {
             echo '';
             exit;
         }
@@ -872,15 +873,12 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
             exit;
         }
 
-        $authorize = !$this->getAnswerChangedParameter();
-        $res = $this->saveQuestionSolution($authorize, true);
-
-        if ($res) {
-            echo $this->lng->txt("autosave_success");
+        if ($this->saveQuestionSolution(!$this->getAnswerChangedParameter(), true)) {
+            echo $this->lng->txt('autosave_success');
             exit;
         }
 
-        echo $this->lng->txt("autosave_failed");
+        echo $this->lng->txt('autosave_failed');
         exit;
     }
 
@@ -2766,20 +2764,15 @@ JS;
         return $nextcmd !== '' ? $nextcmd : null;
     }
 
-    protected function getNextSequenceParameter(): ?int
+    protected function getNextSequenceParameter(): int
     {
-        if (isset($_POST['nextseq']) && is_numeric($_POST['nextseq'])) {
-            return (int) $_POST['nextseq'];
-        }
-
-        return null;
+        return $this->testrequest->int('nextseq');
     }
 
-    protected function getNavigationUrlParameter(): ?string
+    protected function getNavigationUrlParameter(): string
     {
-        if (isset($_POST['test_player_navigation_url'])) {
-            $navigation_url = $_POST['test_player_navigation_url'];
-
+        $navigation_url = $this->testrequest->strVal('test_player_navigation_url');
+        if ($navigation_url !== '') {
             $navigation_url_parts = parse_url($navigation_url);
             $ilias_url_parts = parse_url(ilUtil::_getHttpPath());
 
@@ -2787,8 +2780,7 @@ JS;
                 return $navigation_url;
             }
         }
-
-        return null;
+        return '';
     }
 
     protected function getAnswerChangedParameter(): bool
@@ -2811,13 +2803,13 @@ JS;
         $this->setAnswerChangedParameter($this->getAnswerChangedParameter());
     }
 
-    protected function saveNavigationPreventConfirmation()
+    protected function saveNavigationPreventConfirmation(): void
     {
-        if (!empty($_POST['save_on_navigation_prevent_confirmation'])) {
+        if ($this->testrequest->bool('save_on_navigation_prevent_confirmation')) {
             ilSession::set('save_on_navigation_prevent_confirmation', true);
         }
 
-        if (!empty($_POST[self::FOLLOWUP_QST_LOCKS_PREVENT_CONFIRMATION_PARAM])) {
+        if ($this->testrequest->bool(self::FOLLOWUP_QST_LOCKS_PREVENT_CONFIRMATION_PARAM)) {
             ilSession::set(self::FOLLOWUP_QST_LOCKS_PREVENT_CONFIRMATION_PARAM, true);
         }
     }

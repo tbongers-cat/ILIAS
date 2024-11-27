@@ -720,6 +720,7 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
                     $this->component_repository,
                     $this->getTestObject(),
                     $this->questionrepository,
+                    $this->testrequest,
                     $this->ref_id
                 );
                 $this->ctrl->forwardCommand($gui);
@@ -1964,7 +1965,7 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
      */
     public function deleteDefaultsObject()
     {
-        $defaults_ids = $this->testrequest->getArrayOfIntsFromPost('chb_defaults');
+        $defaults_ids = $this->testrequest->retrieveArrayOfIntsFromPost('chb_defaults');
         if ($defaults_ids !== null && $defaults_ids !== []) {
             foreach ($defaults_ids as $test_default_id) {
                 $this->getTestObject()->deleteDefaults($test_default_id);
@@ -1987,10 +1988,10 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
     /**
      * Applies the selected test defaults
      */
-    public function applyDefaultsObject($confirmed = false)
+    public function applyDefaultsObject($confirmed = false): void
     {
-        $defaults = $this->testrequest->getArrayOfStringsFromPost('chb_defaults');
-        if ($defaults !== null && $defaults !== []) {
+        $defaults = $this->testrequest->retrieveArrayOfIntsFromPost('chb_defaults');
+        if ($defaults !== []) {
             $this->tpl->setOnScreenMessage('info', $this->lng->txt('tst_defaults_apply_select_one'));
 
             $this->defaultsObject();
@@ -2031,7 +2032,7 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
 
             default:
 
-                $confirmation = new ilTestSettingsChangeConfirmationGUI($this->getTestObject());
+                $confirmation = new ilTestSettingsChangeConfirmationGUI($this->testrequest, $this->getTestObject());
 
                 $confirmation->setFormAction($this->ctrl->getFormAction($this));
                 $confirmation->setCancel($this->lng->txt('cancel'), 'defaults');
