@@ -138,9 +138,9 @@ class RequestDataCollector
         return $this->http->wrapper()->post()->keys();
     }
 
-    public function isMethod(string $method): bool
+    public function isPostRequest(): bool
     {
-        return $this->http->request()->getMethod() === $method;
+        return $this->http->request()->getMethod() === 'POST';
     }
 
     /**
