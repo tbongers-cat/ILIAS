@@ -94,7 +94,7 @@ class NoSubmitFormTest extends \ILIAS_UI_TestBase
         );
 
         $expected_html =
-            "<form id=\"id_1\" role=\"form\" class=\"c-form c-form--horizontal\" enctype=\"multipart/form-data\" action=\"$post_url\" method=\"post\" novalidate=\"novalidate\">" .
+            "<form id=\"id_1\" role=\"form\" class=\"c-form c-form--horizontal\" enctype=\"multipart/form-data\" action=\"$post_url\" method=\"post\">" .
             $dummy_input->getCanonicalName() .
             "</form>";
 
@@ -124,7 +124,7 @@ class NoSubmitFormTest extends \ILIAS_UI_TestBase
         );
 
         $expected_html =
-            "<form id=\"id_1\" role=\"form\" class=\"c-form c-form--horizontal\" enctype=\"multipart/form-data\" action=\"$post_url\" method=\"post\" novalidate=\"novalidate\">" .
+            "<form id=\"id_1\" role=\"form\" class=\"c-form c-form--horizontal\" enctype=\"multipart/form-data\" action=\"$post_url\" method=\"post\">" .
             $dummy_input->getCanonicalName()
             . "<div class=\"c-form__footer\">"
             . "<div class=\"c-form__required\"><span class=\"asterisk\">*</span><span class=\"small\"> $required_lang_var</span></div>"
@@ -172,7 +172,7 @@ class NoSubmitFormTest extends \ILIAS_UI_TestBase
         $data = $form->getData();
 
         $expected_html =
-            "<form id=\"id_1\" role=\"form\" class=\"c-form c-form--horizontal\" enctype=\"multipart/form-data\" action=\"$post_url\" method=\"post\" novalidate=\"novalidate\">" .
+            "<form id=\"id_1\" role=\"form\" class=\"c-form c-form--horizontal\" enctype=\"multipart/form-data\" action=\"$post_url\" method=\"post\">" .
             "<div id=\"\" class=\"c-form__error-msg alert alert-danger\">$error_lang_var</div>" .
             $dummy_input->getCanonicalName() .
             "</form>";
