@@ -18,6 +18,7 @@
 
 declare(strict_types=1);
 
+use ILIAS\Test\RequestDataCollector;
 use ILIAS\TestQuestionPool\Questions\GeneralQuestionPropertiesRepository;
 use ILIAS\Test\Logging\TestLogger;
 use ILIAS\Test\Presentation\TabsManager;
@@ -47,6 +48,7 @@ class ilTestSkillAdministrationGUI
         private ilComponentRepository $component_repository,
         private ilObjTest $test_obj,
         private GeneralQuestionPropertiesRepository $questionrepository,
+        private RequestDataCollector $request_data_collector,
         private int $ref_id
     ) {
     }
@@ -94,7 +96,14 @@ class ilTestSkillAdministrationGUI
                 $this->tabs_manager->activateTab(TabsManager::TAB_ID_SETTINGS);
                 $this->tabs_manager->activateSubTab(TabsManager::SETTINGS_SUBTAB_ID_ASSIGN_SKILL_TRESHOLDS);
 
-                $gui = new ilTestSkillLevelThresholdsGUI($this->ctrl, $this->tpl, $this->lng, $this->db, $this->test_obj->getTestId());
+                $gui = new ilTestSkillLevelThresholdsGUI(
+                    $this->ctrl,
+                    $this->tpl,
+                    $this->lng,
+                    $this->db,
+                    $this->request_data_collector,
+                    $this->test_obj->getTestId()
+                );
                 $gui->setQuestionAssignmentColumnsEnabled(!$this->test_obj->isRandomTest());
                 $gui->setQuestionContainerId($this->test_obj->getId());
                 $this->ctrl->forwardCommand($gui);

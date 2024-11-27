@@ -16,6 +16,7 @@
  *
  *********************************************************************/
 
+use ILIAS\Test\RequestDataCollector;
 use ILIAS\TestQuestionPool\Questions\GeneralQuestionPropertiesRepository;
 
 /**
@@ -43,6 +44,7 @@ class ilTestSkillAdministrationGUITest extends ilTestBaseTestCase
             $this->createMock(ilComponentRepository::class),
             $this->getTestObjMock(),
             $this->createMock(GeneralQuestionPropertiesRepository::class),
+            $this->createMock(RequestDataCollector::class),
             201
         );
     }

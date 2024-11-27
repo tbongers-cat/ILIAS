@@ -22,8 +22,8 @@ namespace ILIAS\Test;
 
 use ILIAS\HTTP\Services as HTTPServices;
 use ILIAS\Refinery\Factory as Refinery;
+use ILIAS\Refinery\Transformation;
 use ILIAS\Repository\BaseGUIRequest;
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 use function array_map;
@@ -38,10 +38,7 @@ class RequestDataCollector
         HTTPServices $http,
         Refinery $refinery
     ) {
-        $this->initRequest(
-            $http,
-            $refinery
-        );
+        $this->initRequest($http, $refinery);
     }
 
     public function getRequest(): ServerRequestInterface
@@ -118,10 +115,9 @@ class RequestDataCollector
     /**
      * @return mixed|null
      */
-    public function raw(string $key)
+    public function raw(string $key): mixed
     {
-        $no_transform = $this->refinery->identity();
-        return $this->get($key, $no_transform);
+        return $this->get($key, $this->refinery->identity());
     }
 
     public function strVal(string $key): string
@@ -134,35 +130,43 @@ class RequestDataCollector
         return $this->http->request()->getParsedBody();
     }
 
-    public function getArrayOfIntsFromPost(string $key): ?array
+    /**
+     * @deprecated
+     */
+    public function getPostKeys(): array
     {
-        $p = $this->http->wrapper()->post();
-        $r = $this->refinery;
-        if (!$p->has($key)) {
-            return null;
-        }
-
-        return $p->retrieve(
-            $key,
-            $r->container()->mapValues(
-                $r->kindlyTo()->int()
-            )
-        );
+        return $this->http->wrapper()->post()->keys();
     }
 
-    public function getArrayOfStringsFromPost(string $key): ?array
+    public function isMethod(string $method): bool
     {
-        $p = $this->http->wrapper()->post();
-        $r = $this->refinery;
-        if (!$p->has($key)) {
-            return null;
-        }
+        return $this->http->request()->getMethod() === $method;
+    }
 
-        return $p->retrieve(
+    /**
+     * @return array<string>
+     */
+    public function retrieveArrayOfStringsFromPost(string $key): array
+    {
+        return $this->retrieveArrayFromPost($key, $this->refinery->kindlyTo()->string());
+    }
+
+    /**
+     * @return array<int>
+     */
+    public function retrieveArrayOfIntsFromPost(string $key): array
+    {
+        return $this->retrieveArrayFromPost($key, $this->refinery->kindlyTo()->int());
+    }
+
+    private function retrieveArrayFromPost(string $key, Transformation $transformation): array
+    {
+        return $this->http->wrapper()->post()->retrieve(
             $key,
-            $r->container()->mapValues(
-                $r->kindlyTo()->string()
-            )
+            $this->refinery->byTrying([
+                $this->refinery->kindlyTo()->listOf($transformation),
+                $this->refinery->always([])
+            ])
         );
     }
 
