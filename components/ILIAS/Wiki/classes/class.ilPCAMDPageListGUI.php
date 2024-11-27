@@ -121,7 +121,7 @@ class ilPCAMDPageListGUI extends ilPageContentGUI
 
         if ($a_insert) {
             if (!$no_fields) {
-                $form->addCommandButton("create_amd_page_list", $this->lng->txt("select"));
+                $form->addCommandButton("create", $this->lng->txt("select"));
             }
             $form->addCommandButton("cancelCreate", $this->lng->txt("cancel"));
         } else {
