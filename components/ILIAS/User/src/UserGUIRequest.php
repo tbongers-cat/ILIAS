@@ -336,7 +336,7 @@ class UserGUIRequest
         return '';
     }
 
-    private function getFromQueryOrPost(string $key, Transformation $transformation, string $source): string|int|array
+    private function getFromQueryOrPost(string $key, Transformation $transformation, string $source): mixed
     {
         if ($source === 'query') {
             return $this->wrapper->query()->retrieve($key, $transformation);
