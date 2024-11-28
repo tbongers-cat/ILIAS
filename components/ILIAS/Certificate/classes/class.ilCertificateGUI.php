@@ -452,13 +452,9 @@ class ilCertificateGUI
                     'sha256',
                     implode('', [
                         $xslfo,
-                        isset($new_background_rid) ? $this->irss->manage()->getResource(
-                            $new_background_rid
-                        )->getStorageID() : '',
+                        isset($new_background_rid) ? $new_background_rid->serialize() : '',
                         $jsonEncodedTemplateValues,
-                        isset($new_thumbnail_rid) ? $this->irss->manage()->getResource(
-                            $new_thumbnail_rid
-                        )->getStorageID() : '',
+                        isset($new_thumbnail_rid) ? $new_background_rid->serialize() : '',
                         $old_background_image, $old_thumbnail_image
                     ])
                 );
