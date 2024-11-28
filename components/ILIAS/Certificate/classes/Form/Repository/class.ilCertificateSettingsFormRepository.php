@@ -207,9 +207,11 @@ class ilCertificateSettingsFormRepository implements ilCertificateFormRepository
                 $certificateTemplate->getBackgroundImageIdentification()
             ) instanceof ResourceIdentification
         ) {
+            $identification = $this->global_certificate_settings->getBackgroundImageIdentification();
             $bgimage->setAllowDeletion(false);
+        } else {
+            $identification = $this->irss->manage()->find($bg_image_rid);
         }
-        $identification = $this->irss->manage()->find($certificateTemplate->getBackgroundImageIdentification());
         if ($identification instanceof ResourceIdentification) {
             $background_flavour = $this->irss->flavours()->get(
                 $identification,
