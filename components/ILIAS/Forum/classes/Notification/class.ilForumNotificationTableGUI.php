@@ -116,11 +116,26 @@ class ilForumNotificationTableGUI extends ilTable2GUI
         )->withActionButtons([
             $this->ui_factory->button()
                 ->primary($this->lng->txt('save'), '#')
-                ->withOnLoadCode(function (string $id) use ($row): string {
-                    return "
-                        $('#$id').closest('.modal').find('form').addClass('ilForumNotificationSettingsForm');
-                        $('#$id').closest('.modal').find('form .il-standard-form-header, .il-standard-form-footer').remove();
-                        $('#$id').click(function() { $(this).closest('.modal').find('form').submit(); return false; });
+                ->withOnLoadCode(function (string $id): string {
+                    return " 
+                        (function () {
+                          const button = document.getElementById('$id');
+                          if (!button) return;
+                        
+                          const modalDialog = button.closest('.modal-dialog');
+                          if (!modalDialog) return;
+
+                          const form = modalDialog.querySelector('.modal-body form');
+                          if (!form) return;
+
+                          form.classList.add('ilForumNotificationSettingsForm');
+                          button.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            if (form) {
+                              form.submit();
+                            }
+                          }, true);
+                        }());
                     ";
                 })
         ]);
