@@ -517,7 +517,6 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
 
             case 'ilobjquestionpoolgui':
             case '':
-
                 //table actions.
                 if ($action = $this->request_data_collector->string($this->action_parameter_token->getName())) {
                     $ids = $this->request_data_collector->raw($this->row_id_token->getName()) ?? null;
