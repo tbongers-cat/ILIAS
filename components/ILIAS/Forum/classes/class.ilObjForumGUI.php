@@ -2282,7 +2282,20 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             '#'
         )->withOnLoadCode(
             static function (string $id) use ($form_id): string {
-                return "$('#$id').click(function() { $('#form_$form_id').submit(); return false; });";
+                return "
+                (function () {
+                  const button = document.getElementById('$id');
+                  if (!button) return;
+                
+                  const form = document.getElementById('form_$form_id');
+                  if (!form) return;
+                
+                  button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    form.submit();
+                  }, true);
+                }());
+                ";
             }
         );
         $modal = $this->uiFactory->modal()->roundtrip(
@@ -3558,15 +3571,24 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             (string) $this->objCurrentTopic->getId()
         );
 
-        $this->tpl->addOnLoadCode('$(".ilFrmPostContent img").each(function() {
-			var $elm = $(this);
-			$elm.css({
-				maxWidth: $elm.attr("width") + "px",
-				maxHeight: $elm.attr("height")  + "px"
-			});
-			$elm.removeAttr("width");
-			$elm.removeAttr("height");
-		});');
+        $this->tpl->addOnLoadCode(
+            <<<'EOD'
+        document.querySelectorAll('.ilFrmPostContent img').forEach((img) => {
+          const maxWidth = img.getAttribute('width');
+          const maxHeight = img.getAttribute('height');
+        
+          if (maxWidth) {
+            img.style.maxWidth = maxWidth + 'px';
+            img.removeAttribute('width');
+          }
+        
+          if (maxHeight) {
+            img.style.maxHeight = maxHeight + 'px';
+            img.removeAttribute('height');
+          }
+        });
+EOD
+        );
 
         if ($this->selectedSorting === ilForumProperties::VIEW_TREE && ($this->selected_post_storage->get($thr_pk) > 0)) {
             $info = $this->getResetLimitedViewInfo();
@@ -4546,9 +4568,24 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
                     ->primary($this->lng->txt('save'), '#')
                     ->withOnLoadCode(function (string $id): string {
                         return "
-                            $('#$id').closest('.modal').find('form').addClass('ilForumNotificationSettingsForm');
-                            $('#$id').closest('.modal').find('form .il-standard-form-header, .il-standard-form-footer').remove();
-                            $('#$id').click(function() { $(this).closest('.modal').find('form').submit(); return false; });
+                        (function () {
+                          const button = document.getElementById('$id');
+                          if (!button) return;
+                        
+                          const modalDialog = button.closest('.modal-dialog');
+                          if (!modalDialog) return;
+
+                          const form = modalDialog.querySelector('.modal-body form');
+                          if (!form) return;
+
+                          form.classList.add('ilForumNotificationSettingsForm');
+                          button.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            if (form) {
+                              form.submit();
+                            }
+                          }, true);
+                        }());
                         ";
                     })
             ]);
@@ -5718,8 +5755,8 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             foreach ($actions as $lng_id => $url) {
                 if ('frm_revoke_censorship' === $lng_id || 'frm_censorship' === $lng_id) {
                     $modalTemplate = new ilTemplate('tpl.forums_censor_modal.html', true, true, 'components/ILIAS/Forum');
-                    $formID = str_replace('.', '_', uniqid('form', true));
-                    $modalTemplate->setVariable('FORM_ID', $formID);
+                    $form_id = str_replace('.', '_', uniqid('form', true));
+                    $modalTemplate->setVariable('FORM_ID', $form_id);
 
                     if ($node->isCensored()) {
                         $modalTemplate->setVariable('BODY', $this->lng->txt('forums_info_censor2_post'));
@@ -5735,8 +5772,21 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
                         $this->lng->txt('submit'),
                         '#'
                     )->withOnLoadCode(
-                        static function (string $id) use ($formID): string {
-                            return "$('#$id').click(function() { $('#$formID').submit(); return false; });";
+                        static function (string $id) use ($form_id): string {
+                            return "
+                            (function () {
+                              const button = document.getElementById('$id');
+                              if (!button) return;
+                            
+                              const form = document.getElementById('$form_id');
+                              if (!form) return;
+                            
+                              button.addEventListener('click', (event) => {
+                                event.preventDefault();
+                                form.submit();
+                              }, true);
+                            }());
+                            ";
                         }
                     );
                     $modal = $this->uiFactory->modal()->roundtrip(
