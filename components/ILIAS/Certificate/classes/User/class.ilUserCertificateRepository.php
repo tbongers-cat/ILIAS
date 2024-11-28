@@ -653,7 +653,7 @@ AND  usr_id = ' . $this->database->quote($userId, 'integer');
 
     /**
      * @return ilUserCertificate[]
-     * @var array{certificate_id: null|string, issue_date: null|DateTime, object: null|string, owner: null|string} $filter
+     * @var array{certificate_id: null|string, issue_date: null|DateTimeImmutable, object: null|string, owner: null|string} $filter
      */
     public function fetchCertificatesForOverview(
         string $user_language,
@@ -673,12 +673,10 @@ AND  usr_id = ' . $this->database->quote($userId, 'integer');
             $column_name = $this->overviewTableColumnToDbColumn($key);
 
             if ($key === 'issue_date') {
-                /** @var null|DateTime $value */
-                $sql_filters[] = $this->database->equals(
-                    $column_name,
-                    (string) $value->getTimestamp(),
-                    ilDBConstants::T_INTEGER
-                );
+                $sql_filter = $this->getIssueDateSqlFilter($column_name, is_array($value) ? $value : []);
+                if ($sql_filter) {
+                    $sql_filters[] = $sql_filter;
+                }
             } else {
                 $sql_filters[] = $this->database->like($column_name, ilDBConstants::T_TEXT, "%$value%");
             }
@@ -714,7 +712,44 @@ AND  usr_id = ' . $this->database->quote($userId, 'integer');
     }
 
     /**
-     * @var array{certificate_id: null|string, issue_date: null|DateTime, object: null|string, owner: null|string} $filter
+     * @param array{from: null|DateTimeImmutable, to: null|DateTimeImmutable} $duration
+     */
+    private function getIssueDateSqlFilter(string $column_name, array $duration): ?string
+    {
+        if (array_keys($duration) === ["from", "to"] && $duration !== ["from" => null, "to" => null]) {
+            $from = $duration["from"];
+            $to = $duration["to"];
+
+            $sql_filter = "";
+            if ($from && $to) {
+                $sql_filter = $column_name
+                    . ' BETWEEN '
+                    . $this->database->quote($from->getTimestamp(), ilDBConstants::T_INTEGER)
+                    . ' AND '
+                    . $this->database->quote($to->getTimestamp(), ilDBConstants::T_INTEGER);
+            }
+
+            if ($from && !$to) {
+                $sql_filter = $column_name
+                    . ' >= '
+                    . $this->database->quote($from->getTimestamp(), ilDBConstants::T_INTEGER);
+            }
+
+            if (!$from && $to) {
+                $sql_filter = $column_name
+                    . ' <= '
+                    . $this->database->quote($to->getTimestamp(), ilDBConstants::T_INTEGER);
+            }
+
+            if ($sql_filter) {
+                return $sql_filter;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @var array{certificate_id: null|string, issue_date: array{from: null|DateTimeImmutable, to: null|DateTimeImmutable}, object: null|string, owner: null|string} $filter
      */
     public function fetchCertificatesForOverviewCount(array $filter, ?Range $range = null): int
     {
@@ -741,12 +776,10 @@ AND  usr_id = ' . $this->database->quote($userId, 'integer');
             }
 
             if ($key === 'issue_date') {
-                /** @var null|DateTime $value */
-                $sql_filters[] = $this->database->equals(
-                    $column_name,
-                    (string) $value->getTimestamp(),
-                    ilDBConstants::T_INTEGER
-                );
+                $sql_filter = $this->getIssueDateSqlFilter($column_name, is_array($value) ? $value : []);
+                if ($sql_filter) {
+                    $sql_filters[] = $sql_filter;
+                }
             } else {
                 $sql_filters[] = $this->database->like($column_name, ilDBConstants::T_TEXT, "%$value%");
             }
