@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 /**
  * Tiny MCE editor class
@@ -383,8 +383,6 @@ class ilTinyMCE extends ilRTE
             if (in_array('img', $a_html_tags)) {
                 //array_push($theme_advanced_buttons, 'advimage');
                 $theme_advanced_buttons[] = 'image';
-                $theme_advanced_buttons[] = 'ibrowser';
-                $theme_advanced_buttons[] = 'ilimgupload';
             }
             if (in_array('a', $a_html_tags)) {
                 $theme_advanced_buttons[] = 'link';
@@ -497,8 +495,6 @@ class ilTinyMCE extends ilRTE
         if (in_array('img', $a_html_tags)) {
             //array_push($theme_advanced_buttons, 'advimage');
             $theme_advanced_buttons[] = 'image';
-            $theme_advanced_buttons[] = 'ibrowser';
-            $theme_advanced_buttons[] = 'ilimgupload';
         }
         if (in_array('a', $a_html_tags)) {
             $theme_advanced_buttons[] = 'link';
