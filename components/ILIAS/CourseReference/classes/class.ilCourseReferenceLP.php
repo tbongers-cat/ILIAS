@@ -26,9 +26,9 @@ class ilCourseReferenceLP extends ilObjectLP
      * @param bool $a_search
      * @return array
      */
-    public function getMembers(bool $a_search = true): array
+    public function getMembers(bool $search = true): array
     {
-        if (!$a_search) {
+        if (!$search) {
             return [];
         }
         $target_ref_id = \ilObjCourseReference::_lookupTargetRefId($this->obj_id);
@@ -48,16 +48,9 @@ class ilCourseReferenceLP extends ilObjectLP
         return \ilLPObjSettings::LP_MODE_DEACTIVATED;
     }
 
-    /**
-     * @param bool $a_lp_active
-     * @return array
-     */
-    public static function getDefaultModes(bool $a_lp_active): array
+    public static function getDefaultModes(bool $lp_active): array
     {
-        return [
-            \ilLPObjSettings::LP_MODE_DEACTIVATED,
-            \ilLPObjSettings::LP_MODE_COURSE_REFERENCE
-        ];
+        return [\ilLPObjSettings::LP_MODE_DEACTIVATED];
     }
 
     /**
@@ -65,6 +58,9 @@ class ilCourseReferenceLP extends ilObjectLP
      */
     public function getValidModes(): array
     {
-        return self::getDefaultModes(true);
+        return [
+            \ilLPObjSettings::LP_MODE_DEACTIVATED,
+            \ilLPObjSettings::LP_MODE_COURSE_REFERENCE
+        ];
     }
 }
