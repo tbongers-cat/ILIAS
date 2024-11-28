@@ -348,7 +348,8 @@ trait ilTestBaseTestCaseTrait
                 $response_builder_mock,
                 $response_builder_mock
             ),
-            $data_signer
+            $data_signer,
+            $http_mock
         );
     }
 
