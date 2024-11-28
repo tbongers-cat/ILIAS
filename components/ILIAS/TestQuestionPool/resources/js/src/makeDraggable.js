@@ -72,10 +72,12 @@ let currentHoverElementForTouch;
  * @param {Event} event
  */
 function dragstartHandler(event) {
-  startMoving(event.target);
-  event.dataTransfer.dropEffect = dragType;
-  event.dataTransfer.effectAllowed = dragType;
-  event.dataTransfer.setDragImage(draggedElement, 0, 0);
+  setTimeout(() => {
+    startMoving(event.target);
+    event.dataTransfer.dropEffect = dragType;
+    event.dataTransfer.effectAllowed = dragType;
+    event.dataTransfer.setDragImage(draggedElement, 0, 0);
+  }, 0);
 }
 
 /**

@@ -1,6 +1,6 @@
 import terser from '@rollup/plugin-terser';
-import copyright from '../../../../../../../scripts/Copyright-Checker/copyright';
-import preserveCopyright from '../../../../../../../scripts/Copyright-Checker/preserveCopyright';
+import copyright from '../../../../../../../scripts/Copyright-Checker/copyright.js';
+import preserveCopyright from '../../../../../../../scripts/Copyright-Checker/preserveCopyright.js';
 
 export default {
   external: [

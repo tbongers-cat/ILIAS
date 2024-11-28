@@ -384,7 +384,6 @@ class ilAssNestedOrderingElementsInputGUI extends ilIdentifiedMultiValuesInputGU
     public function render(string $a_mode = ''): string
     {
         if (!$this->styling_disabled) {
-            $this->getGlobalTpl()->addCss('assets/css/nested_ordering.css');
             $this->getGlobalTpl()->addCss('assets/css/content.css');
         }
 
