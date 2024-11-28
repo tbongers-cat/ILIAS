@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -18,6 +16,8 @@ declare(strict_types=1);
  *
  *********************************************************************/
 
+declare(strict_types=1);
+
 use ILIAS\HTTP\Agent\AgentDetermination;
 
 /**
@@ -28,8 +28,6 @@ use ILIAS\HTTP\Agent\AgentDetermination;
  */
 class ilRTE
 {
-    public const ILIAS_IMG_MANAGER_PLUGIN = 'ilias_image_manager_plugin';
-
     protected ilGlobalTemplateInterface $tpl;
     protected ilCtrlInterface $ctrl;
     protected ilObjUser $user;
