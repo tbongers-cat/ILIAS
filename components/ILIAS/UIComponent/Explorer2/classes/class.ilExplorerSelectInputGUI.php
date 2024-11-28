@@ -38,6 +38,15 @@ abstract class ilExplorerSelectInputGUI extends ilFormPropertyGUI implements ilT
     protected ilExplorerBaseGUI $explorer_gui;
     protected bool $disabled = false;
 
+    /**
+     * The on load code sould only be added once, otherwise the select link
+     * opens two modals and stuff breaks (https://mantis.ilias.de/view.php?id=42821).
+     *
+     * This is only necessary if the input is rendered twice, and might
+     * lead to problems if the post var is changed in between.
+     */
+    protected $on_load_code;
+
     public function __construct(
         string $a_title,
         string $a_postvar,
@@ -258,6 +267,10 @@ abstract class ilExplorerSelectInputGUI extends ilFormPropertyGUI implements ilT
 
     protected function getInitializationOnLoadCode(): string
     {
+        if (isset($this->on_load_code)) {
+            return $this->on_load_code;
+        }
+
         $modal = $this->ui->factory()->modal()->roundtrip(
             'placeholder',
             $this->ui->factory()->legacy('<div id="' . $this->getFieldId() . '_expl_marker"></div>')
@@ -267,7 +280,7 @@ abstract class ilExplorerSelectInputGUI extends ilFormPropertyGUI implements ilT
             ' ',
             $this->ui->renderer()->render($modal)
         );
-        return 'il.Explorer2.initSelect(\'' . $this->getFieldId() . '\',\'' .
+        return $this->on_load_code = 'il.Explorer2.initSelect(\'' . $this->getFieldId() . '\',\'' .
             $rendered_modal . '\',\'' .
             $modal->getShowSignal() . '\',\'' .
             $modal->getCloseSignal() . '\');';
