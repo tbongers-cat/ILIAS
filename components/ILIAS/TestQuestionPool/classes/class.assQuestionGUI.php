@@ -1160,7 +1160,7 @@ abstract class assQuestionGUI
                 $file->setRequired(true);
                 $file->enableFileNameSelection('filename');
 
-                if ($_FILES && $_FILES['file']['tmp_name'] && $file->checkInput()) {
+                if ($save && $_FILES && $_FILES['file']['tmp_name'] && $file->checkInput()) {
                     if (!file_exists($this->object->getSuggestedSolutionPath())) {
                         ilFileUtils::makeDirParents($this->object->getSuggestedSolutionPath());
                     }
@@ -1539,7 +1539,6 @@ abstract class assQuestionGUI
             $this->setQuestionSpecificTabs($this->tabs_gui);
         }
         $this->addBackTab($this->tabs_gui);
-        $this->tabs_gui->setTabActive('edit_question');
     }
 
     protected function setDefaultTabs(ilTabsGUI $tabs_gui): void
@@ -1564,12 +1563,15 @@ abstract class assQuestionGUI
             'suggested_solution',
             $this->ctrl->getLinkTargetByClass($classname, 'suggestedsolution'),
             [
-                'suggestedsolution', 'saveSuggestedSolution',
-                'outSolutionExplorer', 'cancel', 'addSuggestedSolution',
-                'cancelExplorer' , 'linkChilds', 'removeSuggestedSolution'
-            ],
-            $classname,
-            ''
+                'suggestedsolution',
+                'saveSuggestedSolution',
+                'outSolutionExplorer',
+                'cancel',
+                'addSuggestedSolution',
+                'cancelExplorer' ,
+                'linkChilds',
+                'removeSuggestedSolution'
+            ]
         );
     }
 

@@ -699,7 +699,7 @@ abstract class assQuestion implements Question
     public function getSuggestedSolutionPathWeb(): string
     {
         $webdir = ilFileUtils::removeTrailingPathSeparators(CLIENT_WEB_DIR)
-            . "/data/assessment/{$this->obj_id}/{$this->id}/solution/";
+            . "/assessment/{$this->obj_id}/{$this->id}/solution/";
         return str_replace(
             ilFileUtils::removeTrailingPathSeparators(ILIAS_ABSOLUTE_PATH . '/public'),
             ilFileUtils::removeTrailingPathSeparators(ILIAS_HTTP_PATH),
