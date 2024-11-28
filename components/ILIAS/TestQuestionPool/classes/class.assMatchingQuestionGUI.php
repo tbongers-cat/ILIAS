@@ -797,7 +797,7 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         return $template->get();
     }
 
-    private function buildSolutionsArray(int $active_id, array|bool $user_post_solutions): array
+    private function buildSolutionsArray(int $active_id, int $attempt, array|bool $user_post_solutions): array
     {
         if ($active_id === 0) {
             return [];
@@ -807,7 +807,7 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         }
 
         return array_reduce(
-            $this->object->getTestOutputSolutions($active_id, $pass),
+            $this->object->getTestOutputSolutions($active_id, $attempt),
             static function (array $c, array $v): array {
                 if (!array_key_exists($v['value2'], $c)) {
                     $c[$v['value2']] = [$v['value1']];
@@ -843,7 +843,7 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
     public function getTestOutput(
         int $active_id,
-        int $pass,
+        int $attempt,
         bool $is_question_postponed = false,
         array|bool $user_post_solutions = false,
         bool $show_specific_inline_feedback = false
@@ -851,7 +851,7 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $template = new ilTemplate('tpl.il_as_qpl_matching_output.html', true, true, 'components/ILIAS/TestQuestionPool');
         $this->initializePlayerJS();
 
-        $solutions = $this->buildSolutionsArray($active_id, $user_post_solutions);
+        $solutions = $this->buildSolutionsArray($active_id, $attempt, $user_post_solutions);
         $terms = $this->object->getTerms();
         $definitions = $this->object->getDefinitions();
         switch ($this->object->getShuffleMode()) {
