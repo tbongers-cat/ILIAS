@@ -105,7 +105,8 @@ class Init
             return new Services(
                 $c['file_delivery.delivery'],
                 $c['file_delivery.legacy_delivery'],
-                $c['file_delivery.data_signer']
+                $c['file_delivery.data_signer'],
+                $c['http']
             );
         };
     }
