@@ -312,12 +312,12 @@ class ilOnScreenChatGUI implements ilCtrlBaseClassInterface
             $page->addJavaScript('assets/js/modal.js');
             $page->addJavaScript('assets/js/socket.io.min.js');
             $page->addJavaScript('assets/js/Chatroom.min.js');
-            $page->addJavascript('assets/js/moment-with-locales.min.js');
-            $page->addJavascript('assets/js/browser_notifications.js');
-            $page->addJavascript('assets/js/onscreenchat-notifications.js');
-            $page->addJavascript('assets/js/moment.js');
-            $page->addJavascript('assets/js/chat.js');
-            $page->addJavascript('assets/js/onscreenchat.js');
+            $page->addJavaScript('assets/js/moment-with-locales.min.js');
+            $page->addJavaScript('assets/js/browser_notifications.js');
+            $page->addJavaScript('assets/js/onscreenchat-notifications.js');
+            $page->addJavaScript('assets/js/moment.js');
+            $page->addJavaScript('assets/js/chat.js');
+            $page->addJavaScript('assets/js/onscreenchat.js');
             $page->addOnLoadCode("il.Chat.setConfig(" . json_encode($chatConfig, JSON_THROW_ON_ERROR) . ");");
             $page->addOnLoadCode("il.OnScreenChat.setConfig(" . json_encode($guiConfig, JSON_THROW_ON_ERROR) . ");");
             $page->addOnLoadCode("il.OnScreenChat.init();");
