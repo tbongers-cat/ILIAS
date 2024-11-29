@@ -188,14 +188,13 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $image->setPointsUncheckedFieldEnabled($this->object->getIsMultipleChoice());
         $image->setRequired(true);
 
-        if (strlen($this->object->getImageFilename())) {
+        if ($this->object->getImageFilename() !== '') {
             $image->setImage($this->object->getImagePathWeb() . $this->object->getImageFilename());
             $image->setValue($this->object->getImageFilename());
             $image->setAreas($this->object->getAnswers());
             $assessmentSetting = new ilSetting("assessment");
-            $linecolor = (strlen(
-                $assessmentSetting->get("imap_line_color")
-            )) ? "\"#" . $assessmentSetting->get("imap_line_color") . "\"" : "\"#FF0000\"";
+            $linecolor = $assessmentSetting->get("imap_line_color") !== null
+                ? '"#' . $assessmentSetting->get('imap_line_color') . '"' : '"#FF0000"';
             $image->setLineColor($linecolor);
             $image->setImagePath($this->object->getImagePath());
             $image->setImagePathWeb($this->object->getImagePathWeb());
