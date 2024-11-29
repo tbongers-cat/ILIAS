@@ -989,8 +989,10 @@ of ILIAS. The file contains the following fields:
 * **Login, Auth & Registration**
     * Authority to Sign off on Conceptual Changes: [PerPascalSeeland](https://docu.ilias.de/go/usr/31492)
         , [mjansen](https://docu.ilias.de/go/usr/8784)
+        , [tjoussen](https://docu.ilias.de/go/usr/103745)
     * Authority to Sign off on Code Changes: [PerPascalSeeland](https://docu.ilias.de/go/usr/31492)
         , [mjansen](https://docu.ilias.de/go/usr/8784)
+        , [tjoussen](https://docu.ilias.de/go/usr/103745)
     * Authority to Curate Test Cases: [PerPascalSeeland](https://docu.ilias.de/go/usr/31492)
         , [mjansen](https://docu.ilias.de/go/usr/8784)
     * Authority to (De-)Assign Authorities: [PerPascalSeeland](https://docu.ilias.de/go/usr/31492)
