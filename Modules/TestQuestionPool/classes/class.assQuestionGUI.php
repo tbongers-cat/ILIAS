@@ -1235,7 +1235,9 @@ abstract class assQuestionGUI
             $solution_array['type'] = '';
         }
 
-        $solution_type = $this->request->raw('solutiontype');
+        $solution_type = $this->ctrl->getCmd() === 'cancelSuggestedSolution'
+            ? $solution_array["type"]
+            : $this->request->raw('solutiontype');
         if (is_string($solution_type) &&
             strcmp($solution_type, "file") == 0 &&
             strcmp($solution_array["type"], "file") != 0) {
