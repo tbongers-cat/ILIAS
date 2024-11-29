@@ -151,7 +151,7 @@ class ilSoapFunctions
     /**
      * @return soap_fault|SoapFault|string|null
      */
-    public static function getObjectByReference(string $sid, int $a_ref_id, int $user_id)
+    public static function getObjectByReference(string $sid, int $a_ref_id, ?int $user_id = null)
     {
         $soa = new ilSoapObjectAdministration();
         return $soa->getObjectByReference($sid, $a_ref_id, $user_id);
@@ -160,7 +160,7 @@ class ilSoapFunctions
     /**
      * @return soap_fault|SoapFault|string|null
      */
-    public static function getObjectsByTitle(string $sid, string $a_title, int $user_id)
+    public static function getObjectsByTitle(string $sid, string $a_title, ?int $user_id = null)
     {
         $soa = new ilSoapObjectAdministration();
         return $soa->getObjectsByTitle($sid, $a_title, $user_id);
@@ -214,7 +214,7 @@ class ilSoapFunctions
     /**
      * @return soap_fault|SoapFault|string|null
      */
-    public static function searchObjects(string $sid, array $types, string $key, string $combination, int $user_id)
+    public static function searchObjects(string $sid, array $types, string $key, string $combination, ?int $user_id = null)
     {
         $soa = new ilSoapObjectAdministration();
         return $soa->searchObjects($sid, $types, $key, $combination, $user_id);
@@ -232,7 +232,7 @@ class ilSoapFunctions
     /**
      * @return soap_fault|SoapFault|string|null
      */
-    public static function getXMLTree(string $sid, int $ref_id, array $types, int $user_id)
+    public static function getXMLTree(string $sid, int $ref_id, array $types, ?int $user_id = null)
     {
         $soa = new ilSoapObjectAdministration();
         return $soa->getXMLTree($sid, $ref_id, $types, $user_id);
