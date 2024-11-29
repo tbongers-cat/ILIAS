@@ -1092,7 +1092,9 @@ abstract class assQuestionGUI
         $solution = $this->object->getSuggestedSolution(0);
         $options = $this->getTypeOptions();
 
-        $solution_type = $this->request_data_collector->string('solutiontype');
+        $solution_type = $this->ctrl->getCmd() === 'cancelSuggestedSolution'
+            ? $solution->getType()
+            : $this->request_data_collector->string('solutiontype');
         if ($solution_type === SuggestedSolution::TYPE_FILE
             && ($solution === null || $solution->getType() !== SuggestedSolution::TYPE_FILE)
         ) {
