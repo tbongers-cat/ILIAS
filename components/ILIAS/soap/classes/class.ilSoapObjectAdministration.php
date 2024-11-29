@@ -158,7 +158,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
     /**
      * @return soap_fault|SoapFault|string|null
      */
-    public function getObjectByReference(string $sid, int $a_ref_id, int $user_id)
+    public function getObjectByReference(string $sid, int $a_ref_id, ?int $user_id = null)
     {
         $this->initAuth($sid);
         $this->initIlias();
@@ -176,7 +176,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
 
         $xml_writer = new ilObjectXMLWriter();
         $xml_writer->enablePermissionCheck(true);
-        if ($user_id) {
+        if (is_int($user_id)) {
             $xml_writer->setUserId($user_id);
             $xml_writer->enableOperations(true);
         }
@@ -190,7 +190,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
     /**
      * @return soap_fault|SoapFault|string|null
      */
-    public function getObjectsByTitle(string $sid, string $a_title, int $user_id)
+    public function getObjectsByTitle(string $sid, string $a_title, ?int $user_id = null)
     {
         $this->initAuth($sid);
         $this->initIlias();
@@ -244,7 +244,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
 
         $xml_writer = new ilObjectXMLWriter();
         $xml_writer->enablePermissionCheck(true);
-        if ($user_id) {
+        if (is_int($user_id)) {
             $xml_writer->setUserId($user_id);
             $xml_writer->enableOperations(true);
         }
@@ -258,7 +258,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
     /**
      * @return soap_fault|SoapFault|string|null
      */
-    public function searchObjects(string $sid, array $types, string $key, string $combination, int $user_id)
+    public function searchObjects(string $sid, ?array $types, string $key, string $combination, ?int $user_id = null)
     {
         $this->initAuth($sid);
         $this->initIlias();
@@ -329,7 +329,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
             $object_search = new ilLikeObjectSearch($query_parser);
             $object_search->setFilter($types);
             $res = $object_search->performSearch();
-            if ($user_id) {
+            if (is_int($user_id)) {
                 $res->setUserId($user_id);
             }
             $res->setMaxHits(100);
@@ -373,7 +373,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
     /**
      * @return soap_fault|SoapFault|string|null
      */
-    public function getTreeChilds(string $sid, int $ref_id, array $types, int $user_id)
+    public function getTreeChilds(string $sid, int $ref_id, ?array $types, ?int $user_id = null)
     {
         $this->initAuth($sid);
         $this->initIlias();
@@ -401,7 +401,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
             );
         }
 
-        if (!$types) {
+        if (!is_array($types)) {
             $all = true;
         }
 
@@ -419,7 +419,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
         $xml_writer->enablePermissionCheck(true);
         $xml_writer->setObjects($objs);
         $xml_writer->enableOperations(true);
-        if ($user_id) {
+        if (is_int($user_id)) {
             $xml_writer->setUserId($user_id);
         }
 
@@ -432,7 +432,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
     /**
      * @return soap_fault|SoapFault|string|null
      */
-    public function getXMLTree(string $sid, int $ref_id, array $types, int $user_id)
+    public function getXMLTree(string $sid, int $ref_id, ?array $types, ?int $user_id =null)
     {
         $this->initAuth($sid);
         $this->initIlias();
@@ -471,7 +471,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
         $xml_writer->setObjects($nodes);
         $xml_writer->enableOperations(false);
 
-        if ($user_id) {
+        if (is_int($user_id)) {
             $xml_writer->setUserId($user_id);
         }
 
