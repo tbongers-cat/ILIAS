@@ -88,8 +88,8 @@
 
     const saveDraft = (form, settings) => {
       const { url, loadingImgSrc } = settings;
-      const subject = document.getElementById('subject')?.value;
-      const message = document.getElementById('message')?.value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
 
       if (!autosaveActive || !subject || !message) {
         console.log("Skipping autosave...");
