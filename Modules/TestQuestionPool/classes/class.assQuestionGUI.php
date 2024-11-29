@@ -1312,7 +1312,7 @@ abstract class assQuestionGUI
                 $file->setRequired(true);
                 $file->enableFileNameSelection("filename");
 
-                if ($ave && array_key_exists("file", $_FILES) &&
+                if ($save && array_key_exists("file", $_FILES) &&
                     array_key_exists("tmp_name", $_FILES["file"]) &&
                     $_FILES["file"]["tmp_name"] && $file->checkInput()) {
                     if (!file_exists($this->object->getSuggestedSolutionPath())) {
