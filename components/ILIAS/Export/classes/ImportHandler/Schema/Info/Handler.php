@@ -31,14 +31,13 @@ class Handler implements SchemaInfoInterface
     private string $component;
 
     private string $sub_type;
+    private string $file_path;
 
-    private SplFileInfo $file;
-
-    public function withSplFileInfo(
-        SplFileInfo $spl_file_info
-    ): SchemaInfoInterface {
+    public function withFilePath(
+        string $file_path
+    ) {
         $clone = clone $this;
-        $clone->file = $spl_file_info;
+        $clone->file_path = $file_path;
         return $clone;
     }
 
@@ -68,7 +67,7 @@ class Handler implements SchemaInfoInterface
 
     public function getFile(): SplFileInfo
     {
-        return $this->file;
+        return new SplFileInfo($this->file_path);
     }
 
     public function getComponent(): string

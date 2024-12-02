@@ -25,9 +25,9 @@ use SplFileInfo;
 
 interface HandlerInterface
 {
-    public function withSplFileInfo(
-        SplFileInfo $spl_file_info
-    ): HandlerInterface;
+    public function withFilePath(
+        string $file_path
+    );
 
     public function withComponent(
         string $component

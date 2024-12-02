@@ -80,7 +80,7 @@ class Handler implements SchemaFolderInterface
                 continue;
             }
             $element = $this->import_handler->schema()->info()->handler()
-                ->withSplFileInfo(new SplFileInfo($file->getPathname()))
+                ->withFilePath($file->getPathname())
                 ->withComponent((string) $matches[1])
                 ->withSubtype((string) $matches[3])
                 ->withVersion(new Version($matches[4] . (($matches[6] ?? '') ? '.' . $matches[6] : '')));
