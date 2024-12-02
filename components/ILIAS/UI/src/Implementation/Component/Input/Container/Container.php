@@ -26,6 +26,7 @@ use ILIAS\UI\Implementation\Component\Input\NameSource;
 use ILIAS\UI\Implementation\Component\Input\InputData;
 use ILIAS\Refinery\Transformation;
 use Psr\Http\Message\ServerRequestInterface;
+use ILIAS\Data\Result;
 
 /**
  * This implements commonalities between all forms.
@@ -39,6 +40,7 @@ abstract class Container implements C\Input\Container\Container
     protected ?string $error = null;
     protected ?string $dedicated_name = null;
     protected CI\Input\NameSource $name_source;
+    protected ?Result $result = null;
 
     /**
      * For the implementation of NameSource.
@@ -65,6 +67,11 @@ abstract class Container implements C\Input\Container\Container
 
         $clone = clone $this;
         $clone->input_group = $this->getInputGroup()->withInput($post_data);
+        $clone->result = $clone->input_group->getContent();
+
+        if (!$clone->result->isok()) {
+            $clone->setError($clone->result->error());
+        }
 
         return $clone;
     }
@@ -98,12 +105,10 @@ abstract class Container implements C\Input\Container\Container
      */
     public function getData()
     {
-        $content = $this->getInputGroup()->getContent();
-        if (!$content->isok()) {
-            $this->setError($content->error());
-            return null;
+        if (null !== $this->result && $this->result->isOK()) {
+            return $this->result->value();
         }
-        return $content->value();
+        return null;
     }
 
     public function getDedicatedName(): ?string
