@@ -204,6 +204,9 @@ class ilTestParticipantsGUI
 
     protected function addUserSearchControls(ilToolbarGUI $toolbar): void
     {
+        if (!$this->test_access->checkManageParticipantsAccess()) {
+            return;
+        }
         ilRepositorySearchGUI::fillAutoCompleteToolbar(
             $this,
             $toolbar,
@@ -223,7 +226,9 @@ class ilTestParticipantsGUI
 
     private function addExportDropdown(ilToolbarGUI $toolbar): void
     {
-        $toolbar->addSeparator();
+        if ($this->test_access->checkManageParticipantsAccess()) {
+            $toolbar->addSeparator();
+        }
 
         if ($this->test_obj->getAnonymity()) {
             $this->ctrl->setParameterByClass(self::class, self::EXPORT_TYPE_PARAMETER, 'all_test_runs_a');
