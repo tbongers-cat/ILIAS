@@ -146,7 +146,7 @@ class RequestDataCollector
         return $this->get($key, $this->refinery->kindlyTo()->string()) ?? '';
     }
 
-    public function bool(string $key): bool
+    public function bool(string $key): ?bool
     {
         return $this->get($key, $this->refinery->kindlyTo()->bool());
     }
