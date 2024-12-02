@@ -99,8 +99,10 @@ class ilTestSkillLevelThresholdsGUI
             $elements = $table->getInputElements($this->request_data_collector->retrieveArrayOfStringsFromPost('rendered'));
             foreach ($elements as $elm) {
                 if (!$elm->checkInput()
-                    || !is_int($elm->getInput())) {
+                    || floor($elm->getInput()) !== $elm->getInput()) {
                     $valid = false;
+                    $elm->setValue('');
+                    continue;
                 }
 
                 $elm->setValue($this->request_data_collector->strVal($elm->getPostVar()));
