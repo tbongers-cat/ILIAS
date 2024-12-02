@@ -50,6 +50,9 @@ class ilDclTableListGUI
         $this->ui_factory = $DIC->ui()->factory();
         $this->renderer = $DIC->ui()->renderer();
 
+        $this->tabs->setSetupMode(true);
+        $DIC->help()->setScreenId('dcl_tables');
+
         $this->parent_obj = $a_parent_obj;
 
         if (!$this->checkAccess()) {
