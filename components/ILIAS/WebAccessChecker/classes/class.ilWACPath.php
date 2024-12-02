@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -99,7 +100,7 @@ class ilWACPath
         );
 
 
-        foreach ($result as $k => $v) {
+        foreach (array_keys($result) as $k => $v) {
             if (is_numeric($k)) {
                 unset($result[$k]);
             }
@@ -233,7 +234,7 @@ class ilWACPath
     protected function normalizePath(string $path): string
     {
         $path = ltrim($path, '.');
-        $path = urldecode($path);
+        $path = rawurldecode($path);
 
         // cut everything before "data/" (for installations using a subdirectory)
         $path = strstr($path, '/' . self::DIR_DATA . '/');
@@ -244,8 +245,8 @@ class ilWACPath
         $real_data_dir = realpath("./" . self::DIR_DATA);
         $realpath = realpath("." . $original_path);
 
-        if (strpos($realpath, $real_data_dir) !== 0) {
-            throw new ilWACException(ilWACException::ACCESS_DENIED);
+        if (!str_starts_with($realpath, $real_data_dir)) {
+            throw new ilWACException(ilWACException::NOT_FOUND, "Path is not in data directory");
         }
 
         $normalized_path = ltrim(
@@ -257,7 +258,7 @@ class ilWACPath
             '/'
         );
 
-        return "/" . self::DIR_DATA . '/' . $normalized_path . (!empty($query) ? '?' . $query : '');
+        return "/" . self::DIR_DATA . '/' . $normalized_path . (empty($query) ? '' : '?' . $query);
     }
 
     public function getPrefix(): string
