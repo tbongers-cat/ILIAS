@@ -35,6 +35,7 @@
 @use "_ui-component_file.scss";
 @use "_ui-component_markdown.scss";
 @use "_ui-component_rating.scss";
+@use "ui-component_section";
 @use "_ui-component_numeric.scss";
 @use "_ui-component_optionalgroups.scss";
 
@@ -42,7 +43,7 @@
 /// general form container styling
 .c-form {
   margin-bottom: l.$il-margin-xxlarge-vertical;
-  
+
   .c-form__header,
   .c-form__footer {
     display: grid;

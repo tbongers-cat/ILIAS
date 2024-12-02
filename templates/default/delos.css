@@ -4528,6 +4528,30 @@ hr.il-divider-with-label {
   width: 55%;
 }
 
+.c-form .c-input[data-il-ui-component=section-field-input].c-input {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.c-form .c-input[data-il-ui-component=section-field-input].c-input > label {
+  order: 1;
+  width: 100%;
+  margin-bottom: 9px;
+  font-size: 1.5rem;
+}
+.c-form .c-input[data-il-ui-component=section-field-input].c-input > .c-input__help-byline {
+  width: 100%;
+  order: 2;
+}
+.c-form .c-input[data-il-ui-component=section-field-input].c-input > .c-input__error-msg {
+  order: 3;
+}
+.c-form .c-input[data-il-ui-component=section-field-input].c-input > .c-input__field {
+  margin-top: 12px;
+  width: 100%;
+  order: 4;
+}
+
 .c-input-numeric {
   min-width: 60px;
 }
