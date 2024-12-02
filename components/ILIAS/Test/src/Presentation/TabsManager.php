@@ -54,7 +54,6 @@ class TabsManager
     public const TAB_ID_PARTICIPANTS = 'participants';
 
     public const TAB_ID_YOUR_RESULTS = 'your_results';
-    public const SUBTAB_ID_PARTICIPANTS_RESULTS = 'participantsresults';
     public const SUBTAB_ID_MY_RESULTS = 'myresults';
     public const SUBTAB_ID_LO_RESULTS = 'loresults';
     public const SUBTAB_ID_HIGHSCORE = 'highscore';
@@ -189,7 +188,8 @@ class TabsManager
 
     protected function checkParticipantsTabAccess(): bool
     {
-        if ($this->test_access->checkManageParticipantsAccess()) {
+        if ($this->test_access->checkManageParticipantsAccess()
+            || $this->test_access->checkParticipantsResultsAccess()) {
             return true;
         }
 

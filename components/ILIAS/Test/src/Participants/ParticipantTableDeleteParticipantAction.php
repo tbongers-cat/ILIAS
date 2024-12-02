@@ -47,9 +47,9 @@ class ParticipantTableDeleteParticipantAction implements TableAction
         return self::ACTION_ID;
     }
 
-    public function isEnabled(): bool
+    public function isAvailable(): bool
     {
-        return $this->test_access->getAccess()->checkAccess('write', '', $this->test_obj->getRefId());
+        return $this->test_access->checkManageParticipantsAccess();
     }
 
     public function getTableAction(
@@ -95,9 +95,9 @@ class ParticipantTableDeleteParticipantAction implements TableAction
         array $selected_participants,
         bool $all_participants_selected
     ): ?Modal {
-        if (!$this->test_access->getAccess()->checkAccess('write', '', $this->test_obj->getRefId())) {
+        if (!$this->test_access->checkManageParticipantsAccess()) {
             $this->tpl->setOnScreenMessage(
-                \ilGlobalTemplateInterface::MESSAGE_TYPE_SUCCESS,
+                \ilGlobalTemplateInterface::MESSAGE_TYPE_FAILURE,
                 $this->lng->txt('no_permission'),
                 true
             );

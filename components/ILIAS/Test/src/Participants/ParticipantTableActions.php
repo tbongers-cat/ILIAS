@@ -71,7 +71,7 @@ class ParticipantTableActions
                     $action_token,
                     $action_type_token
                 ): ?StandardAction {
-                    if (!$action->isEnabled()) {
+                    if (!$action->isAvailable()) {
                         return null;
                     }
 

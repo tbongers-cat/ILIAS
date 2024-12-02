@@ -46,7 +46,7 @@ class ParticipantTableShowResultsAction implements TableAction
         return self::ACTION_ID;
     }
 
-    public function isEnabled(): bool
+    public function isAvailable(): bool
     {
         return $this->test_access->checkParticipantsResultsAccess()
             && $this->test_obj->evalTotalPersons() > 0;
@@ -90,7 +90,7 @@ class ParticipantTableShowResultsAction implements TableAction
                 $this->test_obj->getTestId()
             )) {
                 $this->tpl->setOnScreenMessage(
-                    \ilGlobalTemplateInterface::MESSAGE_TYPE_SUCCESS,
+                    \ilGlobalTemplateInterface::MESSAGE_TYPE_FAILURE,
                     $this->lng->txt('no_permission'),
                     true
                 );

@@ -92,7 +92,8 @@ class ilTestParticipantsGUI
 
     public function executeCommand(): void
     {
-        if (!$this->test_access->checkManageParticipantsAccess()) {
+        if (!$this->test_access->checkManageParticipantsAccess()
+            && !$this->test_access->checkParticipantsResultsAccess()) {
             ilObjTestGUI::accessViolationRedirect();
         }
         switch ($this->ctrl->getNextClass($this)) {
@@ -354,7 +355,8 @@ class ilTestParticipantsGUI
                     $this->main_tpl,
                     $this->ui_factory,
                     $this->refinery,
-                    $this->participant_repository
+                    $this->participant_repository,
+                    $this->test_access
                 ),
                 ParticipantTableExtraTimeAction::ACTION_ID => new ParticipantTableExtraTimeAction(
                     $this->lng,
@@ -363,6 +365,7 @@ class ilTestParticipantsGUI
                     $this->ui_factory,
                     $this->participant_repository,
                     $this->current_user,
+                    $this->test_access,
                     $this->test_obj
                 ),
                 ParticipantTableFinishTestAction::ACTION_ID => new ParticipantTableFinishTestAction(
@@ -375,6 +378,7 @@ class ilTestParticipantsGUI
                         $this->db
                     ),
                     $this->current_user,
+                    $this->test_access,
                     $this->test_obj,
                     $this->test_pass_result_repository
                 ),

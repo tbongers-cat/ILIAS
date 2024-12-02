@@ -27,9 +27,14 @@ class ilTestParticipantAccessFilterFactory
 
     public function getManageParticipantsUserFilter(int $ref_id): Closure
     {
-        return function (array $user_ids) use ($ref_id): array {
+        $perm = 'write';
+        if ($this->access->checkAccess('tst_results', '', $ref_id, 'tst')) {
+            $perm = 'tst_results';
+        }
+
+        return function (array $user_ids) use ($ref_id, $perm): array {
             return $this->access->filterUserIdsByRbacOrPositionOfCurrentUser(
-                'write',
+                $perm,
                 ilOrgUnitOperation::OP_MANAGE_PARTICIPANTS,
                 $ref_id,
                 $user_ids
