@@ -55,7 +55,7 @@ class ilTestQuestionPoolExportOptionXML extends ilBasicLegacyExportOption
 
     public function getLabel(): string
     {
-        return $this->lng->txt('exp_xml');
+        return "{$this->lng->txt('exp_create_file')} (xml)";
     }
 
     public function onDeleteFiles(
