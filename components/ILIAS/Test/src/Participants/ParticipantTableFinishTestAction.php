@@ -43,6 +43,7 @@ class ParticipantTableFinishTestAction implements TableAction
         private readonly \ilDBInterface $db,
         private readonly \ilTestProcessLockerFactory $process_locker_factory,
         private readonly \ilObjUser $user,
+        private readonly \ilTestAccess $test_access,
         private readonly \ilObjTest $test_obj,
         private readonly TestResultRepository $test_pass_result_repository
     ) {
@@ -53,9 +54,9 @@ class ParticipantTableFinishTestAction implements TableAction
         return self::ACTION_ID;
     }
 
-    public function isEnabled(): bool
+    public function isAvailable(): bool
     {
-        return true;
+        return $this->test_access->checkManageParticipantsAccess();
     }
 
     public function getTableAction(
@@ -109,6 +110,15 @@ class ParticipantTableFinishTestAction implements TableAction
         array $selected_participants,
         bool $all_participants_selected
     ): ?Modal {
+        if (!$this->test_access->checkManageParticipantsAccess()) {
+            $this->tpl->setOnScreenMessage(
+                \ilGlobalTemplateInterface::MESSAGE_TYPE_FAILURE,
+                $this->lng->txt('no_permission'),
+                true
+            );
+            return null;
+        }
+
         // This is required here because of late test object binding
         $test_session_factory = new \ilTestSessionFactory(
             $this->test_obj,

@@ -27,7 +27,7 @@ use Psr\Http\Message\ServerRequestInterface;
 interface TableAction
 {
     public function getActionId(): string;
-    public function isEnabled(): bool;
+    public function isAvailable(): bool;
     public function getTableAction(
         URLBuilder $url_builder,
         URLBuilderToken $row_id_token,

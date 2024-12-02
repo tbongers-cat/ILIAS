@@ -38,7 +38,8 @@ class ParticipantTableIpRangeAction implements TableAction
         private readonly \ilGlobalTemplateInterface $tpl,
         private readonly UIFactory $ui_factory,
         private readonly Refinery $refinery,
-        protected readonly ParticipantRepository $participant_repository
+        private readonly ParticipantRepository $participant_repository,
+        private readonly \ilTestAccess $test_access,
     ) {
     }
 
@@ -47,9 +48,9 @@ class ParticipantTableIpRangeAction implements TableAction
         return self::ACTION_ID;
     }
 
-    public function isEnabled(): bool
+    public function isAvailable(): bool
     {
-        return true;
+        return $this->test_access->checkManageParticipantsAccess();
     }
 
     public function getTableAction(
@@ -155,6 +156,15 @@ class ParticipantTableIpRangeAction implements TableAction
         array $selected_participants,
         bool $all_participants_selected
     ): ?Modal {
+        if (!$this->test_access->checkManageParticipantsAccess()) {
+            $this->tpl->setOnScreenMessage(
+                \ilGlobalTemplateInterface::MESSAGE_TYPE_FAILURE,
+                $this->lng->txt('no_permission'),
+                true
+            );
+            return null;
+        }
+
         $modal = $this->getModal(
             $url_builder,
             $selected_participants,
