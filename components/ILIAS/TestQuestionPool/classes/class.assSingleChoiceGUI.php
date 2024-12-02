@@ -531,7 +531,7 @@ class assSingleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         $this->object->setMultilineAnswerSetting($types);
         $this->object->setShuffle($this->request_data_collector->bool('shuffle') ?? false);
 
-        $choice = $this->request_data_collector->rawArray('choice');
+        $choice = $this->request_data_collector->raw('choice');
         if (isset($choice['imagename']) && is_array($choice['imagename']) && $types === '1') {
             $this->object->setIsSingleline(true);
             $this->tpl->setOnScreenMessage('info', $this->lng->txt('info_answer_type_change'), true);

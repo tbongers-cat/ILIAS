@@ -60,7 +60,7 @@ class assTextSubsetGUI extends assQuestionGUI implements ilGuiQuestionScoringAdj
          * sk 26.09.22: This is horrific but I don't see a better way right now,
          * without needing to check most questions for side-effects.
          */
-        $answers = $this->request_data_collector->rawArray('answers');
+        $answers = $this->request_data_collector->raw('answers');
         $this->answers_from_post = $answers['answer'] ?? [];
 
         if (!(!$always && $this->editQuestion(true))) {

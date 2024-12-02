@@ -20,7 +20,6 @@ namespace ILIAS\TestQuestionPool;
 
 use Closure;
 use GuzzleHttp\Psr7\UploadedFile;
-use ILIAS\FileUpload\DTO\UploadResult;
 use ILIAS\Refinery\Transformation;
 use ILIAS\Repository\BaseGUIRequest;
 use ILIAS\Refinery\ConstraintViolationException;
