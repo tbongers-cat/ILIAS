@@ -644,7 +644,7 @@ class assMultipleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScorin
         $types = $this->request_data_collector->int('types');
         $this->object->setMultilineAnswerSetting($types);
 
-        $choice = $this->request_data_collector->rawArray('choice');
+        $choice = $this->request_data_collector->raw('choice');
         if (isset($choice['imagename']) && is_array($choice['imagename']) && $types === 1) {
             $this->object->setIsSingleline(true);
             $this->tpl->setOnScreenMessage('info', $this->lng->txt('info_answer_type_change'), true);
@@ -665,7 +665,7 @@ class assMultipleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScorin
         $this->object->flushAnswers();
 
         $choice = $this->cleanupAnswerText(
-            $this->request_data_collector->rawArray('choice'),
+            $this->request_data_collector->raw('choice'),
             !$this->object->isSingleline()
         );
 

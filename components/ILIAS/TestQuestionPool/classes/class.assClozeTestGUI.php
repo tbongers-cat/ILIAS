@@ -163,7 +163,7 @@ JS;
             $cloze_type = $this->request_data_collector->int('clozetype_' . $idx);
             $this->object->setGapType($idx, $cloze_type);
 
-            $gap_idx = $this->request_data_collector->rawArray('gap_' . $idx);
+            $gap_idx = $this->request_data_collector->raw('gap_' . $idx);
 
             if ($cloze_type === assClozeGap::TYPE_TEXT || $cloze_type === assClozeGap::TYPE_SELECT) {
                 $answer = $answer_trafo->transform($gap_idx['answer'] ?? []);
