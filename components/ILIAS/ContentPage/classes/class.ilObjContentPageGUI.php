@@ -439,6 +439,10 @@ class ilObjContentPageGUI extends ilObject2GUI implements ilContentPageObjectCon
             $this->error->raiseError($this->lng->txt('permission_denied'), $this->error->MESSAGE);
         }
 
+        if (strtolower($this->ctrl->getCmd() ?? '') === 'infoscreen') {
+            $this->ctrl->redirectByClass(ilInfoScreenGUI::class, 'showSummary');
+        }
+
         $this->tabs_gui->activateTab(self::UI_TAB_ID_INFO);
 
         $info = new ilInfoScreenGUI($this);
@@ -488,10 +492,6 @@ class ilObjContentPageGUI extends ilObject2GUI implements ilContentPageObjectCon
 
     public function infoScreen(): void
     {
-        // @todo: removed deprecated ilCtrl methods, this needs inspection by a maintainer.
-        // $this->ctrl->setCmd('showSummary');
-        // $this->ctrl->setCmdClass(ilInfoScreenGUI::class);
-
         $this->infoScreenForward();
     }
 
