@@ -31,6 +31,7 @@ class ilDclTableEditGUI
     protected ilGlobalTemplateInterface $tpl;
     protected ilToolbarGUI $toolbar;
     protected Form $form;
+    protected ilHelpGUI $help;
     protected ILIAS\HTTP\Services $http;
     protected ILIAS\Refinery\Factory $refinery;
     protected ilDclTableListGUI $parent_object;
@@ -48,6 +49,7 @@ class ilDclTableEditGUI
         $this->toolbar = $DIC->toolbar();
         $this->parent_object = $a_parent_obj;
         $this->obj_id = $a_parent_obj->getObjId();
+        $this->help = $DIC->help();
         $this->http = $DIC->http();
         $this->refinery = $DIC->refinery();
         $this->ui_factory = $DIC->ui()->factory();
@@ -85,11 +87,13 @@ class ilDclTableEditGUI
 
     public function create(): void
     {
+        $this->help->setSubScreenId('create');
         $this->tpl->setContent($this->lng->txt('dcl_new_table') . $this->ui_renderer->render($this->initForm()));
     }
 
     public function edit(): void
     {
+        $this->help->setSubScreenId('edit');
         $this->tpl->setContent(sprintf($this->lng->txt('dcl_edit_table'), $this->table->getTitle()) . $this->ui_renderer->render($this->initForm('edit')));
     }
 
