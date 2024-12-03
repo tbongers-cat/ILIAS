@@ -188,7 +188,7 @@ class assNumeric extends assQuestion implements ilObjQuestionScoringAdjustable, 
     {
         $eval = new EvalMath();
         $eval->suppress_errors = true;
-        $result = $eval->e($value);
+        $result = $eval->e((string) $value);
         if (($result === false) || ($result === true)) {
             return false;
         }
