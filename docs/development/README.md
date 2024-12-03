@@ -43,5 +43,4 @@ A general overview on our processes can be found in the [development guide](http
 
 ### Templating
 
-- [System Styles](../../templates/README.md): Information about templating in ILIAS
-- [SCSS Guidelines](../../templeates/Guidelines_SCSS-Coding.md): Guidelines about the use of SCSS syntax in ILIAS for style code changes.
+- [System Styles](../../templates/Readme.md): Information about templating in ILIAS- [SCSS Guidelines](../../templates/Guidelines_SCSS-Coding.md): Guidelines about the use of SCSS syntax in ILIAS for style code changes.
