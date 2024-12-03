@@ -1072,7 +1072,11 @@ class assClozeTest extends assQuestion implements ilObjQuestionScoringAdjustable
         $solution_submit = [];
 
         foreach ($this->questionpool_request->getPostKeys() as $post_key) {
-            $value = $this->questionpool_request->string($post_key);
+            try {
+                $value = $this->questionpool_request->string($post_key);
+            } catch (Exception $e) {
+                continue;
+            }
             if ($value === '' || !preg_match('/^gap_(\d+)/', $post_key, $matches)) {
                 continue;
             }
