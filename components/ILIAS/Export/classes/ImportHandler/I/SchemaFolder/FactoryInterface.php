@@ -18,11 +18,14 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\Export\ImportHandler\I\Schema\Folder;
+namespace ILIAS\Export\ImportHandler\I\SchemaFolder;
 
-use ILIAS\Export\ImportHandler\I\Schema\Folder\HandlerInterface as SchemaFolderInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\HandlerInterface as SchemaFolderInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\Info\FactoryInterface as SchemaFolderInfoFactoryInterface;
 
 interface FactoryInterface
 {
+    public function info(): SchemaFolderInfoFactoryInterface;
+
     public function handler(): SchemaFolderInterface;
 }

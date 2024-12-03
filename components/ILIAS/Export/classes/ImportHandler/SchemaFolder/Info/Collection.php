@@ -18,11 +18,11 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\Export\ImportHandler\Schema\Info;
+namespace ILIAS\Export\ImportHandler\SchemaFolder\Info;
 
 use ILIAS\Data\Version;
-use ILIAS\Export\ImportHandler\I\Schema\Info\CollectionInterface as SchemaInfoCollectionInterface;
-use ILIAS\Export\ImportHandler\I\Schema\Info\HandlerInterface as SchemaInfoInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\Info\CollectionInterface as SchemaInfoCollectionInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\Info\HandlerInterface as SchemaInfoInterface;
 use ilLogger;
 
 class Collection implements SchemaInfoCollectionInterface

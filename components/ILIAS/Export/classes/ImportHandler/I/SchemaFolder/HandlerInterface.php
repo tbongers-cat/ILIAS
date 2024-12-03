@@ -18,34 +18,17 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\Export\ImportHandler\I\Schema\Info;
+namespace ILIAS\Export\ImportHandler\I\SchemaFolder;
 
 use ILIAS\Data\Version;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\Info\HandlerInterface as SchemaInfoInterface;
 use SplFileInfo;
 
 interface HandlerInterface
 {
-    public function withFilePath(
-        string $file_path
-    );
+    public function getLatest(string $type, string $sub_type = ''): SchemaInfoInterface|null;
 
-    public function withComponent(
-        string $component
-    ): HandlerInterface;
+    public function getByVersion(Version $version, string $type, string $sub_type = ''): SchemaInfoInterface|null;
 
-    public function withSubtype(
-        string $sub_type
-    ): HandlerInterface;
-
-    public function withVersion(
-        Version $version
-    ): HandlerInterface;
-
-    public function getFile(): SplFileInfo;
-
-    public function getComponent(): string;
-
-    public function getSubtype(): string;
-
-    public function getVersion(): Version;
+    public function getByVersionOrLatest(Version $version, string $type, string $sub_type = ''): SchemaInfoInterface|null;
 }
