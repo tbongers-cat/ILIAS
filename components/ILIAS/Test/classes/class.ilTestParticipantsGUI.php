@@ -230,23 +230,11 @@ class ilTestParticipantsGUI
             $toolbar->addSeparator();
         }
 
-        if ($this->test_obj->getAnonymity()) {
-            $this->ctrl->setParameterByClass(self::class, self::EXPORT_TYPE_PARAMETER, 'all_test_runs_a');
-            $options = [
-                $this->ui_factory->button()->shy(
-                    $this->lng->txt('exp_scored_test_attempt'),
-                    $this->ctrl->getLinkTargetByClass(self::class, 'exportResults')
-                )
-            ];
-        } else {
-            $options = $this->buildOptionsForTestWithNames();
-        }
-
-        $options = $this->addPluginExportsToOptions($options);
-
         $this->ctrl->clearParameterByClass(self::class, 'export_type');
         $toolbar->addComponent(
-            $this->ui_factory->dropdown()->standard($options)->withLabel($this->lng->txt('exp_eval_data'))
+            $this->ui_factory->dropdown()->standard(
+                $this->buildOptionsForTestWithNames()
+            )->withLabel($this->lng->txt('exp_eval_data'))
         );
     }
 
