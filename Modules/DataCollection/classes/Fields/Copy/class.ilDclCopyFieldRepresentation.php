@@ -47,7 +47,7 @@ class ilDclCopyFieldRepresentation extends ilDclBaseFieldRepresentation
         $copy_id = $this->getField()->getProperty(ilDclBaseFieldModel::PROP_REFERENCE);
         $copy_field = ilDclCache::getFieldCache($copy_id);
         if ($copy_field->getTableId() !== 0) {
-            $copy_table =  ilDclCache::getTableCache($copy_field->getTableId());
+            $copy_table = ilDclCache::getTableCache($copy_field->getTableId());
             foreach ($copy_table->getRecords() as $record) {
                 $option = $record->getRecordField($copy_field->getId())->getPlainText();
                 if (!in_array($option, $options)) {
