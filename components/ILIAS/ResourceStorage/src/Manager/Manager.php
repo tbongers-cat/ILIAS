@@ -39,7 +39,6 @@ use ILIAS\ResourceStorage\Revision\RevisionStatus;
  */
 class Manager extends BaseManager
 {
-
     /**
      * @description Creates a new resource from an upload, the status in this case is always PUBLISHED.
      */
