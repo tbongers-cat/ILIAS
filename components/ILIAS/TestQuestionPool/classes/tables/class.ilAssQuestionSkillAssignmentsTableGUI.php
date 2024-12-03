@@ -106,7 +106,7 @@ class ilAssQuestionSkillAssignmentsTableGUI extends ilTable2GUI
     {
         $assignments = $this->skillQuestionAssignmentList->getAssignmentsByQuestionId($a_set['question_id']);
 
-        $this->ctrl->setParameter($this->parent_obj, 'question_id', $a_set['question_id']);
+        $this->ctrl->setParameter($this->parent_obj, 'q_id', $a_set['question_id']);
 
         $this->tpl->setCurrentBlock('question_title');
         $this->tpl->setVariable('ROWSPAN', $this->getRowspan($assignments));

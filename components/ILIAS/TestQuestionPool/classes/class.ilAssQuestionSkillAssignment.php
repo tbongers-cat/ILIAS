@@ -16,6 +16,8 @@
  *
  *********************************************************************/
 
+declare(strict_types=1);
+
 use ILIAS\Skill\Service\SkillTreeService;
 
 /**
@@ -31,57 +33,17 @@ class ilAssQuestionSkillAssignment
     public const EVAL_MODE_BY_QUESTION_RESULT = 'result';
     public const EVAL_MODE_BY_QUESTION_SOLUTION = 'solution';
 
+    private ilDBInterface $db;
+    private int $parentObjId;
+    private int $questionId;
+    private int $skillBaseId;
+    private int $skillTrefId;
+    private int $skillPoints;
+    private string $skillTitle = '';
+    private string $skillPath = '';
+    private string $evalMode;
 
-    /**
-     * @var ilDBInterface
-     */
-    private $db;
-
-    /**
-     * @var integer
-     */
-    private $parentObjId;
-
-    /**
-     * @var integer
-     */
-    private $questionId;
-
-    /**
-     * @var integer
-     */
-    private $skillBaseId;
-
-    /**
-     * @var integer
-     */
-    private $skillTrefId;
-
-    /**
-     * @var integer
-     */
-    private $skillPoints;
-
-    /**
-     * @var string
-     */
-    private $skillTitle;
-
-    /**
-     * @var string
-     */
-    private $skillPath;
-
-    /**
-     * @var string
-     */
-    private $evalMode;
-
-    /**
-     * @var ilAssQuestionSolutionComparisonExpressionList
-     */
-    private $solutionComparisonExpressionList;
-
+    private ilAssQuestionSolutionComparisonExpressionList $solutionComparisonExpressionList;
     private SkillTreeService $skill_tree_service;
 
     public function __construct(ilDBInterface $db)
@@ -108,7 +70,7 @@ class ilAssQuestionSkillAssignment
         $res = $this->db->queryF(
             $query,
             ['integer', 'integer', 'integer', 'integer'],
-            [$this->getParentObjId(), $this->getQuestionId(), $this->getSkillBaseId(), $this->getSkillTrefId()]
+            [$this->parentObjId, $this->questionId, $this->skillBaseId, $this->skillTrefId]
         );
 
         $row = $this->db->fetchAssoc($res);
@@ -235,81 +197,51 @@ class ilAssQuestionSkillAssignment
         return $row['cnt'] > 0;
     }
 
-    /**
-     * @param int $skillPoints
-     */
-    public function setSkillPoints($skillPoints): void
+    public function setSkillPoints(int $skillPoints): void
     {
         $this->skillPoints = $skillPoints;
     }
 
-    /**
-     * @return int
-     */
     public function getSkillPoints(): int
     {
         return $this->skillPoints;
     }
 
-    /**
-     * @param int $questionId
-     */
-    public function setQuestionId($questionId): void
+    public function setQuestionId(int $questionId): void
     {
         $this->questionId = $questionId;
     }
 
-    /**
-     * @return int
-     */
     public function getQuestionId(): int
     {
         return $this->questionId;
     }
 
-    /**
-     * @param int $skillBaseId
-     */
-    public function setSkillBaseId($skillBaseId): void
+    public function setSkillBaseId(int $skillBaseId): void
     {
         $this->skillBaseId = $skillBaseId;
     }
 
-    /**
-     * @return int
-     */
     public function getSkillBaseId(): int
     {
         return $this->skillBaseId;
     }
 
-    /**
-     * @param int $skillTrefId
-     */
-    public function setSkillTrefId($skillTrefId): void
+    public function setSkillTrefId(int $skillTrefId): void
     {
         $this->skillTrefId = $skillTrefId;
     }
 
-    /**
-     * @return int
-     */
     public function getSkillTrefId(): int
     {
         return $this->skillTrefId;
     }
 
-    /**
-     * @param int $parentObjId
-     */
-    public function setParentObjId($parentObjId): void
+    public function setParentObjId(int $parentObjId): void
     {
         $this->parentObjId = $parentObjId;
     }
 
-    /**
-     * @return int
-     */
     public function getParentObjId(): int
     {
         return $this->parentObjId;
@@ -371,14 +303,14 @@ class ilAssQuestionSkillAssignment
         return $this->evalMode;
     }
 
-    public function setEvalMode($evalMode): void
+    public function setEvalMode(string $evalMode): void
     {
         $this->evalMode = $evalMode;
     }
 
     public function hasEvalModeBySolution(): bool
     {
-        return $this->getEvalMode() == self::EVAL_MODE_BY_QUESTION_SOLUTION;
+        return $this->evalMode === self::EVAL_MODE_BY_QUESTION_SOLUTION;
     }
 
     public function initSolutionComparisonExpressionList(): void
@@ -412,7 +344,6 @@ class ilAssQuestionSkillAssignment
 
     /**
      * @param mixed $skillPoints
-     * @return bool
      */
     public function isValidSkillPoint($skillPoints): bool
     {
