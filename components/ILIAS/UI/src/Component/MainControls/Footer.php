@@ -57,15 +57,16 @@ interface Footer extends Component
     public function withAdditionalText(string ...$texts): self;
 
     /**
-     * @deprecated injecting modals into the footer will be removed in the future.
-     *             triggers or signals can be injected using withAdditionalLinkGroup(),
-     *             withAdditionalLink(), or withAdditionalIcon().
-     */
-    public function withAdditionalModalAndTrigger(Modal\RoundTrip $roundTripModal, Shy $shyButton): self;
-
-    /**
      * Get a Footer like this but with a permanent URL to the current page, which can
      * be copied by the users.
      */
     public function withPermanentURL(URI $url): self;
+
+    /**
+     * @deprecated injecting modals into the footer will be removed in the future.
+     * Get a Footer like this but add an additional modal wich will be rendered to the page. Please be aware that
+     * you must add the Triggerer for the modal to the footer as well and connect the modal to the triggerer.
+     * Do not use this to add Modals not related to the Footer.
+     */
+    public function withAdditionalModal(Modal\RoundTrip $modal): self;
 }

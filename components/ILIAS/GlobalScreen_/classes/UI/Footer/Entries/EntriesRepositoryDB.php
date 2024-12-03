@@ -23,6 +23,7 @@ use ILIAS\GlobalScreen\Scope\MainMenu\Collector\Renderer\Hasher;
 use ILIAS\GlobalScreen\Scope\Footer\Factory\canHaveParent;
 use ILIAS\GlobalScreen\Scope\Footer\Factory\Link;
 use ILIAS\GlobalScreen\Scope\Footer\Factory\Modal;
+use ILIAS\GlobalScreen\Scope\Footer\Factory\hasAction;
 
 class EntriesRepositoryDB implements EntriesRepository
 {
@@ -62,8 +63,8 @@ class EntriesRepositoryDB implements EntriesRepository
                 true,
                 $item->getPosition(),
                 $item->getParentIdentification()->serialize(),
-                (string) $item->getAction(),
-                $item->mustOpenInNewViewport(),
+                $item instanceof hasAction ? (string) $item->getAction() : '',
+                $item instanceof hasAction ? $item->mustOpenInNewViewport() : false,
                 true
             );
             $this->store($new);

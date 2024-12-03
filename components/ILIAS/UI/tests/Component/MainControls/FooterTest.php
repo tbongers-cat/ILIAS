@@ -81,11 +81,14 @@ class FooterTest extends ILIAS_UI_TestBase
         $modal_mock->method('getShowSignal')->willReturn($signal_mock);
 
         $shy_mock = $this->shy_mock;
-        $shy_mock->expects($this->once())->method('withOnClick')->with($signal_mock);
+        $shy_mock->expects($this->once())->method('withOnClick')->with($signal_mock)->willReturnSelf();
+
+        $shy_mock = $shy_mock->withOnClick($modal_mock->getShowSignal());
 
         /** @var I\MainControls\Footer $footer */
         $footer = $this->getUIFactory()->mainControls()->footer();
-        $footer = $footer->withAdditionalModalAndTrigger($modal_mock, $shy_mock);
+        $footer = $footer->withAdditionalLink($shy_mock);
+        $footer = $footer->withAdditionalModal($modal_mock);
 
         $this->assertCount(1, $footer->getModals());
         $this->assertCount(1, $footer->getAdditionalLinks());
@@ -225,8 +228,11 @@ EOT;
         $shy_mock = $this->shy_mock;
         $shy_mock->method('withOnClick')->willReturnSelf();
 
+        $shy_mock = $shy_mock->withOnClick($modal_mock->getShowSignal());
+
         $footer = $this->getUIFactory()->mainControls()->footer();
-        $footer = $footer->withAdditionalModalAndTrigger($modal_mock, $shy_mock);
+        $footer = $footer->withAdditionalLink($shy_mock);
+        $footer = $footer->withAdditionalModal($modal_mock);
 
         $renderer = $this->getDefaultRenderer(null, [$modal_mock, $shy_mock]);
         $actual_html = $renderer->render($footer);

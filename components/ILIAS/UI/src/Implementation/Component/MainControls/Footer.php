@@ -134,13 +134,11 @@ class Footer implements MainControls\Footer
         return $this->modals;
     }
 
-    public function withAdditionalModalAndTrigger(Modal\RoundTrip $roundTripModal, Shy $shyButton): self
+    public function withAdditionalModal(Modal\RoundTrip $modal): MainControls\Footer
     {
-        $linked_shy_button = $shyButton->withOnClick($roundTripModal->getShowSignal());
-
         $clone = clone $this;
-        $clone->links[] = $linked_shy_button;
-        $clone->modals[] = $roundTripModal;
+        $clone->modals[] = $modal;
         return $clone;
     }
+
 }
