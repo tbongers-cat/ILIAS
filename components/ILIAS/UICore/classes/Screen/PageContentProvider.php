@@ -171,11 +171,6 @@ class PageContentProvider extends AbstractModificationProvider
         return $subtab_title . $tab_title;
     }
 
-    public function getFooterModification(CalledContexts $screen_context_stack): ?FooterModification
-    {
-        return $this->globalScreen()->layout()->factory()->footer()->withModification(fn(?Footer $footer): ?Footer => $this->dic['legalDocuments']->modifyFooter($footer));
-    }
-
     /**
      * @deprecated this is needed as long as the PageContentProvider is the only place which stores the permalink
      */

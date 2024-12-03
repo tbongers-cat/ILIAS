@@ -48,6 +48,7 @@ use ilObjUser;
 use ILIAS\LegalDocuments\ConsumerToolbox\Routing;
 use ILIAS\Data\Result\Error;
 use ilStartUpGUI;
+use Closure;
 
 require_once __DIR__ . '/ContainerMock.php';
 
@@ -122,9 +123,9 @@ class ConductorTest extends TestCase
 
     public function testModifyFooter(): void
     {
-        $footer = $this->mock(Footer::class);
+        $footer = fn() => null;
 
-        $modify_footer = function (Footer $f) use ($footer) {
+        $modify_footer = function (Closure $f) use ($footer) {
             $this->assertSame($footer, $f);
             return $f;
         };

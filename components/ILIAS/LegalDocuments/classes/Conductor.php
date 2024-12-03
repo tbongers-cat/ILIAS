@@ -29,7 +29,6 @@ use Closure;
 use ILIAS\Data\Result;
 use ILIAS\Data\Result\Ok;
 use ILIAS\Data\Result\Error;
-use ILIAS\UI\Component\MainControls\Footer;
 use ILIAS\Refinery\Transformation;
 use ilStartUpGUI;
 use ilObjUser;
@@ -102,9 +101,9 @@ class Conductor
         );
     }
 
-    public function modifyFooter(Footer $footer): Footer
+    public function modifyFooter(Closure $footer): Closure
     {
-        return array_reduce($this->internal->all('footer'), fn($footer, Closure $proc) => $proc($footer), $footer);
+        return array_reduce($this->internal->all('footer'), fn(Closure $footer, Closure $proc) => $proc($footer), $footer);
     }
 
     public function agree(string $gui, string $cmd): void
