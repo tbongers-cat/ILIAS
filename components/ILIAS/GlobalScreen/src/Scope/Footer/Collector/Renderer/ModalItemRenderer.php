@@ -32,7 +32,10 @@ class ModalItemRenderer extends AbstractFooterItemRenderer
     protected function getSpecificComponentForItem(isItem $item): Component|array
     {
         /** @var Modal $item */
-        return $this->ui->factory()->button()->shy($item->getTitle(), '#');
+        return $this->ui->factory()->button()->shy($item->getTitle(), '#')
+                        ->withOnClick(
+                            $item->getModal()->getShowSignal()
+                        );
     }
 
 }

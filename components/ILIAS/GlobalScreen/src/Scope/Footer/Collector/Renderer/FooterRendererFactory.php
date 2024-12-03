@@ -65,7 +65,7 @@ class FooterRendererFactory
         return match (true) {
             $item instanceof Group => $footer->withAdditionalLinkGroup($item->getTitle(), $component),
             $item instanceof Link => $item->hasParent() ? $footer : $footer->withAdditionalLink($component),
-            $item instanceof Modal => $footer->withAdditionalModalAndTrigger($item->getModal(), $component),
+            $item instanceof Modal => $footer->withAdditionalModal($item->getModal()),
             $item instanceof Permanent => $footer->withPermanentURL($item->getURI()),
             $item instanceof Text => $footer->withAdditionalText($item->getText()),
             default => $footer,
