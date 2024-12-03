@@ -319,7 +319,7 @@ class ilAssQuestionSkillAssignmentsGUI
 
     private function showSkillSelectionCmd(): void
     {
-        $this->ctrl->saveParameter($this, 'question_id');
+        $this->ctrl->saveParameter($this, 'q_id');
         $question_id = $this->request_data_collector->getQuestionId();
 
         $assignmentList = new ilAssQuestionSkillAssignmentList($this->db);
@@ -474,7 +474,7 @@ class ilAssQuestionSkillAssignmentsGUI
         $table->setSkillQuestionAssignmentList($assignmentList);
         $table->setData($this->orderQuestionData($this->questionList->getQuestionDataArray()));
 
-        $this->tpl->setContent($this->ctrl->getHTML($table));
+        $this->tpl->setContent($table->getHTML());
     }
 
     private function isSyncOriginalPossibleAndAllowed($questionId): bool
@@ -506,7 +506,7 @@ class ilAssQuestionSkillAssignmentsGUI
         $confirmation->setHeaderText($this->lng->txt('qpl_sync_quest_skl_assigns_confirmation'));
 
         $confirmation->setFormAction($this->ctrl->getFormAction($this));
-        $confirmation->addHiddenItem('question_id', $this->request_data_collector->getQuestionId());
+        $confirmation->addHiddenItem('q_id', $this->request_data_collector->getQuestionId());
         $confirmation->setConfirm($this->lng->txt('yes'), self::CMD_SYNC_ORIGINAL);
         $confirmation->setCancel($this->lng->txt('no'), self::CMD_SHOW_SKILL_QUEST_ASSIGNS);
 
@@ -617,14 +617,17 @@ class ilAssQuestionSkillAssignmentsGUI
     /**
      * @return ilAssQuestionSkillAssignment
      */
-    private function buildQuestionSkillAssignment($questionId, $skillBaseId, $skillTrefId): ilAssQuestionSkillAssignment
-    {
+    private function buildQuestionSkillAssignment(
+        int $question_id,
+        int $skill_base_id,
+        int $skill_tref_id
+    ): ilAssQuestionSkillAssignment {
         $assignment = new ilAssQuestionSkillAssignment($this->db);
 
         $assignment->setParentObjId($this->getQuestionContainerId());
-        $assignment->setQuestionId($questionId);
-        $assignment->setSkillBaseId($skillBaseId);
-        $assignment->setSkillTrefId($skillTrefId);
+        $assignment->setQuestionId($question_id);
+        $assignment->setSkillBaseId($skill_base_id);
+        $assignment->setSkillTrefId($skill_tref_id);
 
         $assignment->loadFromDb();
         $assignment->loadAdditionalSkillData();
@@ -690,7 +693,7 @@ class ilAssQuestionSkillAssignmentsGUI
 
     private function keepAssignmentParameters(): void
     {
-        $this->ctrl->saveParameter($this, 'question_id');
+        $this->ctrl->saveParameter($this, 'q_id');
         $this->ctrl->saveParameter($this, 'skill_base_id');
         $this->ctrl->saveParameter($this, 'skill_tref_id');
     }
