@@ -50,7 +50,7 @@ class InlineSrcBuilder implements SrcBuilder
         $sream_resolver = $revision->maybeStreamResolver();
         if ($sream_resolver !== null) {
             $stream = $sream_resolver->getStream();
-            if($sream_resolver->isInMemory()) {
+            if ($sream_resolver->isInMemory()) {
                 return $this->buildDataURLFromStream($stream);
             }
 
