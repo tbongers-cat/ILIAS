@@ -198,7 +198,7 @@ class ilAssQuestionSkillAssignmentsGUI
     private function saveSkillPointsCmd(): void
     {
         $success = true;
-        $skill_points = $this->request_data_collector->rawArray('skill_points');
+        $skill_points = $this->request_data_collector->raw('skill_points');
 
         for ($i = 0; $i < 2; $i++) {
             foreach ($skill_points as $assignment_key => $skill_point) {
