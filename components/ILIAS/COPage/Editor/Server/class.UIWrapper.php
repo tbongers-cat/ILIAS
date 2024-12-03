@@ -218,7 +218,7 @@ class UIWrapper
 
         $html =
             substr($html, 0, $footer_pos) .
-            preg_replace("#\\<" . $tag . "(.*)/" . $tag . ">#iUs", $button_html, substr($html, $footer_pos), 1);
+            preg_replace("#\\<" . $tag . "([^>]*)btn-default(.*)/" . $tag . ">#iUs", $button_html, substr($html, $footer_pos), 1);
 
         if ($id !== "") {
             $html = str_replace("<form ", "<form id='$id' ", $html);
