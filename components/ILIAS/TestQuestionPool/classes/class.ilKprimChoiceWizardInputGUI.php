@@ -84,7 +84,7 @@ class ilKprimChoiceWizardInputGUI extends ilSingleChoiceWizardInputGUI
         $a_value = $this->cleanupAnswerText($a_value, $answer_type === 'multiLine');
         $answers = $this->forms_helper->transformArray($a_value, 'answer', $this->refinery->kindlyTo()->string());
         $imagename = $this->forms_helper->transformArray($a_value, 'imagename', $this->refinery->kindlyTo()->string());
-        $correctness = $this->forms_helper->transformArray($a_value, 'imagename', $this->refinery->kindlyTo()->bool());
+        $correctness = $this->forms_helper->transformArray($a_value, 'correctness', $this->refinery->kindlyTo()->bool());
 
         foreach ($answers as $index => $value) {
             $answer = new ilAssKprimChoiceAnswer();
