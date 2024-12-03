@@ -1089,7 +1089,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
         if ($qsa_import_fails->failedImportsRegistered()) {
             $button = $this->ui_factory->button()->standard(
                 $this->lng->txt('ass_skl_import_fails_remove_btn'),
-                $this->ctrl->getLinkTarget($this, 'renoveImportFails')
+                $this->ctrl->getLinkTargetByClass([ilRepositoryGUI::class, self::class], 'renoveImportFails')
             );
             $this->tpl->setOnScreenMessage(
                 'failure',
@@ -1103,7 +1103,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
         if ($this->rbac_system->checkAccess('write', $this->request_data_collector->getRefId())) {
             $btn = $this->ui_factory->button()->primary(
                 $this->lng->txt('ass_create_question'),
-                $this->ctrl->getLinkTarget($this, 'createQuestionForm')
+                $this->ctrl->getLinkTargetByClass([ilRepositoryGUI::class, self::class], 'createQuestionForm')
             );
             $this->toolbar->addComponent($btn);
 
@@ -1121,7 +1121,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
             if (ilSession::get('qpl_clipboard') != null && count(ilSession::get('qpl_clipboard'))) {
                 $btn_paste = $this->ui_factory->button()->standard(
                     $this->lng->txt('paste'),
-                    $this->ctrl->getLinkTarget($this, 'paste')
+                    $this->ctrl->getLinkTargetByClass([ilRepositoryGUI::class, self::class], 'paste')
                 );
                 $this->toolbar->addComponent($btn_paste);
             }
@@ -1215,11 +1215,11 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
     {
         $this->tabs_gui->activateTab('print_view');
         $this->ctrl->setParameter($this, 'output', 'overview');
-        $output_link = $this->ctrl->getLinkTarget($this, 'print');
+        $output_link = $this->ctrl->getLinkTargetByClass([ilRepositoryGUI::class, self::class], 'print');
         $this->ctrl->setParameter($this, 'output', 'detailed_output_solutions');
-        $output_link_detailed = $this->ctrl->getLinkTarget($this, 'print');
+        $output_link_detailed = $this->ctrl->getLinkTargetByClass([ilRepositoryGUI::class, self::class], 'print');
         $this->ctrl->setParameter($this, 'output', 'detailed_output_printview');
-        $output_link_printview = $this->ctrl->getLinkTarget($this, 'print');
+        $output_link_printview = $this->ctrl->getLinkTargetByClass([ilRepositoryGUI::class, self::class], 'print');
 
         $mode = $this->ui_factory->dropdown()->standard([
             $this->ui_factory->button()->shy($this->lng->txt('overview'), $output_link),
@@ -1409,7 +1409,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
                 $this->ctrl->clearParameterByClass(self::class, 'q_id');
                 $ilLocator->addItem(
                     $this->object->getTitle(),
-                    $this->ctrl->getLinkTarget($this, ''),
+                    $this->ctrl->getLinkTargetByClass([ilRepositoryGUI::class, self::class], ''),
                     '',
                     $this->request_data_collector->getRefId()
                 );
@@ -1549,7 +1549,10 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
         if ($with_read_access) {
             $this->tabs_gui->addTarget(
                 'assQuestions',
-                $this->ctrl->getLinkTarget($this, self::DEFAULT_CMD),
+                $this->ctrl->getLinkTargetByClass(
+                    [ilRepositoryGUI::class, self::class],
+                    self::DEFAULT_CMD
+                ),
                 [
                     self::DEFAULT_CMD,
                     'filter',
@@ -1617,15 +1620,15 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
             // properties
             $this->tabs_gui->addTarget(
                 'settings',
-                $this->ctrl->getLinkTargetByClass('ilObjQuestionPoolSettingsGeneralGUI'),
+                $this->ctrl->getLinkTargetByClass(ilObjQuestionPoolSettingsGeneralGUI::class),
                 [],
-                ['ilObjQuestionPoolSettingsGeneralGUI', 'ilObjTaxonomyGUI']
+                [ilObjQuestionPoolSettingsGeneralGUI::class, ilObjTaxonomyGUI::class]
             );
 
             // skill service
             if ($this->isSkillsTabRequired()) {
                 $link = $this->ctrl->getLinkTargetByClass(
-                    ['ilQuestionPoolSkillAdministrationGUI', 'ilAssQuestionSkillAssignmentsGUI'],
+                    [ilQuestionPoolSkillAdministrationGUI::class, ilAssQuestionSkillAssignmentsGUI::class],
                     ilAssQuestionSkillAssignmentsGUI::CMD_SHOW_SKILL_QUEST_ASSIGNS
                 );
 
@@ -1637,7 +1640,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
             // print view
             $this->tabs_gui->addTarget(
                 'print_view',
-                $this->ctrl->getLinkTarget($this, 'print'),
+                $this->ctrl->getLinkTargetByClass([ilRepositoryGUI::class, self::class], 'print'),
                 ['print'],
                 '',
                 ''
@@ -1660,7 +1663,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
         if ($with_write_access) {
             $this->tabs_gui->addTarget(
                 'export',
-                $this->ctrl->getLinkTargetByClass('ilexportgui', ''),
+                $this->ctrl->getLinkTargetByClass(ilExportGUI::class, ''),
                 '',
                 'ilexportgui'
             );
@@ -1669,7 +1672,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
         if ($this->access->checkAccess('edit_permission', '', $this->object->getRefId())) {
             $this->tabs_gui->addTarget(
                 'perm_settings',
-                $this->ctrl->getLinkTargetByClass([get_class($this), 'ilpermissiongui'], 'perm'),
+                $this->ctrl->getLinkTargetByClass([ilRepositoryGUI::class, self::class, ilPermissionGUI::class], 'perm'),
                 ['perm', 'info', 'owner'],
                 'ilpermissiongui'
             );
