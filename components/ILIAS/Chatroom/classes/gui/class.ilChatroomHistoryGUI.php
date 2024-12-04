@@ -123,8 +123,6 @@ class ilChatroomHistoryGUI extends ilChatroomGUIHandler
 
         $this->gui->switchToVisibleMode();
 
-        $this->mainTpl->addCss('assets/css/chatroom.css');
-
         // should be able to grep templates
         if ($export) {
             $roomTpl = new ilGlobalTemplate('tpl.history_export.html', true, true, 'components/ILIAS/Chatroom');
