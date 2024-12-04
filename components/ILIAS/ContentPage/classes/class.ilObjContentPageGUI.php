@@ -376,7 +376,6 @@ class ilObjContentPageGUI extends ilObject2GUI implements ilContentPageObjectCon
                 $this->tabs_gui->activateTab(self::UI_TAB_ID_EXPORT);
 
                 $gui = new ilExportGUI($this);
-                $gui->addFormat('xml');
                 $this->ctrl->forwardCommand($gui);
                 break;
 
