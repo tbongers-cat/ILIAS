@@ -199,9 +199,7 @@ class ilRTE
                     if (ilObject::_lookupType((int) $mob) === 'mob') {
                         $mob_obj = new ilObjMediaObject((int) $mob);
                         $replace = 'il_' . $matches[1][$idx] . '_mob_' . $mob;
-                        $path_to_file = ilWACSignedPath::signFile(
-                            ILIAS_HTTP_PATH . '/public/data/' . CLIENT_ID . '/mobs/mm_' . $mob . '/' . $mob_obj->getTitle()
-                        );
+                        $path_to_file = $mob_obj->getStandardSrc();
                         $resulttext = str_replace("src=\"$replace\"", "src=\"" . $path_to_file . "\"", $resulttext);
                     }
                 }
