@@ -66,7 +66,7 @@ class ilForumTopicTableGUI extends ilTable2GUI
         $this->setExternalSegmentation(true);
 
         parent::__construct($a_parent_obj, $a_parent_cmd);
-        $this->mainTemplate->addCss('./components/ILIAS/Forum/css/forum_table.css');
+        $this->mainTemplate->addCss('./assets/css/forum_table.css');
         $this->is_post_draft_allowed = ilForumPostDraft::isSavePostDraftAllowed();
     }
 
