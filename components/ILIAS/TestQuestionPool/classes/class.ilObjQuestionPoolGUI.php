@@ -1603,16 +1603,16 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
             );
         }
         if ($with_read_access) {
-            $this->tabs_gui->addTarget(
+            $this->tabs_gui->addTab(
                 'info_short',
+                $this->lng->txt('info_short'),
                 $this->ctrl->getLinkTargetByClass(
                     [
                         ilRepositoryGUI::class,
                         self::class,
                         ilInfoScreenGUI::class
                     ]
-                ),
-                ['']
+                )
             );
         }
 
@@ -1729,6 +1729,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
             $this->error->raiseError($this->lng->txt('msg_no_perm_read'));
         }
 
+        $this->tabs_gui->activateTab('info_short');
         $info = new ilInfoScreenGUI($this);
         $info->enablePrivateNotes();
         $info->addMetaDataSections($this->object->getId(), 0, $this->object->getType());
