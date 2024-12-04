@@ -588,4 +588,4 @@ are printed bold**, all other fields might be omitted. A minimal example is
     "session_max_idle": 1800
   }
   ```
-  * *session_max_idle* (type: number) maximum session idle (in minutes)
+  * *session_max_idle* (type: number) maximum session idle (in seconds)

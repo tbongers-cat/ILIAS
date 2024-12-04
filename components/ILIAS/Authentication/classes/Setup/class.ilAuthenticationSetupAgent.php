@@ -25,7 +25,7 @@ class ilAuthenticationSetupAgent implements Setup\Agent
 {
     use Setup\Agent\HasNoNamedObjective;
 
-    protected const DEFAULT_SESSION_EXPIRE = 30;
+    protected const DEFAULT_SESSION_EXPIRE_IN_SECONDS = 1_800;
 
     public function __construct(protected Refinery\Factory $refinery)
     {
@@ -39,7 +39,7 @@ class ilAuthenticationSetupAgent implements Setup\Agent
     public function getArrayToConfigTransformation(): Refinery\Transformation
     {
         return $this->refinery->custom()->transformation(function ($data): \ilAuthenticationSetupConfig {
-            return new ilAuthenticationSetupConfig($data["session_max_idle"] ?? self::DEFAULT_SESSION_EXPIRE);
+            return new ilAuthenticationSetupConfig($data["session_max_idle"] ?? self::DEFAULT_SESSION_EXPIRE_IN_SECONDS);
         });
     }
 
@@ -49,7 +49,9 @@ class ilAuthenticationSetupAgent implements Setup\Agent
             return new ilSessionMaxIdleIsSetObjective($config);
         }
 
-        return new ilSessionMaxIdleIsSetObjective(new ilAuthenticationSetupConfig(self::DEFAULT_SESSION_EXPIRE));
+        return new ilSessionMaxIdleIsSetObjective(
+            new ilAuthenticationSetupConfig(self::DEFAULT_SESSION_EXPIRE_IN_SECONDS)
+        );
     }
 
     public function getUpdateObjective(Setup\Config $config = null): Setup\Objective
