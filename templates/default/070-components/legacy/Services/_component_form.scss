@@ -106,6 +106,7 @@ select[size] {
 
 .form-control {
 	display: block;
+	width: 100%;
 	height: $il-input-min-height;
 	padding: $il-padding-base-vertical $il-padding-base-horizontal;
 	font-size: $il-standard-form-font-size;
@@ -155,6 +156,10 @@ select[size] {
 	textarea & {
 		height: auto;
 	}
+}
+
+select.form-control {
+	width: auto;
 }
 
 .form-control.form-control-sm.il-input-tag-container {
