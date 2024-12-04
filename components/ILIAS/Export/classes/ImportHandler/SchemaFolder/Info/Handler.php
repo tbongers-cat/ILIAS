@@ -68,7 +68,7 @@ class Handler implements SchemaInfoInterface
 
     public function getFile(): SplFileInfo
     {
-        return $this->spl_file_info;#new SplFileInfo($this->file_path);
+        return $this->spl_file_info;
     }
 
     public function getComponent(): string
