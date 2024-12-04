@@ -82,7 +82,7 @@ class ilTestEvalObjectiveOrientedGUI extends ilTestServiceGUI
         }
 
         $this->toolbar->addComponent(
-            $this->ui->factory()->button()->standard($this->lng->txt('print'), '')
+            $this->ui_factory->button()->standard($this->lng->txt('print'), '')
                 ->withOnLoadCode(fn($id) => "$('#$id').on('click', ()=>{window.print();})")
         );
 
