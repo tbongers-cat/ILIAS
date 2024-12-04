@@ -1270,7 +1270,7 @@ class ilObjTest extends ilObject
     /**
      * @param array<int> $active_ids
      */
-    private function removeTestActives(array $active_ids)
+    public function removeTestActives(array $active_ids): void
     {
         $IN_activeIds = $this->db->in('active_id', $active_ids, false, 'integer');
         $this->db->manipulate("DELETE FROM tst_active WHERE $IN_activeIds");
