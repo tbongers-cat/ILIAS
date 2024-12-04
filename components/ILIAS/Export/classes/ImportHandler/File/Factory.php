@@ -29,12 +29,14 @@ use ILIAS\Export\ImportHandler\I\File\FactoryInterface as FileFactory;
 use ILIAS\Export\ImportHandler\I\File\Namespace\FactoryInterface as FileNamespaceFactoryInterface;
 use ILIAS\Export\ImportHandler\I\File\XML\FactoryInterface as XMLFileFactoryInterface;
 use ILIAS\Export\ImportHandler\I\File\XSD\FactoryInterface as XSDFileFactoryInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\HandlerInterface as SchemaFolderInterface;
 use ILIAS\Export\ImportStatus\ilFactory as ImportStatusFactory;
 use ilLanguage;
 use ilLogger;
 
 class Factory implements FileFactory
 {
+    protected SchemaFolderInterface $schema_folder;
     protected ImportHandlerFactoryInterface $import_handler;
     protected ilLogger $logger;
     protected ilLanguage $lng;
@@ -46,13 +48,15 @@ class Factory implements FileFactory
         ImportStatusFactory $import_status_factory,
         ilLogger $logger,
         ilLanguage $lng,
-        DataFactory $data_factory
+        DataFactory $data_factory,
+        SchemaFolderInterface $schema_folder
     ) {
         $this->import_handler = $import_handler;
         $this->import_status_factory = $import_status_factory;
         $this->logger = $logger;
         $this->lng = $lng;
         $this->data_factory = $data_factory;
+        $this->schema_folder = $schema_folder;
     }
 
     public function xml(): XMLFileFactoryInterface
@@ -62,7 +66,8 @@ class Factory implements FileFactory
             $this->import_status_factory,
             $this->logger,
             $this->lng,
-            $this->data_factory
+            $this->data_factory,
+            $this->schema_folder
         );
     }
 
