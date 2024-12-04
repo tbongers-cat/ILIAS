@@ -268,7 +268,7 @@ class assSingleChoiceImport extends assQuestionImport
                 $DIC['ilLog']->write(__METHOD__ . ': import mob from dir: ' . $importfile);
 
                 $media_object = ilObjMediaObject::_saveTempFileAsMediaObject(basename($importfile), $importfile, false);
-                ilObjMediaObject::_saveUsage($media_object->getId(), "qpl:html", $this->object->getId());
+                ilObjMediaObject::_saveUsage($media_object->getId(), 'qpl:html', $this->object->getId());
                 $questiontext = str_replace("src=\"" . $mob["mob"] . "\"", "src=\"" . "il_" . IL_INST_ID . "_mob_" . $media_object->getId() . "\"", $questiontext);
                 foreach ($answers as $key => $value) {
                     $answer_obj = $answers[$key];
@@ -303,14 +303,12 @@ class assSingleChoiceImport extends assQuestionImport
             );
         }
         $this->object->saveToDb();
-        if (count($item->suggested_solutions)) {
-            foreach ($item->suggested_solutions as $suggested_solution) {
-                $this->importSuggestedSolution(
-                    $this->object->getId(),
-                    $suggested_solution["solution"]->getContent(),
-                    $suggested_solution["gap_index"]
-                );
-            }
+        foreach ($item->suggested_solutions as $suggested_solution) {
+            $this->importSuggestedSolution(
+                $this->object->getId(),
+                $suggested_solution["solution"]->getContent(),
+                $suggested_solution["gap_index"]
+            );
         }
         if ($tst_id > 0) {
             $q_1_id = $this->object->getId();
