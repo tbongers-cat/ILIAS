@@ -27,6 +27,7 @@ use ILIAS\Export\ImportHandler\I\File\XML\Manifest\FactoryInterface as ManifestF
 use ILIAS\Export\ImportHandler\I\File\XML\Manifest\HandlerCollectionInterface as ManifestXMLFileCollectionInterface;
 use ILIAS\Export\ImportHandler\I\File\XML\Manifest\HandlerInterface as ManifestXMLFileInterface;
 use ILIAS\Export\ImportStatus\ilFactory as ImportStatusFactory;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\HandlerInterface as SchemaFolderInterface;
 use ilLogger;
 
 class Factory implements ManifestFileFactoryInterface
@@ -34,15 +35,18 @@ class Factory implements ManifestFileFactoryInterface
     protected ImportHandlerFactoryInterface $import_handler;
     protected ilLogger $logger;
     protected ImportStatusFactory $import_status_factory;
+    protected SchemaFolderInterface $schema_folder;
 
     public function __construct(
         ImportHandlerFactoryInterface $import_handler,
         ilLogger $logger,
-        ImportStatusFactory $import_status_factory
+        ImportStatusFactory $import_status_factory,
+        SchemaFolderInterface $schema_folder
     ) {
         $this->import_handler = $import_handler;
         $this->logger = $logger;
         $this->import_status_factory = $import_status_factory;
+        $this->schema_folder = $schema_folder;
     }
 
     public function handler(): ManifestXMLFileInterface
@@ -55,7 +59,7 @@ class Factory implements ManifestFileFactoryInterface
             $this->import_handler->path(),
             $this->import_handler->file()->xml(),
             $this->import_handler->file()->xsd(),
-            $this->import_handler->schema()->folder()->handler()
+            $this->schema_folder
         );
     }
 
