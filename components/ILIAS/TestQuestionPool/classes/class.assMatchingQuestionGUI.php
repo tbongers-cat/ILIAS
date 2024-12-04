@@ -885,12 +885,14 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             $template->parseCurrentBlock();
         }
 
-        foreach ($terms as $term) {
-            $this->populateTerm($term);
-            $template->setCurrentBlock('draggable');
-            $template->setVariable('ID_DRAGGABLE', $term->getIdentifier());
-            $template->parseCurrentBlock();
-        }
+        $template->setVariable(
+            'TERMS_PRESENTATION_SOURCE',
+            array_reduce(
+                $terms,
+                fn(string $c, assAnswerMatchingTerm $v) => $c . $this->buildTermHtml($v),
+                ''
+            )
+        );
 
         $template->setVariable('QUESTIONTEXT', $this->object->getQuestionForHTMLOutput());
 
