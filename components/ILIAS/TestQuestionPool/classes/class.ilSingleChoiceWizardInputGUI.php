@@ -273,7 +273,6 @@ class ilSingleChoiceWizardInputGUI extends ilTextInputGUI
         }
         $image_names = $this->forms_helper->transformArray($data, 'imagename', $this->refinery->kindlyTo()->string());
 
-
         if (is_array($_FILES) && count($_FILES) && $this->getSingleline() && (!$this->hideImages)) {
             if (is_array($_FILES[$this->getPostVar()]['error']['image'])) {
                 foreach ($_FILES[$this->getPostVar()]['error']['image'] as $index => $error) {
@@ -293,7 +292,9 @@ class ilSingleChoiceWizardInputGUI extends ilTextInputGUI
 
                             case UPLOAD_ERR_NO_FILE:
                                 if (
-                                    $this->getRequired() && !$this->forms_helper->inArray($image_names, $index)
+                                    !$this->forms_helper->inArray($image_names, $index)
+                                    && !$this->forms_helper->inArray($answers, $index)
+                                    && $this->getRequired()
                                 ) {
                                     $this->setAlert($this->lng->txt('form_msg_file_no_upload'));
                                     return false;

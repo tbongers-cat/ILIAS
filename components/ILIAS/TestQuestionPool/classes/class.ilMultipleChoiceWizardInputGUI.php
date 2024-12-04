@@ -80,7 +80,7 @@ class ilMultipleChoiceWizardInputGUI extends ilSingleChoiceWizardInputGUI
             $this->setAlert($this->lng->txt($answers));
             return false;
         }
-        $images = $this->forms_helper->transformArray($data, 'imagename', $this->refinery->kindlyTo()->string());
+        $image_names = $this->forms_helper->transformArray($data, 'imagename', $this->refinery->kindlyTo()->string());
 
         // check upload
         if (is_array($_FILES) && count($_FILES) && $this->getSingleline()) {
@@ -103,7 +103,7 @@ class ilMultipleChoiceWizardInputGUI extends ilSingleChoiceWizardInputGUI
 
                                 case UPLOAD_ERR_NO_FILE:
                                     if (
-                                        !$this->forms_helper->inArray($images, $index)
+                                        !$this->forms_helper->inArray($image_names, $index)
                                         && !$this->forms_helper->inArray($answers, $index)
                                         && $this->getRequired()
                                     ) {
