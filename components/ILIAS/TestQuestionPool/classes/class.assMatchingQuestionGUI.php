@@ -878,7 +878,7 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         }
 
         foreach ($definitions as $definition) {
-            $terms = $this->populateDefinition($definition, $solutions, $terms);
+            $terms = $this->populateDefinition($template, $definition, $solutions, $terms);
             $template->setCurrentBlock('droparea');
             $template->setVariable('ID_DROPAREA', $definition->getIdentifier());
             $template->setVariable('QUESTION_ID', $this->object->getId());
