@@ -45,7 +45,6 @@ class ilAssQuestionSkillAssignmentPropertyFormGUI extends ilPropertyFormGUI
         global $DIC;
         $this->ui_factory = $DIC['ui.factory'];
         $this->ui_renderer = $DIC['ui.renderer'];
-
         parent::__construct();
     }
 
