@@ -840,6 +840,9 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
 
         $default_html = $this->renderer->render($vc_container);
         $modals = $this->renderer->render($this->modal_collection);
+
+        $this->initStyleSheets();
+
         $forwarder = new ilForumPageCommandForwarder(
             $GLOBALS['DIC']['http'],
             $this->ctrl,
@@ -850,7 +853,6 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             $this->content_style_domain
         );
         $forwarder->setPresentationMode(ilForumPageCommandForwarder::PRESENTATION_MODE_PRESENTATION);
-        $this->initStyleSheets();
 
         $this->tpl->setContent($forwarder->forward() . $default_html . $modals);
     }
