@@ -1873,7 +1873,7 @@ class ilPageObjectGUI
                         "action" => $char_formats,
                         "aria-label" => $lng->txt("copg_more_character_formats")
         ];
-        $c_formats[] = ["text" => '<i><b><u>T</u></b><sub>x</sub></i>',
+        $c_formats[] = ["text" => '<i><strong><u>T</u></strong><sub>x</sub></i>',
                         "action" => "selection.removeFormat",
                         "data" => [],
                         "aria-label" => $lng->txt("copg_remove_formats")
@@ -2145,7 +2145,7 @@ class ilPageObjectGUI
             $mode = "fullscreen";
         }
 
-        //echo "<b>XML:</b>".htmlentities($xml);
+        //echo "XML:".htmlentities($xml);
         // determine target frames for internal links
         $wb_path = ilFileUtils::getWebspaceDir("output") . "/";
         $enlarge_path = ilUtil::getImagePath("media/enlarge.svg");
@@ -2552,7 +2552,7 @@ class ilPageObjectGUI
     public function displayValidationError($a_error): void
     {
         if (is_array($a_error)) {
-            $error_str = "<b>Error(s):</b><br>";
+            $error_str = "<strong>Error(s):</strong><br>";
             foreach ($a_error as $error) {
                 $err_mess = implode(" - ", $error);
                 if (!is_int(strpos($err_mess, ":0:"))) {
