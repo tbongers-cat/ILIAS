@@ -144,7 +144,7 @@ class ilTagInputGUI extends ilSubEnabledFormPropertyGUI
         $this->setType("tag_input");
         $this->tpl->addJavaScript('assets/js/bootstrap-tagsinput_2015_25_03.js');
         $this->tpl->addJavaScript('assets/js/typeahead_0.11.1.js');
-        $this->tpl->addCss('./components/ILIAS/TestQuestionPool/templates/default/bootstrap-tagsinput_2015_25_03.css');
+        $this->tpl->addCss('assets/css/bootstrap-tagsinput_2015_25_03.css');
     }
 
     /**
@@ -170,7 +170,7 @@ class ilTagInputGUI extends ilSubEnabledFormPropertyGUI
         $valid = true;
 
         $values = array_filter($this->strArray($this->getPostVar()));
-        if($values === [] && $this->getRequired()) {
+        if ($values === [] && $this->getRequired()) {
             $this->setAlert($lng->txt("msg_input_is_required"));
             return false;
         }
