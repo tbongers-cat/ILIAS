@@ -1280,6 +1280,7 @@ class ilObjectGUI implements ImplementsCreationCallback
             $target = new $target_class(0, ilObject2GUI::REPOSITORY_NODE_ID, $this->getRefId());
         }
         $target->importFile($file_to_import, $path_to_uploaded_file_in_temp_dir);
+        $this->ctrl->clearParameterByClass(get_class($this), 'new_type');
         $this->viewObject();
     }
 
