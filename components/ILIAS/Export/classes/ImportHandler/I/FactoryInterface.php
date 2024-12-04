@@ -24,6 +24,7 @@ use ILIAS\Export\ImportHandler\I\File\FactoryInterface as FileFactoryInterface;
 use ILIAS\Export\ImportHandler\I\Parser\FactoryInterface as ParserFactoryInterface;
 use ILIAS\Export\ImportHandler\I\Path\FactoryInterface as PathFactoryInterface;
 use ILIAS\Export\ImportHandler\I\Schema\FactoryInterface as SchemaFactoryInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\FactoryInterface as SchemaFolderFactoryInterface;
 use ILIAS\Export\ImportHandler\I\Validation\FactoryInterface as ValidationFactoryInterface;
 
 interface FactoryInterface
@@ -33,6 +34,8 @@ interface FactoryInterface
     public function file(): FileFactoryInterface;
 
     public function schema(): SchemaFactoryInterface;
+
+    public function schemaFolder(): SchemaFolderFactoryInterface;
 
     public function path(): PathFactoryInterface;
 

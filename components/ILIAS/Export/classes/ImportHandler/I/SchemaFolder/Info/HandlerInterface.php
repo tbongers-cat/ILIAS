@@ -18,7 +18,7 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\Export\ImportHandler\I\Schema\Info;
+namespace ILIAS\Export\ImportHandler\I\SchemaFolder\Info;
 
 use ILIAS\Data\Version;
 use SplFileInfo;

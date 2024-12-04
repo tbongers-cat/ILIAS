@@ -26,7 +26,7 @@ use ILIAS\Export\ImportHandler\I\File\XSD\FactoryInterface as XSDFileFactoryInte
 use ILIAS\Export\ImportHandler\I\File\XSD\HandlerInterface as XSDFileInterface;
 use ILIAS\Export\ImportHandler\I\Parser\FactoryInterface as ParserFactoryInterface;
 use ILIAS\Export\ImportHandler\I\Parser\NodeInfo\HandlerInterface as XMLFileNodeInfoInterface;
-use ILIAS\Export\ImportHandler\I\Schema\Folder\HandlerInterface as SchemaFolderInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\HandlerInterface as SchemaFolderInterface;
 use ILIAS\Export\ImportHandler\I\Schema\HandlerInterface as SchemaInterface;
 
 class Handler implements SchemaInterface

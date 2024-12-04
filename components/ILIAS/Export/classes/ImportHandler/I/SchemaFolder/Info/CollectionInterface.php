@@ -18,11 +18,11 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\Export\ImportHandler\I\Schema\Info;
+namespace ILIAS\Export\ImportHandler\I\SchemaFolder\Info;
 
 use Countable;
 use ILIAS\Data\Version;
-use ILIAS\Export\ImportHandler\I\Schema\Info\HandlerInterface as SchemaInfoInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\Info\HandlerInterface as SchemaInfoInterface;
 use Iterator;
 
 interface CollectionInterface extends Iterator, Countable

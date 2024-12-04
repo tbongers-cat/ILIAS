@@ -31,7 +31,7 @@ use ILIAS\Export\ImportHandler\I\File\XSD\HandlerInterface as XSDFileInterface;
 use ILIAS\Export\ImportHandler\I\Parser\FactoryInterface as ParserFactoryInterface;
 use ILIAS\Export\ImportHandler\I\Parser\HandlerInterface as ParserInterface;
 use ILIAS\Export\ImportHandler\I\Path\FactoryInterface as PathFactoryInterface;
-use ILIAS\Export\ImportHandler\I\Schema\Folder\HandlerInterface as ImportStatusSchemaFolderInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\HandlerInterface as ImportStatusSchemaFolderInterface;
 use ILIAS\Export\ImportHandler\I\Validation\HandlerInterface as ValidationInterface;
 use ILIAS\Export\ImportStatus\Exception\ilException as ImportStatusException;
 use ILIAS\Export\ImportStatus\I\ilCollectionInterface as ImportStatusHandlerCollectionInterface;
