@@ -26,13 +26,12 @@ use ILIAS\Export\ImportHandler\I\File\XML\HandlerInterface as XMLFileInterface;
 use ILIAS\Export\ImportHandler\I\Path\HandlerInterface as PathInterface;
 use ILIAS\Export\ImportHandler\I\Schema\CollectionInterface as SchemaCollectionInterface;
 use ILIAS\Export\ImportHandler\I\Schema\FactoryInterface as SchemaFactoryInterface;
-use ILIAS\Export\ImportHandler\I\Schema\Folder\FactoryInterface as SchemaFolderFactoryInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\FactoryInterface as SchemaFolderFactoryInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\HandlerInterface as SchemaFolderInterface;
 use ILIAS\Export\ImportHandler\I\Schema\HandlerInterface as SchemaInterface;
-use ILIAS\Export\ImportHandler\I\Schema\Info\FactoryInterface as SchemaInfoFactoryInterface;
 use ILIAS\Export\ImportHandler\Schema\Collection as SchemaCollection;
-use ILIAS\Export\ImportHandler\Schema\Folder\Factory as SchemaFolderFactory;
+use ILIAS\Export\ImportHandler\SchemaFolder\Factory as SchemaFolderFactory;
 use ILIAS\Export\ImportHandler\Schema\Handler as Schema;
-use ILIAS\Export\ImportHandler\Schema\Info\Factory as SchemaInfoFactory;
 use ilLogger;
 
 class Factory implements SchemaFactoryInterface
@@ -40,12 +39,15 @@ class Factory implements SchemaFactoryInterface
     protected ImportHandlerFactoryInterface $import_handler;
     protected DataFactory $data_factory;
     protected ilLogger $logger;
+    protected SchemaFolderInterface $schema_folder;
 
     public function __construct(
+        SchemaFolderInterface $schema_folder,
         ImportHandlerFactoryInterface $import_handler,
         DataFactory $data_factory,
         ilLogger $logger
     ) {
+        $this->schema_folder = $schema_folder;
         $this->import_handler = $import_handler;
         $this->data_factory = $data_factory;
         $this->logger = $logger;
@@ -54,7 +56,7 @@ class Factory implements SchemaFactoryInterface
     public function handler(): SchemaInterface
     {
         return new Schema(
-            $this->folder()->handler(),
+            $this->schema_folder,
             $this->data_factory,
             $this->import_handler->parser(),
             $this->import_handler->file()->xsd()
@@ -64,21 +66,6 @@ class Factory implements SchemaFactoryInterface
     public function collection(): SchemaCollectionInterface
     {
         return new SchemaCollection();
-    }
-
-    public function folder(): SchemaFolderFactoryInterface
-    {
-        return new SchemaFolderFactory(
-            $this->import_handler,
-            $this->logger
-        );
-    }
-
-    public function info(): SchemaInfoFactoryInterface
-    {
-        return new SchemaInfoFactory(
-            $this->logger
-        );
     }
 
     public function collectionFrom(

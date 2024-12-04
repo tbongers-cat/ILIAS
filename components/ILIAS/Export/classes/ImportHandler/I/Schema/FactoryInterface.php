@@ -23,9 +23,7 @@ namespace ILIAS\Export\ImportHandler\I\Schema;
 use ILIAS\Export\ImportHandler\I\File\XML\HandlerInterface as XMLFileInterface;
 use ILIAS\Export\ImportHandler\I\Path\HandlerInterface as PathInterface;
 use ILIAS\Export\ImportHandler\I\Schema\CollectionInterface as SchemaCollectionInterface;
-use ILIAS\Export\ImportHandler\I\Schema\Folder\FactoryInterface as SchemaFolderFactoryInterface;
 use ILIAS\Export\ImportHandler\I\Schema\HandlerInterface as SchemaInterface;
-use ILIAS\Export\ImportHandler\I\Schema\Info\FactoryInterface as SchemaInfoFactoryInterface;
 
 interface FactoryInterface
 {
@@ -37,8 +35,4 @@ interface FactoryInterface
         XMLFileInterface $xml_file_handler,
         PathInterface $path_to_entities
     ): SchemaCollectionInterface;
-
-    public function folder(): SchemaFolderFactoryInterface;
-
-    public function info(): SchemaInfoFactoryInterface;
 }

@@ -27,10 +27,13 @@ use ILIAS\Export\ImportHandler\I\File\FactoryInterface as FileFactoryInterface;
 use ILIAS\Export\ImportHandler\I\Parser\FactoryInterface as ParserFactoryInterface;
 use ILIAS\Export\ImportHandler\I\Path\FactoryInterface as PathFactoryInterface;
 use ILIAS\Export\ImportHandler\I\Schema\FactoryInterface as SchemaFactoryInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\FactoryInterface as SchemaFolderFactoryInterface;
 use ILIAS\Export\ImportHandler\I\Validation\FactoryInterface as ValidationFactoryInterface;
 use ILIAS\Export\ImportHandler\Parser\Factory as ParserFactory;
 use ILIAS\Export\ImportHandler\Path\Factory as PathFactory;
 use ILIAS\Export\ImportHandler\Schema\Factory as SchemaFactory;
+use ILIAS\Export\ImportHandler\SchemaFolder\Factory as SchemaFolderFactory;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\HandlerInterface as SchemaFolderInterface;
 use ILIAS\Export\ImportHandler\Validation\Factory as ValidationFactory;
 use ILIAS\Export\ImportStatus\ilFactory as ImportStatusFactory;
 use ilLanguage;
@@ -42,6 +45,7 @@ class Factory implements ImportHandlerFactoryInterface
     protected ilLanguage $lng;
     protected ImportStatusFactory $import_status_factory;
     protected DataFactory $data_factory;
+    protected SchemaFolderInterface $schema_folder;
 
     public function __construct()
     {
@@ -51,6 +55,7 @@ class Factory implements ImportHandlerFactoryInterface
         $this->lng->loadLanguageModule("exp");
         $this->import_status_factory = new ImportStatusFactory();
         $this->data_factory = new DataFactory();
+        $this->schema_folder = $this->schemaFolder()->handler();
     }
 
     public function parser(): ParserFactoryInterface
@@ -68,15 +73,25 @@ class Factory implements ImportHandlerFactoryInterface
             $this->import_status_factory,
             $this->logger,
             $this->lng,
-            $this->data_factory
+            $this->data_factory,
+            $this->schema_folder
         );
     }
 
     public function schema(): SchemaFactoryInterface
     {
         return new SchemaFactory(
+            $this->schema_folder,
             $this,
             $this->data_factory,
+            $this->logger
+        );
+    }
+
+    public function schemaFolder(): SchemaFolderFactoryInterface
+    {
+        return new SchemaFolderFactory(
+            $this,
             $this->logger
         );
     }

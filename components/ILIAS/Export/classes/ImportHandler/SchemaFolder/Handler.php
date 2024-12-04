@@ -18,14 +18,14 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\Export\ImportHandler\Schema\Folder;
+namespace ILIAS\Export\ImportHandler\SchemaFolder;
 
 use DirectoryIterator;
 use ILIAS\Data\Version;
-use ILIAS\Export\ImportHandler\I\FactoryInterface as ImportHandlerFactoryInterface;
-use ILIAS\Export\ImportHandler\I\Schema\Folder\HandlerInterface as SchemaFolderInterface;
-use ILIAS\Export\ImportHandler\I\Schema\Info\CollectionInterface as SchemaInfoCollectionInterface;
-use ILIAS\Export\ImportHandler\I\Schema\Info\HandlerInterface as SchemaInfoInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\Info\FactoryInterface as SchemaInfoFactoryInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\HandlerInterface as SchemaFolderInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\Info\CollectionInterface as SchemaInfoCollectionInterface;
+use ILIAS\Export\ImportHandler\I\SchemaFolder\Info\HandlerInterface as SchemaInfoInterface;
 use ilLogger;
 use SplFileInfo;
 
@@ -34,17 +34,17 @@ class Handler implements SchemaFolderInterface
     protected const FILE_EXTENSION = 'xsd';
     protected const FILE_PREFIX = 'ilias_';
     protected const SCHEMA_DEFINITION_LOCATION = '../components/ILIAS/Export/xml/SchemaValidation';
-    protected ImportHandlerFactoryInterface $import_handler;
+    protected SchemaInfoFactoryInterface $schema_info_factory;
     protected SchemaInfoCollectionInterface $collection;
     protected ilLogger $logger;
 
     public function __construct(
-        ImportHandlerFactoryInterface $import_handler,
+        SchemaInfoFactoryInterface $schema_info_factory,
         ilLogger $logger
     ) {
-        $this->import_handler = $import_handler;
+        $this->schema_info_factory = $schema_info_factory;
         $this->logger = $logger;
-        $this->collection = $import_handler->schema()->info()->collection();
+        $this->collection = $this->schema_info_factory->collection();
         $this->readSchemaFiles();
     }
 
@@ -79,7 +79,7 @@ class Handler implements SchemaFolderInterface
                 $this->logger->dump($matches, \ilLogLevel::DEBUG);
                 continue;
             }
-            $element = $this->import_handler->schema()->info()->handler()
+            $element = $this->schema_info_factory->handler()
                 ->withSplFileInfo(new SplFileInfo($file->getPathname()))
                 ->withComponent((string) $matches[1])
                 ->withSubtype((string) $matches[3])
