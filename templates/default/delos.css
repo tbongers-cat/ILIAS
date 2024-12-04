@@ -4248,6 +4248,30 @@ hr.il-divider-with-label {
   display: block;
   width: 100%;
 }
+.il-filter span[data-collapse-glyph-visibility="1"] {
+  display: inline;
+}
+.il-filter span[data-collapse-glyph-visibility="0"] {
+  display: none;
+}
+.il-filter span[data-expand-glyph-visibility="1"] {
+  display: inline;
+}
+.il-filter span[data-expand-glyph-visibility="0"] {
+  display: none;
+}
+.il-filter div[data-active-inputs-expanded="1"] {
+  display: block;
+}
+.il-filter div[data-active-inputs-expanded="0"] {
+  display: none;
+}
+.il-filter div[data-section-inputs-expanded="1"] {
+  display: flex;
+}
+.il-filter div[data-section-inputs-expanded="0"] {
+  display: none;
+}
 
 .il-filter-bar {
   display: flex;
@@ -4260,15 +4284,16 @@ hr.il-divider-with-label {
 .il-filter-bar .il-filter-bar-opener:hover {
   background-color: #f0f0f0;
 }
-.il-filter-bar .il-filter-bar-opener .btn-bulky {
+.il-filter-bar .il-filter-bar-opener button {
   min-height: 0px;
   width: 100%;
+  padding: 6px 12px;
   border: none;
   background-color: initial;
   font-size: 0.875rem;
-  justify-content: left;
+  text-align: left;
 }
-.il-filter-bar .il-filter-bar-opener .btn-bulky .glyph {
+.il-filter-bar .il-filter-bar-opener button .glyph {
   padding-right: 0.3em;
 }
 .il-filter-bar .il-filter-bar-toggle {
