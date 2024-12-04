@@ -6,12 +6,12 @@
     let autosaveActive = true;
 
     const disableAutosave = () => {
-      console.log("Disabling autosave...");
+      console.log('Pause autosave...');
       autosaveActive = false;
     };
 
     const enableAutosave = () => {
-      console.log("Enabling autosave...");
+      console.log('Enabling autosave...');
       autosaveActive = true;
     };
 
@@ -38,7 +38,7 @@
       });
 
       if (isSaving) {
-        console.log("Locking UI...");
+        console.log('Locking UI...');
         form.querySelectorAll('.ilFormCmds').forEach((cmd) => {
           const img = createElement('img', {
             src: loadingImgSrc,
@@ -49,7 +49,7 @@
           cmd.insertBefore(img, submitBtn);
         });
       } else {
-        console.log("Unlocking UI...");
+        console.log('Unlocking UI...');
         document.querySelectorAll('.ilFrmLoadingImg').forEach((img) => img.remove());
       }
 
@@ -88,11 +88,16 @@
 
     const saveDraft = (form, settings) => {
       const { url, loadingImgSrc } = settings;
+
+      if (typeof tinyMCE !== 'undefined') {
+        tinyMCE.triggerSave();
+      }
+
       const subject = document.getElementById('subject').value;
       const message = document.getElementById('message').value;
 
       if (!autosaveActive || !subject || !message) {
-        console.log("Skipping autosave...");
+        console.log('Skipping autosave...');
         return Promise.resolve(); // No save needed
       }
 
@@ -138,11 +143,11 @@
 
       ensureElements(form, settings)
         .then(() => {
-          console.log("Starting autosave interval...");
+          console.log('Starting autosave interval...');
           autosaveIntervalHandle = setInterval(() => saveDraft(form, settings), settings.interval);
 
           form.addEventListener('submit', () => {
-            console.log("Clearing autosave interval...");
+            console.log('Clearing autosave interval...');
             clearInterval(autosaveIntervalHandle);
           });
         });
@@ -166,10 +171,10 @@ il.Util.addOnLoad(() => {
         primaryButtons.forEach((button) => button.remove());
 
         if (dialog.showModal) {
-          console.log("Show dialog...");
+          console.log('Show dialog...');
           dialog.showModal();
           dialog.addEventListener('close', () => {
-            console.log("Closing dialog...");
+            console.log('Closing dialog...');
             il.ForumDraftsAutosave.enableAutosave();
           });
         } else {
