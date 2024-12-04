@@ -201,7 +201,7 @@ class TitlesBuilder
         $this->objectives = [];
 
         foreach ($lo_attempts as $lo_attempt) {
-            $this->objectives[$loRun->getObjectiveId()] = $this->getObjectiveTitle($lo_attempt);
+            $this->objectives[$lo_attempt->getObjectiveId()] = $this->getObjectiveTitle($lo_attempt);
         }
     }
 
