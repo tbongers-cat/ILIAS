@@ -21,13 +21,10 @@ declare(strict_types=1);
 namespace ILIAS\LegalDocuments\Table;
 
 use Closure;
-use DateTimeImmutable;
 use Generator;
 use ilCalendarSettings;
 use ilCtrl;
 use ilCtrlInterface;
-use ilDatePresentation;
-use ilDateTime;
 use ILIAS\Data\Factory;
 use ILIAS\Data\URI;
 use ILIAS\LegalDocuments\ConsumerToolbox\UI;
@@ -62,6 +59,7 @@ class DocumentTable implements OrderingBinding
     private readonly Ordering $table;
     private readonly Renderer $ui_renderer;
     private ilObjUser $user;
+    private \DateTimeZone $usr_timezone;
 
     public function __construct(
         private readonly Closure $criterion_as_component,
@@ -82,6 +80,7 @@ class DocumentTable implements OrderingBinding
         $this->ctrl = $ctrl ?: $DIC->ctrl();
         $this->ui_renderer = $ui_renderer ?: $DIC->ui()->renderer();
         $this->user = $user ?: $DIC->user();
+        $this->usr_timezone = new \DateTimeZone($this->user->getTimeZone());
 
         $this->table = $this->buildTable();
     }
@@ -105,7 +104,7 @@ class DocumentTable implements OrderingBinding
                 'criteria' => $uiTable->column()->text($this->ui->txt('tbl_docs_head_criteria')),
             ],
             $this,
-            (new URI((string) $this->request->getUri()))->withParameter("cmd", "saveOrder")
+            (new URI((string) $this->request->getUri()))->withParameter('cmd', 'saveOrder')
         )
             ->withId('legalDocsTable')
             ->withRequest($this->request);
@@ -161,8 +160,8 @@ class DocumentTable implements OrderingBinding
         $table_row = [
             'id' => $document->id(),
             'title' => $this->ui_renderer->render($this->modal->create($document->content())),
-            'created' => $document->meta()->creation()->time(),
-            'change' => $document->meta()->lastModification()->time(),
+            'created' => $document->meta()->creation()->time()->setTimezone($this->usr_timezone),
+            'change' => $document->meta()->lastModification()->time()->setTimezone($this->usr_timezone),
             'criteria' => $this->ui_renderer->render($criterion_components),
         ];
         return $row_builder->buildOrderingRow((string) $document->id(), $table_row);
