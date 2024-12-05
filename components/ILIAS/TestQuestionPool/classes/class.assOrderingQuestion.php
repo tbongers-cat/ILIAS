@@ -75,10 +75,15 @@ class assOrderingQuestion extends assQuestion implements ilObjQuestionScoringAdj
 
     public function isComplete(): bool
     {
+        $elements_list = $this->getOrderingElementList()->getElements();
+        if ($elements_list === [] && $this->element_list_for_deferred_saving !== null) {
+            $elements_list = $this->element_list_for_deferred_saving;
+        }
         $elements = array_filter(
-            $this->getOrderingElementList()->getElements(),
+            $elements_list->getElements(),
             fn($element) => trim($element->getContent()) != ''
         );
+
         $has_at_least_two_elements = count($elements) > 1;
 
         $complete = $this->getAuthor()
