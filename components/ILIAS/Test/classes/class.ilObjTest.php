@@ -3267,10 +3267,14 @@ class ilObjTest extends ilObject
                     )->withPassword($metadata["entry"]);
                     break;
                 case 'ip_range_from':
-                    $access_settings = $access_settings->withIpRangeFrom($metadata['entry']);
+                    if ($metadata['entry'] !== '') {
+                        $access_settings = $access_settings->withIpRangeFrom($metadata['entry']);
+                    }
                     break;
                 case 'ip_range_to':
-                    $access_settings = $access_settings->withIpRangeTo($metadata['entry']);
+                    if ($metadata['entry'] !== '') {
+                        $access_settings = $access_settings->withIpRangeTo($metadata['entry']);
+                    }
                     break;
                 case "pass_scoring":
                     $scoring_settings = $scoring_settings->withPassScoring((int) $metadata["entry"]);
