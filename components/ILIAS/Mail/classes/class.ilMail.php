@@ -743,7 +743,7 @@ class ilMail
                 $this->user_id,
                 $mail_data->getAttachments(),
                 $mail_data->getTo(),
-                '',
+                $mail_data->getCc(),
                 '',
                 'unread',
                 $mail_data->getSubject(),
