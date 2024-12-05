@@ -828,7 +828,7 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
     protected function sortDefinitionsBySolution(array $solutions, array $definitions): array
     {
         $neworder = [];
-        foreach (array_key($solutions) as $definition_id) {
+        foreach (array_keys($solutions) as $definition_id) {
             $neworder[] = $this->object->getDefinitionWithIdentifier($definition_id);
         }
 
