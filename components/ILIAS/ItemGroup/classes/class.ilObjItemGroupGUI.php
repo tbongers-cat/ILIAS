@@ -223,6 +223,7 @@ class ilObjItemGroupGUI extends ilObject2GUI
         $parent_ref_id = $tree->getParentId($this->object->getRefId());
         $parent_type = ilObject::_lookupType($parent_ref_id, true);
         $parent_gui_class = 'ilObj' . $this->obj_definition->getClassName($parent_type) . 'GUI';
+        $this->ctrl->setParameterByClass($parent_gui_class, 'ref_id', $parent_ref_id);
         $gui = new ILIAS\ILIASObject\Creation\AddNewItemGUI(
             $this->buildAddNewItemElements(
                 $this->getCreatableObjectTypes(),
@@ -231,6 +232,7 @@ class ilObjItemGroupGUI extends ilObject2GUI
             )
         );
         $gui->render();
+        $this->ctrl->clearParameterByClass($parent_gui_class, 'ref_id');
 
         $tab = new ilItemGroupItemsTableGUI($this->gui, $this, "listMaterials");
         $tpl->setContent($tab->getHTML());
