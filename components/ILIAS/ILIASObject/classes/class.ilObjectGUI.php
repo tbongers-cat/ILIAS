@@ -1735,7 +1735,7 @@ class ilObjectGUI implements ImplementsCreationCallback
 
     protected function checkPermissionBool(string $perm, string $cmd = "", string $type = "", ?int $ref_id = null): bool
     {
-        if ($perm == "create") {
+        if ($perm === "create") {
             if (!$ref_id) {
                 $ref_id = $this->requested_ref_id;
             }
