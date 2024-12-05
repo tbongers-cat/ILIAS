@@ -77,10 +77,10 @@ class assOrderingQuestion extends assQuestion implements ilObjQuestionScoringAdj
     {
         $elements_list = $this->getOrderingElementList()->getElements();
         if ($elements_list === [] && $this->element_list_for_deferred_saving !== null) {
-            $elements_list = $this->element_list_for_deferred_saving;
+            $elements_list = $this->element_list_for_deferred_saving->getElements();
         }
         $elements = array_filter(
-            $elements_list->getElements(),
+            $elements_list,
             fn($element) => trim($element->getContent()) != ''
         );
 
