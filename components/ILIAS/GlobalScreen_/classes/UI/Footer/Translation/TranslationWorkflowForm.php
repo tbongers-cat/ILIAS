@@ -138,8 +138,12 @@ class TranslationWorkflowForm
                 continue;
             }
             $translation = $this->translations->getLanguageCode($language_key)?->getTranslation();
+            $language_title = $languages[$language_key] ?? null;
+            if ($language_title === null) {
+                continue;
+            }
             $inputs[$language_key] = $this->fields
-                ->text($languages[$language_key])
+                ->text($language_title)
                 ->withRequired($required)
                 ->withValue(
                     $translation ?? $default_value
