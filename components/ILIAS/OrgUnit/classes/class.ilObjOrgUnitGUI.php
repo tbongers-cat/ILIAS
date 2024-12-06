@@ -502,7 +502,7 @@ class ilObjOrgUnitGUI extends ilContainerGUI
             $this->tabs_gui->addTab(
                 "info_short",
                 "Info",
-                $this->ctrl->getLinkTargetByClass("ilinfoscreengui", "showSummary")
+                $this->ctrl->getLinkTargetByClass([self::class, ilInfoScreenGUI::class], "showSummary")
             );
         }
 
@@ -513,7 +513,7 @@ class ilObjOrgUnitGUI extends ilContainerGUI
                     self::TAB_STAFF,
                     $this->lng->txt(self::TAB_STAFF),
                     $this->ctrl->getLinkTargetByClass(
-                        ilOrgUnitUserAssignmentGUI::class,
+                        [self::class, ilOrgUnitUserAssignmentGUI::class],
                         ilOrgUnitUserAssignmentGUI::CMD_INDEX
                     )
                 );
@@ -529,7 +529,10 @@ class ilObjOrgUnitGUI extends ilContainerGUI
                 $this->tabs_gui->addTab(
                     "administrate_users",
                     $this->lng->txt("administrate_users"),
-                    $this->ctrl->getLinkTargetByClass("ilLocalUserGUI", "index")
+                    $this->ctrl->getLinkTargetByClass(
+                        [self::class, ilLocalUserGUI::class],
+                        'index'
+                    )
                 );
             }
         }
@@ -539,13 +542,17 @@ class ilObjOrgUnitGUI extends ilContainerGUI
                 $this->tabs_gui->addTab(
                     self::TAB_GLOBAL_SETTINGS,
                     $this->lng->txt('settings'),
-                    $this->ctrl->getLinkTargetByClass(ilOrgUnitGlobalSettingsGUI::class)
+                    $this->ctrl->getLinkTargetByClass(
+                        [self::class, ilOrgUnitGlobalSettingsGUI::class]
+                    )
                 );
             }
             $this->tabs_gui->addTab(
                 self::TAB_EXPORT,
                 $this->lng->txt(self::TAB_EXPORT),
-                $this->ctrl->getLinkTargetByClass(ilOrgUnitExportGUI::class)
+                $this->ctrl->getLinkTargetByClass(
+                    [self::class, ilOrgUnitExportGUI::class]
+                )
             );
 
             // Add OrgUnit types and positions tabs
@@ -553,12 +560,16 @@ class ilObjOrgUnitGUI extends ilContainerGUI
                 $this->tabs_gui->addTab(
                     self::TAB_ORGU_TYPES,
                     $this->lng->txt(self::TAB_ORGU_TYPES),
-                    $this->ctrl->getLinkTargetByClass(ilOrgUnitTypeGUI::class)
+                    $this->ctrl->getLinkTargetByClass(
+                        [self::class, ilOrgUnitTypeGUI::class]
+                    )
                 );
                 $this->tabs_gui->addTab(
                     self::TAB_POSITIONS,
                     $this->lng->txt(self::TAB_POSITIONS),
-                    $this->ctrl->getLinkTargetByClass(ilOrgUnitPositionGUI::class)
+                    $this->ctrl->getLinkTargetByClass(
+                        [self::class, ilOrgUnitPositionGUI::class]
+                    )
                 );
             }
         }
