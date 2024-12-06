@@ -27,9 +27,6 @@ class ImplementationOfAgentFinder implements AgentFinder
 {
     protected array|AgentCollection $component_agents;
 
-    /**
-     * @var array<string, Agent> $predefined_agents
-     */
     public function __construct(
         protected Refinery $refinery,
         protected Data\Factory $data_factory,
@@ -98,7 +95,7 @@ class ImplementationOfAgentFinder implements AgentFinder
         // TODO: This seems to be something that rather belongs to Services/Component/
         // but we put it here anyway for the moment. This seems to be something that
         // could go away when we unify Services/Modules/Plugins to one common concept.
-        $path = "[/]public/Customizing/global/plugins/.*/.*/" . $name . "/.*";
+        $path = "[/]public/Customizing/plugins/.*/.*/" . $name . "/.*";
         $agent_classes = iterator_to_array($this->interface_finder->getMatchingClassNames(
             Agent::class,
             [],
