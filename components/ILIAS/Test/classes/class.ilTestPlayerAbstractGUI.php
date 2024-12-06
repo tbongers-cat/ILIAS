@@ -1118,7 +1118,7 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
                 ),
                 $this->ui_factory->button()->standard(
                     $this->lng->txt('btn_next'),
-                    $this->ctrl->getFormAction($this, ilTestPlayerCommands::AFTER_TEST_PASS_FINISHED)
+                    $this->ctrl->getLinkTargetByClass(static::class, ilTestPlayerCommands::AFTER_TEST_PASS_FINISHED)
                 )
             ])
         );
