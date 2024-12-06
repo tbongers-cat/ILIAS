@@ -145,7 +145,7 @@ function willStartConversation(userList) {
 }
 
 function saveShowSystemMessageState(on, initial) {
-  return fetch(initial.system_message_update_url, {
+  return fetch(initial.state.system_message_update_url, {
     method: 'POST',
     body: new URLSearchParams({state: Number(on)})
   });
