@@ -349,7 +349,7 @@ class assSingleChoice extends assQuestion implements ilObjQuestionScoringAdjusta
         $points = 0.0;
         foreach ($this->answers as $key => $answer) {
             if (is_numeric($participant_solution)
-                && $key === $participant_solution) {
+                && $key === (int) $participant_solution) {
                 $points = $answer->getPoints();
             }
         }

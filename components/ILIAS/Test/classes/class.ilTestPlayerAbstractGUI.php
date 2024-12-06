@@ -1341,9 +1341,9 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
             )
         );
 
-        $this->help->setScreenIdComponent("tst");
-        $this->help->setScreenId("assessment");
-        $this->help->setSubScreenId("question");
+        $this->help->setScreenIdComponent('tst');
+        $this->help->setScreenId('assessment');
+        $this->help->setSubScreenId('question');
 
         $sequence_element = $this->getCurrentSequenceElement();
 
@@ -2214,7 +2214,7 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
             $this->registerForcedFeedbackNavUrl($this->getNavigationUrlParameter());
         }
         // fau.
-        $this->ctrl->redirect($this, ilTestPlayerCommands::SHOW_QUESTION);
+        $this->ctrl->redirectByClass(static::class, ilTestPlayerCommands::SHOW_QUESTION);
     }
 
     protected function nextQuestionCmd()
@@ -2758,7 +2758,7 @@ JS;
 
     protected function getInstantResponseParameter(): bool
     {
-        return $this->testrequest->bool('instresp') ?? false;
+        return $this->testrequest->isInstanceResponseRequested();
     }
 
     protected function getNextCommandParameter()
@@ -2812,11 +2812,11 @@ JS;
 
     protected function saveNavigationPreventConfirmation(): void
     {
-        if ($this->testrequest->bool('save_on_navigation_prevent_confirmation')) {
+        if ($this->testrequest->retrieveBoolFromPost('save_on_navigation_prevent_confirmation')) {
             ilSession::set('save_on_navigation_prevent_confirmation', true);
         }
 
-        if ($this->testrequest->bool(self::FOLLOWUP_QST_LOCKS_PREVENT_CONFIRMATION_PARAM)) {
+        if ($this->testrequest->retrieveBoolFromPost(self::FOLLOWUP_QST_LOCKS_PREVENT_CONFIRMATION_PARAM)) {
             ilSession::set(self::FOLLOWUP_QST_LOCKS_PREVENT_CONFIRMATION_PARAM, true);
         }
     }

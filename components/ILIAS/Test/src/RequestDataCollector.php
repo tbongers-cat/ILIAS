@@ -97,9 +97,9 @@ class RequestDataCollector
         return $this->int('pass_id');
     }
 
-    public function bool(string $key): ?bool
+    public function retrieveBoolFromPost(string $key): ?bool
     {
-        if (!$this->http->wrapper()->post()->has($key)) {
+        if ($this->http->wrapper()->post()->has($key)) {
             return null;
         }
 
@@ -108,6 +108,21 @@ class RequestDataCollector
             $this->refinery->byTrying([
                 $this->refinery->kindlyTo()->bool(),
                 $this->refinery->always(null)
+            ])
+        );
+    }
+
+    public function isInstanceResponseRequested(): bool
+    {
+        if (!$this->http->wrapper()->query()->has('instresp')) {
+            return false;
+        }
+
+        return $this->http->wrapper()->query()->retrieve(
+            'instresp',
+            $this->refinery->byTrying([
+                $this->refinery->kindlyTo()->bool(),
+                $this->refinery->always(false)
             ])
         );
     }
