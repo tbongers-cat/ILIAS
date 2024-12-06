@@ -381,8 +381,8 @@ class assSingleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringA
             $template->setVariable("ANSWER_TEXT", ilLegacyFormElementsUtil::prepareTextareaOutput($answer->getAnswertext(), true));
 
             if (is_object($this->getPreviewSession())) {
-                $user_solution = $this->getPreviewSession()->getParticipantsSolution() ?? '';
-                if (strcmp($user_solution, $answer_id) == 0) {
+                $user_solution = $this->getPreviewSession()->getParticipantsSolution();
+                if ($user_solution === (string) $answer_id) {
                     $template->setVariable("CHECKED_ANSWER", " checked=\"checked\"");
                 }
             }
