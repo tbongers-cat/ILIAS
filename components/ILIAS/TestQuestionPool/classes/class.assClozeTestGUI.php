@@ -159,7 +159,7 @@ JS;
         $answer_trafo = $this->refinery->kindlyTo()->listOf($this->refinery->kindlyTo()->string());
         $points_trafo = $this->refinery->kindlyTo()->listOf($this->refinery->kindlyTo()->float());
 
-        foreach ($gaps as $idx => $hidden) {
+        foreach (array_keys($gaps) as $idx) {
             $cloze_type = $this->request_data_collector->int('clozetype_' . $idx);
             $this->object->setGapType($idx, $cloze_type);
 
@@ -229,7 +229,7 @@ JS;
             $ass_cloze_gab_combination::clearGapCombinationsFromDb($this->object->getId());
 
             $gap_combination = $this->request_data_collector->floatArray('gap_combination', 4);
-            if (count($gap_combination) > 0) {
+            if ($gap_combination !== []) {
                 $ass_cloze_gab_combination->saveGapCombinationToDb(
                     $this->object->getId(),
                     $gap_combination,
