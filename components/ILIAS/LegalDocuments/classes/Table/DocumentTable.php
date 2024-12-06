@@ -23,7 +23,6 @@ namespace ILIAS\LegalDocuments\Table;
 use Closure;
 use Generator;
 use ilCalendarSettings;
-use ilCtrl;
 use ilCtrlInterface;
 use ILIAS\Data\Factory;
 use ILIAS\Data\URI;
@@ -55,7 +54,7 @@ class DocumentTable implements OrderingBinding
 
     private readonly ServerRequestInterface|RequestInterface $request;
     private readonly Factory $data_factory;
-    private readonly ilCtrl|ilCtrlInterface $ctrl;
+    private readonly ilCtrlInterface $ctrl;
     private readonly Ordering $table;
     private readonly Renderer $ui_renderer;
     private ilObjUser $user;
@@ -70,7 +69,7 @@ class DocumentTable implements OrderingBinding
         private readonly ?EditLinks $edit_links = null,
         ServerRequestInterface|RequestInterface|null $request = null,
         ?Factory $data_factory = null,
-        ?ilCtrl $ctrl = null,
+        ?ilCtrlInterface $ctrl = null,
         ?Renderer $ui_renderer = null,
         ?ilObjUser $user = null
     ) {

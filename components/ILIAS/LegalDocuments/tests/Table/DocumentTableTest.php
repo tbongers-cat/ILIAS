@@ -69,7 +69,7 @@ class DocumentTableTest extends TestCase
             new Factory(),
             $this->mock(ilCtrl::class),
             $this->mock(Renderer::class),
-            $this->mock(ilObjUser::class)
+            $this->mockTree(ilObjUser::class, ['getTimeZone' => 'europe/berlin'])
         ));
     }
 
@@ -98,7 +98,7 @@ class DocumentTableTest extends TestCase
             new Factory(),
             $this->mock(ilCtrl::class),
             $this->mock(Renderer::class),
-            $this->mock(ilObjUser::class)
+            $this->mockTree(ilObjUser::class, ['getTimeZone' => 'europe/berlin'])
         );
 
         $this->assertSame(

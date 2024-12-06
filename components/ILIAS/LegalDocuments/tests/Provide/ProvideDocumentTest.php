@@ -64,7 +64,7 @@ class ProvideDocumentTest extends TestCase
             $this->mock(DocumentRepository::class),
             new SelectionMap(),
             [],
-            $this->mock(Container::class)
+            $this->mockTree(Container::class, ['user' => ['getTimeZone' => 'europe/berlin']])
         ));
     }
 
@@ -72,24 +72,17 @@ class ProvideDocumentTest extends TestCase
     {
         $dummy_gui = new stdClass();
 
-        $http = $this->mock(Services::class);
-
-        $uri = $this->mock(UriInterface::class);
-        $uri->method('__toString')->willReturn('http://myIlias/ilias.php?baseClass=iladministrationgui&cmdNode=2g:qo:gq&cmdClass=ilLegalDocumentsAdministrationGUI&cmd=documents&ref_id=50');
-
-        $request = $this->mock(ServerRequestInterface::class);
-        $request->method("getUri")->willReturn($uri);
-
-        $http->method('request')->willReturn($request);
+        $uri = 'http://myIlias/ilias.php?baseClass=iladministrationgui&cmdNode=2g:qo:gq&cmdClass=ilLegalDocumentsAdministrationGUI&cmd=documents&ref_id=50';
 
         $container = $this->mockTree(Container::class, [
             'ui' => [
-                'factory' => $this->mock(UIFactory::class),
-                'mainTemplate' => $this->mock(ilGlobalTemplateInterface::class),
+                'factory' => [],
+                'mainTemplate' => [],
             ],
-            'language' => $this->mock(ilLanguage::class),
-            'http' => $http,
-            'ctrl' => $this->mock(ilCtrl::class)
+            'language' => [],
+            'http' => ['request' => ['getUri' => ['__toString' => $uri]]],
+            'ctrl' => [],
+            'user' => ['getTimeZone' => 'europe/berlin'],
         ]);
 
         $instance = new ProvideDocument('foo', $this->mock(DocumentRepository::class), new SelectionMap(), [], $container);
@@ -104,33 +97,17 @@ class ProvideDocumentTest extends TestCase
 
         $dummy_gui = new stdClass();
 
-        $http = $this->mock(Services::class);
-        $uri = $this->mock(UriInterface::class);
-        $uri->method('__toString')->willReturn('http://myIlias/ilias.php?baseClass=iladministrationgui&cmdNode=2g:qo:gq&cmdClass=ilLegalDocumentsAdministrationGUI&cmd=documents&ref_id=50');
-
-        $request = $this->mock(ServerRequestInterface::class);
-        $request->method("getUri")->willReturn($uri);
-
-        $http->method('request')->willReturn($request);
-
-        $action_factory = $this->mock(Factory::class);
-        $action_factory->method('multi')->willReturn($this->mock(Multi::class));
-
-        $table_factory = $this->mock(\ILIAS\UI\Component\Table\Factory::class);
-        $table_factory->method('action')->willReturn($action_factory);
-        $ui_factory = $this->mock(UIFactory::class);
-        $ui_factory
-            ->method('table')
-            ->willReturn($table_factory);
+        $uri = 'http://myIlias/ilias.php?baseClass=iladministrationgui&cmdNode=2g:qo:gq&cmdClass=ilLegalDocumentsAdministrationGUI&cmd=documents&ref_id=50';
 
         $container = $this->mockTree(Container::class, [
             'ui' => [
-                'factory' => $ui_factory,
-                'mainTemplate' => $this->mock(ilGlobalTemplateInterface::class),
+                'factory' => ['table' => ['action' => ['multi' => []]]],
+                'mainTemplate' => [],
             ],
-            'language' => $this->mock(ilLanguage::class),
-            'http' => $http,
-            'ctrl' => $this->mock(ilCtrl::class),
+            'language' => [],
+            'http' => ['request' => ['getUri' => ['__toString' => $uri]]],
+            'ctrl' => [],
+            'user' => ['getTimeZone' => 'europe/berlin'],
         ]);
 
         $instance = new ProvideDocument('foo', $this->mock(DocumentRepository::class), new SelectionMap(), [], $container);
