@@ -228,7 +228,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
         $shape = $this->request_data_collector->string('shape');
         $shape_title = $this->request_data_collector->string('shapetitle');
-        $image = $this->request_data_collector->strArray('image', 2);
+        $image = $this->request_data_collector->raw('image', 2);
 
         switch ($shape) {
             case assImagemapQuestion::AVAILABLE_SHAPES['RECT']:
@@ -257,9 +257,9 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $this->getQuestionTemplate();
         $editor_tpl = new ilTemplate('tpl.il_as_qpl_imagemap_question.html', true, true, 'components/ILIAS/TestQuestionPool');
 
-        $shape = $shape ?? $this->request_data_collector->string('shape');
+        $shape = $shape !== '' ? $shape : $this->request_data_collector->string('shape');
         $shape_title = $this->request_data_collector->string('shapetitle');
-        $image = $this->request_data_collector->strArray('image', 2);
+        $image = $this->request_data_collector->raw('image', 2);
         $coords = $image['mapcoords'] ?? [];
 
         $cmd = $this->request_data_collector->raw('cmd');
@@ -275,7 +275,10 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
         $editor_tpl->setCurrentBlock('hidden');
         $editor_tpl->setVariable('HIDDEN_NAME', 'shape');
-        $editor_tpl->setVariable('HIDDEN_VALUE', $shape);
+        $editor_tpl->setVariable(
+            'HIDDEN_VALUE',
+            $shape
+        );
         $editor_tpl->parseCurrentBlock();
 
         $preview = new ilImagemapPreview($this->object->getImagePath() . $this->object->getImageFilename());
