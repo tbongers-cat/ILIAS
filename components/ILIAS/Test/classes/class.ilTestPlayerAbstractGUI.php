@@ -863,7 +863,7 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
      */
     public function autosaveCmd(): void
     {
-        if (count($this->testrequest->getPostKeys()) > 0) {
+        if ($this->testrequest->getPostKeys() === []) {
             echo '';
             exit;
         }
