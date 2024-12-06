@@ -8790,7 +8790,7 @@ dcl#:#dcl_reference_link#:#Referenzierten Eintrag verlinken
 dcl#:#dcl_reference_link_info#:#Achtung: Aktivieren Sie die Vorlage der Einzelansicht in der referenzierten Tabelle.
 dcl#:#dcl_reference_title#:#Feld auswählen
 dcl#:#dcl_reference_title_desc#:#Antworten aus dem ausgewählten Feld werden Auswahloptionen für dieses Feld.
-dcl#:#dcl_regex#:#Texteingabe einschranken
+dcl#:#dcl_regex#:#Texteingabe einschränken
 dcl#:#dcl_regex_info#:#Es kann ein regulärer Ausdruck ohne Delimiter eingegeben werden. Automatisch werden dann bestimmte Einträge zurückgewiesen.
 dcl#:#dcl_required#:#Verpflichtend
 dcl#:#dcl_row_not_found#:# - Dieses Feld wurde in der Tabelle nicht gefunden.
