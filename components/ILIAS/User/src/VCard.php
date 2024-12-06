@@ -166,7 +166,7 @@ class VCard
         $vcard = "BEGIN:VCARD\n";
         $vcard .= 'VERSION:' . $this->types['VERSION'] . "\n";
         foreach ($this->types as $type => $var) {
-            ilLoggerFactory::getLogger('user')->debug(print_r($this->types, true));
+            \ilLoggerFactory::getLogger('user')->debug(print_r($this->types, true));
 
             switch ($type) {
                 case 'FN':
@@ -264,25 +264,25 @@ class VCard
                             $label = 'LABEL';
                             $adr_types = [];
                             if ($this->types['LABEL']['TYPE'] > 0) {
-                                if (($this->types['LABEL']['TYPE'] & ADR_TYPE_DOM) > 0) {
+                                if (($this->types['LABEL']['TYPE'] & self::ADR_TYPE_DOM) > 0) {
                                     $adr_types[] = 'dom';
                                 }
-                                if (($this->types['LABEL']['TYPE'] & ADR_TYPE_INTL) > 0) {
+                                if (($this->types['LABEL']['TYPE'] & self::ADR_TYPE_INTL) > 0) {
                                     $adr_types[] = 'intl';
                                 }
-                                if (($this->types['LABEL']['TYPE'] & ADR_TYPE_POSTAL) > 0) {
+                                if (($this->types['LABEL']['TYPE'] & self::ADR_TYPE_POSTAL) > 0) {
                                     $adr_types[] = 'postal';
                                 }
-                                if (($this->types['LABEL']['TYPE'] & ADR_TYPE_PARCEL) > 0) {
+                                if (($this->types['LABEL']['TYPE'] & self::ADR_TYPE_PARCEL) > 0) {
                                     $adr_types[] = 'parcel';
                                 }
-                                if (($this->types['LABEL']['TYPE'] & ADR_TYPE_HOME) > 0) {
+                                if (($this->types['LABEL']['TYPE'] & self::ADR_TYPE_HOME) > 0) {
                                     $adr_types[] = 'home';
                                 }
-                                if (($this->types['LABEL']['TYPE'] & ADR_TYPE_WORK) > 0) {
+                                if (($this->types['LABEL']['TYPE'] & self::ADR_TYPE_WORK) > 0) {
                                     $adr_types[] = 'work';
                                 }
-                                if (($this->types['LABEL']['TYPE'] & ADR_TYPE_PREF) > 0) {
+                                if (($this->types['LABEL']['TYPE'] & self::ADR_TYPE_PREF) > 0) {
                                     $adr_types[] = 'pref';
                                 }
                                 $label .= ';TYPE=' . implode(',', $adr_types);
@@ -300,46 +300,46 @@ class VCard
                                 $tel = 'TEL';
                                 $tel_types = [];
                                 if ($phone['TYPE'] > 0) {
-                                    if (($phone['TYPE'] & TEL_TYPE_HOME) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_HOME) > 0) {
                                         $tel_types[] = 'home';
                                     }
-                                    if (($phone['TYPE'] & TEL_TYPE_MSG) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_MSG) > 0) {
                                         $tel_types[] = 'msg';
                                     }
-                                    if (($phone['TYPE'] & TEL_TYPE_WORK) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_WORK) > 0) {
                                         $tel_types[] = 'work';
                                     }
-                                    if (($phone['TYPE'] & TEL_TYPE_PREF) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_PREF) > 0) {
                                         $tel_types[] = 'pref';
                                     }
-                                    if (($phone['TYPE'] & TEL_TYPE_VOICE) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_VOICE) > 0) {
                                         $tel_types[] = 'voice';
                                     }
-                                    if (($phone['TYPE'] & TEL_TYPE_FAX) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_FAX) > 0) {
                                         $tel_types[] = 'fax';
                                     }
-                                    if (($phone['TYPE'] & TEL_TYPE_CELL) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_CELL) > 0) {
                                         $tel_types[] = 'cell';
                                     }
-                                    if (($phone['TYPE'] & TEL_TYPE_VIDEO) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_VIDEO) > 0) {
                                         $tel_types[] = 'video';
                                     }
-                                    if (($phone['TYPE'] & TEL_TYPE_PAGER) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_PAGER) > 0) {
                                         $tel_types[] = 'pager';
                                     }
-                                    if (($phone['TYPE'] & TEL_TYPE_BBS) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_BBS) > 0) {
                                         $tel_types[] = 'bbs';
                                     }
-                                    if (($phone['TYPE'] & TEL_TYPE_MODEM) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_MODEM) > 0) {
                                         $tel_types[] = 'modem';
                                     }
-                                    if (($phone['TYPE'] & TEL_TYPE_CAR) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_CAR) > 0) {
                                         $tel_types[] = 'car';
                                     }
-                                    if (($phone['TYPE'] & TEL_TYPE_ISDN) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_ISDN) > 0) {
                                         $tel_types[] = 'isdn';
                                     }
-                                    if (($phone['TYPE'] & TEL_TYPE_PCS) > 0) {
+                                    if (($phone['TYPE'] & self::TEL_TYPE_PCS) > 0) {
                                         $tel_types[] = 'pcs';
                                     }
                                     $tel .= ';TYPE=' . implode(',', $tel_types);
@@ -362,13 +362,13 @@ class VCard
                                 $email = 'EMAIL';
                                 $adr_types = [];
                                 if ($mail['TYPE'] > 0) {
-                                    if (($mail['TYPE'] & EMAIL_TYPE_INTERNET) > 0) {
+                                    if (($mail['TYPE'] & self::EMAIL_TYPE_INTERNET) > 0) {
                                         $adr_types[] = 'internet';
                                     }
-                                    if (($mail['TYPE'] & EMAIL_TYPE_x400) > 0) {
+                                    if (($mail['TYPE'] & self::EMAIL_TYPE_x400) > 0) {
                                         $adr_types[] = 'x400';
                                     }
-                                    if (($mail['TYPE'] & EMAIL_TYPE_PREF) > 0) {
+                                    if (($mail['TYPE'] & self::EMAIL_TYPE_PREF) > 0) {
                                         $adr_types[] = 'pref';
                                     }
                                     $email .= ';TYPE=' . implode(',', $adr_types);
@@ -812,10 +812,10 @@ class VCard
         string $region = '',
         string $postal_code = '',
         string $country = '',
-        int $type = ADR_TYPE_NONE
+        int $type = self::ADR_TYPE_NONE
     ): void {
-        if ($type == ADR_TYPE_NONE) {
-            $type = ADR_TYPE_INTL + ADR_TYPE_POSTAL + ADR_TYPE_PARCEL + ADR_TYPE_WORK;
+        if ($type === self::ADR_TYPE_NONE) {
+            $type = self::ADR_TYPE_INTL + self::ADR_TYPE_POSTAL + self::ADR_TYPE_PARCEL + self::ADR_TYPE_WORK;
         }
         $po_box = implode(',', $this->explodeVar($po_box));
         $extended_address = implode(',', $this->explodeVar($extended_address));
@@ -868,10 +868,10 @@ class VCard
      */
     public function setLabel(
         string $label = '',
-        int $type = ADR_TYPE_NONE
+        int $type = self::ADR_TYPE_NONE
     ): void {
-        if ($type == ADR_TYPE_NONE) {
-            $type = ADR_TYPE_INTL + ADR_TYPE_POSTAL + ADR_TYPE_PARCEL + ADR_TYPE_WORK;
+        if ($type == self::ADR_TYPE_NONE) {
+            $type = self::ADR_TYPE_INTL + self::ADR_TYPE_POSTAL + self::ADR_TYPE_PARCEL + self::ADR_TYPE_WORK;
         }
         $this->types['LABEL'] = [
             'LABEL' => $this->escape($label),
@@ -920,7 +920,7 @@ class VCard
      */
     public function setPhone(
         string $number = '',
-        int $type = TEL_TYPE_VOICE
+        int $type = self::TEL_TYPE_VOICE
     ): void {
         $this->types['TEL'][] = [
             'TEL' => $this->escape($number),
@@ -950,7 +950,7 @@ class VCard
      */
     public function setEmail(
         string $address = '',
-        int $type = EMAIL_TYPE_INTERNET
+        int $type = self::EMAIL_TYPE_INTERNET
     ): void {
         $this->types['EMAIL'][] = [
             'EMAIL' => $this->escape($address),
