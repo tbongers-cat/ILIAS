@@ -1109,12 +1109,19 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
             $this->object->getTitle() . ' - ' . $this->lng->txt('final_statement')
         );
 
-        $template = new ilTemplate('tpl.il_as_tst_final_statement.html', true, true, 'components/ILIAS/Test');
-        $this->ctrl->setParameter($this, 'skipfinalstatement', 1);
-        $template->setVariable('FORMACTION', $this->ctrl->getFormAction($this, ilTestPlayerCommands::AFTER_TEST_PASS_FINISHED));
-        $template->setVariable('FINALSTATEMENT', $this->object->prepareTextareaOutput($this->object->getFinalStatement(), true));
-        $template->setVariable('BUTTON_CONTINUE', $this->lng->txt('btn_next'));
-        $this->tpl->setVariable($this->getContentBlockName(), $template->get());
+        $this->ctrl->setParameterByClass(static::class, 'skipfinalstatement', 1);
+        $this->tpl->setVariable(
+            $this->getContentBlockName(),
+            $this->ui_renderer->render([
+                $this->ui_factory->legacy(
+                    $this->object->prepareTextareaOutput($this->object->getFinalStatement(), true)
+                ),
+                $this->ui_factory->button()->standard(
+                    $this->lng->txt('btn_next'),
+                    $this->ctrl->getLinkTargetByClass(static::class, ilTestPlayerCommands::AFTER_TEST_PASS_FINISHED)
+                )
+            ])
+        );
     }
 
     protected function prepareTestPage($presentationMode, $sequenceElement, $question_id)
