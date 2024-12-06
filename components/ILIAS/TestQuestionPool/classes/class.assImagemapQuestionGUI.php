@@ -257,6 +257,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $this->getQuestionTemplate();
         $editor_tpl = new ilTemplate('tpl.il_as_qpl_imagemap_question.html', true, true, 'components/ILIAS/TestQuestionPool');
 
+        $shape = $shape !== '' ? $shape : $this->request_data_collector->string('shape');
         $shape_title = $this->request_data_collector->string('shapetitle');
         $image = $this->request_data_collector->raw('image', 2);
         $coords = $image['mapcoords'] ?? [];
@@ -276,7 +277,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $editor_tpl->setVariable('HIDDEN_NAME', 'shape');
         $editor_tpl->setVariable(
             'HIDDEN_VALUE',
-            $shape !== '' ? $shape : $this->request_data_collector->string('shape')
+            $shape
         );
         $editor_tpl->parseCurrentBlock();
 
