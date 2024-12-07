@@ -987,11 +987,19 @@ class ilObjectGUI implements ImplementsCreationCallback
      */
     public function getDidacticTemplateVar(string $type): int
     {
-        if (!$this->post_wrapper->has("didactic_type")) {
+        $create_form = $this->initCreateForm($this->type);
+        if ($create_form instanceof StandardForm) {
+            $data = $create_form->withRequest($this->request)->getData();
+            return isset($data['didactic_templates'])
+                ? $this->parseDidacticTemplateVar($data['didactic_templates'], $type)
+                : 0;
+        }
+
+        if (!$this->post_wrapper->has('didactic_type')) {
             return 0;
         }
 
-        $tpl = $this->post_wrapper->retrieve("didactic_type", $this->refinery->kindlyTo()->string());
+        $tpl = $this->post_wrapper->retrieve('didactic_type', $this->refinery->kindlyTo()->string());
         return $this->parseDidacticTemplateVar($tpl, $type);
     }
 

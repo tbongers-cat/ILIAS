@@ -5951,11 +5951,11 @@ class ilObjTest extends ilObject
      */
     public function applyDefaults($test_defaults): bool
     {
-        $testsettings = unserialize($test_defaults['defaults']);
-        $unserialized_marks = unserialize($test_defaults['marks']);
-
-        if ($unserialized_marks instanceof MarkSchema) {
-            $unserialized_marks = $unserialized_marks->getMarkSteps();
+        $testsettings = unserialize($test_defaults['defaults'], ['allowed_classes' => [DateTimeImmutable::class]]);
+        try {
+            $unserialized_marks = unserialize($test_defaults['marks'], ['allowed_classes' => [Mark::class]]);
+        } catch (Exception $e) {
+            return false;
         }
 
         $this->mark_schema = $this->getMarkSchema()->withMarkSteps($unserialized_marks);
