@@ -235,7 +235,7 @@ class Factory
 
             $graphical_output = true;
             $show_correct_solution = false;
-            $show_inline_feedback = $settings->getShowFeedback();
+            $show_feedback = $settings->getShowFeedback();
             $usr_solution = $question_gui->getSolutionOutput(
                 $active_id,
                 $attempt_id,
@@ -268,6 +268,7 @@ class Factory
 
             $graphical_output = false;
             $show_correct_solution = true;
+            $show_feedback = false;
             $show_inline_feedback = false;
             $best_solution = $question_gui->getSolutionOutput(
                 $active_id,
