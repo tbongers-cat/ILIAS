@@ -89,7 +89,7 @@ class ScoreSettingsDatabaseRepository implements ScoreSettingsRepository
                 ->withScoreCutting((int) $row['score_cutting'])
                 ->withPassScoring((int) $row['pass_scoring']),
             (new SettingsResultSummary($test_id))
-                ->withScoreReporting((int) $row['score_reporting'])
+                ->withScoreReporting(ScoreReportingTypes::from($row['score_reporting']))
                 ->withReportingDate($reporting_date)
                 ->withShowGradingStatusEnabled((bool) $row['show_grading_status'])
                 ->withShowGradingMarkEnabled((bool) $row['show_grading_mark'])

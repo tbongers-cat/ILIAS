@@ -70,7 +70,13 @@ class MarkSchemaTable implements DataRetrieval
                 )
             ],
             $this
-        )->withActions(
+        );
+
+        if (!$this->marks_editable) {
+            return $table;
+        }
+
+        return $table->withActions(
             [
                 self::EDIT_ACTION_NAME => $f->action()->single(
                     $this->lng->txt('edit'),
@@ -84,8 +90,6 @@ class MarkSchemaTable implements DataRetrieval
                 )->withAsync()
             ]
         );
-
-        return $table;
     }
 
     public function getRows(

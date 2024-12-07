@@ -18,7 +18,7 @@
 
 declare(strict_types=1);
 
-use ILIAS\Test\Settings\ScoreReporting\SettingsResultSummary;
+use ILIAS\Test\Settings\ScoreReporting\ScoreReportingTypes;
 
 /**
  * @author		Björn Heyser <bheyser@databay.de>
@@ -159,7 +159,7 @@ class ilTestPassesSelector
         $reportable_passes = [];
 
         foreach ($existing_passes as $pass) {
-            if ($this->isReportablePass($last_pass, $pass)) {
+            if ($this->isReportableAttempt($last_pass, $pass)) {
                 $reportable_passes[] = $pass;
             }
         }
@@ -193,31 +193,32 @@ class ilTestPassesSelector
         return $last_pass;
     }
 
-    private function isReportablePass(int $last_pass, int $pass): bool
+    private function isReportableAttempt(int $last_attempt, int $attempt): bool
     {
-        switch ($this->test_obj->getScoreReporting()) {
-            case SettingsResultSummary::SCORE_REPORTING_IMMIDIATLY:
+        switch ($this->test_obj->getScoreSettings()->getResultSummarySettings()->getScoreReporting()) {
+            case ScoreReportingTypes::SCORE_REPORTING_IMMIDIATLY:
                 return true;
 
-            case SettingsResultSummary::SCORE_REPORTING_DATE:
+            case ScoreReportingTypes::SCORE_REPORTING_DATE:
                 return $this->isReportingDateReached();
 
-            case SettingsResultSummary::SCORE_REPORTING_FINISHED:
-                if ($pass < $last_pass) {
+            case ScoreReportingTypes::SCORE_REPORTING_FINISHED:
+                if ($attempt < $last_attempt) {
                     return true;
                 }
 
-                return $this->isClosedPass($pass);
+                return $this->isClosedPass($attempt);
 
-            case SettingsResultSummary::SCORE_REPORTING_AFTER_PASSED:
+            case ScoreReportingTypes::SCORE_REPORTING_AFTER_PASSED:
                 if (!$this->hasTestPassedOnce($this->getActiveId())) {
                     return false;
                 }
 
-                return $this->isClosedPass($pass);
-        }
+                return $this->isClosedPass($attempt);
 
-        return false;
+            default:
+                return false;
+        }
     }
 
     private function checkLastFinishedPassInitialised()

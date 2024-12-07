@@ -22,6 +22,7 @@ use ILIAS\Test\RequestDataCollector;
 use ILIAS\Test\Presentation\TabsManager;
 use ILIAS\Test\Logging\TestLogger;
 use ILIAS\Test\Settings\ScoreReporting\SettingsResultSummary;
+use ILIAS\Test\Settings\ScoreReporting\ScoreReportingTypes;
 use ILIAS\TestQuestionPool\Questions\GeneralQuestionPropertiesRepository;
 use ILIAS\Test\Results\Toplist\TestTopListRepository;
 use ILIAS\Data\Factory as DataFactory;
@@ -216,14 +217,14 @@ class ilTestResultsGUI
         $message = $this->lng->txt('tst_res_tab_msg_res_after_taking_test');
 
         switch ($this->test_object->getScoreReporting()) {
-            case SettingsResultSummary::SCORE_REPORTING_FINISHED:
+            case ScoreReportingTypes::SCORE_REPORTING_FINISHED:
                 if ($this->test_object->hasAnyTestResult($this->test_session)) {
                     $message = $this->lng->txt('tst_res_tab_msg_res_after_finish_test');
                 }
 
                 break;
 
-            case SettingsResultSummary::SCORE_REPORTING_DATE:
+            case ScoreReportingTypes::SCORE_REPORTING_DATE:
                 $date = $this->test_object->getScoreSettings()->getResultSummarySettings()->getReportingDate()
                     ->setTimezone(new \DateTimeZone($this->user->getTimeZone()));
 
@@ -241,7 +242,7 @@ class ilTestResultsGUI
                 );
                 break;
 
-            case SettingsResultSummary::SCORE_REPORTING_AFTER_PASSED:
+            case ScoreReportingTypes::SCORE_REPORTING_AFTER_PASSED:
                 $message = $this->lng->txt('tst_res_tab_msg_res_after_test_passed');
                 break;
         }

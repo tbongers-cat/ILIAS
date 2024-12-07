@@ -232,13 +232,15 @@ class SettingsScoringGUI extends TestSettingsGUI
 
     private function isScoreReportingAvailable(): bool
     {
-        if (!$this->test_object->getScoreReporting()) {
+        $result_summary_settings = $this->test_object->getScoreSettings()
+            ->getResultSummarySettings();
+        if ($result_summary_settings->getScoreReporting()->isReportingEnabled()) {
             return false;
         }
 
-        if ($this->test_object->getScoreReporting() === SettingsResultSummary::SCORE_REPORTING_DATE) {
-            $reporting_date = $this->test_object->getScoreSettings()->getResultSummarySettings()->getReportingDate();
-            return $reporting_date <= new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
+        if ($result_summary_settings->getScoreReporting() === ScoreReportingTypes::SCORE_REPORTING_DATE) {
+            return $result_summary_settings->getResultSummarySettings()
+                ->getReportingDate() <= new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
         }
 
         return true;

@@ -26,10 +26,9 @@ use ILIAS\Test\Scoring\Settings\Settings as SettingsScoring;
 use ILIAS\Test\Settings\ScoreReporting\SettingsResultSummary;
 use ILIAS\Test\Settings\ScoreReporting\SettingsResultDetails;
 use ILIAS\Test\Settings\ScoreReporting\SettingsGamification;
-use ILIAS\UI\Implementation\Component as I;
+use ILIAS\Test\Settings\ScoreReporting\ScoreReportingTypes;
 use ILIAS\UI\Component as C;
 use ILIAS\UI\Implementation\Component\Symbol as S;
-use ILIAS\Data;
 
 class ScoreSettingsTest extends ilTestBaseTestCase
 {
@@ -67,9 +66,10 @@ class ScoreSettingsTest extends ilTestBaseTestCase
     {
         $dat = new \DateTimeImmutable();
         $s = new SettingsResultSummary(-666);
-        $this->assertEquals(5, $s->withScoreReporting(5)->getScoreReporting());
-        $this->assertTrue($s->withScoreReporting(1)->getScoreReportingEnabled());
-        $this->assertFalse($s->withScoreReporting(0)->getScoreReportingEnabled());
+        $this->assertEquals(
+            ScoreReportingTypes::SCORE_REPORTING_AFTER_PASSED,
+            $s->withScoreReporting(ScoreReportingTypes::SCORE_REPORTING_AFTER_PASSED)->getScoreReporting()
+        );
         $this->assertTrue($s->withShowGradingStatusEnabled(true)->getShowGradingStatusEnabled());
         $this->assertFalse($s->withShowGradingStatusEnabled(false)->getShowGradingStatusEnabled());
         $this->assertTrue($s->withShowGradingMarkEnabled(true)->getShowGradingMarkEnabled());

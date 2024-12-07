@@ -20,6 +20,7 @@ namespace ScoreReporting;
 
 use DateTimeImmutable;
 use ILIAS\Test\Settings\ScoreReporting\SettingsResultSummary;
+use ILIAS\Test\Settings\ScoreReporting\ScoreReportingTypes;
 use ilTestBaseTestCase;
 
 class SettingsResultSummaryTest extends ilTestBaseTestCase
@@ -33,37 +34,20 @@ class SettingsResultSummaryTest extends ilTestBaseTestCase
     /**
      * @dataProvider getAndWithScoreReportingDataProvider
      */
-    public function testGetAndWithScoreReporting(int $IO): void
+    public function testGetAndWithScoreReporting(ScoreReportingTypes $IO): void
     {
-        $settingsResultSummary = new SettingsResultSummary(0);
-        $settingsResultSummary = $settingsResultSummary->withScoreReporting($IO);
-        $this->assertEquals($IO, $settingsResultSummary->getScoreReporting());
+        $this->assertEquals(
+            $IO,
+            (new SettingsResultSummary(0))->withScoreReporting($IO)->getScoreReporting()
+        );
     }
 
     public static function getAndWithScoreReportingDataProvider(): array
     {
         return [
-            [-1],
-            [0],
-            [1]
-        ];
-    }
-
-    /**
-     * @dataProvider getScoreReportingEnabledDataProvider
-     */
-    public function testGetScoreReportingEnabled(bool $IO): void
-    {
-        $settingsResultSummary = new SettingsResultSummary(0);
-        $settingsResultSummary = $settingsResultSummary->withScoreReporting($IO ? 1 : 0);
-        $this->assertEquals($IO, $settingsResultSummary->getScoreReportingEnabled());
-    }
-
-    public static function getScoreReportingEnabledDataProvider(): array
-    {
-        return [
-            [false],
-            [true]
+            [ScoreReportingTypes::SCORE_REPORTING_DISABLED],
+            [ScoreReportingTypes::SCORE_REPORTING_FINISHED],
+            [ScoreReportingTypes::SCORE_REPORTING_AFTER_PASSED]
         ];
     }
 
