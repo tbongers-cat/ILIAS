@@ -152,7 +152,8 @@ class Factory
                 );
 
                 if ($last_attempt !== null
-                    && $last_attempt->getStatusOfAttempt() === StatusOfAttempt::RUNNING) {
+                    && $last_attempt->getStatusOfAttempt() === StatusOfAttempt::RUNNING
+                    && $last_attempt->getStartedDate() !== null) {
                     $v = $v->withRunningAttemptStart($last_attempt->getStartedDate());
                 }
 
