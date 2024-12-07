@@ -65,7 +65,7 @@ class AttemptOverview
         return $this->exam_id;
     }
 
-    public function getStartedDate(): \DateTimeImmutable
+    public function getStartedDate(): ?\DateTimeImmutable
     {
         return $this->attempt_started_date;
     }
