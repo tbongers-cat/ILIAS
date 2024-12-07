@@ -324,7 +324,7 @@ class ResultsExportExcel implements Exporter
 
                 $this->worksheet->setCell($current_row, $col++, $test_attempt_data->getReachedPoints());
                 $this->worksheet->setCell($current_row, $col++, $test_attempt_data->getMaxpoints());
-                $this->worksheet->setCell($current_row, $col++, $test_attempt_data->getMark()->getShortName());
+                $this->worksheet->setCell($current_row, $col++, $test_attempt_data->getMark()?->getShortName() ?? '');
                 $this->worksheet->setCell($current_row, $col++, $test_attempt_data->getQuestionCount());
                 $this->worksheet->setCell($current_row, $col++, $test_attempt_data->getNrOfAnsweredQuestions());
                 $this->worksheet->setCell($current_row, $col++, $test_attempt_data->getReachedPointsInPercent());

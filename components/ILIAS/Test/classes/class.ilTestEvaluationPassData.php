@@ -46,7 +46,7 @@ class ilTestEvaluationPassData
     private int $questioncount;
     private float $maxpoints;
     private float $reachedpoints;
-    private Mark $mark;
+    private ?Mark $mark = null;
     private int $nrOfAnsweredQuestions;
     private int $pass;
     private ?int $requestedHintsCount = null;
@@ -106,7 +106,7 @@ class ilTestEvaluationPassData
         return $this->getMaxPoints() ? $this->getReachedPoints() / $this->getMaxPoints() * 100.0 : 0.0;
     }
 
-    public function getMark(): Mark
+    public function getMark(): ?Mark
     {
         return $this->mark;
     }
