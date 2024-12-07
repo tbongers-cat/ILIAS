@@ -274,6 +274,9 @@ class MarkSchemaGUI
 
     private function populateToolbar(InterruptiveModal $confirmation_modal, RoundTripModal $add_mark_modal): void
     {
+        if (!$this->editable) {
+            return;
+        }
         $create_simple_schema_button = $this->ui_factory->button()->standard(
             $this->lng->txt('tst_mark_reset_to_simple_mark_schema'),
             $confirmation_modal->getShowSignal()
@@ -290,12 +293,11 @@ class MarkSchemaGUI
     public function runTableCommand(): void
     {
         $action = $this->getTableActionQueryString();
-        if ($action === null) {
+        if (!$this->editable || $action === null) {
             return;
         }
 
         $affected_marks = $this->getTableAffectedItemsFromQuery();
-
         if ($affected_marks === null) {
             $this->response_handler->sendAsync(
                 $this->ui_renderer->renderAsync(
