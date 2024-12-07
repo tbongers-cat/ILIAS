@@ -6550,7 +6550,7 @@ class ilObjTest extends ilObject
         $found_participants = $data->getParticipants();
         $results = ['overview' => [], 'questions' => []];
         if ($found_participants !== []) {
-            $results['overview']['tst_stat_result_mark_median'] = $data->getStatistics()->getEvaluationDataOfMedianUser()?->getMark()->getShortName() ?? '';
+            $results['overview']['tst_stat_result_mark_median'] = $data->getStatistics()->getEvaluationDataOfMedianUser()?->getMark()?->getShortName() ?? '';
             $results['overview']['tst_stat_result_rank_median'] = $data->getStatistics()->rankMedian();
             $results['overview']['tst_stat_result_total_participants'] = $data->getStatistics()->count();
             $results['overview']['tst_stat_result_median'] = $data->getStatistics()->median();
@@ -6566,7 +6566,7 @@ class ilObjTest extends ilObject
             $total_passed_max = 0;
             $total_passed_time = 0;
             foreach ($found_participants as $userdata) {
-                if ($userdata->getMark()->getPassed()) {
+                if ($userdata->getMark()?->getPassed()) {
                     $total_passed++;
                     $total_passed_reached += $userdata->getReached();
                     $total_passed_max += $userdata->getMaxpoints();

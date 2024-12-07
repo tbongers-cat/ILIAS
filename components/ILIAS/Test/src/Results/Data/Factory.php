@@ -63,7 +63,7 @@ class Factory
         $total_passed_max = 0.0;
         $total_passed_time = 0;
         foreach ($found_participants as $userdata) {
-            if ($userdata->getMark()->getPassed()) {
+            if ($userdata->getMark()?->getPassed()) {
                 $total_passed++;
                 $total_passed_reached += $userdata->getReached();
                 $total_passed_max += $userdata->getMaxpoints();
@@ -79,7 +79,7 @@ class Factory
             $test_obj->evalTotalStartedAverageTime($eval->getParticipantIds()),
             $total_passed_time,
             $eval->getStatistics()->rankMedian(),
-            $eval->getStatistics()->getEvaluationDataOfMedianUser()?->getMark()->getShortName() ?? '',
+            $eval->getStatistics()->getEvaluationDataOfMedianUser()?->getMark()?->getShortName() ?? '',
             $eval->getStatistics()->median(),
             $total_passed === 0 ? 0 : $total_passed_reached / $total_passed
         );
