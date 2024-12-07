@@ -297,6 +297,7 @@ class ilAssOrderingFormValuesObjectsConverter implements ilFormValuesManipulator
             }
 
             $elements[$identifier] = $element;
+            $counter++;
         }
 
         return $elements;
