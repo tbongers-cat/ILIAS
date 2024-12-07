@@ -2622,12 +2622,15 @@ class ilObjTest extends ilObject
             }
 
             for ($i = 0;$i < $user_data->getPassCount();$i++) {
-                $pass_data = $user_data->getPass($i);
+                $attempt_data = $user_data->getPass($i);
+                if ($attempt_data === null) {
+                    continue;
+                }
                 $mark = $this->getMarkSchema()->getMatchingMark(
-                    $pass_data->getReachedPointsInPercent()
+                    $attempt_data->getReachedPointsInPercent()
                 );
                 if ($mark !== null) {
-                    $pass_data->setMark($mark);
+                    $attempt_data->setMark($mark);
                 }
             }
 
