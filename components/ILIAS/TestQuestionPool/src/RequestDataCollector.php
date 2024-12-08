@@ -238,9 +238,9 @@ class RequestDataCollector
 
     private function retrieveArray(string $key, int $depth, Transformation $transformation): array
     {
-        $chain = $this->refinery->kindlyTo()->listOf($transformation);
+        $chain = $this->refinery->kindlyTo()->dictOf($transformation);
         for ($i = 1; $i < $depth; $i++) {
-            $chain = $this->refinery->kindlyTo()->listOf($chain);
+            $chain = $this->refinery->kindlyTo()->dictOf($chain);
         }
 
         return $this->http->wrapper()->post()->retrieve(

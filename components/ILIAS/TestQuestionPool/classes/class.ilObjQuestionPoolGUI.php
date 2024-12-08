@@ -236,6 +236,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
                 $gui->initPreviewSettings($this->object->getRefId());
                 $gui->initPreviewSession($this->user->getId(), $this->fetchAuthoringQuestionIdParamater());
                 $gui->initHintTracking();
+                $this->ctrl->clearParameterByClass(self::class, 'q_id');
                 $this->tabs_gui->setBackTarget(
                     $this->lng->txt('backtocallingpool'),
                     $this->ctrl->getLinkTargetByClass(self::class, self::DEFAULT_CMD)
