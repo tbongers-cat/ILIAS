@@ -51,6 +51,8 @@ class assFileUpload extends assQuestion implements ilObjQuestionScoringAdjustabl
 
     protected string $allowedextensions = '';
 
+    private ?string $current_cmd;
+
     /** @var boolean Indicates whether completion by submission is enabled or not */
     protected $completion_by_submission = false;
 
@@ -75,11 +77,12 @@ class assFileUpload extends assQuestion implements ilObjQuestionScoringAdjustabl
         string $question = ''
     ) {
         parent::__construct($title, $comment, $author, $owner, $question);
+        /** @var ILIAS\DI\Container $DIC */
         global $DIC;
         $this->irss = $DIC->resourceStorage();
         $this->file_delivery = $DIC->fileDelivery();
-        $this->file_upload = $DIC->upload();
-
+        $this->file_upload = $DIC['upload'];
+        $this->current_cmd = $DIC['ilCtrl']->getCmd();
         $local_dic = QuestionPoolDIC::dic();
         $this->participant_repository = $local_dic['participant_repository'];
     }
@@ -534,7 +537,10 @@ class assFileUpload extends assQuestion implements ilObjQuestionScoringAdjustabl
         $test_id = $this->participant_repository->lookupTestIdByActiveId($active_id);
 
         try {
-            $upload_handling_required = $this->isFileUploadAvailable() && $this->checkUpload();
+            $upload_handling_required = $this->current_cmd !== 'submitSolution'
+                && !$this->isFileDeletionAction()
+                && $this->isFileUploadAvailable()
+                && $this->checkUpload();
         } catch (IllegalStateException $e) {
             $this->tpl->setOnScreenMessage('failure', $e->getMessage(), true);
             return false;

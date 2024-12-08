@@ -221,7 +221,7 @@ abstract class assQuestion implements Question
 
     protected function getQuestionAction(): string
     {
-        return $this->questionpool_request->getCmdIndex($this->questionActionCmd);
+        return $this->questionpool_request->getCmdIndex($this->questionActionCmd) ?? '';
     }
 
     protected function isNonEmptyItemListPostSubmission(string $post_submission_field_name): bool
