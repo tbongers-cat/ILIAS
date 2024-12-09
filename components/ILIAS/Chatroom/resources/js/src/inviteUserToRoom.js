@@ -17,10 +17,9 @@
 export default ({closeModal, showModal, node}, labels, invite, userList, send) => {
   const input = node.querySelector('input[type=text]');
   let value = null;
-
-  node.querySelector('form').addEventListener('submit', e => {
+  node.querySelector('.modal-body form').addEventListener('submit', e => {
     e.preventDefault();
-    if (value != null) {
+    if (value !== null) {
       invite(value);
       closeModal();
     }
@@ -184,7 +183,7 @@ function searchForUsers(userList, send, search) {
   }
   return send({search}).then(
     response => ({
-      items: response.items.filter(item => !userList.includes(item.id)),
+      items: Object.values(response.items).filter(item => !userList.includes(item.id)),
       hasMoreResults: response.hasMoreResults || false,
     })
   );

@@ -21,6 +21,9 @@ const Void = () => {};
 const load = key => new Promise(resolve => bus.onArrived(key, ({node, showModal, closeModal}) => {
   let next = Void;
   node.querySelector('form').addEventListener('submit', e => {
+    if (e.submitter && e.submitter.getAttribute('data-dismiss') === 'modal') {
+      return;
+    }
     e.preventDefault();
     next(true);
     next = Void;
