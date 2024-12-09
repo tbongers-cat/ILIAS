@@ -114,7 +114,7 @@ class ilDashboardRecommendedContentGUI extends ilDashboardBlockGUI
         );
     }
 
-    public function confirmedRemoveObject(array $ids): void
+    public function confirmedRemove(array $ids): void
     {
         $rec_manager = new ilRecommendedContentManager();
         foreach ($ids as $ref_id) {
