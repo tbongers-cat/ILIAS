@@ -136,8 +136,8 @@ class ilAssQuestionHintGUI extends ilAssQuestionHintAbstractGUI
             }
 
             if ($hintJustCreated && $this->question_obj->isAdditionalContentEditingModePageObject()) {
-                $this->ctrl->setParameterByClass(self::class, 'hint_id', $questionHint->getId());
-                $this->ctrl->redirectByClass(self::class, 'edit');
+                $this->ctrl->setParameterByClass(ilAssHintPageGUI::class, 'hint_id', $questionHint->getId());
+                $this->ctrl->redirectByClass(ilAssHintPageGUI::class, 'edit');
             } else {
                 $this->ctrl->redirectByClass(ilAssQuestionHintsGUI::class, ilAssQuestionHintsGUI::CMD_SHOW_LIST);
             }
