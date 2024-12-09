@@ -113,7 +113,7 @@ class ilAssQuestionHintsGUI extends ilAssQuestionHintAbstractGUI
                     $this->question_obj,
                     $this->ctrl,
                     $this->tabs,
-                    $this->tabs
+                    $this->lng
                 );
                 $forwarder->setPresentationMode($presentationMode);
                 $forwarder->forward();

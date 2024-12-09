@@ -196,6 +196,8 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
                     $this->redirectAfterMissingWrite();
                 }
 
+                $this->ctrl->saveParameterByClass(ilAssQuestionPreviewGUI::class, 'q_id');
+                $this->ctrl->saveParameterByClass(ilAssQuestionHintRequestGUI::class, 'q_id');
                 $this->ctrl->saveParameter($this, 'q_id');
                 $gui = new ilAssQuestionPreviewGUI(
                     $this->ctrl,
