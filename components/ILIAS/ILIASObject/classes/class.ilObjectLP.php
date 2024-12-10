@@ -724,7 +724,7 @@ class ilObjectLP
     }
 
     /**
-     * @return Input[]
+     * @return array<string, Input> A map of Input elements mapped to a corresponding key
      */
     public function appendModeConfiguration(int $mode): array
     {
@@ -733,7 +733,7 @@ class ilObjectLP
 
     /**
      * @param string $selected_group post var of the selected group
-     * @param array  $group_data data of the that group as array, as processed by the KS
+     * @param array<string, mixed> $group_data data of the that group as array, as processed by the KS
      */
     public function saveModeConfiguration(
         string $selected_group,
