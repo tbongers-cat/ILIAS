@@ -21,7 +21,6 @@ declare(strict_types=1);
 use ILIAS\TestQuestionPool\QuestionPoolDIC;
 use ILIAS\TestQuestionPool\RequestDataCollector;
 use ILIAS\TestQuestionPool\Questions\QuestionLMExportable;
-
 use ILIAS\Test\Logging\AdditionalInformationGenerator;
 
 /**
@@ -120,12 +119,12 @@ class assImagemapQuestion extends assQuestion implements ilObjQuestionScoringAdj
 
     public function isComplete(): bool
     {
-        if (strlen($this->title)
-            && ($this->author)
-            && ($this->question)
-            && ($this->image_filename)
-            && (count($this->answers))
-            && ($this->getMaximumPoints() > 0)
+        if ($this->title !== ''
+            && $this->author
+            && $this->question
+            && $this->image_filename
+            && $this->answers !== []
+            && $this->getMaximumPoints() > 0
         ) {
             return true;
         }
@@ -207,7 +206,7 @@ class assImagemapQuestion extends assQuestion implements ilObjQuestionScoringAdj
         }
 
         $src = opendir($image_source_path);
-        while($src_file = readdir($src)) {
+        while ($src_file = readdir($src)) {
             if ($src_file === '.' || $src_file === '..') {
                 continue;
             }
@@ -238,7 +237,7 @@ class assImagemapQuestion extends assQuestion implements ilObjQuestionScoringAdj
             $this->setOwner($data['owner']);
             $this->setIsMultipleChoice($data['is_multiple_choice'] == self::MODE_MULTIPLE_CHOICE);
             $this->setQuestion(ilRTE::_replaceMediaObjectImageSrc((string) $data['question_text'], 1));
-            $this->setImageFilename($data['image_file']);
+            $this->setImageFilename($data['image_file'] ?? '');
 
             try {
                 $this->setLifecycle(ilAssQuestionLifecycle::getInstance($data['lifecycle']));

@@ -108,7 +108,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             }
 
             if ($_FILES['imagemapfile']['tmp_name'] !== '') {
-                if ($this->object->getSelfAssessmentEditingMode() && $this->object->getId() < 1) {
+                if ($this->object->getId() < 1) {
                     $this->object->createNewQuestion();
                 }
 
@@ -123,7 +123,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             $this->object->setImageFilename($this->request_data_collector->string('image_name'));
         }
         if ($_FILES['image']['tmp_name'] !== '') {
-            if ($this->object->getSelfAssessmentEditingMode() && $this->object->getId() < 1) {
+            if ($this->object->getId() < 1) {
                 $this->object->createNewQuestion();
             }
             $this->object->setImageFilename($_FILES['image']['name'], $_FILES['image']['tmp_name']);
@@ -583,7 +583,9 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             $template->parseCurrentBlock();
         }
         $template->setVariable("QUESTIONTEXT", $this->object->getQuestionForHTMLOutput());
-        $template->setVariable("IMG_SRC", ilWACSignedPath::signFile($imagepath));
+        if (is_file($imagepath)) {
+            $template->setVariable("IMG_SRC", ilWACSignedPath::signFile($imagepath));
+        }
         $template->setVariable("IMG_ALT", $this->lng->txt("imagemap"));
         $template->setVariable("IMG_TITLE", $this->lng->txt("imagemap"));
         $questionoutput = $template->get();
