@@ -1649,8 +1649,8 @@ abstract class assQuestion implements Question
                 $resolved_link = ilInternalLink::_getIdForImportId("MediaObject", $internal_link);
                 break;
         }
-        if ($resolved_link !== null) {
-            return (string) $resolved_link;
+        if ($resolved_link === null) {
+            return "il__{$matches[2]}_{$matches[3]}";
         }
         return $internal_link;
     }
