@@ -19,8 +19,8 @@
 use ILIAS\MetaData\Services\ServicesInterface as LOMServices;
 use ILIAS\MetaData\Paths\PathInterface as LOMPath;
 use ILIAS\MetaData\Paths\Filters\FilterType;
-use ILIAS\MetaData\Repository\Search\Filters\Placeholder;
-use ILIAS\MetaData\Repository\Search\Clauses\Mode;
+use ILIAS\MetaData\Search\Filters\Placeholder;
+use ILIAS\MetaData\Search\Clauses\Mode;
 
 /**
  * Class ilLMObject
