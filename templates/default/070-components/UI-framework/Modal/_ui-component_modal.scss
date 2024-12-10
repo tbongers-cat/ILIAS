@@ -44,6 +44,31 @@ $il-modal-dark-carousel-color: $il-main-bg !default;
 	border: none;
 	background: none;
 	@include box-shadow($il-shadow--large);
+
+	&.il-modal-lightbox-dark {
+		.modal-content {
+			background-color: $il-modal-dark-color;
+			color: $il-modal-light-color;
+			.modal-header {
+				border-bottom-color: $il-modal-light-color;
+			}
+			.modal-title {
+				padding: 0px;
+			}
+			.carousel-inner {
+				padding: 0px;
+			}
+			.carousel-control {
+				color: $il-modal-dark-carousel-color;
+				width: 15%;
+			}
+		}
+		.close {
+			color: $il-modal-light-color;
+			background-color: $il-modal-dark-color;
+			opacity: 1;
+		}
+	}
 }
 
 // .modal-open      - body class for killing the scroll
