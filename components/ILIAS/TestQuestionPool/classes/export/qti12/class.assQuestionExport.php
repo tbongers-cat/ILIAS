@@ -15,7 +15,7 @@
  *
  *********************************************************************/
 
-use ILIAS\TestQuestionPool\Questions\SuggestedSolution\SuggestedSolution;
+use ILIAS\TestQuestionPool\Questions\SuggestedSolution\SuggestedSolutionFile;
 
 /**
 * Class for question exports
@@ -244,7 +244,11 @@ class assQuestionExport
                 'points' => $hint->getPoints()
             ];
             if ($this->object->isAdditionalContentEditingModePageObject()) {
-                $data = (new ilAssHintPage($hint->getId()))->getXMLContent();
+                try {
+                    $data = (new ilAssHintPage($hint->getId()))->getXMLContent();
+                } catch (Exception $e) {
+                    continue;
+                }
             } else {
                 $data = $hint->getText();
             }
@@ -254,27 +258,39 @@ class assQuestionExport
         return $writer;
     }
 
-    protected function addSuggestedSolution(ilXmlWriter $writer, SuggestedSolution $suggested_solution): ilXmlWriter
+    protected function addSuggestedSolution(ilXmlWriter $writer): ilXmlWriter
     {
-        if (!$suggested_solution->isOfTypeLink()) {
+        $solution = $this->object->getSuggestedSolution();
+        if ($solution === null) {
             return $writer;
         }
 
-        if (preg_match("/il_(\d*?)_(\w+)_(\d+)/", $suggested_solution->getInternalLink(), $matches) !== 1) {
-            return $writer;
-        }
-
-        $writer->xmlStartTag("material");
-        $intlink = "il_" . IL_INST_ID . "_" . $matches[2] . "_" . $matches[3];
-        if (strcmp($matches[1], "") != 0) {
-            $intlink = $suggested_solution->getInternalLink();
-        }
+        $mattext = ['type' => $solution->getType()];
         $attrs = [
-            "label" => "suggested_solution"
+            'label' => 'suggested_solution',
+            'texttype' => 'application/json'
         ];
-        $writer->xmlElement("mattext", $attrs, $intlink);
-        $writer->xmlEndTag("material");
 
+        if ($solution instanceof SuggestedSolutionFile) {
+            $mattext['title'] = $solution->getTitle();
+            $mattext['filename'] = $solution->getFilename();
+            $mattext['value'] = base64_encode(file_get_contents(
+                $this->object->getSuggestedSolutionPath() . $solution->getFilename()
+            ));
+        } else {
+            if (!preg_match('/il_(\d*?)_(\w+)_(\d+)/', $solution->getInternalLink(), $matches)) {
+                return $writer;
+            }
+            $mattext['value'] = 'il_' . IL_INST_ID . '_' . $matches[2] . '_' . $matches[3];
+            if ($matches[1] !== '') {
+                $mattext['value'] = $solution['internal_link'];
+            }
+
+        }
+
+        $writer->xmlStartTag('material');
+        $writer->xmlElement('mattext', $attrs, json_encode($mattext));
+        $writer->xmlEndTag('material');
         return $writer;
     }
 
