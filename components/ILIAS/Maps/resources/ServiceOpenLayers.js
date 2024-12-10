@@ -21445,7 +21445,7 @@ class ServiceOpenLayers {
         marker.setPosition(pos);
         this.map.addOverlay(marker);
 
-        element.innerHTML = "<img src='./components/ILIAS/Maps/images/mm_20_blue.png'>";
+        element.innerHTML = "<img src='./assets/images/standard/icon_mapm.svg'>";
     }
 
     /**
