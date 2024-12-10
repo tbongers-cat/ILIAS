@@ -33,7 +33,6 @@ class ilADTEnumSearchBridgeSingle extends ilADTSearchBridgeSingle
         $def = $this->getADT()->getCopyOfDefinition();
 
         $options = $def->getOptions();
-        asort($options); // ?
 
         $this->lng->loadLanguageModule("search");
         $options = array("" => $this->lng->txt("search_any")) + $options;
