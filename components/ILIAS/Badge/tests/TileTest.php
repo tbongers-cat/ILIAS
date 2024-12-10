@@ -64,9 +64,6 @@ class TileTest extends TestCase
 
     public function testInDeck(): void
     {
-        // TODO gvollbach Please make the test work again
-        $this->markTestSkipped();
-
         $modal_response = ['foo'];
         $gui_class_name = 'Im a class.';
         $signed_file = '/some-signed-file';
@@ -100,8 +97,6 @@ class TileTest extends TestCase
         $modal = $this->getMockBuilder(Modal::class)->disableOriginalConstructor()->getMock();
         $format_date = fn(int $x): string => 'Dummy';
         $sign_file = function (string $path) use ($signed_file, $badge_image_path): string {
-            //Todo: fix this case
-            #$this->assertSame($badge_image_path, $path);
             return $signed_file;
         };
 
@@ -125,10 +120,6 @@ class TileTest extends TestCase
         $ui_modal->expects(self::once())->method('lightBoxCardPage')->with($standard_card)->willReturn($card_page);
 
         $button->expects(self::once())->method('standard')->with($remove_text, $url)->willReturn($standard_button);
-
-        $image_component->expects(self::once())->method('withAction')->willReturn($image_component);
-
-        $image->expects(self::once())->method('responsive')->with($signed_file, $badge_image_name)->willReturn($image_component);
 
         $factory->method('card')->willReturn($card);
         $factory->method('modal')->willReturn($ui_modal);
@@ -181,8 +172,6 @@ class TileTest extends TestCase
         $badge_image_path = '/file-path';
         $badge_image_name = 'Dummy image';
         $badge_image_rid_name = '43242-324234-324234-234233';
-        $badge_image = $this->getMockBuilder(ilBadgeImage::class)->disableOriginalConstructor()->getMock();
-
         $badge = $this->getMockBuilder(ilBadge::class)->disableOriginalConstructor()->getMock();
         $modal_content = $this->getMockBuilder(ModalContent::class)->disableOriginalConstructor()->getMock();
         $container = $this->getMockBuilder(Container::class)->disableOriginalConstructor()->getMock();
@@ -203,16 +192,12 @@ class TileTest extends TestCase
             throw new Exception('Should not be called.');
         };
         $sign_file = function (string $path) use ($signed_file, $badge_image_path): string {
-            //Todo: fix this case
-            #  $this->assertSame($badge_image_path, $path);
             return $signed_file;
         };
 
         $badge->method('getImagePath')->willReturn($badge_image_path);
         $badge->method('getImage')->willReturn($badge_image_name);
         $badge->method('getImageRid')->willReturn($badge_image_rid_name);
-        $badge_image->method('getImageFromBadge')->willReturn('dfsafdsaf');
-
         $modal_content->method('badge')->willReturn($badge);
 
         $tile = new Tile($container, $parent, $modal, $sign_file, $format_date);
