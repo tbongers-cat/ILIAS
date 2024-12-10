@@ -8304,12 +8304,9 @@ div.alert ul > li:before {
   padding-bottom: 3px;
 }
 
+.il-audio-container > audio,
 .il-audio-container > button {
   width: 100%;
-}
-
-.il-audio-player {
-  background: #2c2c2c;
 }
 
 .webui-popover-content {

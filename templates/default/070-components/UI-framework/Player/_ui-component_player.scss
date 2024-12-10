@@ -5,10 +5,8 @@ $il-player-audio-width: 100%;
 
 // audio
 .il-audio-container {
+  > audio, 
   > button {
     width: $il-player-audio-width;
   }
-}
-.il-audio-player {
-  background: $il-neutral-color;
 }
