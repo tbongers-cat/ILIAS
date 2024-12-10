@@ -78,7 +78,6 @@ class ilADTEnumSearchBridgeMulti extends ilADTSearchBridgeMulti
         $def = $this->getADT()->getCopyOfDefinition();
 
         $options = $def->getOptions();
-        asort($options); // ?
 
         $cbox = new ilCheckboxGroupInputGUI($this->getTitle(), $this->getElementId());
         $cbox->setValue($this->getADT()->getSelections());
