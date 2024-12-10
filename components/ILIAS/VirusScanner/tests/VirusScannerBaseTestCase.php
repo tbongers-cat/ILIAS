@@ -18,20 +18,29 @@
 
 declare(strict_types=1);
 
-namespace ILIAS;
+namespace ILIAS\VirusScanner\tests;
 
-class VirusScanner_ implements Component\Component
+use ILIAS\DI\Container;
+use PHPUnit\Framework\TestCase;
+
+abstract class VirusScannerBaseTestCase extends TestCase
 {
-    public function init(
-        array | \ArrayAccess &$define,
-        array | \ArrayAccess &$implement,
-        array | \ArrayAccess &$use,
-        array | \ArrayAccess &$contribute,
-        array | \ArrayAccess &$seek,
-        array | \ArrayAccess &$provide,
-        array | \ArrayAccess &$pull,
-        array | \ArrayAccess &$internal,
-    ): void {
-        // ...
+    protected function setUp(): void
+    {
+        $GLOBALS['DIC'] = new Container();
+
+        parent::setUp();
+    }
+
+    protected function setGlobalVariable(string $name, $value): void
+    {
+        global $DIC;
+
+        $GLOBALS[$name] = $value;
+
+        unset($DIC[$name]);
+        $DIC[$name] = static function (Container $c) use ($name) {
+            return $GLOBALS[$name];
+        };
     }
 }

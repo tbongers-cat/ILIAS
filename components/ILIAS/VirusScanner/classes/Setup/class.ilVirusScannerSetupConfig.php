@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -18,15 +16,17 @@ declare(strict_types=1);
  *
  *********************************************************************/
 
+declare(strict_types=1);
+
 use ILIAS\Setup;
 
 class ilVirusScannerSetupConfig implements Setup\Config
 {
-    public const VIRUS_SCANNER_NONE = "none";
-    private const VIRUS_SCANNER_SOPHOS = "sophos";
-    private const VIRUS_SCANNER_ANTIVIR = "antivir";
-    private const VIRUS_SCANNER_CLAMAV = "clamav";
-    private const VIRUS_SCANNER_ICAP = "icap";
+    public const VIRUS_SCANNER_NONE = 'none';
+    private const VIRUS_SCANNER_SOPHOS = 'sophos';
+    private const VIRUS_SCANNER_ANTIVIR = 'antivir';
+    private const VIRUS_SCANNER_CLAMAV = 'clamav';
+    public const VIRUS_SCANNER_ICAP = 'icap';
 
     protected string $virus_scanner;
 
@@ -70,7 +70,7 @@ class ilVirusScannerSetupConfig implements Setup\Config
             $this->icap_client_path = $this->toLinuxConvention($icap_client_path);
         } elseif ($virus_scanner !== self::VIRUS_SCANNER_NONE && (!$path_to_scan || !$path_to_clean)) {
             throw new InvalidArgumentException(
-                "Missing path to scan and/or clean commands for virus scanner."
+                'Missing path to scan and/or clean commands for virus scanner.'
             );
         }
         $this->virus_scanner = $virus_scanner;
@@ -83,7 +83,8 @@ class ilVirusScannerSetupConfig implements Setup\Config
         if (!$p) {
             return null;
         }
-        return preg_replace("/\\\\/", "/", $p);
+
+        return preg_replace("/\\\\/", '/', $p);
     }
 
     public function getVirusScanner(): string

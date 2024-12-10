@@ -25,7 +25,7 @@ class ilVirusScannerClamAV extends ilVirusScanner
     public function __construct(string $scan_command, string $clean_command)
     {
         parent::__construct($scan_command, $clean_command);
-        $this->type = "clamav";
+        $this->type = 'clamav';
         $this->scanZipFiles = true;
     }
 
@@ -56,9 +56,9 @@ class ilVirusScannerClamAV extends ilVirusScanner
     protected function processBufferScan(string $buffer): bool
     {
         $descriptor_spec = [
-            0 => ["pipe", "r"],  // stdin is a pipe that the child will read from
-            1 => ["pipe", "w"],  // stdout is a pipe that the child will write to
-            2 => ["pipe", "w"]        // stderr for the child
+            0 => ['pipe', 'r'],  // stdin is a pipe that the child will read from
+            1 => ['pipe', 'w'],  // stdout is a pipe that the child will write to
+            2 => ['pipe', 'w']        // stderr for the child
         ];
 
         $pipes = []; // will look like follows after passing
@@ -100,10 +100,10 @@ class ilVirusScannerClamAV extends ilVirusScanner
 
     protected function hasDetections(string $detectionReport): int
     {
-        return preg_match("/FOUND/", $detectionReport);
+        return preg_match('/FOUND/', $detectionReport);
     }
 
-    public function scanFile(string $file_path, string $org_name = ""): string
+    public function scanFile(string $file_path, string $org_name = ''): string
     {
         $this->scanFilePath = $file_path;
         $this->scanFileOrigName = $org_name;
@@ -113,9 +113,9 @@ class ilVirusScannerClamAV extends ilVirusScanner
         chmod($file_path, $perm);
 
         $a_filepath = realpath($file_path);
-        if(file_exists($file_path)) {
+        if (file_exists($file_path)) {
             $args = ilShellUtil::escapeShellArg($file_path);
-            $arguments = $this->buildScanCommandArguments($args) . " 2>&1";
+            $arguments = $this->buildScanCommandArguments($args) . ' 2>&1';
             $cmd = ilShellUtil::escapeShellCmd($this->scanCommand);
             $out = ilShellUtil::execQuoted($cmd, $arguments);
             $this->scanResult = implode("\n", $out);
@@ -130,13 +130,13 @@ class ilVirusScannerClamAV extends ilVirusScanner
                 return $this->scanResult;
             } else {
                 $this->scanFileIsInfected = false;
-                return "";
+                return '';
             }
         }
 
-        $return_error = "ERROR (Virus Scanner failed): "
+        $return_error = 'ERROR (Virus Scanner failed): '
             . $this->scanResult
-            . "; Path=" . $a_filepath;
+            . '; Path=' . $a_filepath;
         $this->log->write($return_error);
         return $return_error;
     }
