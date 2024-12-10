@@ -26,9 +26,6 @@ use ILIAS\UI\Component\Input\Input;
  */
 class ilForumLP extends ilObjectLP
 {
-    /**
-     * @return array<string, Input>
-     */
     public function appendModeConfiguration(int $mode): array
     {
         global $DIC;
