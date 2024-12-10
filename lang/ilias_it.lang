@@ -8466,6 +8466,9 @@ dcl#:#dcl_confirm_delete_table#:#Vuoi davvero eliminare questa tabella con il su
 dcl#:#dcl_confirm_storing_records#:#Si prega di convalidare e confermare il proprio input.
 dcl#:#dcl_confirm_storing_records_no_permission#:#Non è possibile cambiare successivamente la registrazione.
 dcl#:#dcl_copy#:#Copia raccolta dati
+dcl#:#dcl_copy_field#:#Copy###10 12 2024 new variable
+dcl#:#dcl_copy_field_desc#:#Field to copy options stored in a different field of a table.###10 12 2024 new variable
+dcl#:#dcl_copy_title#:#Copy of table and field###10 12 2024 new variable
 dcl#:#dcl_create_date#:#Data di creazione
 dcl#:#dcl_create_entry_rules#:#Creazione della voce
 dcl#:#dcl_create_field#:#Crea campo
@@ -8490,6 +8493,7 @@ dcl#:#dcl_delete_tables_no_selection#:#Please select at least one table to delet
 dcl#:#dcl_delete_views#:#Elimina visualizzazioni
 dcl#:#dcl_delete_views_no_selection#:#Please select at least one view to delete###31 03 2023 new variable
 dcl#:#dcl_deleted_records#:#%S registrazioni eliminate correttamente
+dcl#:#dcl_deprecated_copy#:#(Deprecated)###10 12 2024 new variable
 dcl#:#dcl_desc#:#Ordine discendente (DESC)
 dcl#:#dcl_description#:#Descrizione campo
 dcl#:#dcl_detailed_view#:#Visualizzazione dettagliata
@@ -8608,6 +8612,7 @@ dcl#:#dcl_number#:#Numero intero
 dcl#:#dcl_number_desc#:#Campo per valori interni (massimo 9 cifre). Nessun decimale o frazioni.
 dcl#:#dcl_online_info#:#Solo se la raccolta dati è online, allora gli utenti possono utilizzarla.
 dcl#:#dcl_order#:#Ordine
+dcl#:#dcl_origin_not_found#:#Origin field was not found!###10 12 2024 new variable
 dcl#:#dcl_own_entries#:#Solo le voci proprie
 dcl#:#dcl_owner#:#Proprietario
 dcl#:#dcl_owner_description#:#Il proprietario dell’inserimento.

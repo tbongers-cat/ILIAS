@@ -8452,6 +8452,9 @@ dcl#:#dcl_confirm_delete_table#:#内容や階層の含まれるこのテーブ�
 dcl#:#dcl_confirm_storing_records#:#有効にして入力を確認して下さい。
 dcl#:#dcl_confirm_storing_records_no_permission#:#以降は記録を変更する権利がありません。
 dcl#:#dcl_copy#:#データ収集を作成
+dcl#:#dcl_copy_field#:#Copy###10 12 2024 new variable
+dcl#:#dcl_copy_field_desc#:#Field to copy options stored in a different field of a table.###10 12 2024 new variable
+dcl#:#dcl_copy_title#:#Copy of table and field###10 12 2024 new variable
 dcl#:#dcl_create_date#:#作成日
 dcl#:#dcl_create_entry_rules#:#作成のエントリー
 dcl#:#dcl_create_field#:#フィールドを作成
@@ -8476,6 +8479,7 @@ dcl#:#dcl_delete_tables_no_selection#:#削除するテーブルを一つは選�
 dcl#:#dcl_delete_views#:#ビューを削除
 dcl#:#dcl_delete_views_no_selection#:#削除するビューを一つは選択して下さい。
 dcl#:#dcl_deleted_records#:#%sレコードが正しく削除されました
+dcl#:#dcl_deprecated_copy#:#(Deprecated)###10 12 2024 new variable
 dcl#:#dcl_desc#:#降順 (DESC)
 dcl#:#dcl_description#:#フィールド説明
 dcl#:#dcl_detailed_view#:#詳細ビュー
@@ -8594,6 +8598,7 @@ dcl#:#dcl_number#:#整数
 dcl#:#dcl_number_desc#:#整数値(最大9桁)用のフィールドです。小数や分数ではありません。
 dcl#:#dcl_online_info#:#データ収集がオンラインの場合に限りユーザはデータ収集を使用できます。
 dcl#:#dcl_order#:#順
+dcl#:#dcl_origin_not_found#:#Origin field was not found!###10 12 2024 new variable
 dcl#:#dcl_own_entries#:#自己エントリーのみ
 dcl#:#dcl_owner#:#オーナ
 dcl#:#dcl_owner_description#:#エントリーのオーナ

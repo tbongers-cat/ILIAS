@@ -8452,6 +8452,9 @@ dcl#:#dcl_confirm_delete_table#:#Tem a certeza que quer apagar esta tabela com o
 dcl#:#dcl_confirm_storing_records#:#Valide e confirme a sua entrada.
 dcl#:#dcl_confirm_storing_records_no_permission#:#Não tem permissão para mudar o registo mais tarde.
 dcl#:#dcl_copy#:#Copiar coleção de dados
+dcl#:#dcl_copy_field#:#Copy###10 12 2024 new variable
+dcl#:#dcl_copy_field_desc#:#Field to copy options stored in a different field of a table.###10 12 2024 new variable
+dcl#:#dcl_copy_title#:#Copy of table and field###10 12 2024 new variable
 dcl#:#dcl_create_date#:#Data de criação
 dcl#:#dcl_create_entry_rules#:#Entry Creation###30 04 2021 new variable
 dcl#:#dcl_create_field#:#Criar campo
@@ -8476,6 +8479,7 @@ dcl#:#dcl_delete_tables_no_selection#:#Please select at least one table to delet
 dcl#:#dcl_delete_views#:#Apagar vistas
 dcl#:#dcl_delete_views_no_selection#:#Please select at least one view to delete###31 03 2023 new variable
 dcl#:#dcl_deleted_records#:#Guardar registo corrigido
+dcl#:#dcl_deprecated_copy#:#(Deprecated)###10 12 2024 new variable
 dcl#:#dcl_desc#:#Ordem descendente (DESC)
 dcl#:#dcl_description#:#Descrição do campo
 dcl#:#dcl_detailed_view#:#Vista detalhada
@@ -8594,6 +8598,7 @@ dcl#:#dcl_number#:#Inteiro
 dcl#:#dcl_number_desc#:#Campo para valores inteiros (máx. 9 dígitos). Nada de decimais ou frações.
 dcl#:#dcl_online_info#:#Apenas se a coleção de dados estiver online é que os utilizadores podem usá-la.
 dcl#:#dcl_order#:#Ordem
+dcl#:#dcl_origin_not_found#:#Origin field was not found!###10 12 2024 new variable
 dcl#:#dcl_own_entries#:#Apenas entradas próprias
 dcl#:#dcl_owner#:#Proprietário
 dcl#:#dcl_owner_description#:#O proprietário da entrada.

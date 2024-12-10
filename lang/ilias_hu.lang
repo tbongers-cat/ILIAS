@@ -8467,6 +8467,9 @@ dcl#:#dcl_confirm_delete_table#:#Biztos, hogy törli a táblát annak tartalmáv
 dcl#:#dcl_confirm_storing_records#:#Kérem, ellenőrizze és hagyja jóvá beírt adatát.
 dcl#:#dcl_confirm_storing_records_no_permission#:#Nincs jogosultsága a bejegyzést utólag módosítani.
 dcl#:#dcl_copy#:#Adatgyűjtés másolása
+dcl#:#dcl_copy_field#:#Copy###10 12 2024 new variable
+dcl#:#dcl_copy_field_desc#:#Field to copy options stored in a different field of a table.###10 12 2024 new variable
+dcl#:#dcl_copy_title#:#Copy of table and field###10 12 2024 new variable
 dcl#:#dcl_create_date#:#Létrehozás dátuma
 dcl#:#dcl_create_entry_rules#:#Bejegyzés létrehozása
 dcl#:#dcl_create_field#:#Mező létrehozása
@@ -8491,6 +8494,7 @@ dcl#:#dcl_delete_tables_no_selection#:#Legalább egy törlendő táblát válass
 dcl#:#dcl_delete_views#:#Nézetek törlése
 dcl#:#dcl_delete_views_no_selection#:#Legalább egy törlendő nézetet válasszon ki
 dcl#:#dcl_deleted_records#:#Sikeresen törölt %s bejegyzéseket
+dcl#:#dcl_deprecated_copy#:#(Deprecated)###10 12 2024 new variable
 dcl#:#dcl_desc#:#Csökkenő sorrend (CSÖKK)
 dcl#:#dcl_description#:#Mező leírása
 dcl#:#dcl_detailed_view#:#Egyszerű
@@ -8609,6 +8613,7 @@ dcl#:#dcl_number#:#Egész szám
 dcl#:#dcl_number_desc#:#Egész szám típusú beviteli mező (max. 9 számjegy). Közönséges és tizedes törtek nem engedélyezettek.
 dcl#:#dcl_online_info#:#Az adatgyűjtést csak online állapotában használhatják a felhasználók.
 dcl#:#dcl_order#:#Sorrend
+dcl#:#dcl_origin_not_found#:#Origin field was not found!###10 12 2024 new variable
 dcl#:#dcl_own_entries#:#Csak a saját bejegyzéseim
 dcl#:#dcl_owner#:#Tulajdonos
 dcl#:#dcl_owner_description#:#Az a felhasználó, aki a bejegyzés tulajdonosa.

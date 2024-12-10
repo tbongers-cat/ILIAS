@@ -8452,6 +8452,9 @@ dcl#:#dcl_confirm_delete_table#:#Želite li zaista izbrisati ovu tablicu sa sadr
 dcl#:#dcl_confirm_storing_records#:#Molimo provjerite i potvrdite svoj unos.
 dcl#:#dcl_confirm_storing_records_no_permission#:#Nakon toga nećete imati dopuštenje za promjenu zapisa.
 dcl#:#dcl_copy#:#Kopiraj zbirku podataka
+dcl#:#dcl_copy_field#:#Copy###10 12 2024 new variable
+dcl#:#dcl_copy_field_desc#:#Field to copy options stored in a different field of a table.###10 12 2024 new variable
+dcl#:#dcl_copy_title#:#Copy of table and field###10 12 2024 new variable
 dcl#:#dcl_create_date#:#Datum stvaranja
 dcl#:#dcl_create_entry_rules#:#Entry Creation###04 06 2021 new variable
 dcl#:#dcl_create_field#:#Stvori polje
@@ -8476,6 +8479,7 @@ dcl#:#dcl_delete_tables_no_selection#:#Please select at least one table to delet
 dcl#:#dcl_delete_views#:#Izbriši prikaze
 dcl#:#dcl_delete_views_no_selection#:#Please select at least one view to delete###31 03 2023 new variable
 dcl#:#dcl_deleted_records#:#Uspješno izbrisani %s unosi
+dcl#:#dcl_deprecated_copy#:#(Deprecated)###10 12 2024 new variable
 dcl#:#dcl_desc#:#Silazni poredak (DESC)
 dcl#:#dcl_description#:#Opis polja
 dcl#:#dcl_detailed_view#:#Detaljan prikaz
@@ -8594,6 +8598,7 @@ dcl#:#dcl_number#:#Cijeli broj
 dcl#:#dcl_number_desc#:#Polje za cijele brojeve (najviše 9 znamenki). Bez decimala ili razlomaka.
 dcl#:#dcl_online_info#:#Korisnici mogu koristiti zbirku podataka samo ako je zbirka podataka online.
 dcl#:#dcl_order#:#Redoslijed
+dcl#:#dcl_origin_not_found#:#Origin field was not found!###10 12 2024 new variable
 dcl#:#dcl_own_entries#:#Samo vlastiti unosi
 dcl#:#dcl_owner#:#Vlasnik
 dcl#:#dcl_owner_description#:#Vlasnik unosa.

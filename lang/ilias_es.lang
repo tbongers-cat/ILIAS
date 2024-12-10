@@ -8454,6 +8454,9 @@ dcl#:#dcl_confirm_delete_table#:#¿Está seguro de que quiere eliminar esta tabl
 dcl#:#dcl_confirm_storing_records#:#Valide y confirme su entrada.
 dcl#:#dcl_confirm_storing_records_no_permission#:#No tiene permiso para cambiar el registro después.
 dcl#:#dcl_copy#:#Copiar colección de datos
+dcl#:#dcl_copy_field#:#Copy###10 12 2024 new variable
+dcl#:#dcl_copy_field_desc#:#Field to copy options stored in a different field of a table.###10 12 2024 new variable
+dcl#:#dcl_copy_title#:#Copy of table and field###10 12 2024 new variable
 dcl#:#dcl_create_date#:#Fecha de creación
 dcl#:#dcl_create_entry_rules#:#Entry Creation###30 04 2021 new variable
 dcl#:#dcl_create_field#:#Crear campo
@@ -8478,6 +8481,7 @@ dcl#:#dcl_delete_tables_no_selection#:#Please select at least one table to delet
 dcl#:#dcl_delete_views#:#Eliminar vistas
 dcl#:#dcl_delete_views_no_selection#:#Please select at least one view to delete###31 03 2023 new variable
 dcl#:#dcl_deleted_records#:#Borrados correctamente %s registros.
+dcl#:#dcl_deprecated_copy#:#(Deprecated)###10 12 2024 new variable
 dcl#:#dcl_desc#:#Orden descendente (DESC)
 dcl#:#dcl_description#:#Descripción del campo
 dcl#:#dcl_detailed_view#:#Vista detallada
@@ -8596,6 +8600,7 @@ dcl#:#dcl_number#:#Entero
 dcl#:#dcl_number_desc#:#Campo para valores enteros (máximo de 9 dígitos) Sin decimales ni fracciones.
 dcl#:#dcl_online_info#:#Los usuarios pueden usar la colección de datos sólo si está activa.
 dcl#:#dcl_order#:#Orden
+dcl#:#dcl_origin_not_found#:#Origin field was not found!###10 12 2024 new variable
 dcl#:#dcl_own_entries#:#Solo entradas propias
 dcl#:#dcl_owner#:#Propietario
 dcl#:#dcl_owner_description#:#Propietario de la entrada
