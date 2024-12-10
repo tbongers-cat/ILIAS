@@ -25,7 +25,7 @@ use ILIAS\FileUpload\Processor\PreProcessor;
 
 final class ilVirusScannerPreProcessor implements PreProcessor
 {
-    protected \ilVirusScanner $scanner;
+    protected ilVirusScanner $scanner;
 
     public function __construct(ilVirusScanner $scanner)
     {
@@ -34,9 +34,9 @@ final class ilVirusScannerPreProcessor implements PreProcessor
 
     public function process(FileStream $stream, Metadata $metadata): ProcessingStatus
     {
-        $uri = $stream->getMetadata()["uri"];
+        $uri = $stream->getMetadata()['uri'];
         // chmod($uri, 0755); // we must find a way e.g. ClamAV can read the file
-        if ($this->scanner->scanFile($uri) !== "") {
+        if ($this->scanner->scanFile($uri) !== '') {
             return new ProcessingStatus(ProcessingStatus::DENIED, 'Virus detected.');
         }
 

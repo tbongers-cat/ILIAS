@@ -63,14 +63,11 @@ class ilVirusScanner
         $this->scanCommand = $scan_command;
         $this->cleanCommand = $clean_command;
 
-        $this->type = "simulate";
+        $this->type = 'simulate';
         $this->scanZipFiles = false;
     }
 
     /**
-     * @param string $a_file
-     * @param string $a_orig_name
-     * @param bool $a_clean
      * @return array{0: bool, 1: string}
      */
     public static function virusHandling(string $a_file, string $a_orig_name = '', bool $a_clean = true): array
@@ -129,31 +126,31 @@ class ilVirusScanner
         return $bufferFile;
     }
 
-    public function scanFile(string $file_path, string $org_name = ""): string
+    public function scanFile(string $file_path, string $org_name = ''): string
     {
         $this->scanFilePath = $file_path;
         $this->scanFileOrigName = $org_name;
 
-        if ($org_name === "infected.txt" || $org_name === "cleanable.txt") {
+        if ($org_name === 'infected.txt' || $org_name === 'cleanable.txt') {
             $this->scanFileIsInfected = true;
             $this->scanResult =
-                "FILE INFECTED: [" . $file_path . "] (VIRUS: simulated)";
+                'FILE INFECTED: [' . $file_path . '] (VIRUS: simulated)';
             $this->logScanResult();
             return $this->scanResult;
         }
 
         $this->scanFileIsInfected = false;
-        $this->scanResult = "";
-        return "";
+        $this->scanResult = '';
+        return '';
     }
 
     public function logScanResult(): void
     {
-        $mess = "Virus Scanner (" . $this->type . ")";
+        $mess = 'Virus Scanner (' . $this->type . ')';
         if ($this->scanFileOrigName) {
-            $mess .= " (File " . $this->scanFileOrigName . ")";
+            $mess .= ' (File ' . $this->scanFileOrigName . ')';
         }
-        $mess .= ": " . preg_replace('/[\r\n]+/', "; ", $this->scanResult);
+        $mess .= ': ' . preg_replace('/[\r\n]+/', '; ', $this->scanResult);
 
         $this->log->write($mess);
     }
@@ -163,33 +160,33 @@ class ilVirusScanner
         unlink($bufferFile);
     }
 
-    public function cleanFile(string $file_path, string $org_name = ""): string
+    public function cleanFile(string $file_path, string $org_name = ''): string
     {
         $this->cleanFilePath = $file_path;
         $this->cleanFileOrigName = $org_name;
 
-        if ($org_name === "cleanable.txt") {
+        if ($org_name === 'cleanable.txt') {
             $this->cleanFileIsCleaned = true;
             $this->cleanResult =
-                "FILE CLEANED: [" . $file_path . "] (VIRUS: simulated)";
+                'FILE CLEANED: [' . $file_path . '] (VIRUS: simulated)';
             $this->logCleanResult();
             return $this->cleanResult;
         }
 
         $this->cleanFileIsCleaned = false;
         $this->cleanResult =
-            "FILE NOT CLEANED: [" . $file_path . "] (VIRUS: simulated)";
+            'FILE NOT CLEANED: [' . $file_path . '] (VIRUS: simulated)';
         $this->logCleanResult();
-        return "";
+        return '';
     }
 
     public function logCleanResult(): void
     {
-        $mess = "Virus Cleaner (" . $this->type . ")";
+        $mess = 'Virus Cleaner (' . $this->type . ')';
         if ($this->cleanFileOrigName) {
-            $mess .= " (File " . $this->cleanFileOrigName . ")";
+            $mess .= ' (File ' . $this->cleanFileOrigName . ')';
         }
-        $mess .= ": " . preg_replace('/[\r\n]+/', "; ", $this->cleanResult);
+        $mess .= ': ' . preg_replace('/[\r\n]+/', '; ', $this->cleanResult);
 
         $this->log->write($mess);
     }
@@ -212,14 +209,14 @@ class ilVirusScanner
     public function getScanMessage(): string
     {
         if ($this->scanFileIsInfected) {
-            $ret = sprintf($this->lng->txt("virus_infected"), $this->scanFileOrigName);
+            $ret = sprintf($this->lng->txt('virus_infected'), $this->scanFileOrigName);
         } else {
-            $ret = sprintf($this->lng->txt("virus_not_infected"), $this->scanFileOrigName);
+            $ret = sprintf($this->lng->txt('virus_not_infected'), $this->scanFileOrigName);
         }
 
         if ($this->scanResult) {
-            $ret .= " " . $this->lng->txt("virus_scan_message")
-                . "<br />"
+            $ret .= ' ' . $this->lng->txt('virus_scan_message')
+                . '<br />'
                 . str_replace(
                     $this->scanFilePath,
                     $this->scanFileOrigName,
@@ -232,14 +229,14 @@ class ilVirusScanner
     public function getCleanMessage(): string
     {
         if ($this->cleanFileIsCleaned) {
-            $ret = sprintf($this->lng->txt("virus_cleaned"), $this->cleanFileOrigName);
+            $ret = sprintf($this->lng->txt('virus_cleaned'), $this->cleanFileOrigName);
         } else {
-            $ret = sprintf($this->lng->txt("virus_not_cleaned"), $this->cleanFileOrigName);
+            $ret = sprintf($this->lng->txt('virus_not_cleaned'), $this->cleanFileOrigName);
         }
 
         if ($this->cleanResult) {
-            $ret .= " " . $this->lng->txt("virus_clean_message")
-                . "<br />"
+            $ret .= ' ' . $this->lng->txt('virus_clean_message')
+                . '<br />'
                 . str_replace(
                     $this->cleanFilePath,
                     $this->cleanFileOrigName,

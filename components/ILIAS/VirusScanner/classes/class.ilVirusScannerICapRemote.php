@@ -149,7 +149,7 @@ class ilVirusScannerICapRemote extends ilVirusScanner
         ];
         foreach (preg_split('/\r?\n/', $string) as $line) {
             if ([] === $response['protocol']) {
-                if (0 !== strpos($line, 'ICAP/')) {
+                if (!str_starts_with($line, 'ICAP/')) {
                     throw new RuntimeException('Unknown ICAP response');
                 }
                 $parts = preg_split('/ +/', $line, 3);
@@ -201,6 +201,7 @@ class ilVirusScannerICapRemote extends ilVirusScanner
                 }
             }
         }
+
         return $response;
     }
 
@@ -224,4 +225,3 @@ class ilVirusScannerICapRemote extends ilVirusScanner
         return $this->parseResponse($response);
     }
 }
-//hsuhh-patch: end

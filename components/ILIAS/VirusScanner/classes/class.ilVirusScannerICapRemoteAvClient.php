@@ -30,7 +30,7 @@ class ilVirusScannerICapRemoteAvClient extends ilVirusScannerICapRemote
         $this->options(IL_ICAP_AV_COMMAND);
     }
 
-    public function scanFile(string $file_path, string $org_name = ""): string
+    public function scanFile(string $file_path, string $org_name = ''): string
     {
         $return_string = '';
         $file_path = realpath($file_path);
@@ -66,9 +66,9 @@ class ilVirusScannerICapRemoteAvClient extends ilVirusScannerICapRemote
                 self::HEADER_INFECTION_FOUND,
                 $header
             ) && $header[self::HEADER_INFECTION_FOUND] !== '') {
-                $infection_split = explode(";", $header[self::HEADER_INFECTION_FOUND]);
+                $infection_split = explode(';', $header[self::HEADER_INFECTION_FOUND]);
                 foreach ($infection_split as $infection) {
-                    $parts = explode("=", $infection);
+                    $parts = explode('=', $infection);
                     if ($parts !== false &&
                         is_array($parts) &&
                         count($parts) > 0 &&
@@ -79,6 +79,7 @@ class ilVirusScannerICapRemoteAvClient extends ilVirusScannerICapRemote
                 $virus_found = true;
             }
         }
+
         return $virus_found;
     }
 }

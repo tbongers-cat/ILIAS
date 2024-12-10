@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 use ILIAS\Setup;
 
@@ -39,46 +39,46 @@ class ilVirusScannerMetricsCollectedObjective extends Setup\Metrics\CollectedObj
             return;
         }
 
-        $virus_scanner = $ini->readVariable("tools", "vscantype");
+        $virus_scanner = $ini->readVariable('tools', 'vscantype');
         $storage->storeConfigText(
-            "virusscanner",
+            'virusscanner',
             $virus_scanner,
-            "The engine that is used for virus scanning."
+            'The engine that is used for virus scanning.'
         );
 
         if ($virus_scanner === ilVirusScannerSetupConfig::VIRUS_SCANNER_ICAP) {
             $storage->storeConfigText(
-                "icap_client_path",
-                $ini->readVariable("tools", "icap_client_path"),
-                "The configured ICAP client path."
+                'icap_client_path',
+                $ini->readVariable('tools', 'icap_client_path'),
+                'The configured ICAP client path.'
             );
             $storage->storeConfigText(
-                "icap_host",
-                $ini->readVariable("tools", "icap_host"),
-                "The configured ICAP host."
+                'icap_host',
+                $ini->readVariable('tools', 'icap_host'),
+                'The configured ICAP host.'
             );
             $storage->storeConfigText(
-                "icap_port",
-                $ini->readVariable("tools", "icap_port"),
-                "The configured ICAP port."
+                'icap_port',
+                $ini->readVariable('tools', 'icap_port'),
+                'The configured ICAP port.'
             );
             $storage->storeConfigText(
-                "icap_service_name",
-                $ini->readVariable("tools", "icap_service_name"),
-                "The configured ICAP service name."
+                'icap_service_name',
+                $ini->readVariable('tools', 'icap_service_name'),
+                'The configured ICAP service name.'
             );
         } elseif (is_string($virus_scanner) &&
             $virus_scanner !== '' &&
             $virus_scanner !== ilVirusScannerSetupConfig::VIRUS_SCANNER_NONE) {
             $storage->storeConfigText(
-                "path_to_scan",
-                $ini->readVariable("tools", "scancommand"),
-                "The path to the binary that is used for virus scanning."
+                'path_to_scan',
+                $ini->readVariable('tools', 'scancommand'),
+                'The path to the binary that is used for virus scanning.'
             );
             $storage->storeConfigText(
-                "path_to_clean",
-                $ini->readVariable("tools", "cleancommand"),
-                "The path to the binary that is used for cleaning up after virus scanning."
+                'path_to_clean',
+                $ini->readVariable('tools', 'cleancommand'),
+                'The path to the binary that is used for cleaning up after virus scanning.'
             );
         }
     }
