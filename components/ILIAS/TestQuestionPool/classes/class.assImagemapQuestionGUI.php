@@ -354,7 +354,11 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             $editor_tpl->setCurrentBlock('imagearea');
             $editor_tpl->setVariable('ALT_IMAGE', $this->lng->txt('imagemap'));
         }
-        $editor_tpl->setVariable('IMAGE_SOURCE', $image_path);
+        try {
+            $editor_tpl->setVariable('IMAGE_SOURCE', ilWACSignedPath::signFile($image_path));
+        } catch (ilWACException $e) {
+
+        }
         $editor_tpl->parseCurrentBlock();
 
         if ($shape_title !== '') {
@@ -475,7 +479,11 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             $template->setVariable("QUESTIONTEXT", $this->object->getQuestionForHTMLOutput());
         }
 
-        $template->setVariable("IMG_SRC", ilWACSignedPath::signFile($imagepath));
+        try {
+            $template->setVariable("IMG_SRC", ilWACSignedPath::signFile($imagepath));
+        } catch (ilWACException $e) {
+
+        }
         $template->setVariable("IMG_ALT", $this->lng->txt("imagemap"));
         $template->setVariable("IMG_TITLE", $this->lng->txt("imagemap"));
         if (($active_id > 0) && (!$show_correct_solution)) {
@@ -583,8 +591,10 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             $template->parseCurrentBlock();
         }
         $template->setVariable("QUESTIONTEXT", $this->object->getQuestionForHTMLOutput());
-        if (is_file($imagepath)) {
+        try {
             $template->setVariable("IMG_SRC", ilWACSignedPath::signFile($imagepath));
+        } catch (ilWACException $e) {
+
         }
         $template->setVariable("IMG_ALT", $this->lng->txt("imagemap"));
         $template->setVariable("IMG_TITLE", $this->lng->txt("imagemap"));
@@ -654,7 +664,11 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             }
         }
         $template->setVariable("QUESTIONTEXT", $this->object->getQuestionForHTMLOutput());
-        $template->setVariable("IMG_SRC", ilWACSignedPath::signFile($imagepath));
+        try {
+            $template->setVariable("IMG_SRC", ilWACSignedPath::signFile($imagepath));
+        } catch (ilWACException $e) {
+
+        }
         $template->setVariable("IMG_ALT", $this->lng->txt("imagemap"));
         $template->setVariable("IMG_TITLE", $this->lng->txt("imagemap"));
         $questionoutput = $template->get();
