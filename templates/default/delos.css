@@ -7841,6 +7841,34 @@ div.alert ul > li:before {
   -webkit-box-shadow: 20px 10px 30px rgba(0, 0, 0, 0.15);
   box-shadow: 20px 10px 30px rgba(0, 0, 0, 0.15);
 }
+.c-modal.il-modal-lightbox-dark .modal-content,
+.il-prompt dialog.il-modal-lightbox-dark .modal-content {
+  background-color: #2c2c2c;
+  color: white;
+}
+.c-modal.il-modal-lightbox-dark .modal-content .modal-header,
+.il-prompt dialog.il-modal-lightbox-dark .modal-content .modal-header {
+  border-bottom-color: white;
+}
+.c-modal.il-modal-lightbox-dark .modal-content .modal-title,
+.il-prompt dialog.il-modal-lightbox-dark .modal-content .modal-title {
+  padding: 0px;
+}
+.c-modal.il-modal-lightbox-dark .modal-content .carousel-inner,
+.il-prompt dialog.il-modal-lightbox-dark .modal-content .carousel-inner {
+  padding: 0px;
+}
+.c-modal.il-modal-lightbox-dark .modal-content .carousel-control,
+.il-prompt dialog.il-modal-lightbox-dark .modal-content .carousel-control {
+  color: white;
+  width: 15%;
+}
+.c-modal.il-modal-lightbox-dark .close,
+.il-prompt dialog.il-modal-lightbox-dark .close {
+  color: white;
+  background-color: #2c2c2c;
+  opacity: 1;
+}
 
 .modal-open {
   overflow: hidden;

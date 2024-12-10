@@ -13,6 +13,7 @@ namespace ILIAS\UI\examples\Modal\LightboxImagePage;
  *   ILIAS shows a button titled "Show some fancy images".
  *   A click onto the button will grey out ILIAS and opens a modal with multiple contents which can be viewed one after
  *   another by clicking the arrow glyphs.
+ *   The modal's background is dark with a light font color.
  *   All contents consist of a titled each.
  *   In the lower part of the modal a circle glyph is centered about which you can see that you can look at
  *   three contents within the modal.
