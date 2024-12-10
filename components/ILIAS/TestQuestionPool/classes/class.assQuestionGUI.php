@@ -728,8 +728,11 @@ abstract class assQuestionGUI
         $this->object->getCurrentUser()->writePref('tst_lastquestiontype', $this->object->getQuestionType());
 
         if ($this->request_data_collector->getQuestionId() === 0) {
-            $this->object->createNewQuestion();
+            if ($this->object->getId() < 1) {
+                $this->object->createNewQuestion();
+            }
             $this->setQuestionTabs();
+            $this->tabs_gui->activateTab('edit_question');
         }
 
         if ($this->needsSyncQuery()) {
