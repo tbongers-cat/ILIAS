@@ -262,7 +262,8 @@ abstract class assQuestion implements Question
         ?int $tst_id,
         ?ilObject &$tst_object,
         int &$question_counter,
-        array $import_mapping
+        array $import_mapping,
+        array $solutionhints = []
     ): array {
         $classname = $this->getQuestionType() . "Import";
         $import = new $classname($this);
@@ -277,7 +278,31 @@ abstract class assQuestion implements Question
             $import_mapping
         );
 
+        foreach ($solutionhints as $hint) {
+            $this->importHint($import->getQuestionId(), $hint);
+        }
+
         return $new_import_mapping;
+    }
+
+    private function importHint(int $question_id, array $hint_array): void
+    {
+        $hint = new ilAssQuestionHint();
+        $hint->setQuestionId($question_id);
+        $hint->setIndex($hint_array['index'] ?? '');
+        $hint->setPoints($hint_array['points'] ?? '');
+        if ($this->getAdditionalContentEditingMode() === self::ADDITIONAL_CONTENT_EDITING_MODE_IPE) {
+            $hint->save();
+            $hint_page = (new ilAssHintPage());
+            $hint_page->setParentId($question_id);
+            $hint_page->setId($hint->getId());
+            $hint_page->setXMLContent($hint_array['txt']);
+            $hint_page->createFromXML();
+            return;
+        }
+
+        $hint->setText($hint_array['txt'] ?? '');
+        $hint->save();
     }
 
     /**
