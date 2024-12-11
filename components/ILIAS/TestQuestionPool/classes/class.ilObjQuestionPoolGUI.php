@@ -689,6 +689,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
                 }
 
                 if ($cmd === 'save') {
+                    $this->tabs_gui->activateTab('edit_question');
                     $question_gui->editQuestion(false, false);
                 }
                 break;

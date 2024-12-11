@@ -104,12 +104,12 @@ function updatePositionInputs() {
 }
 
 function changeHandler(draggedElement, target) {
-  updatePlaceholders();
   updateIndentationInputs(draggedElement, target);
   updatePositionInputs();
 }
 
-function onStartAdditionalHandler(draggedElement) {
+function onStartPrepareHandler(draggedElement) {
+  updatePlaceholders();
   if (draggedElement.previousElementSibling?.classList.contains(placeholderClass)) {
     draggedElement.previousElementSibling.remove();
   }
@@ -128,6 +128,6 @@ export default function orderingVerticalHandler(parentElementParam, makeDraggabl
     answerElementClass,
     placeholderClass,
     changeHandler,
-    onStartAdditionalHandler,
+    onStartPrepareHandler,
   );
 }
