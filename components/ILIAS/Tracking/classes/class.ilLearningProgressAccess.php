@@ -78,17 +78,18 @@ class ilLearningProgressAccess
         }
 
         $olp = ilObjectLP::getInstance(ilObject::_lookupObjId($a_ref_id));
-        if ($DIC->access()->checkAccess(
-            'read_learning_progress',
-            '',
-            $a_ref_id
-        ) ||
-            (
+        if (
+            $olp->isActive() && (
+                $DIC->access()->checkAccess(
+                    'read_learning_progress',
+                    '',
+                    $a_ref_id
+                ) ||
                 $DIC->access()->checkRbacOrPositionPermissionAccess(
                     ilOrgUnitOperation::OP_READ_LEARNING_PROGRESS,
                     ilOrgUnitOperation::OP_READ_LEARNING_PROGRESS,
                     $a_ref_id
-                ) && $olp->isActive()
+                )
             )
         ) {
             return true;
