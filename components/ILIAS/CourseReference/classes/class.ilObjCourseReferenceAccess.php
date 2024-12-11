@@ -38,7 +38,6 @@ class ilObjCourseReferenceAccess extends ilContainerReferenceAccess
         switch ($permission) {
             case 'visible':
             case 'read':
-            case 'edit_learning_progress':
                 $target_ref_id = ilObjCourseReference::_lookupTargetRefId($obj_id);
 
                 if (!$target_ref_id || !$DIC->access()->checkAccessOfUser($user_id, $permission, $cmd, $target_ref_id)) {
