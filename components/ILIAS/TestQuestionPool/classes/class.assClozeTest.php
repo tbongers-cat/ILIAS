@@ -1016,24 +1016,6 @@ class assClozeTest extends assQuestion implements ilObjQuestionScoringAdjustable
         return false;
     }
 
-    public function validateSolutionSubmit(): bool
-    {
-        foreach ($this->getSolutionSubmitValidation() as $gapIndex => $value) {
-            $gap = $this->getGap($gapIndex);
-
-            if ($gap->getType() != assClozeGap::TYPE_NUMERIC) {
-                continue;
-            }
-
-            if (strlen($value) && !$this->isValidNumericSubmitValue($value)) {
-                $this->tpl->setOnScreenMessage('failure', $this->lng->txt("err_no_numeric_value"), true);
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     public function fetchSolutionSubmit(): array
     {
         $solution_submit = [];
@@ -1062,33 +1044,6 @@ class assClozeTest extends assQuestion implements ilObjQuestionScoringAdjustable
             }
 
             $solution_submit[$index] = $value;
-        }
-
-        return $solution_submit;
-    }
-
-    public function getSolutionSubmitValidation(): array
-    {
-        $solution_submit = [];
-
-        foreach ($this->questionpool_request->getPostKeys() as $post_key) {
-            try {
-                $value = $this->questionpool_request->string($post_key);
-            } catch (Exception $e) {
-                continue;
-            }
-            if ($value === '' || !preg_match('/^gap_(\d+)/', $post_key, $matches)) {
-                continue;
-            }
-            $gap = $this->getGap((int) $matches[1]);
-            if ($gap === null
-                || $gap->getType() === assClozeGap::TYPE_SELECT && $value === '-1') {
-                continue;
-            }
-            if ($gap->getType() === assClozeGap::TYPE_NUMERIC) {
-                $value = $this->questionpool_request->float($post_key);
-            }
-            $solution_submit[trim($matches[1])] = $value;
         }
 
         return $solution_submit;
