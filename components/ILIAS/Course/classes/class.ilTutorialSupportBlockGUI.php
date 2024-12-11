@@ -129,6 +129,9 @@ class ilTutorialSupportBlockGUI extends ilBlockGUI
 
     protected function hasContactEnabled(int $tutor_id): bool
     {
+        if (!ilBuddySystem::getInstance()->isEnabled()) {
+            return false;
+        }
         $setting_value = ilObjUser::_lookupPref($tutor_id, 'bs_allow_to_contact_me');
         return is_null($setting_value) ? false : $setting_value === 'y';
     }
