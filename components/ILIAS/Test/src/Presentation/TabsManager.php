@@ -707,7 +707,8 @@ class TabsManager
 
     public function needsYourResultsTab(): bool
     {
-        return $this->test_session->reportableResultsAvailable($this->test_object);
+        return $this->test_session->reportableResultsAvailable($this->test_object)
+            || $this->test_object->canShowSolutionPrintview($this->test_session->getUserId());
     }
 
     protected function getYourResultsTabTarget(): string
@@ -725,12 +726,12 @@ class TabsManager
 
     protected function needsYourResultsSubTab(): bool
     {
-        return $this->test_object->isScoreReportingEnabled() || $this->needsYourSolutionsSubTab();
+        return $this->test_object->isScoreReportingEnabled();
     }
 
     public function needsLoResultsSubTab(): bool
     {
-        if (!$this->needsYourResultsTab()) {
+        if (!$this->test_object->isScoreReportingEnabled()) {
             return false;
         }
 
@@ -739,7 +740,7 @@ class TabsManager
 
     public function needsHighSoreSubTab(): bool
     {
-        if (!$this->needsYourResultsTab()) {
+        if (!$this->test_object->isScoreReportingEnabled()) {
             return false;
         }
 
@@ -748,7 +749,7 @@ class TabsManager
 
     public function needsSkillResultsSubTab(): bool
     {
-        if (!$this->needsYourResultsTab()) {
+        if (!$this->test_object->isScoreReportingEnabled()) {
             return false;
         }
 

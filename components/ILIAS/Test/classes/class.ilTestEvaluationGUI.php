@@ -23,7 +23,6 @@ use ILIAS\Test\Presentation\PrintLayoutProvider;
 use ILIAS\UI\Component\ViewControl\Mode as ViewControlMode;
 use ILIAS\UI\Component\Link\Standard as StandardLink;
 use ILIAS\UI\Component\Panel\Sub as SubPanel;
-use ILIAS\UI\Component\Signal;
 use ILIAS\Filesystem\Stream\Streams;
 
 /**
@@ -133,12 +132,13 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
         $results_panel = $this->ui_factory->panel()->report(
             $this->lng->txt('tst_results'),
             array_map(
-                function (int $v): SubPanel {
-                    $attempt_id = ilObjTest::_getResultPass($v);
-                    $components = $this->buildAttemptComponents($v, $attempt_id, false, true);
+                function (string $v): SubPanel {
+                    $value = (int) $v;
+                    $attempt_id = ilObjTest::_getResultPass($value);
+                    $components = $this->buildAttemptComponents($value, $attempt_id, false, true);
                     return $this->ui_factory->panel()->sub(
                         $this->buildResultsTitle(
-                            ilObjUser::_lookupFullname($this->object->_getUserIdFromActiveId($v)),
+                            ilObjUser::_lookupFullname($this->object->_getUserIdFromActiveId($value)),
                             $attempt_id
                         ),
                         $components
@@ -164,7 +164,7 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
         $this->ctrl->saveParameterByClass(self::class, 'active_ids');
         $selected_active_ids = explode(',', $this->testrequest->strVal('active_ids'));
 
-        $this->addPrintButtonToToolbar();
+        $this->addPrintResultsButtonToToolbar();
         $this->addToggleBestSolutionButtonToToolbar();
 
         $current_active_id = (int) $selected_active_ids[0];
@@ -456,10 +456,7 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
             $this->addAttemptSwitchingViewControlToToolbar($test_passes_selector->getClosedPasses(), $attempt);
         }
 
-        $this->toolbar->addComponent(
-            $this->ui_factory->button()->standard($this->lng->txt('print'), '')
-                ->withOnLoadCode(fn($id) => "$('#$id').on('click', ()=>{window.print();})")
-        );
+        $this->addPrintButtonToToolbar();
 
         $test_result_header_label_builder = new ResultsTitlesBuilder($this->lng, $this->obj_cache);
         $test_result_header_label_builder->setAttemptLastAccessDate(
@@ -954,7 +951,7 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
         return [$attempt_overview, $attempt_details];
     }
 
-    private function addPrintButtonToToolbar(): void
+    private function addPrintResultsButtonToToolbar(): void
     {
         $link = $this->ctrl->getLinkTargetByClass(self::class, 'printResults');
         $this->toolbar->addComponent(
@@ -964,6 +961,20 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
             )->withOnLoadCode(
                 fn($id): string => "document.getElementById('{$id}').addEventListener('click', "
                     . "(e) => {window.open('{$link}');}"
+                    . ');'
+            )
+        );
+    }
+
+    private function addPrintButtonToToolbar(): void
+    {
+        $this->toolbar->addComponent(
+            $this->ui_factory->button()->standard(
+                $this->lng->txt('print'),
+                ''
+            )->withOnLoadCode(
+                fn($id): string => "document.getElementById('{$id}').addEventListener('click', "
+                    . "()=>{window.print();}"
                     . ');'
             )
         );
