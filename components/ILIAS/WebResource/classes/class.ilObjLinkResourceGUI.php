@@ -216,30 +216,25 @@ class ilObjLinkResourceGUI extends ilObject2GUI
         $this->lng->loadLanguageModule($this->requested_new_type);
         $this->ctrl->setParameter($this, "new_type", $this->requested_new_type);
 
-        $form = $this->initCreateForm($this->requested_new_type);
-        if ($form->checkInput()) {
+        $this->form = $this->initCreateForm($this->requested_new_type);
+        if ($this->form->checkInput()) {
             $this->ctrl->setParameter($this, "new_type", "");
 
             $class_name = "ilObj" . $this->obj_definition->getClassName($this->requested_new_type);
             $newObj = new $class_name();
             $newObj->setType($this->requested_new_type);
-            $newObj->setTitle($form->getInput("title"));
-            $newObj->setDescription($form->getInput("desc"));
+            $newObj->setTitle($this->form->getInput("title"));
+            $newObj->setDescription($this->form->getInput("desc"));
             $newObj->processAutoRating();
             $newObj->create();
 
             $this->putObjectInTree($newObj);
 
-            $dtpl = $this->getDidacticTemplateVar("dtpl");
-            if ($dtpl) {
-                $newObj->applyDidacticTemplate($dtpl);
-            }
-
             $this->afterSave($newObj);
         }
 
-        $form->setValuesByPost();
-        $this->tpl->setContent($form->getHTML());
+        $this->form->setValuesByPost();
+        $this->tpl->setContent($this->form->getHTML());
     }
 
     protected function afterSave(ilObject $new_object): void
