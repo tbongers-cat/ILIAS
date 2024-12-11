@@ -45,8 +45,7 @@ function setup() {
   );
 }
 
-function changeHandler() {
-  const currentAnswer = [];
+function updatePlaceholders() {
   const placeholderElement = parentElement.querySelector(`.${placeholderClass}`);
 
   parentElement.querySelectorAll(`.${answerElementClass}`).forEach(
@@ -66,14 +65,18 @@ function changeHandler() {
       elem.remove();
     },
   );
+}
 
+function changeHandler() {
+  const currentAnswer = [];
   parentElement.querySelectorAll(`.${answerElementClass} > div > span`).forEach(
     (elem) => { currentAnswer.push(elem.textContent); },
   );
   parentElement.nextElementSibling.value = currentAnswer.join(answerSeparator);
 }
 
-function onStartAdditionalHandler(draggedElement) {
+function onStartPrepareHandler(draggedElement) {
+  updatePlaceholders();
   if (draggedElement.previousElementSibling?.classList.contains(placeholderClass)) {
     draggedElement.previousElementSibling.remove();
   }
@@ -92,6 +95,6 @@ export default function orderingHorizontalHandler(parentElementParam, makeDragga
     answerElementClass,
     placeholderClass,
     changeHandler,
-    onStartAdditionalHandler,
+    onStartPrepareHandler,
   );
 }

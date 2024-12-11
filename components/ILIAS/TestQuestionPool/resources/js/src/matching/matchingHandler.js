@@ -109,12 +109,10 @@ function updateAnswerElementsManyToMany(droppedElement, target, draggedElement) 
   }
 }
 
-function updatePlaceholdersAndTerms(droppedElement, target, draggedElement) {
+function updateTerms(droppedElement, target, draggedElement) {
   if (matchingType === matchingTypeManyToMany) {
     updateAnswerElementsManyToMany(droppedElement, target, draggedElement);
   }
-
-  updatePlaceholders();
 }
 
 function updatePlaceholders() {
@@ -151,10 +149,11 @@ function updateValues(draggedElement, droppedElement, target) {
 
 function changeHandler(droppedElement, target, draggedElement) {
   updateValues(draggedElement, droppedElement, target);
-  updatePlaceholdersAndTerms(droppedElement, target, draggedElement);
+  updateTerms(droppedElement, target, draggedElement);
 }
 
 function onStartPrepareHandler(draggedElement) {
+  updatePlaceholders();
   const sourceArea = parentElement.querySelector(`#${sourceAreaId}`);
   if (!sourceArea.firstElementChild.classList.contains(placeholderClass)) {
     sourceArea.prepend(placeholderElement.cloneNode());
