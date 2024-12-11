@@ -11,25 +11,16 @@
  * us at:
  * https://www.ilias.de
  * https://github.com/ILIAS-eLearning
+ *
+ * @author Thibeau Fuhrer <thibeau@sr.solutions>
  */
 
-import copyright from '../../../../../../scripts/Copyright-Checker/copyright.js';
-
-export default {
-  external: [
-    'il',
-    'jquery',
-    'crypto',
-  ],
-  input: './src/core.js',
-  output: {
-    file: './dist/core.js',
-    format: 'iife',
-    banner: copyright,
-    globals: {
-      il: 'il',
-      jquery: '$',
-      crypto: 'crypto',
-    },
-  },
-};
+/**
+ * @param {HTMLCollection} elements
+ * @returns {DocumentFragment}
+ */
+export default function createDocumentFragment(document, elements) {
+  const documentFragment = document.createDocumentFragment();
+  documentFragment.append(...elements);
+  return documentFragment;
+}

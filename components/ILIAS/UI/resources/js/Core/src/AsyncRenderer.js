@@ -13,6 +13,8 @@
  * https://github.com/ILIAS-eLearning
  */
 
+import createDocumentFragment from './createDocumentFragment';
+
 /**
  * @author Thibeau Fuhrer <thibeau@sr.solutions>
  */
@@ -52,7 +54,7 @@ export default class AsyncRenderer {
     return fetch(url.toString())
       .then((response) => response.text())
       .then((html) => this.#createElements(html))
-      .then((elements) => this.#createDocumentFragment(elements))
+      .then((elements) => createDocumentFragment(this.#document, elements))
       .catch((error) => {
         throw new Error(`Could not render element(s) from '${url}': ${error.message}`);
       });
@@ -99,15 +101,5 @@ export default class AsyncRenderer {
     });
 
     return newElement.children;
-  }
-
-  /**
-   * @param {HTMLCollection} elements
-   * @returns {DocumentFragment}
-   */
-  #createDocumentFragment(elements) {
-    const documentFragment = this.#document.createDocumentFragment();
-    documentFragment.append(...elements);
-    return documentFragment;
   }
 }

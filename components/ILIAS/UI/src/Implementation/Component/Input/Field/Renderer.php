@@ -44,8 +44,6 @@ use ILIAS\UI\Implementation\Component\Input\Container\Filter\ProxyFilterField;
  */
 class Renderer extends AbstractComponentRenderer
 {
-    public const DYNAMIC_INPUT_ID_PLACEHOLDER = 'DYNAMIC_INPUT_ID';
-
     public const DATETIME_DATEPICKER_MINMAX_FORMAT = 'Y-m-d\Th:m';
     public const DATE_DATEPICKER_MINMAX_FORMAT = 'Y-m-d';
     public const TYPE_DATE = 'date';
@@ -787,10 +785,11 @@ class Renderer extends AbstractComponentRenderer
             $file_preview_template
         );
 
+        $template->setVariable('FILE_PREVIEW_TEMPLATE', $file_preview_template->get('block_file_preview'));
+
         $this->setHelpBlockForFileField($template, $input);
 
         $input = $this->initClientsideFileInput($input);
-        $input = $this->initClientsideRenderer($input, $file_preview_template->get('block_file_preview'));
 
         // display the action button (to choose files).
         $template->setVariable('ACTION_BUTTON', $default_renderer->render(
@@ -832,8 +831,8 @@ class Renderer extends AbstractComponentRenderer
         $registry->register('assets/js/dropzone.min.js');
         $registry->register('assets/js/dropzone.js');
         $registry->register('assets/js/input.js');
+        $registry->register('assets/js/core.js');
         $registry->register('assets/js/file.js');
-        $registry->register('assets/js/dynamic_inputs_renderer.js');
         $registry->register('assets/js/input.factory.min.js');
     }
 
@@ -953,65 +952,6 @@ class Renderer extends AbstractComponentRenderer
                 ";
             }
         );
-    }
-
-    protected function initClientsideRenderer(
-        FI\HasDynamicInputs $input,
-        string $template_html
-    ): FI\HasDynamicInputs {
-        $dynamic_inputs_template_html = $this->replaceTemplateIds($template_html);
-        $dynamic_input_count = $this->countInputsWithoutGroupsRecursively($input->getTemplateForDynamicInputs());
-
-        // note that $dynamic_inputs_template_html is in tilted single quotes (`),
-        // because otherwise the html syntax might collide with normal ones.
-        return $input->withAdditionalOnLoadCode(function ($id) use (
-            $dynamic_inputs_template_html,
-            $dynamic_input_count
-        ) {
-            return "
-                $(document).ready(function () {
-                    il.UI.Input.DynamicInputsRenderer.init(
-                        '$id',
-                        `$dynamic_inputs_template_html`,
-                        $dynamic_input_count
-                    );
-                });
-            ";
-        });
-    }
-
-    /**
-     * Counts all inputs and nested inputs of groups, without counting groups themselves.
-     */
-    protected function countInputsWithoutGroupsRecursively(FormInput|Input $input): int
-    {
-        if (!($input instanceof Component\Input\Group)) {
-            return 1;
-        }
-
-        $count = 0;
-        foreach ($input->getInputs() as $sub_input) {
-            $count += $this->countInputsWithoutGroupsRecursively($sub_input);
-        }
-
-        return $count;
-    }
-
-    protected function replaceTemplateIds(string $template_html): string
-    {
-        // regex matches anything between 'id="' and '"', hence the js_id.
-        preg_match_all('/(?<=id=")(.*?)(?=\s*")/', $template_html, $matches);
-        if (!empty($matches[0])) {
-            foreach ($matches[0] as $index => $js_id) {
-                $template_html = str_replace(
-                    $js_id,
-                    self::DYNAMIC_INPUT_ID_PLACEHOLDER . "_$index",
-                    $template_html
-                );
-            }
-        }
-
-        return $template_html;
     }
 
     /**
