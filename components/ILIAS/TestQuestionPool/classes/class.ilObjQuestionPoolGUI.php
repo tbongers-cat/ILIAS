@@ -37,6 +37,7 @@ use ILIAS\TestQuestionPool\Import\TestQuestionsImportTrait;
 use ILIAS\FileUpload\MimeType;
 use ILIAS\UI\Component\Modal\RoundTrip as RoundTripModal;
 use ILIAS\HTTP\Services as HTTPServices;
+use ILIAS\Style\Content\Service as ContentStyle;
 
 /**
  * Class ilObjQuestionPoolGUI
@@ -84,6 +85,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
     protected URLBuilderToken $action_parameter_token;
     protected URLBuilderToken $row_id_token;
     private Archives $archives;
+    private ContentStyle $content_style;
 
     protected RequestDataCollector $request_data_collector;
     protected GeneralQuestionPropertiesRepository $questionrepository;
@@ -106,6 +108,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
         $this->taxonomy = $DIC->taxonomy();
         $this->http = $DIC->http();
         $this->archives = $DIC->archives();
+        $this->content_style = $DIC->contentStyle();
 
         $this->data_factory = new DataFactory();
 
@@ -424,6 +427,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
                     $this->lng,
                     $this->help,
                     $this->request_data_collector,
+                    $this->content_style,
                     true
                 );
                 $this->ctrl->forwardCommand($gui);
