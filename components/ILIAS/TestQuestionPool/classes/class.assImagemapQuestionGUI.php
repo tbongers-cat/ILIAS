@@ -52,7 +52,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $this->linecolor = '#' . (new ilSetting('assessment'))->get('imap_line_color') ?? 'FF0000';
     }
 
-    protected function deleteImage(): void
+    public function deleteImage(): void
     {
         $this->object->deleteImage();
         $this->object->saveToDb();
