@@ -174,11 +174,6 @@ class ilContainerReferenceGUI extends ilObjectGUI
 
             $this->putObjectInTree($newObj);
 
-            $dtpl = $this->getDidacticTemplateVar("dtpl");
-            if ($dtpl) {
-                $newObj->applyDidacticTemplate($dtpl);
-            }
-
             $this->afterSave($newObj);
         }
 
