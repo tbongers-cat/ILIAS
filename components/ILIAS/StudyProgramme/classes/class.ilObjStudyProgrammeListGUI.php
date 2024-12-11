@@ -59,17 +59,6 @@ class ilObjStudyProgrammeListGUI extends ilObjectListGUI
     }
 
     /**
-     * @inheritdoc
-     */
-    public function getCommandLink(string $cmd): string
-    {
-        $this->ctrl->setParameterByClass("ilobjstudyprogrammegui", "ref_id", $this->ref_id);
-        $target = $this->ctrl->getLinkTargetByClass("ilobjstudyprogrammegui", $cmd);
-        $this->ctrl->setParameterByClass("ilobjstudyprogrammegui", "ref_id", null);
-        return $target;
-    }
-
-    /**
     * @inheritdoc
     */
     public function getListItemHTML(
