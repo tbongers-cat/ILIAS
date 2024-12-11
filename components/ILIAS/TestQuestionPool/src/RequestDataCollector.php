@@ -201,7 +201,10 @@ class RequestDataCollector
     public function getCmdIndex(string $key): int|string|null
     {
         $cmd = $this->rawArray('cmd');
-        return key($cmd[$key] ?? []);
+        if (!isset($cmd[$key]) || !is_array($cmd[$key])) {
+            return null;
+        }
+        return key($cmd[$key]);
     }
 
     /**
