@@ -708,7 +708,8 @@ class TabsManager
     public function needsYourResultsTab(): bool
     {
         return $this->test_session->reportableResultsAvailable($this->test_object)
-            || $this->test_object->canShowSolutionPrintview($this->test_session->getUserId());
+            || $this->test_session->getActiveId() !== 0
+                && $this->test_object->canShowSolutionPrintview($this->test_session->getUserId());
     }
 
     protected function getYourResultsTabTarget(): string
