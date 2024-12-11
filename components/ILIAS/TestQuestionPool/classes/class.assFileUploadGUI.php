@@ -280,7 +280,7 @@ class assFileUploadGUI extends assQuestionGUI implements ilGuiQuestionScoringAdj
             $template->parseCurrentBlock();
         }
 
-        if (strlen($this->object->getAllowedExtensions())) {
+        if ($this->object->getAllowedExtensions() !== '') {
             $template->setCurrentBlock("allowed_extensions");
             $template->setVariable("TXT_ALLOWED_EXTENSIONS", ilLegacyFormElementsUtil::prepareTextareaOutput($this->lng->txt("allowedextensions") . ": " . $this->object->getAllowedExtensions()));
             $template->parseCurrentBlock();
@@ -332,7 +332,7 @@ class assFileUploadGUI extends assQuestionGUI implements ilGuiQuestionScoringAdj
             $template->parseCurrentBlock();
         }
 
-        if (strlen($this->object->getAllowedExtensions())) {
+        if ($this->object->getAllowedExtensions() !== '') {
             $template->setCurrentBlock("allowed_extensions");
             $template->setVariable("TXT_ALLOWED_EXTENSIONS", ilLegacyFormElementsUtil::prepareTextareaOutput($this->lng->txt("allowedextensions") . ": " . $this->object->getAllowedExtensions()));
             $template->parseCurrentBlock();
