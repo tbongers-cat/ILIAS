@@ -707,7 +707,7 @@ class assFileUpload extends assQuestion implements ilObjQuestionScoringAdjustabl
             // hey: prevPassSolutions - readability spree - get a chance to understand the code
             if ($this->isFileDeletionSubmitAvailable()) {
                 // hey.
-                $delete_files = $this->questionpool_request->intArray(self::DELETE_FILES_TBL_POSTVAR);
+                $delete_files = $this->questionpool_request->strArray(self::DELETE_FILES_TBL_POSTVAR);
 
                 $userSolution = $this->deletePreviewFileUploads($previewSession->getUserId(), $userSolution, $delete_files);
             } else {
