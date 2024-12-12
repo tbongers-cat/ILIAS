@@ -2125,7 +2125,6 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
             $this->trackTestObjectReadEvent();
         }
         $info = new ilInfoScreenGUI($this);
-        $info->setOpenFormTag(false);
 
         if ($this->isCommandClassAnyInfoScreenChild()) {
             $this->ctrl->forwardCommand($info);
