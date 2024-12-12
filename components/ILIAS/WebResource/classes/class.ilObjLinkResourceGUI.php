@@ -230,6 +230,13 @@ class ilObjLinkResourceGUI extends ilObject2GUI
 
             $this->putObjectInTree($newObj);
 
+            if ($this->form->getInput('didactic_template')) {
+                $dtpl = $this->getDidacticTemplateVar("dtpl");
+                // Object calls initCreateForm again in getDidacticTemplateVar
+                $this->form->checkInput();
+                $newObj->applyDidacticTemplate($dtpl);
+            }
+
             $this->afterSave($newObj);
         }
 
