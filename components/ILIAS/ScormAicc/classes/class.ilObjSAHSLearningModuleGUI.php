@@ -428,7 +428,7 @@ class ilObjSAHSLearningModuleGUI extends ilObjectGUI
                 $newObj->getDataDirectory(),
                 false,
                 false,
-                ZipDirectoryHandling::KEEP_STRUCTURE
+                true
             );
         }
         ilFileUtils::renameExecutables($newObj->getDataDirectory());
