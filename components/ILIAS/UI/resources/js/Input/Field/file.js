@@ -382,8 +382,8 @@ il.UI.Input = il.UI.Input || {};
 			// add file info to preview and setup expansion toggles.
 			preview.querySelector('[data-dz-name]').innerText = file.name;
 			preview.querySelector('[data-dz-size]').innerHTML = dropzones[input_id].filesize(file.size);
-
-			preview = $(preview);
+			dropzones[input_id].options.previewsContainer.append(...preview.children);
+			preview = $(dropzones[input_id].options.previewsContainer.lastElementChild);
 			setupExpansionGlyphs(preview);
 
 			dropzones[input_id].options.previewsContainer.append(...preview.children());
