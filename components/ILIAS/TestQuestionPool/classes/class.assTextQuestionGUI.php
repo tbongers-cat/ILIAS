@@ -553,7 +553,7 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         switch ($this->object->getKeywordRelation()) {
             case assTextQuestion::SCORING_MODE_KEYWORD_RELATION_NONE:
                 $this->object->setAnswers([]);
-                $points = str_replace(',', '.', $this->request_data_collector->string('non_keyword_points'));
+                $points = $this->request_data_collector->float('non_keyword_points');
                 break;
             case assTextQuestion::SCORING_MODE_KEYWORD_RELATION_ANY:
                 $this->object->setAnswers($this->request_data_collector->raw('any_keyword'));
@@ -561,11 +561,11 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
                 break;
             case assTextQuestion::SCORING_MODE_KEYWORD_RELATION_ALL:
                 $this->object->setAnswers($this->request_data_collector->raw('all_keyword'));
-                $points = str_replace(',', '.', $this->request_data_collector->string('all_keyword_points'));
+                $points = $this->request_data_collector->float('all_keyword_points');
                 break;
             case assTextQuestion::SCORING_MODE_KEYWORD_RELATION_ONE:
                 $this->object->setAnswers($this->request_data_collector->raw('one_keyword'));
-                $points = (float) str_replace(',', '.', $this->request_data_collector->string('one_keyword_points'));
+                $points = $this->request_data_collector->float('one_keyword_points');
                 break;
         }
         $this->object->setPoints((float) $points);
