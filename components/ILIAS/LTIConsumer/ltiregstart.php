@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -18,13 +16,15 @@ declare(strict_types=1);
  *
  *********************************************************************/
 
+declare(strict_types=1);
+
 /** @noRector */
 chdir("../../../");
 
 ilInitialisation::initILIAS();
 global $DIC;
 
-if (!$DIC->user()->getId() || $DIC->user()->getId() === ANONYMOUS_USER_ID) {
+if (!$DIC->user()->getId() || !ilLTIConsumerAccess::hasCustomProviderCreationAccess()) {
     ilObjLTIConsumer::sendResponseError(401, "unauthorized");
 }
 
