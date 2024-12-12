@@ -19,7 +19,6 @@
 declare(strict_types=1);
 
 use ILIAS\TestQuestionPool\Questions\QuestionAutosaveable;
-
 use ILIAS\Test\Logging\AdditionalInformationGenerator;
 
 /**
@@ -166,14 +165,14 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
     {
         $this->clearResults();
         $this->clearVariables();
-        if (preg_match_all("/(\\\$v\\d+)/ims", $this->getQuestion(), $matches)) {
+        if (preg_match_all('/(\$v\d+)/im', $this->getQuestion(), $matches)) {
             foreach ($matches[1] as $variable) {
                 $varObj = new assFormulaQuestionVariable($variable, '0.0', '0.0', null, 0);
                 $this->addVariable($varObj);
             }
         }
 
-        if (preg_match_all("/(\\\$r\\d+)/ims", $this->getQuestion(), $rmatches)) {
+        if (preg_match_all('/(\$r\d+)/im', $this->getQuestion(), $rmatches)) {
             foreach ($rmatches[1] as $result) {
                 $resObj = new assFormulaQuestionResult($result, null, null, 0, null, null, 1, 1, true);
                 $this->addResult($resObj);
@@ -183,7 +182,7 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
 
     public function checkForDuplicateVariables(): bool
     {
-        if (preg_match_all("/(\\\$v\\d+)/ims", $this->getQuestion(), $matches)) {
+        if (preg_match_all('/(\$v\d+)/im', $this->getQuestion(), $matches)) {
             if ((count(array_unique($matches[1]))) != count($matches[1])) {
                 return false;
             }
@@ -193,7 +192,7 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
 
     public function checkForDuplicateResults(): bool
     {
-        if (preg_match_all("/(\\\$r\\d+)/ims", $this->getQuestion(), $rmatches)) {
+        if (preg_match_all('/(\$r\d+)/im', $this->getQuestion(), $rmatches)) {
             if ((count(array_unique($rmatches[1]))) != count($rmatches[1])) {
                 return false;
             }
@@ -210,7 +209,7 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
         $resObjects = [];
         $matches = null;
 
-        if (preg_match_all("/(\\\$r\\d+)/ims", $questionText, $matches)) {
+        if (preg_match_all('/(\$r\d+)/im', $questionText, $matches)) {
             foreach ($matches[1] as $resultKey) {
                 $resObjects[] = $this->getResult($resultKey);
             }
@@ -228,7 +227,7 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
         $var_objects = [];
         $matches = null;
 
-        if (preg_match_all("/(\\\$v\\d+)/ims", $question_text, $matches)) {
+        if (preg_match_all('/(\$v\d+)/im', $question_text, $matches)) {
             $var_objects = array_reduce(
                 $matches[1],
                 function (array $c, string $v): array {
@@ -274,7 +273,7 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
             $active_id,
             $pass
         );
-        if(is_null($values)) {
+        if (is_null($values)) {
             $values = $this->getInitialVariableSolutionValues();
             $this->pass_presented_variables_repo->store(
                 $question_id,
@@ -340,12 +339,12 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
                 $val = (strlen($varObj->getValue()) > 8) ? strtoupper(sprintf("%e", $varObj->getValue())) : $varObj->getValue();
             }
 
-            $text = preg_replace("/\\$" . substr($varObj->getVariable(), 1) . "(?![0-9]+)/", $val . " " . $unit . "\\1", $text);
+            $text = preg_replace('/\$' . substr($varObj->getVariable(), 1) . '(?![0-9]+)/', $val . ' ' . $unit . '\1', $text);
         }
 
         $text = $this->purifyAndPrepareTextAreaOutput($text);
 
-        if (preg_match_all("/(\\\$r\\d+)/ims", $this->getQuestion(), $rmatches)) {
+        if (preg_match_all('/(\$r\d+)/im', $this->getQuestion(), $rmatches)) {
             foreach ($rmatches[1] as $result) {
                 $resObj = $this->getResult($result);
                 $value = "";
@@ -428,7 +427,7 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
                             array_key_exists($result, $userdata) &&
                             array_key_exists('frac_helper', $userdata[$result]) &&
                             is_string($userdata[$result]["frac_helper"])) {
-                            if (!preg_match('-/-', $value)) {
+                            if (!str_contains($value, '/')) {
                                 $units .= ' &asymp; ' . $userdata[$result]["frac_helper"] . ', ';
                             }
                         }
@@ -437,8 +436,8 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
                     case assFormulaQuestionResult::RESULT_CO_FRAC:
                         if ($frac_helper !== '') {
                             $units .= ' &asymp; ' . $frac_helper . ', ';
-                        } elseif (is_array($userdata) && isset($userdata[$result]) && isset($userdata[$result]["frac_helper"]) && $userdata[$result]["frac_helper"] !== '') {
-                            if (!preg_match('-/-', $value)) {
+                        } elseif (isset($userdata[$result]["frac_helper"]) && is_array($userdata) && $userdata[$result]["frac_helper"] !== '') {
+                            if (!str_contains($value, '/')) {
                                 $units .= ' &asymp; ' . $userdata[$result]["frac_helper"] . ', ';
                             }
                         }
@@ -514,7 +513,7 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
 
                     $resultOutput = $template->get();
                 }
-                $text = preg_replace("/\\\$" . substr($result, 1) . "(?![0-9]+)/", $input . " " . $units . " " . $checkSign . " " . $resultOutput . " " . "\\1", $text);
+                $text = preg_replace('/\$' . substr($result, 1) . '(?![0-9]+)/', $input . ' ' . $units . ' ' . $checkSign . ' ' . $resultOutput . ' ' . '\1', $text);
             }
         }
         return $text;
@@ -806,14 +805,14 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
         $solutions = $this->getSolutionValues($active_id, $pass, $authorized_solution);
         $user_solution = [];
         foreach ($solutions as $solution_value) {
-            if (preg_match('/^(\\\$v\\d+)$/', $solution_value['value1'], $matches)) {
+            if (preg_match('/^(\$v\d+)$/', $solution_value['value1'], $matches)) {
                 $user_solution[$matches[1]] = $solution_value['value2'];
                 $var_obj = $this->getVariable($solution_value['value1']);
                 $var_obj->setValue($solution_value['value2']);
                 continue;
             }
 
-            if (preg_match('/^(\\\$r\\d+)$/', $solution_value['value1'], $matches)) {
+            if (preg_match('/^(\$r\d+)$/', $solution_value['value1'], $matches)) {
                 if (!array_key_exists($matches[1], $user_solution)) {
                     $user_solution[$matches[1]] = [];
                 }
@@ -821,7 +820,7 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
                 continue;
             }
 
-            if (preg_match('/^(\\\$r\\d+)_unit$/', $solution_value['value1'], $matches)) {
+            if (preg_match('/^(\$r\d+)_unit$/', $solution_value['value1'], $matches)) {
                 if (!array_key_exists($matches[1], $user_solution)) {
                     $user_solution[$matches[1]] = [];
                 }
@@ -874,7 +873,7 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
             return true;
         }
 
-        if (preg_match('/^[-+]{0,1}\d+\/\d+$/', $submittedValue)) {
+        if (preg_match('/^[-+]?\d+\/\d+$/', $submittedValue)) {
             return true;
         }
 
@@ -895,7 +894,7 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
             function () use ($answer, $active_id, $pass, $authorized) {
                 foreach ($answer as $key => $value) {
                     $matches = null;
-                    if (preg_match("/^result_(\\\$r\\d+)$/", $key, $matches) === false) {
+                    if (preg_match('/^result_(\$r\d+)$/', $key, $matches) !== false) {
                         $queryResult = "SELECT solution_id FROM tst_solutions WHERE active_fi = %s AND pass = %s AND question_fi = %s AND authorized = %s  AND " . $this->db->like('value1', 'clob', $matches[1]);
 
                         if ($this->getStep() !== null) {
@@ -921,7 +920,7 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
                         continue;
                     }
 
-                    if (preg_match("/^result_(\\\$r\\d+)_unit$/", $key, $matches)) {
+                    if (preg_match('/^result_(\$r\d+)_unit$/', $key, $matches) !== false) {
                         $queryResultUnit = "SELECT solution_id FROM tst_solutions WHERE active_fi = %s AND pass = %s AND question_fi = %s AND authorized = %s AND " . $this->db->like('value1', 'clob', $matches[1] . "_unit");
 
                         if ($this->getStep() !== null) {
@@ -1017,9 +1016,9 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
         foreach ($this->getSolutionSubmit() as $key => $val) {
             $matches = null;
 
-            if (preg_match("/^result_(\\\$r\\d+)$/", $key, $matches)) {
+            if (preg_match('/^result_(\$r\d+)$/', $key, $matches)) {
                 $userSolution[$matches[1]] = $val;
-            } elseif (preg_match("/^result_(\\\$r\\d+)_unit$/", $key, $matches)) {
+            } elseif (preg_match('/^result_(\$r\d+)_unit$/', $key, $matches)) {
                 $userSolution[$matches[1] . "_unit"] = $val;
             }
         }
@@ -1086,16 +1085,16 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition, Ques
         $user_solution = [];
 
         foreach ($solutions as $solution_value) {
-            if (preg_match('/^(\\\$v\\d+)$/', $solution_value['value1'], $matches)) {
+            if (preg_match('/^(\$v\d+)$/', $solution_value['value1'], $matches)) {
                 $user_solution[$matches[1]] = $solution_value['value2'];
                 $varObj = $this->getVariable($matches[1]);
                 $varObj->setValue($solution_value['value2']);
-            } elseif (preg_match('/^(\\\$r\\d+)$/', $solution_value['value1'], $matches)) {
+            } elseif (preg_match('/^(\$r\d+)$/', $solution_value['value1'], $matches)) {
                 if (!array_key_exists($matches[1], $user_solution)) {
                     $user_solution[$matches[1]] = [];
                 }
                 $user_solution[$matches[1]]['value'] = $solution_value['value2'];
-            } elseif (preg_match('/^(\\\$r\\d+)_unit$/', $solution_value['value1'], $matches)) {
+            } elseif (preg_match('/^(\$r\d+)_unit$/', $solution_value['value1'], $matches)) {
                 if (!array_key_exists($matches[1], $user_solution)) {
                     $user_solution[$matches[1]] = [];
                 }
