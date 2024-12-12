@@ -200,7 +200,7 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
         if ($new_tpl_id !== $current_tpl_id) {
             // redirect to didactic template confirmation
             $this->ctrl->setParameterByClass(ilDidacticTemplateGUI::class, "didactic_type", $new_tpl_id);
-            $this->ctrl->redirect(ilDidacticTemplateGUI::class, "confirmTemplateSwitch");
+            $this->ctrl->redirectByClass(ilDidacticTemplateGUI::class, "confirmTemplateSwitch");
         }
         parent::afterUpdate();
     }

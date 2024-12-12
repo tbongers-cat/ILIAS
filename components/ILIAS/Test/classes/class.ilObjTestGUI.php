@@ -1397,12 +1397,10 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
     {
         $new_object->saveToDb();
 
-        $test_def_id = $this->getDidacticTemplateVar('tstdef');
-        if ($test_def_id !== 0) {
-            $test_defaults = $new_object->getTestDefaults($test_def_id);
-            if (!$new_object->applyDefaults($test_defaults)) {
-                $this->tpl->setOnScreenMessage('failure', $this->lng->txt('tst_defaults_apply_not_possible'));
-            }
+        $test_def_id = $this->getSelectedPersonalDefaultsSettingsFromForm();
+        if ($test_def_id !== null
+            && !$new_object->applyDefaults($new_object->getTestDefaults($test_def_id))) {
+            $this->tpl->setOnScreenMessage('failure', $this->lng->txt('tst_defaults_apply_not_possible'));
         }
 
         $new_object->saveToDb();
@@ -1422,6 +1420,16 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
         $this->tpl->setOnScreenMessage('success', $this->lng->txt('object_added'), true);
         $this->ctrl->setParameter($this, 'ref_id', $new_object->getRefId());
         $this->ctrl->redirectByClass(SettingsMainGUI::class);
+    }
+
+    private function getSelectedPersonalDefaultsSettingsFromForm(): ?int
+    {
+        $data = $this->initCreateForm($this->type)
+            ->withRequest($this->request)
+            ->getData();
+        return isset($data['didactic_templates'])
+            ? $this->parseDidacticTemplateVar($data['didactic_templates'], 'tstdef')
+            : null;
     }
 
     public function backToRepositoryObject()

@@ -984,15 +984,20 @@ class ilObjectGUI implements ImplementsCreationCallback
 
     /**
      * Get didactic template setting from creation screen
+     *
+     * @deprecated 10 Will be removed with ILIAS 12
      */
     public function getDidacticTemplateVar(string $type): int
     {
         $create_form = $this->initCreateForm($this->type);
         if ($create_form instanceof StandardForm) {
-            $data = $create_form->withRequest($this->request)->getData();
-            return isset($data['didactic_templates'])
-                ? $this->parseDidacticTemplateVar($data['didactic_templates'], $type)
-                : 0;
+            try {
+                $data = $create_form->withRequest($this->request)->getData();
+                return isset($data['didactic_templates'])
+                    ? $this->parseDidacticTemplateVar($data['didactic_templates'], $type)
+                    : 0;
+            } catch (InvalidArgumentException $e) {
+            }
         }
 
         if (!$this->post_wrapper->has('didactic_type')) {
@@ -1003,7 +1008,7 @@ class ilObjectGUI implements ImplementsCreationCallback
         return $this->parseDidacticTemplateVar($tpl, $type);
     }
 
-    private function parseDidacticTemplateVar(string $var, string $type): int
+    protected function parseDidacticTemplateVar(string $var, string $type): int
     {
         if (substr($var, 0, strlen($type) + 1) != $type . "_") {
             return 0;
