@@ -55,6 +55,19 @@ class ilDclDetailedViewGUI
         $this->ui_factory = $DIC->ui()->factory();
         $this->renderer = $DIC->ui()->renderer();
 
+        if (
+            !$this->http->wrapper()->query()->has('table_id') ||
+            !$this->http->wrapper()->query()->has('tableview_id')
+        ) {
+            $this->main_tpl->setOnScreenMessage($this->main_tpl::MESSAGE_TYPE_FAILURE, 'Table not found', true);
+            $this->ctrl->redirectByClass(ilDclRecordListGUI::class, "show");
+        }
+
+        $this->tableview_id = $this->http->wrapper()->query()->retrieve('tableview_id', $this->refinery->kindlyTo()->int());
+        $table_id = $this->http->wrapper()->query()->retrieve('table_id', $this->refinery->kindlyTo()->int());
+        $this->table = ilDclCache::getTableCache($table_id);
+        $this->loadSession();
+
         $this->record_id = null;
         if ($this->http->wrapper()->query()->has('record_id')) {
             $this->record_id = $this->http->wrapper()->query()->retrieve(
@@ -62,10 +75,12 @@ class ilDclDetailedViewGUI
                 $this->refinery->kindlyTo()->int()
             );
         } elseif ($this->http->wrapper()->query()->has('record_pos')) {
+            $record_ids = ilSession::get('dcl_record_ids');
             $pos = $this->http->wrapper()->query()->retrieve('record_pos', $this->refinery->kindlyTo()->int());
-            $records = array_values(ilDclTableView::findOrGetInstance($tableview_id)->getTable()->getRecords());
-            $record = $records[$pos] ?? end($records);
-            $this->record_id = $record->getId();
+            if ($record_ids === [] || !array_key_exists($pos, $record_ids)) {
+                $this->ctrl->redirectToURL($this->http->request()->getServerParams()['HTTP_REFERER']);
+            }
+            $this->record_id = $record_ids[$pos];
         }
         if ($this->http->wrapper()->post()->has('record_id')) {
             $this->record_id = $this->http->wrapper()->post()->retrieve(
@@ -76,7 +91,6 @@ class ilDclDetailedViewGUI
 
         if ($this->record_id) {
             $this->record_obj = ilDclCache::getRecordCache($this->record_id);
-            $this->table = $this->record_obj->getTable();
             if (!$this->record_obj->hasPermissionToView($this->dcl_gui_object->getRefId())) {
                 $this->main_tpl->setOnScreenMessage('failure', $this->lng->txt('dcl_msg_no_perm_view'), true);
                 $this->ctrl->redirectByClass(ilDclRecordListGUI::class, "show");
@@ -218,17 +232,19 @@ class ilDclDetailedViewGUI
         // Buttons for previous/next records
 
         if ($this->is_enabled_paging) {
-            $records = $this->table->getRecords();
-            $DIC->toolbar()->addComponent(
-                $DIC->ui()->factory()->viewControl()->pagination()
-                    ->withTargetURL($this->ctrl->getLinkTargetByClass(self::class, 'jumpToRecord'), 'record_pos')
-                    ->withPageSize(1)
-                    ->withDropdownAt(5)
-                    ->withDropdownLabel($this->lng->txt('entry_of'))
-                    ->withCurrentPage(array_search($this->record_id, array_keys($records)))
-                    ->withTotalEntries(count($records))
-                    ->withMaxPaginationButtons(20)
-            );
+            $record_ids = ilSession::get('dcl_record_ids');
+            if ($record_ids !== [] && array_search($this->record_id, $record_ids) !== false) {
+                $DIC->toolbar()->addComponent(
+                    $DIC->ui()->factory()->viewControl()->pagination()
+                        ->withTargetURL($this->ctrl->getLinkTargetByClass(self::class, 'jumpToRecord'), 'record_pos')
+                        ->withPageSize(1)
+                        ->withDropdownAt(5)
+                        ->withDropdownLabel($this->lng->txt('entry_of'))
+                        ->withCurrentPage(array_search($this->record_id, $record_ids))
+                        ->withTotalEntries(count($record_ids))
+                        ->withMaxPaginationButtons(20)
+                );
+            }
         }
 
         if ($this->record_obj->hasPermissionToEdit($this->dcl_gui_object->getRefId())) {
