@@ -1399,7 +1399,8 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
 
         $test_def_id = $this->getSelectedPersonalDefaultsSettingsFromForm();
         if ($test_def_id !== null
-            && !$new_object->applyDefaults($new_object->getTestDefaults($test_def_id))) {
+            && ($defaults = $new_object->getTestDefaults($test_def_id)) !== null
+            && !$new_object->applyDefaults($defaults)) {
             $this->tpl->setOnScreenMessage('failure', $this->lng->txt('tst_defaults_apply_not_possible'));
         }
 
@@ -2064,7 +2065,7 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
             $this->tpl->setOnScreenMessage('info', $info, true);
         }
 
-        if (!$this->getTestObject()->applyDefaults($defaults)) {
+        if (is_array($defaults) && !$this->getTestObject()->applyDefaults($defaults)) {
             $this->tpl->setOnScreenMessage('failure', $this->lng->txt('tst_defaults_apply_not_possible'));
             $this->ctrl->redirect($this, 'defaults');
         }
