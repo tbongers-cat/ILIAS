@@ -386,8 +386,6 @@ il.UI.Input = il.UI.Input || {};
 			preview = $(dropzones[input_id].options.previewsContainer.lastElementChild);
 			setupExpansionGlyphs(preview);
 
-			dropzones[input_id].options.previewsContainer.append(...preview.children());
-
 			// store rendered preview id temporarily in file, to retrieve
 			// the corresponding input later.
 			file.input_id = getFileEntryInput(preview).attr('id');
