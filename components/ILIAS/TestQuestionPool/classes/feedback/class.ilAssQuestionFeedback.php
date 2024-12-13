@@ -330,7 +330,7 @@ abstract class ilAssQuestionFeedback
             $feedback_content = ilRTE::_replaceMediaObjectImageSrc($feedback_content, 0);
         }
 
-        if ($feedbackId != -1) {
+        if ($feedbackId !== -1) {
             $this->db->update(
                 $this->getGenericFeedbackTableName(),
                 [
@@ -364,6 +364,9 @@ abstract class ilAssQuestionFeedback
      */
     final public function deleteGenericFeedbacks(int $question_id, bool $isAdditionalContentEditingModePageObject): void
     {
+        if ($page_object_id === -1) {
+            return;
+        }
         if ($isAdditionalContentEditingModePageObject) {
             $this->ensurePageObjectDeleted(
                 $this->getGenericFeedbackPageObjectType(),
