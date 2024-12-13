@@ -1177,9 +1177,11 @@ class ilObjTest extends ilObject
 
         if ($participant_data->getUserIds() !== []) {
             /* @var ilTestLP $testLP */
-            $testLP = ilObjectLP::getInstance($this->getId());
-            $testLP->setTestObject($this);
-            $testLP->resetLPDataForUserIds($participant_data->getUserIds(), false);
+            $test_lp = ilObjectLP::getInstance($this->getId());
+            if ($test_lp instanceof ilTestLP) {
+                $test_lp->setTestObject($this);
+                $test_lp->resetLPDataForUserIds($participant_data->getUserIds(), false);
+            }
         }
 
         if ($participant_data->getActiveIds() !== []) {
