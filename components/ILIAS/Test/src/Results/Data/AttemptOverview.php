@@ -127,7 +127,7 @@ class AttemptOverview
             $lng->txt('tst_stat_result_resultspoints') => $this->reached_points
                 . ' ' . strtolower($lng->txt('of')) . ' ' . $this->available_points
             . ' (' . sprintf('%2.2f', $this->getReachedPointsInPercent()) . ' %)',
-            $lng->txt('tst_stat_result_resultsmarks') => $this->mark->getShortName()
+            $lng->txt('tst_stat_result_resultsmarks') => $this->mark?->getShortName() ?? ''
         ];
 
         if ($this->settings->getShowHints()) {
