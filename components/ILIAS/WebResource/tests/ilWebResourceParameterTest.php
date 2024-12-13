@@ -225,15 +225,6 @@ class ilWebResourceParameterTest extends TestCase
             'name3'
         );
         $this->assertSame('name3=MATRICULATION', $param->getInfo());
-        $param = new ilWebLinkParameter(
-            $user,
-            0,
-            13,
-            9,
-            ilWebLinkBaseParameter::VALUES['session_id'],
-            'name4'
-        );
-        $this->assertSame('name4=SESSION_ID', $param->getInfo());
     }
 
     public function testGetInfoException(): void

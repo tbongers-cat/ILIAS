@@ -27,7 +27,6 @@ abstract class ilWebLinkBaseParameter
 {
     public const UNDEFINED_NAME = 'undefined';
     public const USER_ID_NAME = 'user_id';
-    public const SESSION_ID_NAME = 'session_id';
     public const LOGIN_NAME = 'login';
     public const MATRICULATION_NAME = 'matriculation';
 
@@ -37,7 +36,6 @@ abstract class ilWebLinkBaseParameter
     public const VALUES = [
         self::UNDEFINED_NAME => 0,
         self::USER_ID_NAME => 1,
-        self::SESSION_ID_NAME => 2,
         self::LOGIN_NAME => 3,
         self::MATRICULATION_NAME => 4
     ];
@@ -49,7 +47,6 @@ abstract class ilWebLinkBaseParameter
     public const VALUES_TEXT = [
         self::VALUES[self::UNDEFINED_NAME] => 'links_select_one',
         self::VALUES[self::USER_ID_NAME] => 'links_user_id',
-        self::VALUES[self::SESSION_ID_NAME] => 'links_session_id',
         self::VALUES[self::LOGIN_NAME] => 'links_user_name',
         self::VALUES[self::MATRICULATION_NAME] => 'matriculation',
     ];

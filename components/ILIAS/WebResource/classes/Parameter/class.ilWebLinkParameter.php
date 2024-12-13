@@ -61,10 +61,6 @@ class ilWebLinkParameter extends ilWebLinkBaseParameter
                 ));
                 break;
 
-            case self::VALUES['session_id']:
-                $link .= (session_id());
-                break;
-
             case self::VALUES['user_id']:
                 $link .= ($this->user->getId());
                 break;
@@ -89,9 +85,6 @@ class ilWebLinkParameter extends ilWebLinkBaseParameter
         switch ($this->getValue()) {
             case self::VALUES['user_id']:
                 return $info . '=USER_ID';
-
-            case self::VALUES['session_id']:
-                return $info . '=SESSION_ID';
 
             case self::VALUES['login']:
                 return $info . '=LOGIN';
