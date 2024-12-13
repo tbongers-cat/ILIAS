@@ -141,4 +141,15 @@ class DBUpdateSteps10 implements \ilDatabaseUpdateSteps
             [$max_login_attempts_exceeded, $max_login_attempts_exceeded]
         );
     }
+
+    public function step_5(): void
+    {
+        if ($this->db->tableColumnExists('personal_clipboard', 'title')) {
+            $this->db->modifyTableColumn('personal_clipboard', 'title', [
+                'type' => \ilDBConstants::T_TEXT,
+                'length' => 255,
+                'notnull' => false
+            ]);
+        }
+    }
 }
