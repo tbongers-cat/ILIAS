@@ -5954,7 +5954,7 @@ class ilObjTest extends ilObject
      *
      * @return boolean TRUE if the application succeeds, FALSE otherwise
      */
-    public function applyDefaults($test_defaults): bool
+    public function applyDefaults(array $test_defaults): bool
     {
         $testsettings = unserialize($test_defaults['defaults'], ['allowed_classes' => [DateTimeImmutable::class]]);
         try {
