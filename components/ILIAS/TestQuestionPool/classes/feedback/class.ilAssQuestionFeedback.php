@@ -364,9 +364,6 @@ abstract class ilAssQuestionFeedback
      */
     final public function deleteGenericFeedbacks(int $question_id, bool $isAdditionalContentEditingModePageObject): void
     {
-        if ($page_object_id === -1) {
-            return;
-        }
         if ($isAdditionalContentEditingModePageObject) {
             $this->ensurePageObjectDeleted(
                 $this->getGenericFeedbackPageObjectType(),
@@ -647,6 +644,10 @@ abstract class ilAssQuestionFeedback
 
     final protected function ensurePageObjectDeleted(string $page_object_type, int $page_object_id): void
     {
+        if ($page_object_id === -1) {
+            return;
+        }
+
         if ($page_object_type == ilAssQuestionFeedback::PAGE_OBJECT_TYPE_GENERIC_FEEDBACK) {
             if (ilAssGenFeedbackPage::_exists($page_object_type, $page_object_id)) {
                 $pageObject = new ilAssGenFeedbackPage($page_object_id);
