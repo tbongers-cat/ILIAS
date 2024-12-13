@@ -1096,7 +1096,7 @@ class ilObjLinkResourceGUI extends ilObject2GUI
                 );
                 $options = [];
                 foreach (ilWebLinkBaseParameter::VALUES as $name => $identifier) {
-                    $options[] = $this->lng->txt(ilWebLinkBaseParameter::VALUES_TEXT[$identifier]);
+                    $options[$identifier] = $this->lng->txt(ilWebLinkBaseParameter::VALUES_TEXT[$identifier]);
                 }
                 $val->setOptions($options);
                 $val->setValue(0);

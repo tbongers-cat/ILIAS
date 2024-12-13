@@ -296,7 +296,7 @@ class ilWebResourceEditableLinkTableGUI extends ilTable2GUI
 
             $options = [];
             foreach (ilWebLinkBaseParameter::VALUES as $name => $identifier) {
-                $options[] = $this->lng->txt(ilWebLinkBaseParameter::VALUES_TEXT[$identifier]);
+                $options[$identifier] = $this->lng->txt(ilWebLinkBaseParameter::VALUES_TEXT[$identifier]);
             }
             $this->tpl->setVariable(
                 'SEL_DYN_VAL',
