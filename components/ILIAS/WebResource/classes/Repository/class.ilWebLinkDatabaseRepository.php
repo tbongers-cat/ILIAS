@@ -551,7 +551,7 @@ class ilWebLinkDatabaseRepository implements ilWebLinkRepository
         $parameters = [];
 
         while ($row = $res->fetchRow(ilDBConstants::FETCHMODE_OBJECT)) {
-            $parameters[] = new ilWebLinkParameter(
+            $parameter = new ilWebLinkParameter(
                 $this->user,
                 (int) $row->webr_id,
                 (int) $row->link_id,
@@ -559,6 +559,12 @@ class ilWebLinkDatabaseRepository implements ilWebLinkRepository
                 (int) $row->value,
                 (string) $row->name
             );
+            try {
+                $this->validateParameter($parameter);
+            } catch (Exception $e) {
+                continue;
+            }
+            $parameters[] = $parameter;
         }
 
         return $parameters;
