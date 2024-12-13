@@ -914,8 +914,7 @@ abstract class assQuestion implements Question
             $this->feedbackOBJ->deleteGenericFeedbacks($question_id, $this->isAdditionalContentEditingModePageObject());
             $this->feedbackOBJ->deleteSpecificAnswerFeedbacks($question_id, $this->isAdditionalContentEditingModePageObject());
         } catch (Exception $e) {
-            $this->log->root()->error("EXCEPTION: Could not delete additional table data of question $question_id: $e");
-            return;
+            $this->log->root()->error("EXCEPTION: Could not delete additional table data of question {$question_id}: {$e}");
         }
 
         try {
@@ -926,15 +925,13 @@ abstract class assQuestion implements Question
                 [$question_id]
             );
         } catch (Exception $e) {
-            $this->log->root()->error("EXCEPTION: Could not delete delete question $question_id from a test: $e");
-            return;
+            $this->log->root()->error("EXCEPTION: Could not delete delete question {$question_id} from a test: {$e}");
         }
 
         try {
             $this->getSuggestedSolutionsRepo()->deleteForQuestion($question_id);
         } catch (Exception $e) {
-            $this->log->root()->error("EXCEPTION: Could not delete suggested solutions of question $question_id: $e");
-            return;
+            $this->log->root()->error("EXCEPTION: Could not delete suggested solutions of question {$question_id}: {$e}");
         }
 
         $directory = CLIENT_WEB_DIR . "/assessment/" . $obj_id . "/$question_id";
@@ -943,8 +940,7 @@ abstract class assQuestion implements Question
                 ilFileUtils::delDir($directory);
             }
         } catch (Exception $e) {
-            $this->log->root()->error("EXCEPTION: Could not delete question file directory $directory of question $question_id: $e");
-            return;
+            $this->log->root()->error("EXCEPTION: Could not delete question file directory {$directory} of question {$question_id}: {$e}");
         }
 
         try {
@@ -961,8 +957,7 @@ abstract class assQuestion implements Question
                 }
             }
         } catch (Exception $e) {
-            $this->log->root()->error("EXCEPTION: Error deleting the media objects of question $question_id: $e");
-            return;
+            $this->log->root()->error("EXCEPTION: Error deleting the media objects of question {$question_id}: {$e}");
         }
         ilAssQuestionHintTracking::deleteRequestsByQuestionIds([$question_id]);
         ilAssQuestionHintList::deleteHintsByQuestionIds([$question_id]);
@@ -990,8 +985,10 @@ abstract class assQuestion implements Question
         try {
             ilObjQuestionPool::_updateQuestionCount($this->getObjId());
         } catch (Exception $e) {
-            $this->log->root()->error("EXCEPTION: Error updating the question pool question count of question pool " . $this->getObjId() . " when deleting question $question_id: $e");
-            return;
+            $this->log->root()->error(
+                "EXCEPTION: Error updating the question pool question count of"
+                . " question pool {$this->getObjId()} when deleting question {$question_id}: {$e}"
+            );
         }
     }
 
