@@ -86,7 +86,8 @@ class PageQueryActionHandler implements Server\QueryActionHandler
         ]);
         $r = $this->ui->renderer();
         $o = new \stdClass();
-        $o->dropdown = $r->render($dd);
+        $dd_html = preg_replace('/\s*id="[^"]*"/', '', $r->render($dd));
+        $o->dropdown = $dd_html;
         $o->addCommands = $this->getAddCommands();
         $o->pageEditHelp = $this->getPageEditHelp();
         $o->multiEditHelp = $this->getMultiEditHelp();
