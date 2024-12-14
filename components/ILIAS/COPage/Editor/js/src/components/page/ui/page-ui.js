@@ -280,6 +280,7 @@ export default class PageUI {
             }
             li.querySelector('a').addEventListener('click', (event) => {
               event.isDropDownSelectionEvent = true;
+              this.hideAllAddDropdowns();
               dispatch.dispatch(action.page().editor().componentInsert(
                 cname,
                 area.dataset.pcid,
@@ -290,15 +291,26 @@ export default class PageUI {
             });
             ul.appendChild(li);
           }
-          if (ul.style.display == 'block') {
-            ul.style.display = '';
-          } else {
+
+          if (ul.dataset.copgDDShown !== '1') {
+            this.hideAllAddDropdowns();
             ul.style.display = 'block';
+            ul.dataset.copgDDShown = '1';
+          } else {
+            ul.style.display = 'none';
+            ul.dataset.copgDDShown = '0';
           }
         });
       });
     });
     this.refreshAddButtonText();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  hideAllAddDropdowns() {
+    document.querySelectorAll("[data-copg-ed-type='add-area'] ul.dropdown-menu").forEach((el) => {
+      el.style.display = 'none';
+    });
   }
 
   /**
