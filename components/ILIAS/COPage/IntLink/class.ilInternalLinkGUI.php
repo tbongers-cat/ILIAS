@@ -924,19 +924,24 @@ class ilInternalLinkGUI
 
         $lng->loadLanguageModule("link");
 
+        $debug = false;
+
         $tpl->addJavaScript("assets/js/ilExplorer.js");
         ilExplorerBaseGUI::init();
 
-        //$tpl->addJavascript("../components/ILIAS/COPage/IntLink/resources/ilIntLink.js");
-        $tpl->addJavascript("assets/js/ilIntLink.js");
+        if ($debug) {
+            $tpl->addJavascript("../components/ILIAS/COPage/IntLink/resources/ilIntLink.js");
+        } else {
+            $tpl->addJavascript("assets/js/ilIntLink.js");
+        }
+
         // #18721
         $tpl->addJavaScript("assets/js/Form.js");
 
         $mt = self::getModalTemplate();
+        $tpl->addOnLoadCode('il.IntLink.setModalTemplate("' . addslashes(json_encode($mt["template"])) . '");');
 
-        $html = "<div id='ilIntLinkModal' data-show-signal='".$mt["show"]."' data-close-signal='".$mt["close"]."'>".
-            $mt["template"] .
-            "</div>";
+        $html = "<div id='ilIntLinkModal' data-show-signal='".$mt["show"]."' data-close-signal='".$mt["close"]."'></div>";
 
         return $html;
     }
