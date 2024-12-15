@@ -87,6 +87,7 @@ class PageQueryActionHandler implements Server\QueryActionHandler
         $r = $this->ui->renderer();
         $o = new \stdClass();
         $dd_html = preg_replace('/\s*id="[^"]*"/', '', $r->render($dd));
+        $r->renderAsync($dd);   // this prevents further buttons to get the dd JS attached
         $o->dropdown = $dd_html;
         $o->addCommands = $this->getAddCommands();
         $o->pageEditHelp = $this->getPageEditHelp();
