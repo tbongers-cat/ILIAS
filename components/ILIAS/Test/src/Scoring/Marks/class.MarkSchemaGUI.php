@@ -67,7 +67,7 @@ class MarkSchemaGUI
     ) {
         $this->mark_schema = $test->getMarkSchema();
         $this->editable = $test->marksEditable();
-        $uri = ILIAS_HTTP_PATH . '/' . $this->ctrl->getLinkTargetByClass([\ilObjTestGUI::class, self::class], self::DEFAULT_CMD);
+        $uri = ILIAS_HTTP_PATH . '/' . $this->ctrl->getLinkTargetByClass([\ilRepositoryGUI::class, \ilObjTestGUI::class, self::class], self::DEFAULT_CMD);
         $url_builder = new URLBuilder(
             (new DataFactory())->uri($uri)
         );
@@ -85,7 +85,6 @@ class MarkSchemaGUI
 
     public function executeCommand(): void
     {
-        $this->tabs->activateSubTab(TabsManager::SETTINGS_SUBTAB_ID_MARK_SCHEMA);
         $cmd = $this->ctrl->getCmd(self::DEFAULT_CMD);
         $this->$cmd();
     }
