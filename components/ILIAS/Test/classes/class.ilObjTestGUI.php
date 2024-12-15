@@ -555,8 +555,6 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
                 }
                 $this->protectByWritePermission();
 
-                $this->prepareOutput();
-                $this->addHeaderAction();
                 $mark_schema_gui = new MarkSchemaGUI(
                     $this->getTestObject(),
                     $this->user,
@@ -575,6 +573,11 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
                     $this->ui_renderer
                 );
                 $this->ctrl->forwardCommand($mark_schema_gui);
+
+                $this->prepareOutput();
+                $this->addHeaderAction();
+                $this->tabs_gui->activateSubTab(TabsManager::SETTINGS_SUBTAB_ID_MARK_SCHEMA);
+
                 break;
 
             case strtolower(SettingsMainGUI::class):
