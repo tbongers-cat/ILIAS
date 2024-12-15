@@ -582,6 +582,10 @@ class ilPCMediaObjectGUI extends ilPageContentGUI
         return null;
     }
 
+    protected function create_mob() : void
+    {
+        $this->create();
+    }
 
     /**
      * edit properties form
