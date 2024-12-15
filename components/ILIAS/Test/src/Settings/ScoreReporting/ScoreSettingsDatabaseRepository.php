@@ -69,17 +69,6 @@ class ScoreSettingsDatabaseRepository implements ScoreSettingsRepository
 
         $row = $this->db->fetchAssoc($res);
 
-        $reporting_date = $row['reporting_date'];
-        if ($reporting_date) {
-            $reporting_date = \DateTimeImmutable::createFromFormat(
-                self::STORAGE_DATE_FORMAT,
-                $reporting_date,
-                new \DateTimeZone('UTC')
-            );
-        } else {
-            $reporting_date = null;
-        }
-
         $test_id = (int) $row['test_id'];
 
         $settings = new ScoreSettings(
@@ -90,7 +79,7 @@ class ScoreSettingsDatabaseRepository implements ScoreSettingsRepository
                 ->withPassScoring((int) $row['pass_scoring']),
             (new SettingsResultSummary($test_id))
                 ->withScoreReporting(ScoreReportingTypes::from($row['score_reporting']))
-                ->withReportingDate($reporting_date)
+                ->withReportingDate($this->buildDateFromString($row['reporting_date']))
                 ->withShowGradingStatusEnabled((bool) $row['show_grading_status'])
                 ->withShowGradingMarkEnabled((bool) $row['show_grading_mark'])
                 ->withPassDeletionAllowed((bool) $row['pass_deletion_allowed']),
@@ -130,6 +119,43 @@ class ScoreSettingsDatabaseRepository implements ScoreSettingsRepository
             self::TABLE_NAME,
             $values,
             ['test_id' => ['integer', $settings->getTestId()]]
+        );
+    }
+
+
+    public function getSettingsResultSummaryByObjIds(array $obj_ids): array
+    {
+        $result = $this->db->query(
+            'SELECT ' . PHP_EOL
+            . 'test_id, obj_fi, score_reporting, reporting_date,' . PHP_EOL
+            . 'show_grading_status, show_grading_mark, pass_deletion_allowed' . PHP_EOL
+            . 'FROM ' . self::TABLE_NAME . PHP_EOL
+            . 'WHERE ' . $this->db->in('obj_fi', $obj_ids, false, \ilDBConstants::T_INTEGER)
+        );
+
+        $settings_summary = [];
+        while (($row = $this->db->fetchAssoc($result)) !== null) {
+            $settings_summary[$row['obj_fi']] = (new SettingsResultSummary($row['test_id']))
+                ->withScoreReporting(ScoreReportingTypes::from($row['score_reporting']))
+                ->withReportingDate($this->buildDateFromString($row['reporting_date']))
+                ->withShowGradingStatusEnabled((bool) $row['show_grading_status'])
+                ->withShowGradingMarkEnabled((bool) $row['show_grading_mark'])
+                ->withPassDeletionAllowed((bool) $row['pass_deletion_allowed']);
+        }
+        return $settings_summary;
+    }
+
+    private function buildDateFromString(?string $reporting_date): ?\DateTimeImmutable
+    {
+        if ($reporting_date === null
+            || $reporting_date === '') {
+            return null;
+        }
+
+        return \DateTimeImmutable::createFromFormat(
+            self::STORAGE_DATE_FORMAT,
+            $reporting_date,
+            new \DateTimeZone('UTC')
         );
     }
 }

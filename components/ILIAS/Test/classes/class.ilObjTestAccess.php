@@ -23,6 +23,8 @@ use ILIAS\Test\Access\AccessFileUploadPreview;
 use ILIAS\Test\Access\AccessQuestionImage;
 use ILIAS\Test\Access\SimpleAccess;
 use ILIAS\Test\Access\Readable;
+use ILIAS\Test\Settings\ScoreReporting\ScoreSettingsDatabaseRepository;
+use ILIAS\Test\Settings\ScoreReporting\ScoreReportingTypes;
 use ILIAS\Data\Result;
 use ILIAS\Data\Result\Error;
 
@@ -45,6 +47,9 @@ class ilObjTestAccess extends ilObjectAccess implements ilConditionHandling
     private ilLanguage $lng;
     private ilRbacSystem $rbac_system;
     private ilAccessHandler $access;
+
+    private static ?ilCertificateObjectsForUserPreloader $certificate_preloader = null;
+    private static array $settings_result_summaries_by_obj_id = [];
 
     public function __construct()
     {
@@ -719,5 +724,39 @@ class ilObjTestAccess extends ilObjectAccess implements ilConditionHandling
         $test_session = $test_session_factory->getSessionByUserId($user_id);
 
         return $test_obj->canShowTestResults($test_session);
+    }
+
+    public static function _preloadData($obj_ids, $ref_ids): void
+    {
+        global $DIC;
+        if ((new ilCertificateActiveValidator())->validate()) {
+            self::$certificate_preloader = new ilCertificateObjectsForUserPreloader(new ilUserCertificateRepository());
+            self::$certificate_preloader->preLoad($DIC['ilUser']->getId(), $obj_ids);
+            self::$settings_result_summaries_by_obj_id = (new ScoreSettingsDatabaseRepository($DIC['ilDB']))
+                ->getSettingsResultSummaryByObjIds($obj_ids);
+        }
+    }
+
+    public function showCertificateFor(int $user_id, int $obj_id): bool
+    {
+        if (self::$certificate_preloader === null
+            || !self::$certificate_preloader->isPreloaded($user_id, $obj_id)
+            || !isset(self::$settings_result_summaries_by_obj_id[$obj_id])
+            || self::$settings_result_summaries_by_obj_id[$obj_id]->getScoreReporting()
+                === ScoreReportingTypes::SCORE_REPORTING_DISABLED) {
+            return false;
+        }
+
+        $score_reporting = self::$settings_result_summaries_by_obj_id[$obj_id]->getScoreReporting();
+        if ($score_reporting === ScoreReportingTypes::SCORE_REPORTING_IMMIDIATLY) {
+            return true;
+        }
+
+        if ($score_reporting === ScoreReportingTypes::SCORE_REPORTING_DATE
+            && self::$settings_result_summaries_by_obj_id->getReportingDate() < new \DateTimeImmutable('now', new DateTimeZone('UTC'))) {
+            return true;
+        }
+
+        return false;
     }
 }
