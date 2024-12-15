@@ -50,7 +50,7 @@ class ilPCSectionGUI extends ilPageContentGUI
 
             $onload_code = [];
             $char = $form->getItemByPostVar("characteristic");
-            $onload_code = array_merge($onload_code, $char->getOnloadCode());
+            //$onload_code = array_merge($onload_code, $char->getOnloadCode());
 
             $from = $form->getItemByPostVar("active_from");
             $from->setSideBySide(false);
@@ -247,7 +247,7 @@ class ilPCSectionGUI extends ilPageContentGUI
         }
 
         // characteristic selection
-        $char_prop = new ilAdvSelectInputGUI(
+        $char_prop = new ilSelectInputGUI(
             $this->lng->txt("cont_characteristic"),
             "characteristic"
         );
@@ -265,11 +265,14 @@ class ilPCSectionGUI extends ilPageContentGUI
             ? "Block"
             : $this->content_obj->getCharacteristic();
 
+        $options = [];
         foreach ($chars as $k => $char) {
             $html = '<div class="ilCOPgEditStyleSelectionItem"><div class="ilc_section_' . $k . '" style="' . self::$style_selector_reset . '">' .
                 $char . '</div></div>';
-            $char_prop->addOption($k, $char, $html);
+            //$char_prop->addOption($k, $char, $html);
+            $options[$k] = $char;
         }
+        $char_prop->setOptions($options);
 
         $char_prop->setValue($selected);
         $form->addItem($char_prop);

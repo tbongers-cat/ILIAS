@@ -1241,9 +1241,8 @@ class ilPCMediaObjectGUI extends ilPageContentGUI
         $form = new ilPropertyFormGUI();
         $form->setFormAction($ilCtrl->getFormAction($this));
         $form->setTitle($this->lng->txt("cont_edit_style"));
-
         // characteristic selection
-        $char_prop = new ilAdvSelectInputGUI(
+        $char_prop = new ilSelectInputGUI(
             $this->lng->txt("cont_characteristic"),
             "characteristic"
         );
@@ -1263,11 +1262,14 @@ class ilPCMediaObjectGUI extends ilPageContentGUI
             $selected = "MediaContainer";
         }
 
+        $options = [];
         foreach ($chars as $k => $char) {
             $html = '<div class="ilCOPgEditStyleSelectionItem">' .
                 $char . '</div>';
-            $char_prop->addOption($k, $char, $html);
+            //$char_prop->addOption($k, $char, $html);
+            $options[$k] = $char;
         }
+        $char_prop->setOptions($options);
 
         $char_prop->setValue($selected);
         $form->addItem($char_prop);
@@ -1305,10 +1307,10 @@ class ilPCMediaObjectGUI extends ilPageContentGUI
         $tpl->setContent($html);
     }
 
-    public function getStyleInput(): ilAdvSelectInputGUI
+    public function getStyleInput(): ilSelectInputGUI
     {
         // characteristic selection
-        $char_prop = new ilAdvSelectInputGUI(
+        $char_prop = new ilSelectInputGUI(
             $this->lng->txt("cont_characteristic"),
             "characteristic"
         );
@@ -1328,12 +1330,14 @@ class ilPCMediaObjectGUI extends ilPageContentGUI
             }
         }
 
+        $options = [];
         foreach ($chars as $k => $char) {
             $html = '<div class="ilCOPgEditStyleSelectionItem">' .
                 $char . '</div>';
-            $char_prop->addOption($k, $char, $html);
+            //$char_prop->addOption($k, $char, $html);
+            $options[$k] = $char;
         }
-
+        $char_prop->setOptions($options);
         $char_prop->setValue($selected);
 
         return $char_prop;

@@ -369,6 +369,8 @@ class UIWrapper
         array $data = null
     ): string {
         $ui = $this->ui;
+        // workaround to clear async code from dropdowns
+        $ui->renderer()->renderAsync($ui->factory()->legacy(""));
         $l = $this->getLink($content, $component, $type, $action, $data);
         return $ui->renderer()->renderAsync($l);
     }
