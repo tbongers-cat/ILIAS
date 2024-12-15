@@ -1234,7 +1234,6 @@ class ilPCMediaObjectGUI extends ilPageContentGUI
         $ilCtrl = $this->ctrl;
         $tpl = $this->tpl;
         $lng = $this->lng;
-
         $this->displayValidationError();
 
         // edit form
@@ -1276,7 +1275,7 @@ class ilPCMediaObjectGUI extends ilPageContentGUI
 
 
         // caption style
-        $cap_style = new ilAdvSelectInputGUI(
+        $cap_style = new ilSelectInputGUI(
             $this->lng->txt("cont_caption_style"),
             "caption_style"
         );
@@ -1285,20 +1284,13 @@ class ilPCMediaObjectGUI extends ilPageContentGUI
         $this->getCharacteristicsOfCurrentStyle(["media_caption"]);
         $chars = $this->getCharacteristics();
         $options = $chars;
-        //$options = array_merge(array("" => $this->lng->txt("none")), $chars);
-        foreach ($options as $k => $option) {
-            $html = '<table border="0" cellspacing="0" cellpadding="0"><tr><td class="ilc_table_cell_' . $k . '">' .
-                $option . '</td></tr></table>';
-            $cap_style->addOption($k, $option, $html);
-        }
+        $cap_style->setOptions($options);
 
         if (count($options) > 0) {
             $current_value = $this->content_obj->getCaptionClass() ?: "MediaCaption";
             $cap_style->setValue($current_value);
             $form->addItem($cap_style);
         }
-
-
 
         // save button
         $form->addCommandButton("saveStyle", $lng->txt("save"));

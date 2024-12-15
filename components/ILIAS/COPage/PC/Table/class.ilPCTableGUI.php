@@ -256,7 +256,7 @@ class ilPCTableGUI extends ilPageContentGUI
         $this->form->addItem($spacing);*/
 
         // table templates and table classes
-        $char_prop = new ilAdvSelectInputGUI(
+        $char_prop = new ilSelectInputGUI(
             $this->lng->txt("cont_characteristic_table"),
             "characteristic"
         );
@@ -271,6 +271,7 @@ class ilPCTableGUI extends ilPageContentGUI
                 );
             }
         }
+        $options = [];
         foreach ($chars as $k => $char) {
             if (strpos($k, ":") > 0) {
                 $t = explode(":", $k);
@@ -279,8 +280,10 @@ class ilPCTableGUI extends ilPageContentGUI
                 $html = '<table class="ilc_table_' . $k . '"><tr><td class="small">' .
                     $char . '</td></tr></table>';
             }
-            $char_prop->addOption($k, $char, $html);
+            //$char_prop->addOption($k, $char, $html);
+            $options[$k] = $char;
         }
+        $char_prop->setOptions($options);
         $char_prop->setValue("StandardTable");
         $this->form->addItem($char_prop);
 
@@ -315,7 +318,7 @@ class ilPCTableGUI extends ilPageContentGUI
 
         if ($a_mode == "create") {
             // first row style
-            $fr_style = new ilAdvSelectInputGUI(
+            $fr_style = new ilSelectInputGUI(
                 $this->lng->txt("cont_first_row_style"),
                 "first_row_style"
             );
@@ -323,11 +326,7 @@ class ilPCTableGUI extends ilPageContentGUI
             $this->getCharacteristicsOfCurrentStyle(["table_cell"]);
             $chars = $this->getCharacteristics();
             $options = array_merge(array("" => $this->lng->txt("none")), $chars);
-            foreach ($options as $k => $option) {
-                $html = '<table border="0" cellspacing="0" cellpadding="0"><tr><td class="ilc_table_cell_' . $k . '">' .
-                    $option . '</td></tr></table>';
-                $fr_style->addOption($k, $option, $html);
-            }
+            $fr_style->setOptions($options);
 
             $fr_style->setValue("");
             $this->form->addItem($fr_style);
@@ -662,7 +661,7 @@ class ilPCTableGUI extends ilPageContentGUI
         $form->setTitle($this->lng->txt("cont_table_cell_properties"));
 
         // first row style
-        $style = new ilAdvSelectInputGUI(
+        $style = new ilSelectInputGUI(
             $this->lng->txt("cont_style"),
             "style"
         );
@@ -670,11 +669,7 @@ class ilPCTableGUI extends ilPageContentGUI
         $this->getCharacteristicsOfCurrentStyle(["table_cell"]);	// scorm-2004
         $chars = $this->getCharacteristics();	// scorm-2004
         $options = array_merge(array("" => $this->lng->txt("none")), $chars);	// scorm-2004
-        foreach ($options as $k => $option) {
-            $html = '<table border="0" cellspacing="0" cellpadding="0"><tr><td class="ilc_table_cell_' . $k . '">' .
-                $option . '</td></tr></table>';
-            $style->addOption($k, $option, $html);
-        }
+        $style->setOptions($options);
 
         $style->setValue("");
         $style->setInfo($lng->txt("cont_set_tab_style_info"));
