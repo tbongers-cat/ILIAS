@@ -811,65 +811,48 @@ class assFormulaQuestionGUI extends assQuestionGUI
                 []
             );
         }
+
         if (($active_id > 0) && (!$show_correct_solution)) {
-            $user_solution['active_id'] = $active_id;
-            $user_solution['pass'] = $pass;
+            $user_solution["active_id"] = $active_id;
+            $user_solution["pass"] = $pass;
             $solutions = $this->object->getSolutionValues($active_id, $pass);
-            $user_solution = array_merge($user_solution, $solutions);
-        } elseif ($active_id) {
-            $solution_values = [];
-            $participants_solution = $this->object->getSolutionValues($active_id, $pass);
-            foreach ($participants_solution as $val1 => $val2) {
-                $solution_values[] = ['value1' => $val1, 'value2' => $val2];
-            }
-            $user_solution = $this->object->getBestSolution($solution_values);
-        } elseif (is_object($this->getPreviewSession())) {
-            $solution_values = [];
-            $participants_solution = $this->getPreviewSession()->getParticipantsSolution();
-            if (is_array($participants_solution)) {
-                foreach ($participants_solution as $val1 => $val2) {
-                    $solution_values[] = ['value1' => $val1, 'value2' => $val2];
+            foreach ($solutions as $idx => $solution_value) {
+                if (preg_match("/^(\\\$v\\d+)$/", $solution_value["value1"], $matches)) {
+                    $user_solution[$matches[1]] = $solution_value["value2"];
+                } elseif (preg_match("/^(\\\$r\\d+)$/", $solution_value["value1"], $matches)) {
+                    if (!array_key_exists($matches[1], $user_solution)) {
+                        $user_solution[$matches[1]] = [];
+                    }
+                    $user_solution[$matches[1]]["value"] = $solution_value["value2"];
+                } elseif (preg_match("/^(\\\$r\\d+)_unit$/", $solution_value["value1"], $matches)) {
+                    if (!array_key_exists($matches[1], $user_solution)) {
+                        $user_solution[$matches[1]] = [];
+                    }
+                    $user_solution[$matches[1]]["unit"] = $solution_value["value2"];
                 }
             }
-            $user_solution = $this->object->getBestSolution($solution_values);
+        } elseif ($active_id) {
+            $user_solution = $this->object->getBestSolution($this->object->getSolutionValues($active_id, $pass));
+        } elseif (is_object($this->getPreviewSession())) {
+            $solutionValues = [];
+
+            $participantsSolution = $this->getPreviewSession()->getParticipantsSolution();
+            if (is_array($participantsSolution)) {
+                foreach ($participantsSolution as $val1 => $val2) {
+                    $solutionValues[] = ['value1' => $val1, 'value2' => $val2];
+                }
+            }
+
+            $user_solution = $this->object->getBestSolution($solutionValues);
         }
 
-        return $this->renderSolutionOutput(
-            $user_solution,
-            $active_id,
-            $pass,
-            $graphical_output,
-            $result_output,
-            $show_question_only,
-            $show_feedback,
-            $show_correct_solution,
-            $show_manual_scoring,
-            $show_question_text,
-            false,
-            $show_inline_feedback
-        );
-    }
-
-    public function renderSolutionOutput(
-        mixed $user_solutions,
-        int $active_id,
-        int $pass,
-        bool $graphical_output = false,
-        bool $result_output = false,
-        bool $show_question_only = true,
-        bool $show_feedback = false,
-        bool $show_correct_solution = false,
-        bool $show_manual_scoring = false,
-        bool $show_question_text = true,
-        bool $show_autosave_title = false,
-        bool $show_inline_feedback = false,
-    ): ?string {
         $template = new ilTemplate("tpl.il_as_qpl_formulaquestion_output_solution.html", true, true, 'components/ILIAS/TestQuestionPool');
         $correctness_icons = [
             'correct' => $this->generateCorrectnessIconsForCorrectness(self::CORRECTNESS_OK),
             'not_correct' => $this->generateCorrectnessIconsForCorrectness(self::CORRECTNESS_NOT_OK)
         ];
-        $questiontext = $this->object->substituteVariables($user_solutions, $graphical_output, true, $result_output, $correctness_icons);
+        $questiontext = $this->object->substituteVariables($user_solution, $graphical_output, true, $result_output, $correctness_icons);
+
         $template->setVariable("QUESTIONTEXT", ilLegacyFormElementsUtil::prepareTextareaOutput($questiontext, true));
         $questionoutput = $template->get();
         $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "components/ILIAS/TestQuestionPool");
@@ -879,6 +862,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
                 $this->hasCorrectSolution($active_id, $pass) ?
                 ilAssQuestionFeedback::CSS_CLASS_FEEDBACK_CORRECT : ilAssQuestionFeedback::CSS_CLASS_FEEDBACK_WRONG
             );
+
             $solutiontemplate->setVariable("ILC_FB_CSS_CLASS", $cssClass);
             $solutiontemplate->setVariable("FEEDBACK", ilLegacyFormElementsUtil::prepareTextareaOutput($feedback, true));
         }
@@ -886,6 +870,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
 
         $solutionoutput = $solutiontemplate->get();
         if (!$show_question_only) {
+            // get page object output
             $solutionoutput = $this->getILIASPage($solutionoutput);
         }
         return $solutionoutput;
@@ -896,6 +881,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
         bool $show_inline_feedback = false
     ): string {
         $user_solution = [];
+
         if (is_object($this->getPreviewSession())) {
             $solutions = (array) $this->getPreviewSession()->getParticipantsSolution();
 
@@ -906,16 +892,16 @@ class assFormulaQuestionGUI extends assQuestionGUI
                     if (!array_key_exists($matches[1], $user_solution)) {
                         $user_solution[$matches[1]] = [];
                     }
-                    $user_solution[$matches[1]]['value'] = $val2;
+                    $user_solution[$matches[1]]["value"] = $val2;
                 } elseif (preg_match("/^(\\\$r\\d+)_unit$/", $val1, $matches)) {
                     if (!array_key_exists($matches[1], $user_solution)) {
                         $user_solution[$matches[1]] = [];
                     }
-                    $user_solution[$matches[1]][['unit']] = $val2;
+                    $user_solution[$matches[1]]["unit"] = $val2;
                 }
 
-                if (preg_match("/^(\\\$r\\d+)/", $val1, $matches) && !isset($user_solution[$matches[1]]['result_type'])) {
-                    $user_solution[$matches[1]]['result_type'] = assFormulaQuestionResult::getResultTypeByQstId($this->object->getId(), $val1);
+                if (preg_match("/^(\\\$r\\d+)/", $val1, $matches) && !isset($user_solution[$matches[1]]["result_type"])) {
+                    $user_solution[$matches[1]]["result_type"] = assFormulaQuestionResult::getResultTypeByQstId($this->object->getId(), $val1);
                 }
             }
         }
@@ -954,45 +940,42 @@ class assFormulaQuestionGUI extends assQuestionGUI
         // get the solution of the user for the active pass or from the last pass if allowed
         $user_solution = [];
         if ($active_id) {
+            $solutions = $this->object->getTestOutputSolutions($active_id, $pass);
+
             $actualPassIndex = null;
             if ($this->object->getTestPresentationConfig()->isSolutionInitiallyPrefilled()) {
                 $actualPassIndex = ilObjTest::_getPass($active_id);
             }
-            $solutions = [];
-            foreach ($this->object->getTestOutputSolutions($active_id, $pass) as $val1 => $val2) {
-                $solutions[] = ['value1' => $val1, 'value2' => $val2];
-            }
+
             foreach ($solutions as $idx => $solution_value) {
-                if (preg_match("/^(\\\$v\\d+)$/", $solution_value['value1'], $matches)) {
+                if (preg_match("/^(\\\$v\\d+)$/", $solution_value["value1"], $matches)) {
                     if ($this->object->getTestPresentationConfig()->isSolutionInitiallyPrefilled()) {
-                        $this->object->saveCurrentSolution($active_id, $actualPassIndex, $matches[1], $solution_value['value2'], true);
+                        $this->object->saveCurrentSolution($active_id, $actualPassIndex, $matches[1], $solution_value["value2"], true);
                     }
-                    $user_solution[$matches[1]] = $solution_value['value2'];
-                } elseif (preg_match("/^(\\\$r\\d+)$/", $solution_value['value1'], $matches)) {
+
+                    $user_solution[$matches[1]] = $solution_value["value2"];
+                } elseif (preg_match("/^(\\\$r\\d+)$/", $solution_value["value1"], $matches)) {
                     if (!array_key_exists($matches[1], $user_solution)) {
                         $user_solution[$matches[1]] = [];
                     }
-                    $user_solution[$matches[1]]['value'] = $solution_value['value2'];
-                } elseif (preg_match("/^(\\\$r\\d+)_unit$/", $solution_value['value1'], $matches)) {
+                    $user_solution[$matches[1]]["value"] = $solution_value["value2"];
+                } elseif (preg_match("/^(\\\$r\\d+)_unit$/", $solution_value["value1"], $matches)) {
                     if (!array_key_exists($matches[1], $user_solution)) {
                         $user_solution[$matches[1]] = [];
                     }
-                    $user_solution[$matches[1]][['unit']] = $solution_value['value2'];
+                    $user_solution[$matches[1]]["unit"] = $solution_value["value2"];
                 }
-                if (preg_match("/^(\\\$r\\d+)/", $solution_value['value1'], $matches) && !isset($user_solution[$matches[1]]['result_type'])) {
-                    $user_solution[$matches[1]]['result_type'] = assFormulaQuestionResult::getResultTypeByQstId($this->object->getId(), $solution_value['value1']);
+                if (preg_match("/^(\\\$r\\d+)/", $solution_value["value1"], $matches) && !isset($user_solution[$matches[1]]["result_type"])) {
+                    $user_solution[$matches[1]]["result_type"] = assFormulaQuestionResult::getResultTypeByQstId($this->object->getId(), $solution_value["value1"]);
                 }
             }
         }
 
         // fau: testNav - take question variables always from authorized solution because they are saved with this flag, even if an authorized solution is not saved
-        $solutions = [];
-        foreach ($this->object->getSolutionValues($active_id, $pass, true) as $val1 => $val2) {
-            $solutions[] = ['value1' => $val1, 'value2' => $val2];
-        }
+        $solutions = $this->object->getSolutionValues($active_id, $pass, true);
         foreach ($solutions as $idx => $solution_value) {
-            if (preg_match("/^(\\\$v\\d+)$/", $solution_value['value1'], $matches)) {
-                $user_solution[$matches[1]] = $solution_value['value2'];
+            if (preg_match("/^(\\\$v\\d+)$/", $solution_value["value1"], $matches)) {
+                $user_solution[$matches[1]] = $solution_value["value2"];
             }
         }
 

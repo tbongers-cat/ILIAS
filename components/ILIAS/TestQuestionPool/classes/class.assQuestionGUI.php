@@ -204,7 +204,7 @@ abstract class assQuestionGUI
     abstract public function getSolutionOutput(
         int $active_id,
         ?int $pass = null,
-        bool $graphical_output = false,
+        bool $graphicalOutput = false,
         bool $result_output = false,
         bool $show_question_only = true,
         bool $show_feedback = false,
@@ -226,23 +226,6 @@ abstract class assQuestionGUI
         array|bool $user_post_solutions = false,
         bool $show_specific_inline_feedback = false
     ): string;
-
-    public function renderSolutionOutput(
-        mixed $user_solutions,
-        int $active_id,
-        int $pass,
-        bool $graphical_output = false,
-        bool $result_output = false,
-        bool $show_question_only = true,
-        bool $show_feedback = false,
-        bool $show_correct_solution = false,
-        bool $show_manual_scoring = false,
-        bool $show_question_text = true,
-        bool $show_autosave_title = false,
-        bool $show_inline_feedback = false,
-    ): ?string {
-        return null;
-    }
 
     /**
      * @deprecated sk 25 FEB 2024: I introduce this to not have to have the
@@ -2043,39 +2026,6 @@ abstract class assQuestionGUI
         ])->withActionButtonLabel($this->lng->txt('sync_question_to_pool'));
         return $this->ui->renderer()->render(
             $modal->withOnLoad($modal->getShowSignal())
-        );
-    }
-
-    public function getAutoSavedSolutionOutput(
-        int $active_id,
-        int $pass,
-        bool $graphical_output = false,
-        bool $result_output = false,
-        bool $show_question_only = true,
-        bool $show_feedback = false,
-        bool $show_correct_solution = false,
-        bool $show_manual_scoring = false,
-        bool $show_question_text = true,
-        bool $show_autosave_title = false,
-        bool $show_inline_feedback = false
-    ): ?string {
-        $autosave_solutions = $this->object->getSolutionValues($active_id, $pass, false);
-        if ($autosave_solutions === []) {
-            return null;
-        }
-        return $this->renderSolutionOutput(
-            $autosave_solutions,
-            $active_id,
-            $pass,
-            $graphical_output,
-            $result_output,
-            $show_question_only,
-            $show_feedback,
-            $show_correct_solution,
-            $show_manual_scoring,
-            $show_question_text,
-            $show_autosave_title,
-            $show_inline_feedback
         );
     }
 }

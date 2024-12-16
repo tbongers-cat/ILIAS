@@ -224,15 +224,9 @@ class AttemptResultsTable
                 ]);
             }
 
-            $listing = [
-                $lng->txt('tst_header_participant') => $question->getUserAnswer()
-            ];
-            if ($autosave_content = $question->getAutosavedAnswer()) {
-                $listing[$lng->txt('autosavecontent')] = $autosave_content;
-            }
-
+            $user_answer = $question->getUserAnswer();
             $answer_contents = [
-                $ui_factory->listing()->descriptive($listing)
+                $ui_factory->listing()->descriptive([$lng->txt('tst_header_participant') => $user_answer])
             ];
             if ($env->getShowBestSolution()) {
                 $answer_contents[] = $ui_factory->listing()->descriptive([

@@ -38,8 +38,7 @@ class QuestionResult
         private readonly bool $workedthrough,
         private readonly bool $answered,
         private readonly int $requested_hints,
-        private readonly ?string $content_for_recapitulation,
-        private readonly ?string $autosaved_answer
+        private readonly ?string $content_for_recapitulation
     ) {
     }
 
@@ -109,9 +108,4 @@ class QuestionResult
     {
         return $this->requested_hints;
     }
-    public function getAutosavedAnswer(): ?string
-    {
-        return $this->autosaved_answer;
-    }
-
 }
