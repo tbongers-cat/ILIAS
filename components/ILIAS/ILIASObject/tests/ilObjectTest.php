@@ -44,6 +44,10 @@ class ilObjectTest extends TestCase
         $DIC['ilAppEventHandler'] = $this->createMock(ilAppEventHandler::class);
         $DIC['ilUser'] = $this->createMock(ilObjUser::class);
 
+        if (!defined('ILIAS_LOG_DIR')) {
+            define('ILIAS_LOG_DIR', '/var/log');
+        }
+
         if (!defined('ILIAS_LOG_ENABLED')) {
             define('ILIAS_LOG_ENABLED', true);
         }
