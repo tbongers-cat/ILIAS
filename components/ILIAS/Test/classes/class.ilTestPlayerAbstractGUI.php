@@ -1554,6 +1554,7 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
         $current_question_obj = $this->getQuestionInstance(
             $this->test_sequence->getQuestionForSequence($current_sequence_element)
         );
+        $current_question_obj->setTestId($this->object->getId());
 
         $current_question_obj->resetUsersAnswer(
             $this->test_session->getActiveId(),
