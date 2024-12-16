@@ -144,7 +144,7 @@ class AttemptOverview
                     ?->setTimezone($environment['timezone'])
                     ->format($environment['datetimeformat']) ?? '',
                 $lng->txt('tst_nr_of_passes') => (string) $this->nr_of_attempts,
-                $lng->txt('scored_pass') => (string) $this->scored_attempt,
+                $lng->txt('scored_pass') => (string) ($this->scored_attempt + 1),
                 $lng->txt('tst_stat_result_rank_participant') => (string) $this->rank
             ]
         );

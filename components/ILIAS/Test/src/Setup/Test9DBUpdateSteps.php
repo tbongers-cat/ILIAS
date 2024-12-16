@@ -358,4 +358,9 @@ class Test9DBUpdateSteps implements \ilDatabaseUpdateSteps
         }
     }
 
+    public function step_20(): void
+    {
+        $this->db->manipulate('UPDATE tst_pass_result SET points = 0 WHERE points < 0');
+        $this->db->manipulate('UPDATE tst_result_cache SET reached_points = 0 WHERE reached_points < 0');
+    }
 }
