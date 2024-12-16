@@ -648,7 +648,10 @@ class ilObjectGUI implements ImplementsCreationCallback
         $this->lng->loadLanguageModule($new_type);
         $this->ctrl->setParameter($this, 'new_type', $new_type);
 
+        $this->tpl->setTitleIcon(ilObject::getIconForType($this->requested_new_type));
+        $this->tpl->setTitle($this->lng->txt('obj_' . $this->requested_new_type));
         $create_form = $this->initCreateForm($new_type);
+        $this->tabs_gui->setBackTarget($this->lng->txt('cancel'), $this->ctrl->getLinkTargetByClass(static::class, 'cancel'));
         $this->tpl->setContent($this->getCreationFormsHTML($create_form));
     }
 

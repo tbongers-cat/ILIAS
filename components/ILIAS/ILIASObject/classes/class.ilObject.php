@@ -1846,19 +1846,17 @@ class ilObject
         bool $offline = false
     ): string {
         global $DIC;
-
         $ilSetting = $DIC->settings();
-        $objDefinition = $DIC["objDefinition"];
 
         if ($obj_id == "" && $type == "") {
             return "";
         }
 
-        if ($type == "") {
+        if ($type === "") {
             $type = ilObject::_lookupType($obj_id);
         }
 
-        if ($size == "") {
+        if ($size === "") {
             $size = "big";
         }
 
@@ -1884,21 +1882,27 @@ class ilObject
         }
 
         if (!$offline) {
-            if ($objDefinition->isPluginTypeName($type)) {
-                if ($objDefinition->getClassName($type) != "") {
-                    $class_name = "il" . $objDefinition->getClassName($type) . 'Plugin';
-                    $location = $objDefinition->getLocation($type);
-                    if (is_file($location . "/class." . $class_name . ".php")) {
-                        return call_user_func([$class_name, "_getIcon"], $type, $size, $obj_id);
-                    }
-                }
-                return ilUtil::getImagePath("standard/icon_cmps.svg");
-            }
-
-            return ilUtil::getImagePath("standard/icon_" . $type . ".svg");
-        } else {
-            return "./images/standard/icon_" . $type . ".svg";
+            return self::getIconForType($type);
         }
+        return "./images/standard/icon_{$type}.svg";
+    }
+
+    public static function getIconForType(string $type): string
+    {
+        global $DIC;
+        $objDefinition = $DIC['objDefinition'];
+        if (!$objDefinition->isPluginTypeName($type)) {
+            return ilUtil::getImagePath("standard/icon_{$type}.svg");
+        }
+
+        if ($objDefinition->getClassName($type) !== '') {
+            $class_name = "il{$objDefinition->getClassName($type)}Plugin";
+            $location = $objDefinition->getLocation($type);
+            if (is_file($location . "/class.{$class_name}.php")) {
+                return call_user_func([$class_name, '_getIcon'], $type);
+            }
+        }
+        return ilUtil::getImagePath('standard/icon_cmps.svg');
     }
 
     /**
