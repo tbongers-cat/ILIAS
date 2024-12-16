@@ -100,11 +100,12 @@ class ilTestEvaluationFactory
         $scoring_settings = $this->test_obj->getPassScoring();
         $participants = [];
         $current_user = null;
+        $current_attempt = null;
 
         foreach ($eval_data_rows as $row) {
-
-            if ($current_user != $row['active_fi']) {
+            if ($current_user !== $row['active_fi']) {
                 $current_user = $row['active_fi'];
+                $current_attempt = null;
 
                 $user_eval_data = new ilTestEvaluationUserData($scoring_settings);
 
@@ -125,31 +126,33 @@ class ilTestEvaluationFactory
                 $visiting_time = $this->test_obj->getVisitingTimeOfParticipant($row['active_fi']);
                 $user_eval_data->setFirstVisit($visiting_time["first_access"]);
                 $user_eval_data->setLastVisit($visiting_time["last_access"]);
+            }
 
-                $pass = new \ilTestEvaluationPassData();
-                $pass->setPass($row['pass']);
-                $pass->setReachedPoints($row['points']);
+            if ($current_attempt !== $row['pass']) {
+                $attempt = new \ilTestEvaluationPassData();
+                $attempt->setPass($row['pass']);
+                $attempt->setReachedPoints($row['points']);
 
                 if ($row['questioncount'] == 0) {
                     list($count, $points) = array_values(
                         $this->test_obj->getQuestionCountAndPointsForPassOfParticipant($row['active_fi'], $row['pass'])
                     );
-                    $pass->setMaxPoints($points);
-                    $pass->setQuestionCount($count);
+                    $attempt->setMaxPoints($points);
+                    $attempt->setQuestionCount($count);
                 } else {
-                    $pass->setMaxPoints($row['maxpoints']);
-                    $pass->setQuestionCount($row['questioncount']);
+                    $attempt->setMaxPoints($row['maxpoints']);
+                    $attempt->setQuestionCount($row['questioncount']);
                 }
 
-                $pass->setNrOfAnsweredQuestions($row['answeredquestions']);
-                $pass->setWorkingTime($row['workingtime']);
-                $pass->setExamId((string) $row['exam_id']);
-                $pass->setRequestedHintsCount($row['hint_count']);
-                $pass->setDeductedHintPoints($row['hint_points']);
+                $attempt->setNrOfAnsweredQuestions($row['answeredquestions']);
+                $attempt->setWorkingTime($row['workingtime']);
+                $attempt->setExamId((string) $row['exam_id']);
+                $attempt->setRequestedHintsCount($row['hint_count']);
+                $attempt->setDeductedHintPoints($row['hint_points']);
             }
 
             if ($row['question_fi'] !== null) {
-                $pass->addAnsweredQuestion(
+                $attempt->addAnsweredQuestion(
                     $row["question_fi"],
                     $row["qpl_maxpoints"],
                     $row["result_points"],
@@ -159,7 +162,7 @@ class ilTestEvaluationFactory
                 );
             }
 
-            $user_eval_data->addPass($row['pass'], $pass);
+            $user_eval_data->addPass($row['pass'], $attempt);
 
             $participants[$row['active_fi']] = $user_eval_data;
         }
