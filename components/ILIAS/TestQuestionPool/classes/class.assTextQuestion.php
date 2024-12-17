@@ -649,7 +649,10 @@ class assTextQuestion extends assQuestion implements ilObjQuestionScoringAdjusta
 
         for ($i = 0; $i < $count; $i++) {
             if ($withPoints) {
-                $this->addAnswer($answers['answer'][$i], $answers['points'][$i]);
+                $this->addAnswer(
+                    $answers['answer'][$i],
+                    $this->refinery->kindlyTo()->float()->transform($answers['points'][$i])
+                );
             } else {
                 $this->addAnswer($answers[$i], 0);
             }

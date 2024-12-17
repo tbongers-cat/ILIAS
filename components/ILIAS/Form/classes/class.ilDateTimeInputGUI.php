@@ -172,10 +172,11 @@ class ilDateTimeInputGUI extends ilSubEnabledFormPropertyGUI implements ilTableF
     public function getInput(): ?string
     {
         if ($this->valid && $this->getDate() !== null) {
-            return $this->getDate()->get(
-                IL_CAL_FKT_DATE,
-                $this->getDatetimeFormatForInput()
-            );
+            // getInput() should return a generic format
+            $post_format = $this->getShowTime()
+                ? IL_CAL_DATETIME
+                : IL_CAL_DATE;
+            return $this->getDate()->get($post_format);
         }
         return null;
     }

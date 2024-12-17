@@ -21,16 +21,8 @@ declare(strict_types=1);
 use ILIAS\Test\Scoring\Marks\Mark;
 
 /**
-* Class ilTestEvaluationUserData
-*
-* @author		Helmut Schottmüller <helmut.schottmueller@mac.com>
-* @author		Björn Heyser <bheyser@databay.de>
-* @version		$Id$
-*
-* @defgroup ModulesTest Modules/Test
-* @extends ilObject
-*/
-
+ * @deprecated 11; Result/EvaluationData will be refined.
+ */
 class ilTestEvaluationUserData
 {
     private array $question_titles;
