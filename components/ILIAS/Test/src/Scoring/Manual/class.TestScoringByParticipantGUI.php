@@ -390,12 +390,11 @@ class TestScoringByParticipantGUI extends \ilTestServiceGUI
         $form->setTitle(sprintf($this->lng->txt('manscoring_results_pass'), $pass + 1));
         $form->setTableWidth('100%');
 
-        $autosave_enabled = $this->object->getAutosave();
-        $show_solutions_enabled = $this->object->getShowSolutionFeedback();
         foreach ($question_gui_list as $question_id => $question_gui) {
             $question_header = sprintf($this->lng->txt('tst_manscoring_question_section_header'), $question_gui->getObject()->getTitle());
             $question_solution = $question_gui->getSolutionOutput($active_id, $pass, false, false, true, false, false, true);
             $best_solution = $question_gui->getObject()->getSuggestedSolutionOutput();
+
             $feedback = \ilObjTest::getSingleManualFeedback($active_id, $question_id, $pass);
 
             $disabled = false;
@@ -410,25 +409,6 @@ class TestScoringByParticipantGUI extends \ilTestServiceGUI
             $cust = new \ilCustomInputGUI($this->lng->txt('tst_manscoring_input_question_and_user_solution'));
             $cust->setHtml($question_solution);
             $form->addItem($cust);
-
-            if ($autosave_enabled) {
-                $aresult_output = $question_gui->getAutoSavedSolutionOutput(
-                    $active_id,
-                    $pass,
-                    false,
-                    false,
-                    true,
-                    $show_solutions_enabled,
-                    false,
-                    true,
-                    false
-                );
-                if ($aresult_output !== null) {
-                    $cust = new \ilCustomInputGUI($this->lng->txt('autosavecontent'));
-                    $cust->setHtml($aresult_output);
-                    $form->addItem($cust);
-                }
-            }
 
             $text = new \ilTextInputGUI($this->lng->txt('tst_change_points_for_question'), "question__{$question_id}__points");
             if ($initValues) {
