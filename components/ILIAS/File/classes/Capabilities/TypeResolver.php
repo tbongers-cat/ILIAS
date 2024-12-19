@@ -14,17 +14,17 @@
  * https://www.ilias.de
  * https://github.com/ILIAS-eLearning
  *
- *********************************************************************
- *
- * Entry Point for Async calls from the Notification Center
- */
+ *********************************************************************/
 
 declare(strict_types=1);
 
-namespace ILIAS\GlobalScreen\Client;
+namespace ILIAS\File\Capabilities;
 
-/** @noRector  */
-require_once(__DIR__ . '/../vendor/composer/vendor/autoload.php');
-require_once __DIR__ . '/../artifacts/bootstrap_default.php';
-entry_point('ILIAS Legacy Initialisation Adapter');
-(new Notifications())->run();
+/**
+ * @author Fabian Schmid <fabian@sr.solutions>
+ */
+interface TypeResolver
+{
+    public function resolveType(int $ref_id): string;
+
+}
