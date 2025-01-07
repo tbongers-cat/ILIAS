@@ -20,26 +20,21 @@ declare(strict_types=1);
 
 namespace ILIAS\Export;
 
-use ILIAS\Repository\RepoServiceBase;
+use ILIAS\Repository\GlobalDICDomainServices;
 
-class InternalRepoService
+class ExternalDomainService
 {
-    use RepoServiceBase;
-
     protected static array $instance = [];
 
     public function __construct(
-        protected InternalDataService $data,
-        protected \ilDBInterface $db
+        protected InternalDomainService $internal_domain
     ) {
     }
 
-    public function html(): HTML\RepoService
+    public function html(): HTML\ExternalDomainService
     {
-        return self::$instance['html'] ??= new HTML\RepoService(
-            $this->data->html(),
-            $this->db,
-            $this->irss()
+        return self::$instance['html'] ??= new HTML\ExternalDomainService(
+            $this->internal_domain
         );
     }
 }

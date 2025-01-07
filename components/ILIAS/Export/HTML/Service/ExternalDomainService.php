@@ -18,28 +18,30 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\Export;
+namespace ILIAS\Export\HTML;
 
-use ILIAS\Repository\RepoServiceBase;
+use ILIAS\Repository\GlobalDICDomainServices;
+use ILIAS\Export\HTML\RepoService;
+use ILIAS\Export\HTML\DataService;
+use ILIAS\Export\InternalDomainService;
+use ILIAS\components\Export\HTML\ExportCollector;
 
-class InternalRepoService
+class ExternalDomainService
 {
-    use RepoServiceBase;
-
     protected static array $instance = [];
 
     public function __construct(
-        protected InternalDataService $data,
-        protected \ilDBInterface $db
+        protected InternalDomainService $internal_domain
     ) {
     }
 
-    public function html(): HTML\RepoService
-    {
-        return self::$instance['html'] ??= new HTML\RepoService(
-            $this->data->html(),
-            $this->db,
-            $this->irss()
+    public function collector(
+        int $obj_id,
+        string $type = ""
+    ): ExportCollector {
+        return $this->internal_domain->html()->collector(
+            $obj_id,
+            $type
         );
     }
 }

@@ -18,28 +18,35 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\Export;
+namespace ILIAS\Export\HTML;
 
-use ILIAS\Repository\RepoServiceBase;
-
-class InternalRepoService
+class ExportFile
 {
-    use RepoServiceBase;
-
-    protected static array $instance = [];
-
     public function __construct(
-        protected InternalDataService $data,
-        protected \ilDBInterface $db
+        protected int $object_id,
+        protected string $rid,
+        protected string $timestamp,
+        protected string $type
     ) {
     }
 
-    public function html(): HTML\RepoService
+    public function getObjectId(): int
     {
-        return self::$instance['html'] ??= new HTML\RepoService(
-            $this->data->html(),
-            $this->db,
-            $this->irss()
-        );
+        return $this->object_id;
+    }
+
+    public function getRid(): string
+    {
+        return $this->rid;
+    }
+
+    public function getTimestamp(): string
+    {
+        return $this->timestamp;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
     }
 }

@@ -18,28 +18,8 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\Export;
+namespace ILIAS\components\Export\HTML;
 
-use ILIAS\Repository\RepoServiceBase;
-
-class InternalRepoService
+class ExportException extends \ilException
 {
-    use RepoServiceBase;
-
-    protected static array $instance = [];
-
-    public function __construct(
-        protected InternalDataService $data,
-        protected \ilDBInterface $db
-    ) {
-    }
-
-    public function html(): HTML\RepoService
-    {
-        return self::$instance['html'] ??= new HTML\RepoService(
-            $this->data->html(),
-            $this->db,
-            $this->irss()
-        );
-    }
 }
