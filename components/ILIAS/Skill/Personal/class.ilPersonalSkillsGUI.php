@@ -711,7 +711,7 @@ class ilPersonalSkillsGUI
             }
 
             if (!$has_at_least_one_entry) {
-                $panel_comps[] = $this->ui_fac->legacy("<br/>" . $lng->txt("skmg_no_skill_entries"));
+                $panel_comps[] = $this->ui_fac->legacy()->content("<br/>" . $lng->txt("skmg_no_skill_entries"));
             }
 
             // suggested resources

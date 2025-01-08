@@ -188,7 +188,7 @@ class TestScreenGUI
         ) {
             $elements[] = $this->ui_factory->panel()->standard(
                 $this->lng->txt('tst_introduction'),
-                $this->ui_factory->legacy($introduction),
+                $this->ui_factory->legacy()->content($introduction),
             );
         }
 

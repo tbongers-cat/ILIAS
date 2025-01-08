@@ -80,7 +80,7 @@ function base()
         ->withProperty('Recording', 'recording available', false)
     ;
 
-    $status = $f->legacy(
+    $status = $f->legacy()->content(
         $renderer->render($f->symbol()->icon()->custom('./assets/images/learning_progress/in_progress.svg', 'incomplete'))
         . ' in progress'
     );

@@ -116,9 +116,9 @@ class Factory implements \ILIAS\UI\Factory
     /**
      * @inheritdoc
      */
-    public function legacy(string $content): C\Legacy\Legacy
+    public function legacy(): C\Legacy\Factory
     {
-        return $this->legacy_factory->legacy($content);
+        return $this->legacy_factory;
     }
 
     /**

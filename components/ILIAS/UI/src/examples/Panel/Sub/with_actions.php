@@ -28,7 +28,7 @@ function with_actions()
 
     $block = $f->panel()->standard(
         "Panel Title",
-        $f->panel()->sub("Sub Panel Title", $f->legacy("Some Content"))->withActions($actions)
+        $f->panel()->sub("Sub Panel Title", $f->legacy()->content("Some Content"))->withActions($actions)
     );
 
     return $renderer->render($block);

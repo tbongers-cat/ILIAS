@@ -57,32 +57,33 @@ class LPMainBarProvider extends AbstractStaticMainMenuProvider
 
         return [
             $this->mainmenu->link($this->if->identifier('mm_pd_lp'))
-                ->withTitle($title)
-                ->withAction(
-                    $ctrl->getLinkTargetByClass(
-                        [
-                            ilDashboardGUI::class,
-                            ilAchievementsGUI::class,
-                            ilLPPersonalGUI::class
-                        ]
-                    )
-                )
-                ->withParent(
-                    StandardTopItemsProvider::getInstance()->getAchievementsIdentification()
-                )
-                ->withPosition(30)
-                ->withSymbol($icon)
-                ->withNonAvailableReason(
-                    $this->dic->ui()->factory()->legacy(
-                        "{$this->dic->language()->txt('component_not_active')}"
-                    )
-                )
-                ->withAvailableCallable(
-                    function () {
-                        return ilObjUserTracking::_enabledLearningProgress() &&
-                            ilObjUserTracking::_hasLearningProgressLearner();
-                    }
-                ),
-            ];
+                           ->withTitle($title)
+                           ->withAction(
+                               $ctrl->getLinkTargetByClass(
+                                   ["ilDashboardGUI",
+                                    "ilAchievementsGUI",
+                                    "ilLearningProgressGUI",
+                                    'ilLPListOfProgressGUI'
+                                   ]
+                               )
+                           )
+                           ->withParent(
+                               StandardTopItemsProvider::getInstance(
+                               )->getAchievementsIdentification()
+                           )
+                           ->withPosition(30)
+                           ->withSymbol($icon)
+                           ->withNonAvailableReason(
+                               $this->dic->ui()->factory()->legacy()->content(
+                                   "{$this->dic->language()->txt('component_not_active')}"
+                               )
+                           )
+                           ->withAvailableCallable(
+                               function () {
+                                   return ilObjUserTracking::_enabledLearningProgress() &&
+                                       ilObjUserTracking::_hasLearningProgressLearner();
+                               }
+                           ),
+        ];
     }
 }

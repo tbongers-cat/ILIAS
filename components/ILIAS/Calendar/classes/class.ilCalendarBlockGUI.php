@@ -556,7 +556,7 @@ class ilCalendarBlockGUI extends ilBlockGUI
 
         // workaround to include asynch code from ui only one time, see #20853
         if ($this->ctrl->isAsynch()) {
-            $f = $this->ui->factory()->legacy("");
+            $f = $this->ui->factory()->legacy()->content("");
             $ret .= $this->ui->renderer()->renderAsync($f);
         }
         if (count($this->modals) > 0) {

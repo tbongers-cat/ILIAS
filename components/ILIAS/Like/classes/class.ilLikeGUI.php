@@ -114,7 +114,7 @@ class ilLikeGUI
 
         // modal
         $modal_asyn_url = $ctrl->getLinkTarget($this, "renderModal", "", true, false);
-        $modal = $f->modal()->roundtrip('', $f->legacy(""))
+        $modal = $f->modal()->roundtrip('', $f->legacy()->content(""))
             ->withAsyncRenderUrl($modal_asyn_url);
 
         $modal_show_sig_id = $modal->getShowSignal()->getId();

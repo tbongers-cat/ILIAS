@@ -75,7 +75,7 @@ class NoUIFactory implements Factory
     public function image(): C\Image\Factory
     {
     }
-    public function legacy(string $content): C\Legacy\Legacy
+    public function legacy(): C\Legacy\Factory
     {
     }
     public function panel(): C\Panel\Factory

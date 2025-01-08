@@ -92,7 +92,7 @@ class PrintProcessGUI
         $ui->mainTemplate()->addJavaScript("assets/js/Form.js");
         $modal = $ui->factory()->modal()->roundtrip(
             $this->lng->txt("exp_print_pdf"),
-            $ui->factory()->legacy('some modal')
+            $ui->factory()->legacy()->content('some modal')
         )->withAsyncRenderUrl($selection_action);
         $print_button = $ui->factory()->button()->standard(
             $this->lng->txt("exp_print_pdf"),

@@ -152,7 +152,7 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
             'ADM_CONTENT',
             $this->ui_renderer->render([
                 $results_panel,
-                $this->ui_factory->legacy('')->withAdditionalOnLoadCode(
+                $this->ui_factory->legacy()->content('')->withAdditionalOnLoadCode(
                     fn(string $id): string => 'setTimeout(() => {window.print();}, 50)'
                 )
             ])

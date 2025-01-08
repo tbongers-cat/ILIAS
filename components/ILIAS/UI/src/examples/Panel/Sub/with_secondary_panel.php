@@ -50,7 +50,7 @@ function with_secondary_panel()
 
     $block = $f->panel()->standard(
         "Panel Title",
-        $f->panel()->sub("Sub Panel Title", $f->legacy("Some Content"))
+        $f->panel()->sub("Sub Panel Title", $f->legacy()->content("Some Content"))
           ->withFurtherInformation($panel)
     );
 

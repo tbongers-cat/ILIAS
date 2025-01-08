@@ -22,7 +22,7 @@ function base()
 
     $block = $f->panel()->standard(
         "Panel Title",
-        $f->panel()->sub("Sub Panel Title", $f->legacy("Some Content"))
+        $f->panel()->sub("Sub Panel Title", $f->legacy()->content("Some Content"))
     );
 
     return $renderer->render($block);

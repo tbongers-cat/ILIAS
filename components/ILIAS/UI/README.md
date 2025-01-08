@@ -545,7 +545,7 @@ This code snippet shows how to open a modal by clicking on a button:
 ```php
 global $DIC;
 $factory = $DIC->ui()->factory();
-$modal = $factory->modal()->roundtrip('Title', $factory->legacy('Hello World'));
+$modal = $factory->modal()->roundtrip('Title', $factory->legacy()->content('Hello World'));
 $button = $factory->button()->standard('Open Modal', '#')
   ->withOnClick($modal->getShowSignal());
 ```
@@ -560,7 +560,7 @@ This means that a cloned component may trigger the same signals as the original.
  ```php
 global $DIC;
 $factory = $DIC->ui()->factory();
-$modal = $factory->modal()->roundtrip('Title', $factory->legacy('Hello World'));
+$modal = $factory->modal()->roundtrip('Title', $factory->legacy()->content('Hello World'));
 $button1 = $factory->button()->standard('Open Modal', '#')
   ->withOnClick($modal->getShowSignal());
 $button2 = $button1->withLabel('Open the same Modal');   

@@ -20,7 +20,7 @@ declare(strict_types=1);
 
 use ILIAS\Language\Language;
 use ILIAS\UI\Factory as UIFactory;
-use ILIAS\UI\Component\Legacy\Legacy as LegacyComponent;
+use ILIAS\UI\Component\Legacy\Content as LegacyComponent;
 use ILIAS\UI\Component\Card\Standard as StandardCard;
 use ILIAS\UI\Component\Image\Image as Image;
 use ILIAS\UI\Renderer;

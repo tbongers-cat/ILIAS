@@ -44,10 +44,9 @@ class RepositoryObjectTest extends ILIAS_UI_TestBase
                 protected array $mocks
             ) {
             }
-            public function legacy($content): C\Legacy\Legacy
+            public function legacy(): C\Legacy\Factory
             {
-                $f = new I\Component\Legacy\Factory(new I\Component\SignalGenerator());
-                return $f->legacy($content);
+                return new I\Component\Legacy\Factory(new I\Component\SignalGenerator());
             }
             public function button(): C\Button\Factory
             {

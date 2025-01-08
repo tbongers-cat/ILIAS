@@ -1102,7 +1102,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
 
             $draft_modal = $this->factory->modal()->roundtrip(
                 $this->lng->txt('drafts'),
-                [$this->factory->legacy($threadsTemplate->get())]
+                [$this->factory->legacy()->content($threadsTemplate->get())]
             );
             $this->modal_collection[] = $draft_modal;
             $edit_title = $this->factory->button()->standard($this->lng->txt('drafts'), '#')->withOnClick(
@@ -2302,7 +2302,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
         );
         $modal = $this->uiFactory->modal()->roundtrip(
             $this->lng->txt('activate_only_current'),
-            [$this->uiFactory->legacy($form->getHTML()), $message]
+            [$this->uifactory->legacy()->content($form->getHTML()), $message]
         )->withActionButtons([$submitBtn]);
         $action_button = $this->uiFactory->button()->standard($this->lng->txt('activate_post'), '#')->withOnClick(
             $modal->getShowSignal()
@@ -5769,7 +5769,7 @@ EOD
 
                     $modalTemplate->setVariable('FORM_ACTION', $url);
 
-                    $content = $this->uiFactory->legacy($modalTemplate->get());
+                    $content = $this->uifactory->legacy()->content($modalTemplate->get());
                     $submitBtn = $this->uiFactory->button()->primary(
                         $this->lng->txt('submit'),
                         '#'

@@ -22,7 +22,7 @@ function mainbar(): string
     $ctrl->setParameterByClass('ilsystemstyledocumentationgui', 'new_ui', '1');
     $url = $ctrl->getLinkTargetByClass('ilsystemstyledocumentationgui', 'entries');
     $to_page = $f->link()->standard('Full Screen Page Layout', $url);
-    $txt = $f->legacy('<p>Better head over to a preview of page to see a mainbar in its entire beauty...</p>');
+    $txt = $f->legacy()->content('<p>Better head over to a preview of page to see a mainbar in its entire beauty...</p>');
     return $renderer->render([
         $txt,
         $to_page

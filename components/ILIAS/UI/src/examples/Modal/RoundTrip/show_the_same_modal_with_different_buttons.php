@@ -21,7 +21,7 @@ function show_the_same_modal_with_different_buttons()
     $factory = $DIC->ui()->factory();
     $renderer = $DIC->ui()->renderer();
 
-    $modal = $factory->modal()->roundtrip('My Modal 1', $factory->legacy('My Content'))
+    $modal = $factory->modal()->roundtrip('My Modal 1', $factory->legacy()->content('My Content'))
         ->withActionButtons([
             $factory->button()->primary('Primary Action', ''),
             $factory->button()->standard('Secondary Action', ''),

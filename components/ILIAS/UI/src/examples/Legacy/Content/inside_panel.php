@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ILIAS\UI\examples\Legacy;
+namespace ILIAS\UI\examples\Legacy\Content;
 
 /**
  * ---
@@ -21,7 +21,7 @@ function inside_panel()
     $renderer = $DIC->ui()->renderer();
 
     //Init Component
-    $legacy = $f->legacy("Legacy Content");
+    $legacy = $f->legacy()->content("Legacy Content");
     $panel = $f->panel()->standard("Panel Title", $legacy);
 
     //Render

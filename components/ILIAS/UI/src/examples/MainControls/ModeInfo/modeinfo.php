@@ -26,7 +26,7 @@ function modeinfo(): string
     return $renderer->render([
         $f->divider()->horizontal(),
         $f->link()->bulky($icon, 'See UI in fullscreen-mode', $target),
-        $f->legacy('<p><b>press the link above to init a page with Mode Info</b></p><p><br/></p>'),
+        $f->legacy()->content('<p><b>press the link above to init a page with Mode Info</b></p><p><br/></p>'),
         $f->divider()->horizontal()
     ]);
 }
@@ -52,11 +52,11 @@ function renderModeInfoFullscreenMode(\ILIAS\DI\Container $dic)
     $data_factory = new \ILIAS\Data\Factory();
     $renderer = $dic->ui()->renderer();
 
-    $panel_content = $f->legacy("Mode Info is Active");
+    $panel_content = $f->legacy()->content("Mode Info is Active");
     $slate = $f->mainControls()->slate()->legacy(
         "Mode Info Active",
         $f->symbol()->glyph()->notification(),
-        $f->legacy("Things todo when special Mode is active")
+        $f->legacy()->content("Things todo when special Mode is active")
     );
 
     $page = $f->layout()->page()->standard(

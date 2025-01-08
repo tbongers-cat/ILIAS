@@ -39,7 +39,7 @@ class Factory implements C\Panel\Secondary\Factory
     /**
      * @inheritdoc
      */
-    public function legacy(string $title, C\Legacy\Legacy $legacy): C\Panel\Secondary\Legacy
+    public function legacy(string $title, C\Legacy\Content $legacy): C\Panel\Secondary\Legacy
     {
         return new Legacy($title, $legacy);
     }

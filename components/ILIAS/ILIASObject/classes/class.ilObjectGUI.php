@@ -671,7 +671,7 @@ class ilObjectGUI implements ImplementsCreationCallback
             $form->setTitle('');
             $form->setTitleIcon('');
             $form->setTableWidth('100%');
-            $content = $this->ui_factory->legacy($form->getHTML());
+            $content = $this->ui_factory->legacy()->content($form->getHTML());
         }
 
         return $this->ui_renderer->render(

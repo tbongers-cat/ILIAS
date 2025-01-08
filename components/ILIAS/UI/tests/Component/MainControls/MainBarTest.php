@@ -210,10 +210,9 @@ class MainBarTest extends ILIAS_UI_TestBase
                 $slate_factory = new I\MainControls\Slate\Factory($sig_gen, $counter_factory, $symbol_factory);
                 return new I\MainControls\Factory($sig_gen, $slate_factory);
             }
-            public function legacy(string $content): C\Legacy\Legacy
+            public function legacy(): C\Legacy\Factory
             {
-                $sig_gen = new I\SignalGenerator();
-                return new I\Legacy\Legacy($content, $sig_gen);
+                return new I\Legacy\Factory($sig_gen);
             }
         };
         $factory->button_factory = $this->button_factory;
@@ -234,7 +233,7 @@ class MainBarTest extends ILIAS_UI_TestBase
                     )
             );
 
-        $toolslate = $sf->legacy('Help', $icon, new I\Legacy\Legacy('Help', new I\SignalGenerator()));
+        $toolslate = $sf->legacy('Help', $icon, new I\Legacy\Content('Help', new I\SignalGenerator()));
 
         $mb = $this->factory->mainBar()
             ->withAdditionalEntry('test1', $this->getButton())

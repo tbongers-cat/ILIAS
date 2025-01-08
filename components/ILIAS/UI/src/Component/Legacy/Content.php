@@ -29,7 +29,7 @@ use ILIAS\UI\Component\Layout\Alignment\Block;
  * Interface Legacy
  * @package ILIAS\UI\Component\Legacy
  */
-interface Legacy extends Component, JavaScriptBindable, Block
+interface Content extends Component, JavaScriptBindable, Block
 {
     /**
      * Get content as string stored in this component.
@@ -41,7 +41,7 @@ interface Legacy extends Component, JavaScriptBindable, Block
      *
      * @deprecated Should only be used to connect legacy components. Will be removed in the future. Use at your own risk
      */
-    public function withCustomSignal(string $signal_name, string $js_code): Legacy;
+    public function withCustomSignal(string $signal_name, string $js_code): static;
 
     /**
      * Get signal with custom JavaScript code

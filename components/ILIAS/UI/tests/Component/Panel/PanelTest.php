@@ -168,7 +168,7 @@ class PanelTest extends ILIAS_UI_TestBase
 
         $p = $fp->sub("Title", array(new ComponentDummy()));
 
-        $legacy = new I\Component\Legacy\Legacy("Legacy content", new SignalGenerator());
+        $legacy = new I\Component\Legacy\Content("Legacy content", new SignalGenerator());
         $secondary = new I\Component\Panel\Secondary\Legacy("Legacy panel title", $legacy);
 
         $p = $p->withFurtherInformation($secondary);
@@ -295,7 +295,7 @@ EOT;
         $r = $this->getDefaultRenderer();
 
         $p = $fp->sub("Title", array());
-        $legacy = new I\Component\Legacy\Legacy("Legacy content", new SignalGenerator());
+        $legacy = new I\Component\Legacy\Content("Legacy content", new SignalGenerator());
         $secondary = new I\Component\Panel\Secondary\Legacy("Legacy panel title", $legacy);
         $p = $p->withFurtherInformation($secondary);
         $html = $r->render($p);

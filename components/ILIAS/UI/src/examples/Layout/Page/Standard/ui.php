@@ -209,7 +209,7 @@ function pagedemoContent(\ILIAS\UI\Factory $f, Renderer $r, MainBar $mainbar): a
 
         $f->panel()->standard(
             'Demo Content 2',
-            $f->legacy("some content<br>some content<br>some content<br>x.")
+            $f->legacy()->content("some content<br>some content<br>some content<br>x.")
         ),
         $f->panel()->standard(
             'Demo Content 3',
@@ -217,7 +217,7 @@ function pagedemoContent(\ILIAS\UI\Factory $f, Renderer $r, MainBar $mainbar): a
         ),
         $f->panel()->standard(
             'Demo Content 4',
-            $f->legacy("some content<br>some content<br>some content<br>x.")
+            $f->legacy()->content("some content<br>some content<br>some content<br>x.")
         )
     ];
 }
@@ -256,7 +256,7 @@ function pagedemoMetabar(\ILIAS\UI\Factory $f): \ILIAS\UI\Component\MainControls
     $notes = $f->maincontrols()->slate()->legacy(
         'Notification',
         $f->symbol()->glyph()->notification()->withCounter($f->counter()->novelty(3)),
-        $f->legacy('<p>some content</p>')
+        $f->legacy()->content('<p>some content</p>')
     );
 
     return $f->mainControls()->metaBar()
@@ -399,7 +399,7 @@ function getDemoEntryAchievements(\ILIAS\UI\Factory $f): \ILIAS\UI\Component\Mai
     return $f->maincontrols()->slate()->legacy(
         'Achievements',
         $symbol,
-        $f->legacy('content: Achievements')
+        $f->legacy()->content('content: Achievements')
     );
 }
 
@@ -411,7 +411,7 @@ function getDemoEntryCommunication(\ILIAS\UI\Factory $f): \ILIAS\UI\Component\Ma
     return $f->maincontrols()->slate()->legacy(
         'Communication',
         $symbol,
-        $f->legacy('content: Communication')
+        $f->legacy()->content('content: Communication')
     );
 }
 
@@ -448,7 +448,7 @@ function getDemoEntryAdministration(\ILIAS\UI\Factory $f): \ILIAS\UI\Component\M
     return $f->maincontrols()->slate()->legacy(
         'Administration',
         $symbol,
-        $f->legacy('content: Administration')
+        $f->legacy()->content('content: Administration')
     );
 }
 
@@ -462,7 +462,7 @@ function getDemoEntryTools(\ILIAS\UI\Factory $f): array
     $slate = $f->maincontrols()->slate()->legacy(
         'Help',
         $symbol,
-        $f->legacy('
+        $f->legacy()->content('
             <h2>Help</h2>
             <p>
                 Some Text for help entry
@@ -482,7 +482,7 @@ function getDemoEntryTools(\ILIAS\UI\Factory $f): array
     $slate = $f->maincontrols()->slate()->legacy(
         'Editor',
         $symbol,
-        $f->legacy('
+        $f->legacy()->content('
             <h2>Editor</h2>
             <p>
                 Some Text for editor entry

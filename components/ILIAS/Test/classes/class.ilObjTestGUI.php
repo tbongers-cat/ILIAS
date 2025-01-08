@@ -1370,7 +1370,7 @@ class ilObjTestGUI extends ilObjectGUI implements ilCtrlBaseClassInterface, ilDe
         $panel = $this->ui_factory->panel()->standard(
             $this->lng->txt('import_tst'),
             [
-                $this->ui_factory->legacy($this->lng->txt('qpl_import_verify_found_questions')),
+                $this->ui_factory->legacy()->content($this->lng->txt('qpl_import_verify_found_questions')),
                 $form
             ]
         );

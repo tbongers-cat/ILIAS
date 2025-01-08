@@ -2244,7 +2244,7 @@ class ilPageObjectGUI
                 $h["text"] = str_replace($page_toc_ph, "", $h["text"]);
 
                 $listing->node(
-                    $this->ui->factory()->legacy("<a href='#" . $h["anchor"] . "' class='ilc_page_toc_PageTOCLink'>" . $h["text"] . "</a>"),
+                    $this->ui->factory()->legacy()->content("<a href='#" . $h["anchor"] . "' class='ilc_page_toc_PageTOCLink'>" . $h["text"] . "</a>"),
                     (string) $i,
                     (string) ($par)
                 );

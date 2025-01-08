@@ -19,15 +19,15 @@ function nested()
     $tpl->addCss('assets/ui-examples/css/alignment_examples.css');
 
     $blocks = [
-        $ui_factory->legacy('<div class="example_block fullheight blue">D</div>'),
-        $ui_factory->legacy('<div class="example_block fullheight green">E</div>'),
-        $ui_factory->legacy('<div class="example_block fullheight yellow">F</div>')
+        $ui_factory->legacy()->content('<div class="example_block fullheight blue">D</div>'),
+        $ui_factory->legacy()->content('<div class="example_block fullheight green">E</div>'),
+        $ui_factory->legacy()->content('<div class="example_block fullheight yellow">F</div>')
     ];
 
     $aligned = $ui_factory->layout()->alignment()->horizontal()->evenlyDistributed(
-        $ui_factory->legacy('<div class="example_block bluedark">A</div>'),
-        $ui_factory->legacy('<div class="example_block greendark">B</div>'),
-        $ui_factory->legacy('<div class="example_block yellowdark">C</div>')
+        $ui_factory->legacy()->content('<div class="example_block bluedark">A</div>'),
+        $ui_factory->legacy()->content('<div class="example_block greendark">B</div>'),
+        $ui_factory->legacy()->content('<div class="example_block yellowdark">C</div>')
     );
 
     return $renderer->render(

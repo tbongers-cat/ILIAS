@@ -124,7 +124,7 @@ function with_all_view_controls(): string
 
     $std_list = $f->panel()->secondary()->legacy(
         "List Title",
-        $f->legacy(
+        $f->legacy()->content(
             $renderer->render([
                 $f->item()->group("Subtitle 1", [
                     $item1,

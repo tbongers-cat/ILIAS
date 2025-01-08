@@ -167,7 +167,7 @@ class ItemNotificationTest extends ILIAS_UI_TestBase
     {
         $f = $this->getUIFactory()->item();
 
-        $content = new I\Component\Legacy\Legacy("someContent", $this->sig_gen);
+        $content = new I\Component\Legacy\Content("someContent", $this->sig_gen);
         $c = $f->notification("title", $this->getIcon())->withAdditionalContent($content);
 
         $this->assertEquals($c->getAdditionalContent(), $content);
@@ -207,7 +207,7 @@ class ItemNotificationTest extends ILIAS_UI_TestBase
         });
 
         $props = array("prop1" => "val1", "prop2" => "val2");
-        $content = new I\Component\Legacy\Legacy("someContent", $this->sig_gen);
+        $content = new I\Component\Legacy\Content("someContent", $this->sig_gen);
         $actions = new I\Component\Dropdown\Standard(array(
             new I\Component\Button\Shy("ILIAS", "https://www.ilias.de"),
             new I\Component\Button\Shy("GitHub", "https://www.github.com")

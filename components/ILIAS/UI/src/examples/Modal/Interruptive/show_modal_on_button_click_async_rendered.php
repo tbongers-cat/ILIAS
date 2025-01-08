@@ -64,7 +64,7 @@ function show_modal_on_button_click_async_rendered()
     ) {
         $out[] = $post_wrapper->retrieve('interruptive_items', $refinery->custom()->transformation(
             function ($v) use ($factory, $post_wrapper, $items) {
-                return $factory->panel()->standard('Affected Item', $factory->legacy($items[$v[0]]));
+                return $factory->panel()->standard('Affected Item', $factory->legacy()->content($items[$v[0]]));
             }
         ));
     }

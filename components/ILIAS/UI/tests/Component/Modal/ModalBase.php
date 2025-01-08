@@ -40,10 +40,9 @@ abstract class ModalBase extends ILIAS_UI_TestBase
             {
                 return new I\Component\Counter\Factory();
             }
-            public function legacy(string $content): C\Legacy\Legacy
+            public function legacy(): C\Legacy\Factory
             {
-                $f = new I\Component\Legacy\Factory(new I\Component\SignalGenerator());
-                return $f->legacy($content);
+                return new I\Component\Legacy\Factory(new I\Component\SignalGenerator());
             }
         };
     }

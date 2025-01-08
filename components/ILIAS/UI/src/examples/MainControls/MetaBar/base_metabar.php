@@ -19,7 +19,7 @@ function base_metabar(): string
     $renderer = $DIC->ui()->renderer();
 
     $url = $DIC->http()->request()->getUri()->__toString() . '&new_metabar_ui=1';
-    $txt = $f->legacy('<p>
+    $txt = $f->legacy()->content('<p>
             The Metabar Example opens in Fullscreen to showcase the behaviour of the metabar best.
             Note, an comprensive example for developers on how to access the JS API of the Metabar
             feature bellow in the second example.
@@ -42,7 +42,7 @@ function buildMetabar(\ILIAS\UI\Factory $f): \ILIAS\UI\Component\MainControls\Me
     $notes = $f->mainControls()->slate()->legacy(
         'Notification',
         $f->symbol()->glyph()->notification(),
-        $f->legacy('some content')
+        $f->legacy()->content('some content')
     );
 
     return $f->mainControls()->metaBar()
@@ -101,7 +101,7 @@ function pageMetabarDemoContent(\ILIAS\UI\Factory $f): array
     return [
         $f->panel()->standard(
             'All about the Meta Bar',
-            $f->legacy(
+            $f->legacy()->content(
                 "See above"
             )
         ),

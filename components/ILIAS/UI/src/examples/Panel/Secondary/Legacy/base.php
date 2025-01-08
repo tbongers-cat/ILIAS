@@ -24,7 +24,7 @@ function base()
         $factory->button()->shy("GitHub", "https://www.github.com")
     ));
 
-    $legacy = $factory->legacy("Legacy content");
+    $legacy = $factory->legacy()->content("Legacy content");
 
     $panel = $factory->panel()->secondary()->legacy(
         "Legacy panel title",
