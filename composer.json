@@ -106,9 +106,6 @@
 	},
 	"extra": {
 		"patches": {
-			"phpmailer/phpmailer": {
-				"ILIAS PhpMailer Patches": "./vendor/composer/patches/phpmailer.patch"
-			},
 			"imsglobal/lti": {
 				"ILIAS LTI Patches": "./vendor/composer/patches/lti.patch"
 			}
