@@ -18,14 +18,17 @@
 
 use ILIAS\Filesystem\Filesystem;
 use ILIAS\Filesystem\DTO\Metadata;
-use ILIAS\Cron\Schedule\CronJobScheduleType;
+use ILIAS\DI\Container;
+use ILIAS\Cron\Job\Schedule\JobScheduleType;
+use ILIAS\Cron\Job\JobResult;
+use ILIAS\Cron\CronJob;
 
 /**
  * Class ilFileSystemCleanTempDirCron
  *
  * @author Lukas Zehnder <lz@studer-raimann.ch>
  */
-class ilFileSystemCleanTempDirCron extends ilCronJob
+class ilFileSystemCleanTempDirCron extends CronJob
 {
     protected Filesystem $filesystem;
 
@@ -82,9 +85,9 @@ class ilFileSystemCleanTempDirCron extends ilCronJob
         return true;
     }
 
-    public function getDefaultScheduleType(): CronJobScheduleType
+    public function getDefaultScheduleType(): JobScheduleType
     {
-        return CronJobScheduleType::SCHEDULE_TYPE_DAILY;
+        return JobScheduleType::DAILY;
     }
 
     public function getDefaultScheduleValue(): ?int
@@ -92,7 +95,7 @@ class ilFileSystemCleanTempDirCron extends ilCronJob
         return 1;
     }
 
-    public function run(): ilCronJobResult
+    public function run(): JobResult
     {
         $this->initDependencies();
         // only delete files and folders older than ten days to prevent issues with ongoing processes (e.g. zipping a folder)
@@ -159,9 +162,9 @@ class ilFileSystemCleanTempDirCron extends ilCronJob
         $num_folders = count($deleted_folders);
         $num_files = count($deleted_files);
 
-        $result = new ilCronJobResult();
+        $result = new JobResult();
         $result->setMessage($num_folders . " folders and " . $num_files . " files have been deleted.");
-        $result->setStatus(ilCronJobResult::STATUS_OK);
+        $result->setStatus(JobResult::STATUS_OK);
         return $result;
     }
 }

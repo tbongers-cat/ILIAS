@@ -7445,6 +7445,7 @@ cron#:#cron_action_run_sure#:#Are you sure you want to run the cron job "%s"?
 cron#:#cron_changed_by_crontab#:#SYSTEM
 cron#:#cron_component#:#Component
 cron#:#cron_job_id#:#ID
+cron#:#cron_jobs_with_required_intervention#:#The following jobs may require an intervention.
 cron#:#cron_last_run#:#Last Run
 cron#:#cron_no_executable_job_selected#:#Please select at least one executable cron job.
 cron#:#cron_result#:#Result

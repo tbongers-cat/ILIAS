@@ -7443,6 +7443,7 @@ cron#:#cron_action_run_sure#:#Wollen Sie wirklich den Cron-Job „%s“ ausführ
 cron#:#cron_changed_by_crontab#:#SYSTEM
 cron#:#cron_component#:#Komponente
 cron#:#cron_job_id#:#ID
+cron#:#cron_jobs_with_required_intervention#:#Folgende Cron-Jobs benötigen möglicherweise eine Begutachtung.
 cron#:#cron_last_run#:#Letzter Durchlauf
 cron#:#cron_no_executable_job_selected#:#Bitte wählen Sie mindestens einen ausführbaren Cron-Job.
 cron#:#cron_result#:#Ergebnis
