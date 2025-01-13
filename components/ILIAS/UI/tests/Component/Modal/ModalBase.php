@@ -23,7 +23,7 @@ require_once(__DIR__ . "/../../Base.php");
 
 use ILIAS\UI\Component as C;
 use ILIAS\UI\Implementation as I;
-use ILIAS\UI\Component\Input\Field\Factory as FieldFactory;
+use ILIAS\UI\Implementation\Component\Input\Field\Factory as FieldFactory;
 use ILIAS\UI\Implementation\Component\Input\Field\Group;
 
 /**
@@ -36,11 +36,11 @@ abstract class ModalBase extends ILIAS_UI_TestBase
     public function getUIFactory(): NoUIFactory
     {
         return new class () extends NoUIFactory {
-            public function counter(): C\Counter\Factory
+            public function counter(): I\Component\Counter\Factory
             {
                 return new I\Component\Counter\Factory();
             }
-            public function legacy(): C\Legacy\Factory
+            public function legacy(): I\Component\Legacy\Factory
             {
                 return new I\Component\Legacy\Factory(new I\Component\SignalGenerator());
             }
@@ -57,7 +57,7 @@ abstract class ModalBase extends ILIAS_UI_TestBase
 
         return new I\Component\Modal\Factory(
             new SignalGeneratorMock(),
-            $this->createMock(C\Modal\InterruptiveItem\Factory::class),
+            $this->createMock(I\Component\Modal\InterruptiveItem\Factory::class),
             $factory_mock
         );
     }

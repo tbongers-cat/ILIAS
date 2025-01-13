@@ -33,7 +33,7 @@ class CardTest extends ILIAS_UI_TestBase
     public function getFactory(): NoUIFactory
     {
         return new class () extends NoUIFactory {
-            public function legacy(): C\Legacy\Factory
+            public function legacy(): I\Component\Legacy\Factory
             {
                 return new I\Component\Legacy\Factory(new I\Component\SignalGenerator());
             }

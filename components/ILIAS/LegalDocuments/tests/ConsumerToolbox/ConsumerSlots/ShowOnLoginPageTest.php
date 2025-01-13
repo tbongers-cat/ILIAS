@@ -24,8 +24,8 @@ use ILIAS\LegalDocuments\test\ContainerMock;
 use ILIAS\LegalDocuments\ConsumerToolbox\UI;
 use ILIAS\LegalDocuments\Provide;
 use PHPUnit\Framework\TestCase;
-use ILIAS\UI\Component\Legacy;
-use ILIAS\UI\Implementation\Factory as UIFactory;
+use ILIAS\UI\Implementation\Component\Legacy;
+use ILIAS\UI\Implementation\FactoryInternal as UIFactory;
 use ilTemplate;
 
 require_once __DIR__ . '/../../ContainerMock.php';

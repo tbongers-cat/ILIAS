@@ -27,8 +27,7 @@ use ILIAS\UI\Implementation\Component\SignalGenerator;
 use ILIAS\Refinery\Factory as Refinery;
 use ILIAS\Language\Language;
 use Psr\Http\Message\ServerRequestInterface;
-use ILIAS\UI\Component\Button\Factory as ButtonFactory;
-use ILIAS\UI\Implementation\Component\Button\Factory as ButtonFactoryImplementation;
+use ILIAS\UI\Implementation\Component\Button\Factory as ButtonFactory;
 
 require_once(__DIR__ . "/../../../../Base.php");
 
@@ -74,7 +73,7 @@ class FormWithoutSubmitButtonsTest extends \ILIAS_UI_TestBase
             $this->language
         );
 
-        $this->button_factory = new ButtonFactoryImplementation();
+        $this->button_factory = new ButtonFactory();
 
         parent::setUp();
     }

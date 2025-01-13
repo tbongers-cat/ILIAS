@@ -39,21 +39,21 @@ class DrilldownTest extends ILIAS_UI_TestBase
     public function getUIFactory(): NoUIFactory
     {
         return new class () extends NoUIFactory {
-            public function menu(): C\Menu\Factory
+            public function menu(): I\Menu\Factory
             {
                 return new Menu\Factory(
                     new I\SignalGenerator(),
                 );
             }
-            public function button(): C\Button\Factory
+            public function button(): I\Button\Factory
             {
                 return new I\Button\Factory();
             }
-            public function legacy(): C\Legacy\Factory
+            public function legacy(): I\Legacy\Factory
             {
                 return new I\Legacy\Factory(new I\SignalGenerator());
             }
-            public function symbol(): \ILIAS\UI\Component\Symbol\Factory
+            public function symbol(): I\Symbol\Factory
             {
                 return new I\Symbol\Factory(
                     new I\Symbol\Icon\Factory(),
