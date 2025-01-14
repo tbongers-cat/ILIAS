@@ -57,16 +57,16 @@ class LPMainBarProvider extends AbstractStaticMainMenuProvider
 
         return [
             $this->mainmenu->link($this->if->identifier('mm_pd_lp'))
-                           ->withTitle($title)
-                           ->withAction(
-                               $ctrl->getLinkTargetByClass(
-                                   ["ilDashboardGUI",
-                                    "ilAchievementsGUI",
-                                    "ilLearningProgressGUI",
-                                    'ilLPListOfProgressGUI'
-                                   ]
-                               )
-                           )
+                ->withTitle($title)
+                ->withAction(
+                    $ctrl->getLinkTargetByClass(
+                        [
+                            ilDashboardGUI::class,
+                            ilAchievementsGUI::class,
+                            ilLPPersonalGUI::class
+                        ]
+                    )
+                )
                            ->withParent(
                                StandardTopItemsProvider::getInstance(
                                )->getAchievementsIdentification()
