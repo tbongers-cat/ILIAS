@@ -130,7 +130,11 @@ class StandardFilterTest extends ILIAS_UI_TestBase
 
     protected function buildListingFactory(): I\Listing\Factory
     {
-        return new I\Listing\Factory();
+        return new I\Listing\Factory(
+            new I\Listing\Workflow\Factory(),
+            new I\Listing\CharacteristicValue\Factory(),
+            new I\Listing\Entity\Factory(),
+        );
     }
 
     public function getUIFactory(): WithNoUIFactories

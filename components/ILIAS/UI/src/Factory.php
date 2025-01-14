@@ -741,7 +741,7 @@ interface Factory
      * ---
      * @return  \ILIAS\UI\Component\Legacy\Factory
      */
-    public function legacy(): Legacy\Factory;
+    public function legacy(): C\Legacy\Factory;
 
     /**
      * ---

@@ -38,27 +38,27 @@ class PanelSecondaryLegacyTest extends ILIAS_UI_TestBase
                 return new I\Component\Panel\Secondary\Legacy($title, $content);
             }
 
-            public function legacy(): C\Legacy\Factory
+            public function legacy(): I\Component\Legacy\Factory
             {
                 return new I\Component\Legacy\Factory(new I\Component\SignalGenerator());
             }
 
-            public function dropdown(): C\Dropdown\Factory
+            public function dropdown(): I\Component\Dropdown\Factory
             {
                 return new I\Component\Dropdown\Factory();
             }
 
-            public function viewControl(): C\ViewControl\Factory
+            public function viewControl(): I\Component\ViewControl\Factory
             {
                 return new I\Component\ViewControl\Factory(new SignalGenerator());
             }
 
-            public function button(): C\Button\Factory
+            public function button(): I\Component\Button\Factory
             {
                 return new I\Component\Button\Factory();
             }
 
-            public function symbol(): C\Symbol\Factory
+            public function symbol(): I\Component\Symbol\Factory
             {
                 return new I\Component\Symbol\Factory(
                     new I\Component\Symbol\Icon\Factory(),

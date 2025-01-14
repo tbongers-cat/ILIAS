@@ -32,7 +32,7 @@ class LegacyTest extends ILIAS_UI_TestBase
     public function getUIFactory(): NoUIFactory
     {
         return new class () extends NoUIFactory {
-            public function legacy(): C\Legacy\Factory
+            public function legacy(): IC\Legacy\Factory
             {
                 return new IC\Legacy\Factory(new IC\SignalGenerator());
             }

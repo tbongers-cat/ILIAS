@@ -119,7 +119,7 @@ class EntityTest extends ILIAS_UI_TestBase
     public function getUIFactory(): NoUIFactory
     {
         return new class () extends NoUIFactory {
-            public function dropdown(): I\Dropdown\Factory
+            public function dropdown(): Dropdown\Factory
             {
                 return new Dropdown\Factory();
             }

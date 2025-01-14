@@ -68,13 +68,11 @@ class LauncherInlineTest extends ILIAS_UI_TestBase
             public I\SignalGenerator $sig_gen;
             public I\Input\Field\Factory $input_factory;
 
-            public function button(): C\Button\Factory
+            public function button(): I\Button\Factory
             {
-                return new I\Button\Factory(
-                    $this->sig_gen
-                );
+                return new I\Button\Factory();
             }
-            public function symbol(): C\Symbol\Factory
+            public function symbol(): I\Symbol\Factory
             {
                 return new I\Symbol\Factory(
                     new I\Symbol\Icon\Factory(),
@@ -82,7 +80,7 @@ class LauncherInlineTest extends ILIAS_UI_TestBase
                     new I\Symbol\Avatar\Factory()
                 );
             }
-            public function modal(): C\Modal\Factory
+            public function modal(): I\Modal\Factory
             {
                 return new I\Modal\Factory(
                     $this->sig_gen,

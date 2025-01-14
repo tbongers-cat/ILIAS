@@ -392,12 +392,12 @@ class StandardPageTest extends ILIAS_UI_TestBase
     public function getUIFactory(): NoUIFactory
     {
         return new class () extends NoUIFactory {
-            public function button(): \ILIAS\UI\Component\Button\Factory
+            public function button(): Button\Factory
             {
                 return new Button\Factory();
             }
 
-            public function dropdown(): Factory
+            public function dropdown(): Dropdown\Factory
             {
                 return new Dropdown\Factory();
             }
