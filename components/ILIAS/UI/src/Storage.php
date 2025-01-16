@@ -15,10 +15,15 @@
  * https://github.com/ILIAS-eLearning
  */
 
-namespace ILIAS\UI\Component\Table;
+namespace ILIAS\UI;
 
 /**
- * @author Thibeau Fuhrer <thibeau@sr.solutions>
+ * Storage is simple key/value store without further schema definition.
+ * It's used to (mainly temporarily) keep parameters induced by a user interaction,
+ * e.g. operating view controls.
+ * Storage has no data-separation or id-handling on its own, so, recommandedly,
+ * you will store the whole of your data at once in a suitable format
+ * as a single value depending on a key unique to your view.
  */
 interface Storage extends \ArrayAccess
 {

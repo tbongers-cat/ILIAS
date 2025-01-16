@@ -35,7 +35,7 @@ class UI implements Component\Component
         $define[] = UI\Factory::class;
         $define[] = UI\Renderer::class;
         $define[] = UI\HelpTextRetriever::class;
-        $define[] = UI\Component\Table\Storage::class;
+        $define[] = UI\Storage::class;
         $define[] = UI\Component\Progress\AsyncRefreshInterval::class;
         $define[] = UI\Component\Input\Field\PhpUploadLimit::class;
         $define[] = UI\Component\Input\Field\GlobalUploadLimit::class;
@@ -362,7 +362,7 @@ class UI implements Component\Component
                 $pull[Data\Factory::class],
                 $internal[UI\Implementation\Component\Table\Column\Factory::class],
                 $internal[UI\Implementation\Component\Table\Action\Factory::class],
-                $use[UI\Component\Table\Storage::class],
+                $use[UI\Storage::class],
                 $internal[UI\Implementation\Component\Table\DataRowBuilder::class],
                 $internal[UI\Implementation\Component\Table\OrderingRowBuilder::class],
             );
