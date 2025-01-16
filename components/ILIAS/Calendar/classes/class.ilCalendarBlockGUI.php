@@ -812,7 +812,7 @@ class ilCalendarBlockGUI extends ilBlockGUI
 
                 $modal = $f->modal()->roundtrip(
                     ilDatePresentation::formatPeriod($dates["start"], $dates["end"]),
-                    $f->legacy($content)
+                    $f->legacy()->content($content)
                 );
                 echo $r->renderAsync($modal);
             }

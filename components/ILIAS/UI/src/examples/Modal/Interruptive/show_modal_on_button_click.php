@@ -49,7 +49,7 @@ function show_modal_on_button_click()
     ) {
         $panel = $factory->panel()->standard(
             'Affected Items',
-            $factory->legacy(print_r($post_wrapper->retrieve('interruptive_items', $refinery->kindlyTo()->string()), true))
+            $factory->legacy()->content(print_r($post_wrapper->retrieve('interruptive_items', $refinery->kindlyTo()->string()), true))
         );
         $out[] = $panel;
     }

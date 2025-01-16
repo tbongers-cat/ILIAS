@@ -211,7 +211,7 @@ JS;
         $list_html = $this->user_action_gui->renderDropDown($user->getId());
 
         if ($contact_btn_html || $list_html) {
-            return $this->ui_factory->legacy(
+            return $this->ui_factory->legacy()->content(
                 "<div style='display:grid; grid-template-columns: max-content max-content;'>"
                 . "<div>"
                 . $contact_btn_html

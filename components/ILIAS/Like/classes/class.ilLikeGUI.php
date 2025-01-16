@@ -125,7 +125,7 @@ class ilLikeGUI
 
 
         // emoticon popover
-        $popover = $f->popover()->standard($f->legacy(''))->withTitle('');
+        $popover = $f->popover()->standard($f->legacy()->content(''))->withTitle('');
         $ctrl->setParameter($this, "repl_sig", $popover->getReplaceContentSignal()->getId());
         $asyn_url = $ctrl->getLinkTarget($this, "renderEmoticons", "", true, false);
         $popover = $popover->withAsyncContentUrl($asyn_url);
@@ -338,7 +338,7 @@ class ilLikeGUI
             $f->item()->group("", $list_items)
         ));
 
-        $header = $f->legacy($this->renderEmoCounters(null, true));
+        $header = $f->legacy()->content($this->renderEmoCounters(null, true));
         //$header = $f->legacy("---");
 
         $modal = $f->modal()->roundtrip('', [$header, $std_list]);

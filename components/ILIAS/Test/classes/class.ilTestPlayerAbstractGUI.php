@@ -1113,7 +1113,7 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
         $this->tpl->setVariable(
             $this->getContentBlockName(),
             $this->ui_renderer->render([
-                $this->ui_factory->legacy(
+                $this->ui_factory->legacy()->content(
                     $this->object->prepareTextareaOutput($this->object->getFinalStatement(), true)
                 ),
                 $this->ui_factory->button()->standard(
@@ -2586,7 +2586,7 @@ JS;
     {
         $modal = $this->ui_factory->modal()->roundtrip(
             $this->lng->txt('tst_instant_feedback'),
-            $this->ui_factory->legacy($tpl->get()),
+            $this->ui_factory->legacy()->content($tpl->get()),
             []
         )->withActionButtons([
             $this->ui_factory->button()->standard($this->lng->txt('proceed'), $nav_url)

@@ -260,7 +260,7 @@ class ilChatroomViewGUI extends ilChatroomGUIHandler
     private function panel(string $title, $body): string
     {
         if (is_array($body)) {
-            $body = $this->uiFactory->legacy(join('', array_map($this->uiRenderer->render(...), $body)));
+            $body = $this->uiFactory->legacy()->content(join('', array_map($this->uiRenderer->render(...), $body)));
         }
         $panel = $this->uiFactory->panel()->secondary()->legacy($title, $body);
 

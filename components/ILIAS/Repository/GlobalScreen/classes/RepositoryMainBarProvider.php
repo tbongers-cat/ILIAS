@@ -129,7 +129,7 @@ class RepositoryMainBarProvider extends AbstractStaticMainMenuProvider
                                     ->withSymbol($icon)
                                     ->withContentWrapper(
                                         static fn(): Legacy =>
-                                            $f->legacy((new ilFavouritesListGUI())->render())
+                                            $f->legacy()->content((new ilFavouritesListGUI())->render())
                                     )
                                     ->withParent(StandardTopItemsProvider::getInstance()->getPersonalWorkspaceIdentification())
                                     ->withPosition(10)

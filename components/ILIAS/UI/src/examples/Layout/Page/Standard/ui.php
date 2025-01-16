@@ -198,7 +198,7 @@ function pagedemoContent(\ILIAS\UI\Factory $f, Renderer $r, MainBar $mainbar): a
     return [
         $f->panel()->standard(
             'Using Signals',
-            $f->legacy(
+            $f->legacy()->content(
                 "This button will replace the contents of the second tool-slate.<br />"
                 . "Goto Tools, second entry and click it.<br />"
                 . $r->render($replace_btn)
@@ -213,7 +213,7 @@ function pagedemoContent(\ILIAS\UI\Factory $f, Renderer $r, MainBar $mainbar): a
         ),
         $f->panel()->standard(
             'Demo Content 3',
-            $f->legacy(loremIpsum())
+            $f->legacy()->content(loremIpsum())
         ),
         $f->panel()->standard(
             'Demo Content 4',
@@ -251,7 +251,7 @@ function pagedemoMetabar(\ILIAS\UI\Factory $f): \ILIAS\UI\Component\MainControls
     $search = $f->maincontrols()->slate()->legacy(
         'Search',
         $f->symbol()->glyph()->search()->withCounter($f->counter()->status(1)),
-        $f->legacy(substr(loremIpsum(), 0, 180))
+        $f->legacy()->content(substr(loremIpsum(), 0, 180))
     );
     $notes = $f->maincontrols()->slate()->legacy(
         'Notification',
@@ -370,7 +370,7 @@ function getDemoEntryPersonalWorkspace(\ILIAS\UI\Factory $f, Renderer $r): \ILIA
         ->custom('./assets/ui-examples/images/Page/bookmarks.svg', '')
         ->withSize('small');
 
-    $bookmarks = $f->legacy(implode('<br />', [
+    $bookmarks = $f->legacy()->content(implode('<br />', [
         $r->render($f->button()->shy('my bookmark 1', '#')),
         $r->render($f->button()->shy('my bookmark 2', '#'))
     ]));
