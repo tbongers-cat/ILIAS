@@ -117,6 +117,17 @@ class MediaObjectRepository
         }
     }
 
+    public function addFileFromLocal(int $mob_id, string $tmp_name, string $path): void
+    {
+        if ($rid = $this->getRidForMobId($mob_id)) {
+            $this->irss->addLocalFileToContainer(
+                $rid,
+                $tmp_name,
+                $path
+            );
+        }
+    }
+
     public function getLocalSrc(int $mob_id, string $location): string
     {
         return $this->irss->getContainerUri($this->getRidForMobId($mob_id), $location);
