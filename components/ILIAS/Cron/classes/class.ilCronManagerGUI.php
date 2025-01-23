@@ -374,7 +374,7 @@ class ilCronManagerGUI
         $job_data = $jobs_data[0];
 
         $form = new ilPropertyFormGUI();
-        $form->setFormAction($this->ctrl->getFormAction($this, 'update'));
+        $form->setFormAction($this->ctrl->getFormAction($this, 'updateLegacy'));
         $form->setTitle($this->lng->txt('cron_action_edit') . ': "' . $job->getTitle() . '"');
 
         if ($job->hasFlexibleSchedule()) {
@@ -416,7 +416,7 @@ class ilCronManagerGUI
             $job->addCustomSettingsToForm($form);
         }
 
-        $form->addCommandButton('update', $this->lng->txt('save'));
+        $form->addCommandButton('updateLegacy', $this->lng->txt('save'));
         $form->addCommandButton('render', $this->lng->txt('cancel'));
 
         return $form;
