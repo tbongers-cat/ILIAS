@@ -357,7 +357,7 @@ class ilObjStudyProgrammeAutoCategoriesGUI
             $cat->setValue($current_ref_id);
         }
         $cat->getExplorerGUI()->setRootId(ROOT_FOLDER_ID);
-        $cat->getExplorerGUI()->setAjax(false);
+        $cat->getExplorerGUI()->setAjax(true);
         $form->addItem($cat);
 
         $hi = new ilHiddenInputGUI(self::F_CATEGORY_ORIGINAL_REF);
