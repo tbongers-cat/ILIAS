@@ -74,7 +74,7 @@ function renderModeInfoFullscreenMode(\ILIAS\DI\Container $dic)
                 'Mode Info Example',
                 $panel_content
             ),
-            $f->legacy("</div></div>")
+            $f->legacy()->content("</div></div>")
         ],
         $f->mainControls()->metaBar()->withAdditionalEntry(
             'help',
