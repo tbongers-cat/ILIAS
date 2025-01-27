@@ -69,7 +69,7 @@ function renderModeInfoFullscreenMode(\ILIAS\DI\Container $dic)
 
     $page = $f->layout()->page()->standard(
         [
-            $f->legacy("<div id='mainspacekeeper'><div style='padding: 15px;'>"),
+            $f->legacy()->content("<div id='mainspacekeeper'><div style='padding: 15px;'>"),
             $f->panel()->standard(
                 'Mode Info Example',
                 $panel_content
