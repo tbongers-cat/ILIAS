@@ -31,8 +31,8 @@ class CronJobEntityTest extends TestCase
      * @param ilCronJob|null $job_instance
      */
     private function getEntity(
-        ilCronJob $job_instance = null,
-        int $schedule_type = null,
+        ?ilCronJob $job_instance = null,
+        ?int $schedule_type = null,
         int $schedule_value = 5,
         bool $is_plugin = false
     ): ilCronJobEntity {
