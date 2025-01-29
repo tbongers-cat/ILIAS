@@ -271,7 +271,7 @@ class ilUtil
      */
     public static function is_email(
         string $a_email,
-        ilMailRfc822AddressParserFactory $mailAddressParserFactory = null
+        ?ilMailRfc822AddressParserFactory $mailAddressParserFactory = null
     ): bool {
         if ($mailAddressParserFactory === null) {
             $mailAddressParserFactory = new ilMailRfc822AddressParserFactory();
