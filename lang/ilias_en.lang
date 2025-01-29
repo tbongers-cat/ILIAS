@@ -8581,7 +8581,6 @@ dateplaner#:#wk_short#:#WK
 dateplaner#:#year#:#Year
 dcl#:#add_value#:#Add New Entry
 dcl#:#dcl_activate_notification#:#Enable Notification
-dcl#:#dcl_activate_view#:#Activate this view
 dcl#:#dcl_add#:#Create Data Collection
 dcl#:#dcl_add_new_field#:#Add New Field
 dcl#:#dcl_add_new_record#:#Add New Entry
@@ -8606,8 +8605,6 @@ dcl#:#dcl_changed_by#:#Changed by
 dcl#:#dcl_checked#:#Checked.
 dcl#:#dcl_comments#:#Comments
 dcl#:#dcl_comments_desc#:#Displays the number of comments for a Entry.
-dcl#:#dcl_confirm_delete_detailed_view_text#:#The detailed view definition of entries of this table will be removed irreversibly, the entries and fields themselves will not be changed.
-dcl#:#dcl_confirm_delete_detailed_view_title#:#Do you really want to delete this detailed view?
 dcl#:#dcl_confirm_delete_field#:#Do you really want to delete this field?
 dcl#:#dcl_confirm_delete_fields#:#Do you really want to delete these fields?
 dcl#:#dcl_confirm_delete_record#:#Delete this Entry?
@@ -8630,7 +8627,6 @@ dcl#:#dcl_date_selection#:#Date Selection
 dcl#:#dcl_date_selection_desc#:#Offer selection of date options.
 dcl#:#dcl_datetime#:#Date Entry
 dcl#:#dcl_datetime_desc#:#Field for a date.
-dcl#:#dcl_deactivate_view#:#Deactivate this view
 dcl#:#dcl_default_sort_field#:#Default sort field
 dcl#:#dcl_default_sort_field_desc#:#The table will be sorted by this field by default.
 dcl#:#dcl_default_sort_field_order#:#Default sort field order
@@ -8640,8 +8636,6 @@ dcl#:#dcl_delete_perm#:#User can delete entries
 dcl#:#dcl_delete_records#:#Delete Entries
 dcl#:#dcl_delete_tables#:#Delete Tables
 dcl#:#dcl_delete_tables_no_selection#:#Please select at least one table to delete
-dcl#:#dcl_delete_views#:#Delete Views
-dcl#:#dcl_delete_views_no_selection#:#Please select at least one view to delete
 dcl#:#dcl_deleted_records#:#Successfully deleted %s Entries
 dcl#:#dcl_deprecated_copy#:#(Deprecated)
 dcl#:#dcl_desc#:#Descending Order (DESC)
@@ -8658,8 +8652,6 @@ dcl#:#dcl_edit_perm#:#User can edit entries
 dcl#:#dcl_edit_record#:#Edit Entry
 dcl#:#dcl_edit_table#:#Edit Settings of Table "%s"
 dcl#:#dcl_editable_in_table_gui#:#Please vote in the table view.
-dcl#:#dcl_empty_detailed_view#:#Delete this detailed view
-dcl#:#dcl_empty_detailed_view_success#:#The detailed view definition has been deleted successfully.
 dcl#:#dcl_err_formula_field_not_found#:#Field with title '%s' not found
 dcl#:#dcl_error_parsing_expression#:#Error parsing expression
 dcl#:#dcl_export_enabled#:#Allow export function for all users
@@ -8788,7 +8780,6 @@ dcl#:#dcl_public_comments#:#Activate Public Comments
 dcl#:#dcl_public_comments_desc#:#Users can comment on entries of the table.
 dcl#:#dcl_rating#:#Rating
 dcl#:#dcl_rating_desc#:#Users can rate entries with up to five stars.
-dcl#:#dcl_rbac_roles_without_read_access_on_any_standard_view#:#The following rbac roles have read access on the data collection, but no read access on any standard view of a table:
 dcl#:#dcl_record#:#Entry
 dcl#:#dcl_record_deleted#:#Entry deleted
 dcl#:#dcl_record_from_total#:#%d of %d
