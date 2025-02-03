@@ -34,4 +34,13 @@ export default class JQueryEventDispatcher {
   dispatch(element, eventType, data) {
     this.#jquery(element).trigger(eventType, data);
   }
+
+  /**
+   * @param {HTMLElement} element
+   * @param {string} eventType
+   * @param {function} handler
+   */
+  register(element, eventType, handler) {
+    this.#jquery(element).on(eventType, handler);
+  }
 }

@@ -11,17 +11,16 @@
  * us at:
  * https://www.ilias.de
  * https://github.com/ILIAS-eLearning
- *
- ******************************************************************** */
+ */
 
 import terser from '@rollup/plugin-terser';
-import copyright from '../../../../../../scripts/Copyright-Checker/copyright.js';
-import preserveCopyright from '../../../../../../scripts/Copyright-Checker/preserveCopyright.js';
+import copyright from '../../../../../../../scripts/Copyright-Checker/copyright.js';
+import preserveCopyright from '../../../../../../../scripts/Copyright-Checker/preserveCopyright.js';
 
 export default {
-  input: './src/viewcontrols.js',
+  input: './src/index.js',
   output: {
-    file: './dist/viewcontrols.min.js',
+    file: './dist/input.viewcontrols.min.js',
     format: 'iife',
     banner: copyright,
     plugins: [

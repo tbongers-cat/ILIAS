@@ -17304,6 +17304,7 @@ ui#:#footer_permanent_link#:#Footer Permanent Link
 ui#:#footer_texts#:#Footer Texts
 ui#:#label_fieldselection#:#Field Selection
 ui#:#label_fieldselection_refresh#:#Apply
+ui#:#label_modeviewcontrol#:#view mode
 ui#:#label_pagination_limit#:#Pagination Number of Rows
 ui#:#label_pagination_offset#:#Pagination Offset
 ui#:#label_sortation#:#Sortation
