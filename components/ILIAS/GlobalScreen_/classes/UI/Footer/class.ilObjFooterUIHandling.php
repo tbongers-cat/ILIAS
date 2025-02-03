@@ -195,7 +195,7 @@ final class ilObjFooterUIHandling
         }
     }
 
-    public function getHereAsURI(string $cmd = null): URI
+    public function getHereAsURI(?string $cmd = null): URI
     {
         $uri = new URI((string) $this->http->request()->getUri());
         if ($cmd !== null) {

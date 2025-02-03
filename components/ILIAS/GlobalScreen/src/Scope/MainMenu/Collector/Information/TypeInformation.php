@@ -47,9 +47,9 @@ final class TypeInformation
     public function __construct(
         string $type,
         string $type_name_for_presentation,
-        TypeRenderer $renderer = null,
-        TypeHandler $type_handler = null,
-        string $type_byline = null
+        ?TypeRenderer $renderer = null,
+        ?TypeHandler $type_handler = null,
+        ?string $type_byline = null
     ) {
         $this->instance = new $type(new NullIdentification());
         $this->type = $type;

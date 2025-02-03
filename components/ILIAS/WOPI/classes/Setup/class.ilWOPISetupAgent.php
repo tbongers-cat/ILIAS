@@ -42,12 +42,12 @@ class ilWOPISetupAgent implements Agent
         throw new \BadMethodCallException('Not implemented');
     }
 
-    public function getInstallObjective(Config $config = null): Objective
+    public function getInstallObjective(?Config $config = null): Objective
     {
         return new \ilDatabaseUpdateStepsExecutedObjective(new ilWOPIDB90());
     }
 
-    public function getUpdateObjective(Config $config = null): Objective
+    public function getUpdateObjective(?Config $config = null): Objective
     {
         return new ObjectiveCollection(
             "WOPI Updates",

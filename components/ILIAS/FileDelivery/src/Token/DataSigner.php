@@ -86,7 +86,7 @@ final class DataSigner
         string $filename,
         Disposition $disposition,
         int $user_id,
-        \DateTimeImmutable $until = null
+        ?\DateTimeImmutable $until = null
     ): string {
         $payload = $this->payload_builder->shortFile(
             $stream,
@@ -116,7 +116,7 @@ final class DataSigner
     public function sign(
         array $data,
         string $salt,
-        \DateTimeImmutable $until = null
+        ?\DateTimeImmutable $until = null
     ): string {
         $payload = new StructuredPayload($data);
 

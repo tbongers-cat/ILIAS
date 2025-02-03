@@ -260,7 +260,7 @@ class ilMySQLQueryUtils extends ilQueryUtils
         return $sql;
     }
 
-    public function groupConcat(string $field_name, string $seperator = ",", string $order = null): string
+    public function groupConcat(string $field_name, string $seperator = ",", ?string $order = null): string
     {
         if ($order === null) {
             $sql = "GROUP_CONCAT(" . $field_name . " SEPARATOR " . $this->quote($seperator, "text") . ")";

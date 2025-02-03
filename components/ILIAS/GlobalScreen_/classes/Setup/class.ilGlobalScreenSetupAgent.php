@@ -52,7 +52,7 @@ class ilGlobalScreenSetupAgent implements Setup\Agent
     /**
      * @inheritdocs
      */
-    public function getInstallObjective(Setup\Config $config = null): Setup\Objective
+    public function getInstallObjective(?Setup\Config $config = null): Setup\Objective
     {
         return new Setup\Objective\NullObjective();
     }
@@ -60,7 +60,7 @@ class ilGlobalScreenSetupAgent implements Setup\Agent
     /**
      * @inheritdocs
      */
-    public function getUpdateObjective(Setup\Config $config = null): Setup\Objective
+    public function getUpdateObjective(?Setup\Config $config = null): Setup\Objective
     {
         return new Setup\Objective\NullObjective();
     }

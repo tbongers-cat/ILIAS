@@ -41,7 +41,7 @@ abstract class CachedActiveRecord extends ActiveRecord
     /**
      * @inheritDoc
      */
-    public function __construct(mixed $primary_key = 0, arConnector $arConnector = null)
+    public function __construct(mixed $primary_key = 0, ?arConnector $arConnector = null)
     {
         if (is_null($arConnector)) {
             $arConnector = new arConnectorDB();

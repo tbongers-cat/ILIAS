@@ -37,7 +37,7 @@ class ilStorageContainersExistingObjective extends Objective\DirectoryCreatedObj
         'fsv2'
     ];
 
-    public function __construct(array $storage_handler_ids = null)
+    public function __construct(?array $storage_handler_ids = null)
     {
         parent::__construct(StorageHandlerFactory::BASE_DIRECTORY);
         $this->storage_handler_ids = $storage_handler_ids ?? $this->storage_handler_ids;

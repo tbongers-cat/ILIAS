@@ -89,7 +89,7 @@ class ResourceBuilder
         Repositories $repositories,
         LockHandler $lock_handler,
         StreamAccess $stream_access,
-        FileNamePolicy $file_name_policy = null
+        ?FileNamePolicy $file_name_policy = null
     ) {
         $this->storage_handler_factory = $storage_handler_factory;
         $this->lock_handler = $lock_handler;
@@ -518,7 +518,7 @@ class ResourceBuilder
      * @param ResourceStakeholder|null $stakeholder
      * @return bool whether ResourceStakeholders handled this successful
      */
-    public function remove(StorableResource $resource, ResourceStakeholder $stakeholder = null): bool
+    public function remove(StorableResource $resource, ?ResourceStakeholder $stakeholder = null): bool
     {
         $sucessful = true;
         if ($stakeholder instanceof ResourceStakeholder) {

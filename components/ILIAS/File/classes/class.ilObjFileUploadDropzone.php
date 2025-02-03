@@ -43,7 +43,7 @@ class ilObjFileUploadDropzone
     protected int $target_ref_id;
     protected ?string $content;
 
-    public function __construct(int $target_ref_id, string $content = null)
+    public function __construct(int $target_ref_id, ?string $content = null)
     {
         global $DIC;
 

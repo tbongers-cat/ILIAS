@@ -85,7 +85,7 @@ final class LegacyArchives
      */
     public function unzip(
         string $path_to_zip,
-        string $extract_to_path = null,
+        ?string $extract_to_path = null,
         bool $overwrite = false,
         bool $flat = false,
         bool $ensure_top_directory = false

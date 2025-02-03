@@ -172,7 +172,7 @@ class ilBiblLibraryTableGUI implements DataRetrieval
     }
 
 
-    private function getRecords(Range $range = null, Order $order = null): array
+    private function getRecords(?Range $range = null, ?Order $order = null): array
     {
         $records = [];
         $libraries = $this->facade->libraryFactory()->getAll();

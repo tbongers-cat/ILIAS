@@ -63,7 +63,7 @@ class ilFileCommonSettingsGUI
         }
     }
 
-    protected function editSettings(ilPropertyFormGUI $form = null): void
+    protected function editSettings(?ilPropertyFormGUI $form = null): void
     {
         if (is_null($form)) {
             $form = $this->buildForm();

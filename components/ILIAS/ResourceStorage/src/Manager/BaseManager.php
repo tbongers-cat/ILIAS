@@ -89,7 +89,7 @@ abstract class BaseManager
         FileStream $stream,
         ResourceStakeholder $stakeholder,
         ResourceType $type,
-        string $revision_title = null
+        ?string $revision_title = null
     ): ResourceIdentification {
         $info_resolver = new StreamInfoResolver(
             $stream,
@@ -156,7 +156,7 @@ abstract class BaseManager
         ResourceIdentification $identification,
         UploadResult $result,
         ResourceStakeholder $stakeholder,
-        string $revision_title = null,
+        ?string $revision_title = null,
         bool $draft = false
     ): Revision {
         if ($result->isOK()) {
@@ -202,7 +202,7 @@ abstract class BaseManager
         ResourceIdentification $identification,
         UploadResult $result,
         ResourceStakeholder $stakeholder,
-        string $revision_title = null
+        ?string $revision_title = null
     ): Revision {
         if ($result->isOK()) {
             if (!$this->resource_builder->has($identification)) {
@@ -249,7 +249,7 @@ abstract class BaseManager
         ResourceIdentification $identification,
         FileStream $stream,
         ResourceStakeholder $stakeholder,
-        string $revision_title = null,
+        ?string $revision_title = null,
         bool $draft = false
     ): Revision {
         if (!$this->resource_builder->has($identification)) {
@@ -294,7 +294,7 @@ abstract class BaseManager
         ResourceIdentification $identification,
         FileStream $stream,
         ResourceStakeholder $stakeholder,
-        string $revision_title = null
+        ?string $revision_title = null
     ): Revision {
         if (!$this->resource_builder->has($identification)) {
             throw new \LogicException(

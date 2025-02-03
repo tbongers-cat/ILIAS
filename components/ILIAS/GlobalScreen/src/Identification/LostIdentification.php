@@ -32,7 +32,7 @@ class LostIdentification implements IdentificationInterface
      * NullIdentification constructor.
      * @param IdentificationInterface $wrapped_identification
      */
-    public function __construct(string $serialized_string = null)
+    public function __construct(?string $serialized_string = null)
     {
         $this->serialized_string = $serialized_string;
     }

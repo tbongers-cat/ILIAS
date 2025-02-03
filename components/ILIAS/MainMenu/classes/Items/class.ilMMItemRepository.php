@@ -175,7 +175,7 @@ WHERE sub_items.parent_identification != '' ORDER BY top_items.position, parent_
      * @return ilMMItemFacadeInterface
      * @throws Throwable
      */
-    public function getItemFacade(IdentificationInterface $identification = null): ilMMItemFacadeInterface
+    public function getItemFacade(?IdentificationInterface $identification = null): ilMMItemFacadeInterface
     {
         if ($identification === null || $identification instanceof NullIdentification || $identification instanceof NullPluginIdentification) {
             return new ilMMNullItemFacade($identification ?: new NullIdentification(), $this->main_collector);

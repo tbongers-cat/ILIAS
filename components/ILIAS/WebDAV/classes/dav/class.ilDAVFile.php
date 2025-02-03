@@ -66,7 +66,7 @@ class ilDAVFile implements IFile
     /**
      * @param string|resource $data
      */
-    public function put($data, string $name = null): ?string
+    public function put($data, ?string $name = null): ?string
     {
         if (!$this->repo_helper->checkAccess('write', $this->obj->getRefId())) {
             throw new Forbidden("Permission denied. No write access for this file");

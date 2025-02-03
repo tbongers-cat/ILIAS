@@ -51,7 +51,7 @@ final class ilBibliographicSetupAgent implements Setup\Agent
     /**
      * @inheritdoc
      */
-    public function getInstallObjective(Setup\Config $config = null): Setup\Objective
+    public function getInstallObjective(?Setup\Config $config = null): Setup\Objective
     {
         return new ilFileSystemComponentDataDirectoryCreatedObjective(
             self::COMPONENT_DIR,
@@ -62,7 +62,7 @@ final class ilBibliographicSetupAgent implements Setup\Agent
     /**
      * @inheritdoc
      */
-    public function getUpdateObjective(Setup\Config $config = null): Setup\Objective
+    public function getUpdateObjective(?Setup\Config $config = null): Setup\Objective
     {
         return new Setup\ObjectiveCollection('Setup Bibliografic directories and database', true, ...[
             new ilDatabaseUpdateStepsExecutedObjective(

@@ -52,7 +52,7 @@ class Injector
     public function createInstance(
         string $fullyQualifiedClassName,
         bool $requireFile = false,
-        callable $with = null
+        ?callable $with = null
     ): object {
         // The reflection classes needed.
         $reflectionClass = new \ReflectionClass($fullyQualifiedClassName);

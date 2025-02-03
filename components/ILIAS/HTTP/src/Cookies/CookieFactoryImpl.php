@@ -35,7 +35,7 @@ class CookieFactoryImpl implements CookieFactory
     /**
      * @inheritdoc
      */
-    public function create(string $name, string $value = null): Cookie
+    public function create(string $name, ?string $value = null): Cookie
     {
         return new CookieWrapper(SetCookie::create($name, $value));
     }
@@ -44,7 +44,7 @@ class CookieFactoryImpl implements CookieFactory
     /**
      * @inheritdoc
      */
-    public function createRememberedForLongTime(string $name, string $value = null): Cookie
+    public function createRememberedForLongTime(string $name, ?string $value = null): Cookie
     {
         return new CookieWrapper(SetCookie::createRememberedForever($name, $value));
     }

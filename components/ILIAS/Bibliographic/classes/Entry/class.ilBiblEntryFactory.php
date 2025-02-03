@@ -129,7 +129,7 @@ class ilBiblEntryFactory implements ilBiblEntryFactoryInterface
     /**
      * @return \ilBiblEntryInterface[]
      */
-    public function filterEntriesForTable(int $object_id, ilBiblTableQueryInfo $info = null): array
+    public function filterEntriesForTable(int $object_id, ?ilBiblTableQueryInfo $info = null): array
     {
         $entries = $this->filterEntryIdsForTableAsArray($object_id, $info);
         $entry_objects = [];

@@ -115,7 +115,7 @@ final class ZipReader
     /**
      * @param array|null $structure pass the existing structure to avoid re-reading the ZIP. pass null to read the ZIP
      */
-    public function getItem(string $path_inside_zip, array $structure = null): array
+    public function getItem(string $path_inside_zip, ?array $structure = null): array
     {
         $structure = $structure ?? $this->getStructure();
         $info = $structure[$path_inside_zip] ?? [];

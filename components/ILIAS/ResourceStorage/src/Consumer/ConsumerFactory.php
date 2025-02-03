@@ -46,7 +46,7 @@ class ConsumerFactory
      */
     public function __construct(
         StreamAccess $stream_access,
-        FileNamePolicy $file_name_policy = null
+        ?FileNamePolicy $file_name_policy = null
     ) {
         $this->stream_access = $stream_access;
         global $DIC;

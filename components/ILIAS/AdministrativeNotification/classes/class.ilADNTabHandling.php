@@ -50,7 +50,7 @@ class ilADNTabHandling
         $this->help = $DIC->help();
     }
 
-    public function initTabs(string $tab, string $subtab = null, bool $backtab = false): void
+    public function initTabs(string $tab, ?string $subtab = null, bool $backtab = false): void
     {
         $this->tabs->clearTargets(); // clears Help-ID
 

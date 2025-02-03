@@ -50,7 +50,7 @@ class ResourceListingUI
     public function __construct(
         private ViewDefinition $view_definition,
         private TableDataSource $data_source,
-        ActionGenerator $action_generator = null
+        ?ActionGenerator $action_generator = null
     ) {
         global $DIC;
         $this->action_generator = $action_generator ?? new NullActionGenerator();

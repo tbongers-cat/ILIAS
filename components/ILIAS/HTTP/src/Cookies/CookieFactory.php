@@ -36,7 +36,7 @@ interface CookieFactory
      * @param string      $name  The unique cookie name.
      * @param null|string $value Cookie value.
      */
-    public function create(string $name, string $value = null): Cookie;
+    public function create(string $name, ?string $value = null): Cookie;
 
 
     /**
@@ -45,7 +45,7 @@ interface CookieFactory
      * @param string      $name  The unique cookie name.
      * @param null|string $value Cookie value.
      */
-    public function createRememberedForLongTime(string $name, string $value = null): Cookie;
+    public function createRememberedForLongTime(string $name, ?string $value = null): Cookie;
 
 
     /**

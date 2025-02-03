@@ -125,7 +125,7 @@ class ilBiblFieldFactory implements ilBiblFieldFactoryInterface
     /**
      * @inheritDoc
      */
-    public function filterAllFieldsForType(ilBiblTypeInterface $type, ilBiblTableQueryInfoInterface $queryInfo = null): array
+    public function filterAllFieldsForType(ilBiblTypeInterface $type, ?ilBiblTableQueryInfoInterface $queryInfo = null): array
     {
         return $this->getCollectionForFilter($type, $queryInfo)->get();
     }
@@ -134,7 +134,7 @@ class ilBiblFieldFactory implements ilBiblFieldFactoryInterface
     /**
      * @inheritDoc
      */
-    public function filterAllFieldsForTypeAsArray(ilBiblTypeInterface $type, ilBiblTableQueryInfoInterface $queryInfo = null): array
+    public function filterAllFieldsForTypeAsArray(ilBiblTypeInterface $type, ?ilBiblTableQueryInfoInterface $queryInfo = null): array
     {
         return $this->getCollectionForFilter($type, $queryInfo)->getArray();
     }
@@ -216,7 +216,7 @@ class ilBiblFieldFactory implements ilBiblFieldFactoryInterface
     }
 
 
-    private function getCollectionForFilter(ilBiblTypeInterface $type, ilBiblTableQueryInfoInterface $queryInfo = null): \ActiveRecordList
+    private function getCollectionForFilter(ilBiblTypeInterface $type, ?ilBiblTableQueryInfoInterface $queryInfo = null): \ActiveRecordList
     {
         $collection = ilBiblField::getCollection();
 

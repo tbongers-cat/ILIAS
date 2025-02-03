@@ -51,11 +51,11 @@ class ilDatabaseSetupConfig implements Setup\Config
         string $host,
         string $database,
         string $user,
-        Password $password = null,
+        ?Password $password = null,
         bool $create_database = true,
-        string $collation = null,
-        int $port = null,
-        string $path_to_db_dump = null
+        ?string $collation = null,
+        ?int $port = null,
+        ?string $path_to_db_dump = null
     ) {
         if (!in_array($type, \ilDBConstants::getInstallableTypes())) {
             throw new \InvalidArgumentException(

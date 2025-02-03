@@ -57,7 +57,7 @@ class MainToolCollector extends AbstractBaseCollector implements ItemCollector
      * @param DynamicToolProvider[] $providers
      * @param ItemInformation|null  $information
      */
-    public function __construct(array $providers, ItemInformation $information = null)
+    public function __construct(array $providers, ?ItemInformation $information = null)
     {
         $this->providers = $providers;
         $this->information = $information;

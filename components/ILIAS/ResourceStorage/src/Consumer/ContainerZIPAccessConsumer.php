@@ -48,7 +48,7 @@ class ContainerZIPAccessConsumer implements ContainerConsumer
         $this->stream_access = $stream_access;
     }
 
-    public function getZIP(UnzipOptions $unzip_options = null): Unzip
+    public function getZIP(?UnzipOptions $unzip_options = null): Unzip
     {
         $revision = $this->getRevision();
         $revision = $this->stream_access->populateRevision($revision);

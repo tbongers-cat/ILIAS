@@ -46,7 +46,7 @@ class ilDBAnalyzer
      *
      * @deprecated Use global ilDB only. If something is missing there, please contact fs@studer-raimann.ch
      */
-    public function __construct(ilDBInterface $ilDBInterface = null)
+    public function __construct(?ilDBInterface $ilDBInterface = null)
     {
         if (!$ilDBInterface instanceof ilDBInterface) {
             global $DIC;

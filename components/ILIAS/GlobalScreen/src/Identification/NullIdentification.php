@@ -32,7 +32,7 @@ class NullIdentification implements IdentificationInterface
      * NullIdentification constructor.
      * @param IdentificationInterface $wrapped_identification
      */
-    public function __construct(IdentificationInterface $wrapped_identification = null)
+    public function __construct(?IdentificationInterface $wrapped_identification = null)
     {
         $this->wrapped_identification = $wrapped_identification;
     }

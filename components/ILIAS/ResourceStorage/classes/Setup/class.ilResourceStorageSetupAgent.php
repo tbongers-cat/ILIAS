@@ -43,7 +43,7 @@ class ilResourceStorageSetupAgent implements Agent
         throw new \LogicException("Agent has no config.");
     }
 
-    public function getInstallObjective(Config $config = null): Objective
+    public function getInstallObjective(?Config $config = null): Objective
     {
         return new ObjectiveCollection(
             'IRSS Installation',
@@ -55,7 +55,7 @@ class ilResourceStorageSetupAgent implements Agent
         );
     }
 
-    public function getUpdateObjective(Config $config = null): Objective
+    public function getUpdateObjective(?Config $config = null): Objective
     {
         return new ObjectiveCollection(
             'IRSS Update',

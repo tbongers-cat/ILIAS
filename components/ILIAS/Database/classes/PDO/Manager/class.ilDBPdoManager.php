@@ -84,7 +84,7 @@ class ilDBPdoManager implements ilDBManager, ilDBPdoManagerInterface
     /**
      * @return string[]
      */
-    public function listSequences(string $database = null): array
+    public function listSequences(?string $database = null): array
     {
         $query = "SHOW TABLES LIKE '%_seq'";
         if (!is_null($database)) {

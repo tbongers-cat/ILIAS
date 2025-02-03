@@ -73,7 +73,7 @@ interface ilQueryUtilsInterface
     public function createDatabase(string $name, string $charset = "utf8", string $collation = ""): string;
 
 
-    public function groupConcat(string $a_field_name, string $a_seperator = ",", string $a_order = null): string;
+    public function groupConcat(string $a_field_name, string $a_seperator = ",", ?string $a_order = null): string;
 
 
     /**

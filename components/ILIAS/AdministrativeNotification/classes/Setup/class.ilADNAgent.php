@@ -50,13 +50,13 @@ class ilADNAgent implements Setup\Agent
     }
 
 
-    public function getInstallObjective(Config $config = null): Setup\Objective
+    public function getInstallObjective(?Config $config = null): Setup\Objective
     {
         return new Setup\Objective\NullObjective();
     }
 
 
-    public function getUpdateObjective(Config $config = null): Setup\Objective
+    public function getUpdateObjective(?Config $config = null): Setup\Objective
     {
         return new Setup\ObjectiveCollection(
             "",

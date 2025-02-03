@@ -57,12 +57,12 @@ class Agent implements Setup\Agent
         throw new LogicException("No Config");
     }
 
-    public function getInstallObjective(Config $config = null): Objective
+    public function getInstallObjective(?Config $config = null): Objective
     {
         return new DeliveryMethodObjective();
     }
 
-    public function getUpdateObjective(Config $config = null): Objective
+    public function getUpdateObjective(?Config $config = null): Objective
     {
         return new DeliveryMethodObjective();
     }

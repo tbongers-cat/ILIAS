@@ -45,7 +45,7 @@ class Manager extends BaseManager
     public function upload(
         UploadResult $result,
         ResourceStakeholder $stakeholder,
-        string $revision_title = null
+        ?string $revision_title = null
     ): ResourceIdentification {
         if ($result->isOK()) {
             $info_resolver = new UploadInfoResolver(
@@ -70,7 +70,7 @@ class Manager extends BaseManager
     public function stream(
         FileStream $stream,
         ResourceStakeholder $stakeholder,
-        string $revision_title = null
+        ?string $revision_title = null
     ): ResourceIdentification {
         return $this->newStreamBased(
             $stream,

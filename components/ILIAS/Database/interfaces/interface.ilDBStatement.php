@@ -51,5 +51,5 @@ interface ilDBStatement
     public function fetchAssoc(): ?array;
 
 
-    public function execute(array $a_data = null): ilDBStatement;
+    public function execute(?array $a_data = null): ilDBStatement;
 }

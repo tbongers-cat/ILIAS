@@ -70,8 +70,8 @@ class Services
         FileNamePolicy $file_name_policy,
         StreamAccess $stream_access,
         Factory $machine_factory,
-        SrcBuilder $src_builder = null,
-        RepositoryPreloader $preloader = null
+        ?SrcBuilder $src_builder = null,
+        ?RepositoryPreloader $preloader = null
     ) {
         $this->events = new Subject();
         $src_builder ??= new InlineSrcBuilder();

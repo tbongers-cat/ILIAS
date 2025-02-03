@@ -98,7 +98,7 @@ class ilPDOStatement implements ilDBStatement
     }
 
 
-    public function execute(array $a_data = null): ilDBStatement
+    public function execute(?array $a_data = null): ilDBStatement
     {
         $this->pdo_statement->execute($a_data);
 

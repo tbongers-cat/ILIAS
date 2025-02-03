@@ -39,7 +39,7 @@ interface ilBiblEntryFactoryInterface
      * @param \ilBiblTableQueryInfo|null $info
      * @return \ilBiblEntryInterface[]
      */
-    public function filterEntriesForTable(int $object_id, ilBiblTableQueryInfo $info = null): array;
+    public function filterEntriesForTable(int $object_id, ?ilBiblTableQueryInfo $info = null): array;
 
     public function filterEntryIdsForTableAsArray(int $object_id, ?ilBiblTableQueryInfo $info = null): array;
 

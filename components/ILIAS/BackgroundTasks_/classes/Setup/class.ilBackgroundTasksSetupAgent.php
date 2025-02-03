@@ -55,7 +55,7 @@ class ilBackgroundTasksSetupAgent implements Setup\Agent
     /**
      * @inheritdoc
      */
-    public function getInstallObjective(Setup\Config $config = null): Setup\Objective
+    public function getInstallObjective(?Setup\Config $config = null): Setup\Objective
     {
         /** @noinspection PhpParamsInspection */
         return new ilBackgroundTasksConfigStoredObjective($config);
@@ -64,7 +64,7 @@ class ilBackgroundTasksSetupAgent implements Setup\Agent
     /**
      * @inheritdoc
      */
-    public function getUpdateObjective(Setup\Config $config = null): Setup\Objective
+    public function getUpdateObjective(?Setup\Config $config = null): Setup\Objective
     {
         if ($config !== null) {
             /** @noinspection PhpParamsInspection */

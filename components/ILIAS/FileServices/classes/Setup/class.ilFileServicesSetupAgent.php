@@ -29,7 +29,7 @@ use ILIAS\Setup\Condition\PHPExtensionLoadedCondition;
 
 class ilFileServicesSetupAgent extends Agent\NullAgent implements Agent
 {
-    public function getInstallObjective(Config $config = null): Objective
+    public function getInstallObjective(?Config $config = null): Objective
     {
         return new ObjectiveCollection(
             "Check for several PHP-Extensions needed by FileServices.",
@@ -43,7 +43,7 @@ class ilFileServicesSetupAgent extends Agent\NullAgent implements Agent
         );
     }
 
-    public function getUpdateObjective(Config $config = null): Objective
+    public function getUpdateObjective(?Config $config = null): Objective
     {
         return $this->getInstallObjective($config);
     }

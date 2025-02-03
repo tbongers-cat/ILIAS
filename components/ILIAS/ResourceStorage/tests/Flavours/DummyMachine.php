@@ -38,7 +38,7 @@ class DummyMachine extends AbstractMachine implements FlavourMachine
 
     public function load(
         string $id,
-        string $can_handle_definition_id = null,
+        ?string $can_handle_definition_id = null,
         string $depends_on_engine = NoEngine::class
     ): void {
         $this->id = $id;

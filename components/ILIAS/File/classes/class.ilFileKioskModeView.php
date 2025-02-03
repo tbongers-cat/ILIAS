@@ -87,7 +87,7 @@ class ilFileKioskModeView extends ilKioskModeView
         }
     }
 
-    public function updateGet(State $state, string $command, int $parameter = null): State
+    public function updateGet(State $state, string $command, ?int $parameter = null): State
     {
         if ($command === self::CMD_TOGGLE_LEARNING_PROGRESS) {
             $this->toggleLearningProgress();
@@ -100,7 +100,7 @@ class ilFileKioskModeView extends ilKioskModeView
         return $state;
     }
 
-    public function render(State $state, Factory $factory, URLBuilder $url_builder, array $post = null): Component
+    public function render(State $state, Factory $factory, URLBuilder $url_builder, ?array $post = null): Component
     {
         $file_gui = new ilObjFileGUI($this->file_obj->getRefId());
         return $factory->legacy()->content($file_gui->buildInfoScreen(true)->getHTML());

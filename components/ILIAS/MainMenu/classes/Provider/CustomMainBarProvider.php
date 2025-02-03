@@ -65,7 +65,7 @@ class CustomMainBarProvider extends AbstractStaticMainMenuProvider implements St
     /**
      * @inheritDoc
      */
-    public function __construct(Container $dic, \ilMainMenuAccess $access = null)
+    public function __construct(Container $dic, ?\ilMainMenuAccess $access = null)
     {
         parent::__construct($dic);
         $this->mm_access = $access ?? new ilObjMainMenuAccess();

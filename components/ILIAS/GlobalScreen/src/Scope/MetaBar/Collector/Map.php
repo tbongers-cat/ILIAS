@@ -38,7 +38,7 @@ class Map extends AbstractMap
 {
     private readonly MetaBarItemFactory $factory;
 
-    public function __construct(MetaBarItemFactory $factory = null)
+    public function __construct(?MetaBarItemFactory $factory = null)
     {
         parent::__construct();
         //        $this->factory = $factory;

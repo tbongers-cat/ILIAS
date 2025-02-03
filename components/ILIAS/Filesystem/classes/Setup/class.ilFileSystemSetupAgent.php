@@ -54,7 +54,7 @@ class ilFileSystemSetupAgent implements Setup\Agent
     /**
      * @inheritdoc
      */
-    public function getInstallObjective(Setup\Config $config = null): Setup\Objective
+    public function getInstallObjective(?Setup\Config $config = null): Setup\Objective
     {
         /** @noinspection PhpParamsInspection */
         return new ilFileSystemDirectoriesCreatedObjective($config);
@@ -63,7 +63,7 @@ class ilFileSystemSetupAgent implements Setup\Agent
     /**
      * @inheritdoc
      */
-    public function getUpdateObjective(Setup\Config $config = null): Setup\Objective
+    public function getUpdateObjective(?Setup\Config $config = null): Setup\Objective
     {
         if ($config) {
             /** @noinspection PhpParamsInspection */

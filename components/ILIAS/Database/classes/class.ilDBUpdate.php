@@ -43,7 +43,7 @@ class ilDBUpdate
     private ilSetting $custom_updates_setting;
     private array $custom_updates_content = [];
 
-    public function __construct(ilDBInterface $a_db_handler, ilIniFile $client_ini = null)
+    public function __construct(ilDBInterface $a_db_handler, ?ilIniFile $client_ini = null)
     {
         $this->client_ini = $client_ini;
         $this->db = $a_db_handler;
