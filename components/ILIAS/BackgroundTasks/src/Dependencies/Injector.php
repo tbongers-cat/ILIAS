@@ -31,17 +31,12 @@ use ReflectionParameter;
  */
 class Injector
 {
-    protected \ILIAS\DI\Container $dic;
-    protected \ILIAS\BackgroundTasks\Dependencies\DependencyMap\DependencyMap $dependencyMap;
-
     /**
      * Factory constructor.
      * @param               $dic Container
      */
-    public function __construct(Container $dic, DependencyMap $dependencyMap)
+    public function __construct(protected Container $dic, protected DependencyMap $dependencyMap)
     {
-        $this->dic = $dic;
-        $this->dependencyMap = $dependencyMap;
     }
 
     /**
@@ -114,8 +109,7 @@ class Injector
 
         if ($with) {
             return $this->dependencyMap->getDependencyWith($this->dic, $type, $fullyQualifiedClassName, $with);
-        } else {
-            return $this->dependencyMap->getDependency($this->dic, $type, $fullyQualifiedClassName);
         }
+        return $this->dependencyMap->getDependency($this->dic, $type, $fullyQualifiedClassName);
     }
 }

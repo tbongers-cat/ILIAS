@@ -24,20 +24,16 @@ declare(strict_types=1);
  */
 class ilTableLock implements ilTableLockInterface
 {
-    protected string $table_name = '';
     protected bool $lock_sequence = false;
     protected string $alias = '';
     protected int $lock_level = ilAtomQuery::LOCK_WRITE;
     protected bool $checked = false;
-    protected \ilDBInterface $ilDBInstance;
 
     /**
      * ilTableLock constructor.
      */
-    public function __construct(string $table_name, ilDBInterface $ilDBInterface)
+    public function __construct(protected string $table_name, protected \ilDBInterface $ilDBInstance)
     {
-        $this->table_name = $table_name;
-        $this->ilDBInstance = $ilDBInterface;
     }
 
     /**

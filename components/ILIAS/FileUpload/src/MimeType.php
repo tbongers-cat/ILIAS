@@ -501,7 +501,7 @@ class MimeType
     protected function __construct(string $path_to_file)
     {
         /** @noinspection HttpUrlsUsage */
-        if (strpos($path_to_file, 'http://') !== false || strpos($path_to_file, 'https://') !== false) {
+        if (str_contains($path_to_file, 'http://') || str_contains($path_to_file, 'https://')) {
             $this->setExternal(true);
         }
         $parts = parse_url($path_to_file);
@@ -572,9 +572,8 @@ class MimeType
         if ($this->getSuffix() !== '' && $this->getSuffix() !== '0' && isset($suffix_map[$this->getSuffix()])) {
             if (!is_array($suffix_map[$this->getSuffix()])) {
                 return $suffix_map[$this->getSuffix()];
-            } else {
-                return $suffix_map[$this->getSuffix()][0];
             }
+            return $suffix_map[$this->getSuffix()][0];
         }
         if (extension_loaded('Fileinfo') && is_file($this->getPath())) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE);

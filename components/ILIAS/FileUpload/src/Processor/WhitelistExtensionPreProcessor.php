@@ -21,7 +21,6 @@ namespace ILIAS\FileUpload\Processor;
 use ILIAS\Filesystem\Stream\FileStream;
 use ILIAS\FileUpload\DTO\Metadata;
 use ILIAS\FileUpload\DTO\ProcessingStatus;
-use Psr\Http\Message\StreamInterface;
 
 /**
  * Class WhitelistExtensionPreProcessor
@@ -34,12 +33,6 @@ use Psr\Http\Message\StreamInterface;
  */
 final class WhitelistExtensionPreProcessor implements PreProcessor
 {
-    /**
-     * @var string[]
-     */
-    private array $whitelist;
-
-
     /**
      * WhitelistExtensionPreProcessor constructor.
      *
@@ -58,9 +51,8 @@ final class WhitelistExtensionPreProcessor implements PreProcessor
      *
      * @param \string[] $whitelist The file extensions which should be whitelisted.
      */
-    public function __construct(array $whitelist)
+    public function __construct(private array $whitelist)
     {
-        $this->whitelist = $whitelist;
     }
 
 

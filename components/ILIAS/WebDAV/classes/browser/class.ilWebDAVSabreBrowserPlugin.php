@@ -26,22 +26,21 @@ use Sabre\DAV\Browser\Plugin;
  */
 class ilWebDAVSabreBrowserPlugin extends Plugin
 {
-    protected ilCtrlInterface $ctrl;
     private string $mount_instruction_path;
 
-    public function __construct(ilCtrlInterface $ctrl, UriInterface $uri)
+    public function __construct(protected ilCtrlInterface $ctrl, UriInterface $uri)
     {
         $this->mount_instruction_path = $uri->getScheme() . '://';
         $this->mount_instruction_path .= $uri->getHost();
         $this->mount_instruction_path .= $uri->getPath();
         $this->mount_instruction_path .= "?mount-instructions";
-        $this->ctrl = $ctrl;
         parent::__construct(false);
     }
 
     /**
      * @inheritdoc
      */
+    #[\Override]
     public function generateDirectoryIndex($path)
     {
         $this->ctrl->redirectToURL($this->mount_instruction_path);

@@ -17,12 +17,13 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\Notification\Collector\Renderer;
 
+use ILIAS\UI\Component\Component;
 use ILIAS\GlobalScreen\Client\Notifications as ClientNotifications;
 use ILIAS\GlobalScreen\Scope\MainMenu\Collector\Renderer\Hasher;
 use ILIAS\GlobalScreen\Scope\Notification\Factory\isItem;
-use ILIAS\GlobalScreen\Scope\Notification\Factory\StandardNotification;
 use ILIAS\UI\Component\Item\Notification;
 
 /**
@@ -35,9 +36,9 @@ class StandardNotificationRenderer extends AbstractBaseNotificationRenderer impl
 
     /**
      * @param StandardNotification
-     * @return \ILIAS\UI\Component\Item\Notification|mixed
+     * @return Notification|mixed
      */
-    public function getNotificationComponentForItem(isItem $item): \ILIAS\UI\Component\Component
+    public function getNotificationComponentForItem(isItem $item): Component
     {
         $ui_notification_item = $item->getNotificationItem();
 

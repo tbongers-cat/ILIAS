@@ -16,6 +16,10 @@
  *
  *********************************************************************/
 
+use PHPUnit\Framework\Attributes\BackupGlobals;
+use PHPUnit\Framework\Attributes\BackupStaticProperties;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use ILIAS\BackgroundTasks\Implementation\Values\AggregationValues\ListValue;
 use ILIAS\BackgroundTasks\Implementation\Values\ScalarValues\IntegerValue;
 use ILIAS\BackgroundTasks\Implementation\Values\ScalarValues\StringValue;
@@ -29,16 +33,16 @@ require_once("vendor/composer/vendor/autoload.php");
 /**
  * Class BackgroundTaskTest
  *
- * @runTestsInSeparateProcesses
- * @preserveGlobalState    disabled
- * @backupGlobals          disabled
- * @backupStaticAttributes disabled
  *
  * @author Oskar Truffer <ot@studer-raimann.ch>
  */
+#[BackupGlobals(false)]
+#[BackupStaticProperties(false)]
+#[PreserveGlobalState(false)]
+#[RunTestsInSeparateProcesses]
 class ValueTest extends TestCase
 {
-    public function testIntegerValue()
+    public function testIntegerValue(): void
     {
         $integer = new IntegerValue();
         $integer->setValue(3);
@@ -56,7 +60,7 @@ class ValueTest extends TestCase
         $this->assertTrue($integer->getType()->equals(new SingleType(IntegerValue::class)));
     }
 
-    public function testListValue()
+    public function testListValue(): void
     {
         $list = new ListValue();
         $list->setValue([1, 2, 3]);

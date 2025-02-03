@@ -32,9 +32,6 @@ namespace ILIAS\FileUpload\Collection;
  */
 final class ImmutableMapWrapper implements ImmutableStringMap
 {
-    private \ILIAS\FileUpload\Collection\StringMap $map;
-
-
     /**
      * ImmutableMapWrapper constructor.
      *
@@ -42,9 +39,8 @@ final class ImmutableMapWrapper implements ImmutableStringMap
      *
      * @since 5.3
      */
-    public function __construct(StringMap $map)
+    public function __construct(private StringMap $map)
     {
-        $this->map = $map;
     }
 
 

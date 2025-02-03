@@ -18,6 +18,13 @@
 
 namespace ILIAS\FileUpload\Processor;
 
+use PHPUnit\Framework\Attributes\BackupGlobals;
+use PHPUnit\Framework\Attributes\BackupStaticProperties;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\Small;
+
 require_once('./vendor/composer/vendor/autoload.php');
 
 use ILIAS\Filesystem\Stream\Streams;
@@ -29,19 +36,16 @@ use PHPUnit\Framework\TestCase;
  * Class BlacklistFileHeaderPreProcessorTest
  *
  * @author  Nicolas Schäfli <ns@studer-raimann.ch>
- *
- * @runTestsInSeparateProcesses
- * @preserveGlobalState    disabled
- * @backupGlobals          disabled
- * @backupStaticAttributes disabled
  */
+#[BackupGlobals(false)]
+#[BackupStaticProperties(false)]
+#[PreserveGlobalState(false)]
+#[RunTestsInSeparateProcesses]
 class BlacklistFileHeaderPreProcessorTest extends TestCase
 {
-    /**
-     * @Test
-     * @small
-     */
-    public function testProcessWhichShouldSucceed()
+    #[Test]
+    #[Small]
+    public function testProcessWhichShouldSucceed(): void
     {
         $fileHeaderBlacklist = hex2bin('FFD8FF'); //jpg header start
         $fileHeaderStart = hex2bin('FFD8FB'); //jpg header start
@@ -56,11 +60,9 @@ class BlacklistFileHeaderPreProcessorTest extends TestCase
         $this->assertSame('File header does not match blacklist.', $result->getMessage());
     }
 
-    /**
-     * @Test
-     * @small
-     */
-    public function testProcessWithHeaderMismatchWhichShouldGetRejected()
+    #[Test]
+    #[Small]
+    public function testProcessWithHeaderMismatchWhichShouldGetRejected(): void
     {
         $fileHeaderStart = hex2bin('FFD8FF'); //jpg header start
         $trailer = hex2bin('FFD9'); //jpg trailer

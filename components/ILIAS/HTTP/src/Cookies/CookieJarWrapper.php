@@ -33,15 +33,11 @@ use Psr\Http\Message\ResponseInterface;
  */
 class CookieJarWrapper implements CookieJar
 {
-    private SetCookies $cookies;
-
-
     /**
      * CookieJarWrapper constructor.
      */
-    public function __construct(SetCookies $cookies)
+    public function __construct(private SetCookies $cookies)
     {
-        $this->cookies = $cookies;
     }
 
 
@@ -57,7 +53,7 @@ class CookieJarWrapper implements CookieJar
     /**
      * @inheritDoc
      */
-    public function get(string $name): ?\ILIAS\HTTP\Cookies\Cookie
+    public function get(string $name): ?Cookie
     {
         $cookie = $this->cookies->get($name);
 

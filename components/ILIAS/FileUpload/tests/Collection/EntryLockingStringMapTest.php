@@ -18,6 +18,11 @@
 
 namespace ILIAS\FileUpload\Collection;
 
+use PHPUnit\Framework\Attributes\BackupGlobals;
+use PHPUnit\Framework\Attributes\BackupStaticProperties;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use PHPUnit\Framework\Attributes\Test;
 use ILIAS\FileUpload\Collection\Exception\ElementAlreadyExistsException;
 use ILIAS\FileUpload\Collection\Exception\NoSuchElementException;
 use PHPUnit\Framework\TestCase;
@@ -28,18 +33,17 @@ require_once './vendor/composer/vendor/autoload.php';
  * Class EntryLockingStringMapTest
  *
  * @author  Nicolas Schäfli <ns@studer-raimann.ch>
- *
- * @runTestsInSeparateProcesses
- * @preserveGlobalState    disabled
- * @backupGlobals          disabled
- * @backupStaticAttributes disabled
  */
+#[BackupGlobals(false)]
+#[BackupStaticProperties(false)]
+#[PreserveGlobalState(false)]
+#[RunTestsInSeparateProcesses]
 class EntryLockingStringMapTest extends TestCase
 {
     /**
      * @var EntryLockingStringMap
      */
-    private $subject;
+    private EntryLockingStringMap $subject;
 
     /**
      * @setup
@@ -49,10 +53,8 @@ class EntryLockingStringMapTest extends TestCase
         $this->subject = new EntryLockingStringMap();
     }
 
-    /**
-     * @Test
-     */
-    public function testPutValueWhichShouldSucceed()
+    #[Test]
+    public function testPutValueWhichShouldSucceed(): void
     {
         $key = "hello";
         $value = "world";
@@ -63,10 +65,8 @@ class EntryLockingStringMapTest extends TestCase
         $this->assertEquals($value, $result[$key]);
     }
 
-    /**
-     * @Test
-     */
-    public function testPutValueTwiceWhichShouldFail()
+    #[Test]
+    public function testPutValueTwiceWhichShouldFail(): void
     {
         $key = "hello";
         $value = "world";
@@ -79,10 +79,8 @@ class EntryLockingStringMapTest extends TestCase
         $this->subject->put($key, $value);
     }
 
-    /**
-     * @Test
-     */
-    public function testGetWhichShouldSucceed()
+    #[Test]
+    public function testGetWhichShouldSucceed(): void
     {
         $key = "hello";
         $value = "world";
@@ -93,10 +91,8 @@ class EntryLockingStringMapTest extends TestCase
         $this->assertEquals($value, $result);
     }
 
-    /**
-     * @Test
-     */
-    public function testGetWithoutPutTheValueWhichShouldFail()
+    #[Test]
+    public function testGetWithoutPutTheValueWhichShouldFail(): void
     {
         $key = "hello";
 

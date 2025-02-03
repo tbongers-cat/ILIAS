@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\Layout\Factory;
 
 use ILIAS\UI\Component\Image\Image;
@@ -30,6 +31,7 @@ class LogoModification extends AbstractLayoutModification implements LayoutModif
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function isFinal(): bool
     {
         return false;

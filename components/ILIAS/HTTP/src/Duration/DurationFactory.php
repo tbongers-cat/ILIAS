@@ -27,11 +27,8 @@ use ILIAS\HTTP\Duration\Increment\IncrementFactory;
  */
 class DurationFactory
 {
-    protected IncrementFactory $incrementFactory;
-
-    public function __construct(IncrementFactory $incrementFactory)
+    public function __construct(protected IncrementFactory $incrementFactory)
     {
-        $this->incrementFactory = $incrementFactory;
     }
 
     public function callbackDuration(int $duration_in_ms): CallbackDuration

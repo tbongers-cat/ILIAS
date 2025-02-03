@@ -21,6 +21,7 @@
  * Date: 12.05.17
  * Time: 10:05
  */
+
 namespace BackgroundTasks\Implementation\Tasks;
 
 use ILIAS\BackgroundTasks\Implementation\Tasks\BasicTaskFactory;
@@ -33,7 +34,7 @@ use PHPUnit\Framework\TestCase;
 
 class BasicTaskFactoryTest extends TestCase
 {
-    public function testBasicFactory()
+    public function testBasicFactory(): void
     {
         $dic = new Container();
         $injector = new Injector($dic, new BaseDependencyMap());

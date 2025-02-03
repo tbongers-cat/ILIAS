@@ -99,7 +99,7 @@ class ilWebDAVDIC extends Container
 
         $this['sabre.authplugin'] = function ($c) use ($DIC): AuthPlugin {
             $webdav_auth = new ilWebDAVAuthentication($DIC->user(), $DIC['ilAuthSession'], ilLoggerFactory::getLogger('webdav'));
-            $auth_callback_class = new BasicCallBack(array($webdav_auth, 'authenticate'));
+            $auth_callback_class = new BasicCallBack($webdav_auth->authenticate(...));
             return new AuthPlugin($auth_callback_class);
         };
 

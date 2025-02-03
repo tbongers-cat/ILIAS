@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\MainMenu\Collector\Renderer;
 
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\isItem;
@@ -31,6 +32,7 @@ class LinkItemRenderer extends BaseTypeRenderer
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getComponentWithContent(isItem $item): Component
     {
         return $this->ui_factory->link()->bulky($this->getStandardSymbol($item), $item->getTitle(), $this->getURI($item->getAction()))->withOpenInNewViewport($item->isLinkWithExternalAction());

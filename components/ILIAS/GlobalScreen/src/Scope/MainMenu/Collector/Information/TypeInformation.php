@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\MainMenu\Collector\Information;
 
 use ILIAS\GlobalScreen\Identification\NullIdentification;
@@ -39,21 +40,19 @@ final class TypeInformation
     private TypeRenderer $renderer;
     private isItem $instance;
     private string $type;
-    private string $type_name_for_presentation;
     private string $type_byline_for_presentation;
     private TypeHandler $type_handler;
     private bool $creation_prevented = false;
 
     public function __construct(
         string $type,
-        string $type_name_for_presentation,
+        private string $type_name_for_presentation,
         ?TypeRenderer $renderer = null,
         ?TypeHandler $type_handler = null,
         ?string $type_byline = null
     ) {
         $this->instance = new $type(new NullIdentification());
         $this->type = $type;
-        $this->type_name_for_presentation = $type_name_for_presentation;
         $this->type_handler = $type_handler ?: new BaseTypeHandler();
         $this->renderer = $renderer ?: new BaseTypeRenderer();
         $this->type_byline_for_presentation = $type_byline ?: "";

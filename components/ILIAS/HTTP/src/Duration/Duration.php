@@ -36,11 +36,9 @@ abstract class Duration
     protected const MS_TO_US = 1_000;
 
     protected ?IncrementStrategy $increment = null;
-    protected int $duration_in_ms;
 
-    public function __construct(int $duration_in_ms)
+    public function __construct(protected int $duration_in_ms)
     {
-        $this->duration_in_ms = $duration_in_ms;
     }
 
     public function withIncrement(IncrementStrategy $increment): self

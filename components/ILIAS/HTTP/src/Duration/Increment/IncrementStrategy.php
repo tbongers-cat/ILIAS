@@ -20,8 +20,6 @@ declare(strict_types=1);
 
 namespace ILIAS\HTTP\Duration\Increment;
 
-use ILIAS\HTTP\Duration\Duration;
-
 /**
  * @author Thibeau Fuhrer <thibeau@sr.solutions>
  */

@@ -1,21 +1,5 @@
 <?php
 /**
- * This file is part of ILIAS, a powerful learning management system
- * published by ILIAS open source e-Learning e.V.
- *
- * ILIAS is licensed with the GPL-3.0,
- * see https://www.gnu.org/licenses/gpl-3.0.en.html
- * You should have received a copy of said license along with the
- * source code, too.
- *
- * If this is not the case or you just want to try ILIAS, you'll find
- * us at:
- * https://www.ilias.de
- * https://github.com/ILIAS-eLearning
- *
- *********************************************************************/
-
-/**
  * Shibboleth role assignment rule
  *
  * @author  Stefan Meyer <meyer@leifos.com>
@@ -27,14 +11,28 @@
  */
 class ilShibbolethRoleAssignmentRule
 {
+    /**
+     * @var string
+     */
     private const ERR_MISSING_NAME = 'shib_missing_attr_name';
+    /**
+     * @var string
+     */
     private const ERR_MISSING_VALUE = 'shib_missing_attr_value';
+    /**
+     * @var string
+     */
     private const ERR_MISSING_ROLE = 'shib_missing_role';
+    /**
+     * @var string
+     */
     private const ERR_MISSING_PLUGIN_ID = 'shib_missing_plugin_id';
+    /**
+     * @var string
+     */
     private const TABLE_NAME = 'shib_role_assignment';
 
     private ilDBInterface $db;
-    private int $rule_id;
     private int $role_id = 0;
     private string $attribute_name = '';
     private string $attribute_value = '';
@@ -43,11 +41,10 @@ class ilShibbolethRoleAssignmentRule
     private bool $remove_on_update = false;
     private ?string $plugin_id = null;
 
-    public function __construct(int $a_rule_id = 0)
+    public function __construct(private int $rule_id = 0)
     {
         global $DIC;
         $this->db = $DIC->database();
-        $this->rule_id = $a_rule_id;
         $this->read();
     }
 
@@ -257,7 +254,7 @@ class ilShibbolethRoleAssignmentRule
 
         $pattern = str_replace('*', '.*?', $this->getValue());
 
-        return (bool) preg_match('/^' . $pattern . '$/us', $values);
+        return (bool) preg_match('/^' . $pattern . '$/us', (string) $values);
     }
 
     private function read(): void

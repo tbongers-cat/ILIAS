@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\Layout\Factory;
 
 use ILIAS\UI\Component\MainControls\MainBar as UIMainBar;
@@ -30,6 +31,7 @@ class MainBarModification extends AbstractLayoutModification implements LayoutMo
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function isFinal(): bool
     {
         return false;

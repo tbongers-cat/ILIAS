@@ -21,11 +21,8 @@ declare(strict_types=1);
 
 class ilWebDAVMountInstructionsDocumentsContainsHtmlValidator
 {
-    private string $text;
-
-    public function __construct(string $purified_html_content)
+    public function __construct(private string $text)
     {
-        $this->text = $purified_html_content;
     }
 
     public function isValid(): bool
@@ -46,7 +43,7 @@ class ilWebDAVMountInstructionsDocumentsContainsHtmlValidator
             );
             foreach ($iter as $element) {
                 /** @var $element DOMNode */
-                if (strtolower($element->nodeName) === 'body') {
+                if (strtolower((string) $element->nodeName) === 'body') {
                     continue;
                 }
 
@@ -54,7 +51,7 @@ class ilWebDAVMountInstructionsDocumentsContainsHtmlValidator
                     return true;
                 }
             }
-        } catch (Exception|Throwable $e) {
+        } catch (Exception|Throwable) {
             return false;
         }
 

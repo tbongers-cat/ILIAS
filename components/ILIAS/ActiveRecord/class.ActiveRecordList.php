@@ -163,7 +163,7 @@ class ActiveRecordList
     public function innerjoinAR(
         ActiveRecord $activeRecord,
         $on_this,
-        $on_external,
+        string $on_external,
         array $fields = ['*'],
         string $operator = '=',
         bool $both_external = false
@@ -497,8 +497,8 @@ class ActiveRecordList
                     $arField = $obj->getArFieldList()->getFieldByName($key);
                     if ($arField !== null && ($arField->isDateField() && $this->getDateFormat())) {
                         $res_awake[$key . '_unformatted'] = $value;
-                        $res_awake[$key . '_unix'] = strtotime($value);
-                        $value = date($this->getDateFormat(), strtotime($value));
+                        $res_awake[$key . '_unix'] = strtotime((string) $value);
+                        $value = date($this->getDateFormat(), strtotime((string) $value));
                     }
                     $waked = $this->getAR()->wakeUp($key, $value);
                     $res_awake[$key] = $waked ?? $value;

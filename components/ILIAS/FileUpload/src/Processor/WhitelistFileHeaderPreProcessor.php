@@ -22,7 +22,6 @@ use ILIAS\Filesystem\Stream\FileStream;
 use ILIAS\FileUpload\DTO\Metadata;
 use ILIAS\FileUpload\DTO\ProcessingStatus;
 use ILIAS\FileUpload\ScalarTypeCheckAware;
-use Psr\Http\Message\StreamInterface;
 
 /**
  * Class WhitelistFileHeaderPreProcessor

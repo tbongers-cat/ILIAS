@@ -66,7 +66,7 @@ class ilAuthProviderShibboleth extends ilAuthProvider
                 $shib_user->update();
                 $shib_user = ilShibbolethPluginWrapper::getInstance()->afterUpdateUser($shib_user);
                 ilShibbolethRoleAssignmentRules::updateAssignments($shib_user->getId(), $_SERVER);
-            } elseif (!($account_creation === ilShibbolethSettings::ACCOUNT_CREATION_DISABLED)) {
+            } elseif ($account_creation !== ilShibbolethSettings::ACCOUNT_CREATION_DISABLED) {
                 $shib_user->createFields();
                 $shib_user->setPref('hits_per_page', $this->settings->get('hits_per_page'));
 
@@ -93,7 +93,7 @@ class ilAuthProviderShibboleth extends ilAuthProvider
                 ilShibbolethRoleAssignmentRules::doAssignments($shib_user->getId(), $_SERVER);
             }
 
-            if(!$new_user || $account_creation === ilShibbolethSettings::ACCOUNT_CREATION_ENABLED) {
+            if (!$new_user || $account_creation === ilShibbolethSettings::ACCOUNT_CREATION_ENABLED) {
                 $status->setStatus(ilAuthStatus::STATUS_AUTHENTICATED);
                 $status->setAuthenticatedUserId(ilObjUser::_lookupId($shib_user->getLogin()));
             } elseif ($account_creation === ilShibbolethSettings::ACCOUNT_CREATION_WITH_APPROVAL) {

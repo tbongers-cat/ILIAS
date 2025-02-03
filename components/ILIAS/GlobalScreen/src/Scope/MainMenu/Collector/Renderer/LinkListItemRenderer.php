@@ -17,13 +17,12 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\MainMenu\Collector\Renderer;
 
 use ILIAS\GlobalScreen\Collector\Renderer\isSupportedTrait;
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\isItem;
 use ILIAS\UI\Component\Component;
-use ILIAS\GlobalScreen\Scope\MainMenu\Factory\Item\Link;
-use ILIAS\UI\Component\MainControls\Slate\Slate;
 
 /**
  * Class LinkListItemRenderer
@@ -40,6 +39,7 @@ class LinkListItemRenderer extends BaseTypeRenderer
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getComponentWithContent(isItem $item): Component
     {
         $slate = $this->ui_factory->mainControls()->slate()->combined($item->getTitle(), $this->getStandardSymbol($item));

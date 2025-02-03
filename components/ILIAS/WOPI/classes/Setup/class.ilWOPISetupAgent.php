@@ -22,10 +22,8 @@ use ILIAS\Setup\Metrics\Storage;
 use ILIAS\Setup\Agent;
 use ILIAS\Setup\Objective;
 use ILIAS\Refinery\Transformation;
-use ILIAS\Setup\Metrics;
 use ILIAS\Setup\Config;
 use ILIAS\Setup\ObjectiveCollection;
-use ILIAS\BookingManager\Setup\AccessRBACOperationClonedObjective;
 
 /**
  * @author Fabian Schmid <fabian@sr.solutions>

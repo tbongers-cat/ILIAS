@@ -17,12 +17,12 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Identification\Serializer;
 
 use ILIAS\GlobalScreen\Identification\IdentificationInterface;
 use ILIAS\GlobalScreen\Identification\Map\IdentificationMap;
 use ILIAS\GlobalScreen\Identification\NullPluginIdentification;
-use ILIAS\GlobalScreen\Identification\PluginIdentification;
 use ILIAS\GlobalScreen\Identification\PluginIdentificationProvider;
 use ILIAS\GlobalScreen\Provider\ProviderFactory;
 use LogicException;
@@ -59,7 +59,7 @@ class PluginSerializer implements SerializerInterface
      */
     public function unserialize(string $serialized_string, IdentificationMap $map, ProviderFactory $provider_factory): IdentificationInterface
     {
-        list($plugin_id, $class_name, $internal_identifier) = explode(self::DIVIDER, $serialized_string);
+        [$plugin_id, $class_name, $internal_identifier] = explode(self::DIVIDER, $serialized_string);
 
         if (!$provider_factory->isInstanceCreationPossible($class_name) || !$provider_factory->isRegistered($class_name)) {
             return new NullPluginIdentification($plugin_id, $serialized_string, $internal_identifier);

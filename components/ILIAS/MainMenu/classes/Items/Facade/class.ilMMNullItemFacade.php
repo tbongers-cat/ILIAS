@@ -48,6 +48,7 @@ class ilMMNullItemFacade extends ilMMCustomItemFacade implements ilMMItemFacadeI
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function isTopItem(): bool
     {
         return $this->top_item;
@@ -57,6 +58,7 @@ class ilMMNullItemFacade extends ilMMCustomItemFacade implements ilMMItemFacadeI
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function setIsTopItm(bool $top_item): void
     {
         $this->top_item = $top_item;
@@ -66,6 +68,7 @@ class ilMMNullItemFacade extends ilMMCustomItemFacade implements ilMMItemFacadeI
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function isEmpty(): bool
     {
         return true;
@@ -75,6 +78,7 @@ class ilMMNullItemFacade extends ilMMCustomItemFacade implements ilMMItemFacadeI
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function setActiveStatus(bool $status): void
     {
         $this->active_status = $status;
@@ -84,12 +88,14 @@ class ilMMNullItemFacade extends ilMMCustomItemFacade implements ilMMItemFacadeI
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function setParent(string $parent): void
     {
         $this->parent_identification = $parent;
     }
 
 
+    #[\Override]
     public function create(): void
     {
         $s = new ilMMCustomItemStorage();
@@ -125,6 +131,7 @@ class ilMMNullItemFacade extends ilMMCustomItemFacade implements ilMMItemFacadeI
     }
 
 
+    #[\Override]
     public function isAvailable(): bool
     {
         return false;
@@ -134,6 +141,7 @@ class ilMMNullItemFacade extends ilMMCustomItemFacade implements ilMMItemFacadeI
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function isAlwaysAvailable(): bool
     {
         return false;
@@ -143,6 +151,7 @@ class ilMMNullItemFacade extends ilMMCustomItemFacade implements ilMMItemFacadeI
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getProviderNameForPresentation(): string
     {
         return $this->identification->getProviderNameForPresentation();
@@ -152,6 +161,7 @@ class ilMMNullItemFacade extends ilMMCustomItemFacade implements ilMMItemFacadeI
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function isDeletable(): bool
     {
         return true;
@@ -161,6 +171,7 @@ class ilMMNullItemFacade extends ilMMCustomItemFacade implements ilMMItemFacadeI
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function supportsRoleBasedVisibility(): bool
     {
         return true;

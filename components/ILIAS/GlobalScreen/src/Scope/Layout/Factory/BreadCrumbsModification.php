@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\Layout\Factory;
 
 use ILIAS\UI\Component\Breadcrumbs\Breadcrumbs as UIBreadcrumbs;
@@ -30,6 +31,7 @@ class BreadCrumbsModification extends AbstractLayoutModification implements Layo
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function isFinal(): bool
     {
         return false;

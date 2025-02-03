@@ -24,7 +24,7 @@ abstract class ilWebDAVMountInstructionsDocumentProcessorBase implements ilWebDA
     {
         $processing_text = $a_raw_mount_instructions;
 
-        $found_instructions = array();
+        $found_instructions = [];
 
         do {
             $pair_found = false;
@@ -51,8 +51,8 @@ abstract class ilWebDAVMountInstructionsDocumentProcessorBase implements ilWebDA
             }
         } while ($pair_found || $open_with_no_close_tag_found);
 
-        if (count($found_instructions) === 0) {
-            $found_instructions = [ $a_raw_mount_instructions ];
+        if ($found_instructions === []) {
+            return [ $a_raw_mount_instructions ];
         }
 
         return $found_instructions;

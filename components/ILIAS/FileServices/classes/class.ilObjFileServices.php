@@ -37,11 +37,13 @@ class ilObjFileServices extends ilObject
         parent::__construct($id, $call_by_reference);
     }
 
+    #[\Override]
     public function getPresentationTitle(): string
     {
         return $this->lng->txt("file_services");
     }
 
+    #[\Override]
     public function getLongDescription(): string
     {
         return $this->lng->txt("file_services_description");

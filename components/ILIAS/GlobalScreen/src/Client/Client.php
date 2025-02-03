@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Client;
 
 use ILIAS\GlobalScreen\Scope\Layout\MetaContent\MetaContent;
@@ -27,15 +28,12 @@ use ILIAS\GlobalScreen\Scope\Layout\MetaContent\MetaContent;
  */
 class Client
 {
-    private ClientSettings $settings;
-
     /**
      * Client constructor.
      * @param ClientSettings $settings
      */
-    public function __construct(ClientSettings $settings)
+    public function __construct(private ClientSettings $settings)
     {
-        $this->settings = $settings;
     }
 
     public function init(MetaContent $content): void

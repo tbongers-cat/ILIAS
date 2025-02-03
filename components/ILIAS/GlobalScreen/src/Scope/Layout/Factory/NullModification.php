@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\Layout\Factory;
 
 /**
@@ -44,6 +45,7 @@ class NullModification extends AbstractLayoutModification implements LayoutModif
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getPriority(): int
     {
         return -1;

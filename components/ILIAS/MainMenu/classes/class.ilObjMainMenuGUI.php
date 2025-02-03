@@ -62,6 +62,7 @@ class ilObjMainMenuGUI extends ilObject2GUI
         $this->assignObject();
     }
 
+    #[\Override]
     public function executeCommand(): void
     {
         $next_class = $this->ctrl->getNextClass();

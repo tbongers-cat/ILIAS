@@ -29,16 +29,12 @@ use ILIAS\Refinery\Transformation;
  */
 class ArrayBasedRequestWrapper implements RequestWrapper
 {
-    private array $raw_values;
-
-
     /**
      * GetRequestWrapper constructor.
      * @param mixed[] $raw_values
      */
-    public function __construct(array $raw_values)
+    public function __construct(private array $raw_values)
     {
-        $this->raw_values = $raw_values;
     }
 
 

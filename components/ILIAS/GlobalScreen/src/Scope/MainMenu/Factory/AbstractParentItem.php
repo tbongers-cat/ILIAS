@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\MainMenu\Factory;
 
 /**
@@ -64,7 +65,7 @@ abstract class AbstractParentItem extends AbstractBaseItem implements isParent
      */
     public function hasChildren(): bool
     {
-        return (count($this->children) > 0);
+        return ($this->children !== []);
     }
 
     /**
@@ -72,9 +73,7 @@ abstract class AbstractParentItem extends AbstractBaseItem implements isParent
      */
     public function removeChild(isItem $child_to_remove): isParent
     {
-        $this->children = array_filter($this->children, static function (isItem $item) use ($child_to_remove): bool {
-            return $item !== $child_to_remove;
-        });
+        $this->children = array_filter($this->children, static fn(isItem $item): bool => $item !== $child_to_remove);
 
         return $this;
     }

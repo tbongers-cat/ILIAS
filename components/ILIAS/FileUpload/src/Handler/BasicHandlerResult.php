@@ -27,25 +27,11 @@ use ILIAS\UI\Component\Input\Field\UploadHandler;
  */
 final class BasicHandlerResult implements HandlerResult
 {
-    private string $file_identification_key;
-    private int $status;
-    private string $file_identifier;
-    private string $message;
-
-
     /**
      * BasicHandlerResult constructor.
      */
-    public function __construct(
-        string $file_identification_key,
-        int $status,
-        string $file_identifier,
-        string $message
-    ) {
-        $this->file_identification_key = $file_identification_key;
-        $this->status = $status;
-        $this->file_identifier = $file_identifier;
-        $this->message = $message;
+    public function __construct(private string $file_identification_key, private int $status, private string $file_identifier, private string $message)
+    {
     }
 
 

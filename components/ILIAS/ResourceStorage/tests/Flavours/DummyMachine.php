@@ -20,7 +20,6 @@ namespace ILIAS\ResourceStorage\Flavours;
 
 use ILIAS\Filesystem\Stream\FileStream;
 use ILIAS\ResourceStorage\Flavour\Definition\FlavourDefinition;
-use ILIAS\ResourceStorage\Flavour\Engine\Engine;
 use ILIAS\ResourceStorage\Flavour\Engine\NoEngine;
 use ILIAS\ResourceStorage\Flavour\Machine\DefaultMachines\AbstractMachine;
 use ILIAS\ResourceStorage\Flavour\Machine\FlavourMachine;

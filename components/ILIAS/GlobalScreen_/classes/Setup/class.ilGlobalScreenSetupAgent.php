@@ -18,19 +18,21 @@
 
 declare(strict_types=1);
 
-use ILIAS\Setup;
+use ILIAS\Setup\Agent;
+use ILIAS\Setup\Agent\HasNoNamedObjective;
+use ILIAS\Setup\Config;
+use ILIAS\Setup\Objective;
+use ILIAS\Setup\Objective\NullObjective;
+use ILIAS\Setup\Metrics\Storage;
 use ILIAS\Refinery\Factory as Refinery;
 use ILIAS\Refinery\Transformation;
 
-class ilGlobalScreenSetupAgent implements Setup\Agent
+class ilGlobalScreenSetupAgent implements Agent
 {
-    use Setup\Agent\HasNoNamedObjective;
+    use HasNoNamedObjective;
 
-    protected Refinery $refinery;
-
-    public function __construct(Refinery $refinery)
+    public function __construct(protected Refinery $refinery)
     {
-        $this->refinery = $refinery;
     }
 
     /**
@@ -52,23 +54,23 @@ class ilGlobalScreenSetupAgent implements Setup\Agent
     /**
      * @inheritdocs
      */
-    public function getInstallObjective(?Setup\Config $config = null): Setup\Objective
+    public function getInstallObjective(?Config $config = null): Objective
     {
-        return new Setup\Objective\NullObjective();
+        return new NullObjective();
     }
 
     /**
      * @inheritdocs
      */
-    public function getUpdateObjective(?Setup\Config $config = null): Setup\Objective
+    public function getUpdateObjective(?Config $config = null): Objective
     {
-        return new Setup\Objective\NullObjective();
+        return new NullObjective();
     }
 
     /**
      * @inheritdocs
      */
-    public function getBuildObjective(): Setup\Objective
+    public function getBuildObjective(): Objective
     {
         return new ilGlobalScreenBuildProviderMapObjective();
     }
@@ -76,9 +78,9 @@ class ilGlobalScreenSetupAgent implements Setup\Agent
     /**
      * @inheritdoc
      */
-    public function getStatusObjective(Setup\Metrics\Storage $storage): Setup\Objective
+    public function getStatusObjective(Storage $storage): Objective
     {
-        return new Setup\Objective\NullObjective();
+        return new NullObjective();
     }
 
     /**

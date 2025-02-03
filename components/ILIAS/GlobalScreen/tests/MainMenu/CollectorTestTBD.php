@@ -26,7 +26,6 @@ use ILIAS\GlobalScreen\Scope\MainMenu\Collector\Information\TypeInformationColle
 use ILIAS\GlobalScreen\Scope\MainMenu\Collector\MainMenuMainCollector;
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\hasSymbol;
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\hasTitle;
-use ILIAS\GlobalScreen\Scope\MainMenu\Factory\isChild;
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\isItem;
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\MainMenuItemFactory;
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\StaticMainMenuProvider;
@@ -94,21 +93,17 @@ class CollectorTest extends TestCase
             /**
              * @var IdentificationInterface[]
              */
-            private $p_identifications;
+            private array $p_identifications = [];
             /**
              * @var IdentificationInterface[]
              */
-            protected $c_identifications;
+            protected $c_identifications = [];
 
             public function __construct()
             {
                 $if = new IdentificationFactory(new NullProviderFactory());
-                $iff = function (string $id) use ($if) {
-                    return $if->core($this)->identifier($id);
-                };
+                $iff = (fn(string $id): IdentificationInterface => $if->core($this)->identifier($id));
                 $this->factory = new MainMenuItemFactory();
-                $this->p_identifications = [];
-                $this->c_identifications = [];
                 $this->type_information = new TypeInformationCollection();
                 $this->type_information->add();
 

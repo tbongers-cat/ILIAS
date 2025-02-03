@@ -39,8 +39,6 @@ final class UploadResult
     private string $name;
     private int $size;
     private string $mimeType;
-    private ImmutableStringMap $metaData;
-    private ProcessingStatus $status;
     private string $path;
 
 
@@ -57,7 +55,7 @@ final class UploadResult
      *
      * @since 5.3
      */
-    public function __construct(string $name, int $size, string $mimeType, ImmutableStringMap $metaData, ProcessingStatus $status, string $path)
+    public function __construct(string $name, int $size, string $mimeType, private ImmutableStringMap $metaData, private ProcessingStatus $status, string $path)
     {
         $this->stringTypeCheck($name, "name");
         $this->stringTypeCheck($mimeType, "mimeType");
@@ -67,8 +65,6 @@ final class UploadResult
         $this->name = $name;
         $this->size = $size;
         $this->mimeType = $mimeType;
-        $this->metaData = $metaData;
-        $this->status = $status;
         $this->path = $path;
     }
 

@@ -23,14 +23,11 @@ declare(strict_types=1);
  */
 abstract class ilQueryUtils implements ilQueryUtilsInterface
 {
-    protected \ilDBInterface $db_instance;
-
     /**
      * ilMySQLQueryUtils constructor.
      */
-    public function __construct(ilDBInterface $ilDBInterface)
+    public function __construct(protected \ilDBInterface $db_instance)
     {
-        $this->db_instance = $ilDBInterface;
     }
 
     /**

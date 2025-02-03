@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\Layout\Factory;
 
 use ILIAS\GlobalScreen\Scope\Layout\Provider\PagePart\PagePartProvider;
@@ -47,6 +48,7 @@ class PageBuilderModification extends AbstractLayoutModification implements Layo
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function isFinal(): bool
     {
         return true;

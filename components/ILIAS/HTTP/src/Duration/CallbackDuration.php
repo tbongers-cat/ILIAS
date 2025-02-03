@@ -20,8 +20,6 @@ declare(strict_types=1);
 
 namespace ILIAS\HTTP\Duration;
 
-use Closure;
-
 /**
  * @author Thibeau Fuhrer <thibeau@sr.solutions>
  */
@@ -35,7 +33,7 @@ class CallbackDuration extends Duration
         $start_time = microtime(true);
         $halted = true;
 
-        register_shutdown_function(static function () use (&$halted) {
+        register_shutdown_function(static function () use (&$halted): void {
             if ($halted) {
                 throw new \LogicException("Callback could not be stretched because it halted the programm.");
             }

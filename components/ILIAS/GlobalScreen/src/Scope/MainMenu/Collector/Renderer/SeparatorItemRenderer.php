@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\MainMenu\Collector\Renderer;
 
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\isItem;
@@ -31,11 +32,12 @@ class SeparatorItemRenderer extends BaseTypeRenderer
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getComponentWithContent(isItem $item): Component
     {
         $horizontal = $this->ui_factory->divider()->horizontal();
         if ($item->getTitle()) {
-            $horizontal = $horizontal->withLabel($item->getTitle());
+            return $horizontal->withLabel($item->getTitle());
         }
         return $horizontal;
     }

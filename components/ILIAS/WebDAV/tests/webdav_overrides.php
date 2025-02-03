@@ -27,6 +27,7 @@ class ilDAVContainerWithOverridenGetChildCollection extends ilDAVContainer
         $this->child_collection = $child_collection;
     }
 
+    #[\Override]
     protected function getChildCollection(): ilContainer
     {
         return $this->child_collection;

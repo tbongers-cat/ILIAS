@@ -20,12 +20,6 @@ declare(strict_types=1);
 
 namespace ILIAS\GlobalScreen\Helper;
 
-use Closure;
-use ReflectionFunction;
-use Throwable;
-use InvalidArgumentException;
-use ILIAS\DI\Container;
-
 /**
  * Class BasicAccessCheckClosuresSingleton
  *

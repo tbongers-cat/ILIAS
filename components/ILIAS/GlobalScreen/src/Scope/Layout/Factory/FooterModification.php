@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\Layout\Factory;
 
 use ILIAS\UI\Component\MainControls\Footer;
@@ -30,6 +31,7 @@ class FooterModification extends AbstractLayoutModification implements LayoutMod
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function isFinal(): bool
     {
         return true;

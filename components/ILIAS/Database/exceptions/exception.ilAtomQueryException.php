@@ -37,6 +37,7 @@ class ilAtomQueryException extends ilDatabaseException
     public const DB_ATOM_IDENTICAL_TABLES = 10909;
 
 
+    #[\Override]
     protected function tranlateException(int $code): string
     {
         $message = 'An undefined Exception occured';

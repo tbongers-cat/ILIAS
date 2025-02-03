@@ -18,6 +18,13 @@
 
 namespace ILIAS\FileUpload;
 
+use PHPUnit\Framework\Attributes\BackupGlobals;
+use PHPUnit\Framework\Attributes\BackupStaticProperties;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\Small;
+
 require_once('./vendor/composer/vendor/autoload.php');
 
 use ILIAS\Filesystem\Filesystems;
@@ -37,12 +44,11 @@ use Psr\Http\Message\UploadedFileInterface;
  * Class FileUploadImplTest
  *
  * @author  Nicolas Schäfli <ns@studer-raimann.ch>
- *
- * @runTestsInSeparateProcesses
- * @preserveGlobalState    disabled
- * @backupGlobals          disabled
- * @backupStaticAttributes disabled
  */
+#[BackupGlobals(false)]
+#[BackupStaticProperties(false)]
+#[PreserveGlobalState(false)]
+#[RunTestsInSeparateProcesses]
 class FileUploadImplTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
@@ -50,7 +56,7 @@ class FileUploadImplTest extends TestCase
     /**
      * @var FileUpload $subject
      */
-    private $subject;
+    private FileUploadImpl $subject;
     /**
      * @var MockInterface | PreProcessorManager $prePorcessorManagerMock
      */
@@ -65,11 +71,9 @@ class FileUploadImplTest extends TestCase
     private $globalHttpStateMock;
 
 
-    /**
-     * @Test
-     * @small
-     */
-    public function testRegisterWhichShouldSucceed()
+    #[Test]
+    #[Small]
+    public function testRegisterWhichShouldSucceed(): void
     {
         $processorMock = \Mockery::mock(PreProcessor::class);
         $this->prePorcessorManagerMock->shouldReceive('with')
@@ -79,11 +83,9 @@ class FileUploadImplTest extends TestCase
         $this->subject->register($processorMock);
     }
 
-    /**
-     * @Test
-     * @small
-     */
-    public function testRegisterWithProcessedFilesWhichShouldFail()
+    #[Test]
+    #[Small]
+    public function testRegisterWithProcessedFilesWhichShouldFail(): void
     {
         $processorMock = \Mockery::mock(PreProcessor::class);
 
@@ -98,11 +100,9 @@ class FileUploadImplTest extends TestCase
         $this->subject->register($processorMock);
     }
 
-    /**
-     * @Test
-     * @small
-     */
-    public function testProcessWhichShouldSucceed()
+    #[Test]
+    #[Small]
+    public function testProcessWhichShouldSucceed(): void
     {
         $processingResult = new ProcessingStatus(ProcessingStatus::OK, 'All green!');
         $uploadedFile = Mockery::mock(UploadedFileInterface::class);
@@ -143,11 +143,9 @@ class FileUploadImplTest extends TestCase
         $this->subject->process();
     }
 
-    /**
-     * @Test
-     * @small
-     */
-    public function testProcessWithFailedUploadWhichShouldGetRejected()
+    #[Test]
+    #[Small]
+    public function testProcessWithFailedUploadWhichShouldGetRejected(): void
     {
         $uploadedFile = Mockery::mock(UploadedFileInterface::class);
         $uploadedFile
@@ -186,11 +184,9 @@ class FileUploadImplTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @small
-     */
-    public function testHasUploadsWithoutUploadedFiles()
+    #[Test]
+    #[Small]
+    public function testHasUploadsWithoutUploadedFiles(): void
     {
         // No File-Upload Element
         $this->globalHttpStateMock->shouldReceive('request->getUploadedFiles')
@@ -199,11 +195,9 @@ class FileUploadImplTest extends TestCase
         $this->assertFalse($this->subject->hasUploads());
     }
 
-    /**
-     * @test
-     * @small
-     */
-    public function testHasUploadsWithSingleUploadedFile()
+    #[Test]
+    #[Small]
+    public function testHasUploadsWithSingleUploadedFile(): void
     {
         $uploadedFile = Mockery::mock(UploadedFileInterface::class);
 
@@ -214,11 +208,9 @@ class FileUploadImplTest extends TestCase
         $this->assertTrue($this->subject->hasUploads());
     }
 
-    /**
-     * @test
-     * @small
-     */
-    public function testHasUploadsWithMultipleUploadedFile()
+    #[Test]
+    #[Small]
+    public function testHasUploadsWithMultipleUploadedFile(): void
     {
         $files = [];
         for ($i = 0; $i < 10; $i++) {

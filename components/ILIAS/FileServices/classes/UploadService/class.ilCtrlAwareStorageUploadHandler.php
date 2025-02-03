@@ -18,13 +18,9 @@
 
 declare(strict_types=1);
 
-
-use ILIAS\Filesystem\Stream\Streams;
-use ILIAS\FileUpload\FileUpload;
-use ILIAS\HTTP\Services as HttpServices;
+use ILIAS\ResourceStorage\Services;
 use ILIAS\FileUpload\Handler\FileInfoResult;
 use ILIAS\FileUpload\Handler\HandlerResult;
-use ILIAS\FileUpload\Handler\ilCtrlAwareUploadHandler;
 use ILIAS\ResourceStorage\Stakeholder\ResourceStakeholder;
 use ILIAS\FileUpload\DTO\UploadResult;
 use ILIAS\FileUpload\Handler\BasicHandlerResult;
@@ -38,15 +34,13 @@ use ILIAS\FileUpload\Handler\AbstractCtrlAwareUploadHandler;
  */
 class ilCtrlAwareStorageUploadHandler extends AbstractCtrlAwareUploadHandler
 {
-    protected ResourceStakeholder $stakeholder;
-    protected \ILIAS\ResourceStorage\Services $storage;
+    protected Services $storage;
 
-    public function __construct(ResourceStakeholder $stakeholder)
+    public function __construct(protected ResourceStakeholder $stakeholder)
     {
         global $DIC;
         parent::__construct();
         $this->storage = $DIC->resourceStorage();
-        $this->stakeholder = $stakeholder;
     }
 
     protected function getUploadResult(): HandlerResult

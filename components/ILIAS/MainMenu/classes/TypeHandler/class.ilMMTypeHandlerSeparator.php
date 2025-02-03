@@ -45,7 +45,7 @@ class ilMMTypeHandlerSeparator implements TypeHandler
     public function enrichItem(isItem $item): isItem
     {
         if ($item instanceof Separator && $item->getTitle() !== "") {
-            $item = $item->withVisibleTitle(true);
+            return $item->withVisibleTitle(true);
         }
 
         return $item;
@@ -57,7 +57,7 @@ class ilMMTypeHandlerSeparator implements TypeHandler
      */
     public function getAdditionalFieldsForSubForm(IdentificationInterface $identification): array
     {
-        return array();
+        return [];
     }
 
 

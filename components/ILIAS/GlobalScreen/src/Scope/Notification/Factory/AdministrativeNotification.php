@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\Notification\Factory;
 
 use ILIAS\GlobalScreen\Identification\IdentificationInterface;
@@ -44,7 +45,7 @@ class AdministrativeNotification extends AbstractBaseNotification implements isI
 
     protected string $summary;
 
-    protected ?Closure  $available_callable = null;
+    protected ?Closure $available_callable = null;
     protected ?Closure $visiblility_callable = null;
     protected bool $is_always_available = false;
     protected string $denotation = self::DENOTATION_NEUTRAL;
@@ -52,6 +53,7 @@ class AdministrativeNotification extends AbstractBaseNotification implements isI
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getRenderer(UIFactory $factory): NotificationRenderer
     {
         return new AdministrativeNotificationRenderer($factory);

@@ -17,13 +17,13 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\MainMenu\Collector\Information;
 
 use ILIAS\GlobalScreen\Identification\IdentificationInterface;
 use ILIAS\GlobalScreen\Identification\NullIdentification;
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\hasSymbol;
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\hasTitle;
-use ILIAS\GlobalScreen\Scope\MainMenu\Factory\isChild;
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\isItem;
 
 /**

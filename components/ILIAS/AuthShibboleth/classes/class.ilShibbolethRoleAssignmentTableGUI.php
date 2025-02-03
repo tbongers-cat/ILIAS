@@ -50,6 +50,7 @@ class ilShibbolethRoleAssignmentTableGUI extends ilTable2GUI
     /**
      * @throws ilCtrlException
      */
+    #[\Override]
     protected function fillRow(array $a_set): void
     {
         $this->tpl->setVariable('VAL_ID', $a_set['id']);

@@ -34,7 +34,7 @@ class ilShibbolethRoleAssignmentRules
     {
         global $DIC;
         $db = $DIC->database();
-        $rules = array();
+        $rules = [];
         /**
          * @var $db ilDBInterface
          */

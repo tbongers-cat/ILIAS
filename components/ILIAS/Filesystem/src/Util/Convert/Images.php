@@ -21,7 +21,6 @@ declare(strict_types=1);
 namespace ILIAS\Filesystem\Util\Convert;
 
 use ILIAS\Filesystem\Stream\FileStream;
-use ILIAS\Filesystem\Stream\Streams;
 
 /**
  * @author Fabian Schmid <fabian@sr.solutions>

@@ -33,6 +33,9 @@ use ILIAS\Refinery\Factory as Refinery;
  */
 class ilFileKioskModeView extends ilKioskModeView
 {
+    /**
+     * @var string
+     */
     private const CMD_TOGGLE_LEARNING_PROGRESS = 'toggleManualLearningProgress';
 
     protected ilObjFile $file_obj;

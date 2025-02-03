@@ -18,6 +18,14 @@
 
 namespace ILIAS\FileUpload\Processor;
 
+use PHPUnit\Framework\Attributes\BackupGlobals;
+use PHPUnit\Framework\Attributes\BackupStaticProperties;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\Small;
+
 require_once('./vendor/composer/vendor/autoload.php');
 
 use ILIAS\Filesystem\Stream\FileStream;
@@ -30,20 +38,19 @@ use PHPUnit\Framework\TestCase;
  * Class PreProcessorManagerImplTest
  *
  * @author  Nicolas Schäfli <ns@studer-raimann.ch>
- *
- * @runTestsInSeparateProcesses
- * @preserveGlobalState    disabled
- * @backupGlobals          disabled
- * @backupStaticAttributes disabled
  */
+#[BackupGlobals(false)]
+#[BackupStaticProperties(false)]
+#[PreserveGlobalState(false)]
+#[RunTestsInSeparateProcesses]
 class PreProcessorManagerImplTest extends TestCase
 {
-    use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    use MockeryPHPUnitIntegration;
 
     /**
      * @var PreProcessorManager $subject
      */
-    private $subject;
+    private PreProcessorManagerImpl $subject;
 
 
     /**
@@ -56,11 +63,9 @@ class PreProcessorManagerImplTest extends TestCase
         $this->subject = new PreProcessorManagerImpl();
     }
 
-    /**
-     * @Test
-     * @small
-     */
-    public function testProcessValidFileWhichShouldSucceed()
+    #[Test]
+    #[Small]
+    public function testProcessValidFileWhichShouldSucceed(): void
     {
         $response = new ProcessingStatus(ProcessingStatus::OK, 'All green!');
         $metadata = new Metadata('test.txt', 4500, 'text/plain');
@@ -86,11 +91,9 @@ class PreProcessorManagerImplTest extends TestCase
         $this->assertSame('All green!', $result->getMessage());
     }
 
-    /**
-     * @Test
-     * @small
-     */
-    public function testProcessWithoutProcessorsWhichShouldSucceed()
+    #[Test]
+    #[Small]
+    public function testProcessWithoutProcessorsWhichShouldSucceed(): void
     {
         $expectedResponse = new ProcessingStatus(ProcessingStatus::OK, 'No processors were registered.');
         $metadata = new Metadata('test.txt', 4500, 'text/plain');
@@ -103,11 +106,9 @@ class PreProcessorManagerImplTest extends TestCase
         $this->assertSame($expectedResponse->getMessage(), $result->getMessage());
     }
 
-    /**
-     * @Test
-     * @small
-     */
-    public function testProcessInvalidFileWhichShouldGetRejected()
+    #[Test]
+    #[Small]
+    public function testProcessInvalidFileWhichShouldGetRejected(): void
     {
         $responseGood = new ProcessingStatus(ProcessingStatus::OK, 'All green!');
         $responseBad = new ProcessingStatus(ProcessingStatus::REJECTED, 'Fail all red!');
@@ -135,11 +136,9 @@ class PreProcessorManagerImplTest extends TestCase
         $this->assertSame($responseBad->getMessage(), $result->getMessage());
     }
 
-    /**
-     * @Test
-     * @small
-     */
-    public function testProcessValidFileWithFailingProcessorWhichShouldGetRejected()
+    #[Test]
+    #[Small]
+    public function testProcessValidFileWithFailingProcessorWhichShouldGetRejected(): void
     {
         $responseGood = new ProcessingStatus(ProcessingStatus::OK, 'All green!');
 

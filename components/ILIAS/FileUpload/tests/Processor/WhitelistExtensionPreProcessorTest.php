@@ -18,6 +18,13 @@
 
 namespace ILIAS\FileUpload\Processor;
 
+use PHPUnit\Framework\Attributes\BackupGlobals;
+use PHPUnit\Framework\Attributes\BackupStaticProperties;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\Small;
+
 require_once('./vendor/composer/vendor/autoload.php');
 
 use ILIAS\Filesystem\Stream\Streams;
@@ -29,19 +36,16 @@ use PHPUnit\Framework\TestCase;
  * Class WhitelistExtensionPreProcessorTest
  *
  * @author  Nicolas Schäfli <ns@studer-raimann.ch>
- *
- * @runTestsInSeparateProcesses
- * @preserveGlobalState    disabled
- * @backupGlobals          disabled
- * @backupStaticAttributes disabled
  */
+#[BackupGlobals(false)]
+#[BackupStaticProperties(false)]
+#[PreserveGlobalState(false)]
+#[RunTestsInSeparateProcesses]
 class WhitelistExtensionPreProcessorTest extends TestCase
 {
-    /**
-     * @Test
-     * @small
-     */
-    public function testProcessWhichShouldSucceed()
+    #[Test]
+    #[Small]
+    public function testProcessWhichShouldSucceed(): void
     {
         $extensions = ['jpg', 'svg'];
         $filename = 'hello.svg';
@@ -54,11 +58,9 @@ class WhitelistExtensionPreProcessorTest extends TestCase
         $this->assertSame('Extension complies with whitelist.', $result->getMessage());
     }
 
-    /**
-     * @Test
-     * @small
-     */
-    public function testProcessWithoutExtensionWhichShouldSucceed()
+    #[Test]
+    #[Small]
+    public function testProcessWithoutExtensionWhichShouldSucceed(): void
     {
         $extensions = ['jpg', ''];
         $filename = 'hello';
@@ -70,11 +72,9 @@ class WhitelistExtensionPreProcessorTest extends TestCase
         $this->assertSame('Extension complies with whitelist.', $result->getMessage());
     }
 
-    /**
-     * @Test
-     * @small
-     */
-    public function testProcessWithoutWhitelistedExtensionWhichShouldGetRejected()
+    #[Test]
+    #[Small]
+    public function testProcessWithoutWhitelistedExtensionWhichShouldGetRejected(): void
     {
         $extensions = ['jpg', 'exe'];
         $filename = 'hello.svg';

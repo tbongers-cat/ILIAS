@@ -23,7 +23,7 @@ use ILIAS\DI\Container;
 
 class ilServicesAuthShibbolethTest extends TestCase
 {
-    private ?\ILIAS\DI\Container $dic_backup;
+    private ?Container $dic_backup;
 
     protected function setUp(): void
     {

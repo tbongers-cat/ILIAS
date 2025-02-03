@@ -18,6 +18,7 @@
 
 declare(strict_types=1);
 
+use ILIAS\Refinery\Factory;
 use ILIAS\UI\Component\Dropzone\File\File as FileDropzone;
 use ILIAS\UI\Component\Input\Field\UploadHandler;
 use ILIAS\DI\UIServices;
@@ -37,13 +38,10 @@ class ilObjFileUploadDropzone
     protected ilLanguage $language;
     protected ilAccess $access;
     protected UIServices $ui;
-    protected \ILIAS\Refinery\Factory $refinery;
+    protected Factory $refinery;
     protected LOMServices $lom_services;
 
-    protected int $target_ref_id;
-    protected ?string $content;
-
-    public function __construct(int $target_ref_id, ?string $content = null)
+    public function __construct(protected int $target_ref_id, protected ?string $content = null)
     {
         global $DIC;
 
@@ -57,8 +55,6 @@ class ilObjFileUploadDropzone
         $this->lom_services = $DIC->learningObjectMetadata();
 
         $this->upload_handler = new ilObjFileUploadHandlerGUI();
-        $this->target_ref_id = $target_ref_id;
-        $this->content = $content;
     }
 
     private function isCopyrightSelectionActive(): bool
@@ -159,7 +155,7 @@ class ilObjFileUploadDropzone
         return $this->language;
     }
 
-    protected function getRefinery(): \ILIAS\Refinery\Factory
+    protected function getRefinery(): Factory
     {
         return $this->refinery;
     }

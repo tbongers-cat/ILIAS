@@ -17,10 +17,10 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\MainMenu\Collector\Renderer;
 
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\isItem;
-use ILIAS\GlobalScreen\Scope\MainMenu\Factory\Item\Complex;
 use ILIAS\UI\Component\Component;
 
 /**
@@ -37,6 +37,7 @@ class ComplexItemRenderer extends BaseTypeRenderer
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getComponentWithContent(isItem $item): Component
     {
         /**

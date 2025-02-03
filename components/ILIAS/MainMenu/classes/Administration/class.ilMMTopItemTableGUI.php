@@ -28,24 +28,18 @@ class ilMMTopItemTableGUI extends ilTable2GUI
 {
     use Hasher;
 
-    private ilMMItemRepository $item_repository;
-
-    private ilObjMainMenuAccess $access;
-
     /**
      * ilMMTopItemTableGUI constructor.
      * @param ilMMTopItemGUI      $a_parent_obj
      * @param ilMMItemRepository  $item_repository
      * @param ilObjMainMenuAccess $access
      */
-    public function __construct(ilMMTopItemGUI $a_parent_obj, ilMMItemRepository $item_repository, ilObjMainMenuAccess $access)
+    public function __construct(ilMMTopItemGUI $a_parent_obj, private ilMMItemRepository $item_repository, private ilObjMainMenuAccess $access)
     {
-        $this->access = $access;
         $this->setId(self::class);
         $this->setExternalSorting(true);
         $this->setExternalSegmentation(true);
         parent::__construct($a_parent_obj);
-        $this->item_repository = $item_repository;
         $this->lng = $this->parent_obj->lng;
         $this->setData($this->resolveData());
         $this->setFormAction($this->ctrl->getFormAction($this->parent_obj));
@@ -71,6 +65,7 @@ class ilMMTopItemTableGUI extends ilTable2GUI
     /**
      * @inheritDoc
      */
+    #[\Override]
     protected function fillRow(array $a_set): void
     {
         static $position;

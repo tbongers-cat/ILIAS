@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\Layout\Provider\PagePart;
 
 /**
@@ -25,14 +26,11 @@ namespace ILIAS\GlobalScreen\Scope\Layout\Provider\PagePart;
  */
 abstract class AbstractOriginalPagePartProvider
 {
-    protected PagePartProvider $original;
-
     /**
      * AbstractOriginalPagePartProvider constructor.
      * @param PagePartProvider $original
      */
-    public function __construct(PagePartProvider $original)
+    public function __construct(protected PagePartProvider $original)
     {
-        $this->original = $original;
     }
 }

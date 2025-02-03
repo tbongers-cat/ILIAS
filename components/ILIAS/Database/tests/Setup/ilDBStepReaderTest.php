@@ -22,6 +22,10 @@ use PHPUnit\Framework\TestCase;
 
 class ilDBStepReaderTestObject extends ilDBStepReader
 {
+    /**
+     * @var mixed[]
+     */
+    public $step_numbers;
     public function setStepNumbers(array $arr): void
     {
         $this->step_numbers = $arr;

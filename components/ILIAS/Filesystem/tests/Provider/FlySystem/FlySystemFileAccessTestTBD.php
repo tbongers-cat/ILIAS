@@ -18,15 +18,15 @@
 
 namespace ILIAS\Filesystem\Provider\FlySystem;
 
+use ILIAS\Filesystem\Exception\FileNotFoundException;
+use Mockery\LegacyMockInterface;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\Small;
 use ILIAS\Data\DataSize;
 use ILIAS\Filesystem\Exception\FileAlreadyExistsException;
 use ILIAS\Filesystem\Exception\IOException;
-use League\Flysystem\FileExistsException;
-use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemAdapter;
-use League\Flysystem\FilesystemException;
-use League\Flysystem\FilesystemInterface;
 use League\Flysystem\FilesystemOperator;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -49,12 +49,12 @@ class FlySystemFileAccessTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
-    private \ILIAS\Filesystem\Provider\FlySystem\FlySystemFileAccess $subject;
-    private \League\Flysystem\Filesystem|\Mockery\MockInterface $filesystemMock;
+    private FlySystemFileAccess $subject;
+    private Filesystem|MockInterface $filesystemMock;
     /**
      * @var AdapterInterface|Mockery\LegacyMockInterface|MockInterface
      */
-    private \Mockery\LegacyMockInterface $adapterMock;
+    private LegacyMockInterface $adapterMock;
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -333,10 +333,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->assertFalse($operationSuccessful);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testSetVisibilityWithMissingFileWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -347,16 +345,14 @@ class FlySystemFileAccessTest extends TestCase
                              ->with($path)
                              ->andReturn(false);
 
-        $this->expectException(\ILIAS\Filesystem\Exception\FileNotFoundException::class);
+        $this->expectException(FileNotFoundException::class);
         $this->expectExceptionMessage("Path \"$path\" not found.");
 
         $this->subject->setVisibility($path, $visibility);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testSetVisibilityWithInvalidAccessModifierWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -373,10 +369,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->setVisibility($path, $visibility);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testGetVisibilityWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -396,10 +390,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->assertSame($visibility, $actualVisibility);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testGetVisibilityWithMissingFileWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -409,16 +401,14 @@ class FlySystemFileAccessTest extends TestCase
                              ->with($path)
                              ->andReturn(false);
 
-        $this->expectException(\ILIAS\Filesystem\Exception\FileNotFoundException::class);
+        $this->expectException(FileNotFoundException::class);
         $this->expectExceptionMessage("Path \"$path\" not found.");
 
         $this->subject->getVisibility($path);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testGetVisibilityWithAdapterErrorWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -439,10 +429,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->getVisibility($path);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testWriteWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -461,10 +449,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->write($path, $content);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testWriteWithAlreadyExistingFileWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -486,10 +472,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->write($path, $content);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testWriteWithAdapterErrorWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -514,10 +498,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->write($path, $content);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testUpdateWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -531,10 +513,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->update($path, $content);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testUpdateWithAdapterErrorWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -553,10 +533,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->update($path, $content);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testUpdateWithMissingFileWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -576,10 +554,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->update($path, $content);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testDeleteWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -592,10 +568,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->delete($path);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testDeleteWithAdapterErrorWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -613,10 +587,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->delete($path);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testDeleteWithMissingFileWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -626,17 +598,14 @@ class FlySystemFileAccessTest extends TestCase
                              ->with($path)
                              ->andThrow(UnableToRetrieveMetadata::class);
 
-        $this->expectException(\ILIAS\Filesystem\Exception\FileNotFoundException::class);
+        $this->expectException(FileNotFoundException::class);
         $this->expectExceptionMessage("File \"$path\" was not found delete operation failed.");
 
         $this->subject->delete($path);
     }
 
-    /**
-     * @Test
-     * @small
-     * Maybe a useless test.
-     */
+    #[Test]
+    #[Small]
     public function testReadAndDeleteWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -658,10 +627,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->readAndDelete($path);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testRenameWhichShouldSucceed(): void
     {
         $source = '/source/path';
@@ -681,10 +648,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->rename($source, $destination);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testRenameWithMissingSourceWhichShouldFail(): void
     {
         $source = '/source/path';
@@ -701,16 +666,14 @@ class FlySystemFileAccessTest extends TestCase
             ->withArgs([$source, $destination])
             ->andThrow(UnableToRetrieveMetadata::class);
 
-        $this->expectException(\ILIAS\Filesystem\Exception\FileNotFoundException::class);
+        $this->expectException(FileNotFoundException::class);
         $this->expectExceptionMessage("File \"$source\" not found.");
 
         $this->subject->rename($source, $destination);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testRenameWithExistingDestinationWhichShouldFail(): void
     {
         $source = '/source/path';
@@ -733,10 +696,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->rename($source, $destination);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testRenameWithGeneralErrorWhichShouldFail(): void
     {
         $source = '/source/path';
@@ -759,10 +720,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->rename($source, $destination);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testCopyWhichShouldSucceed(): void
     {
         $sourcePath = '/path/to/your/source/file';
@@ -782,10 +741,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->copy($sourcePath, $destinationPath);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testCopyWithAdapterErrorWhichShouldFail(): void
     {
         $sourcePath = '/path/to/your/source/file';
@@ -810,10 +767,8 @@ class FlySystemFileAccessTest extends TestCase
         $this->subject->copy($sourcePath, $destinationPath);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testCopyWithMissingFileWhichShouldFail(): void
     {
         $sourcePath = '/path/to/your/source/file';
@@ -830,16 +785,14 @@ class FlySystemFileAccessTest extends TestCase
             ->withArgs([$sourcePath, $destinationPath])
             ->andThrow(UnableToRetrieveMetadata::class);
 
-        $this->expectException(\ILIAS\Filesystem\Exception\FileNotFoundException::class);
+        $this->expectException(FileNotFoundException::class);
         $this->expectExceptionMessage("File source \"$sourcePath\" was not found copy failed.");
 
         $this->subject->copy($sourcePath, $destinationPath);
     }
 
-    /**
-     * @Test
-     * @small
-     */
+    #[Test]
+    #[Small]
     public function testCopyWithExistingDestinationFileWhichShouldFail(): void
     {
         $sourcePath = '/path/to/your/source/file';

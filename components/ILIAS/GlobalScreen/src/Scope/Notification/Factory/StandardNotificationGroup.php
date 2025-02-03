@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\Notification\Factory;
 
 use ILIAS\GlobalScreen\Scope\Notification\Collector\Renderer\NotificationRenderer;
@@ -106,6 +107,7 @@ class StandardNotificationGroup extends AbstractBaseNotification implements isSt
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getRenderer(UIFactory $factory): NotificationRenderer
     {
         return new StandardNotificationGroupRenderer($factory);

@@ -32,24 +32,8 @@ class ilDAVContainer implements ICollection
     use ilWebDAVAccessChildrenFunctionsTrait;
     use ilWebDAVCommonINodeFunctionsTrait;
 
-    protected ilObjUser $current_user;
-    protected ilObject $obj;
-    protected RequestInterface $request;
-    protected ilWebDAVObjFactory $dav_factory;
-    protected ilWebDAVRepositoryHelper $repository_helper;
-
-    public function __construct(
-        ilContainer $obj,
-        ilObjUser $current_user,
-        RequestInterface $request,
-        ilWebDAVObjFactory $dav_factory,
-        ilWebDAVRepositoryHelper $repository_helper
-    ) {
-        $this->obj = $obj;
-        $this->current_user = $current_user;
-        $this->request = $request;
-        $this->dav_factory = $dav_factory;
-        $this->repository_helper = $repository_helper;
+    public function __construct(protected ilObject $obj, protected ilObjUser $current_user, protected RequestInterface $request, protected ilWebDAVObjFactory $dav_factory, protected ilWebDAVRepositoryHelper $repository_helper)
+    {
     }
 
     public function getName(): string
@@ -146,7 +130,7 @@ class ilDAVContainer implements ICollection
                 $file_obj->setTitle($title);
 
                 $file_dav = $this->dav_factory->createDAVObject($file_obj, $this->obj->getRefId());
-            } catch (ilWebDAVNotDavableException $e) {
+            } catch (ilWebDAVNotDavableException) {
                 throw new Forbidden('Forbidden characters in title');
             }
         }
@@ -170,7 +154,7 @@ class ilDAVContainer implements ICollection
             $new_obj->setOwner($this->current_user->getId());
             $new_obj->setTitle($name);
             $this->dav_factory->createDAVObject($new_obj, $this->obj->getRefId());
-        } catch (ilWebDAVNotDavableException $e) {
+        } catch (ilWebDAVNotDavableException) {
             throw new Forbidden('Forbidden characters in title');
         }
     }
@@ -187,7 +171,7 @@ class ilDAVContainer implements ICollection
 
     protected function getChildCollection(): ilContainer
     {
-        if (get_class($this->obj) === 'ilObjCategory') {
+        if ($this->obj::class === 'ilObjCategory') {
             return new ilObjCategory();
         }
 

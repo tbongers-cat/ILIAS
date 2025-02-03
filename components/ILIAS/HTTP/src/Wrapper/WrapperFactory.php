@@ -28,14 +28,11 @@ use Psr\Http\Message\RequestInterface;
  */
 class WrapperFactory
 {
-    private RequestInterface $request;
-
     /**
      * WrapperFactory constructor.
      */
-    public function __construct(RequestInterface $request)
+    public function __construct(private RequestInterface $request)
     {
-        $this->request = $request;
     }
 
     public function query(): ArrayBasedRequestWrapper

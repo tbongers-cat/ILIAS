@@ -30,6 +30,7 @@ class ilMMLinkItemRenderer extends LinkItemRenderer
 {
     use ilMMCloseOnClick;
 
+    #[\Override]
     public function getComponentWithContent(isItem $item): Component
     {
         return parent::getComponentWithContent($this->addDisengageDecorator($item));

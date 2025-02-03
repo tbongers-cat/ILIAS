@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Identification;
 
 use ILIAS\GlobalScreen\Identification\Map\IdentificationMap;
@@ -30,8 +31,6 @@ use ILIAS\GlobalScreen\Provider\Provider;
  */
 class PluginIdentificationProvider extends AbstractIdentificationProvider implements IdentificationProviderInterface
 {
-    protected string $plugin_id = "";
-
     /**
      * PluginIdentificationProvider constructor.
      * @param Provider            $provider
@@ -41,12 +40,11 @@ class PluginIdentificationProvider extends AbstractIdentificationProvider implem
      */
     public function __construct(
         Provider $provider,
-        string $plugin_id,
+        protected string $plugin_id,
         SerializerInterface $serializer,
         IdentificationMap $map
     ) {
         parent::__construct($provider, $serializer, $map);
-        $this->plugin_id = $plugin_id;
     }
 
     /**

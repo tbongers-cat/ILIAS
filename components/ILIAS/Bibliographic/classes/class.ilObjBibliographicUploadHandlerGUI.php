@@ -33,6 +33,7 @@ class ilObjBibliographicUploadHandlerGUI extends ilCtrlAwareStorageUploadHandler
         parent::__construct(new ilObjBibliographicStakeholder());
     }
 
+    #[\Override]
     protected function getUploadResult(): HandlerResult
     {
         $this->upload->process();

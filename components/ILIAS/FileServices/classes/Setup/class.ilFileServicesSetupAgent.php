@@ -18,17 +18,16 @@
 
 declare(strict_types=1);
 
+use ILIAS\Setup\Agent\NullAgent;
 use ILIAS\Setup\Agent;
 use ILIAS\Setup\Objective;
-use ILIAS\Refinery\Transformation;
-use ILIAS\Setup\Metrics;
 use ILIAS\Setup\Config;
-use ILIAS\Setup\Migration;
 use ILIAS\Setup\ObjectiveCollection;
 use ILIAS\Setup\Condition\PHPExtensionLoadedCondition;
 
-class ilFileServicesSetupAgent extends Agent\NullAgent implements Agent
+class ilFileServicesSetupAgent extends NullAgent implements Agent
 {
+    #[\Override]
     public function getInstallObjective(?Config $config = null): Objective
     {
         return new ObjectiveCollection(
@@ -43,6 +42,7 @@ class ilFileServicesSetupAgent extends Agent\NullAgent implements Agent
         );
     }
 
+    #[\Override]
     public function getUpdateObjective(?Config $config = null): Objective
     {
         return $this->getInstallObjective($config);

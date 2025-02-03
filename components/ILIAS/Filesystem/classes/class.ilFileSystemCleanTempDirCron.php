@@ -16,8 +16,8 @@
  *
  *********************************************************************/
 
+use ILIAS\Filesystem\Filesystem;
 use ILIAS\Filesystem\DTO\Metadata;
-use ILIAS\DI\Container;
 use ILIAS\Cron\Schedule\CronJobScheduleType;
 
 /**
@@ -27,7 +27,7 @@ use ILIAS\Cron\Schedule\CronJobScheduleType;
  */
 class ilFileSystemCleanTempDirCron extends ilCronJob
 {
-    protected \ILIAS\Filesystem\Filesystem $filesystem;
+    protected Filesystem $filesystem;
 
     protected ilLanguage $language;
 
@@ -128,7 +128,7 @@ class ilFileSystemCleanTempDirCron extends ilCronJob
         $folders = $this->filesystem->finder()->in([""]);
         $folders = $folders->directories();
         $folders = $folders->date($date);
-        $folders = $folders->sort(fn (
+        $folders = $folders->sort(fn(
             Metadata $a,
             Metadata $b
         ): int => strlen($a->getPath()) - strlen($b->getPath()));

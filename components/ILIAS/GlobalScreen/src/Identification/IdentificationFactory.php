@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Identification;
 
 use ILIAS\GlobalScreen\Identification\Map\IdentificationMap;
@@ -46,7 +47,6 @@ use ILIAS\GlobalScreen\Provider\ProviderFactory;
  */
 class IdentificationFactory
 {
-    protected ProviderFactory $provider_factory;
     protected SerializerFactory $serializer_factory;
     protected IdentificationMap $map;
 
@@ -54,11 +54,10 @@ class IdentificationFactory
      * IdentificationFactory constructor.
      * @param ProviderFactory $provider_factory
      */
-    final public function __construct(ProviderFactory $provider_factory)
+    final public function __construct(protected ProviderFactory $provider_factory)
     {
         $this->serializer_factory = new SerializerFactory();
         $this->map = new IdentificationMap();
-        $this->provider_factory = $provider_factory;
     }
 
     /**

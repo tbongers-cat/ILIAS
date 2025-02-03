@@ -24,25 +24,18 @@ use ILIAS\UI\Component\Modal\Lightbox;
 
 class ilWebDAVMountInstructionsModalGUI
 {
+    /**
+     * @var string
+     */
     private const MOUNT_INSTRUCTIONS_CONTENT_ID = 'webdav_mount_instructions_content';
-
-    protected ilWebDAVMountInstructionsRepositoryImpl $repository;
-    protected Factory $ui_factory;
-    protected Renderer $ui_renderer;
-    protected ilLanguage $lng;
     private Lightbox $modal;
 
-    private function __construct(ilWebDAVMountInstructionsRepositoryImpl $repository, Factory $ui_factory, Renderer $ui_renderer, ilLanguage $lng)
+    private function __construct(protected ilWebDAVMountInstructionsRepositoryImpl $repository, protected Factory $ui_factory, protected Renderer $ui_renderer, protected ilLanguage $lng)
     {
-        $this->repository = $repository;
-        $this->ui_factory = $ui_factory;
-        $this->ui_renderer = $ui_renderer;
-        $this->lng = $lng;
-
         try {
             $document = $this->repository->getMountInstructionsByLanguage($this->lng->getUserLanguage());
             $title = $document->getTitle();
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             $title = $this->lng->txt('webfolder_instructions_titletext');
         }
 

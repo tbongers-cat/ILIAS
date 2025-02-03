@@ -26,17 +26,14 @@ use ILIAS\FileDelivery\Token\Serializer\Serializer;
 use ILIAS\FileDelivery\Token\Signer\Payload\Payload;
 use ILIAS\FileDelivery\Token\Signer\HMACSigner;
 use ILIAS\FileDelivery\Token\Serializer\JSONSerializer;
-use ILIAS\FileDelivery\Token\Signer\Key\DigestMethod\Concat as NoneDigest;
 use ILIAS\FileDelivery\Token\Signer\Key\Signing\HMACSigningKeyGenerator;
 use ILIAS\FileDelivery\Token\Signer\Algorithm\SHA1;
-use ILIAS\FileDelivery\Token\Compression\GZipCompression;
 use ILIAS\FileDelivery\Token\Transport\URLSafeTransport;
 use ILIAS\FileDelivery\Token\Compression\DeflateCompression;
 use ILIAS\FileDelivery\Token\Signer\KeyRotatingSigner;
 use ILIAS\FileDelivery\Token\Signer\Salt\Factory;
 use ILIAS\FileDelivery\Token\Signer\Payload\StructuredPayload;
 use ILIAS\Filesystem\Stream\FileStream;
-use ILIAS\FileDelivery\Token\Data\Stream;
 use ILIAS\FileDelivery\Token\Compression\Compression;
 use ILIAS\FileDelivery\Token\Transport\Transport;
 use ILIAS\FileDelivery\Token\Signer\Payload\Builder;
@@ -90,8 +87,7 @@ final class DataSigner
     ): string {
         $payload = $this->payload_builder->shortFile(
             $stream,
-            $filename,
-            $disposition
+            $filename
         );
 
         if ($until !== null) {

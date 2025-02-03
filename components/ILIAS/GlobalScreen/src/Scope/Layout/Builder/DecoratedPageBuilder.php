@@ -18,6 +18,7 @@
 
 declare(strict_types=1);
 /** @noinspection PhpPropertyOnlyWrittenInspection */
+
 namespace ILIAS\GlobalScreen\Scope\Layout\Builder;
 
 use Closure;
@@ -31,18 +32,13 @@ use ILIAS\UI\Component\Layout\Page\Page;
  */
 class DecoratedPageBuilder implements PageBuilder
 {
-    private PageBuilder $original;
-    private Closure $deco;
-
     /**
      * DecoratedPageBuilder constructor.
      * @param PageBuilder $original
      * @param Closure     $deco
      */
-    public function __construct(PageBuilder $original, Closure $deco)
+    public function __construct(private PageBuilder $original, private Closure $deco)
     {
-        $this->original = $original;
-        $this->deco = $deco;
     }
 
     /**

@@ -24,20 +24,17 @@ declare(strict_types=1);
  */
 class ilMMItemTranslationTableGUI extends ilTable2GUI
 {
-    private ilMMItemFacadeInterface $item_facade;
-
-//    private ilCtrl $ctrl;
-//    private ilLanguage $lng;
+    //    private ilCtrl $ctrl;
+    //    private ilLanguage $lng;
 
     /**
      * ilMMItemTranslationTableGUI constructor.
      * @param ilMMItemTranslationGUI  $a_parent_obj
      * @param ilMMItemFacadeInterface $item_facade
      */
-    public function __construct(ilMMItemTranslationGUI $a_parent_obj, ilMMItemFacadeInterface $item_facade)
+    public function __construct(ilMMItemTranslationGUI $a_parent_obj, private ilMMItemFacadeInterface $item_facade)
     {
         $table_id = self::class;
-        $this->item_facade = $item_facade;
         $this->setId($table_id);
         $this->setPrefix($table_id);
         $this->setFormName($table_id);
@@ -89,6 +86,7 @@ class ilMMItemTranslationTableGUI extends ilTable2GUI
     /**
      * @inheritDoc
      */
+    #[\Override]
     protected function fillRow(array $a_set): void
     {
         /**

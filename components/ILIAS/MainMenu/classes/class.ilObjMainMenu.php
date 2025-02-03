@@ -41,6 +41,7 @@ class ilObjMainMenu extends ilObject
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getPresentationTitle(): string
     {
         return $this->lng->txt("main_menu");
@@ -50,6 +51,7 @@ class ilObjMainMenu extends ilObject
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getLongDescription(): string
     {
         return $this->lng->txt("add_remove_edit_entries_of_main_menu");

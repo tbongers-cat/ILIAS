@@ -18,6 +18,13 @@
 
 namespace ILIAS\FileUpload\Processor;
 
+use PHPUnit\Framework\Attributes\BackupGlobals;
+use PHPUnit\Framework\Attributes\BackupStaticProperties;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\Small;
+
 require_once('./vendor/composer/vendor/autoload.php');
 
 use ILIAS\Filesystem\Stream\Streams;
@@ -29,19 +36,16 @@ use PHPUnit\Framework\TestCase;
  * Class FilenameOverridePreProcessorTest
  *
  * @author Fabian Schmid <fs@studer-raimann.ch>
- *
- * @runTestsInSeparateProcesses
- * @preserveGlobalState    disabled
- * @backupGlobals          disabled
- * @backupStaticAttributes disabled
  */
+#[BackupGlobals(false)]
+#[BackupStaticProperties(false)]
+#[PreserveGlobalState(false)]
+#[RunTestsInSeparateProcesses]
 class FilenameOverridePreProcessorTest extends TestCase
 {
-    /**
-     * @Test
-     * @small
-     */
-    public function testProcessWhichShouldSucceed()
+    #[Test]
+    #[Small]
+    public function testProcessWhichShouldSucceed(): void
     {
         $filename = 'renamed.ogg';
 

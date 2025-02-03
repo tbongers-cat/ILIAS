@@ -22,17 +22,8 @@ use Sabre\DAV\Exception\Forbidden;
 
 class ilWebDAVRepositoryHelper
 {
-    protected ilAccessHandler $access;
-    protected ilTree $tree;
-    protected ilRepUtil $repository_util;
-    protected ilWebDAVLocksRepository $locks_repository;
-
-    public function __construct(ilAccessHandler $access, ilTree $tree, ilRepUtil $repository_util, ilWebDAVLocksRepository $locks_repository)
+    public function __construct(protected ilAccessHandler $access, protected ilTree $tree, protected ilRepUtil $repository_util, protected ilWebDAVLocksRepository $locks_repository)
     {
-        $this->access = $access;
-        $this->tree = $tree;
-        $this->repository_util = $repository_util;
-        $this->locks_repository = $locks_repository;
     }
 
     public function deleteObject(int $ref_id): void
@@ -68,12 +59,10 @@ class ilWebDAVRepositoryHelper
     public function getObjectTitleFromObjId(int $obj_id, bool $escape_forbidden_fileextension = false): string
     {
         if ($escape_forbidden_fileextension && ilObject::_lookupType($obj_id) === 'file') {
-            $title = $this->getFilenameWithSanitizedFileExtension($obj_id);
-        } else {
-            $title = $this->getRawObjectTitleFromObjId($obj_id);
+            return $this->getFilenameWithSanitizedFileExtension($obj_id);
         }
 
-        return $title;
+        return $this->getRawObjectTitleFromObjId($obj_id);
     }
 
     public function getFilenameWithSanitizedFileExtension(int $obj_id): string
@@ -82,7 +71,7 @@ class ilWebDAVRepositoryHelper
 
         try {
             $escaped_title = ilFileUtils::getValidFilename($unescaped_title);
-        } catch (ilFileUtilsException $e) {
+        } catch (ilFileUtilsException) {
             $escaped_title = '';
         }
 

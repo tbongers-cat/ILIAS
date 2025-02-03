@@ -39,10 +39,7 @@ class ilMMUploadHandlerGUI extends AbstractCtrlAwareUploadHandler
      * @var Services
      */
     private $storage;
-    /**
-     * @var ilMMStorageStakeholder
-     */
-    private $stakeholder;
+    private \ilMMStorageStakeholder $stakeholder;
 
 
     /**
@@ -90,9 +87,8 @@ class ilMMUploadHandlerGUI extends AbstractCtrlAwareUploadHandler
             $this->storage->manage()->remove($id, $this->stakeholder);
 
             return new BasicHandlerResult($this->getFileIdentifierParameterName(), HandlerResultInterface::STATUS_OK, $identifier, 'file deleted');
-        } else {
-            return new BasicHandlerResult($this->getFileIdentifierParameterName(), HandlerResultInterface::STATUS_FAILED, $identifier, 'file not found');
         }
+        return new BasicHandlerResult($this->getFileIdentifierParameterName(), HandlerResultInterface::STATUS_FAILED, $identifier, 'file not found');
     }
 
 

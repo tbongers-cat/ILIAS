@@ -28,16 +28,16 @@ use ILIAS\HTTP\Duration\CallbackDuration;
  */
 class CallbackDurationTest extends TestCase
 {
-//    // there isn't a good way to test the shutdown-function with PHPUnit (yet?).
-//    public function testCallbackStretchingWithExit() : void
-//    {
-//        $callback = $this->getTestCallbackWithLength(1, true);
-//        $duration = new CallbackDuration(1);
-//
-//        $this->expectException(\LogicException::class);
-//        $this->expectExceptionMessage("Callback could not be stretched because it halted the programm.");
-//        $duration->stretch($callback);
-//    }
+    //    // there isn't a good way to test the shutdown-function with PHPUnit (yet?).
+    //    public function testCallbackStretchingWithExit() : void
+    //    {
+    //        $callback = $this->getTestCallbackWithLength(1, true);
+    //        $duration = new CallbackDuration(1);
+    //
+    //        $this->expectException(\LogicException::class);
+    //        $this->expectExceptionMessage("Callback could not be stretched because it halted the programm.");
+    //        $duration->stretch($callback);
+    //    }
 
     public function testCallbackStretchingWithTooLongExecutionTime(): void
     {
@@ -66,7 +66,7 @@ class CallbackDurationTest extends TestCase
 
     protected function getTestCallbackWithLength(int $duration_in_ms, bool $should_halt = false): callable
     {
-        return static function () use ($duration_in_ms, $should_halt) {
+        return static function () use ($duration_in_ms, $should_halt): void {
             usleep(1_000 * $duration_in_ms);
             if ($should_halt) {
                 exit;

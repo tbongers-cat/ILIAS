@@ -18,18 +18,13 @@
 
 namespace ILIAS\HTTP\Duration\Increment;
 
-use ILIAS\HTTP\Duration\Duration;
-
 /**
  * @author Thibeau Fuhrer <thibeau@sr.solutions>
  */
 class MultiplierStrategy implements IncrementStrategy
 {
-    protected float $multiplier;
-
-    public function __construct(float $multiplier)
+    public function __construct(protected float $multiplier)
     {
-        $this->multiplier = $multiplier;
     }
 
     public function increment(int $duration_in_ms): int

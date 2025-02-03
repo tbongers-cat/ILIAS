@@ -23,15 +23,11 @@
  */
 class ilBiblFieldFactory implements ilBiblFieldFactoryInterface
 {
-    protected \ilBiblTypeInterface $type;
-
-
     /**
      * ilBiblFieldFactory constructor.
      */
-    public function __construct(\ilBiblTypeInterface $type)
+    public function __construct(protected \ilBiblTypeInterface $type)
     {
-        $this->type = $type;
     }
 
 
@@ -68,7 +64,7 @@ class ilBiblFieldFactory implements ilBiblFieldFactoryInterface
     public function getFieldByTypeAndIdentifier(int $type, string $identifier): ilBiblFieldInterface
     {
         $inst = $this->getARInstance($type, $identifier);
-        if (!$inst) {
+        if ($inst === null) {
             throw new ilException("bibliografic identifier {$identifier} not found");
         }
 
@@ -220,11 +216,11 @@ class ilBiblFieldFactory implements ilBiblFieldFactoryInterface
     {
         $collection = ilBiblField::getCollection();
 
-        $collection->where(array('data_type' => $type->getId()));
+        $collection->where(['data_type' => $type->getId()]);
 
-        if ($queryInfo) {
-            $sorting_column = $queryInfo->getSortingColumn() ? $queryInfo->getSortingColumn() : null;
-            $offset = $queryInfo->getOffset() ? $queryInfo->getOffset() : 0;
+        if ($queryInfo !== null) {
+            $sorting_column = $queryInfo->getSortingColumn() !== '' && $queryInfo->getSortingColumn() !== '0' ? $queryInfo->getSortingColumn() : null;
+            $offset = $queryInfo->getOffset();
             $sorting_direction = $queryInfo->getSortingDirection();
             $limit = $queryInfo->getLimit();
             if ($sorting_column) {
@@ -233,11 +229,7 @@ class ilBiblFieldFactory implements ilBiblFieldFactoryInterface
             $collection->limit($offset, $limit);
 
             foreach ($queryInfo->getFilters() as $queryFilter) {
-                switch ($queryFilter->getFieldName()) {
-                    default:
-                        $collection->where(array($queryFilter->getFieldName() => $queryFilter->getFieldValue()), $queryFilter->getOperator());
-                        break;
-                }
+                $collection->where([$queryFilter->getFieldName() => $queryFilter->getFieldValue()], $queryFilter->getOperator());
             }
         }
 

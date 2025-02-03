@@ -22,6 +22,7 @@
  * Date: 20.04.17
  * Time: 16:50
  */
+
 namespace BackgroundTasks\Implementation\Observer;
 
 use ILIAS\BackgroundTasks\Exceptions\Exception;
@@ -34,7 +35,7 @@ require_once("vendor/composer/vendor/autoload.php");
 
 class BasicObserverTest extends MockeryTestCase
 {
-    public function testCheckIntegrity()
+    public function testCheckIntegrity(): void
     {
         $this->expectException(Exception::class);
 

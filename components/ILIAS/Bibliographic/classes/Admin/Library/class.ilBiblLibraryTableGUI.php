@@ -20,12 +20,12 @@ use ILIAS\UI\Component\Table\DataRetrieval;
 use ILIAS\UI\Component\Table\DataRowBuilder;
 use ILIAS\Data\Range;
 use ILIAS\Data\Order;
-use Psr\Http\Message\ServerRequestInterface AS HttpRequest;
+use Psr\Http\Message\ServerRequestInterface as HttpRequest;
 use ILIAS\UI\Factory as UIFactory;
-use ILIAS\UI\Renderer AS UIRenderer;
+use ILIAS\UI\Renderer as UIRenderer;
 use ILIAS\Data\Factory as DataFactory;
 use ILIAS\UI\URLBuilder;
-use ILIAS\UI\Component\Table\Data AS DataTable;
+use ILIAS\UI\Component\Table\Data as DataTable;
 use ILIAS\UI\URLBuilderToken;
 
 class ilBiblLibraryTableGUI implements DataRetrieval
@@ -185,15 +185,15 @@ class ilBiblLibraryTableGUI implements DataRetrieval
             ];
         }
 
-        if ($order) {
-            [$order_field, $order_direction] = $order->join([], fn($ret, $key, $value) => [$key, $value]);
-            usort($records, static fn($a, $b) => $a[$order_field] <=> $b[$order_field]);
+        if ($order !== null) {
+            [$order_field, $order_direction] = $order->join([], fn($ret, $key, $value): array => [$key, $value]);
+            usort($records, static fn($a, $b): int => $a[$order_field] <=> $b[$order_field]);
             if ($order_direction === 'DESC') {
                 $records = array_reverse($records);
             }
         }
-        if ($range) {
-            $records = array_slice($records, $range->getStart(), $range->getLength());
+        if ($range !== null) {
+            return array_slice($records, $range->getStart(), $range->getLength());
         }
 
         return $records;

@@ -20,30 +20,32 @@
  *
  * @author  Nicolas Schäfli <ns@studer-raimann.ch>
  */
+
 namespace ILIAS\HTTP\Cookies;
 
+use PHPUnit\Framework\Attributes\BackupGlobals;
+use PHPUnit\Framework\Attributes\BackupStaticProperties;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class CookieWrapperTest
  *
  * @author                 Nicolas Schäfli <ns@studer-raimann.ch>
- *
- * @runInSeparateProcess
- * @preserveGlobalState    disabled
- * @backupGlobals          disabled
- * @backupStaticAttributes disabled
  */
+#[BackupGlobals(false)]
+#[BackupStaticProperties(false)]
+#[PreserveGlobalState(false)]
+#[RunInSeparateProcess]
 class CookieWrapperTest extends TestCase
 {
     /**
      * @var CookieWrapper $cookie
      */
-    private $cookie;
-    /**
-     * @var CookieFactory $cookieFactory
-     */
-    private static $cookieFactory;
+    private Cookie $cookie;
+    private static CookieFactoryImpl $cookieFactory;
 
 
     public static function setUpBeforeClass(): void
@@ -64,10 +66,8 @@ class CookieWrapperTest extends TestCase
     }
 
 
-    /**
-     * @Test
-     */
-    public function testWithValueDoesNotChangeTheCurrentObject()
+    #[Test]
+    public function testWithValueDoesNotChangeTheCurrentObject(): void
     {
         $newValue = "yes!";
         $newCookie = $this->cookie->withValue("yes!");
@@ -76,10 +76,8 @@ class CookieWrapperTest extends TestCase
     }
 
 
-    /**
-     * @Test
-     */
-    public function testWithExpiresDoesNotChangeTheCurrentObject()
+    #[Test]
+    public function testWithExpiresDoesNotChangeTheCurrentObject(): void
     {
         $expires = 1000;
         $newCookie = $this->cookie->withExpires($expires);
@@ -89,10 +87,8 @@ class CookieWrapperTest extends TestCase
     }
 
 
-    /**
-     * @Test
-     */
-    public function testRememberForeverDoesNotChangeTheCurrentObject()
+    #[Test]
+    public function testRememberForeverDoesNotChangeTheCurrentObject(): void
     {
         $newCookie = $this->cookie->rememberForLongTime();
 
@@ -101,10 +97,8 @@ class CookieWrapperTest extends TestCase
     }
 
 
-    /**
-     * @Test
-     */
-    public function testExpireDoesNotChangeTheCurrentObject()
+    #[Test]
+    public function testExpireDoesNotChangeTheCurrentObject(): void
     {
         $newCookie = $this->cookie->expire();
 
@@ -113,10 +107,8 @@ class CookieWrapperTest extends TestCase
     }
 
 
-    /**
-     * @Test
-     */
-    public function testWithMaxAgeDoesNotChangeTheCurrentObject()
+    #[Test]
+    public function testWithMaxAgeDoesNotChangeTheCurrentObject(): void
     {
         $maxAge = 1000;
         $newCookie = $this->cookie->withMaxAge($maxAge);
@@ -126,10 +118,8 @@ class CookieWrapperTest extends TestCase
     }
 
 
-    /**
-     * @Test
-     */
-    public function testWithPathDoesNotChangeTheCurrentObject()
+    #[Test]
+    public function testWithPathDoesNotChangeTheCurrentObject(): void
     {
         $path = '/ilias';
         $newCookie = $this->cookie->withPath($path);
@@ -139,10 +129,8 @@ class CookieWrapperTest extends TestCase
     }
 
 
-    /**
-     * @Test
-     */
-    public function testWithDomainDoesNotChangeTheCurrentObject()
+    #[Test]
+    public function testWithDomainDoesNotChangeTheCurrentObject(): void
     {
         $domain = 'ilias.de';
         $newCookie = $this->cookie->withDomain($domain);
@@ -152,10 +140,8 @@ class CookieWrapperTest extends TestCase
     }
 
 
-    /**
-     * @Test
-     */
-    public function testWithSecureDoesNotChangeTheCurrentObject()
+    #[Test]
+    public function testWithSecureDoesNotChangeTheCurrentObject(): void
     {
         $secure = true;
         $newCookie = $this->cookie->withSecure($secure);
@@ -165,10 +151,8 @@ class CookieWrapperTest extends TestCase
     }
 
 
-    /**
-     * @Test
-     */
-    public function testWithHttpOnlyDoesNotChangeTheCurrentObject()
+    #[Test]
+    public function testWithHttpOnlyDoesNotChangeTheCurrentObject(): void
     {
         $httpOnly = true;
         $newCookie = $this->cookie->withHttpOnly($httpOnly);

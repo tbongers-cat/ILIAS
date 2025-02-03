@@ -31,14 +31,11 @@ use Dflydev\FigCookies\Modifier\SameSite;
  */
 class CookieWrapper implements Cookie
 {
-    private SetCookie $cookie;
-
     /**
      * CookieFacade constructor.
      */
-    public function __construct(SetCookie $cookie)
+    public function __construct(private SetCookie $cookie)
     {
-        $this->cookie = $cookie;
     }
 
     /**

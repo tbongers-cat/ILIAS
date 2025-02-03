@@ -38,17 +38,11 @@ class ilDBWrapperFactory
      */
     public static function getWrapper(string $a_type): \ilDBPdoInterface
     {
-        switch ($a_type) {
-            case 'pdo-mysql-innodb':
-            case ilDBConstants::TYPE_INNODB:
-                $ilDB = new ilDBPdoMySQLInnoDB();
-                break;
-            case ilDBConstants::TYPE_GALERA:
-                $ilDB = new ilDBPdoMySQLGalera();
-                break;
-            default:
-                throw new ilDatabaseException("No viable database-type given: " . var_export($a_type, true));
-        }
+        $ilDB = match ($a_type) {
+            'pdo-mysql-innodb', ilDBConstants::TYPE_INNODB => new ilDBPdoMySQLInnoDB(),
+            ilDBConstants::TYPE_GALERA => new ilDBPdoMySQLGalera(),
+            default => throw new ilDatabaseException("No viable database-type given: " . var_export($a_type, true)),
+        };
 
         return $ilDB;
     }

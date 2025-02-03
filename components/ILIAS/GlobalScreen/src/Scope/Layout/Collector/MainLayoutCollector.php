@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\Layout\Collector;
 
 use ILIAS\GlobalScreen\Client\Client;
@@ -36,7 +37,6 @@ use ILIAS\GlobalScreen\Scope\Layout\Factory\TitleModification;
 use ILIAS\GlobalScreen\Scope\Layout\Factory\ViewTitleModification;
 use ILIAS\GlobalScreen\Scope\Layout\MetaContent\MetaContent;
 use ILIAS\GlobalScreen\Scope\Layout\ModificationHandler;
-use ILIAS\GlobalScreen\Scope\Layout\Provider\ModificationProvider;
 use ILIAS\GlobalScreen\ScreenContext\Stack\CalledContexts;
 use ILIAS\UI\Component\Layout\Page\Page;
 use LogicException;
@@ -49,18 +49,13 @@ use LogicException;
 class MainLayoutCollector extends AbstractBaseCollector
 {
     private ModificationHandler $modification_handler;
-    /**
-     * @var ModificationProvider[]
-     */
-    private array $providers;
 
     /**
      * MainLayoutCollector constructor.
      * @param array $providers
      */
-    public function __construct(array $providers)
+    public function __construct(private array $providers)
     {
-        $this->providers = $providers;
         $this->modification_handler = new ModificationHandler();
     }
 
@@ -230,7 +225,8 @@ class MainLayoutCollector extends AbstractBaseCollector
         if (is_a($candicate, $type) && $candicate->hasValidModification()) {
             if ($candicate->getPriority() === $current_modification->getPriority()) {
                 throw new LogicException("There are competing Modifications for $type with the same priority ({$candicate->getPriority()})");
-            } elseif ($candicate->getPriority() > $current_modification->getPriority()) {
+            }
+            if ($candicate->getPriority() > $current_modification->getPriority()) {
                 $current_modification = $candicate;
             }
         }

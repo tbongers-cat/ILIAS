@@ -20,30 +20,29 @@
  *
  * @author  Nicolas Schäfli <ns@studer-raimann.ch>
  */
+
 namespace ILIAS\HTTP\Cookies;
 
+use PHPUnit\Framework\Attributes\BackupGlobals;
+use PHPUnit\Framework\Attributes\BackupStaticProperties;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class CookieWrapperTest
  *
  * @author                 Nicolas Schäfli <ns@studer-raimann.ch>
- *
- * @runInSeparateProcess
- * @preserveGlobalState    disabled
- * @backupGlobals          disabled
- * @backupStaticAttributes disabled
  */
+#[BackupGlobals(false)]
+#[BackupStaticProperties(false)]
+#[PreserveGlobalState(false)]
+#[RunInSeparateProcess]
 class CookieJarWrapperTest extends TestCase
 {
-    /**
-     * @var CookieFactory $cookieFactory
-     */
-    private static $cookieFactory;
-    /**
-     * @var CookieJarFactory $cookieJarFactory
-     */
-    private static $cookieJarFactory;
+    private static CookieFactoryImpl $cookieFactory;
+    private static CookieJarFactoryImpl $cookieJarFactory;
 
 
     public static function setUpBeforeClass(): void
@@ -54,10 +53,8 @@ class CookieJarWrapperTest extends TestCase
     }
 
 
-    /**
-     * @Test
-     */
-    public function testWithDoesNotChangeTheCurrentObject()
+    #[Test]
+    public function testWithDoesNotChangeTheCurrentObject(): void
     {
         $cookieName = "YummyCookie";
         $cookieValue = "MilkAndChocolate";
@@ -73,10 +70,8 @@ class CookieJarWrapperTest extends TestCase
     }
 
 
-    /**
-     * @Test
-     */
-    public function testWithoutDoesNotChangeTheCurrentObject()
+    #[Test]
+    public function testWithoutDoesNotChangeTheCurrentObject(): void
     {
         $cookieName = "YummyCookie";
         $cookieValue = "MilkAndChocolate";

@@ -18,14 +18,11 @@
 
 declare(strict_types=1);
 
-use ILIAS\Setup;
+use ILIAS\Setup\Objective;
 
-abstract class ilDatabaseObjective implements Setup\Objective
+abstract class ilDatabaseObjective implements Objective
 {
-    protected \ilDatabaseSetupConfig $config;
-
-    public function __construct(\ilDatabaseSetupConfig $config)
+    public function __construct(protected \ilDatabaseSetupConfig $config)
     {
-        $this->config = $config;
     }
 }

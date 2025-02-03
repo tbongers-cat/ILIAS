@@ -19,7 +19,7 @@
 namespace ILIAS\HTTP;
 
 /** @noRector */
-
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -31,9 +31,9 @@ use Psr\Http\Message\ServerRequestInterface;
 abstract class AbstractBaseTestCase extends TestCase
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|RequestInterface
+     * @var MockObject|RequestInterface
      */
-    protected $request_interface;
+    protected MockObject $request_interface;
 
     /**
      * @inheritDoc

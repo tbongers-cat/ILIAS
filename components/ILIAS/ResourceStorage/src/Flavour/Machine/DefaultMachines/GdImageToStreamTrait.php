@@ -65,7 +65,7 @@ trait GdImageToStreamTrait
                 'image/webp' => imagecreatefromwebp($filename),
                 default => imagecreatefromstring((string) $stream)
             };
-        } catch (\Throwable $t) {
+        } catch (\Throwable) {
             return null;
         }
     }

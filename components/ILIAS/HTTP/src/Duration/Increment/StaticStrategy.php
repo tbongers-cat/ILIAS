@@ -18,18 +18,13 @@
 
 namespace ILIAS\HTTP\Duration\Increment;
 
-use ILIAS\HTTP\Duration\Duration;
-
 /**
  * @author Thibeau Fuhrer <thibeau@sr.solutions>
  */
 class StaticStrategy implements IncrementStrategy
 {
-    protected int $increment_in_ms;
-
-    public function __construct(int $increment_in_ms)
+    public function __construct(protected int $increment_in_ms)
     {
-        $this->increment_in_ms = $increment_in_ms;
     }
 
     public function increment(int $duration_in_ms): int

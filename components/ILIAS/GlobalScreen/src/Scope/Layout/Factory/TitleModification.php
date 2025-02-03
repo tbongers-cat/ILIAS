@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Scope\Layout\Factory;
 
 /**
@@ -28,6 +29,7 @@ class TitleModification extends AbstractLayoutModification implements LayoutModi
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function isFinal(): bool
     {
         return true;

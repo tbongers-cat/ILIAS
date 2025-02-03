@@ -26,11 +26,8 @@ use Sabre\DAV\Server;
  */
 class ilWebDAVRequestHandler
 {
-    private ilWebDAVDIC $webdav_dic;
-
-    public function __construct(ilWebDAVDIC $webdav_dic)
+    public function __construct(private ilWebDAVDIC $webdav_dic)
     {
-        $this->webdav_dic = $webdav_dic;
     }
 
     public function handleRequest(array $post_array): void

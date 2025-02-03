@@ -17,6 +17,7 @@
  *********************************************************************/
 
 declare(strict_types=1);
+
 namespace ILIAS\GlobalScreen\Identification;
 
 use LogicException;/**
@@ -48,6 +49,7 @@ class ToolIdentificationProvider extends CoreIdentificationProvider implements T
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function identifier(string $identifier_string): IdentificationInterface
     {
         throw new LogicException('Tools must use contextAwareIdentifier');

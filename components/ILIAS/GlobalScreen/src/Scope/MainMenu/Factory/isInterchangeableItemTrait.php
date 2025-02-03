@@ -17,9 +17,8 @@
  *********************************************************************/
 
 declare(strict_types=1);
-namespace ILIAS\GlobalScreen\Scope\MainMenu\Factory;
 
-use ILIAS\GlobalScreen\Identification\NullIdentification;
+namespace ILIAS\GlobalScreen\Scope\MainMenu\Factory;
 
 /**
  * Interface isInterchangeableItem
@@ -33,7 +32,8 @@ trait isInterchangeableItemTrait
         $serialized_parent = $this->getParent()->serialize();
         if ($this instanceof isTopItem) {
             return $serialized_parent !== '';
-        } elseif ($this instanceof isChild) {
+        }
+        if ($this instanceof isChild) {
             return $serialized_parent === '';
         }
         return false;

@@ -44,6 +44,7 @@ class ilObjWebDAVGUI extends ilObjectGUI
         parent::__construct($a_data, $a_id, $a_call_by_reference, false);
     }
 
+    #[\Override]
     public function executeCommand(): void
     {
         $next_class = $this->ctrl->getNextClass($this);
@@ -75,6 +76,7 @@ class ilObjWebDAVGUI extends ilObjectGUI
         }
     }
 
+    #[\Override]
     public function getAdminTabs(): void
     {
         if ($this->rbac_system->checkAccess("visible,read", $this->object->getRefId())) {
@@ -91,6 +93,7 @@ class ilObjWebDAVGUI extends ilObjectGUI
         }
     }
 
+    #[\Override]
     public function setTitleAndDescription(): void
     {
         parent::setTitleAndDescription();

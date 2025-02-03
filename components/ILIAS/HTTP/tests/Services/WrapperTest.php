@@ -35,6 +35,7 @@ class WrapperTest extends AbstractBaseTestCase
     /**
      * @inheritDoc
      */
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

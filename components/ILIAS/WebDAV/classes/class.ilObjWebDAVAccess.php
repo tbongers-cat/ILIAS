@@ -17,8 +17,6 @@
  *********************************************************************/
 
 declare(strict_types=1);
-
-use ILIAS\HTTP\Services;
 use ILIAS\HTTP\Wrapper\RequestWrapper;
 use ILIAS\Refinery\Transformation;
 

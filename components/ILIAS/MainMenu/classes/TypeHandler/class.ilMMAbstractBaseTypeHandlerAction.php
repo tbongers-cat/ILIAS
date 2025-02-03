@@ -21,7 +21,6 @@ declare(strict_types=1);
 use ILIAS\GlobalScreen\Scope\MainMenu\Collector\Handler\TypeHandler;
 use ILIAS\GlobalScreen\Scope\MainMenu\Collector\Renderer\BaseTypeRenderer;
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\isItem;
-use ILIAS\DI\Container;
 use ILIAS\GlobalScreen\Identification\IdentificationInterface;
 
 /**

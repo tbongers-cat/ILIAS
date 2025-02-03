@@ -26,18 +26,21 @@ class ilDBPdoMySQLInnoDB extends ilDBPdoMySQL
 {
     protected string $storage_engine = 'InnoDB';
 
+    #[\Override]
     public function supportsFulltext(): bool
     {
         return false;
     }
 
 
+    #[\Override]
     public function supportsTransactions(): bool
     {
         return false;
     }
 
 
+    #[\Override]
     public function addFulltextIndex(string $table_name, array $fields, string $name = 'in'): bool
     {
         return false; // NOT SUPPORTED
