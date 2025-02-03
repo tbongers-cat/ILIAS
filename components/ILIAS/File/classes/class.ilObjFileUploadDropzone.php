@@ -96,7 +96,6 @@ class ilObjFileUploadDropzone
         // reset new_type again
         $this->ctrl->clearParameterByClass(ilObjFileGUI::class, 'new_type');
 
-        // add input for copyright selection if enabled in the metadata settings
         $additional_input = null;
         if ($this->isCopyrightSelectionActive()) {
             $additional_input = $this->getCopyrightSelectionInput('set_license_for_all_files');

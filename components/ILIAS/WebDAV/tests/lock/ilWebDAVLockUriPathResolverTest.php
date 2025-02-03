@@ -1,11 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
-use PHPUnit\Framework\TestCase;
-use Sabre\DAV\Exception\BadRequest;
-use Sabre\DAV\Exception\NotFound;
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -21,6 +15,12 @@ use Sabre\DAV\Exception\NotFound;
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
+
+use PHPUnit\Framework\TestCase;
+use Sabre\DAV\Exception\BadRequest;
+use Sabre\DAV\Exception\NotFound;
 
 require_once "./components/ILIAS/WebDAV/tests/ilWebDAVTestHelper.php";
 

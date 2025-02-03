@@ -167,9 +167,6 @@ trait ilObjFileMetadata
                                       ->execute();
     }
 
-    /**
-     * update copyright meta data
-     */
     protected function updateCopyright(): void
     {
         global $DIC;
