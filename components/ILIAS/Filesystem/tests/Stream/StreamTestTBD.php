@@ -215,7 +215,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testEofWhichShouldSucceed(): void
     {
         $content = 'awesome content stream';
@@ -232,7 +232,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testEofWithDetachedStreamWhichShouldFail(): void
     {
         $content = 'awesome content stream';
@@ -250,7 +250,7 @@ class StreamTest extends TestCase
 
 
     #[Test]
-    #[Small]
+
     public function testSeekWhichShouldSucceed(): void
     {
         $content = 'awesome content stream';
@@ -265,7 +265,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testSeekWithDetachedStreamWhichShouldFail(): void
     {
         $content = 'awesome content stream';
@@ -283,7 +283,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testSeekWithNotSeekableStreamWhichShouldFail(): void
     {
         $content = 'awesome content stream';
@@ -305,7 +305,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testSeekWithFseekFailureWhichShouldFail(): void
     {
         $content = 'awesome content stream';
@@ -334,7 +334,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testReadWhichShouldSucceed(): void
     {
         $content = 'awesome content stream';
@@ -350,7 +350,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testReadWithZeroLengthWhichShouldSucceed(): void
     {
         $content = 'awesome content stream';
@@ -366,7 +366,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testReadWithDetachedStreamWhichShouldFail(): void
     {
         $content = 'awesome content stream';
@@ -384,7 +384,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testReadWithNegativeLengthWhichShouldFail(): void
     {
         $content = 'awesome content stream';
@@ -401,7 +401,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testReadWithUnreadableStreamWhichShouldFail(): void
     {
         $content = 'awesome content stream';
@@ -418,7 +418,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testReadWithFailingFreadCallWhichShouldFail(): void
     {
         $content = 'awesome content stream';
@@ -447,7 +447,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testGetContentsWhichShouldSucceed(): void
     {
         $content = 'awesome content stream';
@@ -461,7 +461,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testGetContentsWithDetachedStreamWhichShouldFail(): void
     {
         $content = 'awesome content stream';
@@ -478,7 +478,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testGetContentsWithFailingStreamGetContentsCallWhichShouldFail(): void
     {
         $content = 'awesome content stream';
@@ -506,7 +506,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testToStringWhichShouldSucceed(): void
     {
         $content = 'awesome content stream';
@@ -520,7 +520,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testToStringWithErrorWhichShouldSucceed(): void
     {
         $content = 'awesome content stream';
@@ -540,7 +540,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testWriteWhichShouldSucceed(): void
     {
         $content = 'awesome content stream';
@@ -561,7 +561,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testWriteWithDetachedStreamWhichShouldFail(): void
     {
         $content = 'awesome content stream';
@@ -579,7 +579,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testWriteWithReadOnlyStreamWhichShouldFail(): void
     {
         $content = 'awesome content stream';
@@ -596,7 +596,7 @@ class StreamTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testWriteWithFailingFwriteCallWhichShouldFail(): void
     {
         $content = 'awesome content stream';

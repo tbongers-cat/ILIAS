@@ -38,7 +38,6 @@ use PHPUnit\Framework\TestCase;
 #[BackupGlobals(false)]
 #[BackupStaticProperties(false)]
 #[PreserveGlobalState(false)]
-#[RunInSeparateProcess]
 class CookieJarWrapperTest extends TestCase
 {
     private static CookieFactoryImpl $cookieFactory;

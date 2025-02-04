@@ -44,7 +44,7 @@ use PHPUnit\Framework\TestCase;
 class WhitelistExtensionPreProcessorTest extends TestCase
 {
     #[Test]
-    #[Small]
+
     public function testProcessWhichShouldSucceed(): void
     {
         $extensions = ['jpg', 'svg'];
@@ -59,7 +59,7 @@ class WhitelistExtensionPreProcessorTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessWithoutExtensionWhichShouldSucceed(): void
     {
         $extensions = ['jpg', ''];
@@ -73,7 +73,7 @@ class WhitelistExtensionPreProcessorTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessWithoutWhitelistedExtensionWhichShouldGetRejected(): void
     {
         $extensions = ['jpg', 'exe'];

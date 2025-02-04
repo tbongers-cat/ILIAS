@@ -66,7 +66,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testReadStreamWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -84,7 +84,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testReadStreamWithMissingFileWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -101,7 +101,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testReadStreamWithGeneralFailureWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -118,7 +118,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testWriteStreamWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -139,7 +139,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testWriteStreamWithDetachedStreamWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -154,7 +154,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testWriteStreamWithExistingFileWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -173,7 +173,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testWriteStreamWithFailingAdapterWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -197,7 +197,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testPutStreamWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -213,7 +213,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testPutStreamWithGeneralFailureWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -232,7 +232,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testPutStreamWithDetachedStreamWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -247,7 +247,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testUpdateStreamWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -263,7 +263,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testUpdateStreamWithDetachedStreamWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -278,7 +278,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testUpdateStreamWithGeneralFailureWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -298,7 +298,7 @@ class FlySystemFileStreamAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testUpdateStreamWithMissingFileWhichShouldFail(): void
     {
         $path = '/path/to/your/file';

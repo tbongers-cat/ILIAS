@@ -44,7 +44,7 @@ use PHPUnit\Framework\TestCase;
 class WhitelistFileHeaderPreProcessorTest extends TestCase
 {
     #[Test]
-    #[Small]
+
     public function testProcessWhichShouldSucceed(): void
     {
         $fileHeaderStart = hex2bin('FFD8FF'); //jpg header start
@@ -60,7 +60,7 @@ class WhitelistFileHeaderPreProcessorTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessWithHeaderMismatchWhichShouldGetRejected(): void
     {
         $fileHeaderWhitelist = hex2bin('FFD8FF'); //jpg header start

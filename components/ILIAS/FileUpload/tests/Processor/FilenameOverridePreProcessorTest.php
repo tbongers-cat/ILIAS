@@ -44,7 +44,7 @@ use PHPUnit\Framework\TestCase;
 class FilenameOverridePreProcessorTest extends TestCase
 {
     #[Test]
-    #[Small]
+
     public function testProcessWhichShouldSucceed(): void
     {
         $filename = 'renamed.ogg';

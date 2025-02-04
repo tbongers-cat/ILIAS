@@ -72,7 +72,7 @@ class FileUploadImplTest extends TestCase
 
 
     #[Test]
-    #[Small]
+
     public function testRegisterWhichShouldSucceed(): void
     {
         $processorMock = \Mockery::mock(PreProcessor::class);
@@ -84,7 +84,7 @@ class FileUploadImplTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testRegisterWithProcessedFilesWhichShouldFail(): void
     {
         $processorMock = \Mockery::mock(PreProcessor::class);
@@ -101,7 +101,7 @@ class FileUploadImplTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessWhichShouldSucceed(): void
     {
         $processingResult = new ProcessingStatus(ProcessingStatus::OK, 'All green!');
@@ -144,7 +144,7 @@ class FileUploadImplTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessWithFailedUploadWhichShouldGetRejected(): void
     {
         $uploadedFile = Mockery::mock(UploadedFileInterface::class);
@@ -185,7 +185,7 @@ class FileUploadImplTest extends TestCase
 
 
     #[Test]
-    #[Small]
+
     public function testHasUploadsWithoutUploadedFiles(): void
     {
         // No File-Upload Element
@@ -196,7 +196,7 @@ class FileUploadImplTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testHasUploadsWithSingleUploadedFile(): void
     {
         $uploadedFile = Mockery::mock(UploadedFileInterface::class);
@@ -209,7 +209,7 @@ class FileUploadImplTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testHasUploadsWithMultipleUploadedFile(): void
     {
         $files = [];

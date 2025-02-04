@@ -334,7 +334,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testSetVisibilityWithMissingFileWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -352,7 +352,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testSetVisibilityWithInvalidAccessModifierWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -370,7 +370,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testGetVisibilityWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -391,7 +391,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testGetVisibilityWithMissingFileWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -408,7 +408,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testGetVisibilityWithAdapterErrorWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -430,7 +430,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testWriteWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -450,7 +450,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testWriteWithAlreadyExistingFileWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -473,7 +473,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testWriteWithAdapterErrorWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -499,7 +499,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testUpdateWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -514,7 +514,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testUpdateWithAdapterErrorWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -534,7 +534,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testUpdateWithMissingFileWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -555,7 +555,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testDeleteWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -569,7 +569,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testDeleteWithAdapterErrorWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -588,7 +588,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testDeleteWithMissingFileWhichShouldFail(): void
     {
         $path = '/path/to/your/file';
@@ -605,7 +605,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testReadAndDeleteWhichShouldSucceed(): void
     {
         $path = '/path/to/your/file';
@@ -628,7 +628,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testRenameWhichShouldSucceed(): void
     {
         $source = '/source/path';
@@ -649,7 +649,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testRenameWithMissingSourceWhichShouldFail(): void
     {
         $source = '/source/path';
@@ -673,7 +673,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testRenameWithExistingDestinationWhichShouldFail(): void
     {
         $source = '/source/path';
@@ -697,7 +697,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testRenameWithGeneralErrorWhichShouldFail(): void
     {
         $source = '/source/path';
@@ -721,7 +721,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testCopyWhichShouldSucceed(): void
     {
         $sourcePath = '/path/to/your/source/file';
@@ -742,7 +742,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testCopyWithAdapterErrorWhichShouldFail(): void
     {
         $sourcePath = '/path/to/your/source/file';
@@ -768,7 +768,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testCopyWithMissingFileWhichShouldFail(): void
     {
         $sourcePath = '/path/to/your/source/file';
@@ -792,7 +792,7 @@ class FlySystemFileAccessTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testCopyWithExistingDestinationFileWhichShouldFail(): void
     {
         $sourcePath = '/path/to/your/source/file';

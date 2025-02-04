@@ -48,7 +48,7 @@ class FlySystemLocalFilesystemFactoryTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testCreationOfFilesystemWithLinkSkipBehaviourWhichShouldSucceed(): void
     {
         $rootPath = __DIR__;
@@ -75,7 +75,7 @@ class FlySystemLocalFilesystemFactoryTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testCreationOfFilesystemWithInvalidLinkBehaviourWhichShouldFail(): void
     {
         $rootPath = __DIR__;
@@ -105,7 +105,7 @@ class FlySystemLocalFilesystemFactoryTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testCreationOfFilesystemWithInvalidFileLockModeWhichShouldFail(): void
     {
         $rootPath = __DIR__;

@@ -42,7 +42,6 @@ use ILIAS\FileDelivery\FileDeliveryTypes\PHPChunked;
 #[BackupGlobals(false)]
 #[BackupStaticProperties(false)]
 #[PreserveGlobalState(false)]
-#[RunInSeparateProcess]
 class FileDeliveryTypeFactoryTest extends TestCase
 {
     private FileDeliveryTypeFactory $subject;

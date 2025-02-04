@@ -64,7 +64,7 @@ class PreProcessorManagerImplTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessValidFileWhichShouldSucceed(): void
     {
         $response = new ProcessingStatus(ProcessingStatus::OK, 'All green!');
@@ -92,7 +92,7 @@ class PreProcessorManagerImplTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessWithoutProcessorsWhichShouldSucceed(): void
     {
         $expectedResponse = new ProcessingStatus(ProcessingStatus::OK, 'No processors were registered.');
@@ -107,7 +107,7 @@ class PreProcessorManagerImplTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessInvalidFileWhichShouldGetRejected(): void
     {
         $responseGood = new ProcessingStatus(ProcessingStatus::OK, 'All green!');
@@ -137,7 +137,7 @@ class PreProcessorManagerImplTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessValidFileWithFailingProcessorWhichShouldGetRejected(): void
     {
         $responseGood = new ProcessingStatus(ProcessingStatus::OK, 'All green!');

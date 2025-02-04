@@ -39,7 +39,6 @@ use ILIAS\FileDelivery\FileDeliveryTypes\XSendfile;
 #[BackupGlobals(false)]
 #[BackupStaticProperties(false)]
 #[PreserveGlobalState(false)]
-#[RunInSeparateProcess]
 class XSendfileTest extends TestCase
 {
     /**

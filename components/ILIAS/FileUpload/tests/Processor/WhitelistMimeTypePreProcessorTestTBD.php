@@ -49,7 +49,7 @@ class WhitelistMimeTypePreProcessorTest extends TestCase
 
 
     #[Test]
-    #[Small]
+
     public function testProcessWithWhitelistedMimeTypeWhichShouldSucceed(): void
     {
         $whitelist = ['text/html', 'audio/ogg'];
@@ -62,7 +62,7 @@ class WhitelistMimeTypePreProcessorTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessWithWhitelistedAnyKindOfTextMimeTypeWhichShouldSucceed(): void
     {
         $whitelist = ['text/*', '*/ogg'];
@@ -75,7 +75,7 @@ class WhitelistMimeTypePreProcessorTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessWithWhitelistedAnyKindOfOggMimeTypeWhichShouldSucceed(): void
     {
         $whitelist = ['text/html', '*/ogg'];
@@ -88,7 +88,7 @@ class WhitelistMimeTypePreProcessorTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testCreateSubjectWithAnyKindOfMimeTypeWhichShouldFail(): void
     {
         $whitelist = ['audio/ogg', '*/*'];

@@ -45,7 +45,7 @@ use PHPUnit\Framework\TestCase;
 class BlacklistMimeTypePreProcessorTest extends TestCase
 {
     #[Test]
-    #[Small]
+
     public function testProcessWithBlacklistedMimeTypeWhichShouldGetRejected(): void
     {
         $blacklist = ['text/html', 'audio/ogg'];
@@ -59,7 +59,7 @@ class BlacklistMimeTypePreProcessorTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessWithBlacklistedAnyKindOfTextMimeTypeWhichGetRejected(): void
     {
         $blacklist = ['text/*', '*/ogg'];
@@ -72,7 +72,7 @@ class BlacklistMimeTypePreProcessorTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessWithBlacklistedAnyKindOfOggMimeTypeWhichGetRejected(): void
     {
         $blacklist = ['text/html', '*/ogg'];
@@ -85,7 +85,7 @@ class BlacklistMimeTypePreProcessorTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testCreateSubjectWithAnyKindOfMimeTypeWhichShouldFail(): void
     {
         $blacklist = ['audio/ogg', '*/*'];

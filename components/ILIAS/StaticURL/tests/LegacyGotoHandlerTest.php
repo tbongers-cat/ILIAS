@@ -115,7 +115,7 @@ class LegacyGotoHandlerTest extends Base
 
     }
 
-    private function insertDIC(string $key, MockObject|\ilCtrlInterface|(\ilAccessHandler&MockObject)|(\ilObjectDefinition&MockObject)|(\ilObjUser&MockObject)|Services|(\ilGlobalTemplateInterface&MockObject)|(\ilLanguage&MockObject)|(\ilObjectDataCache&MockObject)|(\ilDBInterface&MockObject)|(\ilTree&MockObject)|(\ilRbacReview&MockObject)|(\ilSetting&MockObject)|(\ilErrorHandling&MockObject) $value): void
+    private function insertDIC(string $key, object $value): void
     {
         global $DIC;
         $DIC = $DIC instanceof Container ? $DIC : new Container();

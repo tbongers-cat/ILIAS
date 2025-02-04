@@ -45,7 +45,6 @@ use ILIAS\FileDelivery\FileDeliveryTypes\XAccel;
 #[BackupGlobals(false)]
 #[BackupStaticProperties(false)]
 #[PreserveGlobalState(false)]
-#[RunInSeparateProcess]
 class XAccelTest extends TestCase
 {
     /**

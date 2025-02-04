@@ -44,7 +44,7 @@ use PHPUnit\Framework\TestCase;
 class BlacklistExtensionPreProcessorTest extends TestCase
 {
     #[Test]
-    #[Small]
+
     public function testProcessWhichShouldSucceed(): void
     {
         $extensions = ['jpg', 'svg'];
@@ -59,7 +59,7 @@ class BlacklistExtensionPreProcessorTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessWithBlacklistedEmptyExtensionWhichShouldGetRejected(): void
     {
         $extensions = ['jpg', ''];
@@ -74,7 +74,7 @@ class BlacklistExtensionPreProcessorTest extends TestCase
     }
 
     #[Test]
-    #[Small]
+
     public function testProcessWithBlacklistedExtensionWhichShouldGetRejected(): void
     {
         $extensions = ['jpg', 'exe'];
